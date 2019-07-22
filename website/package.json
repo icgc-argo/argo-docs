@@ -10,5 +10,10 @@
   },
   "devDependencies": {
     "docusaurus": "^1.12.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all",
+    "singleQuote": true
   }
 }
