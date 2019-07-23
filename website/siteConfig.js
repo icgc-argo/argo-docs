@@ -36,7 +36,7 @@ const siteConfig = {
 
   /* path to images for header/footer */
   headerIcon: 'img/icgc_argo_name.svg',
-  footerIcon: 'img/argo_logo.png',
+  footerIcon: null,
   favicon: 'img/favicon.ico',
 
   /* Custom stylesheet and fonts */
@@ -58,11 +58,11 @@ const siteConfig = {
   },
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} ICGC ARGO`,
+  copyright: `© ${new Date().getFullYear()} ICGC ARGO. All Rights reserved.`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'monokai-sublime',
+    theme: 'vs2015',
   },
 
   // Add custom scripts here that would be placed in <script> tags.

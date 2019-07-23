@@ -22,70 +22,44 @@ class Footer extends React.Component {
   }
 
   render() {
+    const Slash = props => (
+      <img src={`${this.props.config.baseUrl}img/slash.svg`} alt="Divider" width="12" height="12" />
+    );
     return (
       <footer className="nav-footer" id="footer">
-        <section className="sitemap">
-          <a href={this.props.config.baseUrl} className="nav-home">
-            {this.props.config.footerIcon && (
-              <img
-                src={this.props.config.baseUrl + this.props.config.footerIcon}
-                alt={this.props.config.title}
-                width="66"
-                height="58"
-              />
-            )}
-          </a>
-          <div>
-            <h5>Docs</h5>
-            <a href={this.docUrl('doc1.html', this.props.language)}>Getting Started</a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>Data Access</a>
-            <a href={this.docUrl('doc2.html', this.props.language)}>Submission</a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>Data Dictionary</a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>APIs</a>
+        <div className="footerWrapper">
+          <div className="footerLogo">
+            <img
+              src={`${this.props.config.baseUrl}img/icgc_argo_full.svg`}
+              alt="ICGC ARGO"
+              height="70px"
+            />
           </div>
-          <div>
-            <h5>Community</h5>
-            <a
-              href="https://platform-ui.qa.argo.cancercollaboratory.org"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              ARGO Platform
-            </a>
-            <a href="https://icgc-argo.org/">ICGC ARGO</a>
+          <div className="footerContent">
+            <section className="footerLinks">
+              <a href="#">The Platform</a>
+              <Slash />
+              <a href="#">Contact</a>
+              <Slash />
+              <a href="#">Privacy Policy</a>
+              <Slash />
+              <a href="#">Terms & Conditions</a>
+              <Slash />
+              <a href="#">Publication Policy</a>
+            </section>
+            <section className="legal-text">{this.props.config.copyright}</section>
+            <section className="legal-text">
+              <a href="#">ICGC ARGO Platform</a> 1.0.0 - API v1 - 8e37309
+            </section>
           </div>
-          <div>
-            <h5>More</h5>
-            <a href="https://github.com/icgc-argo">GitHub</a>
-            <a href="https://twitter.com/icgcargo" target="_blank" rel="noreferrer noopener">
-              Twitter
-            </a>
-            {this.props.config.twitterUsername && (
-              <div className="social">
-                <a
-                  href={`https://twitter.com/${this.props.config.twitterUsername}`}
-                  className="twitter-follow-button"
-                >
-                  Follow @{this.props.config.twitterUsername}
-                </a>
-              </div>
-            )}
-            {this.props.config.facebookAppId && (
-              <div className="social">
-                <div
-                  className="fb-like"
-                  data-href={this.props.config.url}
-                  data-colorscheme="dark"
-                  data-layout="standard"
-                  data-share="true"
-                  data-width="225"
-                  data-show-faces="false"
-                />
-              </div>
-            )}
+          <div className="footerLogo flexEnd">
+            <img
+              src={`${this.props.config.baseUrl}img/oicr_logo.svg`}
+              alt="ICGC ARGO"
+              height="52px"
+            />
           </div>
-        </section>
-        <section className="copyright">{this.props.config.copyright}</section>
+        </div>
       </footer>
     );
   }
