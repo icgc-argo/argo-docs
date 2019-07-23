@@ -28,9 +28,10 @@ const siteConfig = {
   twitterUsername: 'icgcargo',
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'doc1', label: 'Docs' },
-    { doc: 'doc4', label: 'API' },
-    { page: 'help', label: 'Help' },
+    { doc: 'doc1', label: 'Data Access' },
+    { doc: 'doc4', label: 'Submisison' },
+    { page: 'help', label: 'Data Dictionary' },
+    { page: 'help', label: 'Contact' },
   ],
 
   /* path to images for header/footer */
@@ -38,15 +39,18 @@ const siteConfig = {
   footerIcon: 'img/argo_logo.png',
   favicon: 'img/favicon.ico',
 
+  /* Custom stylesheet and fonts */
+  stylesheets: ['https://fonts.googleapis.com/css?family=Work+Sans:300,400,600&display=swap'],
+
   /* Colors for website */
   colors: {
-    primaryColor: '#151c3d',
-    secondaryColor: '#504b6b',
+    primaryColor: '#ffffff',
+    secondaryColor: '#f8f8fb',
   },
 
   /* Custom fonts for website */
   fonts: {
-    // myFont: ['Work Sans'],
+    primaryFont: ['Work Sans'],
     // myOtherFont: [
     //   "-apple-system",
     //   "system-ui"
