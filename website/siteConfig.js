@@ -26,21 +26,22 @@ const siteConfig = {
   //   organizationName: 'JoelMarcey'
 
   twitterUsername: 'icgcargo',
+
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     { doc: 'doc1', label: 'Data Access' },
     { doc: 'doc4', label: 'Submisison' },
     { page: 'help', label: 'Data Dictionary' },
-    { page: 'help', label: 'Contact' },
+    { href: 'https://platform-ui.qa.argo.cancercollaboratory.org/contact', label: 'Contact' },
   ],
 
   /* path to images for header/footer */
-  headerIcon: 'img/icgc_argo_name.svg',
+  headerIcon: 'img/logos/icgc_argo_name.svg',
   footerIcon: null,
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
 
   /* Custom stylesheet and fonts */
-  stylesheets: ['https://fonts.googleapis.com/css?family=Work+Sans:300,400,600&display=swap'],
+  stylesheets: ['https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,600&display=swap'],
 
   /* Colors for website */
   colors: {
