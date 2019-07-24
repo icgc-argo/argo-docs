@@ -68,7 +68,7 @@ const siteConfig = {
   },
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: ['/js/dynamic-styles.js'],
+  scripts: [],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',
