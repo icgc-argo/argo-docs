@@ -29,15 +29,15 @@ class HomeSplash extends React.Component {
     );
 
     const SearchEntry = props => (
-      <div class="searchEntryWrapper">
+      <div className="searchEntryWrapper">
         <img
-          class="searchEntryIcon"
+          className="searchEntryIcon"
           src={`img/icons/search.svg`}
           alt="Search"
           height="20"
           width="20"
         />
-        <input class="searchEntryInput" id="searchBannerInput" placeholder="Search..." />
+        <input className="searchEntryInput" id="searchBannerInput" placeholder="Search..." />
       </div>
     );
 
@@ -47,16 +47,6 @@ class HomeSplash extends React.Component {
         <SearchEntry />
       </section>
     );
-
-    // const ContentBlock = ({ color, title, icon, ...props }) => {
-    //   <div class="contentBlock" style={{ borderColor: color }}>
-    //     <div class="contentBlockHeader">
-    //       <span class="contentBlockTitle">{title}</span>
-    //       <img src={icon} alt={title} />
-    //     </div>
-    //     <div class="contentBlockInner">{props.children}</div>
-    //   </div>;
-    // };
 
     return (
       <SplashContainer>
@@ -70,12 +60,12 @@ class ContentBlock extends React.Component {
   render() {
     const { color, title, icon } = this.props;
     return (
-      <div class="contentBlock" style={{ borderColor: color }}>
-        <div class="contentBlockHeader">
-          <span class="contentBlockTitle">{title}</span>
+      <div className="contentBlock" style={{ borderColor: color }}>
+        <div className="contentBlockHeader">
+          <span className="contentBlockTitle">{title}</span>
           <img src={icon} height={50} />
         </div>
-        <div class="contentBlockInner">{this.props.children}</div>
+        <div className="contentBlockInner">{this.props.children}</div>
       </div>
     );
   }
@@ -90,17 +80,17 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <Container>
-            <div class="row">
+            <div className="row">
               <ContentBlock
                 title="Data Dictionary"
                 color="#4bcee5"
                 icon="img/icons/home/data-dictionary.svg"
               >
-                <span class="contentDescription">
+                <span className="contentDescription">
                   The viewer describes the schema that data submitters must conform to and track
                   changes when formatiting clinical data files.
                 </span>
-                <a class="contentAction" href="#">
+                <a className="contentAction" href="#">
                   Data Dictionary Viewer
                   <img src="img/icons/chevron-right.svg" height={8} width={8} />
                 </a>
@@ -143,7 +133,7 @@ class Index extends React.Component {
                 </ul>
               </ContentBlock>
             </div>
-            <div class="row">
+            <div className="row">
               <ContentBlock
                 title="Access to Controlled Data"
                 color="#7f55cc"

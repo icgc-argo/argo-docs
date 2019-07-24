@@ -29,11 +29,12 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'doc1', label: 'Data Access' },
-    { doc: 'doc4', label: 'Submisison' },
     { page: 'dictionary', label: 'Data Dictionary' },
-    { href: 'https://platform-ui.qa.argo.cancercollaboratory.org/contact', label: 'Contact' },
+    { doc: 'submission-getting-started', label: 'Submission' },
+    { doc: 'data-access', label: 'Data Access' },
+    { href: 'https://platform-ui.argo.cancercollaboratory.org/contact', label: 'Contact' },
   ],
+  docsSideNavCollapsible: true,
 
   /* path to images for header/footer */
   headerIcon: 'img/logos/icgc_argo_name.svg',
@@ -63,7 +64,7 @@ const siteConfig = {
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
-    theme: 'vs2015',
+    theme: 'hybrid',
   },
 
   // Add custom scripts here that would be placed in <script> tags.
