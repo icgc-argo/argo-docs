@@ -1,0 +1,22 @@
+{
+  "docs": {
+    "Submission": [
+      "submission-getting-started",
+      "submission-project-status",
+      "registering-ids",
+      "submitting-clinical-data",
+      "submitting-molecular-data",
+      "data-harmonization",
+      "submitted-data",
+      "managing-program-users",
+      "faq"
+    ],
+    "Data Access": [
+      "data-access",
+      "user-profile-and-token",
+      "user-roles-and-permissions",
+      "data-download",
+      "data-release-schedule"
+    ]
+  }
+}

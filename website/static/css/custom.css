@@ -1,0 +1,307 @@
+/* Reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  /* Font familly variable $primaryFont configured in siteConfig */
+  font-family: $primaryFont;
+}
+
+a {
+  color: #523785;
+  text-decoration: underline;
+}
+
+html a:hover {
+  color: #9f7fd8;
+  text-decoration: underline;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+/* Header */
+.fixedHeaderContainer {
+  background: #ffffff;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.08);
+  padding: 16px;
+}
+
+.fixedHeaderContainer .headerWrapper.wrapper {
+  margin: 0px 0px;
+  max-width: none;
+}
+
+.fixedHeaderContainer .navigationSlider .slidingNav ul li a {
+  color: #151c3d;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  height: 25px;
+  padding: 0px 28px;
+}
+
+.fixedHeaderContainer .navigationSlider .slidingNav ul li a:hover {
+  color: #0774d3;
+  text-decoration: none;
+}
+
+.fixedHeaderContainer .navigationSlider .slidingNav ul li.siteNavItemActive a {
+  color: #0774d3;
+  /* border-bottom: 3px solid #0774d3; */
+}
+
+.fixedHeaderContainer a {
+  height: 25px;
+  text-decoration: none;
+}
+
+.fixedHeaderContainer header img {
+  margin: 0px;
+}
+
+.navigationSlider {
+  height: 25px;
+}
+
+/* Footer */
+
+.nav-footer {
+  background: #f8f8fb;
+  border-top: 1px solid #dcdde1;
+  padding: 0px;
+
+  color: 'black';
+}
+
+.footerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.footerLogo {
+  display: flex;
+  width: 180px;
+}
+
+.flexEnd {
+  justify-content: flex-end;
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 15px;
+
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+}
+
+.footerLinks a {
+  padding: 0 11px;
+}
+
+.legal-text {
+  font-size: 11px;
+  line-height: 1.27;
+  text-align: center;
+}
+.legal-text a {
+  color: #523785;
+}
+
+/* Docs Page */
+/* Right Side Nav */
+.onPageNav ul.toc-headings {
+  padding: 0;
+}
+.onPageNav ul.toc-headings li {
+  padding: 0;
+}
+.onPageNav .toc-headings > li > a {
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px 8px 18px;
+  max-width: 200px;
+}
+.onPageNav .toc-headings > li > a.active {
+  color: #045093;
+  background-color: #e6f1fa;
+}
+
+.onPageNav .toc-headings > li > a:hover {
+  color: #151c3d;
+  background-color: #f2f2f8;
+}
+
+.onPageNav .toc-headings > li + li {
+  margin: 0;
+}
+
+/* Sidebar (Left Menu) */
+.toc .toggleNav .navGroup {
+  border-bottom: 1px solid #dcdde1;
+}
+.toc .toggleNav .navGroup ul {
+  margin-bottom: 5px;
+}
+
+.toc .toggleNav .navGroup .navGroupCategoryTitle {
+  color: #151c3d;
+  margin: 15px 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* chevron svg path element fill for collapsible category */
+.toc .toggleNav .navGroup .navGroupCategoryTitle span.arrow path:first-of-type {
+  fill: #151c3d;
+}
+
+.toc .toggleNav ul {
+  padding: 0;
+}
+
+.toc .toggleNav ul li a {
+  text-decoration: none;
+  color: #151c3d;
+  padding: 8px 15px 7px 15px;
+  font-size: 14px;
+  line-height: 1.57;
+}
+
+.toc .toggleNav ul li.navListItemActive a {
+  color: #045093;
+  background-color: #e6f1fa;
+}
+
+.toc .toggleNav ul li a:hover,
+.toc .toggleNav ul li a:focus {
+  color: #151c3d;
+  background-color: #f2f2f8;
+}
+
+/* Breakpoint Specific */
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+  .onPageNav > .toc-headings {
+    border-left: 2px solid #0774d3;
+  }
+
+  /* .separateOnPageNav .wrapper {
+    max-width: none;
+  } */
+}
+
+@media only screen and (max-width: 1023px) {
+  /* Fix the small screen highlight and menu size */
+  .navigationSlider .slidingNav ul li.siteNavItemActive > a,
+  .navigationSlider .slidingNav ul li.siteNavGroupActive > a {
+    background-color: #f8f8fb;
+  }
+
+  .navigationSlider .slidingNav ul li > a:focus,
+  .navigationSlider .slidingNav ul li > a:hover {
+    background-color: #ffffff;
+  }
+  .fixedHeaderContainer .navigationSlider .slidingNav ul li a {
+    height: 50px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
