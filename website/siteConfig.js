@@ -9,7 +9,7 @@
 // site configuration options.
 
 const siteConfig = {
-  title: 'ICGC-ARGO Platform - User Documentation', // Title for your website.
+  title: 'ICGC ARGO Docs', // Title for your website.
   disableTitleTagline: true,
   disableHeaderTitle: true,
   url: 'https://docs.icgc-argo.com', // Your website URL
@@ -68,7 +68,7 @@ const siteConfig = {
   },
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: [],
+  scripts: ['/js/dynamic-styles.js'],
 
   // On page navigation for the current documentation page.
   onPageNav: 'separate',

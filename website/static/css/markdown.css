@@ -1,0 +1,74 @@
+.post .postHeader .postHeaderTitle {
+  color: #151c3d;
+  font-size: 35px;
+  font-weight: normal;
+}
+
+.post article h1,
+.post article h2,
+.post article h3,
+.post article h4,
+.post article h5 {
+  color: #151c3d;
+  font-weight: normal;
+}
+
+.post article h2::after {
+  content: '';
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  width: 76px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #4bcee5;
+  left: 0;
+}
+
+.post article h2.after0::after {
+  background: #4bcee5;
+}
+.post article h2.after1::after {
+  background: #24dbb4;
+}
+.post article h2.after2::after {
+  background: #f95d31;
+}
+.post article h2.after3::after {
+  background: #7f55cc;
+}
+.post article h2.after4::after {
+  background: #fea430;
+}
+.post article h2.after5::after {
+  background: #0774d3;
+}
+
+.post article p {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.post article ol {
+  list-style: none;
+  counter-reset: ol-counter;
+}
+.post article ol li {
+  counter-increment: ol-counter;
+  position: relative;
+}
+.post article ol li::before {
+  content: counter(ol-counter);
+  position: absolute;
+  --size: 24px;
+  left: calc(-1 * var(--size) - 10px);
+  line-height: var(--size);
+  width: var(--size);
+  height: var(--size);
+  top: 0;
+
+  font-size: 12px;
+  text-align: center;
+  background-color: #e6f1fa;
+  border-radius: 12px;
+}
