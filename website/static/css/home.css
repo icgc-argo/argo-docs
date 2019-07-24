@@ -25,6 +25,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 }
 
 .searchEntryIcon {
@@ -34,11 +35,9 @@
 
 .searchEntryInput {
   border: none;
-  /* height: 80%;
-  width: 88%; */
-
-  width: 202px;
-  height: 21px;
+  height: 100%;
+  width: 100%;
+  
   font-size: 18px;
 
   color: #525767;
