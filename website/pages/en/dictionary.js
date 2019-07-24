@@ -13,38 +13,24 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
 function Help(props) {
-  const {config: siteConfig, language = ''} = props;
-  const {baseUrl, docsUrl} = siteConfig;
+  const { config: siteConfig, language = '' } = props;
+  const { baseUrl, docsUrl } = siteConfig;
   const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
   const langPart = `${language ? `${language}/` : ''}`;
   const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
 
-  const supportLinks = [
-    {
-      content: `Learn more using the [documentation on this site.](${docUrl(
-        'doc1.html',
-      )})`,
-      title: 'Browse Docs',
-    },
-    {
-      content: 'Ask questions about the documentation and project',
-      title: 'Join the community',
-    },
-    {
-      content: "Find out what's new with this project",
-      title: 'Stay up to date',
-    },
-  ];
-
   return (
     <div className="docMainWrapper wrapper">
       <Container className="mainContainer documentContainer postContainer">
-        <div className="post">
+        <div
+          className="post"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
           <header className="postHeader">
-            <h1>Need help?</h1>
+            <h1>Data Dictionary</h1>
           </header>
-          <p>This project is maintained by a dedicated group of people.</p>
-          <GridBlock contents={supportLinks} layout="threeColumn" />
+          <p>Coming Soon...</p>
+          <img src="img/undraw_under_construction.svg" alt="Under Construction" />
         </div>
       </Container>
     </div>

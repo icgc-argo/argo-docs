@@ -31,7 +31,7 @@ const siteConfig = {
   headerLinks: [
     { doc: 'doc1', label: 'Data Access' },
     { doc: 'doc4', label: 'Submisison' },
-    { page: 'help', label: 'Data Dictionary' },
+    { page: 'dictionary', label: 'Data Dictionary' },
     { href: 'https://platform-ui.qa.argo.cancercollaboratory.org/contact', label: 'Contact' },
   ],
 
