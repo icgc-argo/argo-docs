@@ -25,22 +25,22 @@
   left: 0;
 }
 
-.post article h2.after0::after {
+.post article h2:nth-of-type(6n + 1):after {
   background: #4bcee5;
 }
-.post article h2.after1::after {
+.post article h2:nth-of-type(6n + 2):after {
   background: #24dbb4;
 }
-.post article h2.after2::after {
+.post article h2:nth-of-type(6n + 3):after {
   background: #f95d31;
 }
-.post article h2.after3::after {
+.post article h2:nth-of-type(6n + 4):after {
   background: #7f55cc;
 }
-.post article h2.after4::after {
+.post article h2:nth-of-type(6n + 5):after {
   background: #fea430;
 }
-.post article h2.after5::after {
+.post article h2:nth-of-type(6n):after {
   background: #0774d3;
 }
 
