@@ -17,7 +17,7 @@ sidebar_label: Applying for Access
 1. pretty cool
 
 ```JavaScript
-var x = 2;
+var x = 3;
 console.log(x);
 ```
 
