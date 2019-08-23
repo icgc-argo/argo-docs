@@ -48,7 +48,9 @@
   font-size: 14px;
   font-weight: normal;
 }
-
+.post article ul {
+  font-size: 14px;
+}
 .post article ol {
   list-style: none;
   counter-reset: ol-counter;
@@ -71,4 +73,11 @@
   text-align: center;
   background-color: #e6f1fa;
   border-radius: 12px;
+}
+/*Aleks and Kim testing blockquote */
+
+.post article blockquote {
+  color: black;
+  background-color: #FEE8CB;
+  border-left: 8px solid #FEBA63;
 }
