@@ -1,5 +1,5 @@
 ---
-id: registering-ids
+id: registering-samples
 title: Registering Samples
 ---
 
@@ -18,7 +18,7 @@ The basic set of data that must be registered for each sample consists of:
 * Submitter Sample ID
 * Sample Type
 
-During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data  which does not refer to a previously registered samples will result in an error, i.e you will be prompted to complete sample registration before any clinical or molecular data is submitted.
+During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a previously registered samples will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted.
 
 ## Registering Samples
 1. Navigate to the **Submission** area in the top menu.
