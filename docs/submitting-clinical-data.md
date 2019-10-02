@@ -4,10 +4,9 @@ title: Submitting Clinical Data
 ---
 Clinical data consists of all supporting data about your programs donors and their health data.
 
-> Note: Before you can submit clinical data, your data must be assigned ARGO Identifiers through the sample registration process. See [Registering Samples](/s) for instructions on how to register samples.
+> Note: Before you can submit clinical data, your data must be assigned ARGO Identifiers through the sample registration process. See [Registering Samples](registering-samples) for instructions on how to register samples.
 
-
-## Submiting Clinical Data Files
+## Submitting Clinical Data Files
 1. Navigate to the **Submission** area in the top menu.
 1. Click on the **Clinical Submission** section in the left menu for your program.
 1. Download a **TSV Template** for each data type that you are submitting. Format your file(s) according to the current [Data Dictionary](/dictionary) specifications for each clinical data type.

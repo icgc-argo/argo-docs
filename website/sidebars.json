@@ -2,19 +2,17 @@
   "docs": {
     "Submission": [
       "submission-getting-started",
-      "submission-project-status",
-      "registering-ids",
+      "managing-program-access",
+      "registering-samples",
       "submitting-clinical-data",
       "submitting-molecular-data",
-      "data-harmonization",
       "submitted-data",
-      "managing-program-users",
+      "submission-project-status",
       "faq"
     ],
     "Data Access": [
       "data-access",
       "user-profile-and-token",
-      "user-roles-and-permissions",
       "data-download",
       "data-release-schedule"
     ]
