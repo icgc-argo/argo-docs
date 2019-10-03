@@ -29,7 +29,7 @@ During sample registration, **ARGO IDs** will be assigned to your program data. 
 1. Valid files will be available for preview in the Sample Registration workspace.  You can review the file data and view the new (purple star) versus previously registered (grey star) samples by filtering the table on the star column.
 1. Once you have reviewed the file, click on the **Register Samples** button to submit your samples.
 
-Once submitted, samples, along with donor and specimen data, will  be visible on the [Donor Dashboard](/linktootherdocpage).
+Once submitted, samples, along with donor and specimen data, will  be visible on the [Donor Dashboard](/linktootherdocpagexxxxx).
 
 ## Correcting Already Registered Data
 Once samples are registered and data processing and harmonization proceeds, it can be difficult to correct the data manually.
