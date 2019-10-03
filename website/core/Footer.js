@@ -44,7 +44,7 @@ class Footer extends React.Component {
           </div>
           <div className="footerContent">
             <section className="footerLinks">
-              <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">The Platform</a>
+              <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">ARGO Platform</a>
               <Slash />
               <a href="https://platform-ui.qa.argo.cancercollaboratory.org/contact">Contact</a>
               <Slash />
