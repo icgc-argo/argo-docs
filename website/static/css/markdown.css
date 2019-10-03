@@ -51,29 +51,12 @@
 .post article ul {
   font-size: 14px;
 }
-.post article ol {
-  list-style: none;
-  counter-reset: ol-counter;
-}
-.post article ol li {
-  counter-increment: ol-counter;
-  position: relative;
-}
-.post article ol li::before {
-  content: counter(ol-counter);
-  position: absolute;
-  --size: 24px;
-  left: calc(-1 * var(--size) - 10px);
-  line-height: var(--size);
-  width: var(--size);
-  height: var(--size);
-  top: 0;
 
-  font-size: 12px;
-  text-align: center;
-  background-color: #e6f1fa;
-  border-radius: 12px;
+.post article ol li {
+  position: relative;
+  font-size:14px;
 }
+
 /*Aleks and Kim testing blockquote */
 
 .post article blockquote {
