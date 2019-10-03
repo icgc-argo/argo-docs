@@ -1,3 +1,7 @@
+.post {
+   line-height: 1.64;
+}
+
 .post .postHeader .postHeaderTitle {
   color: #151c3d;
   font-size: 35px;
@@ -55,6 +59,7 @@
 .post article ol li {
   position: relative;
   font-size:14px;
+  margin-bottom:8px;
 }
 
 /*Aleks and Kim testing blockquote */
