@@ -37,15 +37,14 @@ class Footer extends React.Component {
             <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">
               <img
                 src={`${this.props.config.baseUrl}img/logos/icgc_argo_full.svg`}
-                alt="ICGC ARGO"
+                alt="ICGC Accelerating Research in Genomic Oncology"
                 width="240px"
               />
             </a>
           </div>
           <div className="footerContent">
             <section className="footerLinks">
-              <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">ARGO Platform</a>
-              <Slash />
+              
               <a href="https://platform-ui.qa.argo.cancercollaboratory.org/contact">Contact</a>
               <Slash />
               <a href="https://platform-ui.qa.argo.cancercollaboratory.org/privacy">
@@ -62,7 +61,7 @@ class Footer extends React.Component {
             </section>
             <section className="legal-text">{this.props.config.copyright}</section>
             <section className="legal-text">
-              <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">ICGC ARGO Platform</a>{' '}
+              <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">ARGO Data Platform</a>{' '}
               1.0.0 - API v1 - 8e37309
             </section>
           </div>
@@ -70,7 +69,7 @@ class Footer extends React.Component {
             <a href="https://www.oicr.on.ca/">
               <img
                 src={`${this.props.config.baseUrl}img/logos/oicr_logo.svg`}
-                alt="ICGC ARGO"
+                alt="Ontario Institute for Cancer Research"
                 height="52px"
               />
             </a>
