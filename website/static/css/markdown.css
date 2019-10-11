@@ -69,3 +69,9 @@
   background-color: #FEE8CB;
   border-left: 8px solid #FEBA63;
 }
+
+.docs-prevnext .button
+{
+  color:#523785;
+  font-size:12px;
+}
