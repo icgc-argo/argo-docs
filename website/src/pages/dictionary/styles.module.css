@@ -1,0 +1,30 @@
+.mainContainer {
+  padding: 40px 20px;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.requiredTag {
+  background-color: #ef4110;
+  font-size: 12px;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.schemaTitle {
+  font-size: 24px;
+}
+
+.schemaTable_column {
+  max-width: 450px;
+  min-width: 100px;
+}
+
+.fieldDescription {
+  font-size: 12px;
+}
+
+.fieldEnumValue {
+  font-size: 12px;
+}

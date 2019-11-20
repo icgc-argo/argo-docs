@@ -9,6 +9,7 @@ const apiRoot = 'https://lectern.qa.argo.cancercollaboratory.org';
 const dictionaryName = 'ICGC-ARGO Data Dictionary';
 const schemaPath = '../website/static/data/schemas';
 const versionsFilename = `${schemaPath}/schema-versions.json`;
+const dataFilename = '../website/src/pages/dictionary/data.json';
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
@@ -42,6 +43,16 @@ function saveDictionaryFile(version, data) {
 
 function saveVersionsFile(data) {
   fs.writeFileSync(versionsFilename, JSON.stringify(data));
+}
+
+// The data file is the file used on load in the data dictionary.
+function saveDataFile(dictionary, versions) {
+  const content = {
+    dictionary,
+    versions,
+    currentVersion: versions[0],
+  };
+  fs.writeFileSync(dataFilename, JSON.stringify(content));
 }
 
 async function fetchAndSaveDiffsForVersion(version) {
@@ -142,8 +153,10 @@ async function runAdd() {
   console.log(chalk.cyan('\nupdating list of data dictionary versions...'));
   saveVersionsFile(updatedVersions);
 
-  const maxVersion = updatedVersions[0];
-  console.log(`${chalk.cyan('latest Data Dictionary version is now: ')} ${maxVersion}`);
+  console.log(chalk.cyan('\nupdating data dictionary input file...'));
+  saveDataFile(dictionary, updatedVersions);
+
+  console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
 }
 
 function runHelp() {
