@@ -1,0 +1,61 @@
+.nav-footer {
+  background: #f8f8fb;
+  border-top: 1px solid #dcdde1;
+  padding: 0px;
+
+  color: 'black';
+}
+
+.footerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.footerLogo {
+  display: flex;
+  width: 180px;
+  justify-content: flex-end;
+}
+
+.flexEnd {
+  justify-content: flex-end;
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 15px;
+
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+}
+
+.footerLinks a {
+  padding: 0 11px;
+}
+
+.legal-text {
+  font-size: 11px;
+  line-height: 1.27;
+  text-align: center;
+}
+.legal-text a {
+  color: #523785;
+}
+
+/* Added by Docusaurus v2 */
+.footerLogoLink {
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.footerLogoLink:hover {
+  opacity: 1;
+}

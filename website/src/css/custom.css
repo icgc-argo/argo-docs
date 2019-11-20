@@ -1,0 +1,362 @@
+/* Reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  font-family: Work Sans;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+ol,
+ul {
+  margin-bottom: 1em;
+  margin-top: 0;
+  padding-left: 2em;
+}
+li + li {
+  margin-top: 3.5px;
+}
+
+:root {
+  --ifm-color-primary: #ffffff;
+  --ifm-color-primary-dark: #ffffff;
+  --ifm-color-primary-darker: #ffffff;
+  --ifm-color-primary-darkest: #ffffff;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
+
+  --ifm-color-secondary: #f8f8fb;
+  --ifm-color-secondary-dark: #f8f8fb;
+  --ifm-color-secondary-darker: #f8f8fb;
+  --ifm-color-secondary-darkest: #f8f8fb;
+  --ifm-color-secondary-light: #f8f8fb;
+  --ifm-color-secondary-lighter: #f8f8fb;
+  --ifm-color-secondary-lightest: #f8f8fb;
+
+  --ifm-navbar-height: 57px;
+}
+
+a {
+  color: #523785;
+  text-decoration: underline;
+}
+
+html a:hover {
+  color: #9f7fd8;
+  text-decoration: underline;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+/* Header */
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.08);
+  padding: 16px;
+}
+
+.navbar .navbar__inner {
+  margin: 0px 20px;
+  /* max-width: none; */
+}
+
+/* .navbar .navbar__inner .navbar__items--right {
+  flex: 2;
+} */
+.navbar .navbar__inner a {
+  color: #151c3d;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.navbar .navbar__inner a:hover {
+  color: #0774d3;
+  text-decoration: none;
+}
+
+.navbar .navbar__inner a.navbar__link--active {
+  color: #0774d3;
+  /* border-bottom: 3px solid #0774d3; */
+}
+
+.navbar .navbar__inner .navbar__items a {
+  height: 25px;
+  text-decoration: none;
+}
+
+.navbar .navbar__inner .navbar__items img {
+  margin: 0px;
+  height: 100%;
+}
+
+.navigationSlider {
+  height: 25px;
+}
+
+/* Docs Page */
+/* Right Side Nav */
+.onPageNav ul.toc-headings {
+  padding: 0;
+}
+.onPageNav ul.toc-headings li {
+  padding: 0;
+}
+.onPageNav .toc-headings > li > a {
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px 8px 18px;
+  max-width: 200px;
+}
+.onPageNav .toc-headings > li > a.active {
+  color: #045093;
+  background-color: #e6f1fa;
+}
+
+.onPageNav .toc-headings > li > a:hover {
+  color: #151c3d;
+  background-color: #f2f2f8;
+}
+
+.onPageNav .toc-headings > li + li {
+  margin: 0;
+}
+
+/* Sidebar (Left Menu) */
+.toc .toggleNav .navGroup {
+  border-bottom: 1px solid #dcdde1;
+}
+.toc .toggleNav .navGroup ul {
+  margin-bottom: 5px;
+}
+
+.toc .toggleNav .navGroup .navGroupCategoryTitle {
+  color: #151c3d;
+  margin: 15px 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* chevron svg path element fill for collapsible category */
+.toc .toggleNav .navGroup .navGroupCategoryTitle span.arrow path:first-of-type {
+  fill: #151c3d;
+}
+
+.toc .toggleNav ul {
+  padding: 0;
+}
+
+.toc .toggleNav ul li a {
+  text-decoration: none;
+  color: #151c3d;
+  padding: 8px 15px 7px 15px;
+  font-size: 14px;
+  line-height: 1.57;
+}
+
+.toc .toggleNav ul li.navListItemActive a {
+  color: #045093;
+  background-color: #e6f1fa;
+}
+
+.toc .toggleNav ul li a:hover,
+.toc .toggleNav ul li a:focus {
+  color: #151c3d;
+  background-color: #f2f2f8;
+}
+
+/* Breakpoint Specific */
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+  .onPageNav > .toc-headings {
+    border-left: 2px solid #0774d3;
+  }
+
+  /* .separateOnPageNav .wrapper {
+    max-width: none;
+  } */
+}
+
+@media only screen and (max-width: 996px) {
+  .navbar .navbar__inner a.navbar__link {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
+
+/* Markdown Custom */
+.post {
+  line-height: 1.64;
+}
+
+article header h1 {
+  color: #151c3d;
+  font-size: 35px;
+  font-weight: normal;
+}
+
+article h1,
+article h2,
+article h3,
+article h4,
+article h5 {
+  color: #151c3d;
+  font-weight: normal;
+}
+
+.post article h2::after {
+  content: '';
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  width: 76px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #4bcee5;
+  left: 0;
+}
+
+.post article h2:nth-of-type(6n + 1):after {
+  background: #4bcee5;
+}
+.post article h2:nth-of-type(6n + 2):after {
+  background: #24dbb4;
+}
+.post article h2:nth-of-type(6n + 3):after {
+  background: #f95d31;
+}
+.post article h2:nth-of-type(6n + 4):after {
+  background: #7f55cc;
+}
+.post article h2:nth-of-type(6n + 5):after {
+  background: #fea430;
+}
+.post article h2:nth-of-type(6n):after {
+  background: #0774d3;
+}
+
+.post article p {
+  font-size: 14px;
+  font-weight: normal;
+}
+.post article ul {
+  font-size: 14px;
+}
+
+.post article ol li {
+  position: relative;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/*Aleks and Kim testing blockquote */
+
+.post article blockquote {
+  color: black;
+  background-color: #fee8cb;
+  border-left: 8px solid #feba63;
+}
+
+.docs-prevnext .button {
+  color: #523785;
+  font-size: 12px;
+}
