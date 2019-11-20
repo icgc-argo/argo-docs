@@ -9,6 +9,8 @@ import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import axios from 'axios';
 
+import DictionaryDiff from './DictionaryDiff';
+
 const data = require('./data.json');
 
 import styles from './styles.module.css';
@@ -18,17 +20,29 @@ async function fetchDictionary(version) {
   return response.data;
 }
 
+async function fetchDiff(version, diffVersion) {
+  const response = await axios.get(
+    `/data/schemas/diffs/${version}/${version}-diff-${diffVersion}.json`,
+  );
+  return response.data;
+}
+
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
 
+  const [diffVersion, setDiffVersion] = useState(null);
+  const [diff, setDiff] = useState(null);
+
   const updateVersion = async newVersion => {
+    setDiffVersion(null);
+    setDiff(null);
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
       setVersion(newVersion);
       setDictionary(newDict);
     } else {
-      alert('FETCHING ERROR - TODO: MAKE THIS A TOASTER');
+      alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
   };
 
@@ -42,6 +56,33 @@ function DataDictionary() {
           })}
         </select>
       </form>
+    );
+  };
+
+  const updateDiffVersion = async newDiffVersion => {
+    setDiffVersion(newDiffVersion);
+    const newDiff = await fetchDiff(version, newDiffVersion);
+    if (newDiff) {
+      setDiff(newDiff);
+    } else {
+      alert('DIFF FETCHING ERROR - TODO: MAKE THIS A TOASTER');
+    }
+  };
+
+  const renderDiffSelect = () => {
+    const lowerVersions = data.versions.filter(v => parseFloat(v) < parseFloat(version));
+    return lowerVersions.length > 0 ? (
+      <form>
+        <label>View Version Diff:</label>
+        <select name="version" onChange={e => updateDiffVersion(e.target.value)}>
+          <option></option>
+          {lowerVersions.map(v => {
+            return <option value={v}>{v}</option>;
+          })}
+        </select>
+      </form>
+    ) : (
+      <p>No older versions available, can't show diff</p>
     );
   };
 
@@ -124,8 +165,16 @@ function DataDictionary() {
       <div className={styles.mainContainer}>
         {renderVersionSelect()}
         <br />
-        Showing Version: {version}
-        {renderDictionary()}
+        {renderDiffSelect()}
+        {diffVersion
+          ? `Showing difference between ${version} and ${diffVersion}`
+          : `Showing Version: ${version}`}
+        <br />
+        {diffVersion && diff ? (
+          <DictionaryDiff diff={diff} high={version} low={diffVersion} />
+        ) : (
+          renderDictionary()
+        )}
       </div>
     </Layout>
   );
