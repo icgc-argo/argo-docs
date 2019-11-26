@@ -115,6 +115,8 @@ li + li {
   --ifm-color-secondary-lighter: #f8f8fb;
   --ifm-color-secondary-lightest: #f8f8fb;
 
+  --ifm-heading-color: #151c3d;
+
   --ifm-navbar-height: 57px;
 }
 
@@ -147,9 +149,10 @@ button:focus {
   /* max-width: none; */
 }
 
-/* .navbar .navbar__inner .navbar__items--right {
-  flex: 2;
-} */
+.navbar .navbar__inner .navbar__items--right {
+  display: flex;
+  flex: 1;
+}
 .navbar .navbar__inner a {
   color: #151c3d;
   font-size: 15px;
@@ -181,27 +184,88 @@ button:focus {
   height: 100%;
 }
 
-.navigationSlider {
-  height: 25px;
+.navbar .navbar__items {
+  flex: 1 1 0;
 }
 
 /* Docs Page */
 /* Right Side Nav */
-.onPageNav ul.toc-headings {
+div.docSidebarContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+  border: 0px;
+  width: 240px;
+}
+div.sidebar_node_modules-\@docusaurus-theme-classic-src-theme-DocSidebar- {
+  padding: 0px;
+}
+
+/* Left Docs Menu */
+.docSidebarContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+  margin-right: 24px;
+}
+
+.menu ul.menu__list {
   padding: 0;
 }
-.onPageNav ul.toc-headings li {
+.menu ul.menu__list li {
   padding: 0;
+  margin: 0;
 }
-.onPageNav .toc-headings > li > a {
+
+.menu ul.menu__list a.menu__link {
   text-decoration: none;
-  display: block;
-  padding: 8px 12px 8px 18px;
-  max-width: 200px;
+  display: flex;
+  align-content: center;
+
+  color: #151c3d;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.57;
+  border-radius: 0px;
+  margin: 8px 0;
+  padding: 0px;
 }
-.onPageNav .toc-headings > li > a.active {
+
+.menu ul.menu__list a.menu__link:hover {
+  background-color: #fff;
+}
+
+.menu .menu__list-item .menu__link--sublist:after {
+  background-image: url('/static/img/icons/chevron-right.svg');
+  background-size: cover;
+  transform: rotate(90deg);
+  transition: transform 0.2s linear;
+  height: 0.8rem;
+  width: 0.8rem;
+  margin-top: 3px;
+}
+.menu .menu__list-item.menu__list-item--collapsed .menu__link--sublist:after {
+  transform: rotate(0deg);
+}
+
+/* Left Docs Menu - Nested List */
+.menu ul.menu__list ul.menu__list {
+  margin: 0;
+  margin-bottom: 5px;
+}
+.menu ul.menu__list ul.menu__list .menu__link {
+  padding: 8px 15px 7px 15px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.menu ul.menu__list ul.menu__list .menu__link.menu__link--active {
   color: #045093;
   background-color: #e6f1fa;
+}
+.menu ul.menu__list ul.menu__list .menu__link:hover {
+  color: #151c3d;
+  background-color: #f2f2f8;
+}
+
+.menu > ul.menu__list > li {
+  border-bottom: 1px solid #dcdde1;
+  margin-bottom: 15px;
 }
 
 .onPageNav .toc-headings > li > a:hover {
@@ -214,6 +278,10 @@ button:focus {
 }
 
 /* Sidebar (Left Menu) */
+div.menu {
+  padding-top: 40px;
+}
+
 .toc .toggleNav .navGroup {
   border-bottom: 1px solid #dcdde1;
 }
@@ -246,9 +314,44 @@ button:focus {
   line-height: 1.57;
 }
 
-.toc .toggleNav ul li.navListItemActive a {
+.docMainContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage-
+  div.padding-vert--lg
+  > div.container {
+  padding: 0px;
+}
+
+.contents.contents__left-border {
+  color: #045093;
+  border-left: 2px solid #0774d3;
+  padding: 0px;
+  font-size: 12px;
+  color: #717171;
+  line-height: 16px;
+}
+.contents.contents__left-border li {
+  margin: 0px;
+}
+.contents.contents__left-border ul {
+  padding: 0px;
+}
+.contents.contents__left-border li ul a.contents__link {
+  padding-left: 24px;
+}
+.contents.contents__left-border .contents__link {
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px 8px 18px;
+  max-width: 200px;
+}
+.contents.contents__left-border .contents__link--active {
   color: #045093;
   background-color: #e6f1fa;
+  font-weight: 600;
+}
+.contents.contents__left-border .contents__link:hover {
+  background-color: #e6f1fa;
+  color: #151c3d;
+  background-color: #f2f2f8;
 }
 
 .toc .toggleNav ul li a:hover,
@@ -256,16 +359,17 @@ button:focus {
   color: #151c3d;
   background-color: #f2f2f8;
 }
+.docPage_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+  margin: 0 auto;
+  padding: 0 20px;
+  flex: 1;
+}
 
 /* Breakpoint Specific */
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
 @media only screen and (min-width: 1024px) {
-  .onPageNav > .toc-headings {
-    border-left: 2px solid #0774d3;
-  }
-
   /* .separateOnPageNav .wrapper {
     max-width: none;
   } */
@@ -281,17 +385,38 @@ button:focus {
 }
 
 @media only screen and (min-width: 1500px) {
+  .docPage_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+    max-width: 1400px;
+  }
 }
 
 /* Markdown Custom */
-.post {
+article {
   line-height: 1.64;
 }
 
-article header h1 {
-  color: #151c3d;
+div.docItemContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocItem- {
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+article header h1.docTitle_node_modules-\@docusaurus-theme-classic-src-theme-DocItem- {
   font-size: 35px;
   font-weight: normal;
+  margin-bottom: 16px;
+}
+
+article div.markdown h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 1.5em;
+  line-height: 30px;
+}
+
+article div.markdown h3 {
+  font-size: 20px;
+  margin-top: 1.5em;
+  line-height: 1.25;
 }
 
 article h1,
@@ -303,7 +428,7 @@ article h5 {
   font-weight: normal;
 }
 
-.post article h2::after {
+article h2::after {
   content: '';
   display: block;
   margin-top: 15px;
@@ -315,48 +440,62 @@ article h5 {
   left: 0;
 }
 
-.post article h2:nth-of-type(6n + 1):after {
+article h2:nth-of-type(6n + 1):after {
   background: #4bcee5;
 }
-.post article h2:nth-of-type(6n + 2):after {
+article h2:nth-of-type(6n + 2):after {
   background: #24dbb4;
 }
-.post article h2:nth-of-type(6n + 3):after {
+article h2:nth-of-type(6n + 3):after {
   background: #f95d31;
 }
-.post article h2:nth-of-type(6n + 4):after {
+article h2:nth-of-type(6n + 4):after {
   background: #7f55cc;
 }
-.post article h2:nth-of-type(6n + 5):after {
+article h2:nth-of-type(6n + 5):after {
   background: #fea430;
 }
-.post article h2:nth-of-type(6n):after {
+article h2:nth-of-type(6n):after {
   background: #0774d3;
 }
 
-.post article p {
+article div.markdown p {
   font-size: 14px;
   font-weight: normal;
+  margin-bottom: 14px;
 }
-.post article ul {
+article div.markdown ul {
   font-size: 14px;
+  margin-bottom: 14px;
 }
 
-.post article ol li {
+article ol li {
   position: relative;
   font-size: 14px;
   margin-bottom: 8px;
 }
 
-/*Aleks and Kim testing blockquote */
-
-.post article blockquote {
+article blockquote {
   color: black;
   background-color: #fee8cb;
   border-left: 8px solid #feba63;
+  padding: 15px 30px 1px 15px; /* bottom margin is 1 because content will have margin-bottom=14px in most cases */
+  margin-bottom: 16px;
 }
 
-.docs-prevnext .button {
+nav.pagination-nav a.pagination-nav__link {
   color: #523785;
   font-size: 12px;
+  border: none;
+}
+
+nav.pagination-nav a.pagination-nav__link:hover {
+  border: none;
+}
+
+nav.pagination-nav a.pagination-nav__link .pagination-nav__link--label {
+  color: #045093;
+}
+nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
+  color: #0774d3;
 }
