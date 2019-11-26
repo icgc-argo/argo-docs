@@ -78,16 +78,6 @@ function DataDictionary() {
         </div>
       </form>
     );
-    return (
-      <form>
-        <Select
-          aria-label="version-select"
-          value={data.versions[0]}
-          options={data.versions.map(d => ({ content: d, value: d }))}
-          onChange={e => updateVersion(e.target.value)}
-        />
-      </form>
-    );
   };
 
   const updateDiffVersion = async newDiffVersion => {
