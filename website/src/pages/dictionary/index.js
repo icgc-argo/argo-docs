@@ -9,6 +9,8 @@ import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import axios from 'axios';
 
+import { ThemeProvider } from '@icgc-argo/uikit';
+
 import DictionaryDiff from './DictionaryDiff';
 
 const data = require('./data.json');
@@ -161,22 +163,24 @@ function DataDictionary() {
   };
 
   return (
-    <Layout permalink="dictionary">
-      <div className={styles.mainContainer}>
-        {renderVersionSelect()}
-        <br />
-        {renderDiffSelect()}
-        {diffVersion
-          ? `Showing difference between ${version} and ${diffVersion}`
-          : `Showing Version: ${version}`}
-        <br />
-        {diffVersion && diff ? (
-          <DictionaryDiff diff={diff} high={version} low={diffVersion} />
-        ) : (
-          renderDictionary()
-        )}
-      </div>
-    </Layout>
+    <ThemeProvider>
+      <Layout permalink="dictionary">
+        <div className={styles.mainContainer}>
+          {renderVersionSelect()}
+          <br />
+          {renderDiffSelect()}
+          {diffVersion
+            ? `Showing difference between ${version} and ${diffVersion}`
+            : `Showing Version: ${version}`}
+          <br />
+          {diffVersion && diff ? (
+            <DictionaryDiff diff={diff} high={version} low={diffVersion} />
+          ) : (
+            renderDictionary()
+          )}
+        </div>
+      </Layout>
+    </ThemeProvider>
   );
 }
 

@@ -102,7 +102,7 @@ module.exports = {
   projectName: 'icgc-argo-documentation',
 
   favicon: 'favicon.ico',
-  tagline: '',
+  tagline: 'ICGC ARGO Docs',
 
   scripts: [],
   stylesheets: ['https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,600&display=swap'],

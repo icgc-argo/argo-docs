@@ -64,7 +64,7 @@ class ContentBlock extends React.Component {
 
 function Index() {
   return (
-    <Layout permalink="/">
+    <Layout permalink="/" title="ICGC ARGO Docs">
       <div>
         <HomeSplash />
         <div className={styles.mainContainer}>
