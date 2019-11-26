@@ -4,6 +4,24 @@
   max-width: 1100px;
 }
 
+.heading {
+  display: flex;
+  flex-direction: row;
+}
+
+.infobar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infobar > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .requiredTag {
   background-color: #df1b42;
   font-size: 12px;

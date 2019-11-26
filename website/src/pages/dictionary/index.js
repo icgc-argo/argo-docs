@@ -17,6 +17,8 @@ const data = require('./data.json');
 
 import styles from './styles.module.css';
 
+import Typography from '@icgc-argo/uikit/Typography';
+
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
   return response.data;
@@ -166,6 +168,17 @@ function DataDictionary() {
     <ThemeProvider>
       <Layout permalink="dictionary">
         <div className={styles.mainContainer}>
+          <div className={styles.heading}>
+            <Typography color="#151c3d" css={{ 'font-size': '28px', width: '100%' }} as="h1">
+              Data Dictionary
+            </Typography>
+            <Typography variant="paragraph" color="#000">
+              The ICGC ARGO Data Dictionary expresses the details of the data model, which adheres
+              to specific formats and restrictions to ensure a standard of data quality. The
+              following list describes the attributes and permissible values for all of the fields
+              within the clinical tsv files for the ARGO Data Platform.
+            </Typography>
+          </div>
           {renderVersionSelect()}
           <br />
           {renderDiffSelect()}
