@@ -1,0 +1,122 @@
+/* Search Banner */
+
+.homeSplashFade {
+  background-image: url('/img/galaxy-splash.jpg');
+  background-position: center;
+  background-size: cover;
+}
+.homeContainer .homeWrapper {
+  padding: 0;
+}
+.searchBanner {
+  height: 223px;
+  padding-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchEntryWrapper {
+  width: 445px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #babcc2;
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.searchEntryIcon {
+  padding: 14px;
+  padding-left: 12px;
+}
+
+.searchEntryInput {
+  border: none;
+  height: 100%;
+  width: 100%;
+
+  font-size: 18px;
+
+  color: #525767;
+  font-weight: 300;
+}
+
+.searchEntryInput::placeholder {
+  color: #525767;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+span.bannerText {
+  color: white;
+  font-size: 44px;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+/* Content Blocks */
+.mainContainer {
+  padding: 40px 20px;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.contentBlock {
+  border-top: 3px solid;
+
+  margin: 0px 25px;
+  padding-top: 10px;
+  min-height: 215px;
+
+  flex: 1;
+}
+
+.contentBlockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.contentBlockTitle {
+  font-size: 20px;
+  font-weight: normal;
+  color: #151c3d;
+}
+
+.contentBlockInner {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.64;
+}
+
+.contentAction {
+  margin-top: 15px;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 996px) {
+  .row {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .mainContainer {
+    max-width: 1400px;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "help": "node manage-versions.js -h --npm",
+    "list": "node manage-versions.js -l --npm",
+    "add": "node manage-versions.js -a --npm --silent"
+  },
+  "devDependencies": {},
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "chalk": "^3.0.0",
+    "inquirer": "^7.0.0",
+    "querystring": "^0.2.0",
+    "yargs": "^15.0.1"
+  }
+}
