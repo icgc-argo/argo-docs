@@ -19,6 +19,11 @@ import styles from './styles.module.css';
 
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
+import Button from '@icgc-argo/uikit/Button';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import Icon from '@icgc-argo/uikit/Icon';
+
+const DownloadIcon = () => <Icon name="download" fill="accent2_dark" height="12px" />;
 
 async function fetchDictionary(version) {
   console.log('fetch dict', version);
@@ -61,16 +66,6 @@ function DataDictionary() {
           options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
           onChange={val => updateVersion(val)}
         />
-      </form>
-    );
-    return (
-      <form>
-        <label>Select Version:</label>
-        <select name="version" onChange={e => updateVersion(e.target.value)}>
-          {data.versions.map(v => {
-            return <option value={v}>{v}</option>;
-          })}
-        </select>
       </form>
     );
   };
@@ -191,7 +186,30 @@ function DataDictionary() {
               within the clinical tsv files for the ARGO Data Platform.
             </Typography>
           </div>
-          {renderVersionSelect()}
+          <div className={styles.infobar}>
+            <div>
+              {renderVersionSelect()}
+              Last updated: January 20, 2020
+            </div>
+            <div>
+              <div>Overview</div>
+              <div>Details</div>
+            </div>
+            <div>
+              <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+                <span>
+                  <DownloadIcon />
+                  File Templates
+                  <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                </span>
+              </DropdownButton>
+              <Button variant="secondary" size="sm">
+                <DownloadIcon />
+                Details
+              </Button>
+            </div>
+          </div>
+
           <br />
           {renderDiffSelect()}
           {diffVersion
