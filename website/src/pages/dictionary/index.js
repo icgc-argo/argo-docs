@@ -55,22 +55,22 @@ function DataDictionary() {
   const renderVersionSelect = () => {
     return (
       <form>
+        <Select
+          aria-label="version-select"
+          value={data.versions[0]}
+          options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
+          onChange={val => updateVersion(val)}
+        />
+      </form>
+    );
+    return (
+      <form>
         <label>Select Version:</label>
         <select name="version" onChange={e => updateVersion(e.target.value)}>
           {data.versions.map(v => {
             return <option value={v}>{v}</option>;
           })}
         </select>
-      </form>
-    );
-    return (
-      <form>
-        <Select
-          aria-label="version-select"
-          value={data.versions[0]}
-          options={data.versions.map(d => ({ content: d, value: d }))}
-          onChange={e => updateVersion(e.target.value)}
-        />
       </form>
     );
   };
@@ -181,7 +181,7 @@ function DataDictionary() {
       <Layout permalink="dictionary">
         <div className={styles.mainContainer}>
           <div className={styles.heading}>
-            <Typography color="#151c3d" css={{ 'font-size': '28px', width: '100%' }} as="h1">
+            <Typography color="#151c3d" css={{ fontSize: '28px', width: '100%' }} as="h1">
               Data Dictionary
             </Typography>
             <Typography variant="paragraph" color="#000">
