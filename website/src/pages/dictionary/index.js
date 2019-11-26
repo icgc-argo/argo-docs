@@ -18,8 +18,10 @@ const data = require('./data.json');
 import styles from './styles.module.css';
 
 import Typography from '@icgc-argo/uikit/Typography';
+import Select from '@icgc-argo/uikit/form/Select';
 
 async function fetchDictionary(version) {
+  console.log('fetch dict', version);
   const response = await axios.get(`/data/schemas/${version}.json`);
   return response.data;
 }
@@ -59,6 +61,16 @@ function DataDictionary() {
             return <option value={v}>{v}</option>;
           })}
         </select>
+      </form>
+    );
+    return (
+      <form>
+        <Select
+          aria-label="version-select"
+          value={data.versions[0]}
+          options={data.versions.map(d => ({ content: d, value: d }))}
+          onChange={e => updateVersion(e.target.value)}
+        />
       </form>
     );
   };
