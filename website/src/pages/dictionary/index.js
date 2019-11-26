@@ -17,6 +17,9 @@ import styles from './styles.module.css';
 
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
+import Button from '@icgc-argo/uikit/Button';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import Icon from '@icgc-argo/uikit/Icon';
 
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
