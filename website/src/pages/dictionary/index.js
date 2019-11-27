@@ -26,7 +26,6 @@ import Icon from '@icgc-argo/uikit/Icon';
 const DownloadIcon = () => <Icon name="download" fill="accent2_dark" height="12px" />;
 
 async function fetchDictionary(version) {
-  console.log('fetch dict', version);
   const response = await axios.get(`/data/schemas/${version}.json`);
   return response.data;
 }
@@ -176,7 +175,16 @@ function DataDictionary() {
       <Layout permalink="dictionary">
         <div className={styles.mainContainer}>
           <div className={styles.heading}>
-            <Typography color="#151c3d" css={{ fontSize: '28px', width: '100%' }} as="h1">
+            <Typography
+              color="#151c3d"
+              css={{
+                fontSize: '28px',
+                display: 'inline-block',
+                marginRight: '55px',
+                flexShrink: 0,
+              }}
+              as="h1"
+            >
               Data Dictionary
             </Typography>
             <Typography variant="paragraph" color="#000">
