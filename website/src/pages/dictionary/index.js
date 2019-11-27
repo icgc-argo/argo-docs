@@ -23,7 +23,16 @@ import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 
-const DownloadIcon = () => <Icon name="download" fill="accent2_dark" height="12px" />;
+const DownloadIcon = props => (
+  <Icon
+    name="download"
+    fill="accent2_dark"
+    height="12px"
+    style={{
+      marginRight: '5px',
+    }}
+  />
+);
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -59,12 +68,14 @@ function DataDictionary() {
   const renderVersionSelect = () => {
     return (
       <form>
-        <Select
-          aria-label="version-select"
-          value={data.versions[0]}
-          options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
-          onChange={val => updateVersion(val)}
-        />
+        <div style={{ width: '150px', marginRight: '10px' }}>
+          <Select
+            aria-label="version-select"
+            value={data.versions[0]}
+            options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
+            onChange={val => updateVersion(val)}
+          />
+        </div>
       </form>
     );
   };
@@ -209,11 +220,27 @@ function DataDictionary() {
               <div>Details</div>
             </div>
             <div>
-              <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+              <DropdownButton
+                variant="secondary"
+                size="sm"
+                style={{ marginRight: '105px' }}
+                menuItems={[]}
+              >
                 <span>
-                  <DownloadIcon />
+                  <DownloadIcon
+                    style={{
+                      margin: '0 5px',
+                    }}
+                  />
                   File Templates
-                  <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                  <Icon
+                    name="chevron_down"
+                    fill="accent2_dark"
+                    height="9px"
+                    style={{
+                      margin: '0 5px',
+                    }}
+                  />
                 </span>
               </DropdownButton>
               <Button variant="secondary" size="sm">
@@ -222,13 +249,13 @@ function DataDictionary() {
               </Button>
             </div>
           </div>
-
-          <br />
+          {/*}
           {renderDiffSelect()}
           {diffVersion
             ? `Showing difference between ${version} and ${diffVersion}`
             : `Showing Version: ${version}`}
           <br />
+          */}
           {diffVersion && diff ? (
             <DictionaryDiff diff={diff} high={version} low={diffVersion} />
           ) : (
