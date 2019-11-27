@@ -197,7 +197,12 @@ function DataDictionary() {
           <div className={styles.infobar}>
             <div>
               {renderVersionSelect()}
-              Last updated: January 20, 2020
+              <span>
+                <Typography variant="data">Last updated: </Typography>
+                <Typography variant="data" bold>
+                  January 20, 2020
+                </Typography>
+              </span>
             </div>
             <div>
               <div>Overview</div>
