@@ -45,7 +45,6 @@ import Icon from '@icgc-argo/uikit/Icon';
 const DownloadIcon = () => <Icon name="download" fill="accent2_dark" height="12px" />;
 
 async function fetchDictionary(version) {
-  console.log('fetch dict', version);
   const response = await axios.get(`/data/schemas/${version}.json`);
   return response.data;
 }
