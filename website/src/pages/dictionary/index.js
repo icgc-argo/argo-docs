@@ -42,7 +42,16 @@ import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 
-const DownloadIcon = () => <Icon name="download" fill="accent2_dark" height="12px" />;
+const DownloadIcon = props => (
+  <Icon
+    name="download"
+    fill="accent2_dark"
+    height="12px"
+    style={{
+      marginRight: '5px',
+    }}
+  />
+);
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
