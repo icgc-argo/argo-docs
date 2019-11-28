@@ -18,11 +18,14 @@ const data = require('./data.json');
 import styles from './styles.module.css';
 
 import Typography from '@icgc-argo/uikit/Typography';
-import Select from '@icgc-argo/uikit/form/Select';
-import Button from '@icgc-argo/uikit/Button';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import Icon from '@icgc-argo/uikit/Icon';
+//import Select from '@icgc-argo/uikit/form/Select';
+///import Button from '@icgc-argo/uikit/Button';
+//import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+//import Icon from '@icgc-argo/uikit/Icon';
+//import Input from '@icgc-argo/uikit/form/Input';
 
+{
+  /*
 const DownloadIcon = props => (
   <Icon
     name="download"
@@ -33,6 +36,8 @@ const DownloadIcon = props => (
     }}
   />
 );
+  */
+}
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -69,12 +74,12 @@ function DataDictionary() {
     return (
       <form>
         <div style={{ width: '150px', marginRight: '10px' }}>
-          <Select
+          {/*<Select
             aria-label="version-select"
             value={data.versions[0]}
             options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
             onChange={val => updateVersion(val)}
-          />
+          />*/}
         </div>
       </form>
     );
@@ -198,13 +203,14 @@ function DataDictionary() {
             >
               Data Dictionary
             </Typography>
-            <Typography variant="paragraph" color="#000">
+            {/* <Typography variant="paragraph" color="#000">
               The ICGC ARGO Data Dictionary expresses the details of the data model, which adheres
               to specific formats and restrictions to ensure a standard of data quality. The
               following list describes the attributes and permissible values for all of the fields
               within the clinical tsv files for the ARGO Data Platform.
-            </Typography>
+            </Typography> */}
           </div>
+          {/*
           <div className={styles.infobar}>
             <div>
               {renderVersionSelect()}
