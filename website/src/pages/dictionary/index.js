@@ -15,12 +15,13 @@ const data = require('./data.json');
 
 import styles from './styles.module.css';
 
+import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import Typography from '@icgc-argo/uikit/Typography';
-//import Select from '@icgc-argo/uikit/form/Select';
-///import Button from '@icgc-argo/uikit/Button';
-//import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-//import Icon from '@icgc-argo/uikit/Icon';
-//import Input from '@icgc-argo/uikit/form/Input';
+import Select from '@icgc-argo/uikit/form/Select';
+import Button from '@icgc-argo/uikit/Button';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import Icon from '@icgc-argo/uikit/Icon';
+import Input from '@icgc-argo/uikit/form/Input';
 
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
@@ -41,8 +42,6 @@ const DownloadIcon = props => (
     }}
   />
 );
-  */
-}
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -74,12 +73,12 @@ function DataDictionary() {
     return (
       <form>
         <div style={{ width: '150px', marginRight: '10px' }}>
-          {/*<Select
+          <Select
             aria-label="version-select"
             value={version}
             options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
             onChange={val => updateVersion(val)}
-          />*/}
+          />
         </div>
       </form>
     );
