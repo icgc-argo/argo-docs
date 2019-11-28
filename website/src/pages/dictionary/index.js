@@ -42,6 +42,8 @@ import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 
+{
+  /*
 const DownloadIcon = props => (
   <Icon
     name="download"
@@ -52,6 +54,8 @@ const DownloadIcon = props => (
     }}
   />
 );
+  */
+}
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -83,12 +87,12 @@ function DataDictionary() {
     return (
       <form>
         <div style={{ width: '150px', marginRight: '10px' }}>
-          <Select
+          {/*<Select
             aria-label="version-select"
             value={version}
             options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
             onChange={val => updateVersion(val)}
-          />
+          />*/}
         </div>
       </form>
     );
