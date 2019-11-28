@@ -15,13 +15,12 @@ const data = require('./data.json');
 
 import styles from './styles.module.css';
 
-import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
-import Input from '@icgc-argo/uikit/form/Input';
+import ResetWrapper from '../../theme/ResetWrapper';
 
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
