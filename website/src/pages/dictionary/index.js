@@ -17,13 +17,12 @@ const data = require('./data.json');
 
 import styles from './styles.module.css';
 
-import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
-import Input from '@icgc-argo/uikit/form/Input';
+import ResetWrapper from '../../theme/ResetWrapper';
 
 const DownloadIcon = props => (
   <Icon
@@ -192,69 +191,71 @@ function DataDictionary() {
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
-        <div className={styles.mainContainer}>
-          <div className={styles.heading}>
-            <Typography
-              color="#151c3d"
-              css={{
-                fontSize: '28px',
-                display: 'inline-block',
-                marginRight: '55px',
-                flexShrink: 0,
-              }}
-              as="h1"
-            >
-              Data Dictionary
-            </Typography>
-            <Typography variant="paragraph" color="#000">
-              The ICGC ARGO Data Dictionary expresses the details of the data model, which adheres
-              to specific formats and restrictions to ensure a standard of data quality. The
-              following list describes the attributes and permissible values for all of the fields
-              within the clinical tsv files for the ARGO Data Platform.
-            </Typography>
-          </div>
+        <ResetWrapper>
+          <div className={styles.mainContainer}>
+            <div className={styles.heading}>
+              <Typography
+                color="#151c3d"
+                css={{
+                  fontSize: '28px',
+                  display: 'inline-block',
+                  marginRight: '55px',
+                  flexShrink: 0,
+                }}
+                as="h1"
+              >
+                Data Dictionary
+              </Typography>
+              <Typography variant="paragraph" color="#000">
+                The ICGC ARGO Data Dictionary expresses the details of the data model, which adheres
+                to specific formats and restrictions to ensure a standard of data quality. The
+                following list describes the attributes and permissible values for all of the fields
+                within the clinical tsv files for the ARGO Data Platform.
+              </Typography>
+            </div>
 
-          <div className={styles.infobar}>
-            <div>
-              {renderVersionSelect()}
-              <span>
-                <Typography variant="data">Last updated: </Typography>
-                <Typography variant="data" bold>
-                  January 20, 2020
-                </Typography>
-              </span>
-            </div>
-            <div>
-              <div>Overview</div>
-              <div>Details</div>
-            </div>
-            <div>
-              <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+            <div className={styles.infobar}>
+              <div>
+                {renderVersionSelect()}
                 <span>
-                  <DownloadIcon />
-                  File Templates
-                  <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                  <Typography variant="data">Last updated: </Typography>
+                  <Typography variant="data" bold>
+                    January 20, 2020
+                  </Typography>
                 </span>
-              </DropdownButton>
-              <Button variant="secondary" size="sm">
-                <DownloadIcon />
-                Details
-              </Button>
+              </div>
+              <div>
+                <div>Overview</div>
+                <div>Details</div>
+              </div>
+              <div>
+                <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+                  <span>
+                    <DownloadIcon />
+                    File Templates
+                    <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                  </span>
+                </DropdownButton>
+                <Button variant="secondary" size="sm">
+                  <DownloadIcon />
+                  Details
+                </Button>
+              </div>
             </div>
+
+            {renderDiffSelect()}
+            {diffVersion
+              ? `Showing difference between ${version} and ${diffVersion}`
+              : `Showing Version: ${version}`}
+            <br />
+
+            {diffVersion && diff ? (
+              <DictionaryDiff diff={diff} high={version} low={diffVersion} />
+            ) : (
+              <RenderDictionary />
+            )}
           </div>
-
-          {renderDiffSelect()}
-          {diffVersion
-            ? `Showing difference between ${version} and ${diffVersion}`
-            : `Showing Version: ${version}`}
-          <br />
-
-          {diffVersion && diff ? (
-            <DictionaryDiff diff={diff} high={version} low={diffVersion} />
-          ) : (
-            <RenderDictionary />
-          )}
-        </div>
+        </ResetWrapper>
       </Layout>
     </ThemeProvider>
   );
