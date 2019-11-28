@@ -15,7 +15,6 @@ const data = require('./data.json');
 
 import styles from './styles.module.css';
 
-import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import Typography from '@icgc-argo/uikit/Typography';
 
 import Select from '@icgc-argo/uikit/form/Select';
