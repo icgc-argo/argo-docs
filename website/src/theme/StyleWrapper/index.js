@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-function ResetWrapper(props) {
+function StyleWrapper(props) {
   return <div style={styles}>{props.children}</div>;
 }
 
-export default ResetWrapper;
+export default StyleWrapper;

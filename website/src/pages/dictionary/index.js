@@ -22,7 +22,7 @@ import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
-import ResetWrapper from '../../theme/ResetWrapper';
+import StyleWrapper from '../../theme/StyleWrapper';
 
 const DownloadIcon = props => (
   <Icon
@@ -191,7 +191,7 @@ function DataDictionary() {
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
-        <ResetWrapper>
+        <StyleWrapper>
           <div className={styles.mainContainer}>
             <div className={styles.heading}>
               <Typography
@@ -255,7 +255,7 @@ function DataDictionary() {
               <RenderDictionary />
             )}
           </div>
-        </ResetWrapper>
+        </StyleWrapper>
       </Layout>
     </ThemeProvider>
   );
