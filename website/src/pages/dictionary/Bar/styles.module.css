@@ -1,0 +1,13 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 15px;
+  background: var(--argo-grey-4);
+  border: solid 1px var(--argo-grey-2);
+}
+
+.bar > div {
+  display: flex;
+  align-items: center;
+}

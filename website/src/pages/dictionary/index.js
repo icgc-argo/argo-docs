@@ -23,6 +23,7 @@ import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
+import Bar from './Bar';
 
 const DownloadIcon = props => (
   <Icon
@@ -243,6 +244,7 @@ function DataDictionary() {
               </div>
             </div>
 
+            <Bar />
             {renderDiffSelect()}
             {diffVersion
               ? `Showing difference between ${version} and ${diffVersion}`

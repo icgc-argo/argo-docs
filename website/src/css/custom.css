@@ -118,6 +118,9 @@ li + li {
   --ifm-heading-color: #151c3d;
 
   --ifm-navbar-height: 57px;
+
+  --argo-grey-2: #dcdde1;
+  --argo-grey-4: #f8f8fb;
 }
 
 a {
