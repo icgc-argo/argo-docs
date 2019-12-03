@@ -21,28 +21,3 @@
   flex-direction: row;
   align-items: center;
 }
-
-.requiredTag {
-  background-color: #df1b42;
-  font-size: 12px;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.schemaTitle {
-  font-size: 24px;
-}
-
-.schemaTable_column {
-  max-width: 450px;
-  min-width: 100px;
-}
-
-.fieldDescription {
-  font-size: 12px;
-}
-
-.fieldEnumValue {
-  font-size: 12px;
-}
