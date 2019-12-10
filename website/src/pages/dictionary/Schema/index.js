@@ -54,11 +54,15 @@ const FieldRow = field => {
 };
 
 const PermissibleValues = ({ regex }) => (
-  <div>
+  <div className={styles.permissibleValues}>
+    <div>Values must meet the regular expression</div>
+    <div className={styles.regex}>{regex}</div>
+    <br />
+    <div>Examples:</div>
     <div>
-      <div>Values must meet the regular expression</div>
-      <div>{regex}</div>
-      <div>Examples:</div>
+      {[{ name: 'PACA-AU', link: '' }].map(({ name, link }) => (
+        <a href={link}>{name}</a>
+      ))}
     </div>
   </div>
 );
@@ -76,11 +80,7 @@ const FieldsTag = ({ fieldCount }) => (
 
 const Schema = ({ schema, key }) => {
   console.log('schema', schema);
-  /**
-   * name
-   * descripton
-   * field = name, description, restrictions : {required, regex, codelist...} , valuetype
-   */
+
   const cols = [
     {
       Header: 'Field & Description',
@@ -89,7 +89,7 @@ const Schema = ({ schema, key }) => {
         <FieldDescription name={name} description={description} />
       ),
     },
-    /*{ Header: 'Data Tier', accessor: '' },*/
+    { Header: 'Data Tier' },
     {
       Header: 'Attributes',
       id: 'attributes',
