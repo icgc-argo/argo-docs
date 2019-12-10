@@ -103,15 +103,13 @@ const Schema = ({ schema, key }) => {
       accessor: ({ restrictions }) =>
         restrictions && restrictions.regex && <PermissibleValues regex={restrictions.regex} />,
     },
-    {
-      /*
-    { Header: 'Notes & Scripts', accessor: '' }, */
-    },
+    { Header: 'Notes & Scripts' },
   ];
   const containerRef = React.createRef();
   const fields = schema.fields;
   const prefix = 'prefix_prefix';
   const ext = 'tsv';
+
   return (
     <div key={key}>
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
@@ -122,7 +120,13 @@ const Schema = ({ schema, key }) => {
       </div>
 
       <div ref={containerRef}>
-        <Table parentRef={containerRef} columns={cols} data={schema.fields} />
+        <Table
+          parentRef={containerRef}
+          columns={cols}
+          data={schema.fields}
+          showPagination={false}
+          sortable={true}
+        />
       </div>
 
       <table>
