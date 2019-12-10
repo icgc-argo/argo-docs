@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from '@icgc-argo/uikit/Table';
-
+import Tag from '@icgc-argo/uikit/Tag';
 import styles from './styles.module.css';
 
 const renderValuesList = list => {
@@ -69,6 +69,31 @@ const FieldDescription = ({ name, description }) => (
   </div>
 );
 
+const TAG_TYPES = Object.freeze({
+  required: 'required',
+  dependency: 'dependency',
+  core: 'core',
+  id: 'id',
+  extended: 'extended',
+});
+
+const TagButton = ({ type }) => {
+  switch (type) {
+    case TAG_TYPES.required:
+      return <Tag className={`${styles.tag} ${styles.required}`}>Required</Tag>;
+    case TAG_TYPES.dependency:
+      return <Tag className={`${styles.tag} ${styles.dependency}`}>Dependency</Tag>;
+    case TAG_TYPES.core:
+      return <Tag className={`${styles.tag} ${styles.core}`}>Core</Tag>;
+    case TAG_TYPES.id:
+      return <Tag className={`${styles.tag} ${styles.id}`}>ID</Tag>;
+    case TAG_TYPES.extended:
+      return <Tag className={`${styles.tag} ${styles.extended}`}>Extended</Tag>;
+    default:
+      return null;
+  }
+};
+
 const Schema = ({ schema, key }) => {
   console.log('schema', schema);
   /**
@@ -88,7 +113,8 @@ const Schema = ({ schema, key }) => {
     {
       Header: 'Attributes',
       id: 'attributes',
-      accessor: ({ restrictions }) => restrictions && restrictions.required && <div>Required</div>,
+      accessor: ({ restrictions }) =>
+        restrictions && restrictions.required && <TagButton type={TAG_TYPES.required} />,
     },
     { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => valueType.toUpperCase() },
     {
