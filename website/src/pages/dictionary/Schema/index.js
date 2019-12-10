@@ -96,7 +96,7 @@ const Schema = ({ schema, key }) => {
       accessor: ({ restrictions }) =>
         restrictions && restrictions.required && <TagButton type={TAG_TYPES.required} />,
     },
-    { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => valueType.toUpperCase() },
+    { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => formatFieldType(valueType) },
     {
       Header: 'Permissible Values',
       id: 'permissibleValues',
