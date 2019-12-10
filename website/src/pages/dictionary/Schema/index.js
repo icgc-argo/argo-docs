@@ -110,15 +110,16 @@ const Schema = ({ schema, key }) => {
   ];
   const containerRef = React.createRef();
   const fields = schema.fields;
-
+  const prefix = 'prefix_prefix';
+  const ext = 'tsv';
   return (
     <div key={key}>
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
 
       <FieldsTag fieldCount={fields.length} />
-      <span>
-        Field Name Example: <span>{`prefix`}</span>[-optional-extension]<span>{`ext`}</span>
-      </span>
+      <div className={styles.fieldExample}>
+        Field Name Example: <span>{`${prefix}`}</span>[-optional-extension]<span>{`.${ext}`}</span>
+      </div>
 
       <div ref={containerRef}>
         <Table parentRef={containerRef} columns={cols} data={schema.fields} />
