@@ -2,6 +2,7 @@ import React from 'react';
 import Table from '@icgc-argo/uikit/Table';
 import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
+import Tag from '@icgc-argo/uikit/Tag';
 
 const renderValuesList = list => {
   const maxEnumLength = 5;
@@ -69,6 +70,10 @@ const FieldDescription = ({ name, description }) => (
   </div>
 );
 
+const FieldsTag = ({ fieldCount }) => (
+  <Tag className={styles.fieldsTag}>{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</Tag>
+);
+
 const Schema = ({ schema, key }) => {
   console.log('schema', schema);
   /**
@@ -104,13 +109,21 @@ const Schema = ({ schema, key }) => {
     },
   ];
   const containerRef = React.createRef();
+  const fields = schema.fields;
 
   return (
     <div key={key}>
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
+
+      <FieldsTag fieldCount={fields.length} />
+      <span>
+        Field Name Example: <span>{`prefix`}</span>[-optional-extension]<span>{`ext`}</span>
+      </span>
+
       <div ref={containerRef}>
         <Table parentRef={containerRef} columns={cols} data={schema.fields} />
       </div>
+
       <table>
         <tr>
           <th>Field & Description</th>
@@ -119,7 +132,7 @@ const Schema = ({ schema, key }) => {
           <th>Permissible Values</th>
           <th>Notes & Scripts</th>
         </tr>
-        {schema.fields.map((field, i) => (
+        {fields.map((field, i) => (
           <FieldRow {...field} key={i} />
         ))}
       </table>
