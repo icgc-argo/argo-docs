@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from '@icgc-argo/uikit/Table';
-import TagButton from './TagButton';
+import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
 
 const renderValuesList = list => {
