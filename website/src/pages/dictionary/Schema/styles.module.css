@@ -47,3 +47,15 @@
 .fieldsTag {
   background-color: #4f546d;
 }
+
+.fieldExample {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.fieldExample > span {
+  font-weight: 600;
+}
