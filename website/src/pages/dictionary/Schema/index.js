@@ -64,8 +64,8 @@ const PermissibleValues = ({ regex }) => (
 );
 
 const FieldDescription = ({ name, description }) => (
-  <div>
-    <div>{name}</div>
+  <div className={styles.fieldDescription}>
+    <div className={styles.name}>{name}</div>
     <div>{description}</div>
   </div>
 );
