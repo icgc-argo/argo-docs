@@ -1,4 +1,5 @@
 import React from 'react';
+import Table from '@icgc-argo/uikit/Table';
 
 import styles from './styles.module.css';
 
@@ -51,23 +52,79 @@ const FieldRow = field => {
   );
 };
 
-const Schema = ({ schema, key }) => (
-  <div key={key}>
-    <h2 className={styles.schemaTitle}>{schema.name}</h2>
-    <table>
-      <tr>
-        <th>Field & Description</th>
-        <th>Attributes</th>
-        <th>Type</th>
-        <th>Permissible Values</th>
-        <th>Notes & Scripts</th>
-      </tr>
-      {schema.fields.map((field, i) => (
-        <FieldRow {...field} key={i} />
-      ))}
-    </table>
-    <br />
+const PermissibleValues = ({ regex }) => (
+  <div>
+    <div>
+      <div>Values must meet the regular expression</div>
+      <div>{regex}</div>
+      <div>Examples:</div>
+    </div>
   </div>
 );
+
+const FieldDescription = ({ name, description }) => (
+  <div>
+    <div>{name}</div>
+    <div>{description}</div>
+  </div>
+);
+
+const Schema = ({ schema, key }) => {
+  console.log('schema', schema);
+  /**
+   * name
+   * descripton
+   * field = name, description, restrictions : {required, regex, codelist...} , valuetype
+   */
+  const cols = [
+    {
+      Header: 'Field & Description',
+      id: 'fieldDescription',
+      accessor: ({ name, description }) => (
+        <FieldDescription name={name} description={description} />
+      ),
+    },
+    /*{ Header: 'Data Tier', accessor: '' },*/
+    {
+      Header: 'Attributes',
+      id: 'attributes',
+      accessor: ({ restrictions }) => restrictions && restrictions.required && <div>Required</div>,
+    },
+    { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => valueType.toUpperCase() },
+    {
+      Header: 'Permissible Values',
+      id: 'permissibleValues',
+      accessor: ({ restrictions }) =>
+        restrictions && restrictions.regex && <PermissibleValues regex={restrictions.regex} />,
+    },
+    {
+      /*
+    { Header: 'Notes & Scripts', accessor: '' }, */
+    },
+  ];
+  const containerRef = React.createRef();
+
+  return (
+    <div key={key}>
+      <h2 className={styles.schemaTitle}>{schema.name}</h2>
+      <div ref={containerRef}>
+        <Table parentRef={containerRef} columns={cols} data={schema.fields} />
+      </div>
+      <table>
+        <tr>
+          <th>Field & Description</th>
+          <th>Attributes</th>
+          <th>Type</th>
+          <th>Permissible Values</th>
+          <th>Notes & Scripts</th>
+        </tr>
+        {schema.fields.map((field, i) => (
+          <FieldRow {...field} key={i} />
+        ))}
+      </table>
+      <br />
+    </div>
+  );
+};
 
 export default Schema;
