@@ -169,6 +169,7 @@ function DataDictionary() {
             </div>
 
             <Bar />
+            {/*
             {renderDiffSelect()}
             {diffVersion
               ? `Showing difference between ${version} and ${diffVersion}`
@@ -179,7 +180,8 @@ function DataDictionary() {
               <DictionaryDiff diff={diff} high={version} low={diffVersion} />
             ) : (
               <RenderDictionary />
-            )}
+            )}*/}
+            <RenderDictionary />
           </div>
         </StyleWrapper>
       </Layout>
