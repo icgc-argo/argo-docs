@@ -22,3 +22,23 @@
 .fieldEnumValue {
   font-size: 12px;
 }
+
+.tag.required {
+  background-color: #e75471;
+}
+
+.tag.dependency {
+  background-color: #ec8f17;
+}
+
+.tag.id {
+  background-color: #00b3d3;
+}
+
+.tag.core {
+  background-color: #00c79d;
+}
+
+.tag.extended {
+  background-color: #a1a4b1;
+}
