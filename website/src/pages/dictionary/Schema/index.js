@@ -3,6 +3,7 @@ import Table from '@icgc-argo/uikit/Table';
 import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
 import Tag from '@icgc-argo/uikit/Tag';
+import CodeList from './CodeList';
 
 const renderValuesList = list => {
   const maxEnumLength = 5;
@@ -11,6 +12,7 @@ const renderValuesList = list => {
       <strong>{item}</strong>
     </p>
   ));
+
   return fullOutput.length > maxEnumLength
     ? [
         ...fullOutput.slice(0, maxEnumLength),
@@ -53,14 +55,14 @@ const FieldRow = field => {
   );
 };
 
-const PermissibleValues = ({ regex }) => (
-  <div className={styles.permissibleValues}>
+const RegexRestriction = ({ regex }) => (
+  <div className={styles.regexRestriction}>
     <div>Values must meet the regular expression</div>
     <div className={styles.regex}>{regex}</div>
     <br />
     <div>Examples:</div>
     <div>
-      {[{ name: 'PACA-AU', link: '' }].map(({ name, link }) => (
+      {[{ name: 'PACA-AU', link: '' }].map(({ name, link }, i) => (
         <a href={link}>{name}</a>
       ))}
     </div>
@@ -100,8 +102,17 @@ const Schema = ({ schema, key }) => {
     {
       Header: 'Permissible Values',
       id: 'permissibleValues',
-      accessor: ({ restrictions }) =>
-        restrictions && restrictions.regex && <PermissibleValues regex={restrictions.regex} />,
+      accessor: 'restrictions',
+      Cell: ({ original: { restrictions = {} } }) => {
+        const { regex = null, codeList = null } = restrictions;
+        if (regex) {
+          return <RegexRestriction regex={regex} />;
+        } else if (codeList) {
+          return <CodeList codeList={codeList} />;
+        } else {
+          return null;
+        }
+      },
     },
     { Header: 'Notes & Scripts' },
   ];
@@ -111,14 +122,13 @@ const Schema = ({ schema, key }) => {
   const ext = 'tsv';
 
   return (
-    <div key={key}>
+    <div>
+      {console.log('schema rerender')}
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
-
       <FieldsTag fieldCount={fields.length} />
       <div className={styles.fieldExample}>
         Field Name Example: <span>{`${prefix}`}</span>[-optional-extension]<span>{`.${ext}`}</span>
       </div>
-
       <div ref={containerRef}>
         <Table
           parentRef={containerRef}
@@ -129,6 +139,7 @@ const Schema = ({ schema, key }) => {
         />
       </div>
 
+      {/*
       <table>
         <tr>
           <th>Field & Description</th>
@@ -140,7 +151,7 @@ const Schema = ({ schema, key }) => {
         {fields.map((field, i) => (
           <FieldRow {...field} key={i} />
         ))}
-      </table>
+        </table>*/}
       <br />
     </div>
   );
