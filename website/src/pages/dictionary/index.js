@@ -53,8 +53,8 @@ function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
 
-  const [diffVersion, setDiffVersion] = useState(null);
-  const [diff, setDiff] = useState(null);
+  //const [diffVersion, setDiffVersion] = useState(null);
+  //const [diff, setDiff] = useState(null);
 
   const updateVersion = async newVersion => {
     setDiffVersion(null);
@@ -111,7 +111,7 @@ function DataDictionary() {
   };
 
   const RenderDictionary = () =>
-    dictionary.schemas.map((schema, i) => <Schema schema={schema} key={i} />);
+    dictionary.schemas.map((schema, i) => (i === 0 ? <Schema schema={schema} /> : null));
 
   return (
     <ThemeProvider>
