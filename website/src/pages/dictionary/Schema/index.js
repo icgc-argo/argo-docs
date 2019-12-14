@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@icgc-argo/uikit/Table';
 import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
@@ -83,6 +83,24 @@ const FieldsTag = ({ fieldCount }) => (
 const Schema = ({ schema, key }) => {
   console.log('schema', schema);
 
+  const fields = schema.fields.map(field => {
+    /**
+     * need to pass in state for Cell rendering
+     * react-table rerenders everything, change shape of codelist to pass in state
+     */
+    const { restrictions: { codeList = null } = {} } = field;
+
+    if (codeList) {
+      const [isExpanded, setExpanded] = useState(false);
+      const newCodeList = {};
+      newCodeList.values = Array.isArray(codeList) ? codeList : codeList.values;
+      newCodeList.isExpanded = isExpanded;
+      newCodeList.setExpanded = setExpanded;
+      return { ...field, restrictions: { codeList: newCodeList } };
+    }
+    return field;
+  });
+
   const cols = [
     {
       Header: 'Field & Description',
@@ -117,7 +135,6 @@ const Schema = ({ schema, key }) => {
     { Header: 'Notes & Scripts' },
   ];
   const containerRef = React.createRef();
-  const fields = schema.fields;
   const prefix = 'prefix_prefix';
   const ext = 'tsv';
 
@@ -133,7 +150,7 @@ const Schema = ({ schema, key }) => {
         <Table
           parentRef={containerRef}
           columns={cols}
-          data={schema.fields}
+          data={fields}
           showPagination={false}
           sortable={true}
         />
@@ -142,7 +159,7 @@ const Schema = ({ schema, key }) => {
       {/*
       <table>
         <tr>
-          <th>Field & Description</th>
+          <th>Field & Description</th>  
           <th>Attributes</th>
           <th>Type</th>
           <th>Permissible Values</th>
