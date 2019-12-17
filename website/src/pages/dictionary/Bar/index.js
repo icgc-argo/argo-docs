@@ -1,8 +1,10 @@
 import React from 'react';
 import Select from '@icgc-argo/uikit/form/Select';
 import Input from '@icgc-argo/uikit/form/Input';
+import Icon from '@icgc-argo/uikit/Icon';
 
 import styles from './styles.module.css';
+import Typography from '@icgc-argo/uikit/Typography';
 
 const Bar = ({
   files = 14,
@@ -11,12 +13,21 @@ const Bar = ({
   onSearch = e => console.log(e.target.val),
 }) => {
   return (
-    <div className={styles.bar}>
-      <div>{`${files} files > ${fields} fields`}</div>
-      <div>
-        Attributes: <Select options={attributes} /> <Input onChange={onSearch} />
+    <Typography variant="data">
+      <div className={styles.bar}>
+        {`${files} files > ${fields} fields`}
+        <div className={styles.dataSelectors}>
+          Data Tier: <Select options={attributes} size="sm" />
+          Attribute: <Select options={attributes} size="sm" />
+          <Input
+            onChange={onSearch}
+            placeholder="Search Dictionary..."
+            preset="search"
+            className={styles.search}
+          />
+        </div>
       </div>
-    </div>
+    </Typography>
   );
 };
 
