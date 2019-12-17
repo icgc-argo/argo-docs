@@ -4,7 +4,7 @@ import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
 import Tag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
-
+import Regex from './Regex';
 const formatFieldType = value => {
   switch (value) {
     case 'string':
@@ -13,20 +13,6 @@ const formatFieldType = value => {
       return value.toUpperCase();
   }
 };
-
-const RegexRestriction = ({ regex }) => (
-  <div className={styles.regexRestriction}>
-    <div>Values must meet the regular expression</div>
-    <div className={styles.regex}>{regex}</div>
-    <br />
-    <div>Examples:</div>
-    <div>
-      {[{ name: 'PACA-AU', link: '' }].map(({ name, link }, i) => (
-        <a href={link}>{name}</a>
-      ))}
-    </div>
-  </div>
-);
 
 const FieldDescription = ({ name, description }) => (
   <div className={styles.fieldDescription}>
@@ -81,7 +67,7 @@ const Schema = ({ schema, key }) => {
       Cell: ({ original: { restrictions = {} } }) => {
         const { regex = null, codeList = null } = restrictions;
         if (regex) {
-          return <RegexRestriction regex={regex} />;
+          return <Regex regex={regex} />;
         } else if (codeList) {
           return <CodeList codeList={codeList} />;
         } else {
