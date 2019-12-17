@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
-import RegexColorize from 'regex-colorize';
 
 const CodeList = ({ codeList }) => {
-  var rgx = new RegexColorize();
-  rgx.colorizeAll();
-
   const { isExpanded, setExpanded, values } = codeList;
   const toggleExpanded = () => {
     setExpanded(!isExpanded);
