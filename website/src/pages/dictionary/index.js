@@ -54,8 +54,6 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(data.dictionary);
 
   const updateVersion = async newVersion => {
-    console.log('new ver', newVersion);
-
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
       setVersion(newVersion);
