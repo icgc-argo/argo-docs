@@ -110,8 +110,7 @@ function DataDictionary() {
     );
   };
 
-  const RenderDictionary = () =>
-    dictionary.schemas.map((schema, i) => (i === 0 ? <Schema schema={schema} /> : null));
+  const RenderDictionary = () => dictionary.schemas.map(schema => <Schema schema={schema} />);
 
   return (
     <ThemeProvider>
