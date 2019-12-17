@@ -20,6 +20,7 @@
 }
 
 .fieldDescription {
+  padding: 4px 0;
   font-size: 12px;
 }
 
@@ -54,7 +55,7 @@
 
 .fieldExample {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 15px;
   margin-bottom: 20px;
   font-size: 14px;
@@ -77,6 +78,10 @@
 /* Permissible Values */
 .regexRestriction .regex {
   color: #15846c;
+}
+
+.codeList {
+  padding: 4px 0;
 }
 
 .codeList .viewMore {
