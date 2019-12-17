@@ -140,7 +140,6 @@ const Schema = ({ schema, key }) => {
 
   return (
     <div>
-      {console.log('schema rerender')}
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
       <FieldsTag fieldCount={fields.length} />
       <div className={styles.fieldExample}>
@@ -155,21 +154,6 @@ const Schema = ({ schema, key }) => {
           sortable={true}
         />
       </div>
-
-      {/*
-      <table>
-        <tr>
-          <th>Field & Description</th>  
-          <th>Attributes</th>
-          <th>Type</th>
-          <th>Permissible Values</th>
-          <th>Notes & Scripts</th>
-        </tr>
-        {fields.map((field, i) => (
-          <FieldRow {...field} key={i} />
-        ))}
-        </table>*/}
-      <br />
     </div>
   );
 };
