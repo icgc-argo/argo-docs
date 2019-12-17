@@ -150,10 +150,6 @@ function DataDictionary() {
                 </span>
               </div>
               <div>
-                <div>Overview</div>
-                <div>Details</div>
-              </div>
-              <div>
                 <DropdownButton variant="secondary" size="sm" menuItems={[]}>
                   <span>
                     <DownloadIcon />
@@ -163,7 +159,7 @@ function DataDictionary() {
                 </DropdownButton>
                 <Button variant="secondary" size="sm">
                   <DownloadIcon />
-                  Details
+                  PDF
                 </Button>
               </div>
             </div>
