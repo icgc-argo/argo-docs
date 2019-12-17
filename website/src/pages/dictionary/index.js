@@ -53,12 +53,9 @@ function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
 
-  //const [diffVersion, setDiffVersion] = useState(null);
-  //const [diff, setDiff] = useState(null);
-
   const updateVersion = async newVersion => {
-    setDiffVersion(null);
-    setDiff(null);
+    console.log('new ver', newVersion);
+
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
       setVersion(newVersion);
@@ -74,7 +71,7 @@ function DataDictionary() {
         <div style={{ width: '150px', marginRight: '10px' }}>
           <Select
             aria-label="version-select"
-            value={data.versions[0]}
+            value={version}
             options={data.versions.map(d => ({ content: `Version ${d}`, value: d }))}
             onChange={val => updateVersion(val)}
           />
