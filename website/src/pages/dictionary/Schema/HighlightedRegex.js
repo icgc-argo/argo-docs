@@ -453,7 +453,6 @@ const HighlightedRegex = ({ regex }) => {
         output.slice(errorIndex + openGroups[i].opening.length);
       numCharsAdded += errorize('', error.UNBALANCED_LEFT_PAREN).length;
     }
-    console.log('output', output);
     return output;
   };
 
