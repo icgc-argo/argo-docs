@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
 
-const CodeList = ({ codeList }) => {
-  const { isExpanded, setExpanded, values } = codeList;
-  const toggleExpanded = () => {
-    setExpanded(!isExpanded);
-  };
-
+const CodeList = ({ codeList, onToggle, isExpanded }) => {
   const maxEnumLength = 5;
-  const fullOutput = values.map(item => (
+  const fullOutput = codeList.map(item => (
     <p className={styles.fieldEnumValue}>
       <strong>{item}</strong>
     </p>
@@ -23,7 +18,7 @@ const CodeList = ({ codeList }) => {
           <div
             className={styles.viewMore}
             onClick={() => {
-              toggleExpanded();
+              onToggle();
             }}
           >
             {fullOutput.length - maxEnumLength} more
