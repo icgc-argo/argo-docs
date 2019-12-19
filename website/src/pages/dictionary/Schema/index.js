@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Table from '@icgc-argo/uikit/Table';
 import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
@@ -31,12 +31,21 @@ const Schema = ({ schema, key }) => {
    * need to pass in state for Cell rendering
    * react-table rerenders everything, change shape of codelist to pass in state
    */
-  const expandingFields = schema.fields.reduce((acc, val) => {
-    acc[val.name] = false;
-    return acc;
-  }, {});
+  const initialExpandingFields = useMemo(
+    () =>
+      schema.fields.reduce((acc, val) => {
+        acc[val.name] = false;
+        return acc;
+      }, {}),
+    [schema],
+  );
 
-  const [expandedCodeLists, setExpandedCodeLists] = useState(expandingFields);
+  const [expandedCodeLists, setExpandedCodeLists] = useState(initialExpandingFields);
+
+  useEffect(() => {
+    setExpandedCodeLists(initialExpandingFields);
+  }, [schema]);
+
   const onCodelistExpandToggle = field => () =>
     setExpandedCodeLists({ ...expandedCodeLists, [field]: true });
 
