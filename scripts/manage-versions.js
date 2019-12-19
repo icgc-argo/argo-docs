@@ -5,7 +5,7 @@ const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
 
-const apiRoot = 'https://lectern.qa.argo.cancercollaboratory.org';
+const apiRoot = 'https://lectern.dev.argo.cancercollaboratory.org';
 const dictionaryName = 'ICGC-ARGO Data Dictionary';
 const schemaPath = '../website/static/data/schemas';
 const versionsFilename = `${schemaPath}/schema-versions.json`;
@@ -66,14 +66,18 @@ async function fetchAndSaveDiffsForVersion(version) {
     const path = `${schemaPath}/diffs/${high}`;
     const filename = `${path}/${high}-diff-${low}.json`;
 
-    ensureDirectoryExistence(path);
-    const response = await fetchDiffForVersions(high, low);
-    console.log(
-      `${chalk.cyan('saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
-        '...',
-      )}`,
-    );
-    fs.writeFileSync(filename, JSON.stringify(response));
+    try {
+      ensureDirectoryExistence(path);
+      const response = await fetchDiffForVersions(high, low);
+      console.log(
+        `${chalk.cyan('saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
+          '...',
+        )}`,
+      );
+      fs.writeFileSync(filename, JSON.stringify(response));
+    } catch (e) {
+      console.log(chalk.red(`Error fetching or saving diff!`));
+    }
   }
 }
 
