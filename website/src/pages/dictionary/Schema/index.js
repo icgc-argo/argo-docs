@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import Tag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
+
 const formatFieldType = value => {
   switch (value) {
     case 'string':
@@ -26,23 +27,20 @@ const FieldsTag = ({ fieldCount }) => (
 );
 
 const Schema = ({ schema, key }) => {
-  const fields = schema.fields.map(field => {
-    /**
-     * need to pass in state for Cell rendering
-     * react-table rerenders everything, change shape of codelist to pass in state
-     */
-    const { restrictions: { codeList = null } = {} } = field;
+  /**
+   * need to pass in state for Cell rendering
+   * react-table rerenders everything, change shape of codelist to pass in state
+   */
+  const expandingFields = schema.fields.reduce((acc, val) => {
+    acc[val.name] = false;
+    return acc;
+  }, {});
 
-    if (codeList) {
-      const [isExpanded, setExpanded] = useState(false);
-      const newCodeList = {};
-      newCodeList.values = Array.isArray(codeList) ? codeList : codeList.values;
-      newCodeList.isExpanded = isExpanded;
-      newCodeList.setExpanded = setExpanded;
-      return { ...field, restrictions: { codeList: newCodeList } };
-    }
-    return field;
-  });
+  const [expandedCodeLists, setExpandedCodeLists] = useState(expandingFields);
+  const onCodelistExpandToggle = field => () =>
+    setExpandedCodeLists({ ...expandedCodeLists, [field]: true });
+
+  const isCodeListExpanded = field => expandedCodeLists[field];
 
   const cols = [
     {
@@ -64,12 +62,19 @@ const Schema = ({ schema, key }) => {
       Header: 'Permissible Values',
       id: 'permissibleValues',
       accessor: 'restrictions',
-      Cell: ({ original: { restrictions = {} } }) => {
+      Cell: ({ original }) => {
+        const { name: field, restrictions = {} } = original;
         const { regex = null, codeList = null } = restrictions;
         if (regex) {
           return <Regex regex={regex} />;
         } else if (codeList) {
-          return <CodeList codeList={codeList} />;
+          return (
+            <CodeList
+              codeList={codeList}
+              onToggle={onCodelistExpandToggle(field)}
+              isExpanded={isCodeListExpanded(field)}
+            />
+          );
         } else {
           return null;
         }
@@ -84,7 +89,7 @@ const Schema = ({ schema, key }) => {
   return (
     <div className={styles.schema}>
       <h2 className={styles.schemaTitle}>{schema.name}</h2>
-      <FieldsTag fieldCount={fields.length} />
+      <FieldsTag fieldCount={schema.fields.length} />
       <div className={styles.fieldExample}>
         Field Name Example: <span>{`${prefix}`}</span>[-optional-extension]<span>{`.${ext}`}</span>
       </div>
@@ -92,7 +97,7 @@ const Schema = ({ schema, key }) => {
         <Table
           parentRef={containerRef}
           columns={cols}
-          data={fields}
+          data={schema.fields}
           showPagination={false}
           sortable={true}
         />
