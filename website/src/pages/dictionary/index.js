@@ -19,10 +19,11 @@ import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
-import Bar from './Bar';
-import Schema from './Schema';
+import Schema from '../../components/Schema';
+import Bar from '../../components/Bar';
 
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
