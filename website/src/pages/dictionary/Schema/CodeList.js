@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
 
-const CodeList = ({ codeList, onToggle, isExpanded }) => {
+const CodeList = ({ codeList = [], onToggle, isExpanded }) => {
   const maxEnumLength = 5;
   const fullOutput = codeList.map(item => (
     <p className={styles.fieldEnumValue}>
