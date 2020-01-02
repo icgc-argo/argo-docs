@@ -11,8 +11,6 @@ import axios from 'axios';
 
 import { ThemeProvider } from '@icgc-argo/uikit';
 
-import DictionaryDiff from './DictionaryDiff';
-
 const data = require('./data.json');
 
 import styles from './styles.module.css';
@@ -21,10 +19,11 @@ import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
-import Bar from './Bar';
-import Schema from './Schema';
+import Schema from '../../components/Schema';
+import Bar from '../../components/Bar';
 
 const DownloadIcon = props => (
   <Icon
@@ -105,7 +104,12 @@ function DataDictionary() {
     );
   };
 
-  const RenderDictionary = () => dictionary.schemas.map(schema => <Schema schema={schema} />);
+  const RenderDictionary = () =>
+    dictionary && dictionary.schemas ? (
+      dictionary.schemas.map(schema => <Schema schema={schema} />)
+    ) : (
+      <DnaLoader />
+    );
 
   return (
     <ThemeProvider>
@@ -158,7 +162,6 @@ function DataDictionary() {
                   </Button>
                 </div>
               </div>
-
               <Bar />
 
               <RenderDictionary />
