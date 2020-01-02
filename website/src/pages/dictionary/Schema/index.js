@@ -26,7 +26,11 @@ const FieldsTag = ({ fieldCount }) => (
   <Tag className={styles.fieldsTag}>{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</Tag>
 );
 
-const Schema = ({ schema, key }) => {
+const Schema = ({ schema, key, ...props }) => {
+  // SSR fix
+  if (typeof schema === 'undefined') return null;
+
+  // console.log('schema', typeof schema, schema.name, schema.fields.length);
   /**
    * need to pass in state for Cell rendering
    * react-table rerenders everything, change shape of codelist to pass in state
