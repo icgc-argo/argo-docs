@@ -1,13 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Table from '@icgc-argo/uikit/Table';
-import Tag, { TAG_TYPES } from '../Tag';
+import TagButton, { TAG_TYPES } from './TagButton';
 import styles from './styles.module.css';
-import DefaultTag from '@icgc-argo/uikit/Tag';
+import Tag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
-import startCase from 'lodash/startCase';
-import Button from '@icgc-argo/uikit/Button';
-import Typography from '@icgc-argo/uikit/Typography';
 
 const formatFieldType = value => {
   switch (value) {
@@ -18,15 +15,6 @@ const formatFieldType = value => {
   }
 };
 
-const HeaderName = ({ name }) => {
-  const sentenceCase = startCase(name);
-  return (
-    <h2 className={styles.schemaTitle}>
-      {sentenceCase} ({name})
-    </h2>
-  );
-};
-
 const FieldDescription = ({ name, description }) => (
   <div className={styles.fieldDescription}>
     <div className={styles.name}>{name}</div>
@@ -35,15 +23,14 @@ const FieldDescription = ({ name, description }) => (
 );
 
 const FieldsTag = ({ fieldCount }) => (
-  <DefaultTag className={styles.fieldsTag}>{`${fieldCount} Field${
-    fieldCount > 1 ? 's' : ''
-  }`}</DefaultTag>
+  <Tag className={styles.fieldsTag}>{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</Tag>
 );
 
-const Schema = ({ schema, key }) => {
+const Schema = ({ schema, key, ...props }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
+  // console.log('schema', typeof schema, schema.name, schema.fields.length);
   /**
    * need to pass in state for Cell rendering
    * react-table rerenders everything, change shape of codelist to pass in state
@@ -72,39 +59,16 @@ const Schema = ({ schema, key }) => {
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description } }) => (
+      accessor: ({ name, description }) => (
         <FieldDescription name={name} description={description} />
       ),
     },
-    {
-      Header: 'Data Tier',
-      Cell: ({ original: { meta } }) => {
-        if (meta && meta.primaryId) {
-          return <Tag type={TAG_TYPES.id} />;
-        } else if (meta && meta.core) {
-          return <Tag type={TAG_TYPES.core} />;
-        } else {
-          return <Tag type={TAG_TYPES.extended} />;
-        }
-      },
-    },
+    { Header: 'Data Tier' },
     {
       Header: 'Attributes',
       id: 'attributes',
-      Cell: ({ original: { restrictions, meta } }) => (
-        <div>
-          {restrictions && restrictions.required && (
-            <div>
-              <Tag type={TAG_TYPES.required} />
-            </div>
-          )}
-          {meta && !!meta.dependsOn && (
-            <div style={{ marginTop: '2px' }}>
-              <Tag type={TAG_TYPES.dependency} />
-            </div>
-          )}
-        </div>
-      ),
+      accessor: ({ restrictions }) =>
+        restrictions && restrictions.required && <TagButton type={TAG_TYPES.required} />,
     },
     { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => formatFieldType(valueType) },
     {
@@ -112,11 +76,10 @@ const Schema = ({ schema, key }) => {
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, restrictions = {}, meta } = original;
+        const { name: field, restrictions = {} } = original;
         const { regex = null, codeList = null } = restrictions;
-        const examples = meta && meta.examples && meta.examples.split(',');
         if (regex) {
-          return <Regex regex={regex} examples={examples} />;
+          return <Regex regex={regex} />;
         } else if (codeList) {
           return (
             <CodeList
@@ -130,34 +93,19 @@ const Schema = ({ schema, key }) => {
         }
       },
     },
-    {
-      Header: 'Notes & Scripts',
-      Cell: ({ original: { meta, restrictions } }) => {
-        const script = restrictions && restrictions.script;
-        return (
-          <div>
-            {meta && meta.notes && <div>{meta.notes}</div>}
-            {script && <Button>View Script</Button>}
-          </div>
-        );
-      },
-    },
+    { Header: 'Notes & Scripts' },
   ];
   const containerRef = React.createRef();
+  const prefix = 'prefix_prefix';
+  const ext = 'tsv';
 
   return (
     <div className={styles.schema}>
-      <HeaderName name={schema.name} />
+      <h2 className={styles.schemaTitle}>{schema.name}</h2>
       <FieldsTag fieldCount={schema.fields.length} />
-      <div>
-        <Typography variant="data">
-          {schema.description}
-          <div className={styles.fieldExample}>
-            Field Name Example: <span>{`${schema.name}`}</span>[-optional-extension].tsv
-          </div>
-        </Typography>
+      <div className={styles.fieldExample}>
+        Field Name Example: <span>{`${prefix}`}</span>[-optional-extension]<span>{`.${ext}`}</span>
       </div>
-
       <div ref={containerRef}>
         <Table
           parentRef={containerRef}

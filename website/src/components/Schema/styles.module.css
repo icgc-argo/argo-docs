@@ -28,9 +28,37 @@
   font-size: 12px;
 }
 
+.tag.required {
+  background-color: #e75471;
+}
+
+.tag.dependency {
+  background-color: #ec8f17;
+}
+
+.tag.id {
+  background-color: #00b3d3;
+}
+
+.tag.core {
+  background-color: #00c79d;
+}
+
+.tag.extended {
+  background-color: #a1a4b1;
+}
+
 /* Fields Tag */
 .fieldsTag {
   background-color: #4f546d;
+}
+
+.fieldExample {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 
 .fieldExample > span {
