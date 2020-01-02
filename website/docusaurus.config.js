@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: 'ICGC ARGO Docs',
   url: 'https://docs.icgc-argo.com',
@@ -9,7 +11,9 @@ module.exports = {
   tagline: 'ICGC ARGO Docs',
 
   scripts: [],
-  stylesheets: ['https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,600&display=swap'],
+  stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
+
+  plugins: [path.resolve(__dirname, './svg-plugin')],
 
   presets: [
     [

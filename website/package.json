@@ -13,8 +13,8 @@
   "dependencies": {
     "@babel/core": "^7.7.2",
     "@docusaurus/core": "^2.0.0-alpha.35",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.35",
-    "@icgc-argo/uikit": "0.0.0-alpha-14",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.37",
+    "@icgc-argo/uikit": "^1.0.6",
     "axios": "^0.19.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
@@ -30,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "svg-inline-loader": "^0.8.0"
   }
 }

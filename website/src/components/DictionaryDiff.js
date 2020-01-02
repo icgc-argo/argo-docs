@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function DictionaryDiff(props) {
   const { diff, high, low } = props;
-
   return (
     <div>
       {diff &&

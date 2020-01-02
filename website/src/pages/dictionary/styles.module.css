@@ -1,30 +1,34 @@
 .mainContainer {
-  padding: 40px 20px;
+  padding: 40px 0;
   margin: 0 auto;
-  max-width: 1100px;
+  display: flex;
 }
 
-.requiredTag {
-  background-color: #df1b42;
-  font-size: 12px;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
+.dict {
+  margin: 0 30px;
 }
 
-.schemaTitle {
-  font-size: 24px;
+.menu {
+  width: 155px;
+  margin: 0 15px;
+  flex-shrink: 0;
 }
 
-.schemaTable_column {
-  max-width: 450px;
-  min-width: 100px;
+.heading {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
 }
 
-.fieldDescription {
-  font-size: 12px;
+.infobar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.fieldEnumValue {
-  font-size: 12px;
+.infobar > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

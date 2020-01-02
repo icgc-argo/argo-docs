@@ -1,0 +1,4 @@
+{
+  "name": "svg-plugin",
+  "main": "./index.js"
+}
