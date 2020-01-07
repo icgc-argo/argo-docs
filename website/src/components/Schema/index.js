@@ -7,6 +7,7 @@ import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
 import Button from '@icgc-argo/uikit/Button';
+import Typography from '@icgc-argo/uikit/Typography';
 
 const formatFieldType = value => {
   switch (value) {
@@ -78,24 +79,32 @@ const Schema = ({ schema, key }) => {
     {
       Header: 'Data Tier',
       Cell: ({ original: { meta } }) => {
-        if (!meta) return null;
-        const { primaryId, core } = meta;
-        const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
-        return <Tag type={type} />;
+        if (meta && meta.primaryId) {
+          return <Tag type={TAG_TYPES.id} />;
+        } else if (meta && meta.core) {
+          return <Tag type={TAG_TYPES.core} />;
+        } else {
+          return <Tag type={TAG_TYPES.extended} />;
+        }
       },
     },
     {
       Header: 'Attributes',
       id: 'attributes',
-      Cell: ({ original: { restrictions, meta } }) => {
-        if (restrictions && restrictions.required) {
-          return <Tag type={TAG_TYPES.required} />;
-        } else if (meta && !!meta.dependsOn) {
-          return <Tag type={TAG_TYPES.dependency} />;
-        } else {
-          return null;
-        }
-      },
+      Cell: ({ original: { restrictions, meta } }) => (
+        <div>
+          {restrictions && restrictions.required && (
+            <div>
+              <Tag type={TAG_TYPES.required} />
+            </div>
+          )}
+          {meta && !!meta.dependsOn && (
+            <div style={{ marginTop: '2px' }}>
+              <Tag type={TAG_TYPES.dependency} />
+            </div>
+          )}
+        </div>
+      ),
     },
     { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => formatFieldType(valueType) },
     {
@@ -140,9 +149,15 @@ const Schema = ({ schema, key }) => {
     <div className={styles.schema}>
       <HeaderName name={schema.name} />
       <FieldsTag fieldCount={schema.fields.length} />
-      <div className={styles.fieldExample}>
-        Field Name Example: <span>{`${schema.name}`}</span>[-optional-extension].tsv
+      <div>
+        <Typography variant="data">
+          {schema.description}
+          <div className={styles.fieldExample}>
+            Field Name Example: <span>{`${schema.name}`}</span>[-optional-extension].tsv
+          </div>
+        </Typography>
       </div>
+
       <div ref={containerRef}>
         <Table
           parentRef={containerRef}

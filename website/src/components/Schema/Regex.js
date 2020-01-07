@@ -11,7 +11,12 @@ const Regex = ({ regex, examples = [] }) => (
     <div>
       {/* need a max width */}
       {examples.map((example, i) => (
-        <a href={''} key={i}>
+        <a
+          href={`http://www.regexplanet.com/advanced/xregexp/index.html?regex=${encodeURIComponent(
+            regex,
+          )}&input=${encodeURIComponent(example)}`}
+          key={i}
+        >
           {example}
         </a>
       ))}
