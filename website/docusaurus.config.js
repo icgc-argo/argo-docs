@@ -56,4 +56,7 @@ module.exports = {
       copyright: `© ${new Date().getFullYear()} ICGC ARGO. All Rights reserved.`,
     },
   },
+  customFields: {
+    platformUrl: 'https://platform-ui.qa.argo.cancercollaboratory.org/',
+  },
 };

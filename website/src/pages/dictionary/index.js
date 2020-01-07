@@ -10,6 +10,8 @@ import Layout from '@theme/Layout';
 import axios from 'axios';
 
 import { ThemeProvider } from '@icgc-argo/uikit';
+import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const data = require('./data.json');
 
@@ -111,6 +113,13 @@ function DataDictionary() {
       <DnaLoader />
     );
 
+  const context = useDocusaurusContext();
+  const {
+    siteConfig: {
+      customFields: { platformUrl = '' },
+    },
+  } = context;
+
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
@@ -134,7 +143,8 @@ function DataDictionary() {
                   The ICGC ARGO Data Dictionary expresses the details of the data model, which
                   adheres to specific formats and restrictions to ensure a standard of data quality.
                   The following list describes the attributes and permissible values for all of the
-                  fields within the clinical tsv files for the ARGO Data Platform.
+                  fields within the clinical tsv files for the{' '}
+                  <Link to={platformUrl}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
 
