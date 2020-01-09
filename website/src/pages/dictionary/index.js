@@ -25,7 +25,7 @@ import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
-import Bar from '../../components/Bar';
+import FileFilters from '../../components/FileFilters';
 
 const DownloadIcon = props => (
   <Icon
@@ -172,7 +172,7 @@ function DataDictionary() {
                   </Button>
                 </div>
               </div>
-              <Bar />
+              <FileFilters />
 
               <RenderDictionary />
             </div>
