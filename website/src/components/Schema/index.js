@@ -45,7 +45,7 @@ const Schema = ({ schema, key }) => {
 
   /**
    * need to pass in state for Cell rendering
-   * react-table rerenders everything, change shape of codelist to pass in state
+   * react-table rerenders everything
    */
   const initialExpandingFields = useMemo(
     () =>
@@ -63,7 +63,7 @@ const Schema = ({ schema, key }) => {
   }, [schema]);
 
   const onCodelistExpandToggle = field => () =>
-    setExpandedCodeLists({ ...expandedCodeLists, [field]: true });
+    setExpandedCodeLists({ ...expandedCodeLists, [field]: !expandedCodeLists[field] });
 
   const isCodeListExpanded = field => expandedCodeLists[field];
 
