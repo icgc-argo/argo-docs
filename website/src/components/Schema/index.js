@@ -171,6 +171,7 @@ const Schema = ({ schema, key }) => {
           data={schema.fields}
           showPagination={false}
           sortable={true}
+          withOutsideBorder={true}
         />
       </div>
     </div>
