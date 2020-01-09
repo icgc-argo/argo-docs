@@ -12,7 +12,7 @@ const Regex = ({ regex, examples = [] }) => (
       {/* need a max width */}
       {examples.map((example, i) => (
         <a href={''} key={i}>
-          {example}
+          {`${example}${i < examples.length - 1 ? ', ' : null}`}
         </a>
       ))}
     </div>
