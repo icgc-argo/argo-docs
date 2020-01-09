@@ -85,6 +85,7 @@ const Schema = ({ schema, key }) => {
         const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
         return <Tag type={type} />;
       },
+      width: 85,
     },
     {
       Header: 'Attributes',
@@ -98,8 +99,14 @@ const Schema = ({ schema, key }) => {
           return null;
         }
       },
+      width: 90,
     },
-    { Header: 'Type', id: 'valueType', accessor: ({ valueType }) => formatFieldType(valueType) },
+    {
+      Header: 'Type',
+      id: 'valueType',
+      accessor: ({ valueType }) => formatFieldType(valueType),
+      width: 70,
+    },
     {
       Header: 'Permissible Values',
       id: 'permissibleValues',
