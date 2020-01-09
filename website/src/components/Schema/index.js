@@ -75,6 +75,7 @@ const Schema = ({ schema, key }) => {
       Cell: ({ original: { name, description } }) => (
         <FieldDescription name={name} description={description} />
       ),
+      style: { whiteSpace: 'normal', wordWrap: 'break-word' },
     },
     {
       Header: 'Data Tier',
@@ -133,6 +134,7 @@ const Schema = ({ schema, key }) => {
           </div>
         );
       },
+      style: { whiteSpace: 'normal', wordWrap: 'break-word' },
     },
   ];
   const containerRef = React.createRef();

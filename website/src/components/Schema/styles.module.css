@@ -36,8 +36,10 @@
 
 /* Field Description */
 .fieldDescription {
+  width: 100%;
   font-size: 12px;
 }
+
 .fieldDescription .name {
   font-family: 'Source Code Pro', monospace;
   font-weight: bold;
