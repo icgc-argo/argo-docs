@@ -130,7 +130,11 @@ const Schema = ({ schema, key }) => {
         return (
           <div>
             {meta && meta.notes && <div>{meta.notes}</div>}
-            {script && <Button>View Script</Button>}
+            {script && (
+              <Button variant="secondary" size="sm">
+                View Script
+              </Button>
+            )}
           </div>
         );
       },
@@ -171,7 +175,6 @@ const Schema = ({ schema, key }) => {
           data={schema.fields}
           showPagination={false}
           sortable={true}
-          withOutsideBorder={true}
         />
       </div>
     </div>
