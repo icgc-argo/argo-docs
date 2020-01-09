@@ -7,6 +7,7 @@ import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
 import Button from '@icgc-argo/uikit/Button';
+import { DataTypography, SchemaTitle } from '../Typography';
 
 const formatFieldType = value => {
   switch (value) {
@@ -20,9 +21,9 @@ const formatFieldType = value => {
 const HeaderName = ({ name }) => {
   const sentenceCase = startCase(name);
   return (
-    <h2 className={styles.schemaTitle}>
+    <SchemaTitle>
       {sentenceCase} ({name})
-    </h2>
+    </SchemaTitle>
   );
 };
 
@@ -138,11 +139,29 @@ const Schema = ({ schema, key }) => {
 
   return (
     <div className={styles.schema}>
-      <HeaderName name={schema.name} />
-      <FieldsTag fieldCount={schema.fields.length} />
-      <div className={styles.fieldExample}>
-        Field Name Example: <span>{`${schema.name}`}</span>[-optional-extension].tsv
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginBottom: '11px',
+        }}
+      >
+        <HeaderName name={schema.name} />
+        <FieldsTag fieldCount={schema.fields.length} />
       </div>
+
+      <div style={{ marginBottom: '11px' }}>
+        <DataTypography>
+          {schema && schema.description}
+          <div>
+            Field Name Example:{' '}
+            <span className={styles.fieldExampleHighlight}>{`${schema.name}`}</span>
+            [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
+          </div>
+        </DataTypography>
+      </div>
+
       <div ref={containerRef}>
         <Table
           parentRef={containerRef}
