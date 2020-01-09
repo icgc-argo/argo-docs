@@ -158,12 +158,12 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
-                <div>
+                <div className={styles.downloads}>
                   <DropdownButton variant="secondary" size="sm" menuItems={[]}>
                     <span>
                       <DownloadIcon />
                       File Templates
-                      <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                      <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
                     </span>
                   </DropdownButton>
                   <Button variant="secondary" size="sm">

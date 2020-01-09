@@ -27,6 +27,10 @@
   align-items: center;
 }
 
+.infobar .downloads button:not(:last-child) {
+  margin-right: 8px;
+}
+
 .infobar > div {
   display: flex;
   flex-direction: row;
