@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import Layout from '@theme/Layout';
 import axios from 'axios';
 
@@ -35,6 +35,8 @@ import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
+import FileMenu from '../../components/FileMenu';
+import camelCase from 'lodash/camelCase';
 
 const DownloadIcon = props => (
   <Icon
@@ -115,9 +117,9 @@ function DataDictionary() {
     );
   };
 
-  const RenderDictionary = () =>
-    dictionary && dictionary.schemas ? (
-      dictionary.schemas.map(schema => <Schema schema={schema} />)
+  const RenderDictionary = ({ schemas, refs }) =>
+    schemas ? (
+      schemas.map(schema => <Schema schema={schema} menuRef={refs[camelCase(schema.name)]} />)
     ) : (
       <DnaLoader />
     );
@@ -128,6 +130,12 @@ function DataDictionary() {
       customFields: { platformUrl = '' },
     },
   } = context;
+
+  // refs to scroll to from FileManu
+  const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
+    acc[camelCase(schema.name)] = createRef();
+    return acc;
+  }, {});
 
   return (
     <ThemeProvider>
@@ -183,9 +191,16 @@ function DataDictionary() {
               </div>
               <FileFilters />
 
-              <RenderDictionary />
+              <RenderDictionary schemas={dictionary.schemas} refs={schemaRefs} />
             </div>
-            <div className={styles.menu}>Menu</div>
+            <div className={styles.menu}>
+              <FileMenu
+                files={dictionary.schemas.map(schema => ({
+                  name: schema.name,
+                  ref: schemaRefs[camelCase(schema.name)],
+                }))}
+              />
+            </div>
           </div>
         </StyleWrapper>
       </Layout>
