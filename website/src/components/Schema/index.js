@@ -6,6 +6,8 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
+import camelCase from 'lodash/camelCase';
+
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 
@@ -40,7 +42,7 @@ const FieldsTag = ({ fieldCount }) => (
   }`}</DefaultTag>
 );
 
-const Schema = ({ schema, key }) => {
+const Schema = ({ schema, menuRef }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
@@ -151,7 +153,7 @@ const Schema = ({ schema, key }) => {
   const containerRef = React.createRef();
 
   return (
-    <div className={styles.schema}>
+    <div ref={menuRef} className={styles.schema}>
       <div
         style={{
           display: 'flex',
