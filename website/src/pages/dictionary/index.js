@@ -30,6 +30,7 @@ import FileMenu from '../../components/FileMenu';
 import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
+import ContentMenu from '@icgc-argo/uikit/ContentMenu';
 import { TAG_TYPES } from '../../components/Tag';
 
 const DownloadIcon = props => (
@@ -111,9 +112,9 @@ function DataDictionary() {
     );
   };
 
-  const RenderDictionary = ({ schemas, refs }) =>
+  const RenderDictionary = ({ schemas, menuRefs }) =>
     schemas ? (
-      schemas.map(schema => <Schema schema={schema} menuRef={refs[camelCase(schema.name)]} />)
+      schemas.map(schema => <Schema schema={schema} menuRef={menuRefs[camelCase(schema.name)]} />)
     ) : (
       <DnaLoader />
     );
@@ -124,12 +125,6 @@ function DataDictionary() {
       customFields: { platformUrl = '' },
     },
   } = context;
-
-  // refs to scroll to from FileManu
-  const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
-    acc[camelCase(schema.name)] = createRef();
-    return acc;
-  }, {});
 
   const schemas = get(dictionary, 'schemas', []);
   const files = schemas.length;
@@ -165,6 +160,16 @@ function DataDictionary() {
       },
       { validDataTiers: new Set(), validDataAttributes: new Set() },
     );
+
+  // menu
+  const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
+    acc[camelCase(schema.name)] = createRef();
+    return acc;
+  }, {});
+  const menuContents = schemas.map(schema => ({
+    name: startCase(schema.name),
+    contentRef: schemaRefs[camelCase(schema.name)],
+  }));
 
   return (
     <ThemeProvider>
@@ -228,14 +233,14 @@ function DataDictionary() {
                 }))}
               />
 
-              <RenderDictionary schemas={dictionary.schemas} refs={schemaRefs} />
+              <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
             </div>
             <div className={styles.menu}>
-              <FileMenu
-                files={dictionary.schemas.map(schema => ({
-                  name: schema.name,
-                  ref: schemaRefs[camelCase(schema.name)],
-                }))}
+              <ContentMenu
+                title="Clinical Files"
+                contents={menuContents}
+                color="#0774d3"
+                scrollYOffset="58"
               />
             </div>
           </div>
