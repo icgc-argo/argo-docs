@@ -28,6 +28,9 @@ import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
 import FileMenu from '../../components/FileMenu';
 import camelCase from 'lodash/camelCase';
+import startCase from 'lodash/startCase';
+import get from 'lodash/get';
+import { TAG_TYPES } from '../../components/Tag';
 
 const DownloadIcon = props => (
   <Icon
@@ -128,6 +131,41 @@ function DataDictionary() {
     return acc;
   }, {});
 
+  const schemas = get(dictionary, 'schemas', []);
+  const files = schemas.length;
+  const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+  const { validDataTiers, validDataAttributes } = schemas
+    .map(schema => schema.fields)
+    .flat()
+    .reduce(
+      (acc, field) => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        const restrictions = get(field, 'restrictions', false);
+        if (primaryId) {
+          acc.validDataTiers.add(TAG_TYPES.id);
+        }
+
+        if (!!restrictions) {
+          acc.validDataAttributes.add(TAG_TYPES.required);
+        }
+
+        if (dependsOn) {
+          acc.validDataAttributes.add(TAG_TYPES.dependency);
+        }
+
+        if (core) {
+          acc.validDataTiers.add(TAG_TYPES.core);
+        }
+
+        if (!core && !primaryId) {
+          acc.validDataTiers.add(TAG_TYPES.extended);
+        }
+        return acc;
+      },
+      { validDataTiers: new Set(), validDataAttributes: new Set() },
+    );
+
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
@@ -180,7 +218,15 @@ function DataDictionary() {
                   </Button>
                 </div>
               </div>
-              <FileFilters />
+              <FileFilters
+                files={files}
+                fields={fields}
+                dataTiers={[...validDataTiers].map(d => ({ content: startCase(d), value: d }))}
+                dataAttributes={[...validDataAttributes].map(d => ({
+                  content: startCase(d),
+                  value: d,
+                }))}
+              />
 
               <RenderDictionary schemas={dictionary.schemas} refs={schemaRefs} />
             </div>
