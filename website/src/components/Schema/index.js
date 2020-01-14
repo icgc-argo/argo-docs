@@ -184,6 +184,8 @@ const Schema = ({ schema, menuRef }) => {
           data={schema.fields}
           showPagination={false}
           sortable={true}
+          cellAlignment="top"
+          withOutsideBorder
         />
       </div>
     </div>
