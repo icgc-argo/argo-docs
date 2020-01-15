@@ -77,7 +77,7 @@ const Schema = ({ schema, menuRef }) => {
       Cell: ({ original: { name, description } }) => (
         <FieldDescription name={name} description={description} />
       ),
-      style: { whiteSpace: 'normal', wordWrap: 'break-word' },
+      style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
       Header: 'Data Tier',
@@ -87,6 +87,7 @@ const Schema = ({ schema, menuRef }) => {
         const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
         return <Tag type={type} />;
       },
+      style: { padding: '8px' },
       width: 85,
     },
     {
@@ -101,12 +102,14 @@ const Schema = ({ schema, menuRef }) => {
           return null;
         }
       },
+      style: { padding: '8px' },
       width: 90,
     },
     {
       Header: 'Type',
       id: 'valueType',
       accessor: ({ valueType }) => formatFieldType(valueType),
+      style: { padding: '8px' },
       width: 70,
     },
     {
@@ -131,6 +134,7 @@ const Schema = ({ schema, menuRef }) => {
           return null;
         }
       },
+      style: { padding: '8px' },
     },
     {
       Header: 'Notes & Scripts',
@@ -147,7 +151,7 @@ const Schema = ({ schema, menuRef }) => {
           </div>
         );
       },
-      style: { whiteSpace: 'normal', wordWrap: 'break-word' },
+      style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
   ];
   const containerRef = React.createRef();
