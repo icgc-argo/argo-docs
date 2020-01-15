@@ -26,7 +26,6 @@ import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
-import FileMenu from '../../components/FileMenu';
 import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
