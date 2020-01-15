@@ -37,9 +37,10 @@ const FieldDescription = ({ name, description }) => (
 );
 
 const FieldsTag = ({ fieldCount }) => (
-  <DefaultTag className={`${styles.tag} ${styles.fields}`}>{`${fieldCount} Field${
-    fieldCount > 1 ? 's' : ''
-  }`}</DefaultTag>
+  <DefaultTag
+    className={`${styles.tag} ${styles.fields}`}
+    style={{ marginTop: '3px' }}
+  >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
 const Schema = ({ schema, menuRef }) => {
