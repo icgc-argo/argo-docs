@@ -123,7 +123,6 @@ function DataDictionary() {
   } = context;
 
   const schemas = get(dictionary, 'schemas', []);
-  console.log('schemas', schemas);
   const files = schemas.length;
   const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
   const schemaFields = flatten(schemas.map(schema => schema.fields));
