@@ -23,7 +23,9 @@ const CodeList = ({ codeList = [], onToggle, isExpanded }) => {
 
   return (
     <div className={styles.codeList}>
-      {fullOutput.length > maxEnumLength && !isExpanded ? (
+      {fullOutput.length < maxEnumLength ? (
+        <div>{fullOutput}</div>
+      ) : !isExpanded ? (
         <div>
           {[...fullOutput.slice(0, maxEnumLength)]}
           <ToggleMore onToggle={onToggle}>
