@@ -135,7 +135,7 @@ const Schema = ({ schema, menuRef }) => {
           return null;
         }
       },
-      style: { padding: '8px' },
+      style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
       Header: 'Notes & Scripts',
