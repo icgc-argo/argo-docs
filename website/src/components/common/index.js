@@ -1,7 +1,6 @@
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
-import Typography from '@icgc-argo/uikit/Typography';
 
 export const DownloadIcon = props => (
   <Icon
