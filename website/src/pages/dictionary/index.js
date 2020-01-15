@@ -8,15 +8,10 @@
 import React, { useState, createRef } from 'react';
 import Layout from '@theme/Layout';
 import axios from 'axios';
-
 import { ThemeProvider } from '@icgc-argo/uikit';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
-const data = require('./data.json');
-
 import styles from './styles.module.css';
-
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
@@ -32,6 +27,9 @@ import ContentMenu from '@icgc-argo/uikit/ContentMenu';
 import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
 import { DownloadIcon, DownloadButton } from '../../components/common';
+import flatten from 'lodash/flatten';
+
+const data = require('./data.json');
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -116,39 +114,38 @@ function DataDictionary() {
   } = context;
 
   const schemas = get(dictionary, 'schemas', []);
+  console.log('schemas', schemas);
   const files = schemas.length;
   const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-  const { validDataTiers, validDataAttributes } = schemas
-    .map(schema => schema.fields)
-    .flat()
-    .reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.id);
-        }
+  const schemaFields = flatten(schemas.map(schema => schema.fields));
+  const { validDataTiers, validDataAttributes } = schemaFields.reduce(
+    (acc, field) => {
+      const meta = get(field, 'meta', {});
+      const { primaryId = false, core = false, dependsOn = false } = meta;
+      const restrictions = get(field, 'restrictions', false);
+      if (primaryId) {
+        acc.validDataTiers.add(TAG_TYPES.id);
+      }
 
-        if (!!restrictions) {
-          acc.validDataAttributes.add(TAG_TYPES.required);
-        }
+      if (!!restrictions) {
+        acc.validDataAttributes.add(TAG_TYPES.required);
+      }
 
-        if (dependsOn) {
-          acc.validDataAttributes.add(TAG_TYPES.dependency);
-        }
+      if (dependsOn) {
+        acc.validDataAttributes.add(TAG_TYPES.dependency);
+      }
 
-        if (core) {
-          acc.validDataTiers.add(TAG_TYPES.core);
-        }
+      if (core) {
+        acc.validDataTiers.add(TAG_TYPES.core);
+      }
 
-        if (!core && !primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.extended);
-        }
-        return acc;
-      },
-      { validDataTiers: new Set(), validDataAttributes: new Set() },
-    );
+      if (!core && !primaryId) {
+        acc.validDataTiers.add(TAG_TYPES.extended);
+      }
+      return acc;
+    },
+    { validDataTiers: new Set(), validDataAttributes: new Set() },
+  );
 
   // menu
   const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
