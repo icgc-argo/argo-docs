@@ -240,7 +240,7 @@ function DataDictionary() {
                 title="Clinical Files"
                 contents={menuContents}
                 color="#0774d3"
-                scrollYOffset="58"
+                scrollYOffset="70"
               />
             </div>
           </div>
