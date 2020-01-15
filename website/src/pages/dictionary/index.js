@@ -19,7 +19,6 @@ import styles from './styles.module.css';
 
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
-import Button from '@icgc-argo/uikit/Button';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import Icon from '@icgc-argo/uikit/Icon';
@@ -41,17 +40,7 @@ import get from 'lodash/get';
 import ContentMenu from '@icgc-argo/uikit/ContentMenu';
 import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
-
-const DownloadIcon = props => (
-  <Icon
-    name="download"
-    fill="accent2_dark"
-    height="12px"
-    style={{
-      marginRight: '5px',
-    }}
-  />
-);
+import { DownloadIcon, DownloadButton } from '../../components/common';
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -226,10 +215,7 @@ function DataDictionary() {
                       <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
                     </span>
                   </DropdownButton>
-                  <Button variant="secondary" size="sm">
-                    <DownloadIcon />
-                    PDF
-                  </Button>
+                  <DownloadButton>PDF</DownloadButton>
                 </div>
               </div>
               <FileFilters

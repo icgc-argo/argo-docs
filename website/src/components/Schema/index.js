@@ -6,8 +6,7 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import camelCase from 'lodash/camelCase';
-
+import { DownloadButton } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 
@@ -171,7 +170,15 @@ const Schema = ({ schema, menuRef }) => {
         <FieldsTag fieldCount={schema.fields.length} />
       </div>
 
-      <div style={{ marginBottom: '11px' }}>
+      <div
+        style={{
+          marginBottom: '11px',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+        }}
+      >
         <DataTypography>
           {schema && schema.description}
           <div>
@@ -180,6 +187,9 @@ const Schema = ({ schema, menuRef }) => {
             [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
           </div>
         </DataTypography>
+        <DownloadButton onClick={() => console.log('file template download')}>
+          File Template
+        </DownloadButton>
       </div>
 
       <div ref={containerRef}>
