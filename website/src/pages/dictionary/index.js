@@ -40,6 +40,7 @@ import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import ContentMenu from '@icgc-argo/uikit/ContentMenu';
 import { TAG_TYPES } from '../../components/Tag';
+import { format as formatDate } from 'date-fns';
 
 const DownloadIcon = props => (
   <Icon
@@ -178,7 +179,7 @@ function DataDictionary() {
     name: startCase(schema.name),
     contentRef: schemaRefs[camelCase(schema.name)],
   }));
-
+  console.log('dict', dictionary);
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
@@ -213,7 +214,7 @@ function DataDictionary() {
                   <span>
                     <Typography variant="data">Last updated: </Typography>
                     <Typography variant="data" bold>
-                      January 20, 2020
+                      {formatDate(get(dictionary, 'updatedAt', ''), 'MMMM D, YYYY')}
                     </Typography>
                   </span>
                 </div>
