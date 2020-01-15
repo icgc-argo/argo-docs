@@ -10,22 +10,31 @@ const FileFilters = ({
   dataTiers = [],
   dataAttributes = [],
   onSearch = e => console.log(e.target.val),
-}) => (
-  <Typography variant="data" color="#151c3d">
-    <div className={styles.fileFilters}>
-      {`${files} files > ${fields} fields`}
-      <div className={styles.dataSelectors}>
-        Data Tier: <Select options={dataTiers} size="sm" />
-        Attribute: <Select options={dataAttributes} size="sm" />
-        <Input
-          onChange={onSearch}
-          placeholder="Search Dictionary..."
-          preset="search"
-          className={styles.search}
-        />
+}) => {
+  const [searchValue, setSearchValue] = React.useState('');
+
+  return (
+    <Typography variant="data" color="#151c3d">
+      <div className={styles.fileFilters}>
+        {`${files} files > ${fields} fields`}
+        <div className={styles.dataSelectors}>
+          Data Tier: <Select options={dataTiers} size="sm" />
+          Attribute: <Select options={dataAttributes} size="sm" />
+          <Input
+            onChange={e => {
+              const val = e.target.value;
+              setSearchValue(val);
+              onSearch(e);
+            }}
+            value={searchValue}
+            placeholder="Search Dictionary..."
+            preset="search"
+            className={styles.search}
+          />
+        </div>
       </div>
-    </div>
-  </Typography>
-);
+    </Typography>
+  );
+};
 
 export default FileFilters;
