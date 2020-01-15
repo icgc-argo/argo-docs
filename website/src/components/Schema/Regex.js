@@ -9,12 +9,19 @@ const Regex = ({ regex, examples = [] }) => (
     <br />
     <div>Examples:</div>
     <div>
-      {/* need a max width */}
-      {examples.map((example, i) => (
-        <a href={''} key={i}>
-          {`${example}${i < examples.length - 1 ? ', ' : null}`}
-        </a>
-      ))}
+      {examples.map((example, i) => {
+        const uriRegex = encodeURIComponent(regex);
+        const uriInput = encodeURIComponent(example);
+        return (
+          <a
+            href={`http://www.regexplanet.com/advanced/xregexp/index.html?regex=${uriRegex}&input=${uriInput}`}
+            target="_blank"
+            key={i}
+          >
+            {`${example}${i < examples.length - 1 ? ', ' : ''}`}
+          </a>
+        );
+      })}
     </div>
   </div>
 );

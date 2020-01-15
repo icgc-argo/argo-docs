@@ -179,7 +179,7 @@ function DataDictionary() {
     name: startCase(schema.name),
     contentRef: schemaRefs[camelCase(schema.name)],
   }));
-  console.log('dict', dictionary);
+
   return (
     <ThemeProvider>
       <Layout permalink="dictionary">
