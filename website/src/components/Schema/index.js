@@ -37,7 +37,7 @@ const FieldDescription = ({ name, description }) => (
 );
 
 const FieldsTag = ({ fieldCount }) => (
-  <DefaultTag className={styles.fieldsTag}>{`${fieldCount} Field${
+  <DefaultTag className={`${styles.tag} ${styles.fields}`}>{`${fieldCount} Field${
     fieldCount > 1 ? 's' : ''
   }`}</DefaultTag>
 );
