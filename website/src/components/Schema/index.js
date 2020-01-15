@@ -179,7 +179,7 @@ const Schema = ({ schema, menuRef }) => {
           alignItems: 'flex-start',
         }}
       >
-        <DataTypography>
+        <DataTypography style={{ flex: 1 }}>
           {schema && schema.description}
           <div>
             Field Name Example:{' '}
@@ -187,9 +187,12 @@ const Schema = ({ schema, menuRef }) => {
             [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
           </div>
         </DataTypography>
-        <DownloadButton onClick={() => console.log('file template download')}>
-          File Template
-        </DownloadButton>
+
+        <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+          <DownloadButton onClick={() => console.log('file template download')}>
+            File Template
+          </DownloadButton>
+        </div>
       </div>
 
       <div ref={containerRef}>
