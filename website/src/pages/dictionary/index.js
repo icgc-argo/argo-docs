@@ -200,11 +200,11 @@ function DataDictionary() {
                 </div>
                 <div className={styles.downloads}>
                   <DropdownButton variant="secondary" size="sm" menuItems={[]}>
-                    <span>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                       <DownloadIcon />
                       File Templates
                       <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
-                    </span>
+                    </div>
                   </DropdownButton>
                   <DownloadButton>PDF</DownloadButton>
                 </div>
