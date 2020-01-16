@@ -1,9 +1,5 @@
 .schema {
-  margin-top: 20px;
-}
-
-.schemaTitle {
-  font-size: 24px;
+  margin-top: 38px;
 }
 
 .schemaTable_column {
@@ -20,7 +16,6 @@
 }
 
 .fieldDescription {
-  padding: 4px 0;
   font-size: 12px;
 }
 
@@ -29,18 +24,21 @@
 }
 
 /* Fields Tag */
-.fieldsTag {
+.tag.fields {
+  margin-left: 8px;
   background-color: #4f546d;
 }
 
-.fieldExample > span {
+.fieldExampleHighlight {
   font-weight: 600;
 }
 
 /* Field Description */
 .fieldDescription {
+  width: 100%;
   font-size: 12px;
 }
+
 .fieldDescription .name {
   font-family: 'Source Code Pro', monospace;
   font-weight: bold;
@@ -53,18 +51,18 @@
   padding: 4px 0;
 }
 
-.codeList .viewMore {
+.codeList .toggleMore {
   color: #523785;
   text-decoration: underline;
   display: flex;
   align-content: center;
 }
 
-.codeList .viewMore:hover {
+.codeList .toggleMore:hover {
   cursor: pointer;
 }
 
-.codeList .viewMore svg {
+.codeList .toggleMore svg {
   margin-left: 2px;
   margin-top: 1px;
 }

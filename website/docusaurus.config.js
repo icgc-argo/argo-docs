@@ -11,7 +11,10 @@ module.exports = {
   tagline: 'ICGC ARGO Docs',
 
   scripts: [],
-  stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
+  stylesheets: [
+    'https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap',
+    'https://fonts.googleapis.com/css?family=Work+Sans:300,400,600&display=swap',
+  ],
 
   plugins: [path.resolve(__dirname, './svg-plugin')],
 
@@ -55,5 +58,8 @@ module.exports = {
       logo: null,
       copyright: `© ${new Date().getFullYear()} ICGC ARGO. All Rights reserved.`,
     },
+  },
+  customFields: {
+    platformUrl: 'https://platform-ui.qa.argo.cancercollaboratory.org/',
   },
 };
