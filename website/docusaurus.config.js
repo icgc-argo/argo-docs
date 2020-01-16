@@ -18,8 +18,6 @@ module.exports = {
 
   plugins: [path.resolve(__dirname, './svg-plugin')],
 
-  plugins: [path.resolve(__dirname, './svg-plugin')],
-
   presets: [
     [
       '@docusaurus/preset-classic',
