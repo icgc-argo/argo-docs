@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.7.2",
-    "@docusaurus/core": "^2.0.0-alpha.40",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.40",
+    "@docusaurus/core": "2.0.0-alpha.35",
+    "@docusaurus/preset-classic": "2.0.0-alpha.37",
     "@icgc-argo/uikit": "^1.0.8",
     "axios": "^0.19.0",
     "react": "^16.10.2",
