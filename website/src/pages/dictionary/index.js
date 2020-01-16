@@ -72,33 +72,6 @@ function DataDictionary() {
     );
   };
 
-  const updateDiffVersion = async newDiffVersion => {
-    setDiffVersion(newDiffVersion);
-    const newDiff = await fetchDiff(version, newDiffVersion);
-    if (newDiff) {
-      setDiff(newDiff);
-    } else {
-      alert('DIFF FETCHING ERROR - TODO: MAKE THIS A TOASTER');
-    }
-  };
-
-  const renderDiffSelect = () => {
-    const lowerVersions = data.versions.filter(v => parseFloat(v) < parseFloat(version));
-    return lowerVersions.length > 0 ? (
-      <form>
-        <label>View Version Diff:</label>
-        <select name="version" onChange={e => updateDiffVersion(e.target.value)}>
-          <option></option>
-          {lowerVersions.map(v => {
-            return <option value={v}>{v}</option>;
-          })}
-        </select>
-      </form>
-    ) : (
-      <p>No older versions available, can't show diff</p>
-    );
-  };
-
   const RenderDictionary = ({ schemas, menuRefs }) =>
     schemas ? (
       schemas.map(schema => <Schema schema={schema} menuRef={menuRefs[camelCase(schema.name)]} />)
