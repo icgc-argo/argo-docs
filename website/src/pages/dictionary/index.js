@@ -19,15 +19,6 @@ import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
-import Bar from '../../components/Bar';
-
-import Select from '@icgc-argo/uikit/form/Select';
-import Button from '@icgc-argo/uikit/Button';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import DnaLoader from '@icgc-argo/uikit/DnaLoader';
-import Icon from '@icgc-argo/uikit/Icon';
-import StyleWrapper from '../../theme/StyleWrapper';
-import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
 import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
