@@ -33,7 +33,7 @@ cd argo-docs/website
 ...and install dependencies via npm:
 
 ```
-npm install
+npm ci
 ```
 
 3. Run the development server to see your edits live in the browser:
