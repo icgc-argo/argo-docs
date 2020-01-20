@@ -13,9 +13,14 @@ spec:
   - name: docker
     image: docker:18-git
     tty: true
-  - name: node
-    image: node:12.6.0
-    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+      type: File
 """
         }
     }
