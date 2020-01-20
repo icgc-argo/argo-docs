@@ -1,10 +1,17 @@
-FROM node:8.11.4
+FROM node:11
 
-WORKDIR /app/website
+WORKDIR /
 
-EXPOSE 3000 35729
-COPY ./docs /app/docs
-COPY ./website /app/website
-RUN yarn install
+COPY . .
 
-CMD ["yarn", "start"]
+# Set env variables here (none to worry about today)
+
+RUN cd website && npm ci && npm run build
+
+FROM nginx:alpine
+
+COPY --from=0 /website/build /usr/share/nginx/html
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]
