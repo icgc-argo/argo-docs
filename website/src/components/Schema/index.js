@@ -172,7 +172,6 @@ const Schema = ({ schema, menuRef }) => {
       {modalVisibility ? (
         <ModalPortal>
           <ScriptModal
-            title=""
             onCloseClick={() => {
               toggleHTMLOverflow();
               setModalVisibility(false);
