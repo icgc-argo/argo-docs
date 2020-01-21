@@ -33,8 +33,8 @@ function Footer() {
         </div>
         <div className={styles.footerContent}>
           <section className={styles.footerLinks}>
-            <a href="https://platform-ui.qa.argo.cancercollaboratory.org/contact">Contact</a>
-            <Slash />
+            {/* <a href="https://platform-ui.qa.argo.cancercollaboratory.org/contact">Contact</a>
+            <Slash /> */}
             <a href="https://platform-ui.qa.argo.cancercollaboratory.org/privacy">Privacy Policy</a>
             <Slash />
             <a href="https://platform-ui.qa.argo.cancercollaboratory.org/terms">
