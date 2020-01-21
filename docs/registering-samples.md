@@ -29,9 +29,9 @@ During sample registration, **ARGO IDs** will be assigned to your program data. 
 1. Valid files will be available for preview in the Sample Registration workspace.  You can review the new samples (purple star) versus previously registered samples (grey star) by filtering the table on the star column.
 1. Once you have reviewed the file preview, click on the **Register Samples** button to submit your samples.
 
-Once submitted, samples, along with donor and specimen data, will be visible on your [Program Dashboard](/linktootherdocpagexxxxx).
+Once submitted, samples, along with donor and specimen data, will be visible on your [Program Dashboard](/docs/submitted-data).
 
 ## Correcting Already Registered Data
 Once samples are registered and data processing and analysis proceeds, it can be difficult to correct the data manually.
 
-If you have made an error to registered sample data, please [contact the DCC](https://platform-ui.qa.argo.cancercollaboratory.org/contact) and they will assist in correcting your registered data.  
+If you have made an error to registered sample data, please contact the DCC and they will assist in correcting your registered data.  

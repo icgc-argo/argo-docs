@@ -9,20 +9,20 @@ If you are a Program Administrator, you will have the ability to invite users to
 
 **Program Administrators** are granted the ability to manage users, and therefore data access, to a program. Program Administrators can:
 
-- view the program profile information
-- add and remove program users
-- view the program dashboard
-- upload and download program data
+- View the program profile information
+- Add and remove program users
+- View the program dashboard
+- Upload and download program data
 
 **Data Submitters** are granted permissions that allow for the management of a program's data. Data Submitters can:
 
-- view the program dashboard
-- upload and download program data
+- View the program dashboard
+- Upload and download program data
 
 **Collaborators** are granted limited view access to a program's data. Collaborators can:
 
-- view the program dashboard
-- download program data
+- View the program dashboard
+- Download program data
 
 ## Adding Users
 
@@ -31,7 +31,7 @@ If you are a Program Administrator, you will have the ability to invite users to
 1. Above the users table, click the _Add Users_ button.
 1. Fill in the First Name, Last Name, Email, and Role of the person you would like to add to your program. The email address you provide will be the email that the user will use to login to the ARGO Data Platform.
 
-> NOTE: Program Administrators are required to specify a Gmail or GSuite enabled email address for user invitations. Other email types **will not** be permitted to complete program registration.
+> NOTE: Program Administrators are required to specify a **Gmail** or **GSuite enabled** email address for user invitations. Other email types **will not** be permitted to complete program registration.
 
 ## Removing Users
 
