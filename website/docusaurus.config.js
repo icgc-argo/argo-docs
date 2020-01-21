@@ -47,11 +47,11 @@ module.exports = {
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
         { to: 'docs/submission-getting-started', label: 'Submission', position: 'right' },
         { to: 'docs/data-access', label: 'Data Access', position: 'right' },
-        {
-          href: 'https://platform-ui.qa.argo.cancercollaboratory.org/contact',
-          label: 'Contact',
-          position: 'right',
-        },
+        // {
+        //   href: 'https://platform-ui.qa.argo.cancercollaboratory.org/contact',
+        //   label: 'Contact',
+        //   position: 'right',
+        // },
       ],
     },
     footer: {
