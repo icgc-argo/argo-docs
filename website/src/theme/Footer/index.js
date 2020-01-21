@@ -23,7 +23,7 @@ function Footer() {
     <footer className={styles['nav-footer']} id="footer">
       <div className={styles.footerWrapper}>
         <div className={styles.footerLogo}>
-          <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">
+          <a href="https://platform.icgc-argo.org/">
             <img
               src={useBaseUrl(`img/logos/icgc_argo_full.svg`)}
               alt="ICGC Accelerating Research in Genomic Oncology"
@@ -33,24 +33,20 @@ function Footer() {
         </div>
         <div className={styles.footerContent}>
           <section className={styles.footerLinks}>
-            {/* <a href="https://platform-ui.qa.argo.cancercollaboratory.org/contact">Contact</a>
+            {/* <a href="https://platform.icgc-argo.org/contact">Contact</a>
             <Slash /> */}
-            <a href="https://platform-ui.qa.argo.cancercollaboratory.org/privacy">Privacy Policy</a>
+            <a href="https://platform.icgc-argo.org/privacy">Privacy Policy</a>
             <Slash />
-            <a href="https://platform-ui.qa.argo.cancercollaboratory.org/terms">
-              Terms & Conditions
-            </a>
+            <a href="https://platform.icgc-argo.org/terms">Terms & Conditions</a>
             <Slash />
-            <a href="https://platform-ui.qa.argo.cancercollaboratory.org/publicationpolicy">
-              Publication Policy
-            </a>
+            <a href="https://platform.icgc-argo.org/publicationpolicy">Publication Policy</a>
           </section>
           <section className={styles['legal-text']}>
             {siteConfig.themeConfig.footer.copyright}
           </section>
           <section className={styles['legal-text']}>
-            <a href="https://platform-ui.qa.argo.cancercollaboratory.org/">ARGO Data Platform</a>{' '}
-            1.0.0 - API v1 - 8e37309
+            <a href="https://platform.icgc-argo.org/">ARGO Data Platform</a> 1.0.0 - API v1 -
+            8e37309
           </section>
         </div>
         <div className={styles.footerLogo}>
