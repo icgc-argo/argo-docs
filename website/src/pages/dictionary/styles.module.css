@@ -40,3 +40,11 @@
   flex-direction: row;
   align-items: center;
 }
+
+/* Modal cont */
+.modalCont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999; /* docusaurus theme header has an index of 200 */
+}

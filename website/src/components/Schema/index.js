@@ -9,6 +9,7 @@ import startCase from 'lodash/startCase';
 import { DownloadButton } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
+import { ModalPortal, toggleHTMLOverflow } from '../../pages/dictionary';
 
 const formatFieldType = value => {
   switch (value) {
@@ -45,6 +46,8 @@ const FieldsTag = ({ fieldCount }) => (
 const Schema = ({ schema, menuRef }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
+
+  const [modalVisibility, setModalVisibility] = useState(false);
 
   /**
    * need to pass in state for Cell rendering
@@ -144,7 +147,14 @@ const Schema = ({ schema, menuRef }) => {
           <div>
             {meta && meta.notes && <div>{meta.notes}</div>}
             {script && (
-              <Button variant="secondary" size="sm">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  toggleHTMLOverflow();
+                  setModalVisibility(!modalVisibility);
+                }}
+              >
                 View Script
               </Button>
             )}
@@ -158,6 +168,11 @@ const Schema = ({ schema, menuRef }) => {
 
   return (
     <div ref={menuRef} className={styles.schema}>
+      {modalVisibility ? (
+        <ModalPortal>
+          <div>Modal</div>
+        </ModalPortal>
+      ) : null}
       <div
         style={{
           display: 'flex',
