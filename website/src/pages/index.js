@@ -124,7 +124,8 @@ function Index() {
               color="#7f55cc"
               icon="img/icons/home/controlled-data.svg"
             >
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
                   <a href="/docs/submission-getting-started">Get started</a>: a quick guide to data
                   submission
@@ -138,10 +139,11 @@ function Index() {
                 <li>
                   How to <a href="/docs/managing-program-access">manage program users</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
             <ContentBlock title="FAQs" color="#fea430" icon="img/icons/home/faq.svg">
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
                   <a href="/docs/faq">Can I submit molecular data before registering IDs?</a>
                 </li>
@@ -151,14 +153,15 @@ function Index() {
                 <li>
                   <a href="/docs/faq">How do I track data processing stage?</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
             <ContentBlock
               title="Release Notes"
               color="#0774d3"
               icon="img/icons/home/data-release.svg"
             >
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
                   <a href="#">Data Dictionary Releases</a>
                 </li>
@@ -168,7 +171,7 @@ function Index() {
                 <li>
                   <a href="#">Platform Software Releases</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
           </div>
         </div>

@@ -5,7 +5,7 @@ const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
 
-const apiRoot = 'https://lectern.dev.argo.cancercollaboratory.org';
+const apiRoot = 'https://lectern.platform.icgc-argo.org';
 const dictionaryName = 'ICGC-ARGO Data Dictionary';
 const schemaPath = '../website/static/data/schemas';
 const versionsFilename = `${schemaPath}/schema-versions.json`;
