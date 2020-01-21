@@ -10,6 +10,7 @@ import { DownloadButton } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, toggleHTMLOverflow } from '../../pages/dictionary';
+import ScriptModal from '../ScriptModal';
 
 const formatFieldType = value => {
   switch (value) {
@@ -170,7 +171,13 @@ const Schema = ({ schema, menuRef }) => {
     <div ref={menuRef} className={styles.schema}>
       {modalVisibility ? (
         <ModalPortal>
-          <div>Modal</div>
+          <ScriptModal
+            title=""
+            onCloseClick={() => {
+              toggleHTMLOverflow();
+              setModalVisibility(false);
+            }}
+          />
         </ModalPortal>
       ) : null}
       <div
