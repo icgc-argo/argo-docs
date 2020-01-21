@@ -3,7 +3,6 @@ id: submission-getting-started
 title: Getting Started
 ---
 
-
 After receiving your data submitter program invitation email to the ARGO Data Platform from the Data Coordination Center (DCC), you are ready to submit clinical and molecular data! Submission of data can start as soon as you join your program.
 
 ## Submitting to the ARGO Data Platform

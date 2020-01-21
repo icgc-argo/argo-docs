@@ -2,8 +2,11 @@
 id: submitting-molecular-data
 title: Submitting Molecular Data
 ---
-## Uploading Files and Metadata
 
-## Specifying Lanes
+## Installing the Song and Score Clients
 
-## Errors
+## Formatting Molecular Metadata Payloads
+
+## Uploading Molecular Files
+
+## Publishing Molecular Data for Processing
