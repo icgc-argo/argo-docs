@@ -90,29 +90,30 @@ function Index() {
             >
               <ul>
                 <li>
-                  <a href="#">Get started</a>: a quick guide to data submission
+                  <a href="/docs/submission-overview">Get started</a>: a quick guide to data
+                  submission
                 </li>
                 <li>
-                  How to <a href="#">submit clinical data</a>
+                  How to <a href="/docs/submitting-clinical-data">submit clinical data</a>
                 </li>
                 <li>
-                  How to <a href="#">submit molecular data</a>
+                  How to <a href="/docs/submitting-molecular-data">submit molecular data</a>
                 </li>
                 <li>
-                  How to <a href="#">manage program users</a>
+                  How to <a href="/docs/managing-program-access">manage program users</a>
                 </li>
               </ul>
             </ContentBlock>
             <ContentBlock title="Data Download" color="#f95d31" icon="img/icons/home/download.svg">
               <ul>
                 <li>
-                  How to <a href="#">download data</a>
+                  How to <a href="/docs/data-download">download data</a>
                 </li>
                 <li>
-                  How to use the <a href="#">Score Download Client</a>
+                  How to use the <a href="/docs/data-download">Score Download Client</a>
                 </li>
                 <li>
-                  How to use the <a href="#">ICGC-ARGO token</a>
+                  How to use the <a href="/docs/user-profile-and-token">ICGC-ARGO token</a>
                 </li>
               </ul>
             </ContentBlock>
@@ -123,40 +124,44 @@ function Index() {
               color="#7f55cc"
               icon="img/icons/home/controlled-data.svg"
             >
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
-                  <a href="#">Get started</a>: a quick guide to data submission
+                  <a href="/docs/submission-getting-started">Get started</a>: a quick guide to data
+                  submission
                 </li>
                 <li>
-                  How to <a href="#">submit clinical data</a>
+                  How to <a href="/docs/submitting-clinical-data">submit clinical data</a>
                 </li>
                 <li>
-                  How to <a href="#">submit molecular data</a>
+                  How to <a href="/docs/submitting-molecular-data">submit molecular data</a>
                 </li>
                 <li>
-                  How to <a href="#">manage program users</a>
+                  How to <a href="/docs/managing-program-access">manage program users</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
             <ContentBlock title="FAQs" color="#fea430" icon="img/icons/home/faq.svg">
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
-                  <a href="#">Can I submit molecular data before registering IDs?</a>
+                  <a href="/docs/faq">Can I submit molecular data before registering IDs?</a>
                 </li>
                 <li>
-                  <a href="#">What does "clinical completeness" mean?</a>
+                  <a href="/docs/faq">What does "clinical completeness" mean?</a>
                 </li>
                 <li>
-                  <a href="#">How do I track data processing stage?</a>
+                  <a href="/docs/faq">How do I track data processing stage?</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
             <ContentBlock
               title="Release Notes"
               color="#0774d3"
               icon="img/icons/home/data-release.svg"
             >
-              <ul>
+              Coming Soon
+              {/* <ul>
                 <li>
                   <a href="#">Data Dictionary Releases</a>
                 </li>
@@ -166,7 +171,7 @@ function Index() {
                 <li>
                   <a href="#">Platform Software Releases</a>
                 </li>
-              </ul>
+              </ul> */}
             </ContentBlock>
           </div>
         </div>
