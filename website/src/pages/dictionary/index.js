@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import axios from 'axios';
 import { ThemeProvider } from '@icgc-argo/uikit';
@@ -43,9 +43,18 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
+const RenderDictionary = ({ schemas, menuRefs }) =>
+  schemas ? (
+    schemas.map(schema => <Schema schema={schema} menuRef={menuRefs[camelCase(schema.name)]} />)
+  ) : (
+    <DnaLoader />
+  );
+
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
+  const [filters, setFilters] = useState({ tiers: [], attributes: [] });
+  const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
@@ -72,13 +81,6 @@ function DataDictionary() {
     );
   };
 
-  const RenderDictionary = ({ schemas, menuRefs }) =>
-    schemas ? (
-      schemas.map(schema => <Schema schema={schema} menuRef={menuRefs[camelCase(schema.name)]} />)
-    ) : (
-      <DnaLoader />
-    );
-
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -86,48 +88,54 @@ function DataDictionary() {
     },
   } = context;
 
-  const schemas = get(dictionary, 'schemas', []);
-  const files = schemas.length;
-  const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-  const schemaFields = flatten(schemas.map(schema => schema.fields));
-  const { validDataTiers, validDataAttributes } = schemaFields.reduce(
-    (acc, field) => {
-      const meta = get(field, 'meta', {});
-      const { primaryId = false, core = false, dependsOn = false } = meta;
-      const restrictions = get(field, 'restrictions', false);
-      if (primaryId) {
-        acc.validDataTiers.add(TAG_TYPES.id);
-      }
-
-      if (!!restrictions) {
-        acc.validDataAttributes.add(TAG_TYPES.required);
-      }
-
-      if (dependsOn) {
-        acc.validDataAttributes.add(TAG_TYPES.dependency);
-      }
-
-      if (core) {
-        acc.validDataTiers.add(TAG_TYPES.core);
-      }
-
-      if (!core && !primaryId) {
-        acc.validDataTiers.add(TAG_TYPES.extended);
-      }
-      return acc;
-    },
-    { validDataTiers: new Set(), validDataAttributes: new Set() },
-  );
-
   // menu
   const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
     acc[camelCase(schema.name)] = createRef();
     return acc;
   }, {});
-  const menuContents = schemas.map(schema => ({
+  const menuContents = dictionary.schemas.map(schema => ({
     name: startCase(schema.name),
     contentRef: schemaRefs[camelCase(schema.name)],
   }));
+
+  useEffect(() => {
+    const schemas = get(dictionary, 'schemas', []);
+    const files = schemas.length;
+    const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+    setMeta({ fileCount: files, fieldCount: fields });
+
+    const schemaFields = flatten(schemas.map(schema => schema.fields));
+    const { validDataTiers, validDataAttributes } = schemaFields.reduce(
+      (acc, field) => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        const restrictions = get(field, 'restrictions', false);
+        if (primaryId) {
+          acc.validDataTiers.add(TAG_TYPES.id);
+        }
+
+        if (!!restrictions) {
+          acc.validDataAttributes.add(TAG_TYPES.required);
+        }
+
+        if (dependsOn) {
+          acc.validDataAttributes.add(TAG_TYPES.dependency);
+        }
+
+        if (core) {
+          acc.validDataTiers.add(TAG_TYPES.core);
+        }
+
+        if (!core && !primaryId) {
+          acc.validDataTiers.add(TAG_TYPES.extended);
+        }
+        return acc;
+      },
+      { validDataTiers: new Set(), validDataAttributes: new Set() },
+    );
+
+    setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
+  }, [dictionary]);
 
   return (
     <ThemeProvider>
@@ -178,11 +186,12 @@ function DataDictionary() {
                   <DownloadButton>PDF</DownloadButton>
                 </div>
               </div>
+
               <FileFilters
-                files={files}
-                fields={fields}
-                dataTiers={[...validDataTiers].map(d => ({ content: startCase(d), value: d }))}
-                dataAttributes={[...validDataAttributes].map(d => ({
+                files={meta.fileCount}
+                fields={meta.fieldCount}
+                dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
+                dataAttributes={filters.attributes.map(d => ({
                   content: startCase(d),
                   value: d,
                 }))}
