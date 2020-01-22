@@ -3,6 +3,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import defaultTheme from 'prism-react-renderer/themes/palenight';
 import Clipboard from 'clipboard';
 import Button from '@icgc-argo/uikit/Button';
+import styles from './styles.module.css';
 
 const exampleCode = `function validate() {\r\n  var result = { valid: true, message: \"only required if on post_therapy_tumour_staging_system is AJCC\" };
 \r\n  return result;\r\n}\r\n\r\nvalidate()`;
@@ -35,19 +36,22 @@ const CodeBlock = ({ code }) => {
   const handleCopyCode = () => {
     window.getSelection().empty();
     setShowCopied(true);
-    setTimeout(() => setShowCopied(false), 2000);
+    setTimeout(() => {
+      copyButton.current.blur();
+      setShowCopied(false);
+    }, 2000);
   };
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div className={styles.copyButton}>
         <Button size="sm" variant="secondary" onClick={() => handleCopyCode()} ref={copyButton}>
           {showCopied ? 'Copied' : 'Copy'}
         </Button>
       </div>
-      <Highlight {...defaultProps} code={exampleCode} language="js" theme={defaultTheme}>
+      <Highlight {...defaultProps} code={code} language="js" theme={defaultTheme}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={style} ref={copyTarget}>
+          <pre className={`${className} ${styles.code}`} style={style} ref={copyTarget}>
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
                 {line.map((token, key) => (
@@ -61,4 +65,5 @@ const CodeBlock = ({ code }) => {
     </div>
   );
 };
+
 export default CodeBlock;
