@@ -169,7 +169,7 @@ const Schema = ({ schema, menuRef }) => {
 
   return (
     <div ref={menuRef} className={styles.schema}>
-      {modalVisibility ? (
+      {true ? (
         <ModalPortal>
           <ScriptModal
             onCloseClick={() => {
