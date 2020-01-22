@@ -1,0 +1,14 @@
+.copyButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 5px 0;
+}
+
+.code {
+  padding: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
