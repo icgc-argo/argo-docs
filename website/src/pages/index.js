@@ -90,7 +90,7 @@ function Index() {
             >
               <ul>
                 <li>
-                  <a href="/docs/submission-getting-started">Get started</a>: a quick guide to data
+                  <a href="/docs/submission-overview">Get started</a>: a quick guide to data
                   submission
                 </li>
                 <li>
