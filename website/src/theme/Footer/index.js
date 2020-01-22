@@ -45,8 +45,8 @@ function Footer() {
             {siteConfig.themeConfig.footer.copyright}
           </section>
           <section className={styles['legal-text']}>
-            <a href="https://platform.icgc-argo.org/">ARGO Data Platform</a> 1.0.0 - API v1 -
-            8e37309
+            <a href="https://platform.icgc-argo.org/">ARGO Data Platform</a>{' '}
+            {/*1.0.0 - API v1 - 8e37309*/}
           </section>
         </div>
         <div className={styles.footerLogo}>
