@@ -142,7 +142,7 @@ const Schema = ({ schema, menuRef }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ({ original: { meta, restrictions } }) => {
+      Cell: ({ original: { meta, restrictions, name } }) => {
         const script = restrictions && restrictions.script;
         return (
           <div>
@@ -159,6 +159,18 @@ const Schema = ({ schema, menuRef }) => {
                 View Script
               </Button>
             )}
+            {script && modalVisibility ? (
+              <ModalPortal>
+                <ScriptModal
+                  field={name}
+                  script={script}
+                  onCloseClick={() => {
+                    toggleHTMLOverflow();
+                    setModalVisibility(false);
+                  }}
+                />
+              </ModalPortal>
+            ) : null}
           </div>
         );
       },
@@ -169,16 +181,6 @@ const Schema = ({ schema, menuRef }) => {
 
   return (
     <div ref={menuRef} className={styles.schema}>
-      {modalVisibility ? (
-        <ModalPortal>
-          <ScriptModal
-            onCloseClick={() => {
-              toggleHTMLOverflow();
-              setModalVisibility(false);
-            }}
-          />
-        </ModalPortal>
-      ) : null}
       <div
         style={{
           display: 'flex',

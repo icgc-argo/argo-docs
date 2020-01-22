@@ -3,7 +3,7 @@ import Modal from '@icgc-argo/uikit/Modal';
 import CodeBlock from '../CodeBlock';
 import Typography from '@icgc-argo/uikit/Typography';
 
-const ScriptModal = ({ field, script, onCloseClick, ...props }) => (
+const ScriptModal = ({ field, script, onCloseClick }) => (
   <Modal
     title={
       <Typography variant="subtitle">
@@ -14,7 +14,6 @@ const ScriptModal = ({ field, script, onCloseClick, ...props }) => (
     onCloseClick={onCloseClick}
     actionVisible={false}
     buttonSize="sm"
-    {...props}
   >
     <Typography variant="paragraph">
       The following script can be used with the ARGO Data Platform API.
