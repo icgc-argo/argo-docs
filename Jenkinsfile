@@ -25,6 +25,17 @@ spec:
         }
     }
     stages {
+        stage('Prepare') {
+            steps {
+                script {
+                    commit = sh(returnStdout: true, script: 'git describe --always').trim()
+                }
+                script {
+                    version = sh(returnStdout: true, script: 'cat ./package.json | grep version | cut -d \':\' -f2 | sed -e \'s/"//\' -e \'s/",//\'').trim()
+                }
+            }
+        }
+
         stage('Test') {
             steps {
                 sh "echo No Docusaurus Tests"
@@ -34,18 +45,20 @@ spec:
         stage('Build') {
             when { branch 'master' }
             steps {
+                script {
+                    version = sh(returnStdout: true, script: 'cat ./website/package.json | grep version | cut -d \':\' -f2 | sed -e \'s/"//\' -e \'s/",//\'').trim()
+                }
                 container('docker') {
                     withCredentials([usernamePassword(credentialsId:'argoDockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
                     }
-                    script {
-                        commit = sh(returnStdout: true, script: 'git describe --always').trim()
-                    }
-
                     // DNS error if --network is default
-                    sh "docker build --network=host . -t icgcargo/argo-docs:${commit}"
+                    sh "docker build --network=host . -t ${dockerHubRepo}:${commit} -t ${dockerHubRepo}:${version}-${commit}"
 
-                    sh "docker push icgcargo/argo-docs:${commit}"
+                    sh "docker push ${dockerHubRepo}:${commit}"
+                    sh "docker push ${dockerHubRepo}:${version}-${commit}"
+
+
                 }
             }
         }
