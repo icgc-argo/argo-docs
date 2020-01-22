@@ -16,11 +16,7 @@ const ScriptModal = ({ field, script, onCloseClick, ...props }) => (
     {...props}
   >
     <div>The following script can be used with the ARGO Data Platform API.</div>
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button size="sm" variant="secondary">
-        COPY
-      </Button>
-    </div>
+
     <CodeBlock>{script}</CodeBlock>
   </Modal>
 );
