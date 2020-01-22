@@ -3,4 +3,4 @@ id: faq
 title: FAQs
 ---
 
-Placeholder
+Coming Soon

@@ -1,13 +1,13 @@
 module.exports = {
   docs: {
     Submission: [
+      'submission-overview',
       'submission-getting-started',
       'managing-program-access',
       'registering-samples',
       'submitting-clinical-data',
       'submitting-molecular-data',
       'submitted-data',
-      'submission-project-status',
       'faq',
     ],
     'Data Access': [
