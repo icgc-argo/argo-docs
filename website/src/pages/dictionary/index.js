@@ -20,6 +20,7 @@ import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
+import TreeView from '../../components/TreeView';
 import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
@@ -30,6 +31,7 @@ import { DownloadIcon, DownloadButton } from '../../components/common';
 import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
+import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -169,6 +171,15 @@ function DataDictionary() {
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
   }, [dictionary]);
 
+  const TAB_STATE = Object.freeze({
+    OVERVIEW: 'OVERVIEW',
+    DETAILS: 'DETAILS',
+  });
+  const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.OVERVIEW);
+  const onTabChange = (e, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -209,6 +220,16 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
+                <Tabs
+                  value={selectedTab}
+                  onChange={onTabChange}
+                  styles={{
+                    marginBottom: '-2px',
+                  }}
+                >
+                  <Tab value={TAB_STATE.OVERVIEW} label="Overview" />
+                  <Tab value={TAB_STATE.DETAILS} label="Details" />
+                </Tabs>
                 <div className={styles.downloads}>
                   <DropdownButton variant="secondary" size="sm" menuItems={[]}>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -231,16 +252,31 @@ function DataDictionary() {
                 }))}
               />
 
-              <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
+              <div
+                style={{
+                  display: selectedTab === TAB_STATE.DETAILS ? 'block' : 'none',
+                }}
+              >
+                <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
+              </div>
+              <div
+                style={{
+                  display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
+                }}
+              >
+                <TreeView />
+              </div>
             </div>
-            <div className={styles.menu}>
-              <ContentMenu
-                title="Clinical Files"
-                contents={menuContents}
-                color="#0774d3"
-                scrollYOffset="70"
-              />
-            </div>
+            {selectedTab === TAB_STATE.DETAILS && (
+              <div className={styles.menu}>
+                <ContentMenu
+                  title="Clinical Files"
+                  contents={menuContents}
+                  color="#0774d3"
+                  scrollYOffset="70"
+                />
+              </div>
+            )}
           </div>
         </StyleWrapper>
       </Layout>
