@@ -9,6 +9,8 @@ import startCase from 'lodash/startCase';
 import { DownloadButton } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
+import { ModalPortal, useModalState } from '../../pages/dictionary';
+import ScriptModal from '../ScriptModal';
 
 const formatFieldType = value => {
   switch (value) {
@@ -45,6 +47,8 @@ const FieldsTag = ({ fieldCount }) => (
 const Schema = ({ schema, menuRef }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
+
+  const [modalVisibility, setModalVisibility] = useState(false);
 
   /**
    * need to pass in state for Cell rendering
@@ -138,16 +142,34 @@ const Schema = ({ schema, menuRef }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ({ original: { meta, restrictions } }) => {
+      Cell: ({ original: { meta, restrictions, name } }) => {
         const script = restrictions && restrictions.script;
+        const [modalVisibility, setModalVisibility] = useModalState();
         return (
           <div>
             {meta && meta.notes && <div>{meta.notes}</div>}
             {script && (
-              <Button variant="secondary" size="sm">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  setModalVisibility(!modalVisibility);
+                }}
+              >
                 View Script
               </Button>
             )}
+            {script && modalVisibility ? (
+              <ModalPortal>
+                <ScriptModal
+                  field={name}
+                  script={script}
+                  onCloseClick={() => {
+                    setModalVisibility(false);
+                  }}
+                />
+              </ModalPortal>
+            ) : null}
           </div>
         );
       },

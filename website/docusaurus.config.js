@@ -36,6 +36,13 @@ module.exports = {
   ],
 
   themeConfig: {
+    prism: {
+      /**
+       * if you change the theme, you will need to change the highlighted theme for the code block
+       * default theme is Palenight*/
+      // theme: require('prism-react-renderer/themes/dracula'),
+    },
+
     disableDarkMode: true,
     navbar: {
       title: '',

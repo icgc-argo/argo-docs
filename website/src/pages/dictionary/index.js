@@ -28,6 +28,38 @@ import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
 import { DownloadIcon, DownloadButton } from '../../components/common';
 import flatten from 'lodash/flatten';
+import ReactDOM from 'react-dom';
+import Modal from '@icgc-argo/uikit/Modal';
+
+export const useModalState = () => {
+  const [visibility, setVisibility] = useState(false);
+
+  const setModalVisibility = visibility => {
+    setVisibility(visibility);
+    const bodyClassList = document.getElementsByTagName('html')[0].classList;
+    if (visibility) {
+      bodyClassList.add('modal-open');
+    } else {
+      bodyClassList.remove('modal-open');
+    }
+    toggle('modal-open');
+  };
+
+  return [visibility, setModalVisibility];
+};
+
+const modalPortalRef = React.createRef();
+export const ModalPortal = ({ children }) => {
+  const ref = modalPortalRef.current;
+  return ref
+    ? ReactDOM.createPortal(
+        <div style={{ width: '100vw', height: '100vh' }}>
+          <Modal.Overlay>{children}</Modal.Overlay>
+        </div>,
+        ref,
+      )
+    : null;
+};
 
 const data = require('./data.json');
 
@@ -139,6 +171,8 @@ function DataDictionary() {
 
   return (
     <ThemeProvider>
+      <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
+
       <Layout permalink="dictionary">
         <StyleWrapper>
           <div className={styles.mainContainer}>
