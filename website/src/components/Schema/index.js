@@ -165,7 +165,6 @@ const Schema = ({ schema, menuRef }) => {
                   field={name}
                   script={script}
                   onCloseClick={() => {
-                    toggleHTMLOverflow();
                     setModalVisibility(false);
                   }}
                 />
