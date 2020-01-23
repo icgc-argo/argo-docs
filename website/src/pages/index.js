@@ -78,7 +78,7 @@ function Index() {
                 The viewer describes the schema that data submitters must conform to and track
                 changes when formatiting clinical data files.
               </span>
-              <a className={styles.contentAction} href="#">
+              <a className={styles.contentAction} href="/dictionary">
                 Data Dictionary Viewer
                 <img src="img/icons/chevron-right.svg" height={8} width={8} />
               </a>
