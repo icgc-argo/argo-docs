@@ -36,7 +36,13 @@ export const useModalState = () => {
 
   const setModalVisibility = visibility => {
     setVisibility(visibility);
-    document.getElementsByTagName('html')[0].classList.toggle('modal-open');
+    const bodyClassList = document.getElementsByTagName('html')[0].classList;
+    if (visibility) {
+      bodyClassList.add('modal-open');
+    } else {
+      bodyClassList.remove('modal-open');
+    }
+    toggle('modal-open');
   };
 
   return [visibility, setModalVisibility];
