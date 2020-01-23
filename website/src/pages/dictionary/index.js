@@ -31,10 +31,18 @@ import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 
-const modalPortalRef = React.createRef();
-export const toggleHTMLOverflow = () => {
-  document.getElementsByTagName('html')[0].classList.toggle('modal-open');
+export const useModalState = () => {
+  const [visibility, setVisibility] = useState(false);
+
+  const setModalVisibility = visibility => {
+    setVisibility(visibility);
+    document.getElementsByTagName('html')[0].classList.toggle('modal-open');
+  };
+
+  return [visibility, setModalVisibility];
 };
+
+const modalPortalRef = React.createRef();
 export const ModalPortal = ({ children }) => {
   const ref = modalPortalRef.current;
   return ref

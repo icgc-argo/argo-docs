@@ -9,7 +9,7 @@ import startCase from 'lodash/startCase';
 import { DownloadButton } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
-import { ModalPortal, toggleHTMLOverflow } from '../../pages/dictionary';
+import { ModalPortal, useModalState } from '../../pages/dictionary';
 import ScriptModal from '../ScriptModal';
 
 const formatFieldType = value => {
@@ -144,6 +144,7 @@ const Schema = ({ schema, menuRef }) => {
       Header: 'Notes & Scripts',
       Cell: ({ original: { meta, restrictions, name } }) => {
         const script = restrictions && restrictions.script;
+        const [modalVisibility, setModalVisibility] = useModalState();
         return (
           <div>
             {meta && meta.notes && <div>{meta.notes}</div>}
@@ -152,7 +153,6 @@ const Schema = ({ schema, menuRef }) => {
                 variant="secondary"
                 size="sm"
                 onClick={() => {
-                  toggleHTMLOverflow();
                   setModalVisibility(!modalVisibility);
                 }}
               >
