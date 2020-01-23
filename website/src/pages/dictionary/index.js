@@ -19,6 +19,8 @@ import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
+import TreeView from '../../components/TreeView';
+import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -33,6 +35,7 @@ import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
 import uniq from 'lodash/uniq';
+import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -225,6 +228,14 @@ function DataDictionary() {
   const menuContents = generateMenuContents(filteredSchemas);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
+  const TAB_STATE = Object.freeze({
+    OVERVIEW: 'OVERVIEW',
+    DETAILS: 'DETAILS',
+  });
+  const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.OVERVIEW);
+  const onTabChange = (e, newValue) => {
+    setSelectedTab(newValue);
+  };
 
   return (
     <ThemeProvider>
@@ -309,6 +320,26 @@ function DataDictionary() {
                     <DownloadButtonContent>PDF</DownloadButtonContent>
                   </Button>*/}
                 {/*</div> */}
+                <Tabs
+                  value={selectedTab}
+                  onChange={onTabChange}
+                  styles={{
+                    marginBottom: '-2px',
+                  }}
+                >
+                  <Tab value={TAB_STATE.OVERVIEW} label="Overview" />
+                  <Tab value={TAB_STATE.DETAILS} label="Details" />
+                </Tabs>
+                <div className={styles.downloads}>
+                  <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                      <DownloadIcon />
+                      File Templates
+                      <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
+                    </div>
+                  </DropdownButton>
+                  <DownloadButton>PDF</DownloadButton>
+                </div>
               </div>
 
               <FileFilters
@@ -326,13 +357,8 @@ function DataDictionary() {
                 searchParams={searchParams}
                 onSearch={search => setSearchParams(search)}
               />
-
-              <RenderDictionary
-                schemas={filteredSchemas}
-                menuContents={menuContents}
-                isLatestSchema={isLatestSchema}
-              />
             </div>
+
             <div className={styles.menu}>
               <SchemaMenu
                 title="Clinical Files"
@@ -340,7 +366,35 @@ function DataDictionary() {
                 color="#0774d3"
                 scrollYOffset="70"
               />
+              <div
+                style={{
+                  display: selectedTab === TAB_STATE.DETAILS ? 'block' : 'none',
+                }}
+              >
+                <RenderDictionary
+                  schemas={filteredSchemas}
+                  menuContents={menuContents}
+                  isLatestSchema={isLatestSchema}
+                />
+              </div>
+              <div
+                style={{
+                  display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
+                }}
+              >
+                <TreeView />
+              </div>
             </div>
+            {selectedTab === TAB_STATE.DETAILS && (
+              <div className={styles.menu}>
+                <ContentMenu
+                  title="Clinical Files"
+                  contents={menuContents}
+                  color="#0774d3"
+                  scrollYOffset="70"
+                />
+              </div>
+            )}
           </div>
         </StyleWrapper>
       </Layout>

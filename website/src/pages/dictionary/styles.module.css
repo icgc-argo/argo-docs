@@ -28,6 +28,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #dcdde1;
 }
 
 .infobar .downloads button:not(:last-child) {
