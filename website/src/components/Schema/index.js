@@ -107,7 +107,7 @@ const Schema = ({ schema, menuRef }) => {
         }
       },
       style: { padding: '8px' },
-      width: 90,
+      width: 102,
     },
     {
       Header: 'Type',
