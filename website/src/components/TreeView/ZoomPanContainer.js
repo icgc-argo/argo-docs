@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React from 'react';
 import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 
 const MIN_ZOOM = 0.3;
@@ -63,7 +63,6 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
   });
   React.useEffect(() => {
     const containerElement = containerRef.current;
-    const objectElement = objectElementRef.current;
     const onMouseMove = e => {
       if (isDragging) {
         const eventLocalX = e.pageX - containerElement.offsetLeft;
@@ -72,13 +71,9 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
           x: eventLocalX - mouseDownPosition.x,
           y: eventLocalY - mouseDownPosition.y,
         };
-        const zoomOffset = {
-          x: -0.5 * (1 - scaleFactor) * objectElement.clientWidth,
-          y: -0.5 * (1 - scaleFactor) * objectElement.clientHeight,
-        };
         setPosition({
-          x: mouseDownPosition.x + zoomOffset.x - objectLocalMousedownPosition.x + delta.x,
-          y: mouseDownPosition.y + zoomOffset.y - objectLocalMousedownPosition.y + delta.y,
+          x: mouseDownPosition.x - objectLocalMousedownPosition.x + delta.x,
+          y: mouseDownPosition.y - objectLocalMousedownPosition.y + delta.y,
         });
       }
     };
@@ -104,6 +99,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
           position: 'absolute',
         }}
       >
+        <button onClick={() => setScaleFactor(1)}>reset</button>{' '}
         <input
           type="range"
           min={minZoom}
@@ -119,8 +115,6 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
         id="zoomer"
         ref={objectElementRef}
         style={{
-          border: 'solid 2px green',
-          transform: `scale(${scaleFactor})`,
           height: '100%',
           width: '100%',
           position: 'absolute',
@@ -128,7 +122,13 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
           top: position.y,
         }}
       >
-        {children}
+        <div
+          style={{
+            transform: `scale(${scaleFactor})`,
+          }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
