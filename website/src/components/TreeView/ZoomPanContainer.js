@@ -19,7 +19,8 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
       style={{
         border: `solid 1px ${theme.colors.grey_2}`,
         transform: `scale(1)`,
-        height: `800px`,
+        height: `50%`,
+        maxHeight: '800px',
         overflow: 'hidden',
       }}
     >
@@ -31,7 +32,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
           minScale: minZoom,
           maxScale: maxZoom,
           limitToBounds: false,
-          limitToWrapper: true,
+          limitToWrapper: false,
         }}
         onWheel={onWheel}
         wheel={{
@@ -42,6 +43,13 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
           const applySliderValue = debounce(value => {
             setScale(value);
           }, 500);
+          const onResetClick = () => {
+            setSliderValue(DEFAULT_SCALE);
+            setTimeout(() => {
+              // No idea wy but we need to push this to the next tick
+              resetTransform();
+            }, 0);
+          };
           return (
             <React.Fragment>
               <div
@@ -64,14 +72,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
                     applySliderValue(value);
                   }}
                 />
-                <button
-                  onClick={() => {
-                    resetTransform();
-                    setSliderValue(DEFAULT_SCALE);
-                  }}
-                >
-                  reset
-                </button>
+                <button onClick={onResetClick}>reset</button>
               </div>
               <TransformComponent>{children}</TransformComponent>
             </React.Fragment>
