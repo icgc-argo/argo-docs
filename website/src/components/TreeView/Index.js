@@ -1,30 +1,33 @@
 import React, { useState, createRef, useEffect } from 'react';
 import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import ZoomPanContainer from './ZoomPanContainer';
+import Tree from './DictionaryTree';
+import data from './data';
+import { Global, css } from '@emotion/core';
 
-const TreeView = () => {
-  const [shown, setShown] = React.useState(false);
-  const onClick = () => {
-    setShown(!shown);
-  };
+const TreeView = ({ dictionary }) => {
+  const [val, setVal] = React.useState('');
+  console.log('dictionary: ', dictionary);
+  console.log('data: ', data);
+
   return (
-    <ZoomPanContainer>
-      <div>
-        <img
-          src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg"
-          alt="Italian Trulli"
-        />
-        {shown && (
-          <img
-            src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg"
-            alt="Italian Trulli"
-          />
-        )}
-        <button style={{ position: 'absolute' }} onClick={onClick}>
-          YO!!!
-        </button>
-      </div>
-    </ZoomPanContainer>
+    <div id="yo" style={{ display: 'flex' }}>
+      <Global
+        styles={css`
+          .dict_src-pages-dictionary- {
+            /* experimental css properties */
+            width: -webkit-fill-available;
+            width: -moz-available;
+            width: fill-available;
+          }
+        `}
+      />
+      <ZoomPanContainer>
+        <div style={{ height: '500px' }}>
+          <Tree searchString={val} rootFile={data} />
+        </div>
+      </ZoomPanContainer>
+    </div>
   );
 };
 

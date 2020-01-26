@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'emotion';
 import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import debounce from 'lodash/debounce';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
@@ -16,18 +17,17 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
   };
   return (
     <div
-      style={{
-        border: `solid 1px ${theme.colors.grey_2}`,
-        transform: `scale(1)`,
-        height: `50%`,
-        maxHeight: '800px',
-        overflow: 'hidden',
-      }}
+      className={css`
+        border: solid 1px ${theme.colors.grey_2};
+        transform: scale(1);
+        overflow: hidden;
+      `}
     >
       <TransformWrapper
         defaultScale={DEFAULT_SCALE}
         defaultPositionX={0}
         defaultPositionY={0}
+        doubleClick={{ disabled: true }}
         options={{
           minScale: minZoom,
           maxScale: maxZoom,
@@ -36,7 +36,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
         }}
         onWheel={onWheel}
         wheel={{
-          step: 20,
+          step: 200,
         }}
       >
         {({ resetTransform, setScale }) => {

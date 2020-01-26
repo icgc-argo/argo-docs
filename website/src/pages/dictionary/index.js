@@ -264,7 +264,7 @@ function DataDictionary() {
                   display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
                 }}
               >
-                <TreeView />
+                <TreeView dictionary={dictionary} />
               </div>
             </div>
             {selectedTab === TAB_STATE.DETAILS && (
