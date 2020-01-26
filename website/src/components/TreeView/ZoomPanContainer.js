@@ -4,8 +4,8 @@ import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import debounce from 'lodash/debounce';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
-const MIN_ZOOM = 0.3;
-const MAX_ZOOM = 1.5;
+const MIN_ZOOM = 0.25;
+const MAX_ZOOM = 2;
 const ZOOM_STEP = 0.05;
 
 export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = ZOOM_STEP }) => {

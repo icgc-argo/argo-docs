@@ -7,11 +7,16 @@ import { Global, css } from '@emotion/core';
 
 const TreeView = ({ dictionary }) => {
   const [val, setVal] = React.useState('');
+  const [offset, setOffset] = React.useState(0);
+  const containerRef = React.createRef();
+  React.useEffect(() => {
+    setOffset(containerRef.current.clientWidth / 2);
+  }, []);
   console.log('dictionary: ', dictionary);
   console.log('data: ', data);
 
   return (
-    <div id="yo" style={{ display: 'flex' }}>
+    <div id="yo" style={{ display: 'flex', cursor: 'grab' }} ref={containerRef}>
       <Global
         styles={css`
           .dict_src-pages-dictionary- {
@@ -23,7 +28,7 @@ const TreeView = ({ dictionary }) => {
         `}
       />
       <ZoomPanContainer>
-        <div style={{ height: '500px' }}>
+        <div style={{ height: '800px', marginLeft: `calc(-50% + ${offset}px)` }}>
           <Tree searchString={val} rootFile={data} />
         </div>
       </ZoomPanContainer>

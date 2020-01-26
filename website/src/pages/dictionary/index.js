@@ -251,7 +251,6 @@ function DataDictionary() {
                   value: d,
                 }))}
               />
-
               <div
                 style={{
                   display: selectedTab === TAB_STATE.DETAILS ? 'block' : 'none',
