@@ -9,7 +9,7 @@ const TreeView = ({ dictionary, searchValue }) => {
   const [offset, setOffset] = React.useState(0);
   const containerRef = React.createRef();
   React.useEffect(() => {
-    setOffset(containerRef.current.clientWidth / 2);
+    setOffset(containerRef.current.clientHeight / 2);
   }, []);
   console.log('dictionary: ', dictionary);
   console.log('data: ', data);
@@ -27,7 +27,7 @@ const TreeView = ({ dictionary, searchValue }) => {
         `}
       />
       <ZoomPanContainer>
-        <div style={{ height: '800px', marginLeft: `calc(-50% + ${offset}px)` }}>
+        <div style={{ height: '800px', width: '4000px', display: 'flex', alignItems: 'center' }}>
           <Tree searchString={searchValue} rootFile={data} />
         </div>
       </ZoomPanContainer>
