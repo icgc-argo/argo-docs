@@ -176,10 +176,9 @@ const FileNode = ({ fileDef }) => {
 
 const ExampleTree = ({ searchString, rootFile }) => {
   const theme = useTheme();
-
   return (
     <Tree
-      label={null}
+      label={<NodeLabel fileName={rootFile.name} fields={rootFile.fields} required></NodeLabel>}
       lineHeight="40px"
       lineWidth="4px"
       lineBorderRadius="25px"
@@ -187,7 +186,9 @@ const ExampleTree = ({ searchString, rootFile }) => {
       nodePadding="2px"
     >
       <SearchStringContext.Provider value={searchString}>
-        <FileNode fileDef={rootFile} />
+        {rootFile.children.map(fileDef => (
+          <FileNode fileDef={fileDef} key={fileDef.name} />
+        ))}
       </SearchStringContext.Provider>
     </Tree>
   );
