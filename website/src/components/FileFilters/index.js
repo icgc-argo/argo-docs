@@ -4,6 +4,7 @@ import Input from '@icgc-argo/uikit/form/Input';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import { styled } from '@icgc-argo/uikit';
+import debounce from 'lodash/debounce';
 
 export const NO_ACTIVE_FILTER = 'no_active_filter';
 export const DEFAULT_FILTER = [{ content: 'All', value: NO_ACTIVE_FILTER }];
@@ -19,10 +20,13 @@ const FileFilters = ({
   dataAttributes = [],
   searchParams = {},
   onSearch = e => console.log(e.target.val),
+  searchValue,
 }) => {
   // update search params
   const onSelect = filterName => value => onSearch({ ...searchParams, ...{ [filterName]: value } });
 
+  const [inputValue, setInputValue] = React.useState('');
+  const applySearch = debounce(onSearch, 500);
   return (
     <Typography variant="data" color="#151c3d">
       <div className={styles.fileFilters}>
@@ -45,11 +49,10 @@ const FileFilters = ({
           />
           {/*<Input
             onChange={e => {
-              const val = e.target.value;
-              setSearchValue(val);
-              onSearch(e);
+              setInputValue(e.target.value);
+              applySearch(e.target.value);
             }}
-            value={searchValue}
+            value={inputValue}
             placeholder="Search Dictionary..."
             preset="search"
             className={styles.search}

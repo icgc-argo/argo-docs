@@ -365,6 +365,13 @@ function DataDictionary() {
                 contents={menuContents}
                 color="#0774d3"
                 scrollYOffset="70"
+                dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
+                dataAttributes={filters.attributes.map(d => ({
+                  content: startCase(d),
+                  value: d,
+                }))}
+                searchValue={searchValue}
+                onSearch={setSearchValue}
               />
               <div
                 style={{
@@ -382,7 +389,7 @@ function DataDictionary() {
                   display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
                 }}
               >
-                <TreeView dictionary={dictionary} />
+                <TreeView dictionary={dictionary} searchValue={searchValue} />
               </div>
             </div>
             {selectedTab === TAB_STATE.DETAILS && (
