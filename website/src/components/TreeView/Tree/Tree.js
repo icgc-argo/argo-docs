@@ -20,12 +20,12 @@ const StyledRootContainer = styled(RootContainer)`
   --tree-node-padding: var(--node-padding, 5px);
 `;
 
-function Tree({ children, label, ...props }) {
+const Tree = React.forwardRef(({ children, label, ...props }, ref) => {
   return (
-    <StyledRootContainer {...props}>
+    <StyledRootContainer {...props} ref={ref}>
       <TreeNode label={label}>{children}</TreeNode>
     </StyledRootContainer>
   );
-}
+});
 
 export default React.memo(Tree);

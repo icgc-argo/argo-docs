@@ -11,8 +11,10 @@ const TreeView = ({ dictionary, searchValue }) => {
   React.useEffect(() => {
     setOffset(containerRef.current.clientHeight / 2);
   }, []);
-  console.log('dictionary: ', dictionary);
-  console.log('data: ', data);
+
+  const onNodeExpand = ({ fileName, expanded }) => {
+    console.log(fileName, expanded);
+  };
 
   return (
     <div id="yo" style={{ display: 'flex', cursor: 'grab' }} ref={containerRef}>
@@ -27,8 +29,15 @@ const TreeView = ({ dictionary, searchValue }) => {
         `}
       />
       <ZoomPanContainer>
-        <div style={{ height: '800px', width: '4000px', display: 'flex', alignItems: 'center' }}>
-          <Tree searchString={searchValue} rootFile={data} />
+        <div
+          style={{
+            height: 800,
+            width: 2000,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
         </div>
       </ZoomPanContainer>
     </div>

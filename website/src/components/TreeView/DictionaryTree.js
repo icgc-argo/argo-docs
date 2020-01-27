@@ -33,7 +33,7 @@ const ExpandButton = ({ expanded = false, onClick }) => {
   );
 };
 
-const NodeLabel = ({ fileName, required = false, fields }) => {
+const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) => {
   const theme = useTheme();
   const searchString = React.useContext(SearchStringContext);
   const [expanded, setExpanded] = React.useState(false);
@@ -87,15 +87,18 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
     padding-left: 10px;
   `;
 
+  const onExpandClick = e => {
+    setExpanded(!expanded);
+    onExpandStateChange(!expanded);
+  };
+
   return (
     <div
       className={css`
         display: flex;
-        /* justify-content: center; */
         flex-direction: column;
         justify-content: center;
         opacity: ${!hasMatch ? 0.25 : 1};
-        /* border: solid 2px red; */
       `}
     >
       <div
@@ -130,7 +133,7 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
               display: flex;
               cursor: pointer;
             `}
-            onClick={e => setExpanded(!expanded)}
+            onClick={onExpandClick}
           >
             <div>
               {!!(searchString && searchString.length)
@@ -189,7 +192,7 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
   );
 };
 
-const FileNode = ({ fileDef }) => {
+const FileNode = ({ fileDef, onExpandStateChange }) => {
   const Node = ({ fileName, required, children, fields }) => {
     return (
       <TreeNode
@@ -199,7 +202,14 @@ const FileNode = ({ fileDef }) => {
             left: -4px !important;
           }
         `}
-        label={<NodeLabel fileName={fileName} required={required} fields={fields} />}
+        label={
+          <NodeLabel
+            fileName={fileName}
+            required={required}
+            fields={fields}
+            onExpandStateChange={onExpandStateChange}
+          />
+        }
       >
         {children}
       </TreeNode>
@@ -208,30 +218,45 @@ const FileNode = ({ fileDef }) => {
   return (
     <Node fileName={fileDef.name} fields={fileDef.fields} required={fileDef.required}>
       {fileDef.children.map(f => (
-        <FileNode fileDef={f} key={f.name} />
+        <FileNode fileDef={f} key={f.name} onExpandStateChange={onExpandStateChange} />
       ))}
     </Node>
   );
 };
 
-const ExampleTree = ({ searchString, rootFile }) => {
+const DictionaryTree = React.forwardRef(({ searchString, rootFile, onNodeExpand }, ref) => {
   const theme = useTheme();
+  const onNodeExpandChange = fileName => expanded => {
+    onNodeExpand({ fileName, expanded });
+  };
   return (
-    <Tree
-      label={<NodeLabel fileName={rootFile.name} fields={rootFile.fields} required></NodeLabel>}
-      lineHeight="40px"
-      lineWidth="4px"
-      lineBorderRadius="25px"
-      lineColor={theme.colors.grey_1}
-      nodePadding="2px"
-    >
-      <SearchStringContext.Provider value={searchString}>
+    <SearchStringContext.Provider value={searchString}>
+      <Tree
+        ref={ref}
+        label={
+          <NodeLabel
+            fileName={rootFile.name}
+            fields={rootFile.fields}
+            onExpandStateChange={onNodeExpandChange(rootFile.name)}
+            required
+          ></NodeLabel>
+        }
+        lineHeight="40px"
+        lineWidth="4px"
+        lineBorderRadius="25px"
+        lineColor={theme.colors.grey_1}
+        nodePadding="2px"
+      >
         {rootFile.children.map(fileDef => (
-          <FileNode fileDef={fileDef} key={fileDef.name} />
+          <FileNode
+            fileDef={fileDef}
+            key={fileDef.name}
+            onExpandStateChange={onNodeExpandChange(fileDef.name)}
+          />
         ))}
-      </SearchStringContext.Provider>
-    </Tree>
+      </Tree>
+    </SearchStringContext.Provider>
   );
-};
+});
 
-export default ExampleTree;
+export default DictionaryTree;

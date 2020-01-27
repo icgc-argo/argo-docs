@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 const MIN_ZOOM = 0.25;
-const MAX_ZOOM = 2;
+const MAX_ZOOM = 1;
 const ZOOM_STEP = 0.05;
 
 export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = ZOOM_STEP }) => {
@@ -74,6 +74,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
                 />
                 <button onClick={onResetClick}>reset</button>
               </div>
+              {/* {staticContent} */}
               <TransformComponent>{children}</TransformComponent>
             </React.Fragment>
           );
