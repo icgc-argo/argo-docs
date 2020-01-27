@@ -20,7 +20,6 @@ const FileFilters = ({
   dataAttributes = [],
   searchParams = {},
   onSearch = e => console.log(e.target.val),
-  searchValue,
 }) => {
   // update search params
   const onSelect = filterName => value => onSearch({ ...searchParams, ...{ [filterName]: value } });
