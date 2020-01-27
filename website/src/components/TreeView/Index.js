@@ -10,16 +10,14 @@ import Button from '@icgc-argo/uikit/Button';
 const createPubsub = () => {
   let listeners = [];
   const subscribe = listener => (listeners = listeners.concat(listener));
-  const unsubscribe = listener => {
-    listeners = listeners.filter(l => {
+  const unsubscribe = listener =>
+    (listeners = listeners.filter(l => {
       l !== listener;
-    });
-  };
-  const dispatch = payload => {
+    }));
+  const dispatch = payload =>
     listeners.forEach(listener => {
       listener(payload);
     });
-  };
   return {
     subscribe,
     unsubscribe,
@@ -35,11 +33,7 @@ export const useExpandAllMessenger = () => React.useContext(ExpandAllMessengerCo
 
 const TreeView = ({ dictionary, searchValue }) => {
   const theme = useTheme();
-  const [offset, setOffset] = React.useState(0);
   const containerRef = React.createRef();
-  React.useEffect(() => {
-    setOffset(containerRef.current.clientHeight / 2);
-  }, []);
 
   const collapseAllMessenger = createPubsub();
   const onCollapseAllClick = () => {
@@ -89,6 +83,7 @@ const TreeView = ({ dictionary, searchValue }) => {
         style={{
           border: `solid 1px ${theme.colors.grey_2}`,
           position: 'absolute',
+          cursor: 'default',
           background: theme.colors.white,
           padding: 8,
           right: 8,

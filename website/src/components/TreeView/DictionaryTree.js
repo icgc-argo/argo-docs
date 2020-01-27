@@ -33,7 +33,7 @@ const ExpandButton = ({ expanded = false, onClick }) => {
   );
 };
 
-const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) => {
+const FileDisplayBox = ({ fileName, required = false, fields, onExpandStateChange }) => {
   const theme = useTheme();
   const searchString = React.useContext(SearchStringContext);
   const [expanded, setExpanded] = React.useState(false);
@@ -94,7 +94,9 @@ const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) 
 
   const collapseAllMessenger = useCollapseAllMessenger();
   React.useEffect(() => {
-    const onDisatch = () => setExpanded(false);
+    const onDisatch = () => {
+      setExpanded(false);
+    };
     collapseAllMessenger.subscribe(onDisatch);
     return () => collapseAllMessenger.unsubscribe(onDisatch);
   }, []);
@@ -112,6 +114,7 @@ const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) 
         flex-direction: column;
         justify-content: center;
         opacity: ${!hasMatch ? 0.25 : 1};
+        margin: 10px 0px;
       `}
     >
       <div
@@ -216,7 +219,7 @@ const FileNode = ({ fileDef, onExpandStateChange }) => {
           }
         `}
         label={
-          <NodeLabel
+          <FileDisplayBox
             fileName={fileName}
             required={required}
             fields={fields}
@@ -242,18 +245,22 @@ const DictionaryTree = React.forwardRef(({ searchString, rootFile, onNodeExpand 
   const onNodeExpandChange = fileName => expanded => {
     onNodeExpand({ fileName, expanded });
   };
+  /**
+   * not sure why but FirstNode cannot be inlined without subscription problem
+   */
+  const FirstNode = () => (
+    <FileDisplayBox
+      fileName={rootFile.name}
+      fields={rootFile.fields}
+      onExpandStateChange={onNodeExpandChange(rootFile.name)}
+      required
+    />
+  );
   return (
     <SearchStringContext.Provider value={searchString}>
       <Tree
         ref={ref}
-        label={
-          <NodeLabel
-            fileName={rootFile.name}
-            fields={rootFile.fields}
-            onExpandStateChange={onNodeExpandChange(rootFile.name)}
-            required
-          />
-        }
+        label={<FirstNode />}
         lineHeight="40px"
         lineWidth="4px"
         lineBorderRadius="25px"
