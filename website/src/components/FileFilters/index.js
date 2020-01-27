@@ -11,7 +11,6 @@ const FileFilters = ({
   dataTiers = [],
   dataAttributes = [],
   onSearch = e => console.log(e.target.val),
-  searchValue,
 }) => {
   const [inputValue, setInputValue] = React.useState('');
   const applySearch = debounce(onSearch, 500);

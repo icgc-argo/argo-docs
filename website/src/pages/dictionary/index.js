@@ -252,7 +252,6 @@ function DataDictionary() {
                   content: startCase(d),
                   value: d,
                 }))}
-                searchValue={searchValue}
                 onSearch={setSearchValue}
               />
               <div
