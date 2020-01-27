@@ -88,14 +88,6 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
   `;
 
   return (
-    // <div
-    //   className={css`
-    //     border: solid 2px red;
-    //   `}
-    // >
-    //   dummy
-    // </div>
-
     <div
       className={css`
         display: flex;
@@ -156,9 +148,6 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
             </div>
           </Tag>
         </div>
-        {/* <Button variant="text" size="sm" onClick={e => setExpanded(!expanded)}>
-          {!expanded ? 'expand' : 'collapse'}
-        </Button> */}
         {expanded && (
           <div
             className={css`
