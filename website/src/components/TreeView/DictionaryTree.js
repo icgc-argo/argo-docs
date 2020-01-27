@@ -5,7 +5,7 @@ import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import { styled } from '@icgc-argo/uikit';
 import Typography from '@icgc-argo/uikit/Typography';
 import Tag from '@icgc-argo/uikit/Tag';
-import Button from '@icgc-argo/uikit/Button';
+import { useCollapseAllMessenger } from './';
 
 const SearchStringContext = React.createContext('');
 
@@ -91,6 +91,13 @@ const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) 
     setExpanded(!expanded);
     onExpandStateChange(!expanded);
   };
+
+  const collapseAllMessenger = useCollapseAllMessenger();
+  React.useEffect(() => {
+    const onCollapseAll = () => setExpanded(false);
+    collapseAllMessenger.subscribe(onCollapseAll);
+    return () => collapseAllMessenger.unsubscribe(onCollapseAll);
+  }, []);
 
   return (
     <div

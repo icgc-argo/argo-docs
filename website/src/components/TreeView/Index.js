@@ -4,20 +4,55 @@ import ZoomPanContainer from './ZoomPanContainer';
 import Tree from './DictionaryTree';
 import data from './data';
 import { Global, css } from '@emotion/core';
+import Typography from '@icgc-argo/uikit/Typography';
+import Button from '@icgc-argo/uikit/Button';
+
+const createPubsub = () => {
+  let listeners = [];
+  const subscribe = listener => (listeners = listeners.concat(listener));
+  const unsubscribe = listener => {
+    listeners = listeners.filter(l => {
+      l !== listener;
+    });
+  };
+  const dispatch = payload => {
+    listeners.forEach(listener => {
+      listener(payload);
+    });
+  };
+  return {
+    subscribe,
+    unsubscribe,
+    listeners,
+    dispatch,
+  };
+};
+
+const CollapseAllMessengerContext = React.createContext();
+export const useCollapseAllMessenger = () => React.useContext(CollapseAllMessengerContext);
 
 const TreeView = ({ dictionary, searchValue }) => {
+  const theme = useTheme();
   const [offset, setOffset] = React.useState(0);
   const containerRef = React.createRef();
   React.useEffect(() => {
     setOffset(containerRef.current.clientHeight / 2);
   }, []);
 
+  const collapseAllMessenger = createPubsub();
+  const onCollapseAllClick = () => {
+    collapseAllMessenger.dispatch();
+  };
   const onNodeExpand = ({ fileName, expanded }) => {
     console.log(fileName, expanded);
   };
 
   return (
-    <div id="yo" style={{ display: 'flex', cursor: 'grab' }} ref={containerRef}>
+    <div
+      id="yo"
+      style={{ display: 'flex', cursor: 'grab', position: 'relative' }}
+      ref={containerRef}
+    >
       <Global
         styles={css`
           .dict_src-pages-dictionary- {
@@ -37,9 +72,26 @@ const TreeView = ({ dictionary, searchValue }) => {
             alignItems: 'center',
           }}
         >
-          <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
+          <CollapseAllMessengerContext.Provider value={collapseAllMessenger}>
+            <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
+          </CollapseAllMessengerContext.Provider>
         </div>
       </ZoomPanContainer>
+      <div
+        style={{
+          border: `solid 1px ${theme.colors.grey_2}`,
+          position: 'absolute',
+          padding: 8,
+          right: 8,
+          top: 8,
+        }}
+      >
+        <Typography color="primary">Filter by Data Tier</Typography>
+
+        <Button variant="secondary" onClick={onCollapseAllClick}>
+          Collapse All
+        </Button>
+      </div>
     </div>
   );
 };
