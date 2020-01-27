@@ -3,6 +3,7 @@ import Select from '@icgc-argo/uikit/form/Select';
 import Input from '@icgc-argo/uikit/form/Input';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
+import debounce from 'lodash/debounce';
 
 const FileFilters = ({
   files = 0,
@@ -10,9 +11,10 @@ const FileFilters = ({
   dataTiers = [],
   dataAttributes = [],
   onSearch = e => console.log(e.target.val),
+  searchValue,
 }) => {
-  const [searchValue, setSearchValue] = React.useState('');
-
+  const [inputValue, setInputValue] = React.useState('');
+  const applySearch = debounce(onSearch, 500);
   return (
     <Typography variant="data" color="#151c3d">
       <div className={styles.fileFilters}>
@@ -22,11 +24,10 @@ const FileFilters = ({
           Attribute: <Select options={dataAttributes} size="sm" />
           <Input
             onChange={e => {
-              const val = e.target.value;
-              setSearchValue(val);
-              onSearch(e);
+              setInputValue(e.target.value);
+              applySearch(e.target.value);
             }}
-            value={searchValue}
+            value={inputValue}
             placeholder="Search Dictionary..."
             preset="search"
             className={styles.search}

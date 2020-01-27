@@ -5,8 +5,7 @@ import Tree from './DictionaryTree';
 import data from './data';
 import { Global, css } from '@emotion/core';
 
-const TreeView = ({ dictionary }) => {
-  const [val, setVal] = React.useState('');
+const TreeView = ({ dictionary, searchValue }) => {
   const [offset, setOffset] = React.useState(0);
   const containerRef = React.createRef();
   React.useEffect(() => {
@@ -29,7 +28,7 @@ const TreeView = ({ dictionary }) => {
       />
       <ZoomPanContainer>
         <div style={{ height: '800px', marginLeft: `calc(-50% + ${offset}px)` }}>
-          <Tree searchString={val} rootFile={data} />
+          <Tree searchString={searchValue} rootFile={data} />
         </div>
       </ZoomPanContainer>
     </div>

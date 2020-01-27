@@ -90,6 +90,8 @@ function DataDictionary() {
   const [filters, setFilters] = useState({ tiers: [], attributes: [] });
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
+  const [searchValue, setSearchValue] = React.useState('');
+
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
@@ -250,6 +252,8 @@ function DataDictionary() {
                   content: startCase(d),
                   value: d,
                 }))}
+                searchValue={searchValue}
+                onSearch={setSearchValue}
               />
               <div
                 style={{
@@ -263,7 +267,7 @@ function DataDictionary() {
                   display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
                 }}
               >
-                <TreeView dictionary={dictionary} />
+                <TreeView dictionary={dictionary} searchValue={searchValue} />
               </div>
             </div>
             {selectedTab === TAB_STATE.DETAILS && (
