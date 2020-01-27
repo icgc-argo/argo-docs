@@ -9,6 +9,30 @@ import Button from '@icgc-argo/uikit/Button';
 
 const SearchStringContext = React.createContext('');
 
+const ExpandButton = ({ expanded = false, onClick }) => {
+  const theme = useTheme();
+  return (
+    <button
+      onClick={onClick}
+      className={css`
+        width: 12px;
+        height: 12px;
+        padding: 0px;
+        line-height: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: ${theme.colors.white};
+        cursor: pointer;
+        border: none;
+      `}
+    >
+      {expanded ? '-' : '+'}
+    </button>
+  );
+};
+
 const NodeLabel = ({ fileName, required = false, fields }) => {
   const theme = useTheme();
   const searchString = React.useContext(SearchStringContext);
@@ -57,6 +81,7 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
   const ListItem = styled('li')`
     list-style-position: inside;
     word-wrap: break-word;
+    list-style-type: disc;
   `;
   const List = styled('ul')`
     padding-left: 10px;
@@ -83,10 +108,13 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
           className={css`
             display: flex;
             justify-content: space-between;
+            align-items: center;
           `}
         >
           <Typography
             variant="data"
+            color="secondary"
+            bold
             className={css`
               margin-left: 5px;
             `}
@@ -96,18 +124,30 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
           <Tag
             className={css`
               background: ${theme.colors.primary_1};
+              display: flex;
+              cursor: pointer;
             `}
+            onClick={e => setExpanded(!expanded)}
           >
-            {!!(searchString && searchString.length)
-              ? `${requiredFields.filter(fieldHasMatch).length +
-                  optionalFields.filter(fieldHasMatch).length} / ${fields.length}`
-              : requiredFields.length + optionalFields.length}{' '}
-            fields
+            <div>
+              {!!(searchString && searchString.length)
+                ? `${requiredFields.filter(fieldHasMatch).length +
+                    optionalFields.filter(fieldHasMatch).length} / ${fields.length}`
+                : requiredFields.length + optionalFields.length}{' '}
+              fields
+            </div>
+            <div
+              className={css`
+                margin-left: 5px;
+              `}
+            >
+              <ExpandButton expanded={expanded} />
+            </div>
           </Tag>
         </div>
-        <Button variant="text" size="sm" onClick={e => setExpanded(!expanded)}>
+        {/* <Button variant="text" size="sm" onClick={e => setExpanded(!expanded)}>
           {!expanded ? 'expand' : 'collapse'}
-        </Button>
+        </Button> */}
         {expanded && (
           <div
             className={css`
