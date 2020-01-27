@@ -149,29 +149,30 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
   );
 };
 
-const Node = ({ fileName, required, children, fields }) => {
+const FileNode = ({ fileDef }) => {
+  const Node = ({ fileName, required, children, fields }) => {
+    return (
+      <TreeNode
+        className={css`
+          &::before,
+          &::after {
+            top: -4px !important;
+          }
+        `}
+        label={<NodeLabel fileName={fileName} required={required} fields={fields} />}
+      >
+        {children}
+      </TreeNode>
+    );
+  };
   return (
-    <TreeNode
-      className={css`
-        &::before,
-        &::after {
-          top: -4px !important;
-        }
-      `}
-      label={<NodeLabel fileName={fileName} required={required} fields={fields} />}
-    >
-      {children}
-    </TreeNode>
+    <Node fileName={fileDef.name} fields={fileDef.fields} required={fileDef.required}>
+      {fileDef.children.map(f => (
+        <FileNode fileDef={f} key={f.name} />
+      ))}
+    </Node>
   );
 };
-
-const FileNode = ({ fileDef }) => (
-  <Node fileName={fileDef.name} fields={fileDef.fields} required={fileDef.required}>
-    {fileDef.children.map(f => (
-      <FileNode fileDef={f} key={f.name} />
-    ))}
-  </Node>
-);
 
 const ExampleTree = ({ searchString, rootFile }) => {
   const theme = useTheme();
