@@ -5,7 +5,7 @@ import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import { styled } from '@icgc-argo/uikit';
 import Typography from '@icgc-argo/uikit/Typography';
 import Tag from '@icgc-argo/uikit/Tag';
-import { useCollapseAllMessenger } from './';
+import { useCollapseAllMessenger, useExpandAllMessenger } from './';
 
 const SearchStringContext = React.createContext('');
 
@@ -94,9 +94,15 @@ const NodeLabel = ({ fileName, required = false, fields, onExpandStateChange }) 
 
   const collapseAllMessenger = useCollapseAllMessenger();
   React.useEffect(() => {
-    const onCollapseAll = () => setExpanded(false);
-    collapseAllMessenger.subscribe(onCollapseAll);
-    return () => collapseAllMessenger.unsubscribe(onCollapseAll);
+    const onDisatch = () => setExpanded(false);
+    collapseAllMessenger.subscribe(onDisatch);
+    return () => collapseAllMessenger.unsubscribe(onDisatch);
+  }, []);
+  const expandAllMessenger = useExpandAllMessenger();
+  React.useEffect(() => {
+    const onDisatch = () => setExpanded(true);
+    expandAllMessenger.subscribe(onDisatch);
+    return () => expandAllMessenger.unsubscribe(onDisatch);
   }, []);
 
   return (
@@ -246,7 +252,7 @@ const DictionaryTree = React.forwardRef(({ searchString, rootFile, onNodeExpand 
             fields={rootFile.fields}
             onExpandStateChange={onNodeExpandChange(rootFile.name)}
             required
-          ></NodeLabel>
+          />
         }
         lineHeight="40px"
         lineWidth="4px"
