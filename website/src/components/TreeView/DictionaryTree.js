@@ -88,11 +88,22 @@ const NodeLabel = ({ fileName, required = false, fields }) => {
   `;
 
   return (
+    // <div
+    //   className={css`
+    //     border: solid 2px red;
+    //   `}
+    // >
+    //   dummy
+    // </div>
+
     <div
       className={css`
         display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
         justify-content: center;
         opacity: ${!hasMatch ? 0.25 : 1};
+        /* border: solid 2px red; */
       `}
     >
       <div
@@ -196,7 +207,7 @@ const FileNode = ({ fileDef }) => {
         className={css`
           &::before,
           &::after {
-            top: -4px !important;
+            left: -4px !important;
           }
         `}
         label={<NodeLabel fileName={fileName} required={required} fields={fields} />}
