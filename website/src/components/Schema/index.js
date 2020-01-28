@@ -88,6 +88,10 @@ const Schema = ({ schema, menuRef }) => {
     {
       Header: 'Data Tier',
       Cell: ({ original }) => {
+        /**
+         * meta core === false && meta.primary id === false && required === false || meta is empty || meta is non existent
+         */
+
         const meta = get(original, 'meta', {});
         const required = get(original, 'restrictions.required', false);
 
