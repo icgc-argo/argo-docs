@@ -11,6 +11,8 @@ import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, useModalState } from '../../pages/dictionary';
 import ScriptModal from '../ScriptModal';
+import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 const formatFieldType = value => {
   switch (value) {
@@ -85,11 +87,17 @@ const Schema = ({ schema, menuRef }) => {
     },
     {
       Header: 'Data Tier',
-      Cell: ({ original: { meta } }) => {
-        if (!meta) return null;
-        const { primaryId, core } = meta;
-        const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
-        return <Tag type={type} />;
+      Cell: ({ original }) => {
+        const meta = get(original, 'meta', {});
+        const required = get(original, 'restrictions.required', false);
+
+        if (isEmpty(meta) && !required) {
+          return <Tag type={TAG_TYPES.extended} />;
+        } else {
+          const { primaryId, core } = meta;
+          const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
+          return <Tag type={type} />;
+        }
       },
       style: { padding: '8px' },
       width: 85,
