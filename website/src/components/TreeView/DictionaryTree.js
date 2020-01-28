@@ -5,7 +5,7 @@ import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import { styled } from '@icgc-argo/uikit';
 import Typography from '@icgc-argo/uikit/Typography';
 import Tag from '@icgc-argo/uikit/Tag';
-import { useCollapseAllMessenger, useExpandAllMessenger } from './';
+import { useExpandStateMessenger } from './';
 
 const SearchStringContext = React.createContext('');
 
@@ -92,19 +92,13 @@ const FileDisplayBox = ({ fileName, required = false, fields, onExpandStateChang
     onExpandStateChange(!expanded);
   };
 
-  const collapseAllMessenger = useCollapseAllMessenger();
+  const collapseAllMessenger = useExpandStateMessenger();
   React.useEffect(() => {
-    const onDisatch = () => {
-      setExpanded(false);
+    const onDisatch = ({ expanded }) => {
+      setExpanded(expanded);
     };
     collapseAllMessenger.subscribe(onDisatch);
     return () => collapseAllMessenger.unsubscribe(onDisatch);
-  }, []);
-  const expandAllMessenger = useExpandAllMessenger();
-  React.useEffect(() => {
-    const onDisatch = () => setExpanded(true);
-    expandAllMessenger.subscribe(onDisatch);
-    return () => expandAllMessenger.unsubscribe(onDisatch);
   }, []);
 
   return (
