@@ -9,27 +9,26 @@ import Button from '@icgc-argo/uikit/Button';
 
 const createPubsub = () => {
   let listeners = [];
-  const subscribe = listener => (listeners = listeners.concat(listener));
-  const unsubscribe = listener =>
+  const subscribe = callback => (listeners = listeners.concat(callback));
+  const unsubscribe = callback =>
     (listeners = listeners.filter(l => {
-      l !== listener;
+      l !== callback;
     }));
-  const dispatch = payload =>
-    listeners.forEach(listener => {
-      listener(payload);
+  const publish = payload => {
+    listeners.forEach(callback => {
+      callback(payload);
     });
+  };
   return {
     subscribe,
     unsubscribe,
     listeners,
-    dispatch,
+    publish,
   };
 };
 
-const CollapseAllMessengerContext = React.createContext();
-export const useCollapseAllMessenger = () => React.useContext(CollapseAllMessengerContext);
-const ExpandAllMessengerContext = React.createContext();
-export const useExpandAllMessenger = () => React.useContext(ExpandAllMessengerContext);
+const ExpandStateMessenger = React.createContext();
+export const useExpandStateMessenger = () => React.useContext(ExpandStateMessenger);
 
 const TreeView = ({ dictionary, searchValue }) => {
   const theme = useTheme();
@@ -37,11 +36,10 @@ const TreeView = ({ dictionary, searchValue }) => {
 
   const collapseAllMessenger = createPubsub();
   const onCollapseAllClick = () => {
-    collapseAllMessenger.dispatch();
+    collapseAllMessenger.publish({ expanded: false });
   };
-  const expandAllMessenger = createPubsub();
   const onExpandAllClick = () => {
-    expandAllMessenger.dispatch();
+    collapseAllMessenger.publish({ expanded: true });
   };
   const onNodeExpand = ({ fileName, expanded }) => {
     console.log(fileName, expanded);
@@ -72,11 +70,9 @@ const TreeView = ({ dictionary, searchValue }) => {
             alignItems: 'center',
           }}
         >
-          <ExpandAllMessengerContext.Provider value={expandAllMessenger}>
-            <CollapseAllMessengerContext.Provider value={collapseAllMessenger}>
-              <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
-            </CollapseAllMessengerContext.Provider>
-          </ExpandAllMessengerContext.Provider>
+          <ExpandStateMessenger.Provider value={collapseAllMessenger}>
+            <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
+          </ExpandStateMessenger.Provider>
         </div>
       </ZoomPanContainer>
       <div
