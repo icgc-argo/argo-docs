@@ -9,13 +9,12 @@
 }
 
 .menu {
-  width: 155px;
-  margin: 0 15px;
+  width: 190px;
+  margin: 0 15px 0 20px;
   flex-shrink: 0;
-}
-
-.menu > div {
-  position: fixed;
+  position: sticky;
+  top: 97px;
+  align-self: flex-start;
 }
 
 .heading {
