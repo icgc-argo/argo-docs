@@ -74,7 +74,6 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
                 />
                 <button onClick={onResetClick}>reset</button>
               </div>
-              {/* {staticContent} */}
               <TransformComponent>{children}</TransformComponent>
             </React.Fragment>
           );
