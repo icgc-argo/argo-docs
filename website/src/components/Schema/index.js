@@ -88,12 +88,7 @@ const Schema = ({ schema, menuRef }) => {
     {
       Header: 'Data Tier',
       Cell: ({ original }) => {
-        /**
-         * meta core === false && meta.primary id === false && required === false || meta is empty || meta is non existent
-         */
-
         const meta = get(original, 'meta', {});
-        console.log('original', original);
         if (isEmpty(meta)) {
           return <Tag type={TAG_TYPES.extended} />;
         } else {
