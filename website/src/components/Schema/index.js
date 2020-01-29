@@ -93,14 +93,17 @@ const Schema = ({ schema, menuRef }) => {
          */
 
         const meta = get(original, 'meta', {});
-        const required = get(original, 'restrictions.required', false);
-
-        if (isEmpty(meta) && !required) {
+        if (isEmpty(meta)) {
           return <Tag type={TAG_TYPES.extended} />;
         } else {
           const { primaryId, core } = meta;
-          const type = primaryId ? TAG_TYPES.id : core ? TAG_TYPES.core : TAG_TYPES.extended;
-          return <Tag type={type} />;
+          return primaryId ? (
+            <Tag type={TAG_TYPES.primaryId} />
+          ) : core ? (
+            <Tag type={TAG_TYPES.core} />
+          ) : (
+            <Tag type={TAG_TYPES.extended} />
+          );
         }
       },
       style: { padding: '8px' },
