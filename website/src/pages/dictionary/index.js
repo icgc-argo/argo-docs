@@ -42,7 +42,6 @@ export const useModalState = () => {
     } else {
       bodyClassList.remove('modal-open');
     }
-    toggle('modal-open');
   };
 
   return [visibility, setModalVisibility];
