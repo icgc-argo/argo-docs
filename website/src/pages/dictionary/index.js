@@ -214,7 +214,7 @@ function DataDictionary() {
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                       <DownloadIcon />
                       File Templates
-                      <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
+                      <Icon name="chevron_down" fill="accent2_dark" height="9px" />
                     </div>
                   </DropdownButton>
                   <DownloadButton>PDF</DownloadButton>
