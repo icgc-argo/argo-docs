@@ -93,12 +93,13 @@ const Schema = ({ schema, menuRef }) => {
          */
 
         const meta = get(original, 'meta', {});
+        console.log('original', original);
         if (isEmpty(meta)) {
           return <Tag type={TAG_TYPES.extended} />;
         } else {
           const { primaryId, core } = meta;
           return primaryId ? (
-            <Tag type={TAG_TYPES.primaryId} />
+            <Tag type={TAG_TYPES.id} />
           ) : core ? (
             <Tag type={TAG_TYPES.core} />
           ) : (
