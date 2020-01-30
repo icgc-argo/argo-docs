@@ -61,7 +61,7 @@ spec:
         }
 
         stage('Deploy to argo-dev') {
-            when { branch 'master' }
+            when { branch 'develop' }
             steps {
                 build(job: "/ARGO/provision/docs", parameters: [
                      [$class: 'StringParameterValue', name: 'AP_ARGO_ENV', value: 'dev' ],
