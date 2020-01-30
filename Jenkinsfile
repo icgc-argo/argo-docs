@@ -43,7 +43,7 @@ spec:
         }
 
         stage('Build') {
-            when {{ anyOf { branch 'master'; branch 'develop' } }
+            when { anyOf { branch 'master'; branch 'develop' } }
             steps {
                 container('docker') {
                     withCredentials([usernamePassword(credentialsId:'argoDockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
