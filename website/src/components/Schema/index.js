@@ -14,6 +14,7 @@ import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
+import { ContentAnchor } from '../ContentMenu';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -31,9 +32,11 @@ const formatFieldType = value => {
 const HeaderName = ({ name }) => {
   const sentenceCase = startCase(name);
   return (
-    <SchemaTitle>
-      {sentenceCase} ({name})
-    </SchemaTitle>
+    <ContentAnchor fragment={name}>
+      <SchemaTitle>
+        {sentenceCase} ({name})
+      </SchemaTitle>
+    </ContentAnchor>
   );
 };
 

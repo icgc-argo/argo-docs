@@ -23,13 +23,13 @@ import FileFilters from '../../components/FileFilters';
 import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
-import ContentMenu from '@icgc-argo/uikit/ContentMenu';
 import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
 import { DownloadIcon, DownloadButton } from '../../components/common';
 import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
+import Menu from '../../components/ContentMenu';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -233,7 +233,7 @@ function DataDictionary() {
               <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
             </div>
             <div className={styles.menu}>
-              <ContentMenu
+              <Menu
                 title="Clinical Files"
                 contents={menuContents}
                 color="#0774d3"
