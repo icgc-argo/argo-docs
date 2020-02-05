@@ -17,6 +17,7 @@ const FileFilters = ({
     <Typography variant="data" color="#151c3d">
       <div className={styles.fileFilters}>
         {`${files} files > ${fields} fields`}
+        {/*
         <div className={styles.dataSelectors}>
           Data Tier: <Select options={dataTiers} size="sm" />
           Attribute: <Select options={dataAttributes} size="sm" />
@@ -31,7 +32,7 @@ const FileFilters = ({
             preset="search"
             className={styles.search}
           />
-        </div>
+          </div>*/}
       </div>
     </Typography>
   );
