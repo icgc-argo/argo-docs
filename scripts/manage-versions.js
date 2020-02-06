@@ -5,11 +5,10 @@ const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
 
+const constants = require('./constants');
+
 const apiRoot = 'https://lectern.platform.icgc-argo.org';
-const dictionaryName = 'ICGC-ARGO Data Dictionary';
-const schemaPath = '../website/static/data/schemas';
-const versionsFilename = `${schemaPath}/schema-versions.json`;
-const dataFilename = '../website/src/pages/dictionary/data.json';
+const { dictionaryName, schemaPath, versionsFilename, dataFilename } = constants;
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
