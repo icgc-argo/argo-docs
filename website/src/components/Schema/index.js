@@ -15,6 +15,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
 import { ContentAnchor } from '../ContentMenu';
+import { ContentSection } from '../ContentMenu';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -55,8 +56,6 @@ const FieldsTag = ({ fieldCount }) => (
 const Schema = ({ schema, menuRef }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
-
-  const [modalVisibility, setModalVisibility] = useState(false);
 
   /**
    * need to pass in state for Cell rendering
@@ -228,6 +227,15 @@ const Schema = ({ schema, menuRef }) => {
             </div>
           </DataTypography>
 
+<<<<<<< HEAD
+=======
+          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+            <DownloadButton onClick={() => console.log('file template download')}>
+              File Template
+            </DownloadButton>
+          </div>
+
+>>>>>>> fix bad merge
           {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
           <DownloadButton onClick={() => console.log('file template download')}>
             File Template
