@@ -1,52 +1,24 @@
 import React from 'react';
-import Menu from '@icgc-argo/uikit/ContentMenu';
-import useTOCHighlight from '../../hooks/useTOCHighlight';
 import kebabCase from 'lodash/kebabCase';
-import { styled } from '@icgc-argo/uikit';
+import Menu, { useMenuHighlight } from '@icgc-argo/uikit/ContentMenu';
 
-const DEFAULT_ANCHOR_CLASSNAME = 'content-anchor';
+const DEFAULT_SECTION_CLASSNAME = 'menu-content-section';
+const DEFAULT_ANCHOR_CLASSNAME = 'menu-anchor';
 
-const getAnchorClassname = (contentPrefix = '') =>
-  `${contentPrefix ? `${contentPrefix}-` : ''}${DEFAULT_ANCHOR_CLASSNAME}`;
-
-const ContentMenu = ({ contentPrefix, ...props }) => {
-  const anchorClassname = getAnchorClassname(contentPrefix);
-  useTOCHighlight(anchorClassname);
-  return <Menu {...props} />;
+const ContentMenu = ({ contentPrefix, scrollYOffset, ...props }) => {
+  useMenuHighlight(DEFAULT_SECTION_CLASSNAME, DEFAULT_ANCHOR_CLASSNAME, scrollYOffset);
+  return (
+    <Menu scrollYOffset={scrollYOffset} anchorClassName={DEFAULT_ANCHOR_CLASSNAME} {...props} />
+  );
 };
 
 /**
- * title prop
- * children can be any element
- * this way we can style the heading anyway we want and keep the anchor isolated
- * instead of trying to style an anchor explicilty each time
- * some redunnancy with adding a title twice
- *
- * <ContentAnchor title="my anchor">
- * <H3>my anchor</h3>
- * </ContentAnchor>
- *
- *  allow a custom component added
+ * Content section, should wrap whole section
  */
-
-const Anchor = styled('a')`
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: none;
-    cursor: default;
-  }
-`;
-
-/**
- * Content anchor to denote a content menu section
- * @param {string} fragment - anchor fragment
- * @param {string} contentPrefix - ContentMenu associates ContentAnchor based on a common contentPrefix
- */
-export const ContentAnchor = ({ fragment, children, contentPrefix = '' }) => (
-  <Anchor href={`#${kebabCase(fragment)}`} className={getAnchorClassname(contentPrefix)}>
+export const ContentSection = ({ title, children }) => (
+  <div id={`${kebabCase(title)}`} className={DEFAULT_SECTION_CLASSNAME}>
     {children}
-  </Anchor>
+  </div>
 );
 
 export default ContentMenu;
