@@ -32,11 +32,9 @@ const formatFieldType = value => {
 const HeaderName = ({ name }) => {
   const sentenceCase = startCase(name);
   return (
-    <ContentAnchor fragment={name}>
-      <SchemaTitle>
-        {sentenceCase} ({name})
-      </SchemaTitle>
-    </ContentAnchor>
+    <SchemaTitle>
+      {sentenceCase} ({name})
+    </SchemaTitle>
   );
 };
 
@@ -198,56 +196,58 @@ const Schema = ({ schema, menuRef }) => {
   const containerRef = React.createRef();
 
   return (
-    <div ref={menuRef} className={styles.schema}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: '11px',
-        }}
-      >
-        <HeaderName name={schema.name} />
-        <FieldsTag fieldCount={schema.fields.length} />
-      </div>
+    <ContentSection title={schema.name}>
+      <div ref={menuRef} className={styles.schema}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: '11px',
+          }}
+        >
+          <HeaderName name={schema.name} />
+          <FieldsTag fieldCount={schema.fields.length} />
+        </div>
 
-      <div
-        style={{
-          marginBottom: '11px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-        }}
-      >
-        <DataTypography style={{ flex: 1 }}>
-          {schema && schema.description}
-          <div>
-            File Name Example:{' '}
-            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
-          </div>
-        </DataTypography>
+        <div
+          style={{
+            marginBottom: '11px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+          }}
+        >
+          <DataTypography style={{ flex: 1 }}>
+            {schema && schema.description}
+            <div>
+              File Name Example:{' '}
+              <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
+              [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
+            </div>
+          </DataTypography>
 
-        {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+          {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
           <DownloadButton onClick={() => console.log('file template download')}>
             File Template
           </DownloadButton>
       </div>*/}
-      </div>
+        </div>
 
-      <div ref={containerRef}>
-        <Table
-          parentRef={containerRef}
-          columns={cols}
-          data={schema.fields}
-          showPagination={false}
-          sortable={true}
-          cellAlignment="top"
-          withOutsideBorder
-        />
+        <div ref={containerRef}>
+          <Table
+            parentRef={containerRef}
+            columns={cols}
+            data={schema.fields}
+            showPagination={false}
+            sortable={true}
+            cellAlignment="top"
+            withOutsideBorder
+          />
+        </div>
       </div>
-    </div>
+    </ContentSection>
   );
 };
 
