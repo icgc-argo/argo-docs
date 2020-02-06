@@ -2,7 +2,8 @@
   "scripts": {
     "help": "node manage-versions.js -h --npm",
     "list": "node manage-versions.js -l --npm",
-    "add": "node manage-versions.js -a --npm --silent"
+    "add": "node manage-versions.js -a --npm --silent",
+    "clean": "node clean-data.js"
   },
   "devDependencies": {},
   "prettier": {
