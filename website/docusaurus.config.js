@@ -52,7 +52,7 @@ module.exports = {
       },
       links: [
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
-        { to: 'docs/submission-getting-started', label: 'Submission', position: 'right' },
+        { to: 'docs/submission-overview', label: 'Submission', position: 'right' },
         { to: 'docs/data-access', label: 'Data Access', position: 'right' },
         // {
         //   href: 'https://platform.icgc-argo.org/contact',
