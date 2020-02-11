@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from '@icgc-argo/uikit/Typography';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import kebabCase from 'lodash/kebabCase';
 
 const Cont = styled('div')`
   margin-top: 14px;
@@ -10,15 +9,14 @@ const Cont = styled('div')`
 `;
 
 const Anchor = styled('a')`
-  .menu-item {
-    color: ${({ disabled, theme }) => (disabled ? theme.colors.grey_1 : theme.colors.primary)};
-  }
+  color: ${({ disabled, theme }) => (disabled ? theme.colors.grey_1 : theme.colors.primary)};
+
   &.active {
     > div {
       background-color: ${({ theme }) => theme.colors.secondary_4};
     }
 
-    .menu-item {
+    & {
       color: ${({ theme }) => theme.colors.secondary_dark};
     }
   }
@@ -26,7 +24,7 @@ const Anchor = styled('a')`
 
 const MenuItem = ({ name, onClick, disabled, className }) => {
   return (
-    <Anchor className={className} onClick={onClick} id={`${kebabCase(name)}`} disabled={disabled}>
+    <Anchor onClick={onClick} disabled={disabled}>
       <div
         css={css`
           padding: 8px 0 8px 16px;
@@ -43,7 +41,7 @@ const MenuItem = ({ name, onClick, disabled, className }) => {
   );
 };
 
-const Menu = ({ title, contents, color, scrollYOffset = 0, anchorClassName }) => {
+const Menu = ({ title, contents, color, scrollYOffset = 0 }) => {
   return (
     <div>
       <Typography variant="sectionHeader" color="primary">
@@ -52,7 +50,6 @@ const Menu = ({ title, contents, color, scrollYOffset = 0, anchorClassName }) =>
       <Cont color={color}>
         {contents.map(({ name, contentRef, disabled }, index) => (
           <MenuItem
-            className={anchorClassName}
             key={index}
             name={name}
             disabled={disabled}
@@ -69,4 +66,3 @@ const Menu = ({ title, contents, color, scrollYOffset = 0, anchorClassName }) =>
 };
 
 export default Menu;
-export { useMenuHighlight } from './hooks';

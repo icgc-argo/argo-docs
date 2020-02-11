@@ -29,7 +29,7 @@ import { DownloadIcon, DownloadButton } from '../../components/common';
 import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
-import Menu from '../../components/ContentMenu';
+import SchemaMenu from '../../components/ContentMenu';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -233,7 +233,7 @@ function DataDictionary() {
               <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
             </div>
             <div className={styles.menu}>
-              <Menu
+              <SchemaMenu
                 title="Clinical Files"
                 contents={menuContents}
                 color="#0774d3"

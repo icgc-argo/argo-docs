@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export const useMenuHighlight = (sectionClassName, anchorClassName, topOffset) => {
+/**
+ *
+ * @param {
+ * } sectionRefs
+ * @param {*} anchorClassName
+ * @param {*} topOffset
+ */
+export const useMenuHighlight = (sectionRefs, anchorClassName, topOffset) => {
   const [lastActiveLink, setLastActiveLink] = useState(undefined);
   const sections = document.getElementsByClassName(sectionClassName);
   const menuLinks = document.getElementsByClassName(anchorClassName);
