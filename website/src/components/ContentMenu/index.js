@@ -1,6 +1,7 @@
 import React from 'react';
 import kebabCase from 'lodash/kebabCase';
-import Menu, { useMenuHighlight } from '@icgc-argo/uikit/ContentMenu';
+import { useMenuHighlight } from './hooks';
+import Menu from './menu';
 
 const DEFAULT_SECTION_CLASSNAME = 'menu-content-section';
 const DEFAULT_ANCHOR_CLASSNAME = 'menu-anchor';
