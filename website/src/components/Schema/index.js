@@ -13,6 +13,11 @@ import { ModalPortal, useModalState } from '../../pages/dictionary';
 import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import { styled } from '@icgc-argo/uikit';
+
+const Notes = styled('div')`
+  margin-bottom: 15px;
+`;
 
 const formatFieldType = value => {
   switch (value) {
