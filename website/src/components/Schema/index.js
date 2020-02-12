@@ -13,6 +13,11 @@ import { ModalPortal, useModalState } from '../../pages/dictionary';
 import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import { styled } from '@icgc-argo/uikit';
+
+const Notes = styled('div')`
+  margin-bottom: 15px;
+`;
 
 const formatFieldType = value => {
   switch (value) {
@@ -158,8 +163,7 @@ const Schema = ({ schema, menuRef }) => {
         const [modalVisibility, setModalVisibility] = useModalState();
         return (
           <div>
-            {meta && meta.notes && <div>{meta.notes}</div>}
-            <br />
+            {meta && meta.notes && <Notes>{meta.notes}</Notes>}
             {script && (
               <Button
                 variant="secondary"
@@ -216,9 +220,9 @@ const Schema = ({ schema, menuRef }) => {
         <DataTypography style={{ flex: 1 }}>
           {schema && schema.description}
           <div>
-            Field Name Example:{' '}
-            <span className={styles.fieldExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
+            File Name Example:{' '}
+            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
+            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
           </div>
         </DataTypography>
 
