@@ -14,22 +14,19 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import DnaLoader from '@icgc-argo/uikit/DnaLoader';
-import Icon from '@icgc-argo/uikit/Icon';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters from '../../components/FileFilters';
-import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
-import { DownloadIcon, DownloadButton } from '../../components/common';
 import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
+import find from 'lodash/find';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -74,9 +71,12 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
-const RenderDictionary = ({ schemas, menuRefs }) =>
+const RenderDictionary = ({ schemas, menuContents }) =>
   schemas ? (
-    schemas.map(schema => <Schema schema={schema} menuRef={menuRefs[camelCase(schema.name)]} />)
+    schemas.map(schema => {
+      const menuItem = find(menuContents, { schemaName: schema.name });
+      return <Schema schema={schema} menuItem={menuItem} />;
+    })
   ) : (
     <DnaLoader />
   );
@@ -120,13 +120,10 @@ function DataDictionary() {
   } = context;
 
   // menu
-  const schemaRefs = dictionary.schemas.reduce((acc, schema) => {
-    acc[camelCase(schema.name)] = createRef();
-    return acc;
-  }, {});
   const menuContents = dictionary.schemas.map(schema => ({
+    schemaName: schema.name,
     name: startCase(schema.name),
-    contentRef: schemaRefs[camelCase(schema.name)],
+    contentRef: createRef(),
   }));
 
   useEffect(() => {
@@ -230,7 +227,7 @@ function DataDictionary() {
                 }))}
               />
 
-              <RenderDictionary schemas={dictionary.schemas} menuRefs={schemaRefs} />
+              <RenderDictionary schemas={dictionary.schemas} menuContents={menuContents} />
             </div>
             <div className={styles.menu}>
               <SchemaMenu
