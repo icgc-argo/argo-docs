@@ -1,11 +1,47 @@
 import React from 'react';
-import { useMenuHighlight } from './hooks';
 import Menu from './menu';
 
-const SchemaMenu = ({ contents, ...props }) => {
+const useMenuHighlight = (schemaRefs, scrollYOffset) => {
+  const [activeItemName, setActiveItemName] = React.useState('');
+
+  React.useLayoutEffect(() => {
+    const findActiveSection = () => {
+      const focusedDomEls =
+        schemaRefs.length > 0 &&
+        schemaRefs.filter(ref => {
+          if (ref && ref.current) {
+            const { top } = ref.current.getBoundingClientRect();
+            if (top >= 0 && top <= scrollYOffset) {
+              return ref.current;
+            }
+          }
+        });
+
+      return focusedDomEls.length > 0 ? focusedDomEls[0].current : null;
+    };
+
+    const onscroll = e => {
+      const domElementInFocus = findActiveSection();
+      if (domElementInFocus) {
+        const activeName = domElementInFocus.dataset.menuTitle;
+        setActiveItemName(activeName);
+      }
+    };
+    document.addEventListener('scroll', onscroll);
+    return () => document.removeEventListener('scroll', onscroll);
+  }, [schemaRefs]);
+
+  return activeItemName;
+};
+
+const SchemaMenu = ({ contents, scrollYOffset, ...props }) => {
   const schemaRefs = contents.map(schema => schema.contentRef);
-  //useMenuHighlight(schemaRefs, DEFAULT_ANCHOR_CLASSNAME, scrollYOffset);
-  return <Menu contents={contents} {...props} />;
+  const activeItemName = useMenuHighlight(schemaRefs, scrollYOffset);
+  const data = contents.map(item =>
+    item.name === activeItemName ? { ...item, active: true } : item,
+  );
+
+  return <Menu {...props} contents={data} scrollYOffset={scrollYOffset} />;
 };
 
 export default SchemaMenu;
