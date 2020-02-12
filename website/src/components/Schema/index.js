@@ -14,6 +14,7 @@ import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -54,6 +55,17 @@ const FieldsTag = ({ fieldCount }) => (
 const Schema = ({ schema, menuItem }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
+
+  const context = useDocusaurusContext();
+  const {
+    siteConfig: {
+      customFields: { GATEWAY_API_ROOT = '' },
+    },
+  } = context;
+
+  const downloadTsvFileTemplate = fileName => {
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+  };
 
   /**
    * need to pass in state for Cell rendering
@@ -225,7 +237,7 @@ const Schema = ({ schema, menuItem }) => {
         </DataTypography>
 
         <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-          <DownloadButton onClick={() => console.log('file template download')}>
+          <DownloadButton onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}>
             File Template
           </DownloadButton>
         </div>

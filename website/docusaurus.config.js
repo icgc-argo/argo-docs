@@ -68,5 +68,6 @@ module.exports = {
   },
   customFields: {
     platformUrl: 'https://platform.icgc-argo.org/',
+    GATEWAY_API_ROOT: 'https://api.platform.icgc-argo.org/',
   },
 };
