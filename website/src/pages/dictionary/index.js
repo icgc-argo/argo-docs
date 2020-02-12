@@ -206,7 +206,7 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
-                {/*<div className={styles.downloads}>
+                <div className={styles.downloads}>
                   <DropdownButton variant="secondary" size="sm" menuItems={[]}>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                       <DownloadIcon />
@@ -215,7 +215,7 @@ function DataDictionary() {
                     </div>
                   </DropdownButton>
                   <DownloadButton>PDF</DownloadButton>
-                </div>*/}
+                </div>
               </div>
 
               <FileFilters

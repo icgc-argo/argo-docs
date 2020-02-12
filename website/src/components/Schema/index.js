@@ -224,11 +224,11 @@ const Schema = ({ schema, menuItem }) => {
           </div>
         </DataTypography>
 
-        {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+        <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
           <DownloadButton onClick={() => console.log('file template download')}>
             File Template
           </DownloadButton>
-      </div>*/}
+        </div>
       </div>
 
       <div ref={containerRef}>
