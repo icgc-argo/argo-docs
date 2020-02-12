@@ -53,7 +53,7 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuRef }) => {
+const Schema = ({ schema, menuItem }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
@@ -195,67 +195,56 @@ const Schema = ({ schema, menuRef }) => {
   const containerRef = React.createRef();
 
   return (
-    <ContentSection title={schema.name}>
-      <div ref={menuRef} className={styles.schema}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: '11px',
-          }}
-        >
-          <HeaderName name={schema.name} />
-          <FieldsTag fieldCount={schema.fields.length} />
-        </div>
+    <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginBottom: '11px',
+        }}
+      >
+        <HeaderName name={schema.name} />
+        <FieldsTag fieldCount={schema.fields.length} />
+      </div>
 
-        <div
-          style={{
-            marginBottom: '11px',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-          }}
-        >
-          <DataTypography style={{ flex: 1 }}>
-            {schema && schema.description}
-            <div>
-              File Name Example:{' '}
-              <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
-              [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
-            </div>
-          </DataTypography>
-
-<<<<<<< HEAD
-=======
-          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-            <DownloadButton onClick={() => console.log('file template download')}>
-              File Template
-            </DownloadButton>
+      <div
+        style={{
+          marginBottom: '11px',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+        }}
+      >
+        <DataTypography style={{ flex: 1 }}>
+          {schema && schema.description}
+          <div>
+            File Name Example:{' '}
+            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
+            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
           </div>
+        </DataTypography>
 
->>>>>>> fix bad merge
-          {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+        {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
           <DownloadButton onClick={() => console.log('file template download')}>
             File Template
           </DownloadButton>
       </div>*/}
-        </div>
-
-        <div ref={containerRef}>
-          <Table
-            parentRef={containerRef}
-            columns={cols}
-            data={schema.fields}
-            showPagination={false}
-            sortable={true}
-            cellAlignment="top"
-            withOutsideBorder
-          />
-        </div>
       </div>
-    </ContentSection>
+
+      <div ref={containerRef}>
+        <Table
+          parentRef={containerRef}
+          columns={cols}
+          data={schema.fields}
+          showPagination={false}
+          sortable={true}
+          cellAlignment="top"
+          withOutsideBorder
+        />
+      </div>
+    </div>
   );
 };
 
