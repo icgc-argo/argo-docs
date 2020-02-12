@@ -216,9 +216,9 @@ const Schema = ({ schema, menuRef }) => {
         <DataTypography style={{ flex: 1 }}>
           {schema && schema.description}
           <div>
-            Field Name Example:{' '}
-            <span className={styles.fieldExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
+            File Name Example:{' '}
+            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
+            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
           </div>
         </DataTypography>
 
