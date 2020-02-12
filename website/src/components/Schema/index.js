@@ -51,11 +51,9 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuRef }) => {
+const Schema = ({ schema, menuItem }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
-
-  const [modalVisibility, setModalVisibility] = useState(false);
 
   /**
    * need to pass in state for Cell rendering
@@ -195,7 +193,7 @@ const Schema = ({ schema, menuRef }) => {
   const containerRef = React.createRef();
 
   return (
-    <div ref={menuRef} className={styles.schema}>
+    <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       <div
         style={{
           display: 'flex',
