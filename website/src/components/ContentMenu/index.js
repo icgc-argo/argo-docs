@@ -6,18 +6,16 @@ const useMenuHighlight = (schemaRefs, scrollYOffset) => {
 
   React.useEffect(() => {
     const findActiveSection = () => {
-      const focusedDomEls =
-        schemaRefs.length > 0 &&
-        schemaRefs.filter(ref => {
-          if (ref && ref.current) {
-            const { top } = ref.current.getBoundingClientRect();
-            if (top >= 0 && top <= scrollYOffset) {
-              return ref.current;
-            }
+      const focusedDomEl = schemaRefs.find(ref => {
+        if (ref && ref.current) {
+          const { top } = ref.current.getBoundingClientRect();
+          if (top >= 0 && top <= scrollYOffset) {
+            return ref.current;
           }
-        });
+        }
+      });
 
-      return focusedDomEls.length > 0 ? focusedDomEls[0].current : null;
+      return focusedDomEl ? focusedDomEl.current : null;
     };
 
     const onscroll = e => {
@@ -40,7 +38,7 @@ const SchemaMenu = ({ contents, scrollYOffset, ...props }) => {
   const data = contents.map(item =>
     item.name === activeItemName ? { ...item, active: true } : item,
   );
-  return <Menu contents={data} scrollYOffset={scrollYOffset} />;
+  return <Menu contents={data} scrollYOffset={scrollYOffset} {...props} />;
 };
 
 export default SchemaMenu;
