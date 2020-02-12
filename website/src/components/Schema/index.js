@@ -158,8 +158,7 @@ const Schema = ({ schema, menuRef }) => {
         const [modalVisibility, setModalVisibility] = useModalState();
         return (
           <div>
-            {meta && meta.notes && <div>{meta.notes}</div>}
-            <br />
+            {meta && meta.notes && <Notes>{meta.notes}</Notes>}
             {script && (
               <Button
                 variant="secondary"
