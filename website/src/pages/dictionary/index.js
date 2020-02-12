@@ -74,7 +74,7 @@ async function fetchDiff(version, diffVersion) {
 const RenderDictionary = ({ schemas, menuContents }) =>
   schemas ? (
     schemas.map(schema => {
-      const menuItem = find(menuContents, { schemaName: schema.name });
+      const menuItem = find(menuContents, { name: startCase(schema.name) });
       return <Schema schema={schema} menuItem={menuItem} />;
     })
   ) : (
@@ -121,9 +121,10 @@ function DataDictionary() {
 
   // menu
   const menuContents = dictionary.schemas.map(schema => ({
-    schemaName: schema.name,
     name: startCase(schema.name),
     contentRef: createRef(),
+    active: false,
+    disabled: false,
   }));
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import Menu from './menu';
+import Menu from '@icgc-argo/uikit/ContentMenu';
 
 const useMenuHighlight = (schemaRefs, scrollYOffset) => {
   const [activeItemName, setActiveItemName] = React.useState('');
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const findActiveSection = () => {
       const focusedDomEls =
         schemaRefs.length > 0 &&
@@ -40,8 +40,7 @@ const SchemaMenu = ({ contents, scrollYOffset, ...props }) => {
   const data = contents.map(item =>
     item.name === activeItemName ? { ...item, active: true } : item,
   );
-
-  return <Menu {...props} contents={data} scrollYOffset={scrollYOffset} />;
+  return <Menu contents={data} scrollYOffset={scrollYOffset} />;
 };
 
 export default SchemaMenu;
