@@ -115,7 +115,7 @@ function DataDictionary() {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
-      customFields: { platformUrl = '' },
+      customFields: { PLATFORM_UI_ROOT = '' },
     },
   } = context;
 
@@ -192,7 +192,7 @@ function DataDictionary() {
                   adheres to specific formats and restrictions to ensure a standard of data quality.
                   The following list describes the attributes and permissible values for all of the
                   fields within the clinical tsv files for the{' '}
-                  <Link to={platformUrl}>ARGO Data Platform.</Link>
+                  <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
 
