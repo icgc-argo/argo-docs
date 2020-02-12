@@ -14,8 +14,6 @@ import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
-import { ContentAnchor } from '../ContentMenu';
-import { ContentSection } from '../ContentMenu';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
