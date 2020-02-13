@@ -22,11 +22,15 @@ import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
 import { format as formatDate } from 'date-fns';
-import flatten from 'lodash/flatten';
-import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
+import flatten from 'lodash/flatten';
+import { getLatestVersion } from '../../utils';
+import { css } from '@icgc-argo/uikit';
+import Icon from '@icgc-argo/uikit/Icon';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -71,11 +75,11 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
-const RenderDictionary = ({ schemas, menuContents }) =>
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
   schemas ? (
     schemas.map(schema => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
-      return <Schema schema={schema} menuItem={menuItem} />;
+      return <Schema schema={schema} menuItem={menuItem} isLatestSchema={isLatestSchema} />;
     })
   ) : (
     <DnaLoader />
@@ -115,9 +119,13 @@ function DataDictionary() {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
-      customFields: { platformUrl = '' },
+      customFields: { PLATFORM_UI_ROOT = '', GATEWAY_API_ROOT = '' },
     },
   } = context;
+
+  const downloadTsvFileTemplate = fileName => {
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+  };
 
   // menu
   const menuContents = dictionary.schemas.map(schema => ({
@@ -166,6 +174,8 @@ function DataDictionary() {
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
   }, [dictionary]);
 
+  const isLatestSchema = getLatestVersion() === version ? true : false;
+
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -192,7 +202,7 @@ function DataDictionary() {
                   adheres to specific formats and restrictions to ensure a standard of data quality.
                   The following list describes the attributes and permissible values for all of the
                   fields within the clinical tsv files for the{' '}
-                  <Link to={platformUrl}>ARGO Data Platform.</Link>
+                  <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
 
@@ -206,16 +216,49 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
-                {/*<div className={styles.downloads}>
-                  <DropdownButton variant="secondary" size="sm" menuItems={[]}>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <DownloadIcon />
-                      File Templates
-                      <Icon name="chevron_down" fill="accent2_dark" height="9px" />
-                    </div>
-                  </DropdownButton>
-                  <DownloadButton>PDF</DownloadButton>
-                </div>*/}
+
+                <div className={styles.downloads}>
+                  <DownloadTooltip disabled={isLatestSchema}>
+                    <DropdownButton
+                      disabled={!isLatestSchema}
+                      variant="secondary"
+                      size="sm"
+                      onItemClick={item => {
+                        if (item.value === 'all') {
+                          downloadTsvFileTemplate(`all`);
+                        } else {
+                          downloadTsvFileTemplate(`${item.value}.tsv`);
+                        }
+                      }}
+                      menuItems={[
+                        {
+                          display: 'Download All',
+                          value: 'all',
+                        },
+                        ...dictionary.schemas.map(schema => ({
+                          value: schema.name,
+                          display: startCase(schema.name.split('_').join(' ')),
+                        })),
+                      ]}
+                    >
+                      <DownloadButtonContent disabled={!isLatestSchema}>
+                        File Templates
+                        <Icon
+                          name="chevron_down"
+                          fill={!isLatestSchema ? 'white' : 'accent2_dark'}
+                          height="9px"
+                          css={css`
+                            margin-left: 5px;
+                          `}
+                        />
+                      </DownloadButtonContent>
+                    </DropdownButton>
+                  </DownloadTooltip>
+                  {/*
+                  <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
+                    <DownloadButtonContent>PDF</DownloadButtonContent>
+                  </Button>*/}
+                </div>
               </div>
 
               <FileFilters
@@ -228,7 +271,11 @@ function DataDictionary() {
                 }))}
               />
 
-              <RenderDictionary schemas={dictionary.schemas} menuContents={menuContents} />
+              <RenderDictionary
+                schemas={dictionary.schemas}
+                menuContents={menuContents}
+                isLatestSchema={isLatestSchema}
+              />
             </div>
             <div className={styles.menu}>
               <SchemaMenu
