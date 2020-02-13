@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
+const { generateTreeData } = require('./generateData');
 
 const constants = require('./constants');
 
@@ -38,6 +39,9 @@ async function printVersionsLists() {
 function saveDictionaryFile(version, data) {
   const filename = `${schemaPath}/${version}.json`;
   fs.writeFileSync(filename, JSON.stringify(data));
+
+  // TODO: move to common func (bad naming here)
+  const treeData = generateTreeData(data);
 }
 
 function saveVersionsFile(data) {
