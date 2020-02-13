@@ -25,6 +25,7 @@ import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
 import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
