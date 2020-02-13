@@ -52,11 +52,7 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-<<<<<<< HEAD
-const Schema = ({ schema, menuItem }) => {
-=======
-const Schema = ({ schema, menuRef, isLatestSchema }) => {
->>>>>>> add disabled state for download buttons
+const Schema = ({ schema, menuItem, isLatestSchema }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
