@@ -29,7 +29,7 @@
   background-color: #4f546d;
 }
 
-.fieldExampleHighlight {
+.fileExampleHighlight {
   font-weight: 600;
 }
 
@@ -40,7 +40,6 @@
 }
 
 .fieldDescription .name {
-  font-family: 'Source Code Pro', monospace;
   font-weight: bold;
   margin-bottom: 5px;
 }

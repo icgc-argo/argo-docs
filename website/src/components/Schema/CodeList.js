@@ -38,7 +38,7 @@ const CodeList = ({ codeList = [], onToggle, isExpanded }) => {
           {fullOutput}
           <ToggleMore onToggle={onToggle}>
             Show less
-            <Icon name="chevron_down" height="8" width="8" fill="#7f55cc" />
+            <Icon name="chevron_up" height="8" width="8" fill="#7f55cc" />
           </ToggleMore>
         </div>
       )}

@@ -6,13 +6,19 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import { DownloadButton } from '../../components/common';
+import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, useModalState } from '../../pages/dictionary';
 import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import { styled } from '@icgc-argo/uikit';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+const Notes = styled('div')`
+  margin-bottom: 15px;
+`;
 
 const formatFieldType = value => {
   switch (value) {
@@ -46,11 +52,20 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuRef }) => {
+const Schema = ({ schema, menuItem, isLatestSchema }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
-  const [modalVisibility, setModalVisibility] = useState(false);
+  const context = useDocusaurusContext();
+  const {
+    siteConfig: {
+      customFields: { GATEWAY_API_ROOT = '' },
+    },
+  } = context;
+
+  const downloadTsvFileTemplate = fileName => {
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+  };
 
   /**
    * need to pass in state for Cell rendering
@@ -158,8 +173,7 @@ const Schema = ({ schema, menuRef }) => {
         const [modalVisibility, setModalVisibility] = useModalState();
         return (
           <div>
-            {meta && meta.notes && <div>{meta.notes}</div>}
-            <br />
+            {meta && meta.notes && <Notes>{meta.notes}</Notes>}
             {script && (
               <Button
                 variant="secondary"
@@ -191,7 +205,7 @@ const Schema = ({ schema, menuRef }) => {
   const containerRef = React.createRef();
 
   return (
-    <div ref={menuRef} className={styles.schema}>
+    <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       <div
         style={{
           display: 'flex',
@@ -216,17 +230,26 @@ const Schema = ({ schema, menuRef }) => {
         <DataTypography style={{ flex: 1 }}>
           {schema && schema.description}
           <div>
-            Field Name Example:{' '}
-            <span className={styles.fieldExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fieldExampleHighlight}>.tsv</span>
+            File Name Example:{' '}
+            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
+            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
           </div>
         </DataTypography>
 
-        {/*<div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-          <DownloadButton onClick={() => console.log('file template download')}>
-            File Template
-          </DownloadButton>
-      </div>*/}
+        <DownloadTooltip disabled={isLatestSchema}>
+          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+            <Button
+              disabled={!isLatestSchema}
+              variant="secondary"
+              size="sm"
+              onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
+            >
+              <DownloadButtonContent disabled={!isLatestSchema}>
+                File Template
+              </DownloadButtonContent>
+            </Button>
+          </div>
+        </DownloadTooltip>
       </div>
 
       <div ref={containerRef}>
