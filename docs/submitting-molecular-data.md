@@ -50,6 +50,65 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 ## Uploading Molecular Data
 ### 1. Format the payload
 /////// NEED THE TAB DISPLAY HERE TO SHOW DIFFEERENT STARTING PAYLOADS {SEQUENCING EXPEIRMETN FOR ONE}
+```
+{
+  "studyId": "DASH-CA",
+  "analysisType": {
+    "name": "sequencing_experiment"
+  },
+  "samples": [
+    {
+      "submitterSampleId": "sample-5",
+      "matchedNormalSubmitterSampleId": "sample-5.1",
+      "sampleType": "Amplified DNA",
+      "specimen": {
+        "submitterSpecimenId": "specimen-5",
+        "specimenType": "Primary tumour",
+        "tumourNormalDesignation": "Tumour",
+        "specimenTissueSource": "Bone marrow"
+      },
+      "donor": {
+        "submitterDonorId": "DASH-5",
+        "gender": "Male"
+      }
+    }
+  ],
+  "files": [
+    {
+      "dataType": "submittedReads",
+      "fileName": "dash-5-tumour.bam",
+      "fileSize": 29,
+      "fileType": "BAM",
+      "fileMd5sum": "14a754c1066adcd2024620b51b2dc244",
+      "fileAccess": "controlled"
+    }
+  ],
+  "read_groups": [
+    {
+      "file_r1": "dash-r5.bam",
+      "file_r2": "",
+      "insert_size": null,
+      "is_paired_end": true,
+      "library_name": "Dashboard-Testing",
+      "platform_unit": "Dashboard-Testing",
+      "read_length_r1": null,
+      "read_length_r2": null,
+      "sample_barcode": null,
+      "submitter_read_group_id": "dash-1-rg-5"
+    }
+  ],
+  "experiment": {
+    "submitter_sequencing_experiment_id": "DASH-SE-5",
+    "library_strategy": "WGS",
+    "sequencing_center": "",
+    "platform": "ILLUMINA",
+    "platform_model": null,
+    "sequencing_date": null
+  },
+  "read_group_count": 1
+}
+```
+
 ### 2. Upload the payload
 Once you have completed formatting the payload, use the song-client `submit` command to upload the json payload to the configured Song.
 
