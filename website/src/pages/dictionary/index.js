@@ -115,9 +115,13 @@ function DataDictionary() {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
-      customFields: { PLATFORM_UI_ROOT = '' },
+      customFields: { PLATFORM_UI_ROOT = '', GATEWAY_API_ROOT = '' },
     },
   } = context;
+
+  const downloadTsvFileTemplate = fileName => {
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+  };
 
   // menu
   const menuContents = dictionary.schemas.map(schema => ({
@@ -206,8 +210,29 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
+
                 <div className={styles.downloads}>
-                  <DropdownButton variant="secondary" size="sm" menuItems={[]}>
+                  <DropdownButton
+                    variant="secondary"
+                    size="sm"
+                    onItemClick={item => {
+                      if (item.value === 'all') {
+                        downloadTsvFileTemplate(`all`);
+                      } else {
+                        downloadTsvFileTemplate(`${item.value}.tsv`);
+                      }
+                    }}
+                    menuItems={[
+                      {
+                        display: 'Download All',
+                        value: 'all',
+                      },
+                      ...dictionary.schemas.map(schema => ({
+                        value: schema.name,
+                        display: startCase(schema.name.split('_').join(' ')),
+                      })),
+                    ]}
+                  >
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                       <DownloadIcon />
                       File Templates
