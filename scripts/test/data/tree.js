@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   name: 'sample_registration',
   required: true,
   fields: [

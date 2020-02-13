@@ -8,6 +8,7 @@
     "watch-tests": "mocha --inline-diff -w"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^7.0.1"
   },
   "prettier": {
