@@ -28,11 +28,11 @@ import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
 import { DownloadButtonContent } from '../../components/common';
+import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
 import flatten from 'lodash/flatten';
 import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 import { getLatestVersion } from '../../utils';
-import Button from '@icgc-argo/uikit/Button';
 import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
 
@@ -222,40 +222,42 @@ function DataDictionary() {
                 </div>
 
                 <div className={styles.downloads}>
-                  <DropdownButton
-                    disabled={!isLatestSchema}
-                    variant="secondary"
-                    size="sm"
-                    onItemClick={item => {
-                      if (item.value === 'all') {
-                        downloadTsvFileTemplate(`all`);
-                      } else {
-                        downloadTsvFileTemplate(`${item.value}.tsv`);
-                      }
-                    }}
-                    menuItems={[
-                      {
-                        display: 'Download All',
-                        value: 'all',
-                      },
-                      ...dictionary.schemas.map(schema => ({
-                        value: schema.name,
-                        display: startCase(schema.name.split('_').join(' ')),
-                      })),
-                    ]}
-                  >
-                    <DownloadButtonContent disabled={!isLatestSchema}>
-                      File Templates
-                      <Icon
-                        name="chevron_down"
-                        fill={!isLatestSchema ? 'white' : 'accent2_dark'}
-                        height="9px"
-                        css={css`
-                          margin-left: 5px;
-                        `}
-                      />
-                    </DownloadButtonContent>
-                  </DropdownButton>
+                  <DownloadTooltip disabled={isLatestSchema}>
+                    <DropdownButton
+                      disabled={!isLatestSchema}
+                      variant="secondary"
+                      size="sm"
+                      onItemClick={item => {
+                        if (item.value === 'all') {
+                          downloadTsvFileTemplate(`all`);
+                        } else {
+                          downloadTsvFileTemplate(`${item.value}.tsv`);
+                        }
+                      }}
+                      menuItems={[
+                        {
+                          display: 'Download All',
+                          value: 'all',
+                        },
+                        ...dictionary.schemas.map(schema => ({
+                          value: schema.name,
+                          display: startCase(schema.name.split('_').join(' ')),
+                        })),
+                      ]}
+                    >
+                      <DownloadButtonContent disabled={!isLatestSchema}>
+                        File Templates
+                        <Icon
+                          name="chevron_down"
+                          fill={!isLatestSchema ? 'white' : 'accent2_dark'}
+                          height="9px"
+                          css={css`
+                            margin-left: 5px;
+                          `}
+                        />
+                      </DownloadButtonContent>
+                    </DropdownButton>
+                  </DownloadTooltip>
                   {/*
                   <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
                     <DownloadButtonContent>PDF</DownloadButtonContent>

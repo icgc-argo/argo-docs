@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
+import Tooltip from '@icgc-argo/uikit/Tooltip';
 
 export const DownloadIcon = ({ disabled }) => (
   <Icon
@@ -17,4 +18,13 @@ export const DownloadButtonContent = ({ children, disabled }) => (
     <DownloadIcon disabled={disabled} />
     {children}
   </div>
+);
+
+export const DownloadTooltip = ({ children, disabled }) => (
+  <Tooltip
+    disabled={disabled}
+    html={<span>Please select latest schema version to download templates</span>}
+  >
+    {children}
+  </Tooltip>
 );
