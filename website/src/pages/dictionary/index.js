@@ -27,6 +27,7 @@ import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
+import { css } from '@icgc-argo/uikit';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -236,7 +237,14 @@ function DataDictionary() {
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                       <DownloadIcon />
                       File Templates
-                      <Icon name="chevron_down" fill="accent2_dark" height="9px" />
+                      <Icon
+                        name="chevron_down"
+                        fill="accent2_dark"
+                        height="9px"
+                        css={css`
+                          margin-left: 5px;
+                        `}
+                      />
                     </div>
                   </DropdownButton>
                   <DownloadButton>PDF</DownloadButton>
