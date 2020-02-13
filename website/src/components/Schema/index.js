@@ -52,7 +52,11 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
+<<<<<<< HEAD
 const Schema = ({ schema, menuItem }) => {
+=======
+const Schema = ({ schema, menuRef, isLatestSchema }) => {
+>>>>>>> add disabled state for download buttons
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
@@ -238,11 +242,12 @@ const Schema = ({ schema, menuItem }) => {
 
         <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
           <Button
+            disabled={!isLatestSchema}
             variant="secondary"
             size="sm"
             onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
           >
-            <DownloadButtonContent>File Template</DownloadButtonContent>
+            <DownloadButtonContent disabled={!isLatestSchema}>File Template</DownloadButtonContent>
           </Button>
         </div>
       </div>

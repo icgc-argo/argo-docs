@@ -79,11 +79,11 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
-const RenderDictionary = ({ schemas, menuContents }) =>
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
   schemas ? (
     schemas.map(schema => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
-      return <Schema schema={schema} menuItem={menuItem} />;
+      return <Schema schema={schema} menuItem={menuItem} isLatestSchema={isLatestSchema} />;
     })
   ) : (
     <DnaLoader />
@@ -178,7 +178,7 @@ function DataDictionary() {
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
   }, [dictionary]);
 
-  const isLatestVersion = () => (getLatestVersion() === version ? true : false);
+  const isLatestSchema = getLatestVersion() === version ? true : false;
 
   return (
     <ThemeProvider>
@@ -223,7 +223,7 @@ function DataDictionary() {
 
                 <div className={styles.downloads}>
                   <DropdownButton
-                    disabled={!isLatestVersion()}
+                    disabled={!isLatestSchema}
                     variant="secondary"
                     size="sm"
                     onItemClick={item => {
@@ -244,11 +244,11 @@ function DataDictionary() {
                       })),
                     ]}
                   >
-                    <DownloadButtonContent disabled={!isLatestVersion()}>
+                    <DownloadButtonContent disabled={!isLatestSchema}>
                       File Templates
                       <Icon
                         name="chevron_down"
-                        fill="accent2_dark"
+                        fill={!isLatestSchema ? 'white' : 'accent2_dark'}
                         height="9px"
                         css={css`
                           margin-left: 5px;
@@ -272,7 +272,11 @@ function DataDictionary() {
                 }))}
               />
 
-              <RenderDictionary schemas={dictionary.schemas} menuContents={menuContents} />
+              <RenderDictionary
+                schemas={dictionary.schemas}
+                menuContents={menuContents}
+                isLatestSchema={isLatestSchema}
+              />
             </div>
             <div className={styles.menu}>
               <SchemaMenu
