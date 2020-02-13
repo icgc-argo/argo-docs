@@ -4,7 +4,8 @@
     "list": "node manage-versions.js -l --npm",
     "add": "node manage-versions.js -a --npm --silent",
     "clean": "node clean-data.js",
-    "test": "mocha --inline-diff"
+    "test": "mocha --inline-diff",
+    "watch-tests": "mocha --inline-diff -w"
   },
   "devDependencies": {
     "mocha": "^7.0.1"
