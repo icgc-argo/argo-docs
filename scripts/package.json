@@ -5,7 +5,9 @@
     "add": "node manage-versions.js -a --npm --silent",
     "clean": "node clean-data.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^7.0.1"
+  },
   "prettier": {
     "printWidth": 100,
     "trailingComma": "all",
