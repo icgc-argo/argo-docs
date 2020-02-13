@@ -256,9 +256,10 @@ function DataDictionary() {
                       />
                     </DownloadButtonContent>
                   </DropdownButton>
+                  {/*
                   <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
                     <DownloadButtonContent>PDF</DownloadButtonContent>
-                  </Button>
+                  </Button>*/}
                 </div>
               </div>
 
