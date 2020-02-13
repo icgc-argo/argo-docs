@@ -9,7 +9,7 @@ function generateTreeData(data) {
   // keep track of nesting of schema
   const treeNestedMap = {};
 
-  const schemaMapping = schemas.reduce((treeData, schema) => {
+  const constructedTreeData = schemas.reduce((treeData, schema) => {
     const schemaName = schema.name;
     // const fields = schema.fields.map(field => ({
     //   name: field.name,
@@ -69,7 +69,7 @@ function generateTreeData(data) {
 
   const tree = {};
   console.log(chalk.yellow('Generating tree data..'));
-  return data;
+  return constructedTreeData;
 }
 
 module.exports = { generateTreeData };
