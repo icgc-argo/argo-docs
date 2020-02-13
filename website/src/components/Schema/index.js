@@ -6,7 +6,7 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import { DownloadButton } from '../../components/common';
+import { DownloadButtonContent } from '../../components/common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, useModalState } from '../../pages/dictionary';
@@ -237,9 +237,13 @@ const Schema = ({ schema, menuItem }) => {
         </DataTypography>
 
         <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-          <DownloadButton onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}>
-            File Template
-          </DownloadButton>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
+          >
+            <DownloadButtonContent>File Template</DownloadButtonContent>
+          </Button>
         </div>
       </div>
 

@@ -1,11 +1,10 @@
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
-import Button from '@icgc-argo/uikit/Button';
 
-export const DownloadIcon = props => (
+export const DownloadIcon = ({ disabled }) => (
   <Icon
     name="download"
-    fill="accent2_dark"
+    fill={disabled ? 'white' : 'accent2_dark'}
     height="12px"
     style={{
       marginRight: '5px',
@@ -13,11 +12,9 @@ export const DownloadIcon = props => (
   />
 );
 
-export const DownloadButton = ({ children, onClick }) => (
-  <Button variant="secondary" size="sm" onClick={e => onClick(e.target.value)}>
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <DownloadIcon />
-      {children}
-    </div>
-  </Button>
+export const DownloadButtonContent = ({ children, disabled }) => (
+  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+    <DownloadIcon disabled={disabled} />
+    {children}
+  </div>
 );

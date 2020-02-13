@@ -27,7 +27,14 @@ import ReactDOM from 'react-dom';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
+import { DownloadButtonContent } from '../../components/common';
+import flatten from 'lodash/flatten';
+import ReactDOM from 'react-dom';
+import Modal from '@icgc-argo/uikit/Modal';
+import { getLatestVersion } from '../../utils';
+import Button from '@icgc-argo/uikit/Button';
 import { css } from '@icgc-argo/uikit';
+import Icon from '@icgc-argo/uikit/Icon';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -171,6 +178,8 @@ function DataDictionary() {
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
   }, [dictionary]);
 
+  const isLatestVersion = () => (getLatestVersion() === version ? true : false);
+
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -214,6 +223,7 @@ function DataDictionary() {
 
                 <div className={styles.downloads}>
                   <DropdownButton
+                    disabled={!isLatestVersion()}
                     variant="secondary"
                     size="sm"
                     onItemClick={item => {
@@ -234,8 +244,7 @@ function DataDictionary() {
                       })),
                     ]}
                   >
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <DownloadIcon />
+                    <DownloadButtonContent disabled={!isLatestVersion()}>
                       File Templates
                       <Icon
                         name="chevron_down"
@@ -245,9 +254,11 @@ function DataDictionary() {
                           margin-left: 5px;
                         `}
                       />
-                    </div>
+                    </DownloadButtonContent>
                   </DropdownButton>
-                  <DownloadButton>PDF</DownloadButton>
+                  <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
+                    <DownloadButtonContent>PDF</DownloadButtonContent>
+                  </Button>
                 </div>
               </div>
 
