@@ -91,6 +91,30 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
 
   const isCodeListExpanded = field => expandedCodeLists[field];
 
+  const [currentShowingScript, setCurrentShowingScript] = React.useState(null);
+  const ScriptCell = ({ original: { meta, restrictions, name } }) => {
+    const script = restrictions && restrictions.script;
+    return (
+      <div>
+        {meta && meta.notes && <Notes>{meta.notes}</Notes>}
+        {script && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              setCurrentShowingScript({
+                fieldName: name,
+                content: script,
+              });
+            }}
+          >
+            View Script
+          </Button>
+        )}
+      </div>
+    );
+  };
+
   const cols = [
     {
       Header: 'Field & Description',
@@ -168,37 +192,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ({ original: { meta, restrictions, name } }) => {
-        const script = restrictions && restrictions.script;
-        const [modalVisibility, setModalVisibility] = useModalState();
-        return (
-          <div>
-            {meta && meta.notes && <Notes>{meta.notes}</Notes>}
-            {script && (
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => {
-                  setModalVisibility(!modalVisibility);
-                }}
-              >
-                View Script
-              </Button>
-            )}
-            {script && modalVisibility ? (
-              <ModalPortal>
-                <ScriptModal
-                  field={name}
-                  script={script}
-                  onCloseClick={() => {
-                    setModalVisibility(false);
-                  }}
-                />
-              </ModalPortal>
-            ) : null}
-          </div>
-        );
-      },
+      Cell: ScriptCell,
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
   ];
@@ -206,6 +200,17 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
+      {currentShowingScript && (
+        <ModalPortal>
+          <ScriptModal
+            field={currentShowingScript.fieldName}
+            script={currentShowingScript.content}
+            onCloseClick={() => {
+              setCurrentShowingScript(null);
+            }}
+          />
+        </ModalPortal>
+      )}
       <div
         style={{
           display: 'flex',
@@ -236,7 +241,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
           </div>
         </DataTypography>
 
-        <DownloadTooltip disabled={isLatestSchema}>
+        {/* <DownloadTooltip disabled={isLatestSchema}>
           <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
             <Button
               disabled={!isLatestSchema}
@@ -249,7 +254,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
               </DownloadButtonContent>
             </Button>
           </div>
-        </DownloadTooltip>
+        </DownloadTooltip> */}
       </div>
 
       <div ref={containerRef}>
