@@ -31,6 +31,7 @@ import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
+import ReactDOM from 'react-dom';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
