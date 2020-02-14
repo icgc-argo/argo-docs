@@ -236,7 +236,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
           </div>
         </DataTypography>
 
-        <DownloadTooltip disabled={isLatestSchema}>
+        {/* <DownloadTooltip disabled={isLatestSchema}>
           <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
             <Button
               disabled={!isLatestSchema}
@@ -249,7 +249,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
               </DownloadButtonContent>
             </Button>
           </div>
-        </DownloadTooltip>
+        </DownloadTooltip> */}
       </div>
 
       <div ref={containerRef}>

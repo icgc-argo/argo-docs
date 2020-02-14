@@ -6,6 +6,7 @@
  */
 
 import React, { useState, createRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
 import axios from 'axios';
 import { ThemeProvider } from '@icgc-argo/uikit';
@@ -217,7 +218,7 @@ function DataDictionary() {
                   </span>
                 </div>
 
-                <div className={styles.downloads}>
+                {/* <div className={styles.downloads}>
                   <DownloadTooltip disabled={isLatestSchema}>
                     <DropdownButton
                       disabled={!isLatestSchema}
@@ -258,7 +259,7 @@ function DataDictionary() {
                   <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
                     <DownloadButtonContent>PDF</DownloadButtonContent>
                   </Button>*/}
-                </div>
+                {/*</div> */}
               </div>
 
               <FileFilters
