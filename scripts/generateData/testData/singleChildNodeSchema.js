@@ -3,6 +3,7 @@ module.exports = {
     schemas: [
       {
         name: 'sample_registration',
+        required: true,
         description:
           'The collection of elements required to register the required Donor-Specimen-Sample data to the ARGO Platform. Registration of samples is required before genomic and clinical data submission can proceed.',
         fields: [

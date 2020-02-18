@@ -5,8 +5,8 @@ module.exports = {
   children: [
     {
       name: 'specimen',
-      required: true,
       fields: [{ name: 'specimen_submitter_id', required: true }],
+      children: [],
     },
   ],
 };
