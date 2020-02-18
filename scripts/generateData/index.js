@@ -6,13 +6,18 @@ const pickBy = require('lodash/pickBy');
  * Generates tree structure for tree viz
  * ! Assumes single root node
  */
+
+// TODO can probably just pass schemas
 function generateTreeData(data) {
-  const schemas = get(data, 'dictionary.schemas', []);
+  const schemas = get(data, 'schemas', []);
 
   // keep track of nesting of schema
   //   /const treeNestedMap = {};
 
+  const temp = {};
+
   const constructedTreeData = schemas.reduce((treeData, schema) => {
+    // pull out fields
     const { name, required, fields: schemaFields } = schema;
     const schemaName = name;
 
@@ -21,39 +26,26 @@ function generateTreeData(data) {
       required: get(field, 'restrictions.required', false),
     }));
     const parentName = get(schema, 'meta.parent', null);
+    const children = temp[schemaName] ? temp[schemaName] : [];
+    // TODO: Delete temp key
     const currentTreeSchema = pickBy(
-      { name: schemaName, fields, required: required, children: [] },
+      { name: schemaName, fields, required: required, children },
       value => value != null,
     );
 
-    console.log('current tree schema', currentTreeSchema);
-    //treeData[schemaName] = currentTreeSchema;
     if (parentName) {
-      //if(Object.keys(map).includes(parent)) {
-      // const parentSchema = getPath();
-      console.log('tD', treeData.children);
+      temp[parentName] = [currentTreeSchema];
 
-      const parentSchema =
-        parentName === treeData.name
-          ? treeData
-          : treeData.children.find(childSchema => childSchema.name === parentName);
-
-      console.log('parent schema', parentSchema);
-      const updatedParent = {
-        ...parentSchema,
-        children: parentSchema.children.concat(currentTreeSchema),
-      };
-      console.log('update', updatedParent);
-      //}
-      return { ...treeData, ...updatedParent };
+      if (parentName === treeData.name) {
+        return { ...treeData, children: treeData.children.concat(currentTreeSchema) };
+      }
     } else {
-      return { ...treeData, ...currentTreeSchema };
+      const builtTree = temp[schemaName];
+      return { ...currentTreeSchema, children: builtTree ? builtTree : [] };
     }
-    console.log('tree data', treeData);
     return treeData;
   }, {});
 
-  console.log('cstree data', constructedTreeData);
   return constructedTreeData;
 }
 
