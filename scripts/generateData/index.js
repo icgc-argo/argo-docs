@@ -2,74 +2,79 @@ const chalk = require('chalk');
 const get = require('lodash/get');
 const find = require('lodash/find');
 
+/**
+ * Generates tree structure for viz
+ * ! Assumes single root node
+ */
 function generateTreeData(data) {
-  console.log('data', data);
-  const schemas = get(data, 'schemas', []);
+  const schemas = get(data, 'dictionary.schemas', []);
 
   // keep track of nesting of schema
-  const treeNestedMap = {};
+  //   /const treeNestedMap = {};
 
   const constructedTreeData = schemas.reduce((treeData, schema) => {
     const schemaName = schema.name;
+
     const fields = schema.fields.map(field => ({
       name: field.name,
       required: get(field, 'restrictions.required', false),
     }));
     const parent = get(schema, 'meta.parent', null);
-    const treeSchema = { name: schemaName, fields, children: [] };
-
-    /**
-     * no parent adds schema directly to treeData
-     * it's nested path is just it's name
-     */
-    if (!parent) {
-      treeNestedMap[schemaName] = [schemaName];
-      treeData[schemaName] = treeSchema;
-    } else {
-      if (!treeNestedMap[parent]) {
-        treeNestedMap[schemaName] = [parent, schemaName];
-        treeNestedMap[parent] = [parent];
-        treeData[parent] = { name: parent, children: [treeSchema] };
-      } else {
-        const paths = treeNestedMap[parent];
-
-        const findParent = (tree, paths) =>
-          paths.reduce((acc, path, i) => {
-            if (i % 2 === 0) {
-              return acc[path];
-            } else {
-              return find(acc, { name: path });
-            }
-          }, tree);
-
-        const pData = findParent(treeData, paths);
-
-        //        const parentData = get(treeData, nestedPath, null);
-        //let newParentData = { ...pData, children: pData.children.concat(treeSchema) };
-        let newParentData = null;
-        // schema already has children, use it's current object
-        if (treeNestedMap[schemaName]) {
-          const currentSchemaObj = treeData[schema.name];
-          newParentData = { ...pData, children: pData.children.concat(currentSchemaObj) };
-          // update mapping
-        } else {
-          newParentData = { ...pData, children: pData.children.concat(treeSchema) };
-        }
-
-        const ntree = { ...treeData };
-        // update tree map
-        //treeData[''] = newParentData;
-        const newTreeData = { ...treeData, [parent]: newParentData };
-        return newTreeData;
-      }
-    }
-
+    const currentTreeSchema = { name: schemaName, fields, required: schema.required, children: [] };
+    //treeData[schemaName] = currentTreeSchema;
+    return { ...treeData, ...currentTreeSchema };
+    console.log('tree data', treeData);
     return treeData;
   }, {});
 
-  const tree = {};
-  console.log(chalk.yellow('Generating tree data..'));
+  console.log('cstree data', constructedTreeData);
   return constructedTreeData;
 }
 
 module.exports = generateTreeData;
+
+/**
+ *  /**
+     * no parent adds schema directly to treeData
+     * it's nested path is just it's name
+     
+    if (!parent) {
+        treeNestedMap[schemaName] = [schemaName];
+        treeData[schemaName] = treeSchema;
+      } else {
+        if (!treeNestedMap[parent]) {
+          treeNestedMap[schemaName] = [parent, schemaName];
+          treeNestedMap[parent] = [parent];
+          treeData[parent] = { name: parent, children: [treeSchema] };
+        } else {
+          const paths = treeNestedMap[parent];
+  
+          const findParent = (tree, paths) =>
+            paths.reduce((acc, path, i) => {
+              if (i % 2 === 0) {
+                return acc[path];
+              } else {
+                return find(acc, { name: path });
+              }
+            }, tree);
+  
+          const pData = findParent(treeData, paths);
+  
+          //        const parentData = get(treeData, nestedPath, null);
+          //let newParentData = { ...pData, children: pData.children.concat(treeSchema) };
+          let newParentData = null;
+          // schema already has children, use it's current object
+          if (treeNestedMap[schemaName]) {
+            const currentSchemaObj = treeData[schema.name];
+            newParentData = { ...pData, children: pData.children.concat(currentSchemaObj) };
+            // update mapping
+          } else {
+            newParentData = { ...pData, children: pData.children.concat(treeSchema) };
+          }
+  
+          const ntree = { ...treeData };
+          // update tree map
+          //treeData[''] = newParentData;
+          const newTreeData = { ...treeData, [parent]: newParentData };
+          return newTreeData;
+ */
