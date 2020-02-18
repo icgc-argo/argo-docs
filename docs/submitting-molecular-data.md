@@ -30,7 +30,7 @@ retry:
   multiplier: 2.0
 ```
 ### Score-Client
-Download the Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/3.0.1/score-client-3.0.1-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.properties` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/3.0.1/score-client-3.0.1-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.properties` configuration file with the correct user and data submission program values, including:
 - local RDPC Song server URL
 - [API Key](user-profile-and-token)
 - local RDPC Song server URL
@@ -110,7 +110,7 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 ```
 
 ### 2. Upload the payload
-Once you have completed formatting the payload, use the song-client `submit` command to upload the json payload to the configured Song.
+Once you have formatted the payload, use the song-client `submit` command to upload the json payload to the configured Song.
 
 ```
 > ./bin/sing submit -f dash-5-tumour.json
@@ -137,7 +137,7 @@ Using the score-client  `upload` command, upload all files associated with the p
 ```
 > .bin/score-client  upload --manifest manifest.txt
 ```
-If the file successfully uploaded, then you will receive an `Upload completed` message.  
+If the file successfully uploads, then you will receive an `Upload completed` message.  
 
 ### 4. Publish the payload
 ```
