@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
-const { generateTreeData } = require('../generateData');
-const sampleSchemaData = require('./data/schemaData');
-const sampleTreeData = require('./data/tree');
+const generateTreeData = require('./index');
+const sampleSchemaData = require('./testData/input_0');
+const sampleTreeData = require('./testData/output_0');
 
 describe('Tree Data', function() {
   it('should generate tree data', function() {

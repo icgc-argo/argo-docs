@@ -11,12 +11,12 @@ function generateTreeData(data) {
 
   const constructedTreeData = schemas.reduce((treeData, schema) => {
     const schemaName = schema.name;
-    // const fields = schema.fields.map(field => ({
-    //   name: field.name,
-    //   required: get(field, 'restrictions.required', false),
-    //}));
+    const fields = schema.fields.map(field => ({
+      name: field.name,
+      required: get(field, 'restrictions.required', false),
+    }));
     const parent = get(schema, 'meta.parent', null);
-    const treeSchema = { name: schemaName, children: [] }; //fields,
+    const treeSchema = { name: schemaName, fields, children: [] };
 
     /**
      * no parent adds schema directly to treeData
@@ -72,4 +72,4 @@ function generateTreeData(data) {
   return constructedTreeData;
 }
 
-module.exports = { generateTreeData };
+module.exports = generateTreeData;
