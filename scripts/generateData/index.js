@@ -2,9 +2,8 @@ const chalk = require('chalk');
 const get = require('lodash/get');
 const find = require('lodash/find');
 const pickBy = require('lodash/pickBy');
-const isNil = require('lodash/isNil');
 /**
- * Generates tree structure for viz
+ * Generates tree structure for tree viz
  * ! Assumes single root node
  */
 function generateTreeData(data) {
