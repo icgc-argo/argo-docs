@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const fse = require('fs-extra');
 const generateTreeData = require('./index');
 const singleChildSchema = require('./testData/singleChildNodeSchema');
 const singleChildTree = require('./testData/singleChildNodeTree');
@@ -6,6 +7,11 @@ const singleNodeSchema = require('./testData/singleNodeSchema');
 const singleNodeTree = require('./testData/singleNodeTree');
 const nestedChildSchema = require('./testData/nestedChildSchema');
 const nestedChildTree = require('./testData/nestedChildTree');
+const nestedSiblingSchema = require('./testData/nestedSiblingSchema');
+const nestedSiblingTree = require('./testData/nestedSiblingTree');
+
+const writeFile = async (name, data) =>
+  await fse.writeJson(`./generateData/temp/${name}.json`, data);
 
 describe('Tree Data', () => {
   /**
@@ -48,5 +54,9 @@ describe('Tree Data', () => {
    * -- child
    * --- child
    */
-  xit('should generate data with multiple nested children', () => {});
+  it('should generate data with multiple nested children', async () => {
+    const testTreeData = generateTreeData(nestedSiblingSchema);
+    await writeFile('temp', testTreeData);
+    expect(nestedSiblingTree).to.eql(testTreeData);
+  });
 });
