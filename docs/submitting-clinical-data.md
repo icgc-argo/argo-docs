@@ -2,7 +2,7 @@
 id: submitting-clinical-data
 title: Submitting Clinical Data
 ---
-This guide will describe how to submit clinical data to the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors and their health data.
+This guide will describe how to submit clinical data to the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors, including their health data.
 
 > Note: Before you can submit clinical data, your data must be assigned ARGO IDs through the sample registration process. See [Registering Samples](registering-samples) for instructions on how to register samples.
 
@@ -22,7 +22,7 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1.  If there are no errors in your submission, then your submission will be marked as _Valid_.
 
 
-## Signing Off on Your Submission
+## Signing Off Your Submission
 Once you have reviewed the files in the file preview area, click the **Sign Off Submission** button to submit your clinical data. If you have made any updated to data that has already been submitted, you clinical workspace will be placed in a Pending Approval state.  A DCC member will review your updates and approve them for submission.  If there are any issues, your submission will be reopened and the DCC will notify you of any changes needed.
 
-Once submitted, clinical data will be available on [Donor View]() from your [Program Dashboard](/docs/submitted-data).
+Once submitted, clinical data will be available on [Donor Data Summary]() from your [Program Dashboard](/docs/submitted-data).

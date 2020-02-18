@@ -7,7 +7,7 @@ In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO
 
 It is important that the relationships between entities are maintained across all data submissions and formats, as they are fundamental to data integrity across the ARGO Data Platform.
 
-> Registration is the first step in the data submission life cycle.  You **must** registers samples before any clinical or molecular data submissions.
+> Registration is the first step in the data submission life cycle.  You **must** register samples before submitting any clinical or molecular data submissions.
 
 The basic set of data that must be registered for each sample consists of:
 * `program_id`
@@ -20,7 +20,7 @@ The basic set of data that must be registered for each sample consists of:
 * `submitter_sample_id`
 * `sample_type`
 
-During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a  registered samples will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted.
+During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a registered sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
 
 ## Registering Samples
 1. Navigate to the **Submission** area in the top menu.
