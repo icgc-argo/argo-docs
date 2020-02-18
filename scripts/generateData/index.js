@@ -1,7 +1,8 @@
 const chalk = require('chalk');
 const get = require('lodash/get');
 const find = require('lodash/find');
-
+const pickBy = require('lodash/pickBy');
+const isNil = require('lodash/isNil');
 /**
  * Generates tree structure for viz
  * ! Assumes single root node
@@ -13,16 +14,42 @@ function generateTreeData(data) {
   //   /const treeNestedMap = {};
 
   const constructedTreeData = schemas.reduce((treeData, schema) => {
-    const schemaName = schema.name;
+    const { name, required, fields: schemaFields } = schema;
+    const schemaName = name;
 
-    const fields = schema.fields.map(field => ({
+    const fields = schemaFields.map(field => ({
       name: field.name,
       required: get(field, 'restrictions.required', false),
     }));
-    const parent = get(schema, 'meta.parent', null);
-    const currentTreeSchema = { name: schemaName, fields, required: schema.required, children: [] };
+    const parentName = get(schema, 'meta.parent', null);
+    const currentTreeSchema = pickBy(
+      { name: schemaName, fields, required: required, children: [] },
+      value => value != null,
+    );
+
+    console.log('current tree schema', currentTreeSchema);
     //treeData[schemaName] = currentTreeSchema;
-    return { ...treeData, ...currentTreeSchema };
+    if (parentName) {
+      //if(Object.keys(map).includes(parent)) {
+      // const parentSchema = getPath();
+      console.log('tD', treeData.children);
+
+      const parentSchema =
+        parentName === treeData.name
+          ? treeData
+          : treeData.children.find(childSchema => childSchema.name === parentName);
+
+      console.log('parent schema', parentSchema);
+      const updatedParent = {
+        ...parentSchema,
+        children: parentSchema.children.concat(currentTreeSchema),
+      };
+      console.log('update', updatedParent);
+      //}
+      return { ...treeData, ...updatedParent };
+    } else {
+      return { ...treeData, ...currentTreeSchema };
+    }
     console.log('tree data', treeData);
     return treeData;
   }, {});
