@@ -11,7 +11,7 @@ module.exports = {
     ],
     'Data Access': [
       'data-access',
-      'user-profile-and-api-key',
+      'user-profile-and-api-token',
       'data-download',
       'data-release-schedule',
     ],

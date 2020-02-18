@@ -13,8 +13,8 @@ Molecular data is uploaded to the ARGO Data Platform using the Song and Score CL
 ### Song-Client
 Download the **[latest version of the Song client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/4.0.0/song-client-4.0.0-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
 - local RDPC Song server URL
-- [API Key](user-profile-and-token)
-- ARGO Program Id that you are submitting to
+- [API Token](user-profile-and-api-token)
+- ARGO Program Id that you are submitting to (studyId within the config file)
 
 This is an example of how your `application.yaml` configuration file should look:
 ```yml

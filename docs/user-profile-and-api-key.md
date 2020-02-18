@@ -1,6 +1,6 @@
 ---
-id: user-profile-and-api-key
-title: User Profile & API Key
+id: user-profile-and-api-token
+title: User Profile & API Token
 ---
 The ARGO User Profile page displays important user information including:
 - which email you have logged into the ARGO platform with
