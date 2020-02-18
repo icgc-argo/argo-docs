@@ -8,10 +8,21 @@ const nestedChildSchema = require('./testData/nestedChildSchema');
 const nestedChildTree = require('./testData/nestedChildTree');
 
 describe('Tree Data', () => {
+  /**
+   * Example:
+   *
+   * - root
+   */
   it('should generate for a single node', () => {
     const testTreeData = generateTreeData(singleNodeSchema);
     expect(singleNodeTree).to.eql(testTreeData);
   });
+  /**
+   * Example:
+   *
+   * - root
+   * -- child
+   */
   it('should generate tree data with a single child', () => {
     const testTreeData = generateTreeData(singleChildSchema);
     expect(singleChildTree).to.eql(testTreeData);
