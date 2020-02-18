@@ -5,7 +5,7 @@ title: Registering Samples
 
 In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO Identifiers (**ARGO IDs**) used to track the data through the Platform. Each **Donor**, **Specimen**, and **Sample** entity will be assigned an **ARGO ID**, mapping to your program's internal identifiers.
 
-It is important that the relationships between entities are maintained across all data submissions and formats, as they are fundamental to data integrity across the ARGO Data Platform.
+It is important that the relationships between entities are maintained across all data submissions, as they are fundamental to data integrity across the ARGO Data Platform.
 
 > Registration is the first step in the data submission life cycle.  You **must** register samples before submitting any clinical or molecular data submissions.
 
