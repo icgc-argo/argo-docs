@@ -5,20 +5,22 @@ title: Registering Samples
 
 In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO Identifiers (**ARGO IDs**) used to track the data through the Platform. Each **Donor**, **Specimen**, and **Sample** entity will be assigned an **ARGO ID**, mapping to your program's internal identifiers.
 
-It is important that the relationships between entities are maintained across submissions, as they are fundamental to data tracking and integrity across the ARGO Data Platform.
+It is important that the relationships between entities are maintained across all data submissions, as they are fundamental to data integrity across the ARGO Data Platform.
 
-> Registration is the first step in the data submission life cycle.  You must registers samples before any clinical or molecular data submissions.
+> Registration is the first step in the data submission life cycle.  You **must** register samples before submitting any clinical or molecular data submissions.
 
 The basic set of data that must be registered for each sample consists of:
-* Submitter Donor ID
-* Donor Gender
-* Submitter Specimen ID
-* Specimen Tissue Source
-* Specimen Tumor or Normal Designation
-* Submitter Sample ID
-* Sample Type
+* `program_id`
+* `submitter_donor_id`
+* `gender`
+* `submitter_specimen_id`
+* `specimen_tissue_source`
+* `tumour_normal_designation`
+* `specimen_type`
+* `submitter_sample_id`
+* `sample_type`
 
-During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a previously registered samples will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted.
+During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a registered sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
 
 ## Registering Samples
 1. Navigate to the **Submission** area in the top menu.
@@ -34,4 +36,4 @@ Once submitted, samples, along with donor and specimen data, will be visible on 
 ## Correcting Already Registered Data
 Once samples are registered and data processing and analysis proceeds, it can be difficult to correct the data manually.
 
-If you have made an error to registered sample data, please contact the DCC and they will assist in correcting your registered data.  
+If you have made an error to registered sample data, please [contact the DCC](https://platform.icgc-argo.org/contact) and they will assist in correcting your registered data.  
