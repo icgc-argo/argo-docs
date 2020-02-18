@@ -9,7 +9,7 @@ The **International Cancer Genome Consortium Accelerating Research in Genomic On
 
 The Ontario Institute for Cancer Research (OICR) operates as the **Data Coordination Centre (DCC)** to develop the ARGO Data Platform which manages submission, processing, analysis, and dissemination of high-quality clinical and molecular data.
 
-Participating programs submit data through the **[ARGO Data Platform](https://platform.icgc-argo.org/)**, which is also the destination for data display and analysis.
+Participating programs submit data through the **[ARGO Data Platform](https://platform.icgc-argo.org/)**, which is also the destination for public data display and analysis.
 
 ## Data Dictionary
 
