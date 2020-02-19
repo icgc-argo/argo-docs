@@ -10,7 +10,7 @@ const nestedChildTree = require('./testData/nestedChildTree');
 const nestedSiblingSchema = require('./testData/nestedSiblingSchema');
 const nestedSiblingTree = require('./testData/nestedSiblingTree');
 
-const writeFile = async (name, data) =>
+const writeFile = async (name = 'temp', data) =>
   await fse.writeJson(`./generateData/temp/${name}.json`, data);
 
 describe('Tree Data', () => {
@@ -29,7 +29,7 @@ describe('Tree Data', () => {
    * - root
    * -- child
    */
-  it('should generate tree data with a single child', () => {
+  it('should generate tree data with a single child', async () => {
     const testTreeData = generateTreeData(singleChildSchema);
     expect(singleChildTree).to.eql(testTreeData);
   });
@@ -54,9 +54,8 @@ describe('Tree Data', () => {
    * -- child
    * --- child
    */
-  it('should generate data with multiple nested children', async () => {
+  it('should generate data with multiple nested siblings', () => {
     const testTreeData = generateTreeData(nestedSiblingSchema);
-    await writeFile('temp', testTreeData);
     expect(nestedSiblingTree).to.eql(testTreeData);
   });
 });
