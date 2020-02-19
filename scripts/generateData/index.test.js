@@ -6,6 +6,7 @@ const singleChildTree = require('./testData/singleChildNodeTree');
 const singleNodeSchema = require('./testData/singleNodeSchema');
 const singleNodeTree = require('./testData/singleNodeTree');
 const nestedChildSchema = require('./testData/nestedChildSchema');
+const nestedChildUnorderSchema = require('./testData/nestedChildUnorderSchema');
 const nestedChildTree = require('./testData/nestedChildTree');
 const nestedSiblingSchema = require('./testData/nestedSiblingSchema');
 const nestedSiblingTree = require('./testData/nestedSiblingTree');
@@ -42,8 +43,9 @@ describe('Tree Data', () => {
    * ---- child
    */
   it('should generate data with single nested children', () => {
-    const testTreeData = generateTreeData(nestedChildSchema);
-    expect(nestedChildTree).to.eql(testTreeData);
+    const testTreeData1 = generateTreeData(nestedChildSchema);
+    const testTreeData2 = generateTreeData(nestedChildUnorderSchema);
+    expect(nestedChildTree).to.eql(testTreeData1) && expect(nestedChildTree).to.eql(testTreeData2);
   });
   /**
    * Example:
