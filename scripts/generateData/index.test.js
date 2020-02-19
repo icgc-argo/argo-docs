@@ -30,7 +30,7 @@ describe('Tree Data', () => {
    * - root
    * -- child
    */
-  it('should generate tree data with a single child', async () => {
+  it('should generate tree data with a single child', () => {
     const testTreeData = generateTreeData(singleChildSchema);
     expect(singleChildTree).to.eql(testTreeData);
   });
