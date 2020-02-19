@@ -93,18 +93,18 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
 
   const [currentShowingScript, setCurrentShowingScript] = React.useState(null);
   const ScriptCell = ({ original: { meta, restrictions, name } }) => {
-    const script = restrictions && restrictions.script;
+    const scripts = restrictions && restrictions.script;
     return (
       <div>
         {meta && meta.notes && <Notes>{meta.notes}</Notes>}
-        {script && (
+        {scripts && (
           <Button
             variant="secondary"
             size="sm"
             onClick={() => {
               setCurrentShowingScript({
                 fieldName: name,
-                content: script,
+                content: scripts,
               });
             }}
           >

@@ -10,22 +10,30 @@ const exampleCode = `function validate() {\r\n  var result = { valid: true, mess
  * Based off @theme/Codeblock
  */
 
-const CodeBlock = ({ code }) => {
+const CodeBlock = ({ codes }) => {
   return (
     <div>
-      <Highlight {...defaultProps} code={code} language="js" theme={defaultTheme}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={`${className} ${styles.code}`} style={style}>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
+      {codes.map(code => (
+        <div
+          style={{
+            marginBottom: '10px',
+          }}
+        >
+          <Highlight {...defaultProps} code={code} language="js" theme={defaultTheme}>
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <pre className={`${className} ${styles.code}`} style={style}>
+                {tokens.map((line, i) => (
+                  <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      <span {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
                 ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+              </pre>
+            )}
+          </Highlight>
+        </div>
+      ))}
     </div>
   );
 };
