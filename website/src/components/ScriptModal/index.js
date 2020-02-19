@@ -15,10 +15,6 @@ const ScriptModal = ({ field, script, onCloseClick }) => (
     actionVisible={false}
     buttonSize="sm"
   >
-    <Typography variant="paragraph">
-      The following script can be used with the ARGO Data Platform API.
-    </Typography>
-
     <CodeBlock code={script} />
   </Modal>
 );
