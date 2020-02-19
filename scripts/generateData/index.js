@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 const get = require('lodash/get');
-const find = require('lodash/find');
 const pickBy = require('lodash/pickBy');
 /**
  * Generates tree structure for tree viz
@@ -14,39 +13,25 @@ function generateTreeData(data) {
   // keep track of nesting of schema
   //   /const treeNestedMap = {};
 
-  const temp = {};
+  const tree = [];
 
-  const constructedTreeData = schemas.reduce((treeData, schema) => {
-    // pull out fields
-    const { name, required, fields: schemaFields } = schema;
-    const schemaName = name;
-
-    const fields = schemaFields.map(field => ({
-      name: field.name,
-      required: get(field, 'restrictions.required', false),
-    }));
-    const parentName = get(schema, 'meta.parent', null);
-    const children = temp[schemaName] ? temp[schemaName] : [];
-    // TODO: Delete temp key
-    const currentTreeSchema = pickBy(
-      { name: schemaName, fields, required: required, children },
-      value => value != null,
-    );
-
-    if (parentName) {
-      temp[parentName] = [currentTreeSchema];
-
-      if (parentName === treeData.name) {
-        return { ...treeData, children: treeData.children.concat(currentTreeSchema) };
-      }
-    } else {
-      const builtTree = temp[schemaName];
-      return { ...currentTreeSchema, children: builtTree ? builtTree : [] };
-    }
-    return treeData;
+  const mapping = schemas.reduce((mapp, schema) => {
+    mapp[schema.name] = { ...schema, children: [] };
+    return mapp;
   }, {});
 
-  return constructedTreeData;
+  Object.keys(mapping).forEach(schemaKey => {
+    const schema = mapping[schemaKey];
+    const parentName = get(schema, 'meta.parent', null);
+
+    if (parentName) {
+      mapping[parentName]['children'].push(schema);
+    } else {
+      tree.push(schema);
+    }
+  });
+
+  return tree;
 }
 
 module.exports = generateTreeData;
@@ -95,4 +80,47 @@ module.exports = generateTreeData;
           //treeData[''] = newParentData;
           const newTreeData = { ...treeData, [parent]: newParentData };
           return newTreeData;
+
+          ========
+
+
+function generateTreeData(data) {
+  const schemas = get(data, 'schemas', []);
+
+  // keep track of nesting of schema
+  //   /const treeNestedMap = {};
+
+  const temp = {};
+
+  const constructedTreeData = schemas.reduce((treeData, schema) => {
+    // pull out fields
+    const { name, required, fields: schemaFields } = schema;
+    const schemaName = name;
+
+    const fields = schemaFields.map(field => ({
+      name: field.name,
+      required: get(field, 'restrictions.required', false),
+    }));
+    const parentName = get(schema, 'meta.parent', null);
+    const children = temp[schemaName] ? temp[schemaName] : [];
+    // TODO: Delete temp key
+    const currentTreeSchema = pickBy(
+      { name: schemaName, fields, required: required, children },
+      value => value != null,
+    );
+
+    if (parentName) {
+      temp[parentName] = [currentTreeSchema];
+      console.log();
+      if (parentName === treeData.name) {
+        return { ...treeData, children: treeData.children.concat(currentTreeSchema) };
+      }
+    } else {
+      const builtTree = temp[schemaName];
+      return { ...currentTreeSchema, children: builtTree ? builtTree : [] };
+    }
+    return treeData;
+  }, {});
+  console.log('TEMP', temp);
+  return constructedTreeData;
  */
