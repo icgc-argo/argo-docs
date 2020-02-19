@@ -3,7 +3,7 @@
     "help": "node manage-versions.js -h --npm",
     "list": "node manage-versions.js -l --npm",
     "add": "node manage-versions.js -a --npm --silent",
-    "debug-add": "node -nolazy --inspect-brk=9229 manage-versions.js -a",
+    "debug-add": "node -nolazy --inspect-brk=9229 ./generateData/temp/index -a",
     "clean": "node clean-data.js",
     "test": "mocha --inline-diff",
     "watch-tests": "mocha ./**/*.test.js --inline-diff -w"
