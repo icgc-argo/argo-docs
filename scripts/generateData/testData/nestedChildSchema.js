@@ -1,18 +1,6 @@
 module.exports = {
   schemas: [
     {
-      name: 'donor',
-      required: true,
-      description: 'donor description',
-      meta: { parent: 'specimen' },
-      fields: [
-        {
-          name: 'donor_submitter_id',
-          restrictions: { required: true },
-        },
-      ],
-    },
-    {
       name: 'specimen',
       description:
         "The collection of data elements related to a donor's specimen. A specimen is any material sample taken for testing, diagnostic or research purposes.",
@@ -26,6 +14,19 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'donor',
+      required: true,
+      description: 'donor description',
+      meta: { parent: 'specimen' },
+      fields: [
+        {
+          name: 'donor_submitter_id',
+          restrictions: { required: true },
+        },
+      ],
+    },
+
     {
       name: 'sample_registration',
       required: true,

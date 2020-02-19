@@ -7,9 +7,26 @@ module.exports = {
       meta: { parent: 'specimen' },
       fields: [
         {
+          name: 'donor_submitter_id',
+          restrictions: { required: true },
+        },
+      ],
+    },
+    {
+      name: 'hormone_therapy',
+      description:
+        'The collection of data elements describing the details of a hormone treatment therapy completed by a donor.',
+      meta: { parent: 'treatment' },
+      required: true,
+      fields: [
+        {
           name: 'program_id',
           valueType: 'string',
           description: 'Unique identifier of the ARGO program.',
+          meta: {
+            primaryId: true,
+            foreignKey: 'sample_registration.program_id',
+          },
           restrictions: { required: true },
         },
       ],
@@ -55,25 +72,7 @@ module.exports = {
         },
       ],
     },
-    {
-      name: 'hormone_therapy',
-      description:
-        'The collection of data elements describing the details of a hormone treatment therapy completed by a donor.',
-      meta: { parent: 'treatment' },
-      required: true,
-      fields: [
-        {
-          name: 'program_id',
-          valueType: 'string',
-          description: 'Unique identifier of the ARGO program.',
-          meta: {
-            primaryId: true,
-            foreignKey: 'sample_registration.program_id',
-          },
-          restrictions: { required: true },
-        },
-      ],
-    },
+
     {
       name: 'radiation',
       description:

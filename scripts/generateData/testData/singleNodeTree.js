@@ -3,4 +3,5 @@ module.exports = {
   required: true,
   fields: [{ name: 'program_id', required: true }],
   children: [],
+  parentName: '',
 };
