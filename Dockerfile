@@ -13,8 +13,8 @@ FROM nginx:alpine
 # needs shadow to get usermod and groupmod
 RUN apk --no-cache add shadow
 # we're using numeric user to match kubernetes
-RUN usermod -u 1000 nginx
-RUN groupmod -g 1000 nginx
+RUN usermod -u 9999 nginx
+RUN groupmod -g 9999 nginx
 
 COPY --from=0 /app/website/build /usr/share/nginx/html
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
@@ -24,7 +24,7 @@ RUN chown -R nginx:nginx /var/log/nginx
 RUN chown -R nginx:nginx /etc/nginx/conf.d
 RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
 
-USER 1000
+USER 9999
 
 EXPOSE 8080
 
