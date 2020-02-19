@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
-const { generateTreeData } = require('./generateData');
+const generateTreeData = require('./generateData');
 
 const constants = require('./constants');
 
