@@ -1,5 +1,5 @@
 ---
 id: submitted-data
-title: Submitted Data
+title: Viewing Submitted Data
 ---
 Coming Soon
