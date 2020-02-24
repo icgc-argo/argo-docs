@@ -2,7 +2,7 @@
 id: submitting-molecular-data
 title: Submitting Molecular Data
 ---
-Molecular data will be submitted to your local Regional Data Processing Centre (RDPC). RDPCs are responsible for processing your program's molecular data according to the [Harmonization Pipeline](). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform-ui.qa.argo.cancercollaboratory.org/contact).
+Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Harmonization Pipeline](dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform-ui.qa.argo.cancercollaboratory.org/contact).
 
 
 This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata.
