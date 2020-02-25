@@ -150,8 +150,7 @@ async function runAdd() {
   // Fetch the dictionary for this version and save data and tree files
   const dictionary = await fetchDictionaryForVersion(selectedVersion);
   saveFiles(selectedVersion, dictionary);
-  //saveDictionaryFile(selectedVersion, dictionary);
-  //saveTreeFile();
+
   console.log(chalk.cyan('dictionary saved...'));
 
   // Fetch all Diffs and save
