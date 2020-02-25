@@ -4,6 +4,8 @@ const inquirer = require('inquirer');
 const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
+const fse = require('fs-extra');
+const generateTreeData = require('./generateData');
 
 const constants = require('./constants');
 
@@ -35,8 +37,21 @@ async function printVersionsLists() {
   return newVersions;
 }
 
+function saveFiles(version, data) {
+  const dataFile = `${schemaPath}/${version}.json`;
+  const treeFile = `${schemaPath}/${version}_tree.json`;
+  fse.writeJSONSync(dataFile, data);
+  const treeData = await generateTreeData(data);
+  fse.writeJSONSync(treeFile, treeData);
+}
+
 function saveDictionaryFile(version, data) {
   const filename = `${schemaPath}/${version}.json`;
+  fs.writeFileSync(filename, JSON.stringify(data));
+}
+
+function saveTreeFile(version, data) {
+  const filename = `${schemaPath}/${version}-tree.json`;
   fs.writeFileSync(filename, JSON.stringify(data));
 }
 
@@ -140,9 +155,11 @@ async function runAdd() {
   // User select a version
   const selectedVersion = await userSelectVersion(newVersions);
 
-  // Fetch the dictionary for this version and save
+  // Fetch the dictionary for this version and save data and tree files
   const dictionary = await fetchDictionaryForVersion(selectedVersion);
-  saveDictionaryFile(selectedVersion, dictionary);
+  saveFiles(selectedVersion, dictionary);
+  //saveDictionaryFile(selectedVersion, dictionary);
+  //saveTreeFile();
   console.log(chalk.cyan('dictionary saved...'));
 
   // Fetch all Diffs and save
