@@ -204,7 +204,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
         <ModalPortal>
           <ScriptModal
             field={currentShowingScripts.fieldName}
-            script={currentShowingScripts.content}
+            scripts={currentShowingScripts.content}
             onCloseClick={() => {
               setCurrentShowingScripts(null);
             }}
