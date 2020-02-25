@@ -41,7 +41,7 @@ function saveFiles(version, data) {
   const dataFile = `${schemaPath}/${version}.json`;
   const treeFile = `${schemaPath}/${version}_tree.json`;
   fse.writeJSONSync(dataFile, data);
-  const treeData = await generateTreeData(data);
+  const treeData = generateTreeData(data);
   fse.writeJSONSync(treeFile, treeData);
 }
 
