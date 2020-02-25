@@ -45,28 +45,19 @@ function saveFiles(version, data) {
   fse.writeJSONSync(treeFile, treeData);
 }
 
-function saveDictionaryFile(version, data) {
-  const filename = `${schemaPath}/${version}.json`;
-  fs.writeFileSync(filename, JSON.stringify(data));
-}
-
-function saveTreeFile(version, data) {
-  const filename = `${schemaPath}/${version}-tree.json`;
-  fs.writeFileSync(filename, JSON.stringify(data));
-}
-
 function saveVersionsFile(data) {
   fs.writeFileSync(versionsFilename, JSON.stringify(data));
 }
 
 // The data file is the file used on load in the data dictionary.
-function saveDataFile(dictionary, versions) {
+function saveDataFiles(dictionary, versions) {
   const content = {
     dictionary,
     versions,
     currentVersion: versions[0],
   };
   fs.writeFileSync(dataFilename, JSON.stringify(content));
+  fse.writeJSONSync(dataFileTreeName, generateTreeData(content));
 }
 
 async function fetchAndSaveDiffsForVersion(version) {
@@ -174,7 +165,7 @@ async function runAdd() {
   saveVersionsFile(updatedVersions);
 
   console.log(chalk.cyan('\nupdating data dictionary input file...'));
-  saveDataFile(dictionary, updatedVersions);
+  saveDataFiles(dictionary, updatedVersions);
 
   console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
 }
