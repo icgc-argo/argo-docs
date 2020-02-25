@@ -91,20 +91,20 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
 
   const isCodeListExpanded = field => expandedCodeLists[field];
 
-  const [currentShowingScript, setCurrentShowingScript] = React.useState(null);
+  const [currentShowingScripts, setCurrentShowingScripts] = React.useState(null);
   const ScriptCell = ({ original: { meta, restrictions, name } }) => {
-    const script = restrictions && restrictions.script;
+    const scripts = restrictions && restrictions.script;
     return (
       <div>
         {meta && meta.notes && <Notes>{meta.notes}</Notes>}
-        {script && (
+        {scripts && (
           <Button
             variant="secondary"
             size="sm"
             onClick={() => {
-              setCurrentShowingScript({
+              setCurrentShowingScripts({
                 fieldName: name,
-                content: script,
+                content: scripts,
               });
             }}
           >
@@ -200,13 +200,13 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
-      {currentShowingScript && (
+      {currentShowingScripts && (
         <ModalPortal>
           <ScriptModal
-            field={currentShowingScript.fieldName}
-            script={currentShowingScript.content}
+            field={currentShowingScripts.fieldName}
+            script={currentShowingScripts.content}
             onCloseClick={() => {
-              setCurrentShowingScript(null);
+              setCurrentShowingScripts(null);
             }}
           />
         </ModalPortal>
