@@ -10,7 +10,7 @@ const generateTreeData = require('./generateData');
 const constants = require('./constants');
 
 const apiRoot = 'https://lectern.platform.icgc-argo.org';
-const { dictionaryName, schemaPath, versionsFilename, dataFilename } = constants;
+const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
@@ -57,7 +57,8 @@ function saveDataFiles(dictionary, versions) {
     currentVersion: versions[0],
   };
   fs.writeFileSync(dataFilename, JSON.stringify(content));
-  fse.writeJSONSync(dataFileTreeName, generateTreeData(content));
+  const treeData = generateTreeData(content.dictionary);
+  fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
 async function fetchAndSaveDiffsForVersion(version) {
