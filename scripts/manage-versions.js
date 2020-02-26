@@ -4,11 +4,13 @@ const inquirer = require('inquirer');
 const querystring = require('querystring');
 const fs = require('fs');
 const argv = require('yargs').argv;
+const fse = require('fs-extra');
+const generateTreeData = require('./generateData');
 
 const constants = require('./constants');
 
 const apiRoot = 'https://lectern.platform.icgc-argo.org';
-const { dictionaryName, schemaPath, versionsFilename, dataFilename } = constants;
+const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
@@ -35,9 +37,12 @@ async function printVersionsLists() {
   return newVersions;
 }
 
-function saveDictionaryFile(version, data) {
-  const filename = `${schemaPath}/${version}.json`;
-  fs.writeFileSync(filename, JSON.stringify(data));
+function saveFiles(version, data) {
+  const dataFile = `${schemaPath}/${version}.json`;
+  const treeFile = `${schemaPath}/${version}_tree.json`;
+  fse.writeJSONSync(dataFile, data);
+  const treeData = generateTreeData(data);
+  fse.writeJSONSync(treeFile, treeData);
 }
 
 function saveVersionsFile(data) {
@@ -45,13 +50,15 @@ function saveVersionsFile(data) {
 }
 
 // The data file is the file used on load in the data dictionary.
-function saveDataFile(dictionary, versions) {
+function saveDataFiles(dictionary, versions) {
   const content = {
     dictionary,
     versions,
     currentVersion: versions[0],
   };
   fs.writeFileSync(dataFilename, JSON.stringify(content));
+  const treeData = generateTreeData(content.dictionary);
+  fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
 async function fetchAndSaveDiffsForVersion(version) {
@@ -140,9 +147,10 @@ async function runAdd() {
   // User select a version
   const selectedVersion = await userSelectVersion(newVersions);
 
-  // Fetch the dictionary for this version and save
+  // Fetch the dictionary for this version and save data and tree files
   const dictionary = await fetchDictionaryForVersion(selectedVersion);
-  saveDictionaryFile(selectedVersion, dictionary);
+  saveFiles(selectedVersion, dictionary);
+
   console.log(chalk.cyan('dictionary saved...'));
 
   // Fetch all Diffs and save
@@ -157,7 +165,7 @@ async function runAdd() {
   saveVersionsFile(updatedVersions);
 
   console.log(chalk.cyan('\nupdating data dictionary input file...'));
-  saveDataFile(dictionary, updatedVersions);
+  saveDataFiles(dictionary, updatedVersions);
 
   console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
 }

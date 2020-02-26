@@ -75,8 +75,8 @@ function Index() {
               icon="img/icons/home/data-dictionary.svg"
             >
               <span className={styles.contentDescription}>
-                The viewer describes the schema that data submitters must conform to and track
-                changes when formatiting clinical data files.
+                The dictionary describes the schema that data submitters must conform to and track
+                changes when formatting clinical data files.
               </span>
               <a className={styles.contentAction} href="/dictionary">
                 Data Dictionary Viewer
@@ -94,33 +94,33 @@ function Index() {
                   submission
                 </li>
                 <li>
+                  How to <a href="/docs/registering-samples">register samples</a>
+                </li>
+                <li>
                   How to <a href="/docs/submitting-clinical-data">submit clinical data</a>
                 </li>
                 <li>
                   How to <a href="/docs/submitting-molecular-data">submit molecular data</a>
                 </li>
-                <li>
-                  How to <a href="/docs/managing-program-access">manage program users</a>
-                </li>
               </ul>
             </ContentBlock>
-            <ContentBlock title="Data Download" color="#f95d31" icon="img/icons/home/download.svg">
+            <ContentBlock title="Data Access & Download" color="#f95d31" icon="img/icons/home/download.svg">
               <ul>
+                <li>
+                  How to <a href="/docs/data-access">access controlled data</a>
+                </li>
                 <li>
                   How to <a href="/docs/data-download">download data</a>
                 </li>
                 <li>
                   How to use the <a href="/docs/data-download">Score Download Client</a>
                 </li>
-                <li>
-                  How to use the <a href="/docs/user-profile-and-token">ICGC-ARGO token</a>
-                </li>
               </ul>
             </ContentBlock>
           </div>
           <div className={styles.row}>
             <ContentBlock
-              title="Access to Controlled Data"
+              title="Data Harmonization"
               color="#7f55cc"
               icon="img/icons/home/controlled-data.svg"
             >
