@@ -7,7 +7,7 @@ In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO
 
 It is important that the relationships between entities are maintained across all data submissions, as they are fundamental to data integrity across the ARGO Data Platform.
 
-> Registration is the first step in the data submission life cycle.  You **must** register samples before submitting any clinical or molecular data submissions.
+> Registration is the first step in the data submission life cycle.  You **must** register samples before submitting any clinical or molecular data.
 
 The basic set of data that must be registered for each sample consists of:
 * `program_id`
@@ -31,7 +31,7 @@ During sample registration, **ARGO IDs** will be assigned to your program data. 
 1. Valid files will be available for preview in the Sample Registration workspace.  You can review the new samples (purple star) versus previously registered samples (grey star) by filtering the table on the star column.
 1. Once you have reviewed the file preview, click on the **Register Samples** button to submit your samples.
 
-Once submitted, samples, along with donor and specimen data, will be visible on your [Program Dashboard](/docs/submitted-data).
+Once registered, donors, along with specimen and sample data, will be visible on your [Program Dashboard](/docs/submitted-data).
 
 ## Correcting Already Registered Data
 Once samples are registered and data processing and analysis proceeds, it can be difficult to correct the data manually.
