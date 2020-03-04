@@ -263,6 +263,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
           columns={cols}
           data={schema.fields}
           showPagination={false}
+          defaultPageSize={schema.fields.length}
           sortable={true}
           cellAlignment="top"
           withOutsideBorder
