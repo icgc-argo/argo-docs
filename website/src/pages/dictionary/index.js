@@ -89,14 +89,19 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
+
   const [filters, setFilters] = useState({ tiers: [], attributes: [] });
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
+
+  const [searchParams, setSearchParams] = useState({ tier: '' });
+  const [schemas, setSchemas] = useState(dictionary.schemas);
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
       setVersion(newVersion);
       setDictionary(newDict);
+      setSchemas(newDict.schemas);
     } else {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
@@ -136,6 +141,7 @@ function DataDictionary() {
     disabled: false,
   }));
 
+  // TODO: move to static build
   useEffect(() => {
     const schemas = get(dictionary, 'schemas', []);
     const files = schemas.length;
@@ -176,6 +182,28 @@ function DataDictionary() {
   }, [dictionary]);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
+
+  // TODO: Memo
+  const searchSchemas = (schemas, params) => {
+    const filtered = schemas.map(schema => {
+      const { tier } = params;
+      const filteredFields = schema.fields.filter(field => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        if (tier === '') return true;
+        if (tier === TAG_TYPES.id && primaryId) return true;
+        if (tier === TAG_TYPES.core && core) return true;
+        if (tier === TAG_TYPES.extended && !core && !primaryId) return true;
+        return false;
+      });
+      return { ...schema, fields: filteredFields };
+    });
+
+    console.log('search schemas filtered', filtered);
+    return filtered;
+  };
+
+  const filteredSchemas = searchSchemas(dictionary.schemas, searchParams);
 
   return (
     <ThemeProvider>
@@ -270,10 +298,15 @@ function DataDictionary() {
                   content: startCase(d),
                   value: d,
                 }))}
+                searchParams={searchParams}
+                onSearch={search => {
+                  console.log('search', search);
+                  setSearchParams(search);
+                }}
               />
 
               <RenderDictionary
-                schemas={dictionary.schemas}
+                schemas={filteredSchemas}
                 menuContents={menuContents}
                 isLatestSchema={isLatestSchema}
               />
