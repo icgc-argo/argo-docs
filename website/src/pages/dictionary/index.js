@@ -93,7 +93,7 @@ function DataDictionary() {
   const [filters, setFilters] = useState({ tiers: [], attributes: [] });
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
-  const [searchParams, setSearchParams] = useState({ tier: '' });
+  const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
   const [schemas, setSchemas] = useState(dictionary.schemas);
 
   const updateVersion = async newVersion => {
@@ -186,14 +186,18 @@ function DataDictionary() {
   // TODO: Memo
   const searchSchemas = (schemas, params) => {
     const filtered = schemas.map(schema => {
-      const { tier } = params;
+      const { tier, attribute } = params;
       const filteredFields = schema.fields.filter(field => {
         const meta = get(field, 'meta', {});
         const { primaryId = false, core = false, dependsOn = false } = meta;
-        if (tier === '') return true;
+        const required = get(field, 'restrictions.required', false);
+
+        if (tier === '' && attribute === '') return true;
         if (tier === TAG_TYPES.id && primaryId) return true;
         if (tier === TAG_TYPES.core && core) return true;
         if (tier === TAG_TYPES.extended && !core && !primaryId) return true;
+        if (attribute === TAG_TYPES.dependsOn && dependsOn) return true;
+        if (attribute === TAG_TYPES.required && required) return true;
         return false;
       });
       return { ...schema, fields: filteredFields };

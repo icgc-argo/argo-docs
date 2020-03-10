@@ -30,10 +30,16 @@ const FileFilters = ({
           <Select
             options={dataTiers}
             value={searchParams.tier}
-            onChange={val => onSearch({ tier: val })}
+            onChange={val => onSearch({ ...searchParams, tier: val })}
             size="sm"
           />
-          Attribute: <Select options={dataAttributes} size="sm" />
+          Attribute:{' '}
+          <Select
+            options={dataAttributes}
+            value={searchParams.attribute}
+            onChange={val => onSearch({ ...searchParams, attribute: val })}
+            size="sm"
+          />
           {/*<Input
             onChange={e => {
               const val = e.target.value;
