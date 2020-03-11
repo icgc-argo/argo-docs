@@ -192,13 +192,38 @@ function DataDictionary() {
         const { primaryId = false, core = false, dependsOn = false } = meta;
         const required = get(field, 'restrictions.required', false);
 
+        let tierBool = false;
+        let attributeBool = false;
+
         if (tier === '' && attribute === '') return true;
-        if (tier === TAG_TYPES.id && primaryId) return true;
-        if (tier === TAG_TYPES.core && core) return true;
-        if (tier === TAG_TYPES.extended && !core && !primaryId) return true;
-        if (attribute === TAG_TYPES.dependsOn && dependsOn) return true;
-        if (attribute === TAG_TYPES.required && required) return true;
-        return false;
+
+        if (
+          (tier === TAG_TYPES.id && primaryId) ||
+          (tier === TAG_TYPES.core && core) ||
+          (tier === TAG_TYPES.extended && !core && !primaryId) ||
+          tier === ''
+        ) {
+          tierBool = true;
+        }
+
+        if (
+          (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+          (attribute === TAG_TYPES.required && required) ||
+          attribute === ''
+        ) {
+          attributeBool = true;
+        }
+        console.log(
+          field,
+          field.name,
+          'attribute bool',
+          attributeBool,
+          'attb',
+          attribute,
+          'dependson',
+          dependsOn,
+        );
+        return tierBool && attributeBool;
       });
       return { ...schema, fields: filteredFields };
     });
