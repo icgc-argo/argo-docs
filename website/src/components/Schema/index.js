@@ -161,15 +161,14 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
       Header: 'Attributes',
       id: 'attributes',
       Cell: ({ original: { restrictions, meta } }) => {
-        const tags = [];
-        if (restrictions && restrictions.required) {
-          tags.push(<Tag type={TAG_TYPES.required} />);
-        }
-
-        if (meta && !!meta.dependsOn) {
-          tags.push(<Tag type={TAG_TYPES.dependency} />);
-        }
-        return tags.length > 0 ? <TagContainer>{tags}</TagContainer> : null;
+        const isRestrictedField = restrictions && restrictions.required;
+        const isDependentField = meta && !!meta.dependsOn;
+        return (
+          <TagContainer>
+            {isRestrictedField && <Tag type={TAG_TYPES.required} />}
+            {isDependentField && <Tag type={TAG_TYPES.dependency} />}
+          </TagContainer>
+        );
       },
       style: { padding: '8px' },
       width: 102,
