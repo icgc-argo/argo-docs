@@ -20,6 +20,19 @@ const Notes = styled('div')`
   margin-bottom: 15px;
 `;
 
+const TagContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  div {
+    display: inline;
+    :not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+`;
+
 const formatFieldType = value => {
   switch (value) {
     case 'string':
@@ -148,13 +161,15 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
       Header: 'Attributes',
       id: 'attributes',
       Cell: ({ original: { restrictions, meta } }) => {
+        const tags = [];
         if (restrictions && restrictions.required) {
-          return <Tag type={TAG_TYPES.required} />;
-        } else if (meta && !!meta.dependsOn) {
-          return <Tag type={TAG_TYPES.dependency} />;
-        } else {
-          return null;
+          tags.push(<Tag type={TAG_TYPES.required} />);
         }
+
+        if (meta && !!meta.dependsOn) {
+          tags.push(<Tag type={TAG_TYPES.dependency} />);
+        }
+        return tags.length > 0 ? <TagContainer>{tags}</TagContainer> : null;
       },
       style: { padding: '8px' },
       width: 102,
