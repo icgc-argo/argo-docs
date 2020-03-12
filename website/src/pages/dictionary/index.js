@@ -18,7 +18,7 @@ import Select from '@icgc-argo/uikit/form/Select';
 import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
-import FileFilters from '../../components/FileFilters';
+import FileFilters, { NO_ACTIVE_FILTER } from '../../components/FileFilters';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -203,7 +203,8 @@ function DataDictionary() {
             (tier === TAG_TYPES.id && primaryId) ||
             (tier === TAG_TYPES.core && core) ||
             (tier === TAG_TYPES.extended && !core && !primaryId) ||
-            tier === ''
+            tier === '' ||
+            tier === NO_ACTIVE_FILTER
           ) {
             tierBool = true;
           }
@@ -211,7 +212,8 @@ function DataDictionary() {
           if (
             (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
             (attribute === TAG_TYPES.required && required) ||
-            attribute === ''
+            attribute === '' ||
+            attribute === NO_ACTIVE_FILTER
           ) {
             attributeBool = true;
           }
@@ -315,11 +317,15 @@ function DataDictionary() {
               <FileFilters
                 files={meta.fileCount}
                 fields={meta.fieldCount}
-                dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
-                dataAttributes={filters.attributes.map(d => ({
-                  content: startCase(d),
-                  value: d,
-                }))}
+                dataTiers={[{ content: 'All Tiers', value: NO_ACTIVE_FILTER }].concat(
+                  filters.tiers.map(d => ({ content: startCase(d), value: d })),
+                )}
+                dataAttributes={[{ content: 'All Tiers', value: NO_ACTIVE_FILTER }].concat(
+                  filters.attributes.map(d => ({
+                    content: startCase(d),
+                    value: d,
+                  })),
+                )}
                 searchParams={searchParams}
                 onSearch={search => {
                   console.log('search', search);

@@ -4,11 +4,7 @@ import Input from '@icgc-argo/uikit/form/Input';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 
-const search = {
-  tier: '',
-  attribute: '',
-  text: '',
-};
+export const NO_ACTIVE_FILTER = 'no_active_filter';
 
 const FileFilters = ({
   files = 0,
