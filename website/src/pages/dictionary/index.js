@@ -185,50 +185,42 @@ function DataDictionary() {
 
   // TODO: Memo
   const searchSchemas = (schemas, params) => {
-    const filtered = schemas.map(schema => {
-      const { tier, attribute } = params;
-      const filteredFields = schema.fields.filter(field => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const required = get(field, 'restrictions.required', false);
+    const filtered = schemas
+      .map(schema => {
+        const { tier, attribute } = params;
+        const filteredFields = schema.fields.filter(field => {
+          const meta = get(field, 'meta', {});
+          const { primaryId = false, core = false, dependsOn = false } = meta;
+          const required = get(field, 'restrictions.required', false);
 
-        let tierBool = false;
-        let attributeBool = false;
+          let tierBool = false;
+          let attributeBool = false;
 
-        if (tier === '' && attribute === '') return true;
+          if (tier === '' && attribute === '') return true;
 
-        if (
-          (tier === TAG_TYPES.id && primaryId) ||
-          (tier === TAG_TYPES.core && core) ||
-          (tier === TAG_TYPES.extended && !core && !primaryId) ||
-          tier === ''
-        ) {
-          tierBool = true;
-        }
+          if (
+            (tier === TAG_TYPES.id && primaryId) ||
+            (tier === TAG_TYPES.core && core) ||
+            (tier === TAG_TYPES.extended && !core && !primaryId) ||
+            tier === ''
+          ) {
+            tierBool = true;
+          }
 
-        if (
-          (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
-          (attribute === TAG_TYPES.required && required) ||
-          attribute === ''
-        ) {
-          attributeBool = true;
-        }
-        console.log(
-          field,
-          field.name,
-          'attribute bool',
-          attributeBool,
-          'attb',
-          attribute,
-          'dependson',
-          dependsOn,
-        );
-        return tierBool && attributeBool;
-      });
-      return { ...schema, fields: filteredFields };
-    });
+          if (
+            (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+            (attribute === TAG_TYPES.required && required) ||
+            attribute === ''
+          ) {
+            attributeBool = true;
+          }
 
-    console.log('search schemas filtered', filtered);
+          return tierBool && attributeBool;
+        });
+        return { ...schema, fields: filteredFields };
+      })
+      .filter(schema => schema.fields.length > 0);
+
     return filtered;
   };
 
