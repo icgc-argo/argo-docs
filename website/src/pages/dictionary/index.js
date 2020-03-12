@@ -76,14 +76,15 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
+// TODO: loader
 const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
-  schemas ? (
+  schemas.length > 0 ? (
     schemas.map(schema => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
       return <Schema schema={schema} menuItem={menuItem} isLatestSchema={isLatestSchema} />;
     })
   ) : (
-    <DnaLoader />
+    <div>No schemas found</div>
   );
 
 function DataDictionary() {
