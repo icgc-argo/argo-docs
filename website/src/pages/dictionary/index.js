@@ -95,7 +95,22 @@ function DataDictionary() {
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
-  const [schemas, setSchemas] = useState(dictionary.schemas);
+  const [schemas, setSchemas] = useState(data.dictionary.schemas);
+
+  // menu
+  const generateMenuContents = (dictionary, activeSchemas) => {
+    const activeSchemaNames = activeSchemas.map(s => s.name);
+    console.log('generate menu contents', activeSchemaNames);
+    return dictionary.schemas.map(schema => ({
+      key: schema.name,
+      name: startCase(schema.name),
+      contentRef: createRef(),
+      active: false,
+      disabled: !activeSchemaNames.includes(schema.name),
+    }));
+  };
+
+  const [menuContents, setMenuContents] = useState(generateMenuContents(dictionary, schemas));
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
@@ -133,14 +148,6 @@ function DataDictionary() {
   const downloadTsvFileTemplate = fileName => {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
-
-  // menu
-  const menuContents = dictionary.schemas.map(schema => ({
-    name: startCase(schema.name),
-    contentRef: createRef(),
-    active: false,
-    disabled: false,
-  }));
 
   // TODO: move to static build
   useEffect(() => {
@@ -180,13 +187,24 @@ function DataDictionary() {
     );
 
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
+
+    //
+    setMenuContents(generateMenuContents(dictionary, schemas));
   }, [dictionary]);
+
+  useEffect(() => {
+    const activeSchemas = searchSchemas(schemas, searchParams);
+    console.log('search...', activeSchemas);
+
+    setSchemas(activeSchemas);
+    setMenuContents(generateMenuContents(dictionary, activeSchemas));
+  }, [searchParams]);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
   // TODO: Memo
-  const searchSchemas = (schemas, params) => {
-    const filtered = schemas
+  const searchSchemas = (schemas, params) =>
+    dictionary.schemas
       .map(schema => {
         const { tier, attribute } = params;
         const filteredFields = schema.fields.filter(field => {
@@ -223,9 +241,6 @@ function DataDictionary() {
         return { ...schema, fields: filteredFields };
       })
       .filter(schema => schema.fields.length > 0);
-
-    return filtered;
-  };
 
   const filteredSchemas = searchSchemas(dictionary.schemas, searchParams);
 
@@ -328,7 +343,6 @@ function DataDictionary() {
                 )}
                 searchParams={searchParams}
                 onSearch={search => {
-                  console.log('search', search);
                   setSearchParams(search);
                 }}
               />
