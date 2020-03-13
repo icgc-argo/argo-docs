@@ -18,7 +18,7 @@ import Select from '@icgc-argo/uikit/form/Select';
 import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
-import FileFilters, { NO_ACTIVE_FILTER } from '../../components/FileFilters';
+import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -330,10 +330,10 @@ function DataDictionary() {
               <FileFilters
                 files={meta.fileCount}
                 fields={meta.fieldCount}
-                dataTiers={[{ content: 'All Tiers', value: NO_ACTIVE_FILTER }].concat(
+                dataTiers={DEFAULT_FILTER.concat(
                   filters.tiers.map(d => ({ content: startCase(d), value: d })),
                 )}
-                dataAttributes={[{ content: 'All Tiers', value: NO_ACTIVE_FILTER }].concat(
+                dataAttributes={DEFAULT_FILTER.concat(
                   filters.attributes.map(d => ({
                     content: startCase(d),
                     value: d,

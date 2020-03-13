@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 
 export const NO_ACTIVE_FILTER = 'no_active_filter';
+export const DEFAULT_FILTER = [{ content: 'All', value: NO_ACTIVE_FILTER }];
 
 const FileFilters = ({
   files = 0,
