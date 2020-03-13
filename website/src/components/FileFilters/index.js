@@ -15,7 +15,8 @@ const FileFilters = ({
   searchParams = {},
   onSearch = e => console.log(e.target.val),
 }) => {
-  const [searchValue, setSearchValue] = React.useState('');
+  // update search params
+  const onSelect = filterName => value => onSearch({ ...searchParams, ...{ [filterName]: value } });
 
   return (
     <Typography variant="data" color="#151c3d">
@@ -27,14 +28,14 @@ const FileFilters = ({
           <Select
             options={dataTiers}
             value={searchParams.tier}
-            onChange={val => onSearch({ ...searchParams, tier: val })}
+            onChange={onSelect('tier')}
             size="sm"
           />
           Attribute:{' '}
           <Select
             options={dataAttributes}
             value={searchParams.attribute}
-            onChange={val => onSearch({ ...searchParams, attribute: val })}
+            onChange={onSelect('attribute')}
             size="sm"
           />
           {/*<Input
