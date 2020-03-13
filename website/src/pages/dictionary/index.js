@@ -100,7 +100,6 @@ function DataDictionary() {
   // menu
   const generateMenuContents = (dictionary, activeSchemas) => {
     const activeSchemaNames = activeSchemas.map(s => s.name);
-    console.log('generate menu contents', activeSchemaNames);
     return dictionary.schemas.map(schema => ({
       key: schema.name,
       name: startCase(schema.name),
@@ -194,7 +193,6 @@ function DataDictionary() {
 
   useEffect(() => {
     const activeSchemas = searchSchemas(schemas, searchParams);
-    console.log('search...', activeSchemas);
 
     setSchemas(activeSchemas);
     setMenuContents(generateMenuContents(dictionary, activeSchemas));
@@ -342,9 +340,7 @@ function DataDictionary() {
                   })),
                 )}
                 searchParams={searchParams}
-                onSearch={search => {
-                  setSearchParams(search);
-                }}
+                onSearch={search => setSearchParams(search)}
               />
 
               <RenderDictionary
