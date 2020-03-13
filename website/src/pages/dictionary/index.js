@@ -97,7 +97,7 @@ function DataDictionary() {
   const [schemas, setSchemas] = useState(data.dictionary.schemas);
 
   // menu
-  const generateMenuContents = (dictionary, activeSchemas) => {
+  const generateMenuContents = activeSchemas => {
     const activeSchemaNames = activeSchemas.map(s => s.name);
     return dictionary.schemas.map(schema => ({
       key: schema.name,
@@ -108,7 +108,7 @@ function DataDictionary() {
     }));
   };
 
-  const [menuContents, setMenuContents] = useState(generateMenuContents(dictionary, schemas));
+  const [menuContents, setMenuContents] = useState(generateMenuContents(schemas));
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
@@ -184,23 +184,22 @@ function DataDictionary() {
     );
 
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
-    setMenuContents(generateMenuContents(dictionary, schemas));
+    setMenuContents(generateMenuContents(schemas));
   }, [dictionary]);
 
   useEffect(() => {
-    const activeSchemas = searchSchemas(schemas, searchParams);
-
+    const activeSchemas = searchSchemas();
     setSchemas(activeSchemas);
-    setMenuContents(generateMenuContents(dictionary, activeSchemas));
+    setMenuContents(generateMenuContents(activeSchemas));
   }, [searchParams]);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
   // TODO: Memo
-  const searchSchemas = params =>
+  const searchSchemas = () =>
     dictionary.schemas
       .map(schema => {
-        const { tier, attribute } = params;
+        const { tier, attribute } = searchParams;
         const filteredFields = schema.fields.filter(field => {
           const meta = get(field, 'meta', {});
           const { primaryId = false, core = false, dependsOn = false } = meta;
