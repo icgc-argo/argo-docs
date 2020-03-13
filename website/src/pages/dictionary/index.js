@@ -235,8 +235,6 @@ function DataDictionary() {
       })
       .filter(schema => schema.fields.length > 0);
 
-  const filteredSchemas = searchSchemas(dictionary.schemas, searchParams);
-
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -339,7 +337,7 @@ function DataDictionary() {
               />
 
               <RenderDictionary
-                schemas={filteredSchemas}
+                schemas={schemas}
                 menuContents={menuContents}
                 isLatestSchema={isLatestSchema}
               />
