@@ -76,7 +76,6 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
-// TODO: loader
 const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
   schemas.length > 0 ? (
     schemas.map(schema => {
@@ -148,7 +147,6 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
-  // TODO: move to static build
   useEffect(() => {
     const schemas = get(dictionary, 'schemas', []);
     const files = schemas.length;
@@ -186,8 +184,6 @@ function DataDictionary() {
     );
 
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
-
-    //
     setMenuContents(generateMenuContents(dictionary, schemas));
   }, [dictionary]);
 
@@ -201,7 +197,7 @@ function DataDictionary() {
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
   // TODO: Memo
-  const searchSchemas = (schemas, params) =>
+  const searchSchemas = params =>
     dictionary.schemas
       .map(schema => {
         const { tier, attribute } = params;
