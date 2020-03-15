@@ -136,6 +136,46 @@ function DataDictionary() {
     );
   };
 
+  // TODO: Memo
+  const searchSchemas = () =>
+    dictionary.schemas
+      .map(schema => {
+        const { tier, attribute } = searchParams;
+        const filteredFields = schema.fields.filter(field => {
+          const meta = get(field, 'meta', {});
+          const { primaryId = false, core = false, dependsOn = false } = meta;
+          const required = get(field, 'restrictions.required', false);
+
+          let tierBool = false;
+          let attributeBool = false;
+
+          if (tier === '' && attribute === '') return true;
+
+          if (
+            (tier === TAG_TYPES.id && primaryId) ||
+            (tier === TAG_TYPES.core && core) ||
+            (tier === TAG_TYPES.extended && !core && !primaryId) ||
+            tier === '' ||
+            tier === NO_ACTIVE_FILTER
+          ) {
+            tierBool = true;
+          }
+
+          if (
+            (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+            (attribute === TAG_TYPES.required && required) ||
+            attribute === '' ||
+            attribute === NO_ACTIVE_FILTER
+          ) {
+            attributeBool = true;
+          }
+
+          return tierBool && attributeBool;
+        });
+        return { ...schema, fields: filteredFields };
+      })
+      .filter(schema => schema.fields.length > 0);
+
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -187,53 +227,14 @@ function DataDictionary() {
     setMenuContents(generateMenuContents(schemas));
   }, [dictionary]);
 
+  const filteredSchemas = React.useMemo(() => searchSchemas(), [searchParams]);
+
   useEffect(() => {
-    const activeSchemas = searchSchemas();
-    setSchemas(activeSchemas);
-    setMenuContents(generateMenuContents(activeSchemas));
+    setSchemas(filteredSchemas);
+    setMenuContents(generateMenuContents(filteredSchemas));
   }, [searchParams]);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
-
-  // TODO: Memo
-  const searchSchemas = () =>
-    dictionary.schemas
-      .map(schema => {
-        const { tier, attribute } = searchParams;
-        const filteredFields = schema.fields.filter(field => {
-          const meta = get(field, 'meta', {});
-          const { primaryId = false, core = false, dependsOn = false } = meta;
-          const required = get(field, 'restrictions.required', false);
-
-          let tierBool = false;
-          let attributeBool = false;
-
-          if (tier === '' && attribute === '') return true;
-
-          if (
-            (tier === TAG_TYPES.id && primaryId) ||
-            (tier === TAG_TYPES.core && core) ||
-            (tier === TAG_TYPES.extended && !core && !primaryId) ||
-            tier === '' ||
-            tier === NO_ACTIVE_FILTER
-          ) {
-            tierBool = true;
-          }
-
-          if (
-            (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
-            (attribute === TAG_TYPES.required && required) ||
-            attribute === '' ||
-            attribute === NO_ACTIVE_FILTER
-          ) {
-            attributeBool = true;
-          }
-
-          return tierBool && attributeBool;
-        });
-        return { ...schema, fields: filteredFields };
-      })
-      .filter(schema => schema.fields.length > 0);
 
   return (
     <ThemeProvider>
