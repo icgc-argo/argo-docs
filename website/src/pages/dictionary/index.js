@@ -183,7 +183,7 @@ function DataDictionary() {
             let tierBool = false;
             let attributeBool = false;
 
-            if (tier === '' && attribute === '') return true;
+            if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
 
             if (
               (tier === TAG_TYPES.id && primaryId) ||
