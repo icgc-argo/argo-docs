@@ -94,28 +94,12 @@ function DataDictionary() {
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
-  const [schemas, setSchemas] = useState(data.dictionary.schemas);
-
-  // menu
-  const generateMenuContents = activeSchemas => {
-    const activeSchemaNames = activeSchemas.map(s => s.name);
-    return dictionary.schemas.map(schema => ({
-      key: schema.name,
-      name: startCase(schema.name),
-      contentRef: createRef(),
-      active: false,
-      disabled: !activeSchemaNames.includes(schema.name),
-    }));
-  };
-
-  const [menuContents, setMenuContents] = useState(generateMenuContents(schemas));
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
     if (newDict) {
       setVersion(newVersion);
       setDictionary(newDict);
-      setSchemas(newDict.schemas);
     } else {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
@@ -135,46 +119,6 @@ function DataDictionary() {
       </form>
     );
   };
-
-  // TODO: Memo
-  const searchSchemas = () =>
-    dictionary.schemas
-      .map(schema => {
-        const { tier, attribute } = searchParams;
-        const filteredFields = schema.fields.filter(field => {
-          const meta = get(field, 'meta', {});
-          const { primaryId = false, core = false, dependsOn = false } = meta;
-          const required = get(field, 'restrictions.required', false);
-
-          let tierBool = false;
-          let attributeBool = false;
-
-          if (tier === '' && attribute === '') return true;
-
-          if (
-            (tier === TAG_TYPES.id && primaryId) ||
-            (tier === TAG_TYPES.core && core) ||
-            (tier === TAG_TYPES.extended && !core && !primaryId) ||
-            tier === '' ||
-            tier === NO_ACTIVE_FILTER
-          ) {
-            tierBool = true;
-          }
-
-          if (
-            (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
-            (attribute === TAG_TYPES.required && required) ||
-            attribute === '' ||
-            attribute === NO_ACTIVE_FILTER
-          ) {
-            attributeBool = true;
-          }
-
-          return tierBool && attributeBool;
-        });
-        return { ...schema, fields: filteredFields };
-      })
-      .filter(schema => schema.fields.length > 0);
 
   const context = useDocusaurusContext();
   const {
@@ -224,15 +168,61 @@ function DataDictionary() {
     );
 
     setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
-    setMenuContents(generateMenuContents(schemas));
   }, [dictionary]);
 
-  const filteredSchemas = React.useMemo(() => searchSchemas(), [searchParams]);
+  const filteredSchemas = React.useMemo(
+    () =>
+      dictionary.schemas
+        .map(schema => {
+          const { tier, attribute } = searchParams;
+          const filteredFields = schema.fields.filter(field => {
+            const meta = get(field, 'meta', {});
+            const { primaryId = false, core = false, dependsOn = false } = meta;
+            const required = get(field, 'restrictions.required', false);
 
-  useEffect(() => {
-    setSchemas(filteredSchemas);
-    setMenuContents(generateMenuContents(filteredSchemas));
-  }, [searchParams]);
+            let tierBool = false;
+            let attributeBool = false;
+
+            if (tier === '' && attribute === '') return true;
+
+            if (
+              (tier === TAG_TYPES.id && primaryId) ||
+              (tier === TAG_TYPES.core && core) ||
+              (tier === TAG_TYPES.extended && !core && !primaryId) ||
+              tier === '' ||
+              tier === NO_ACTIVE_FILTER
+            ) {
+              tierBool = true;
+            }
+
+            if (
+              (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+              (attribute === TAG_TYPES.required && required) ||
+              attribute === '' ||
+              attribute === NO_ACTIVE_FILTER
+            ) {
+              attributeBool = true;
+            }
+
+            return tierBool && attributeBool;
+          });
+          return { ...schema, fields: filteredFields };
+        })
+        .filter(schema => schema.fields.length > 0),
+    [searchParams],
+  );
+
+  const generateMenuContents = activeSchemas => {
+    const activeSchemaNames = activeSchemas.map(s => s.name);
+    return dictionary.schemas.map(schema => ({
+      key: schema.name,
+      name: startCase(schema.name),
+      contentRef: createRef(),
+      active: false,
+      disabled: !activeSchemaNames.includes(schema.name),
+    }));
+  };
+  const menuContents = generateMenuContents(filteredSchemas);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
@@ -338,7 +328,7 @@ function DataDictionary() {
               />
 
               <RenderDictionary
-                schemas={schemas}
+                schemas={filteredSchemas}
                 menuContents={menuContents}
                 isLatestSchema={isLatestSchema}
               />
