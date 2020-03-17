@@ -16,7 +16,7 @@ To get to your User Profile, click the icon in the top right corner and select P
 Your authentication API Token uniquely identifies you and your permissions. These permissions apply to all ARGO Data Platform applications, for example when using the Song or Score clients for molecular data submission.
 
 You can get your authentication API Token from the [User Profile](https://platform.icgc-argo.org/user) > API Token section.  
-![Profile API Token](/img/data-access-user-profile-api-key.png)
+![Profile API Token](/assets/data-access/user-profile-api-key.png)
 Some important things to note about your API Token:
 
 - ARGO API Tokens have a duration of **30 days**.
@@ -26,7 +26,7 @@ Some important things to note about your API Token:
 ## Member Permissions
 
 Member permissions are assigned based the role that has been granted to you in a specific program, the type of program you are a member of, and your application for access to controlled data.
-![ARGO Member Permissions](/img/data-access-user-profile-program-access.png)
+![ARGO Member Permissions](/assets/data-access/user-profile-program-access.png)
 
 ### DACO Access
 

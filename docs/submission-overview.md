@@ -26,7 +26,7 @@ The ARGO Data Platform has been optimized to ensure that clinical and molecular 
 1. **Molecular Data Processing:** Once raw molecular data has been submitted, analytic workflows will be automatically kicked off for uniform analysis of all donor samples.
 1. **Data QC and Release:** Once **both** core clinical and molecular data has been submitted, and analysis is complete for a donor, the donor data will be released to the program for quality control and the [Data Release](data-release-schedule) process will begin. After an embargo period, donor data will be available on the ARGO Data Platform.
 
-![ARGO Submission Process](/img/ARGO-submission-process.png)
+![ARGO Submission Process](/assets/submission/submission-process.png)
 
 Submitted program data will be available for review using a [Program Dashboard](/docs/submitted-data), with statistics about the program's submission status, released data, and molecular data analysis progress.
 
