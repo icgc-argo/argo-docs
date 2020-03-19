@@ -15,22 +15,28 @@ const NodeContainer = styled('li')`
   padding-left: calc(var(--tree-line-height) + var(--arrow-width));
   margin-top: 0px;
 
-  /* before arrow */
+  /* line cont */
   ::before,
   ::after {
     content: '';
     position: absolute;
     left: 0;
-    width: 50%;
-    border-left: var(--tree-line-width) solid var(--tree-line-color);
     width: var(--tree-line-height);
-    height: 50%;
+    height: 100%;
   }
-  /* */
+
+  /* vertical line */
+  ::before {
+    border-left: var(--tree-line-width) solid var(--tree-line-color);
+  }
+
+  /* horizontal line */
   ::after {
-    top: 50%;
+    top: 100%;
+    transform: translateY(-50%);
     border-top: var(--tree-line-width) solid var(--tree-line-color);
   }
+
   /* single child node - no line */
   :only-child {
     padding: 0;
@@ -40,24 +46,29 @@ const NodeContainer = styled('li')`
       display: none;
     }
   }
-  /* top curve */
+
+  /**/
   :first-of-type {
     ::before {
-      border: 0 none;
+      bottom: -50%;
+      border-radius: var(--tree-line-border-radius) 0 0 0;
     }
     ::after {
       border-radius: var(--tree-line-border-radius) 0 0 0;
     }
   }
+
   /* bottom curve */
   :last-of-type {
     ::before {
-      border-bottom: var(--tree-line-width) solid var(--tree-line-color);
       border-radius: 0 0 0 var(--tree-line-border-radius);
-      bottom: 50%;
+      top: -50%;
     }
     ::after {
+      top: 0;
       border: 0 none;
+      border-bottom: var(--tree-line-width) solid var(--tree-line-color);
+      border-radius: 0 0 0 var(--tree-line-border-radius);
     }
   }
 
@@ -67,12 +78,8 @@ const NodeContainer = styled('li')`
     display: none;
   }
   .ChildrenContainer .arrow {
-    content: '';
     display: block;
     width: 20px;
-    border: 1px solid red;
-    position: absolute;
-    content: '';
     position: absolute;
     width: 0;
     height: 0;
@@ -103,6 +110,7 @@ const ChildrenContainer = styled('ul')`
     width: 0;
     border-top: var(--tree-line-width) solid var(--tree-line-color);
     width: var(--tree-line-height);
+    transform: translateY(-50%);
   }
 `;
 

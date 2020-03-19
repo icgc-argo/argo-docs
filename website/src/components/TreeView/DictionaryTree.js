@@ -209,7 +209,7 @@ const FileNode = ({ fileDef, onExpandStateChange }) => {
         className={css`
           &::before,
           &::after {
-            left: -4px !important;
+            _left: -4px !important;
           }
         `}
         label={
