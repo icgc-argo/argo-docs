@@ -12,24 +12,26 @@ If you are a Program Administrator, you will have the ability to invite users to
 - View the program profile information
 - Add and remove program users
 - View the program dashboard
-- Upload and download program data
+- Submit and download program data
 
-**Data Submitters** are granted permissions that allow for the management of program data. Data Submitters can:
+**Data Submitters** are granted permissions that allow for the submission of program data. Data Submitters can:
 
 - View the program dashboard
-- Upload and download program data
+- Submit and download program data
 
 **Collaborators** are granted limited view access to program data. Collaborators can:
 
 - View the program dashboard
 - Download program data
 
+> NOTE: Clinical data can be downloaded by any program role. In order to download genomic data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](data-access), or [apply for DACO approval here](https://icgc.org/daco).   
+
 ## Adding Users
 
 1. Navigate to the **Submission** area in the top menu.
 1. Click on the **Manage Program** section in the left menu for your program.
 1. Above the users table, click the _Add Users_ button.
-1. Fill in the First Name, Last Name, Email, and Role of the person you would like to add to your program. The email address you provide will be the email that the user will use to login to the ARGO Data Platform.
+1. Fill in the First Name, Last Name, Email, and Role of the person you would like to add to your program. The email address you provide will be the email that the user will use to log in to the ARGO Data Platform.
 
 > NOTE: Program Administrators are required to specify a **Gmail** or **GSuite enabled** email address for user invitations. Other email types **will not** be permitted to complete program registration.
 
