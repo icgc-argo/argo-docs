@@ -18,7 +18,7 @@ import Select from '@icgc-argo/uikit/form/Select';
 import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
-import FileFilters from '../../components/FileFilters';
+import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -32,6 +32,7 @@ import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
+import uniq from 'lodash/uniq';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -77,20 +78,23 @@ async function fetchDiff(version, diffVersion) {
 }
 
 const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
-  schemas ? (
+  schemas.length > 0 ? (
     schemas.map(schema => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
       return <Schema schema={schema} menuItem={menuItem} isLatestSchema={isLatestSchema} />;
     })
   ) : (
-    <DnaLoader />
+    <div>No schemas found</div>
   );
 
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
+
   const [filters, setFilters] = useState({ tiers: [], attributes: [] });
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
+
+  const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
@@ -128,14 +132,6 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
-  // menu
-  const menuContents = dictionary.schemas.map(schema => ({
-    name: startCase(schema.name),
-    contentRef: createRef(),
-    active: false,
-    disabled: false,
-  }));
-
   useEffect(() => {
     const schemas = get(dictionary, 'schemas', []);
     const files = schemas.length;
@@ -149,31 +145,84 @@ function DataDictionary() {
         const { primaryId = false, core = false, dependsOn = false } = meta;
         const restrictions = get(field, 'restrictions', false);
         if (primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.id);
+          acc.validDataTiers.push(TAG_TYPES.id);
         }
 
         if (!!restrictions) {
-          acc.validDataAttributes.add(TAG_TYPES.required);
+          acc.validDataAttributes.push(TAG_TYPES.required);
         }
 
         if (dependsOn) {
-          acc.validDataAttributes.add(TAG_TYPES.dependency);
+          acc.validDataAttributes.push(TAG_TYPES.dependency);
         }
 
         if (core) {
-          acc.validDataTiers.add(TAG_TYPES.core);
+          acc.validDataTiers.push(TAG_TYPES.core);
         }
 
         if (!core && !primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.extended);
+          acc.validDataTiers.push(TAG_TYPES.extended);
         }
         return acc;
       },
-      { validDataTiers: new Set(), validDataAttributes: new Set() },
+      { validDataTiers: [], validDataAttributes: [] },
     );
-
-    setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
+    setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
   }, [dictionary]);
+
+  const filteredSchemas = React.useMemo(
+    () =>
+      dictionary.schemas
+        .map(schema => {
+          const { tier, attribute } = searchParams;
+          const filteredFields = schema.fields.filter(field => {
+            const meta = get(field, 'meta', {});
+            const { primaryId = false, core = false, dependsOn = false } = meta;
+            const required = get(field, 'restrictions.required', false);
+
+            let tierBool = false;
+            let attributeBool = false;
+
+            if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
+
+            if (
+              (tier === TAG_TYPES.id && primaryId) ||
+              (tier === TAG_TYPES.core && core) ||
+              (tier === TAG_TYPES.extended && !core && !primaryId) ||
+              tier === '' ||
+              tier === NO_ACTIVE_FILTER
+            ) {
+              tierBool = true;
+            }
+
+            if (
+              (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+              (attribute === TAG_TYPES.required && required) ||
+              attribute === '' ||
+              attribute === NO_ACTIVE_FILTER
+            ) {
+              attributeBool = true;
+            }
+
+            return tierBool && attributeBool;
+          });
+          return { ...schema, fields: filteredFields };
+        })
+        .filter(schema => schema.fields.length > 0),
+    [searchParams],
+  );
+
+  const generateMenuContents = activeSchemas => {
+    const activeSchemaNames = activeSchemas.map(s => s.name);
+    return dictionary.schemas.map(schema => ({
+      key: schema.name,
+      name: startCase(schema.name),
+      contentRef: createRef(),
+      active: false,
+      disabled: !activeSchemaNames.includes(schema.name),
+    }));
+  };
+  const menuContents = generateMenuContents(filteredSchemas);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
@@ -265,15 +314,21 @@ function DataDictionary() {
               <FileFilters
                 files={meta.fileCount}
                 fields={meta.fieldCount}
-                dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
-                dataAttributes={filters.attributes.map(d => ({
-                  content: startCase(d),
-                  value: d,
-                }))}
+                dataTiers={DEFAULT_FILTER.concat(
+                  filters.tiers.map(d => ({ content: startCase(d), value: d })),
+                )}
+                dataAttributes={DEFAULT_FILTER.concat(
+                  filters.attributes.map(d => ({
+                    content: startCase(d),
+                    value: d,
+                  })),
+                )}
+                searchParams={searchParams}
+                onSearch={search => setSearchParams(search)}
               />
 
               <RenderDictionary
-                schemas={dictionary.schemas}
+                schemas={filteredSchemas}
                 menuContents={menuContents}
                 isLatestSchema={isLatestSchema}
               />
