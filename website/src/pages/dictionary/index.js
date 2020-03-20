@@ -32,6 +32,7 @@ import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
+import uniq from 'lodash/uniq';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -144,30 +145,29 @@ function DataDictionary() {
         const { primaryId = false, core = false, dependsOn = false } = meta;
         const restrictions = get(field, 'restrictions', false);
         if (primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.id);
+          acc.validDataTiers.push(TAG_TYPES.id);
         }
 
         if (!!restrictions) {
-          acc.validDataAttributes.add(TAG_TYPES.required);
+          acc.validDataAttributes.push(TAG_TYPES.required);
         }
 
         if (dependsOn) {
-          acc.validDataAttributes.add(TAG_TYPES.dependency);
+          acc.validDataAttributes.push(TAG_TYPES.dependency);
         }
 
         if (core) {
-          acc.validDataTiers.add(TAG_TYPES.core);
+          acc.validDataTiers.push(TAG_TYPES.core);
         }
 
         if (!core && !primaryId) {
-          acc.validDataTiers.add(TAG_TYPES.extended);
+          acc.validDataTiers.push(TAG_TYPES.extended);
         }
         return acc;
       },
-      { validDataTiers: new Set(), validDataAttributes: new Set() },
+      { validDataTiers: [], validDataAttributes: [] },
     );
-
-    setFilters({ tiers: [...validDataTiers], attributes: [...validDataAttributes] });
+    setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
   }, [dictionary]);
 
   const filteredSchemas = React.useMemo(
