@@ -47,7 +47,7 @@ const NodeContainer = styled('li')`
     }
   }
 
-  /**/
+  /* top curve */
   :first-of-type {
     ::before {
       bottom: -50%;

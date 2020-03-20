@@ -35,7 +35,8 @@ const TreeView = ({ dictionary, searchValue }) => {
   const containerRef = React.createRef();
 
   const collapseAllMessenger = createPubsub();
-  const onCollapseAllClick = () => {
+  const onCollapseAllClick = resetTransform => {
+    resetTransform();
     collapseAllMessenger.publish({ expanded: false });
   };
   const onExpandAllClick = () => {
@@ -61,7 +62,29 @@ const TreeView = ({ dictionary, searchValue }) => {
           }
         `}
       />
-      <ZoomPanContainer>
+      <ZoomPanContainer
+        menu={({ resetTransform }) => (
+          <div
+            style={{
+              border: `solid 1px ${theme.colors.grey_2}`,
+              position: 'absolute',
+              cursor: 'default',
+              background: theme.colors.white,
+              padding: 8,
+              right: 8,
+              top: 8,
+            }}
+          >
+            <Typography color="primary">Filter by Data Tier</Typography>
+            <Button variant="secondary" onClick={() => onCollapseAllClick(resetTransform)}>
+              Collapse All
+            </Button>
+            <Button variant="secondary" onClick={onExpandAllClick}>
+              Expand All
+            </Button>
+          </div>
+        )}
+      >
         <div
           style={{
             height: 800,
@@ -75,25 +98,6 @@ const TreeView = ({ dictionary, searchValue }) => {
           </ExpandStateMessenger.Provider>
         </div>
       </ZoomPanContainer>
-      <div
-        style={{
-          border: `solid 1px ${theme.colors.grey_2}`,
-          position: 'absolute',
-          cursor: 'default',
-          background: theme.colors.white,
-          padding: 8,
-          right: 8,
-          top: 8,
-        }}
-      >
-        <Typography color="primary">Filter by Data Tier</Typography>
-        <Button variant="secondary" onClick={onCollapseAllClick}>
-          Collapse All
-        </Button>
-        <Button variant="secondary" onClick={onExpandAllClick}>
-          Expand All
-        </Button>
-      </div>
     </div>
   );
 };

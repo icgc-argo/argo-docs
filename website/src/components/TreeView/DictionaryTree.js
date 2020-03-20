@@ -94,11 +94,11 @@ const FileDisplayBox = ({ fileName, required = false, fields, onExpandStateChang
 
   const collapseAllMessenger = useExpandStateMessenger();
   React.useEffect(() => {
-    const onDisatch = ({ expanded }) => {
+    const onDispatch = ({ expanded }) => {
       setExpanded(expanded);
     };
-    collapseAllMessenger.subscribe(onDisatch);
-    return () => collapseAllMessenger.unsubscribe(onDisatch);
+    collapseAllMessenger.subscribe(onDispatch);
+    return () => collapseAllMessenger.unsubscribe(onDispatch);
   }, []);
 
   return (
