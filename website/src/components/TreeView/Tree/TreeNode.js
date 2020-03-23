@@ -6,94 +6,89 @@ const NodeContainer = styled('li')`
   text-align: center;
   list-style-type: none;
   position: relative;
-  /* padding-top: var(--tree-line-height);
-  padding-right: var(--tree-node-padding);
-  padding-bottom: 0;
-  padding-left: var(--tree-node-padding); */
-  /* ::before,
-  ::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 50%;
-    width: 50%;
-    border-top: var(--tree-line-width) solid var(--tree-line-color);
-    height: var(--tree-line-height);
-  }
-  ::after {
-    left: 50%;
-    border-left: var(--tree-line-width) solid var(--tree-line-color);
-  }
-  :only-child {
-    padding: 0;
-    ::after,
-    :before {
-      display: none;
-    }
-  }
-  :first-of-type {
-    ::before {
-      border: 0 none;
-    }
-    ::after {
-      border-radius: var(--tree-line-border-radius) 0 0 0;
-    }
-  }
-  :last-of-type {
-    ::before {
-      border-right: var(--tree-line-width) solid var(--tree-line-color);
-      border-radius: 0 var(--tree-line-border-radius) 0 0;
-    }
-    ::after {
-      border: 0 none;
-    }
-  } */
 
   display: flex;
   flex-direction: row;
   padding-top: var(--tree-node-padding);
   padding-right: var(--tree-line-height);
   padding-bottom: 0;
-  padding-left: var(--tree-line-height);
+  padding-left: calc(var(--tree-line-height) + var(--arrow-width));
   margin-top: 0px;
+
+  /* line cont */
   ::before,
   ::after {
     content: '';
     position: absolute;
     left: 0;
-    width: 50%;
-    border-left: var(--tree-line-width) solid var(--tree-line-color);
     width: var(--tree-line-height);
-    height: 50%;
+    height: 100%;
   }
+
+  /* vertical line */
+  ::before {
+    border-left: var(--tree-line-width) solid var(--tree-line-color);
+  }
+
+  /* horizontal line */
   ::after {
-    top: 50%;
+    top: 100%;
+    transform: translateY(-50%);
     border-top: var(--tree-line-width) solid var(--tree-line-color);
   }
+
+  /* single child node - no line */
   :only-child {
     padding: 0;
+    padding-left: var(--arrow-width);
     ::after,
     :before {
       display: none;
     }
   }
+
+  /* top curve */
   :first-of-type {
     ::before {
-      border: 0 none;
+      bottom: -50%;
+      border-radius: var(--tree-line-border-radius) 0 0 0;
     }
     ::after {
       border-radius: var(--tree-line-border-radius) 0 0 0;
     }
   }
+
+  /* bottom curve */
   :last-of-type {
     ::before {
-      border-bottom: var(--tree-line-width) solid var(--tree-line-color);
       border-radius: 0 0 0 var(--tree-line-border-radius);
-      bottom: 50%;
+      top: -50%;
     }
     ::after {
+      top: 0;
       border: 0 none;
+      border-bottom: var(--tree-line-width) solid var(--tree-line-color);
+      border-radius: 0 0 0 var(--tree-line-border-radius);
     }
+  }
+
+  /* arrow */
+  /* first node*/
+  .arrow {
+    display: none;
+  }
+  .ChildrenContainer .arrow {
+    display: block;
+    width: 20px;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    border-style: solid;
+    border-width: 7px 0 7px 9px;
+    border-color: transparent transparent transparent var(--tree-line-color);
+    transform: translate(-9px, -50%);
+    z-index: 2;
   }
 `;
 
@@ -102,19 +97,9 @@ const ChildrenContainer = styled('ul')`
   padding-inline-start: 0;
   padding-top: var(--tree-line-height);
   position: relative;
-  /* ::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 0;
-    border-left: var(--tree-line-width) solid var(--tree-line-color);
-    height: var(--tree-line-height);
-  } */
 
-  /* border: solid 2px green; */
   flex-direction: column;
-  padding-left: var(--tree-line-height);
+  padding-left: calc(var(--tree-line-height));
   padding-top: 0px;
   margin: 0px;
   ::before {
@@ -125,12 +110,14 @@ const ChildrenContainer = styled('ul')`
     width: 0;
     border-top: var(--tree-line-width) solid var(--tree-line-color);
     width: var(--tree-line-height);
+    transform: translateY(-50%);
   }
 `;
 
-function TreeNode({ children, label, className }) {
+function TreeNode({ children, label, className = '' }) {
   return (
     <NodeContainer className={`NodeContainer ${className}`}>
+      <div className="arrow" />
       {label}
       {React.Children.count(children) > 0 && (
         <ChildrenContainer className="ChildrenContainer">{children}</ChildrenContainer>

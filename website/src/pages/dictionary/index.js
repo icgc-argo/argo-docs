@@ -36,6 +36,7 @@ import { css } from '@icgc-argo/uikit';
 import Icon from '@icgc-argo/uikit/Icon';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
+import { styled } from '@icgc-argo/uikit';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -237,6 +238,25 @@ function DataDictionary() {
     setSelectedTab(newValue);
   };
 
+  const StyledTab = styled(Tab)`
+    border: 0 none;
+    position: relative;
+
+    &.active {
+      border: 0 none;
+
+      ::after {
+        content: '';
+        border-bottom: 2px solid #00c79d;
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 80%;
+        margin-left: -40%;
+      }
+    }
+  `;
+
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -327,8 +347,8 @@ function DataDictionary() {
                     marginBottom: '-2px',
                   }}
                 >
-                  <Tab value={TAB_STATE.OVERVIEW} label="Overview" />
-                  <Tab value={TAB_STATE.DETAILS} label="Details" />
+                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
+                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
                 </Tabs>
                 <div className={styles.downloads}>
                   <DropdownButton variant="secondary" size="sm" menuItems={[]}>

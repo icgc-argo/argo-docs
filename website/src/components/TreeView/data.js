@@ -55,6 +55,18 @@ export default {
           children: [
             {
               name: 'primary_diagnosis',
+              fields: [{ name: 'age_at_diagnosis', requireds: true }],
+              children: [],
+              required: true,
+            },
+            {
+              name: 'primary_diagnosis',
+              fields: [{ name: 'age_at_diagnosis', requireds: true }],
+              children: [],
+              required: true,
+            },
+            {
+              name: 'primary_diagnosis',
               fields: [
                 { name: 'age_at_diagnosis', requireds: true },
                 { name: 'cancer_type_code', requireds: true },
@@ -128,7 +140,33 @@ export default {
                       required: true,
                     },
                   ],
-                  children: [],
+                  children: [
+                    {
+                      name: 'primary_diagnosis',
+                      fields: [{ name: 'age_at_diagnosis', requireds: true }],
+                      children: [
+                        {
+                          name: 'primary_diagnosis',
+                          fields: [{ name: 'age_at_diagnosis', requireds: true }],
+                          children: [],
+                          required: true,
+                        },
+                        {
+                          name: 'primary_diagnosis',
+                          fields: [{ name: 'age_at_diagnosis', requireds: true }],
+                          children: [],
+                          required: true,
+                        },
+                        {
+                          name: 'primary_diagnosis',
+                          fields: [{ name: 'age_at_diagnosis', requireds: true }],
+                          children: [],
+                          required: true,
+                        },
+                      ],
+                      required: true,
+                    },
+                  ],
                   required: false,
                 },
                 {
@@ -277,7 +315,38 @@ export default {
                 { name: 'alk_status', required: false },
                 { name: 'ros1_status', required: false },
               ],
-              children: [],
+              children: [
+                {
+                  name: 'biomarkers',
+                  fields: [{ name: 'brca_carrier', required: false }],
+                  children: [],
+                  required: false,
+                },
+                {
+                  name: 'biomarkers',
+                  fields: [{ name: 'brca_carrier', required: false }],
+                  children: [],
+                  required: false,
+                },
+                {
+                  name: 'biomarkers',
+                  fields: [{ name: 'brca_carrier', required: false }],
+                  children: [],
+                  required: false,
+                },
+                {
+                  name: 'biomarkers',
+                  fields: [{ name: 'brca_carrier', required: false }],
+                  children: [],
+                  required: false,
+                },
+                {
+                  name: 'biomarkers',
+                  fields: [{ name: 'brca_carrier', required: false }],
+                  children: [],
+                  required: false,
+                },
+              ],
               required: false,
             },
           ],

@@ -18,6 +18,7 @@ const StyledRootContainer = styled(RootContainer)`
   --tree-line-color: var(--line-color, black);
   --tree-line-border-radius: var(--line-border-radius, 5px);
   --tree-node-padding: var(--node-padding, 5px);
+  --arrow-width: 9px;
 `;
 
 const Tree = React.forwardRef(({ children, label, ...props }, ref) => {

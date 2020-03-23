@@ -8,7 +8,13 @@ const MIN_ZOOM = 0.25;
 const MAX_ZOOM = 1;
 const ZOOM_STEP = 0.05;
 
-export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = ZOOM_STEP }) => {
+export default ({
+  children,
+  minZoom = MIN_ZOOM,
+  maxZoom = MAX_ZOOM,
+  zoomStep = ZOOM_STEP,
+  menu,
+}) => {
   const theme = useTheme();
   const DEFAULT_SCALE = 1;
   const [sliderValue, setSliderValue] = React.useState(DEFAULT_SCALE);
@@ -75,6 +81,7 @@ export default ({ children, minZoom = MIN_ZOOM, maxZoom = MAX_ZOOM, zoomStep = Z
                 <button onClick={onResetClick}>reset</button>
               </div>
               <TransformComponent>{children}</TransformComponent>
+              <div>{menu({ resetTransform })}</div>
             </React.Fragment>
           );
         }}
