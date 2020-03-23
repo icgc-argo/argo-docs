@@ -3,9 +3,14 @@ import Select from '@icgc-argo/uikit/form/Select';
 import Input from '@icgc-argo/uikit/form/Input';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
+import { styled } from '@icgc-argo/uikit';
 
 export const NO_ACTIVE_FILTER = 'no_active_filter';
 export const DEFAULT_FILTER = [{ content: 'All', value: NO_ACTIVE_FILTER }];
+
+const StyledSelect = styled(Select)`
+  min-width: 190px;
+`;
 
 const FileFilters = ({
   files = 0,
@@ -25,14 +30,14 @@ const FileFilters = ({
 
         <div className={styles.dataSelectors}>
           Data Tier:{' '}
-          <Select
+          <StyledSelect
             options={dataTiers}
             value={searchParams.tier}
             onChange={onSelect('tier')}
             size="sm"
           />
           Attribute:{' '}
-          <Select
+          <StyledSelect
             options={dataAttributes}
             value={searchParams.attribute}
             onChange={onSelect('attribute')}
