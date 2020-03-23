@@ -47,18 +47,17 @@ const TreeView = ({ dictionary, searchValue }) => {
   };
 
   return (
-    <div
-      id="yo"
-      style={{ display: 'flex', cursor: 'grab', position: 'relative' }}
-      ref={containerRef}
-    >
+    <div style={{ display: 'flex', cursor: 'grab', position: 'relative' }} ref={containerRef}>
       <Global
         styles={css`
           .dict_src-pages-dictionary- {
             /* experimental css properties */
             width: -webkit-fill-available;
             width: -moz-available;
-            width: fill-available;
+            width: stretch;
+            height: -webkit-fill-available;
+            height: -moz-available;
+            height: stretch;
           }
         `}
       />
