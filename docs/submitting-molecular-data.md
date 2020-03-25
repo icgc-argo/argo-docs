@@ -11,7 +11,7 @@ This guide will describe how to submit molecular data to the ARGO Data Platform.
 Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients).  Song is an open source system used to track and validate metadata about raw data submissions. Score securely and quickly manages upload and download of files to cloud repositories. The Song and Score clients are used in conjuction to  upload raw data files while maintaining file metadata and provenance.
 
 ### Song-Client
-Download the **[latest version of the Song client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/4.0.0/song-client-4.0.0-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the Song client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
 - local RDPC Song server URL
 - [API Token](user-profile-and-api-token)
 - ARGO Program Id that you are submitting to (studyId within the config file)
@@ -30,7 +30,7 @@ retry:
   multiplier: 2.0
 ```
 ### Score-Client
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/3.0.1/score-client-3.0.1-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.properties` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE}-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.properties` configuration file with the correct user and data submission program values, including:
 - local RDPC Song server URL
 - [API Key](user-profile-and-token)
 - local RDPC Song server URL
