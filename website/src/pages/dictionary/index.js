@@ -15,12 +15,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
-import DnaLoader from '@icgc-argo/uikit/DnaLoader';
 import StyleWrapper from '../../theme/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
-import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -28,21 +26,12 @@ import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import {
-  DownloadButtonContent,
-  DownloadTooltip,
-  DownloadIcon,
-  Display,
-} from '../../components/common';
+import { Display } from '../../components/common';
 import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
-import { css } from '@icgc-argo/uikit';
-import Icon from '@icgc-argo/uikit/Icon';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { styled } from '@icgc-argo/uikit';
-import ContentMenu from '../../components/ContentMenu';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
