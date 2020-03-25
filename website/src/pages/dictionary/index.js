@@ -29,7 +29,7 @@ import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
+import { DownloadButtonContent, DownloadTooltip, DownloadIcon } from '../../components/common';
 import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
@@ -37,6 +37,7 @@ import Icon from '@icgc-argo/uikit/Icon';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { styled } from '@icgc-argo/uikit';
+import ContentMenu from '../../components/ContentMenu';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -68,6 +69,7 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
+const treeData = require('./tree.json');
 
 async function fetchDictionary(version) {
   const response = await axios.get(`/data/schemas/${version}.json`);
@@ -99,6 +101,7 @@ function DataDictionary() {
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
 
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
+  const [searchValue, setSearchValue] = useState('');
 
   const updateVersion = async newVersion => {
     const newDict = await fetchDictionary(newVersion);
@@ -350,16 +353,8 @@ function DataDictionary() {
                   <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
                   <StyledTab value={TAB_STATE.DETAILS} label="Details" />
                 </Tabs>
-                <div className={styles.downloads}>
-                  <DropdownButton variant="secondary" size="sm" menuItems={[]}>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                      <DownloadIcon />
-                      File Templates
-                      <Icon name="chevron_down" ffill="accent2_dark" height="9px" />
-                    </div>
-                  </DropdownButton>
-                  <DownloadButton>PDF</DownloadButton>
-                </div>
+
+                <div />
               </div>
 
               <FileFilters
@@ -379,48 +374,31 @@ function DataDictionary() {
               />
             </div>
 
-            <div className={styles.menu}>
-              <SchemaMenu
-                title="Clinical Files"
-                contents={menuContents}
-                color="#0774d3"
-                scrollYOffset="70"
-                dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
-                dataAttributes={filters.attributes.map(d => ({
-                  content: startCase(d),
-                  value: d,
-                }))}
-                onSearch={setSearchValue}
+            <Display visible={selectedTab === TAB_STATE.DETAILS}>
+              <RenderDictionary
+                schemas={filteredSchemas}
+                menuContents={menuContents}
+                isLatestSchema={isLatestSchema}
               />
-              <div
-                style={{
-                  display: selectedTab === TAB_STATE.DETAILS ? 'block' : 'none',
-                }}
-              >
-                <RenderDictionary
-                  schemas={filteredSchemas}
-                  menuContents={menuContents}
-                  isLatestSchema={isLatestSchema}
-                />
-              </div>
-              <div
-                style={{
-                  display: selectedTab === TAB_STATE.OVERVIEW ? 'block' : 'none',
-                }}
-              >
-                <TreeView dictionary={dictionary} searchValue={searchValue} />
-              </div>
-            </div>
-            {selectedTab === TAB_STATE.DETAILS && (
               <div className={styles.menu}>
-                <ContentMenu
+                <SchemaMenu
                   title="Clinical Files"
                   contents={menuContents}
                   color="#0774d3"
                   scrollYOffset="70"
+                  dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
+                  dataAttributes={filters.attributes.map(d => ({
+                    content: startCase(d),
+                    value: d,
+                  }))}
                 />
               </div>
-            )}
+              </Display>
+
+              <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
+                <TreeView dictionary={dictionary} searchValue={searchValue} data={treeData} />
+              </Display>
+            </div>
           </div>
         </StyleWrapper>
       </Layout>
