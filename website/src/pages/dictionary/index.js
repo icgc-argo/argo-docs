@@ -29,7 +29,12 @@ import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import { DownloadButtonContent, DownloadTooltip, DownloadIcon } from '../../components/common';
+import {
+  DownloadButtonContent,
+  DownloadTooltip,
+  DownloadIcon,
+  Display,
+} from '../../components/common';
 import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import { css } from '@icgc-argo/uikit';
@@ -372,14 +377,21 @@ function DataDictionary() {
                 searchParams={searchParams}
                 onSearch={search => setSearchParams(search)}
               />
+
+              <Display visible={selectedTab === TAB_STATE.DETAILS}>
+                <RenderDictionary
+                  schemas={filteredSchemas}
+                  menuContents={menuContents}
+                  isLatestSchema={isLatestSchema}
+                />
+              </Display>
+
+              <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
+                <TreeView dictionary={dictionary} searchValue={searchValue} data={treeData} />
+              </Display>
             </div>
 
-            <Display visible={selectedTab === TAB_STATE.DETAILS}>
-              <RenderDictionary
-                schemas={filteredSchemas}
-                menuContents={menuContents}
-                isLatestSchema={isLatestSchema}
-              />
+            <Display visible={true}>
               <div className={styles.menu}>
                 <SchemaMenu
                   title="Clinical Files"
@@ -393,12 +405,7 @@ function DataDictionary() {
                   }))}
                 />
               </div>
-              </Display>
-
-              <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
-                <TreeView dictionary={dictionary} searchValue={searchValue} data={treeData} />
-              </Display>
-            </div>
+            </Display>
           </div>
         </StyleWrapper>
       </Layout>
