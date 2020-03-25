@@ -2,7 +2,6 @@ import React, { useState, createRef, useEffect } from 'react';
 import { useTheme } from '@icgc-argo/uikit/ThemeProvider';
 import ZoomPanContainer from './ZoomPanContainer';
 import Tree from './DictionaryTree';
-import data from './data';
 import { Global, css } from '@emotion/core';
 import Typography from '@icgc-argo/uikit/Typography';
 import Button from '@icgc-argo/uikit/Button';
@@ -30,7 +29,7 @@ const createPubsub = () => {
 const ExpandStateMessenger = React.createContext();
 export const useExpandStateMessenger = () => React.useContext(ExpandStateMessenger);
 
-const TreeView = ({ dictionary, searchValue }) => {
+const TreeView = ({ data, searchValue }) => {
   const theme = useTheme();
   const containerRef = React.createRef();
 
