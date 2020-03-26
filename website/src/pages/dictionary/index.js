@@ -63,7 +63,7 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
-const treeData = require('./tree.json');
+const dictionaryTreeData = require('./tree.json');
 
 async function fetchDictionary(version) {
   try {
@@ -95,6 +95,7 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
+  const [treeData, setTreeData] = useState(dictionaryTreeData);
 
   const [filters, setFilters] = useState({ tiers: [], attributes: [] });
   const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
@@ -108,6 +109,7 @@ function DataDictionary() {
 
       setVersion(newVersion);
       setDictionary(dict);
+      setTreeData(tree);
     } catch (err) {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
