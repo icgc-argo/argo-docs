@@ -15,8 +15,8 @@ const ToggleMore = ({ children, onToggle }) => (
 
 const CodeList = ({ codeList = [], onToggle, isExpanded }) => {
   const maxEnumLength = 5;
-  const fullOutput = codeList.map(item => (
-    <p className={styles.fieldEnumValue}>
+  const fullOutput = codeList.map((item, i) => (
+    <p key={i} className={styles.fieldEnumValue}>
       <strong>{item}</strong>
     </p>
   ));
