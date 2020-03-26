@@ -384,7 +384,7 @@ function DataDictionary() {
               </Display>
 
               <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
-                <TreeView dictionary={dictionary} searchValue={searchValue} data={treeData} />
+                <TreeView searchValue={searchValue} data={treeData} />
               </Display>
             </div>
 
