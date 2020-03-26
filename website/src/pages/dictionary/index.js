@@ -97,9 +97,6 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(data.dictionary);
   const [treeData, setTreeData] = useState(dictionaryTreeData);
 
-  const [filters, setFilters] = useState({ tiers: [], attributes: [] });
-  const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
-
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
   const [searchValue, setSearchValue] = useState('');
 
@@ -141,6 +138,41 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
+  const schemas = get(dictionary, 'schemas', []);
+  const fileCount = schemas.length;
+  const fieldCount = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+  const filters = schemas
+    .map(schema => schema.fields)
+    .flat(Infinity)
+    .reduce(
+      (acc, field) => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        const restrictions = get(field, 'restrictions', false);
+        if (primaryId) {
+          acc.tiers.push(TAG_TYPES.id);
+        }
+
+        if (!!restrictions) {
+          acc.attributes.push(TAG_TYPES.required);
+        }
+
+        if (dependsOn) {
+          acc.attributes.push(TAG_TYPES.dependency);
+        }
+
+        if (core) {
+          acc.tiers.push(TAG_TYPES.core);
+        }
+
+        if (!core && !primaryId) {
+          acc.tiers.push(TAG_TYPES.extended);
+        }
+        return acc;
+      },
+      { tiers: [], attributes: [] },
+    );
+  /*
   useEffect(() => {
     const schemas = get(dictionary, 'schemas', []);
     const files = schemas.length;
@@ -178,6 +210,7 @@ function DataDictionary() {
     );
     setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
   }, [dictionary]);
+  */
 
   const filteredSchemas = React.useMemo(
     () =>
@@ -360,8 +393,8 @@ function DataDictionary() {
               </div>
 
               <FileFilters
-                files={meta.fileCount}
-                fields={meta.fieldCount}
+                files={fileCount}
+                fields={fieldCount}
                 dataTiers={DEFAULT_FILTER.concat(
                   filters.tiers.map(d => ({ content: startCase(d), value: d })),
                 )}
