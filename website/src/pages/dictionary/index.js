@@ -27,7 +27,6 @@ import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
 import { Display } from '../../components/common';
-import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
