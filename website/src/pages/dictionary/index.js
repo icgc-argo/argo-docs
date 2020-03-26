@@ -141,37 +141,40 @@ function DataDictionary() {
   const schemas = get(dictionary, 'schemas', []);
   const fileCount = schemas.length;
   const fieldCount = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-  const filters = schemas
-    .map(schema => schema.fields)
-    .flat(Infinity)
-    .reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.tiers.push(TAG_TYPES.id);
-        }
+  const filters = React.useMemo(() => {
+    const filters = schemas
+      .map(schema => schema.fields)
+      .flat(Infinity)
+      .reduce(
+        (acc, field) => {
+          const meta = get(field, 'meta', {});
+          const { primaryId = false, core = false, dependsOn = false } = meta;
+          const restrictions = get(field, 'restrictions', false);
+          if (primaryId) {
+            acc.tiers.push(TAG_TYPES.id);
+          }
 
-        if (!!restrictions) {
-          acc.attributes.push(TAG_TYPES.required);
-        }
+          if (!!restrictions) {
+            acc.attributes.push(TAG_TYPES.required);
+          }
 
-        if (dependsOn) {
-          acc.attributes.push(TAG_TYPES.dependency);
-        }
+          if (dependsOn) {
+            acc.attributes.push(TAG_TYPES.dependency);
+          }
 
-        if (core) {
-          acc.tiers.push(TAG_TYPES.core);
-        }
+          if (core) {
+            acc.tiers.push(TAG_TYPES.core);
+          }
 
-        if (!core && !primaryId) {
-          acc.tiers.push(TAG_TYPES.extended);
-        }
-        return acc;
-      },
-      { tiers: [], attributes: [] },
-    );
+          if (!core && !primaryId) {
+            acc.tiers.push(TAG_TYPES.extended);
+          }
+          return acc;
+        },
+        { tiers: [], attributes: [] },
+      );
+    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
+  }, [dictionary]);
   /*
   useEffect(() => {
     const schemas = get(dictionary, 'schemas', []);
