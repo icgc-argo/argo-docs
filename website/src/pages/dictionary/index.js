@@ -66,8 +66,13 @@ const data = require('./data.json');
 const treeData = require('./tree.json');
 
 async function fetchDictionary(version) {
-  const response = await axios.get(`/data/schemas/${version}.json`);
-  return response.data;
+  try {
+    const dict = await axios.get(`/data/schemas/${version}.json`);
+    const tree = await axios.get(`/data/schemas/${version}_tree.json`);
+    return { dict: dict.data, tree: tree.data };
+  } catch (e) {
+    throw e;
+  }
 }
 
 async function fetchDiff(version, diffVersion) {
@@ -98,11 +103,12 @@ function DataDictionary() {
   const [searchValue, setSearchValue] = useState('');
 
   const updateVersion = async newVersion => {
-    const newDict = await fetchDictionary(newVersion);
-    if (newDict) {
+    try {
+      const { dict, tree } = await fetchDictionary(newVersion);
+
       setVersion(newVersion);
-      setDictionary(newDict);
-    } else {
+      setDictionary(dict);
+    } catch (err) {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
   };
