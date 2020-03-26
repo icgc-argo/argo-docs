@@ -175,45 +175,6 @@ function DataDictionary() {
       );
     return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
   }, [dictionary]);
-  /*
-  useEffect(() => {
-    const schemas = get(dictionary, 'schemas', []);
-    const files = schemas.length;
-    const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-    setMeta({ fileCount: files, fieldCount: fields });
-
-    const schemaFields = flatten(schemas.map(schema => schema.fields));
-    const { validDataTiers, validDataAttributes } = schemaFields.reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.id);
-        }
-
-        if (!!restrictions) {
-          acc.validDataAttributes.push(TAG_TYPES.required);
-        }
-
-        if (dependsOn) {
-          acc.validDataAttributes.push(TAG_TYPES.dependency);
-        }
-
-        if (core) {
-          acc.validDataTiers.push(TAG_TYPES.core);
-        }
-
-        if (!core && !primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.extended);
-        }
-        return acc;
-      },
-      { validDataTiers: [], validDataAttributes: [] },
-    );
-    setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
-  }, [dictionary]);
-  */
 
   const filteredSchemas = React.useMemo(
     () =>
