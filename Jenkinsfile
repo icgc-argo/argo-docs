@@ -81,7 +81,7 @@ spec:
             }
         }
 
-        stage('Release & Tag') {
+        stage('Release & Tag Hotfix') {
             when { branch 'hotfix' }
             steps {
                 container('docker') {
@@ -98,7 +98,6 @@ spec:
 
                     sh "docker push ${dockerHubRepo}:${commit}"
                     sh "docker push ${dockerHubRepo}:${version}"
-                    sh "docker push ${dockerHubRepo}:latest"
                 }
             }
         }
