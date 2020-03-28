@@ -9,7 +9,7 @@ const React = require('react');
 
 import Layout from '@theme/Layout';
 import styles from './styles.module.css';
-import SearchEntry from '../components/SearchEntry';
+//import SearchEntry from '../components/SearchEntry';
 import AlgoliaSearch from '../components/AlgoliaSearch';
 
 function HomeSplash() {

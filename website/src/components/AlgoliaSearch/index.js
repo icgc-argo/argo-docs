@@ -5,12 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useCallback } from 'react';
-import classnames from 'classnames';
+import React, { useRef } from 'react';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useHistory } from '@docusaurus/router';
 import style from './styles.module.css';
+import { styled } from '@icgc-argo/uikit';
+
+const SearchWrapper = styled(`div`)`
+  width: 500px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #babcc2;
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .algolia-autocomplete {
+    width: 100%;
+    padding-right: 20px;
+
+    .ds-dropdown-menu {
+      top: calc(100% + 10px) !important;
+    }
+  }
+`;
 
 let loaded = false;
 
@@ -26,7 +46,7 @@ const Search = props => {
   const initAlgolia = () => {
     if (!initialized.current) {
       window.docsearch({
-        debug: true,
+        // debug: true,
         appId: algolia.appId,
         apiKey: algolia.apiKey,
         indexName: algolia.indexName,
@@ -68,7 +88,7 @@ const Search = props => {
   React.useEffect(() => loadAlgolia(), []);
 
   return (
-    <div className={style.searchEntryWrapper} key="search-box">
+    <SearchWrapper key="search-box">
       <img
         className={style.searchEntryIcon}
         src={`img/icons/search.svg`}
@@ -78,7 +98,6 @@ const Search = props => {
       />
 
       <input
-        style={{ height: '100%', width: '100%', paddingRight: '20px' }}
         id="algolia-homepage-search"
         type="search"
         placeholder="Search"
@@ -88,7 +107,7 @@ const Search = props => {
         ref={searchBarRef}
         className={style.searchEntryInput}
       />
-    </div>
+    </SearchWrapper>
   );
 };
 
