@@ -35,12 +35,6 @@ module.exports = {
   ],
 
   themeConfig: {
-    algolia: {
-      //appId: 'app-id',
-      apiKey: '25626fae796133dc1e734c6bcaaeac3c',
-      indexName: 'docsearch',
-      //algoliaOptions: {}, // Optional, if provided by Algolia
-    },
     prism: {
       /**
        * if you change the theme, you will need to change the highlighted theme for the code block

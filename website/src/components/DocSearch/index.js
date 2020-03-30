@@ -1,28 +1,25 @@
 import React, { useRef } from 'react';
 import { useHistory } from '@docusaurus/router';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import docsearch from 'docsearch.js';
 
 /**
  * Init Docsearch on an input (children)
  */
-const DocSearch = ({ searchElId, children }) => {
+const DocSearch = ({ searchElId, children, algoliaOptions }) => {
   const initialized = useRef(false);
-  const { siteConfig = {} } = useDocusaurusContext();
-  const {
-    themeConfig: { algolia },
-  } = siteConfig;
+
   const history = useHistory();
 
   const initAlgolia = () => {
-    if (!initialized.current) {
+    if (!process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX) {
+      console.error('Search not configured');
+    } else if (!initialized.current) {
       docsearch({
         // debug: true,
-        appId: algolia.appId,
-        apiKey: algolia.apiKey,
-        indexName: algolia.indexName,
+        apiKey: process.env.ALGOLIA_API_KEY,
+        indexName: process.env.ALGOLIA_INDEX,
         inputSelector: searchElId,
-        algoliaOptions: algolia.algoliaOptions,
+        algoliaOptions: algoliaOptions,
         // Override algolia's default selection event, allowing us to do client-side
         // navigation and avoiding a full page refresh.
         handleSelected: (_input, _event, suggestion) => {
