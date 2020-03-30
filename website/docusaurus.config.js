@@ -10,7 +10,7 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  scripts: [],
+  scripts: ['./node_modules/docsearch.js/dist/cdn/docsearch.min.js'],
   stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
 
   plugins: [path.resolve(__dirname, './svg-plugin')],
@@ -20,7 +20,10 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/custom.css'),
+            require.resolve('./src/css/algolia.css'),
+          ],
         },
         docs: {
           // docs folder path relative to website dir.

@@ -11,8 +11,6 @@ import classnames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useHistory } from '@docusaurus/router';
 
-let loaded = false;
-
 const Search = props => {
   const initialized = useRef(false);
   const searchBarRef = useRef(null);
@@ -45,20 +43,6 @@ const Search = props => {
         },
       });
       initialized.current = true;
-    }
-  };
-
-  const loadAlgolia = () => {
-    if (!loaded) {
-      Promise.all([import('docsearch.js'), import('./algolia.css')]).then(
-        ([{ default: docsearch }]) => {
-          loaded = true;
-          window.docsearch = docsearch;
-          initAlgolia();
-        },
-      );
-    } else {
-      initAlgolia();
     }
   };
 
@@ -95,8 +79,8 @@ const Search = props => {
           { 'search-bar-expanded': props.isSearchBarExpanded },
           { 'search-bar': !props.isSearchBarExpanded },
         )}
-        onClick={loadAlgolia}
-        onMouseOver={loadAlgolia}
+        onClick={initAlgolia}
+        onMouseOver={initAlgolia}
         onFocus={toggleSearchIconClick}
         onBlur={toggleSearchIconClick}
         ref={searchBarRef}

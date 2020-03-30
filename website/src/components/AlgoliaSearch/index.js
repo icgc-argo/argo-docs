@@ -12,6 +12,10 @@ import { useHistory } from '@docusaurus/router';
 import style from './styles.module.css';
 import { styled } from '@icgc-argo/uikit';
 
+/**
+ * CSS Modules hard to use to style parent dynamic div
+ * i.e when Algolia inits search input
+ */
 const SearchWrapper = styled(`div`)`
   width: 500px;
   height: 50px;
@@ -31,8 +35,6 @@ const SearchWrapper = styled(`div`)`
     }
   }
 `;
-
-let loaded = false;
 
 const Search = props => {
   const initialized = useRef(false);
@@ -70,23 +72,6 @@ const Search = props => {
     }
   };
 
-  const loadAlgolia = () => {
-    if (!loaded) {
-      Promise.all([import('docsearch.js'), import('./algolia.css')]).then(
-        ([{ default: docsearch }]) => {
-          console.log('search loaded');
-          loaded = true;
-          window.docsearch = docsearch;
-          initAlgolia();
-        },
-      );
-    } else {
-      initAlgolia();
-    }
-  };
-
-  React.useEffect(() => loadAlgolia(), []);
-
   return (
     <SearchWrapper key="search-box">
       <img
@@ -102,8 +87,8 @@ const Search = props => {
         type="search"
         placeholder="Search"
         aria-label="Search"
-        onClick={loadAlgolia}
-        onMouseOver={loadAlgolia}
+        onClick={initAlgolia}
+        onMouseOver={initAlgolia}
         ref={searchBarRef}
         className={style.searchEntryInput}
       />
