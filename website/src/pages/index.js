@@ -24,9 +24,7 @@ function HomeSplash() {
   const SearchBanner = props => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
-      <DocSearch searchElId="#algolia-homepage-search">
-        <AlgoliaSearch />
-      </DocSearch>
+      <AlgoliaSearch />
     </section>
   );
 

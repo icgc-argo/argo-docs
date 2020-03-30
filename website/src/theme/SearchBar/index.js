@@ -1,9 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
-import DocSearch from '../../components/DocSearch';
+import useAlgolia from '../../hooks/useAlgolia';
 
-const Search = props => (
-  <DocSearch searchElId="#search_input_react">
+const Search = props => {
+  const inputRef = React.useRef();
+  useAlgolia(inputRef);
+
+  return (
     <div className="navbar__search" key="search-box">
       <span
         aria-label="expand searchbar"
@@ -14,6 +17,7 @@ const Search = props => (
         tabIndex={0}
       />
       <input
+        ref={inputRef}
         id="search_input_react"
         type="search"
         placeholder="Search"
@@ -25,7 +29,7 @@ const Search = props => (
         )}
       />
     </div>
-  </DocSearch>
-);
+  );
+};
 
 export default Search;

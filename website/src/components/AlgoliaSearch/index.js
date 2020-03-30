@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './styles.module.css';
 import { styled } from '@icgc-argo/uikit';
+import useAlgolia from '../../hooks/useAlgolia';
 
 /**
  * CSS Modules hard to use to style parent dynamic div
@@ -26,24 +27,29 @@ const SearchWrapper = styled(`div`)`
   }
 `;
 
-const Search = props => (
-  <SearchWrapper key="search-box">
-    <img
-      className={style.searchEntryIcon}
-      src={`img/icons/search.svg`}
-      alt="Search"
-      height="20"
-      width="20"
-    />
+const Search = props => {
+  const inputRef = React.useRef();
+  useAlgolia(inputRef);
 
-    <input
-      id="algolia-homepage-search"
-      type="search"
-      placeholder="Search"
-      aria-label="Search"
-      className={style.searchEntryInput}
-    />
-  </SearchWrapper>
-);
+  return (
+    <SearchWrapper key="search-box">
+      <img
+        className={style.searchEntryIcon}
+        src={`img/icons/search.svg`}
+        alt="Search"
+        height="20"
+        width="20"
+      />
 
+      <input
+        ref={inputRef}
+        id="algolia-homepage-search"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        className={style.searchEntryInput}
+      />
+    </SearchWrapper>
+  );
+};
 export default Search;
