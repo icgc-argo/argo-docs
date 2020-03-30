@@ -6,14 +6,12 @@ import docsearch from 'docsearch.js';
  * Init Docsearch on an input (children)
  */
 const DocSearch = ({ searchElId, children, algoliaOptions }) => {
-  const initialized = useRef(false);
-
   const history = useHistory();
 
   const initAlgolia = () => {
     if (!process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX) {
       console.error('Search not configured');
-    } else if (!initialized.current) {
+    } else {
       docsearch({
         // debug: true,
         apiKey: process.env.ALGOLIA_API_KEY,
@@ -34,7 +32,6 @@ const DocSearch = ({ searchElId, children, algoliaOptions }) => {
           history.push(routePath);
         },
       });
-      initialized.current = true;
     }
   };
 
