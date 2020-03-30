@@ -6,6 +6,8 @@ import docsearch from 'docsearch.js';
  * Expects id selector for input
  */
 const useAlgolia = (inputRef, options = {}) => {
+  const history = useHistory();
+
   const [currentInput, setCurrentInput] = React.useState();
   React.useEffect(() => {
     setCurrentInput(inputRef.current);
@@ -14,8 +16,6 @@ const useAlgolia = (inputRef, options = {}) => {
   if (!process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX) {
     console.error('Search not configured');
   } else if (currentInput) {
-    const history = useHistory();
-
     docsearch({
       // debug: true,
       apiKey: process.env.ALGOLIA_API_KEY,
