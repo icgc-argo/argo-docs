@@ -10,7 +10,6 @@ const React = require('react');
 import Layout from '@theme/Layout';
 import styles from './styles.module.css';
 import AlgoliaSearch from '../components/AlgoliaSearch';
-import DocSearch from '../components/DocSearch';
 
 function HomeSplash() {
   const SplashContainer = props => (
