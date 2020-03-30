@@ -10,7 +10,6 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  scripts: ['./node_modules/docsearch.js/dist/cdn/docsearch.min.js'],
   stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
 
   plugins: [path.resolve(__dirname, './svg-plugin')],
