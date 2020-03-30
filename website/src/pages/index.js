@@ -9,8 +9,8 @@ const React = require('react');
 
 import Layout from '@theme/Layout';
 import styles from './styles.module.css';
-//import SearchEntry from '../components/SearchEntry';
 import AlgoliaSearch from '../components/AlgoliaSearch';
+import DocSearch from '../components/DocSearch';
 
 function HomeSplash() {
   const SplashContainer = props => (
@@ -24,7 +24,9 @@ function HomeSplash() {
   const SearchBanner = props => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
-      <AlgoliaSearch />
+      <DocSearch searchElId="#algolia-homepage-search">
+        <AlgoliaSearch />
+      </DocSearch>
     </section>
   );
 
