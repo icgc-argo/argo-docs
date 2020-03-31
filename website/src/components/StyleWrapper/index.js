@@ -2,7 +2,9 @@ import React from 'react';
 import { styled } from '@icgc-argo/uikit';
 
 const Wrapper = styled('div')`
-  box-sizing: content-box;
+  * {
+    box-sizing: content-box;
+  }
 `;
 
 function StyleWrapper(props) {
