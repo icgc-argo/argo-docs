@@ -102,7 +102,6 @@ function DataDictionary() {
   const updateVersion = async newVersion => {
     try {
       const { dict, tree } = await fetchDictionary(newVersion);
-
       setVersion(newVersion);
       setDictionary(dict);
       setTreeData(tree);
@@ -214,7 +213,7 @@ function DataDictionary() {
           return { ...schema, fields: filteredFields };
         })
         .filter(schema => schema.fields.length > 0),
-    [searchParams],
+    [searchParams, dictionary],
   );
 
   const generateMenuContents = activeSchemas => {
