@@ -1,5 +1,5 @@
 {
-  "version": "0.1.15-hotfix.1",
+  "version": "0.1.15-hotfix.2",
   "scripts": {
     "start": "docusaurus start",
     "build": "docusaurus build",
