@@ -15,7 +15,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
-import StyleWrapper from '../../theme/StyleWrapper';
+import StyleWrapper from '../../components/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
