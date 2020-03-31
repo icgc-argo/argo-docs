@@ -137,10 +137,9 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
-  const schemas = get(dictionary, 'schemas', []);
-  const fileCount = schemas.length;
-  const fieldCount = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
   const filters = React.useMemo(() => {
+    const schemas = get(dictionary, 'schemas', []);
+
     const filters = schemas
       .map(schema => schema.fields)
       .flat(Infinity)
@@ -216,6 +215,9 @@ function DataDictionary() {
         .filter(schema => schema.fields.length > 0),
     [searchParams],
   );
+
+  const fileCount = filteredSchemas.length;
+  const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
 
   const generateMenuContents = activeSchemas => {
     const activeSchemaNames = activeSchemas.map(s => s.name);
