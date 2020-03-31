@@ -27,7 +27,6 @@ import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
 import { Display } from '../../components/common';
-import flatten from 'lodash/flatten';
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
@@ -97,9 +96,6 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(data.dictionary);
   const [treeData, setTreeData] = useState(dictionaryTreeData);
 
-  const [filters, setFilters] = useState({ tiers: [], attributes: [] });
-  const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
-
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
   const [searchValue, setSearchValue] = useState('');
 
@@ -141,42 +137,42 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
-  useEffect(() => {
-    const schemas = get(dictionary, 'schemas', []);
-    const files = schemas.length;
-    const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-    setMeta({ fileCount: files, fieldCount: fields });
+  const schemas = get(dictionary, 'schemas', []);
+  const fileCount = schemas.length;
+  const fieldCount = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+  const filters = React.useMemo(() => {
+    const filters = schemas
+      .map(schema => schema.fields)
+      .flat(Infinity)
+      .reduce(
+        (acc, field) => {
+          const meta = get(field, 'meta', {});
+          const { primaryId = false, core = false, dependsOn = false } = meta;
+          const restrictions = get(field, 'restrictions', false);
+          if (primaryId) {
+            acc.tiers.push(TAG_TYPES.id);
+          }
 
-    const schemaFields = flatten(schemas.map(schema => schema.fields));
-    const { validDataTiers, validDataAttributes } = schemaFields.reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.id);
-        }
+          if (!!restrictions) {
+            acc.attributes.push(TAG_TYPES.required);
+          }
 
-        if (!!restrictions) {
-          acc.validDataAttributes.push(TAG_TYPES.required);
-        }
+          if (dependsOn) {
+            acc.attributes.push(TAG_TYPES.dependency);
+          }
 
-        if (dependsOn) {
-          acc.validDataAttributes.push(TAG_TYPES.dependency);
-        }
+          if (core) {
+            acc.tiers.push(TAG_TYPES.core);
+          }
 
-        if (core) {
-          acc.validDataTiers.push(TAG_TYPES.core);
-        }
-
-        if (!core && !primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.extended);
-        }
-        return acc;
-      },
-      { validDataTiers: [], validDataAttributes: [] },
-    );
-    setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
+          if (!core && !primaryId) {
+            acc.tiers.push(TAG_TYPES.extended);
+          }
+          return acc;
+        },
+        { tiers: [], attributes: [] },
+      );
+    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
   }, [dictionary]);
 
   const filteredSchemas = React.useMemo(
@@ -360,8 +356,8 @@ function DataDictionary() {
               </div>
 
               <FileFilters
-                files={meta.fileCount}
-                fields={meta.fieldCount}
+                files={fileCount}
+                fields={fieldCount}
                 dataTiers={DEFAULT_FILTER.concat(
                   filters.tiers.map(d => ({ content: startCase(d), value: d })),
                 )}
@@ -384,7 +380,7 @@ function DataDictionary() {
               </Display>
 
               <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
-                <TreeView dictionary={dictionary} searchValue={searchValue} data={treeData} />
+                <TreeView searchValue={searchValue} data={treeData} />
               </Display>
             </div>
 
