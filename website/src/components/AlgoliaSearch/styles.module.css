@@ -1,0 +1,19 @@
+.searchEntryIcon {
+  padding: 14px;
+  padding-left: 12px;
+}
+
+.searchEntryInput {
+  border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 18px;
+  color: #525767;
+  font-weight: 300;
+}
+
+.searchEntryInput::placeholder {
+  color: #525767;
+  font-weight: 300;
+  font-size: 18px;
+}

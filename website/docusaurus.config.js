@@ -10,17 +10,19 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  scripts: [],
   stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
 
-  plugins: [path.resolve(__dirname, './svg-plugin')],
+  plugins: [path.resolve(__dirname, './svg-plugin'), path.resolve(__dirname, './dotenv-plugin')],
 
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/custom.css'),
+            require.resolve('./src/css/algolia.css'),
+          ],
         },
         docs: {
           // docs folder path relative to website dir.

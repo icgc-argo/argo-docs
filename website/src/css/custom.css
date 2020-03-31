@@ -552,3 +552,8 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
 .modal-open {
   overflow: hidden;
 }
+
+/* Algolia Search */
+.algolia-autocomplete * {
+  height: auto !important;
+}
