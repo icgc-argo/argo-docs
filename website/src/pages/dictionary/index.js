@@ -31,6 +31,7 @@ import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { styled } from '@icgc-argo/uikit';
+import flattenDeep from 'lodash/flattenDeep';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -139,37 +140,35 @@ function DataDictionary() {
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
 
-    const filters = schemas
-      .map(schema => schema.fields)
-      .flat(Infinity)
-      .reduce(
-        (acc, field) => {
-          const meta = get(field, 'meta', {});
-          const { primaryId = false, core = false, dependsOn = false } = meta;
-          const restrictions = get(field, 'restrictions', false);
-          if (primaryId) {
-            acc.tiers.push(TAG_TYPES.id);
-          }
+    const fields = schemas.map(schema => schema.fields);
+    const filters = flattenDeep(fields).reduce(
+      (acc, field) => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        const restrictions = get(field, 'restrictions', false);
+        if (primaryId) {
+          acc.tiers.push(TAG_TYPES.id);
+        }
 
-          if (!!restrictions) {
-            acc.attributes.push(TAG_TYPES.required);
-          }
+        if (!!restrictions) {
+          acc.attributes.push(TAG_TYPES.required);
+        }
 
-          if (dependsOn) {
-            acc.attributes.push(TAG_TYPES.dependency);
-          }
+        if (dependsOn) {
+          acc.attributes.push(TAG_TYPES.dependency);
+        }
 
-          if (core) {
-            acc.tiers.push(TAG_TYPES.core);
-          }
+        if (core) {
+          acc.tiers.push(TAG_TYPES.core);
+        }
 
-          if (!core && !primaryId) {
-            acc.tiers.push(TAG_TYPES.extended);
-          }
-          return acc;
-        },
-        { tiers: [], attributes: [] },
-      );
+        if (!core && !primaryId) {
+          acc.tiers.push(TAG_TYPES.extended);
+        }
+        return acc;
+      },
+      { tiers: [], attributes: [] },
+    );
     return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
   }, [dictionary]);
 
