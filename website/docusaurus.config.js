@@ -10,7 +10,10 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
+  stylesheets: [
+    'https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap',
+    './src/css/algolia.css',
+  ],
 
   plugins: [path.resolve(__dirname, './svg-plugin'), path.resolve(__dirname, './dotenv-plugin')],
 
@@ -19,10 +22,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         theme: {
-          customCss: [
-            require.resolve('./src/css/custom.css'),
-            require.resolve('./src/css/algolia.css'),
-          ],
+          customCss: require.resolve('./src/css/custom.css'), // Don't use Array, put more CSS in 'stylesheets' above
         },
         docs: {
           // docs folder path relative to website dir.
