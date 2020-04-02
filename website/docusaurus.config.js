@@ -53,7 +53,7 @@ module.exports = {
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
         { to: 'docs/submission-overview', label: 'Submission', position: 'right' },
         { to: 'docs/data-access', label: 'Data Access', position: 'right' },
-        { to: 'docs/dna-pipeline', label: 'Data Harmonization', position: 'right' },
+        { to: 'docs/dna-pipeline', label: 'Analysis Workflows', position: 'right' },
 
         // {
         //   href: 'https://platform.icgc-argo.org/contact',

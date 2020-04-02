@@ -13,9 +13,9 @@ module.exports = {
       'data-access',
       'user-profile-and-api-token',
       'data-download',
-      'data-release-schedule',
+      'data-release-notes',
     ],
-    'Data Harmonization':[
+    'Analysis Workflows':[
       'dna-pipeline',
     ]
   },

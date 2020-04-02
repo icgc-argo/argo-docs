@@ -111,9 +111,9 @@ function Index() {
           </div>
           <div className={styles.row}>
             <ContentBlock
-              title="Data Harmonization"
+              title="Data Analysis Workflows"
               color="#7f55cc"
-              icon="img/icons/home/controlled-data.svg"
+              icon="img/icons/home/analysis-workflows.svg"
             >
               Coming Soon
               {/* <ul>
