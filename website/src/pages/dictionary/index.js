@@ -353,36 +353,51 @@ function DataDictionary() {
                   {/*  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" /> 
                   <StyledTab value={TAB_STATE.DETAILS} label="Details" />*/}
                 </Tabs>
-
                 <div />
               </div>
-              <div
-                className={css`
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  padding: 8px 15px;
-                  background: var(--argo-grey-4);
-                  border: solid 1px var(--argo-grey-2);
-                  margin-top: 8px;
-                  margin-bottom: 30px;
-                `}
-              >
-                <Meta files={fileCount} fields={fieldCount} />
-                <FileFilters
-                  dataTiers={DEFAULT_FILTER.concat(
-                    filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                  )}
-                  dataAttributes={DEFAULT_FILTER.concat(
-                    filters.attributes.map((d) => ({
-                      content: startCase(d),
-                      value: d,
-                    })),
-                  )}
-                  searchParams={searchParams}
-                  onSearch={(search) => setSearchParams(search)}
-                />
-              </div>
+
+              <Display visible={selectedTab === TAB_STATE.DETAILS}>
+                <div
+                  className={css`
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 8px 15px;
+                    background: var(--argo-grey-4);
+                    border: solid 1px var(--argo-grey-2);
+                    margin-top: 8px;
+                    margin-bottom: 30px;
+                  `}
+                >
+                  <Meta files={fileCount} fields={fieldCount} />
+                  <FileFilters
+                    dataTiers={DEFAULT_FILTER.concat(
+                      filters.tiers.map((d) => ({ content: startCase(d), value: d })),
+                    )}
+                    dataAttributes={DEFAULT_FILTER.concat(
+                      filters.attributes.map((d) => ({
+                        content: startCase(d),
+                        value: d,
+                      })),
+                    )}
+                    searchParams={searchParams}
+                    onSearch={(search) => setSearchParams(search)}
+                  />
+                  <FileFilters
+                    dataTiers={DEFAULT_FILTER.concat(
+                      filters.tiers.map((d) => ({ content: startCase(d), value: d })),
+                    )}
+                    dataAttributes={DEFAULT_FILTER.concat(
+                      filters.attributes.map((d) => ({
+                        content: startCase(d),
+                        value: d,
+                      })),
+                    )}
+                    searchParams={searchParams}
+                    onSearch={(search) => setSearchParams(search)}
+                  />
+                </div>
+              </Display>
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <RenderDictionary
