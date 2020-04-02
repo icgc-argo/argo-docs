@@ -14,8 +14,6 @@ const StyledSelect = styled(Select)`
 `;
 
 const FileFilters = ({
-  files = 0,
-  fields = 0,
   dataTiers = [],
   dataAttributes = [],
   searchParams = {},
@@ -29,8 +27,6 @@ const FileFilters = ({
   return (
     <Typography variant="data" color="#151c3d">
       <div className={styles.fileFilters}>
-        {`${files} files > ${fields} fields`}
-
         <div className={styles.dataSelectors}>
           Data Tier:{' '}
           <StyledSelect
