@@ -400,11 +400,17 @@ function DataDictionary() {
               </Display>
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
-                <RenderDictionary
-                  schemas={filteredSchemas}
-                  menuContents={menuContents}
-                  isLatestSchema={isLatestSchema}
-                />
+                <div
+                  className={css`
+                    margin-top: 30px;
+                  `}
+                >
+                  <RenderDictionary
+                    schemas={filteredSchemas}
+                    menuContents={menuContents}
+                    isLatestSchema={isLatestSchema}
+                  />
+                </div>
               </Display>
 
               <Display visible={false}>
