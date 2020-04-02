@@ -83,14 +83,7 @@ const TreeView = ({ data, searchValue }) => {
           </div>
         )}
       >
-        <div
-          style={{
-            height: 800,
-            width: 2000,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+        <div>
           <ExpandStateMessenger.Provider value={collapseAllMessenger}>
             <Tree searchString={searchValue} rootFile={data} onNodeExpand={onNodeExpand} />
           </ExpandStateMessenger.Provider>
