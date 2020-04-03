@@ -13,6 +13,7 @@ module.exports = {
       'data-access',
       'user-profile-and-api-token',
       'data-download',
+      'publication-guidelines',
       'data-release-notes',
     ],
     'Analysis Workflows':[

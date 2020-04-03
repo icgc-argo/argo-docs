@@ -6,15 +6,22 @@ This guide will describe how to submit clinical data to the ARGO Data Platform. 
 
 > Note: Before you can submit clinical data, your donors must be assigned ARGO IDs through the sample registration process. See [Registering Samples](registering-samples) for instructions on how to register samples.
 
-## Downloading and Formatting Clinical Files
+## Multiple Data Submitters 
+
+There is only one Clinical Submission workspace for each program. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a clinical submission in progress.
+
+![Multiple Data Submitters](/assets/submission/clinical-multiple-submitters.png)
+
+## How to Submit Clinical Data
+
+### Step 1: Download and Format Clinical Files
+![Download and Format Files](/assets/submission/clinical-1-dowload-templates.png)
 
 1. Navigate to the **Submission** area in the top menu.
 1. Click on the **Clinical Submission** section in the left menu for your program.
 1. Download a **TSV Template** for each data type that you are submitting. Format your file(s) according to the current [Data Dictionary](/dictionary) specifications for each clinical data type.
 
-![Download and Format Files](/assets/submission/clinical-1-dowload-templates.png)
-
-### Tips for Formatting your TSV files
+### Tips for Formatting TSV files
 - To simplify editing the TSV files, open them in Excel:
     - BEFORE pasting your data into the Excel spreadsheet, reformat the cells as text. To do so, select the empty cells where you will paste your data, right click and select "Format cells". Choose the "Text" option and click "Ok". 
     - The first row of the file is reserved for the field headers. DO NOT DELETE THESE, as they act as important keys for data validation.
@@ -24,14 +31,14 @@ This guide will describe how to submit clinical data to the ARGO Data Platform. 
 - You do not need to remove any columns from the TSV file. For example, if the field is labeled "extended" in the dictionary and you do not have a value for that field, simply leave it blank.
 - Each file template name references the corresponding version of the dictionary (e.g argo_submission_templates_v0.7 is referencing version 0.7 of the data dictionary). Please make sure you are using the latest version of these files by referencing the latest [Data Dictionary](/dictionary). 
 
-## Uploading Clinical TSV Files
+### Step 2: Upload Clinical TSV Files
 ![Upload Files](/assets/submission/clinical-2-upload.png)
 
 1. Once your file(s) are formatted, click the **Upload Files** button and select your file(s) from the browser. Only TSV file types are supported, and the file names must begin with the data type that is being submitted.  For example, _donor_v.07-[anything].tsv_ would be a correctly formatted name for the donor file.
 1. Upon uploading, if there are any errors in your file they will be displayed within the Clinical Submission workspace. The error report will also be available for download. You must fix all of the errors that are listed within your file(s) and then reupload them.
 1. Valid files will be available for review within the file preview tables. You can review the file data for each data type by using the tabs on the left of the preview area.
 
-## Validating Clinical Workspace
+### Step 3: Validate Clinical Workspace
 Uploaded data must be checked for accuracy against the data in the current submission, as well as any data that has previously been submitted for your donors.
 
 ![Validate Files](/assets/submission/clinical-3-validate.png)
@@ -41,7 +48,7 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1.  If there are no errors in your submission, then it will be marked as _Valid_.
 
 
-## Signing Off Submission
+### Step 4: Sign Off Submission
 ![Sign off Submission](/assets/submission/clinical-4-signoff.png)
 
 1. Once you have reviewed the files in the file preview area, click the **Sign Off Submission** button to submit your clinical data. 
@@ -49,9 +56,3 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1. If your data does not require approval by DCC, it will be submitted automatically.
 
 Once submitted, you will see the clincial data reflected on your [Program Dashboard](/docs/submitted-data).
-
-## Multiple Data Submitters 
-
-There is only one Clinical Submission workspace for each program. All program data submitters will be using the same workspace, and you will see which program member has been working in this space by looking at the file upload info above the preview table. Please be sure to communicate with your team if you see data submissions in progress.
-
-![Multiple Data Submitters](/assets/submission/clinical-multiple-submitters.png)
