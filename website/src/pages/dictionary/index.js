@@ -384,7 +384,7 @@ function DataDictionary() {
               </Display>
             </div>
 
-            <Display visible={true}>
+            <Display visible={selectedTab === TAB_STATE.DETAILS}>
               <div className={styles.menu}>
                 <SchemaMenu
                   title="Clinical Files"

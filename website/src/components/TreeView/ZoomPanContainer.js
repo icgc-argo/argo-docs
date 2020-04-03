@@ -27,6 +27,13 @@ export default ({
         border: solid 1px ${theme.colors.grey_2};
         transform: scale(1);
         overflow: hidden;
+        width: 100%;
+        height: calc(100vh - 355px);
+
+        .react-transform-component {
+          height: 100%;
+          width: 100%;
+        }
       `}
     >
       <TransformWrapper
