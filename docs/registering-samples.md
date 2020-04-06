@@ -22,7 +22,16 @@ The basic set of data that must be registered for each sample consists of:
 
 During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a registered sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
 
-## Downloading and Formatting the Sample Registration File
+## Multiple Data Submitters 
+
+There is only one Sample Registration workspace for each program. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
+
+![Multiple Data Submitters](/assets/submission/registration-multiple-submitters.png) 
+
+## How to Register Samples
+
+### Step 1: Download and Format the Sample Registration File
+![Download and Format File](/assets/submission/register-1-download.png)
 
 1. Navigate to the **Submission** area in the top menu.
 1. Click on the **Register Samples** section in the left menu for your program.
@@ -30,16 +39,14 @@ During sample registration, **ARGO IDs** will be assigned to your program data. 
 
 For help with formatting this file, please refer to [Tips for Formatting your TSV files]( submitting-clinical-data#tips-for-formatting-your-tsv-files)
 
-![Download and Format File](/assets/submission/register-1-download.png)
-
-## Uploading Registration TSV File
+### Step 2: Upload Sample Registration TSV File
 ![Upload Files](/assets/submission/register-2-upload.png)
 
 1. Once your file is formatted, click the **Upload File** button and select your file from the browser. Only TSV file types are supported, and the file name must begin with the *sample-registration* and end with _.tsv_.
 1. Upon uploading, if there are any errors in your file they will be displayed within the Sample Registration workspace. The error report will also be available for download. You must fix all of the errors that are listed within your sample registration file and then reupload it.
 1. Valid files will be available for preview in the Sample Registration workspace.  You can review the new samples (purple star) versus previously registered samples (grey star) by filtering the table on the star column.
 
-## Registering Samples
+### Step 3: Register Samples
 ![Register Samples](/assets/submission/register-3-register.png)
 
 1. Once you have reviewed the file preview, click on the **Register Samples** button to submit your samples.
@@ -50,9 +57,3 @@ Once registered, donors, along with specimen and sample counts, will be visible 
 Once samples are registered and data processing and analysis proceeds, it can be difficult to correct the data manually.
 
 If you have made an error with registered sample data, please [contact the DCC](https://platform.icgc-argo.org/contact) and they will assist in correcting your registered data. 
-
-## Multiple Data Submitters 
-
-There is only one Sample Registration workspace for each program. All program data submitters will be using the same workspace, and you will see which program member has been working in this space by looking at the file upload info above the preview table. Please be sure to communicate with your team if you see sample registrations in progress.
-
-![Multiple Data Submitters](/assets/submission/registration-multiple-submitters.png) 

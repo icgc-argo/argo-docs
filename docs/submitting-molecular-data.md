@@ -47,7 +47,7 @@ metadata.url=https://song.qa.argo.cancercollaboratory.org
 # The location of the object storage service (SCORE)
 storage.url=https://score.qa.argo.cancercollaboratory.org
 ```
-## Uploading Molecular Data
+## How to Upload Molecular Data
 ### 1. Format the payload
 /////// NEED THE TAB DISPLAY HERE TO SHOW DIFFEERENT STARTING PAYLOADS {SEQUENCING EXPEIRMETN FOR ONE}
 ```
