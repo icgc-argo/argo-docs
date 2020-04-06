@@ -10,6 +10,9 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
+  - name: node
+    image: node:12.6.0
+    tty: true
   - name: docker
     image: docker:18-git
     tty: true
@@ -38,7 +41,10 @@ spec:
 
         stage('Test') {
             steps {
-                sh "echo No Docusaurus Tests"
+                container('node') {
+                    sh "npm ci"
+                    sh "npm run build"
+                }
             }
         }
 
