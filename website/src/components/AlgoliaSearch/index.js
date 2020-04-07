@@ -27,7 +27,7 @@ const SearchWrapper = styled(`div`)`
   }
 `;
 
-const Search = props => {
+const Search = (props) => {
   const inputRef = React.useRef();
   useAlgolia(inputRef);
 
