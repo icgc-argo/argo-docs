@@ -28,3 +28,7 @@ export const DownloadTooltip = ({ children, disabled }) => (
     {children}
   </Tooltip>
 );
+
+export const Display = ({ children, visible }) => (
+  <div style={{ display: visible ? 'block' : 'none' }}>{children}</div>
+);

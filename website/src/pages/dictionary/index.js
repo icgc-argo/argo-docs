@@ -15,10 +15,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
-import DnaLoader from '@icgc-argo/uikit/DnaLoader';
-import StyleWrapper from '../../theme/StyleWrapper';
+import StyleWrapper from '../../components/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
+import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
@@ -26,13 +26,12 @@ import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
-import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
-import flatten from 'lodash/flatten';
+import { Display } from '../../components/common';
 import { getLatestVersion } from '../../utils';
-import { css } from '@icgc-argo/uikit';
-import Icon from '@icgc-argo/uikit/Icon';
 import uniq from 'lodash/uniq';
+import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
+import { styled } from '@icgc-argo/uikit';
+import flattenDeep from 'lodash/flattenDeep';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -64,10 +63,16 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
+const dictionaryTreeData = require('./tree.json');
 
 async function fetchDictionary(version) {
-  const response = await axios.get(`/data/schemas/${version}.json`);
-  return response.data;
+  try {
+    const dict = await axios.get(`/data/schemas/${version}.json`);
+    const tree = await axios.get(`/data/schemas/${version}_tree.json`);
+    return { dict: dict.data, tree: tree.data };
+  } catch (e) {
+    throw e;
+  }
 }
 
 async function fetchDiff(version, diffVersion) {
@@ -90,18 +95,18 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
-
-  const [filters, setFilters] = useState({ tiers: [], attributes: [] });
-  const [meta, setMeta] = useState({ fileCount: 0, fieldCount: 0 });
+  const [treeData, setTreeData] = useState(dictionaryTreeData);
 
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
+  const [searchValue, setSearchValue] = useState('');
 
   const updateVersion = async newVersion => {
-    const newDict = await fetchDictionary(newVersion);
-    if (newDict) {
+    try {
+      const { dict, tree } = await fetchDictionary(newVersion);
       setVersion(newVersion);
-      setDictionary(newDict);
-    } else {
+      setDictionary(dict);
+      setTreeData(tree);
+    } catch (err) {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
   };
@@ -132,42 +137,39 @@ function DataDictionary() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
-  useEffect(() => {
+  const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
-    const files = schemas.length;
-    const fields = schemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-    setMeta({ fileCount: files, fieldCount: fields });
 
-    const schemaFields = flatten(schemas.map(schema => schema.fields));
-    const { validDataTiers, validDataAttributes } = schemaFields.reduce(
+    const fields = schemas.map(schema => schema.fields);
+    const filters = flattenDeep(fields).reduce(
       (acc, field) => {
         const meta = get(field, 'meta', {});
         const { primaryId = false, core = false, dependsOn = false } = meta;
         const restrictions = get(field, 'restrictions', false);
         if (primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.id);
+          acc.tiers.push(TAG_TYPES.id);
         }
 
         if (!!restrictions) {
-          acc.validDataAttributes.push(TAG_TYPES.required);
+          acc.attributes.push(TAG_TYPES.required);
         }
 
         if (dependsOn) {
-          acc.validDataAttributes.push(TAG_TYPES.dependency);
+          acc.attributes.push(TAG_TYPES.dependency);
         }
 
         if (core) {
-          acc.validDataTiers.push(TAG_TYPES.core);
+          acc.tiers.push(TAG_TYPES.core);
         }
 
         if (!core && !primaryId) {
-          acc.validDataTiers.push(TAG_TYPES.extended);
+          acc.tiers.push(TAG_TYPES.extended);
         }
         return acc;
       },
-      { validDataTiers: [], validDataAttributes: [] },
+      { tiers: [], attributes: [] },
     );
-    setFilters({ tiers: uniq(validDataTiers), attributes: uniq(validDataAttributes) });
+    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
   }, [dictionary]);
 
   const filteredSchemas = React.useMemo(
@@ -209,8 +211,11 @@ function DataDictionary() {
           return { ...schema, fields: filteredFields };
         })
         .filter(schema => schema.fields.length > 0),
-    [searchParams],
+    [searchParams, dictionary],
   );
+
+  const fileCount = filteredSchemas.length;
+  const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
 
   const generateMenuContents = activeSchemas => {
     const activeSchemaNames = activeSchemas.map(s => s.name);
@@ -225,6 +230,33 @@ function DataDictionary() {
   const menuContents = generateMenuContents(filteredSchemas);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
+  const TAB_STATE = Object.freeze({
+    OVERVIEW: 'OVERVIEW',
+    DETAILS: 'DETAILS',
+  });
+  const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.OVERVIEW);
+  const onTabChange = (e, newValue) => {
+    setSelectedTab(newValue);
+  };
+
+  const StyledTab = styled(Tab)`
+    border: 0 none;
+    position: relative;
+
+    &.active {
+      border: 0 none;
+
+      ::after {
+        content: '';
+        border-bottom: 2px solid #00c79d;
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 80%;
+        margin-left: -40%;
+      }
+    }
+  `;
 
   return (
     <ThemeProvider>
@@ -309,11 +341,23 @@ function DataDictionary() {
                     <DownloadButtonContent>PDF</DownloadButtonContent>
                   </Button>*/}
                 {/*</div> */}
+                <Tabs
+                  value={selectedTab}
+                  onChange={onTabChange}
+                  styles={{
+                    marginBottom: '-2px',
+                  }}
+                >
+                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
+                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
+                </Tabs>
+
+                <div />
               </div>
 
               <FileFilters
-                files={meta.fileCount}
-                fields={meta.fieldCount}
+                files={fileCount}
+                fields={fieldCount}
                 dataTiers={DEFAULT_FILTER.concat(
                   filters.tiers.map(d => ({ content: startCase(d), value: d })),
                 )}
@@ -327,20 +371,34 @@ function DataDictionary() {
                 onSearch={search => setSearchParams(search)}
               />
 
-              <RenderDictionary
-                schemas={filteredSchemas}
-                menuContents={menuContents}
-                isLatestSchema={isLatestSchema}
-              />
+              <Display visible={selectedTab === TAB_STATE.DETAILS}>
+                <RenderDictionary
+                  schemas={filteredSchemas}
+                  menuContents={menuContents}
+                  isLatestSchema={isLatestSchema}
+                />
+              </Display>
+
+              <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
+                <TreeView searchValue={searchValue} data={treeData} />
+              </Display>
             </div>
-            <div className={styles.menu}>
-              <SchemaMenu
-                title="Clinical Files"
-                contents={menuContents}
-                color="#0774d3"
-                scrollYOffset="70"
-              />
-            </div>
+
+            <Display visible={selectedTab === TAB_STATE.DETAILS}>
+              <div className={styles.menu}>
+                <SchemaMenu
+                  title="Clinical Files"
+                  contents={menuContents}
+                  color="#0774d3"
+                  scrollYOffset="70"
+                  dataTiers={filters.tiers.map(d => ({ content: startCase(d), value: d }))}
+                  dataAttributes={filters.attributes.map(d => ({
+                    content: startCase(d),
+                    value: d,
+                  }))}
+                />
+              </div>
+            </Display>
           </div>
         </StyleWrapper>
       </Layout>

@@ -10,17 +10,19 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  scripts: [],
-  stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
+  stylesheets: [
+    'https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap',
+    './src/css/algolia.css',
+  ],
 
-  plugins: [path.resolve(__dirname, './svg-plugin')],
+  plugins: [path.resolve(__dirname, './svg-plugin'), path.resolve(__dirname, './dotenv-plugin')],
 
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/css/custom.css'), // Don't use Array, put more CSS in 'stylesheets' above
         },
         docs: {
           // docs folder path relative to website dir.
@@ -51,7 +53,7 @@ module.exports = {
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
         { to: 'docs/submission-overview', label: 'Submission', position: 'right' },
         { to: 'docs/data-access', label: 'Data Access', position: 'right' },
-        { to: 'docs/dna-pipeline', label: 'Data Harmonization', position: 'right' },
+        { to: 'docs/dna-pipeline', label: 'Analysis Workflows', position: 'right' },
 
         // {
         //   href: 'https://platform.icgc-argo.org/contact',

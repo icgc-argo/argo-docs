@@ -8,7 +8,7 @@ Molecular data will be submitted to your local **Regional Data Processing Centre
 This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata.
 
 ## Data Submission Client Configuration
-Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients).  Song is an open source system used to track and validate metadata about raw data submissions. Score securely and quickly manages upload and download of files to cloud repositories. The Song and Score clients are used in conjuction to  upload raw data files while maintaining file metadata and provenance.
+Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients).  Song is an open source system used to track and validate metadata about raw data submissions. Score securely and quickly manages upload and download of files to cloud repositories. The Song and Score clients are used in conjunction to  upload raw data files while maintaining file metadata and provenance.
 
 ### Song-Client
 Download the **[latest version of the Song client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the  `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
@@ -47,7 +47,7 @@ metadata.url=https://song.qa.argo.cancercollaboratory.org
 # The location of the object storage service (SCORE)
 storage.url=https://score.qa.argo.cancercollaboratory.org
 ```
-## Uploading Molecular Data
+## How to Upload Molecular Data
 ### 1. Format the payload
 /////// NEED THE TAB DISPLAY HERE TO SHOW DIFFEERENT STARTING PAYLOADS {SEQUENCING EXPEIRMETN FOR ONE}
 ```
@@ -143,4 +143,4 @@ If the file successfully uploads, then you will receive an `Upload completed` me
 ```
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
-## Data Processing and Harmonization
+## Data Processing and Analysis

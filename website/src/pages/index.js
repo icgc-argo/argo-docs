@@ -8,11 +8,11 @@
 const React = require('react');
 
 import Layout from '@theme/Layout';
-
 import styles from './styles.module.css';
+import AlgoliaSearch from '../components/AlgoliaSearch';
 
 function HomeSplash() {
-  const SplashContainer = props => (
+  const SplashContainer = (props) => (
     <div className={styles.homeContainer}>
       <div className={styles.homeSplashFade}>
         <div className={styles.homeWrapper}>{props.children}</div>
@@ -20,23 +20,9 @@ function HomeSplash() {
     </div>
   );
 
-  const SearchEntry = props => (
-    <div className={styles.searchEntryWrapper}>
-      <img
-        className={styles.searchEntryIcon}
-        src={`img/icons/search.svg`}
-        alt="Search"
-        height="20"
-        width="20"
-      />
-      <input className={styles.searchEntryInput} id="searchBannerInput" placeholder="Search..." />
-    </div>
-  );
-
-  const SearchBanner = props => (
+  const SearchBanner = (props) => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
-      <SearchEntry />
     </section>
   );
 
@@ -104,7 +90,11 @@ function Index() {
                 </li>
               </ul>
             </ContentBlock>
-            <ContentBlock title="Data Access & Download" color="#f95d31" icon="img/icons/home/download.svg">
+            <ContentBlock
+              title="Data Access & Download"
+              color="#f95d31"
+              icon="img/icons/home/download.svg"
+            >
               <ul>
                 <li>
                   How to <a href="/docs/data-access">access controlled data</a>
@@ -120,9 +110,9 @@ function Index() {
           </div>
           <div className={styles.row}>
             <ContentBlock
-              title="Data Harmonization"
+              title="Data Analysis Workflows"
               color="#7f55cc"
-              icon="img/icons/home/controlled-data.svg"
+              icon="img/icons/home/analysis-workflows.svg"
             >
               Coming Soon
               {/* <ul>
