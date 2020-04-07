@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 import AlgoliaSearch from '../components/AlgoliaSearch';
 
 function HomeSplash() {
-  const SplashContainer = props => (
+  const SplashContainer = (props) => (
     <div className={styles.homeContainer}>
       <div className={styles.homeSplashFade}>
         <div className={styles.homeWrapper}>{props.children}</div>
@@ -20,10 +20,9 @@ function HomeSplash() {
     </div>
   );
 
-  const SearchBanner = props => (
+  const SearchBanner = (props) => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
-      <AlgoliaSearch />
     </section>
   );
 
