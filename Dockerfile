@@ -11,10 +11,6 @@ RUN mkdir /.npm /.nvm \
     && chown -R 9999:9999 /app /.nvm /.bashrc \
     && chown -R 9999:0 /.npm
 
-
-# needs shadow to get usermod and groupmod
-RUN apk --no-cache add shadow
-
 # we're using numeric user to match kubernetes
 RUN usermod -u 9999 nginx
 RUN groupmod -g 9999 nginx
@@ -24,7 +20,6 @@ RUN apt-get update && apt-get install -y curl
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./docker-start.sh /usr/local/bin/docker-start.sh
-
 
 RUN chown -R nginx:nginx /var/cache/nginx
 RUN chown -R nginx:nginx /var/log/nginx
