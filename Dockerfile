@@ -5,15 +5,11 @@ FROM nginx
 # copy instead of mount so we can give permissions as root
 COPY ./website ./app/website
 
-# give permissions for NVM to work as a non root user
-RUN mkdir /.npm /.nvm \
-    && touch /.bashrc \
-    && chown -R 9999:9999 /app /.nvm /.bashrc \
-    && chown -R 9999:0 /.npm
+
 
 # we're using numeric user to match kubernetes
 RUN usermod -u 9999 nginx
-RUN groupmod -g 9999 nginx
+#RUN groupmod -g 9999 nginx
 
 RUN apt-get update && apt-get install -y curl
 
@@ -25,6 +21,15 @@ RUN chown -R nginx:nginx /var/cache/nginx
 RUN chown -R nginx:nginx /var/log/nginx
 RUN chown -R nginx:nginx /etc/nginx/conf.d
 RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
+# This loads nvm
+
+# give permissions for NVM to work as a non root user
+RUN mkdir /.npm /.nvm 
+RUN echo 'export NVM_DIR="/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"'  >> /.bashrc
+
+RUN chown -R nginx:nginx /app /.nvm /.bashrc \
+    && chown -R nginx:0 /.npm
+RUN chmod -R 777 /.npm /.nvm /.bashrc 
 USER 9999
 
 EXPOSE 8080
