@@ -12,3 +12,6 @@ export ALGOLIA_INDEX=TESTING_INDEX_NAME_CIARAN ALGOLIA_API_KEY=99999999999999999
 echo $ALGOLIA_API_KEY $ALGOLIA_INDEX
 envsub .env.docker .env
 npm ci && npm run build
+
+cp -r /app/website/build /usr/share/nginx/html
+nginx -g daemon off
