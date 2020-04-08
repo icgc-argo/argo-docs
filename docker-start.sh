@@ -28,5 +28,5 @@ cat .env
 echo '\ \ \'
 npm ci && npm run build
 
-cp -r /app/website/build /usr/share/nginx/html
+cp -a /app/website/build/. /usr/share/nginx/html
 nginx -g 'daemon off;'
