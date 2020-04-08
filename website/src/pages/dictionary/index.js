@@ -348,8 +348,8 @@ function DataDictionary() {
                     marginBottom: '-2px',
                   }}
                 >
-                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
-                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
+                  {/*  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" /> 
+                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />*/}
                 </Tabs>
 
                 <div />
@@ -379,7 +379,7 @@ function DataDictionary() {
                 />
               </Display>
 
-              <Display visible={selectedTab === TAB_STATE.OVERVIEW}>
+              <Display visible={false}>
                 <TreeView searchValue={searchValue} data={treeData} />
               </Display>
             </div>
