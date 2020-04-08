@@ -16,16 +16,9 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./docker-start.sh /usr/local/bin/docker-start.sh
 
-RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d /app
 RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
 
-# give permissions for NVM to work as a non root user
-RUN mkdir /.npm /.nvm 
-
-# nvm install script to work
-RUN chown -R nginx:nginx /app
-
-#RUN chmod -R 777 /.npm /.nvm /.bashrc 
 USER 9999
 
 EXPOSE 8080
