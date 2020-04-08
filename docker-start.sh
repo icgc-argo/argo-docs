@@ -1,15 +1,19 @@
 #!/bin/bash
-#sleep 999999999999999999999999999
 whoami
+id
+echo 'group........'
+cat /etc/group
+echo 'users..............'
+cat /etc/passwd
 cd /
 pwd
-export NVM_DIR=/.nvm
+#export NVM_DIR=/.nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-ls -la /
-sleep 9999999999999
-source /.bashrc
+source ~/.bashrc
+
 nvm install 12.16.1
 nvm use --delete-prefix 12.16.1
+
 npm install -g envsub
 
 # grab Helm values and update our .env file
@@ -17,8 +21,12 @@ npm install -g envsub
 # We have to update our .env file which will be read by a Docusaurus plugin (dotenv plugin)
 export ALGOLIA_INDEX=TESTING_INDEX_NAME_CIARAN ALGOLIA_API_KEY=99999999999999999999999
 #echo $ALGOLIA_API_KEY $ALGOLIA_INDEX
-#envsub .env.docker .env
-#npm ci && npm run build
+cd /app/website
+envsub .env.docker .env
+echo '\ \ \'
+cat .env
+echo '\ \ \'
+npm ci && npm run build
 
-#cp -r /app/website/build /usr/share/nginx/html
-#nginx -g daemon off
+cp -r /app/website/build /usr/share/nginx/html
+nginx -g 'daemon off;'
