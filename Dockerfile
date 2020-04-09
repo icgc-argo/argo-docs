@@ -23,6 +23,7 @@ USER 9999
 
 ENV NODE_VERSION=12.16.1
 
+# nvm will install NODE_VERSION and set it as default
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash  \
     && . ~/.bashrc \
     && cd /app/website \

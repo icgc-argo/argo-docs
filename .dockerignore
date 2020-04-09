@@ -1,2 +1,6 @@
 */node_modules
 *.log
+*/build
+*/.env*
+*/.gitignore
+*/README.md
