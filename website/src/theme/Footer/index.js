@@ -35,11 +35,11 @@ function Footer() {
           <section className={styles.footerLinks}>
             {/* <a href="https://platform.icgc-argo.org/contact">Contact</a>
             <Slash /> */}
-            <a href="https://platform.icgc-argo.org/privacy">Privacy Policy</a>
+            <a href="https://www.icgc-argo.org/page/2/privacy">Privacy Policy</a>
             <Slash />
-            <a href="https://platform.icgc-argo.org/terms">Terms & Conditions</a>
+            <a href="https://www.icgc-argo.org/page/1/terms-and-conditions">Terms & Conditions</a>
             <Slash />
-            <a href="https://platform.icgc-argo.org/publicationpolicy">Publication Policy</a>
+            <a href="https://www.icgc-argo.org/page/77/e3-publication-policy">Publication Policy</a>
           </section>
           <section className={styles['legal-text']}>
             {siteConfig.themeConfig.footer.copyright}
