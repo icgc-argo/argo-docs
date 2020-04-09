@@ -5,8 +5,9 @@ FROM nginx
 # copy instead of mount so we can give permissions as root
 COPY ./website ./app/website
 
-# we're using numeric user to match kubernetes
 RUN mkdir /home/nginx && touch /home/nginx/.bashrc && chown -R nginx:nginx /home/nginx 
+
+# we're using numeric user to match kubernetes
 RUN usermod -u 9999 -d /home/nginx -s /bin/bash nginx
 RUN groupmod -g 9999 nginx
 
