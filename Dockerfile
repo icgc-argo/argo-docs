@@ -1,5 +1,4 @@
 
-# Set env variables here (none to worry about today)
 FROM nginx
 
 # copy instead of mount so we can give permissions as root
@@ -21,6 +20,13 @@ RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/log/nginx /
 RUN touch /var/run/nginx.pid && chown -R nginx:nginx /var/run/nginx.pid
 
 USER 9999
+
+ENV NODE_VERSION=12.16.1
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash  \
+    && . ~/.bashrc \
+    && cd /app/website \
+    && npm ci
 
 EXPOSE 8080
 
