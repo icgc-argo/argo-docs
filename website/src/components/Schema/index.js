@@ -18,6 +18,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
+  white-space: pre-wrap;
 `;
 
 const TagContainer = styled('div')`
@@ -33,7 +34,7 @@ const TagContainer = styled('div')`
   }
 `;
 
-const formatFieldType = value => {
+const formatFieldType = (value) => {
   switch (value) {
     case 'string':
       return 'TEXT';
@@ -76,7 +77,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
     },
   } = context;
 
-  const downloadTsvFileTemplate = fileName => {
+  const downloadTsvFileTemplate = (fileName) => {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
   };
 
@@ -99,10 +100,10 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
     setExpandedCodeLists(initialExpandingFields);
   }, [schema]);
 
-  const onCodelistExpandToggle = field => () =>
+  const onCodelistExpandToggle = (field) => () =>
     setExpandedCodeLists({ ...expandedCodeLists, [field]: !expandedCodeLists[field] });
 
-  const isCodeListExpanded = field => expandedCodeLists[field];
+  const isCodeListExpanded = (field) => expandedCodeLists[field];
 
   const [currentShowingScripts, setCurrentShowingScripts] = React.useState(null);
   const ScriptCell = ({ original: { meta, restrictions, name } }) => {

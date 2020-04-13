@@ -1,14 +1,3 @@
-.fileFilters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 15px;
-  background: var(--argo-grey-4);
-  border: solid 1px var(--argo-grey-2);
-  margin-top: 8px;
-  margin-bottom: 30px;
-}
-
 .fileFilters .dataSelectors > div {
   margin: 0 7px 0 5px;
 }
