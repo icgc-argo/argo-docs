@@ -32,6 +32,8 @@ import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { styled } from '@icgc-argo/uikit';
 import flattenDeep from 'lodash/flattenDeep';
+import Meta from '../../components/Meta';
+import { css } from 'emotion';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -351,32 +353,51 @@ function DataDictionary() {
                   {/*  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" /> 
                   <StyledTab value={TAB_STATE.DETAILS} label="Details" />*/}
                 </Tabs>
-
                 <div />
               </div>
 
-              <FileFilters
-                files={fileCount}
-                fields={fieldCount}
-                dataTiers={DEFAULT_FILTER.concat(
-                  filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                )}
-                dataAttributes={DEFAULT_FILTER.concat(
-                  filters.attributes.map((d) => ({
-                    content: startCase(d),
-                    value: d,
-                  })),
-                )}
-                searchParams={searchParams}
-                onSearch={(search) => setSearchParams(search)}
-              />
+              <Display visible={selectedTab === TAB_STATE.DETAILS}>
+                <div
+                  className={css`
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 8px 15px;
+                    background: var(--argo-grey-4);
+                    border: solid 1px var(--argo-grey-2);
+                    margin-top: 8px;
+                    margin-bottom: 30px;
+                  `}
+                >
+                  <Meta files={fileCount} fields={fieldCount} />
+                  <FileFilters
+                    dataTiers={DEFAULT_FILTER.concat(
+                      filters.tiers.map((d) => ({ content: startCase(d), value: d })),
+                    )}
+                    dataAttributes={DEFAULT_FILTER.concat(
+                      filters.attributes.map((d) => ({
+                        content: startCase(d),
+                        value: d,
+                      })),
+                    )}
+                    searchParams={searchParams}
+                    onSearch={(search) => setSearchParams(search)}
+                  />
+                </div>
+              </Display>
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
-                <RenderDictionary
-                  schemas={filteredSchemas}
-                  menuContents={menuContents}
-                  isLatestSchema={isLatestSchema}
-                />
+                <div
+                  className={css`
+                    margin-top: 30px;
+                  `}
+                >
+                  <RenderDictionary
+                    schemas={filteredSchemas}
+                    menuContents={menuContents}
+                    isLatestSchema={isLatestSchema}
+                  />
+                </div>
               </Display>
 
               <Display visible={false}>
