@@ -17,8 +17,8 @@ There is only one Clinical Submission workspace for each program. All program da
 ### Step 1: Download and Format Clinical Files
 ![Download and Format Files](/assets/submission/clinical-1-dowload-templates.png)
 
-1. Navigate to the **Submission** area in the top menu.
-1. Click on the **Clinical Submission** section in the left menu for your program.
+1. When logged in, navigate to the **Program Services** area in the top menu.
+1. Click on the **Submit Clinical Data** section in the left menu for your program.
 1. Download a **TSV Template** for each data type that you are submitting. Format your file(s) according to the current [Data Dictionary](/dictionary) specifications for each clinical data type.
 
 ### Tips for Formatting TSV files

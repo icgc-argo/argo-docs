@@ -33,7 +33,7 @@ There is only one Sample Registration workspace for each program. All program da
 ### Step 1: Download and Format the Sample Registration File
 ![Download and Format File](/assets/submission/register-1-download.png)
 
-1. Navigate to the **Submission** area in the top menu.
+1. When logged in, navigate to the **Program Services** area in the top menu.
 1. Click on the **Register Samples** section in the left menu for your program.
 1. Download the **TSV Template** for the sample registration file and format it according to the current [Data Dictionary](/dictionary) specifications.
 
