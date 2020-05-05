@@ -9,7 +9,7 @@ The ARGO User Profile page displays important user information including:
 - your ARGO member permissions
 - API Token management
 
-To get to your User Profile, click the icon in the top right corner and select Profile and Token.
+To get to your User Profile, click the icon in the top right corner and select **Profile and Token**.
 
 ## API Token
 

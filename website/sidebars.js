@@ -14,10 +14,14 @@ module.exports = {
       'user-profile-and-api-token',
       'data-download',
       'publication-guidelines',
-      'data-release-notes',
     ],
     'Analysis Workflows':[
       'dna-pipeline',
+    ],
+    'Release Notes':[
+      'data-releases',
+      'software-releases',
+      'dictionary-releases',
     ]
   },
 };
