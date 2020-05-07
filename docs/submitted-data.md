@@ -2,4 +2,103 @@
 id: submitted-data
 title: Viewing Submitted Data
 ---
-Coming Soon
+Program members can track the progress of their program’s clinical and molecular data submission and download analysis files from the **Program Dashboard**. 
+
+When a program member logs in to the ARGO Data Platform, and navigates to the **Program Services** area in the top menu, they will land on the program dashboard.  If a member belongs to multiple programs, each program has its own dashboard and submission sections.
+
+Program progress is summarized within the following dashboard "cards": 
+
+## Program Statistics 
+
+This card aggregates the following program statistics:
+![Dashbard Program Statistics](/assets/submission/dashboard-stats.png)  
+
+#### Registered Donors
+Once samples are registered, each corresponding donor will be counted as a percentage out of the number of committed program donors.
+
+#### % Donors with all Core Clinical Data
+Once all core clinical fields and files have been submitted for a donor, they are considered **"clinically complete"**. 
+> **A donor must be clinically complete before any of their molecular analysis files are released to the program members.**
+
+Check out [Clinical Data Validation Rules](clinical-data-validation-rules#clinical-data-completeness) for more information on how clinical completeness is calculated.
+
+#### % Donors with Tumour & Normal
+*Coming Soon:* Once a donor has a tumour and normal raw reed pair [submitted through Song](submitting-molecular-data), they will be counted towards this percentage.
+
+#### Donors in Molecular Data Processing
+*Coming Soon:* This is the number of donors that currently have samples being processed in the [analysis pipeline](dna-pipeline).
+
+#### Files to QC
+*Coming Soon:* Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using the file manifest, and will be available for an embargo period before being released to the public via the File Repository (note: all molecular files are controlled and will be available for the public to download with [DACO approval](data-access)). 
+
+#### Donors with Released Files
+*Coming Soon:* Once the embargo period is over, a data release will occur. Donors who have BOTH core clinical completeness and analysis files available will be released to the public via the File Repository.
+
+#### All Files
+*Coming Soon:* The count of all files for the program, i.e. all clinical and molecular analysis files that have either been released to the public or are still in QC for the embargo period. A program member, having DACO approval, can download these files by using the manifest in Song. Check out [How to Download Data](data-download).
+
+## Donor Release Summary
+The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total committed donors.   
+![Dashbard Donor Release Summary](/assets/submission/dashboard-donor-release-card.png)  
+
+## Program Workspace Status
+The **Program Workspace** consists of the sample registration as well as the clinical submission areas.
+![Dashbard Program Workspace Status](/assets/submission/dashboard-program-workspace-card.png)  
+
+All program members share the same workspace, so members are encouraged to communicate with each other when sample registration or clinical submission is in progress. 
+
+**Sample Registration Progress:** this progress bar will show if there are uploaded samples that haven’t been registered yet. A blank status bar means this area is free to register samples.
+
+**Clinical Submission Progress:** this progress bar will show if a clinical submission currently has uploaded files or if it has been validated and is ready for sign off. If a submission is signed off without any updates to previously submitted data, this progress bar will become blank again, signifying that this area is free to submit clinical data.  If the progress bar is in “pending approval” state, this means the clinical submission area has been locked and is under review by DCC. Once DCC approves the clinical data updates, the progress bar will become blank and the clinical submission area is free for a new submission. 
+
+## Completed Core Clinical Data
+*Coming Soon:* This line graph shows the number of donors with core clinical completeness over time. 
+
+## Molecular Data Summary
+*Coming Soon:* This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](dna-pipeline): Raw Read Submission, Alignment and Sanger VC. 
+
+## Donor Data Summary
+This table is a detailed summary of the clinical data status and DNA-seq pipeline status for each registered donor in the program. It also shows which donors have files that have been released to the public via the File Repository (note: all molecular files are controlled and available for the public to download with [DACO approval](data-access))
+![Dashbard Donor Data Summary](/assets/submission/dashboard-donor-table-card.png)  
+
+#### Table Actions
+Using the buttons above the table, a program member can download all clinical data that has been submitted for the program donors. The download will be in the same file format that was submitted through the sample registration and clinical submission sections. 
+
+*Coming Soon:* A program member can download missing clinical data for all donors as well as the table summary details.
+
+The table is sorted by default on the last updated date, so a program member will always see the donors with the most recent activity first. The table can be sorted by another column by clicking on any other column header.
+
+#### Released Files Status
+Each donor has a **star** ![Dashboard Donor Release Star](/assets/submission/dashboard-donor-star.png) that denotes if they have fully released files, partially released files or no released files. In order to have released files, the embargo period must be over and the donor must have 100% [core fields completeness](clinical-data-validation-rules#clinical-data-completeness) as well as some molecular analysis completed.
+
+#### Clinical Data Submission
+The table shows the percentage of **core clinical fields** and percentage of **extended clinical fields** that have been submitted for a donor. 
+
+![Dashboard Clinical Data Submission](/assets/submission/dashboard-clinical-submission.png) 
+* **The percentage of core fields must be 100% (showing ![Dashboard Donor 100% clinical complete](/assets/submission/dashboard-clinical-complete.png)) for any analysis files to be released to the program members for download**. [See how this percentage is calculated](clinical-data-validation-rules#clinical-data-completeness) 
+* The extended field percentage does not have to reach 100%, but it is strongly encouraged that data submitters provide as many of these fields as possible for a donor.
+
+#### Sample Status
+The registered tumour and normal sample count as well as submitted raw reads count are also available within this table. 
+
+![Dashboard Donor Sample Status](/assets/submission/dashboard-samples-raw-reads.png) 
+* In the **samples** column, a 0N (normal) or 0T (tumour) will be highlighted in red for any missing tumour/normal pair (each donor must have at least one normal and one tumour sample registered).  
+* *Coming Soon:* Once raw samples are [submitted through Song](submitting-molecular-data), those counts will appear in the **raw reads** column. Similarly, the raw reads normal and tumour count will be highlighted in red for any instance where the count does not match the registered sample count. 
+
+#### Analysis Status
+*Coming Soon:* The donor summary table also shows where each donor sample is at in the [DNA-Seq Pipeline](dna-pipeline). In the **Alignment** and **Sanger VC** columns, a progress bar will appear if the donor has any samples processing through these workflows. 
+
+![Dashboard Workflow Status](/assets/submission/dashboard-workflow-statusbar.png) 
+* A green section with a number will show how many donor samples have completed that workflow. 
+* An orange section with a number will show how many donor samples are currently processing that workflow. 
+* A red section with a number will show how many donor samples have stopped processing because of a workflow error. 
+* Hovering over these sections will show the specific Submitter Sample IDs for each workflow status. 
+
+The **processing status** table column shows the overall molecular status for that donor: 
+* Registered: samples are awaiting molecular submission or processing.
+* Processing: some submitted samples are processing.
+* Complete: all submitted samples have completed the workflows. 
+
+#### Last Updated
+The **last updated** table column indicates when this donor was last updated with new data submission or molecular analysis.
+
