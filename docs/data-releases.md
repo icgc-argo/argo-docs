@@ -8,7 +8,7 @@ A DCC data release is a curated data set produced from clinical and experimental
 
 ## Data Release 1.0 
 
-**Release Date: July 30, 2020**
+**Release Date:**
 
 ### New Updates 
 Coming soon.

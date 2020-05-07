@@ -131,37 +131,31 @@ function Index() {
                 </li>
               </ul> */}
             </ContentBlock>
-            <ContentBlock title="FAQs" color="#fea430" icon="img/icons/home/faq.svg">
-              Coming Soon
-              {/* <ul>
-                <li>
-                  <a href="/docs/faq">Can I submit molecular data before registering IDs?</a>
-                </li>
-                <li>
-                  <a href="/docs/faq">What does "clinical completeness" mean?</a>
-                </li>
-                <li>
-                  <a href="/docs/faq">How do I track data processing stage?</a>
-                </li>
-              </ul> */}
+            <ContentBlock title="Publication Guidelines" color="#E75471" icon="img/icons/home/publication-guidelines.svg">
+              <span className={styles.contentDescription}>
+                How to cite the ARGO Data Platform and datasets within your publication.
+              </span>
+              <a className={styles.contentAction} href="/docs/publication-guidelines">
+                Read the Guidelines
+                <img src="img/icons/chevron-right.svg" height={8} width={8} />
+              </a>
             </ContentBlock>
             <ContentBlock
               title="Release Notes"
               color="#0774d3"
               icon="img/icons/home/data-release.svg"
             >
-              Coming Soon
-              {/* <ul>
+              <ul>
                 <li>
-                  <a href="#">Data Dictionary Releases</a>
+                  View <a href="/docs/data-releases">data release details</a>
                 </li>
                 <li>
-                  <a href="#">Data Releases</a>
+                  View <a href="/docs/software-releases">software release details</a>
                 </li>
                 <li>
-                  <a href="#">Platform Software Releases</a>
+                  View <a href="/docs/dictionary-releases">dictionary release details</a>
                 </li>
-              </ul> */}
+              </ul>
             </ContentBlock>
           </div>
         </div>

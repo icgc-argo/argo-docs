@@ -7,7 +7,7 @@ A DCC dictionary release happens when there has been an update to the clinical d
 
 ## Dictionary Release 1.0 
 
-**Release Date: July 30, 2020**
+**Release Date:**
 
 ### New Updates 
 Coming soon.
