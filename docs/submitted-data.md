@@ -23,19 +23,19 @@ Once all core clinical fields and files have been submitted for a donor, they ar
 Check out [Clinical Data Validation Rules](clinical-data-validation-rules#clinical-data-completeness) for more information on how clinical completeness is calculated.
 
 #### % Donors with Tumour & Normal
-*Coming Soon:* Once a donor has a tumour and normal raw reed pair [submitted through Song](submitting-molecular-data), they will be counted towards this percentage.
+*Coming Soon:* Once a donor has a tumour and normal raw read pair [submitted through Song](submitting-molecular-data), they will be counted towards this percentage.
 
 #### Donors in Molecular Data Processing
 *Coming Soon:* This is the number of donors that currently have samples being processed in the [analysis pipeline](dna-pipeline).
 
 #### Files to QC
-*Coming Soon:* Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using the file manifest, and will be available for an embargo period before being released to the public via the File Repository (note: all molecular files are controlled and will be available for the public to download with [DACO approval](data-access)). 
+*Coming Soon:* Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using a [file manifest and the score-client](data-download), and will be available for an embargo period before being released to the public via the File Repository. 
 
 #### Donors with Released Files
-*Coming Soon:* Once the embargo period is over, a data release will occur. Donors who have BOTH core clinical completeness and analysis files available will be released to the public via the File Repository.
+*Coming Soon:* Once the files have passed the embargo period, a data release will occur. Donors who have BOTH core clinical completeness and analysis files available will be released to the public via the File Repository.
 
 #### All Files
-*Coming Soon:* The count of all files for the program, i.e. all clinical and molecular analysis files that have either been released to the public or are still in QC for the embargo period. A program member, having DACO approval, can download these files by using the manifest in Song. Check out [How to Download Data](data-download).
+*Coming Soon:* The count of all files for the program, i.e. all clinical and molecular analysis files that have either been released to the public or are still in QC for the embargo period. A program member, having DACO approval, can download these files by using the [file manifest with the score-client](data-download).
 
 ## Donor Release Summary
 The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total committed donors.   
@@ -45,11 +45,11 @@ The status bar in this card shows how many program donors have fully released fi
 The **Program Workspace** consists of the sample registration as well as the clinical submission areas.
 ![Dashbard Program Workspace Status](/assets/submission/dashboard-program-workspace-card.png)  
 
-All program members share the same workspace, so members are encouraged to communicate with each other when sample registration or clinical submission is in progress. 
+> All program members share the same workspace, so members are encouraged to communicate with each other when sample registration or clinical submission is in progress. 
 
 **Sample Registration Progress:** this progress bar will show if there are uploaded samples that haven’t been registered yet. A blank status bar means this area is free to register samples.
 
-**Clinical Submission Progress:** this progress bar will show if a clinical submission currently has uploaded files or if it has been validated and is ready for sign off. If a submission is signed off without any updates to previously submitted data, this progress bar will become blank again, signifying that this area is free to submit clinical data.  If the progress bar is in “pending approval” state, this means the clinical submission area has been locked and is under review by DCC. Once DCC approves the clinical data updates, the progress bar will become blank and the clinical submission area is free for a new submission. 
+**Clinical Submission Progress:** this progress bar will show if a clinical submission currently has uploaded files or if it has been validated and is ready for sign off. If a submission is signed off without any updates to previously submitted data, this progress bar will become blank again, signifying that this area is free to submit clinical data.  If the progress bar is in “pending approval” state, this means the clinical submission area has been locked and is under review by the DCC. Once the DCC approves the clinical data updates, the progress bar will become blank and the clinical submission area is free for a new submission. 
 
 ## Completed Core Clinical Data
 *Coming Soon:* This line graph shows the number of donors with core clinical completeness over time. 
@@ -58,7 +58,7 @@ All program members share the same workspace, so members are encouraged to commu
 *Coming Soon:* This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](dna-pipeline): Raw Read Submission, Alignment and Sanger VC. 
 
 ## Donor Data Summary
-This table is a detailed summary of the clinical data status and DNA-seq pipeline status for each registered donor in the program. It also shows which donors have files that have been released to the public via the File Repository (note: all molecular files are controlled and available for the public to download with [DACO approval](data-access))
+This table is a detailed summary of the clinical data status and DNA-seq pipeline status for each registered donor in the program. It also shows which donors have files that have been released to the public via the File Repository.
 ![Dashbard Donor Data Summary](/assets/submission/dashboard-donor-table-card.png)  
 
 #### Table Actions
