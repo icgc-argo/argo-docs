@@ -4,6 +4,7 @@ module.exports = {
       'submission-overview',
       'registering-samples',
       'submitting-clinical-data',
+      'clinical-data-validation-rules',
       'submitting-molecular-data',
       'submitted-data',
       'managing-program-access',
@@ -13,11 +14,16 @@ module.exports = {
       'data-access',
       'user-profile-and-api-token',
       'data-download',
+      'programmatic-apis',
       'publication-guidelines',
-      'data-release-notes',
     ],
     'Analysis Workflows':[
       'dna-pipeline',
+    ],
+    'Release Notes':[
+      'data-releases',
+      'software-releases',
+      'dictionary-releases',
     ]
   },
 };

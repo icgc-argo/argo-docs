@@ -28,7 +28,7 @@ If you are a Program Administrator, you will have the ability to invite users to
 
 ## Adding Users
 
-1. Navigate to the **Submission** area in the top menu.
+1. When logged in, navigate to the **Program Services** area in the top menu.
 1. Click on the **Manage Program** section in the left menu for your program.
 1. Above the users table, click the _Add Users_ button.
 1. Fill in the First Name, Last Name, Email, and Role of the person you would like to add to your program. The email address you provide will be the email that the user will use to log in to the ARGO Data Platform.
@@ -37,7 +37,7 @@ If you are a Program Administrator, you will have the ability to invite users to
 
 ## Removing Users
 
-1. Navigate to the **Submission** area in the top menu.
+1. When logged in, navigate to the **Program Services** area in the top menu.
 1. Click on the **Manage Program** section in the left menu for your program.
 1. Find the user for which you want to remove program access and click the garbage can icon in their table row.
 1. After confirming removal, the user's program access will be immediately revoked, and they will not be able to complete any program data actions.

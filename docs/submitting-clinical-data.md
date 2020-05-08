@@ -17,8 +17,8 @@ There is only one Clinical Submission workspace for each program. All program da
 ### Step 1: Download and Format Clinical Files
 ![Download and Format Files](/assets/submission/clinical-1-dowload-templates.png)
 
-1. Navigate to the **Submission** area in the top menu.
-1. Click on the **Clinical Submission** section in the left menu for your program.
+1. When logged in, navigate to the **Program Services** area in the top menu.
+1. Click on the **Submit Clinical Data** section in the left menu for your program.
 1. Download a **TSV Template** for each data type that you are submitting. Format your file(s) according to the current [Data Dictionary](/dictionary) specifications for each clinical data type.
 
 ### Tips for Formatting TSV files
@@ -30,6 +30,7 @@ There is only one Clinical Submission workspace for each program. All program da
 - If you are using a text editor, make sure you have invisible characters turned on.  This way you can be sure that tabs are correctly separating each field value. 
 - You do not need to remove any columns from the TSV file. For example, if the field is labeled "extended" in the dictionary and you do not have a value for that field, simply leave it blank.
 - Each file template name references the corresponding version of the dictionary (e.g argo_submission_templates_v0.7 is referencing version 0.7 of the data dictionary). Please make sure you are using the latest version of these files by referencing the latest [Data Dictionary](/dictionary). 
+- Check out [Clinical Data Validation Rules](clinical-data-validation-rules) for the clinical file validation rules.
 
 ### Step 2: Upload Clinical TSV Files
 ![Upload Files](/assets/submission/clinical-2-upload.png)
