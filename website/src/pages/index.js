@@ -91,7 +91,7 @@ function Index() {
               </ul>
             </ContentBlock>
             <ContentBlock
-              title="Data Access & Download "
+              title="Data Access & Download"
               color="#f95d31"
               icon="img/icons/home/download.svg"
             >
