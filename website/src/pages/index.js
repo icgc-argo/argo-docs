@@ -91,7 +91,7 @@ function Index() {
               </ul>
             </ContentBlock>
             <ContentBlock
-              title="Data Access & Download"
+              title="Data Access & Download "
               color="#f95d31"
               icon="img/icons/home/download.svg"
             >
@@ -131,7 +131,11 @@ function Index() {
                 </li>
               </ul> */}
             </ContentBlock>
-            <ContentBlock title="Publication Guidelines" color="#E75471" icon="img/icons/home/publication-guidelines.svg">
+            <ContentBlock
+              title="Publication Guidelines"
+              color="#E75471"
+              icon="img/icons/home/publication-guidelines.svg"
+            >
               <span className={styles.contentDescription}>
                 How to cite the ARGO Data Platform and datasets within your publication.
               </span>
