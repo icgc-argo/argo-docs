@@ -23,6 +23,7 @@ function HomeSplash() {
   const SearchBanner = (props) => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
+      <AlgoliaSearch />
     </section>
   );
 
