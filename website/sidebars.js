@@ -19,7 +19,6 @@ module.exports = {
     ],
     'Analysis Workflows': [
       `analysis-workflows/analysis-overview`,
-      `analysis-workflows/alignment-overview`,
       'analysis-workflows/dna-pipeline',
     ],
     'Release Notes': [

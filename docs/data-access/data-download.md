@@ -5,6 +5,12 @@ title: How to Download Data
 
 > NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](data-access), or [apply for DACO approval here](https://icgc.org/daco).
 
+### Searching for Files
+
+Use the Platform [File Repository](https://platform.icgc-argo.org/repository) to search for a file set of interest. You can narrow file results down by key facet filters on the left side of the page. Once you have a file set identified, click `Download > File Manifest` to download a TSV file manifest.
+
+The file manifest will contain a listing of the files that matched your query, along with some additional metatdata to assist in file identification.
+
 ### Installing the Score-Client
 
 Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE}-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user values, including:
@@ -26,13 +32,18 @@ metadata.url=https://song.argo.cancercollaboratory.org
 storage.url=https://score.argo.cancercollaboratory.org
 ```
 
-### Searching for Files
-
-Use the Platform [File Repository](https://platform.icgc-argo.org/repository) to search for a file set of interest. You can narrow file results down by key facet filters on the left side of the page. Once you have a file set identified, click `Download > File Manifest` to download a TSV file manifest.
-
-The file manifest will contain a listing of the files that matched your query, along with some additional metatdata to assist in file identification.
-
 ### Using the Score-client to Download Files
+
+## Working in Windows
+
+## Working in IOS/Linux
+
+i could use docker from windows (method above)
+
+- I can use docker from ios/linux
+- i can use score-client with env variables with ios/lunix
+- i can user score-client with the application.yaml values
+- i can user score-client with one of two preconfigured profiles, which are only applicable to ICGC Legacy
 
 Once you have identified files of interest and have downloaded a file manifest from the ARGO Platform, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
 
