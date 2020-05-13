@@ -1,20 +1,18 @@
 import React from 'react';
 import { useHistory } from '@docusaurus/router';
+import useSearchAvailable from './useSearchAvailable';
 
 /**
  * Expects id selector for input
  */
 const useAlgolia = (inputRef, options = {}) => {
   const history = useHistory();
+  const searchAvailable = useSearchAvailable();
 
-  const [currentInput, setCurrentInput] = React.useState();
-  React.useEffect(() => {
-    setCurrentInput(inputRef.current);
-  }, []);
-
-  if (!process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX) {
+  if (!searchAvailable) {
     console.warn('Search not configured');
-  } else if (currentInput && window) {
+    return false;
+  } else if (window) {
     // lazy load because docsearch module isn't SSR friendly
     import('docsearch.js').then(({ default: docsearch }) => {
       docsearch({
@@ -40,6 +38,7 @@ const useAlgolia = (inputRef, options = {}) => {
     });
   } else {
     console.warn('Search not available');
+    return false;
   }
 };
 
