@@ -1,29 +1,31 @@
 module.exports = {
   docs: {
     Submission: [
-      'submission-overview',
-      'registering-samples',
-      'submitting-clinical-data',
-      'clinical-data-validation-rules',
-      'submitting-molecular-data',
-      'submitted-data',
-      'managing-program-access',
-      'faq',
+      'submission/submission-overview',
+      'submission/registering-samples',
+      'submission/submitting-clinical-data',
+      'submission/clinical-data-validation-rules',
+      'submission/submitting-molecular-data',
+      'submission/submitted-data',
+      'submission/managing-program-access',
+      'submission/faq',
     ],
     'Data Access': [
-      'data-access',
-      'user-profile-and-api-token',
-      'data-download',
-      'programmatic-apis',
-      'publication-guidelines',
+      'data-access/data-access',
+      'data-access/data-download',
+      'data-access/user-profile-and-api-token',
+      'data-access/programmatic-apis',
+      'data-access/publication-guidelines',
     ],
-    'Analysis Workflows':[
-      'dna-pipeline',
+    'Analysis Workflows': [
+      `analysis-workflows/analysis-overview`,
+      `analysis-workflows/alignment-overview`,
+      'analysis-workflows/dna-pipeline',
     ],
-    'Release Notes':[
-      'data-releases',
-      'software-releases',
-      'dictionary-releases',
-    ]
+    'Release Notes': [
+      'release-notes/data-releases',
+      'release-notes/software-releases',
+      'release-notes/dictionary-releases',
+    ],
   },
 };
