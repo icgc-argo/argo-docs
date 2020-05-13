@@ -1,8 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import useAlgolia from '../../hooks/useAlgolia';
+import useSearchAvailable from '../../hooks/useSearchAvailable';
 
 const Search = (props) => {
+  const searchAvailable = useSearchAvailable();
+  if (!searchAvailable) return null;
+
   const inputRef = React.useRef();
   useAlgolia(inputRef);
 
