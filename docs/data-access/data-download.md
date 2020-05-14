@@ -3,7 +3,7 @@ id: data-download
 title: How to Download Data
 ---
 
-The ARGO Data Platform uses the score-cient as a file download manager. In order to Score facilitates the transfer and storage of your data seamlessly for cloud-based projects. File bundling, resumable downloads, and BAM/CRAM slicing make data transfer fast and smooth.
+The ARGO Data Platform uses the score-cient as a file download manager. Score facilitates the transfer of data with resumable download and built in BAM/CRAM slicing to make data download transfer fast and smooth.
 
 Please note:
 

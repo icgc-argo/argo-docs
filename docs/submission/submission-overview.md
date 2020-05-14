@@ -19,7 +19,7 @@ Explore the details of the ARGO clinical dataset in the **[ARGO Data Dictionary 
 
 ## Data Submission and Release Process
 
-The ARGO Data Platform has been optimized to ensure that clinical and molecular data upload is intuitiv and efficient for data submitters. ARGO data submission and release happens in 4 major steps:
+The ARGO Data Platform has been optimized to ensure that clinical and molecular data upload is intuitive and efficient for data submitters. ARGO data submission and release happens in 4 major steps:
 
 1. **Register Molecular Samples:** [Registering samples](registering-samples) initializes the ARGO-assigned primary identifiers that will be assigned to submitted data entities. Registering samples with specimen and donor identifiers upfront maintains data integrity across the data submission and processing pipelines.
 1. **Submit Donor Clinical and Molecular Data:** Clinical Data Submitters can use the Progam Services section in the ARGO Data Platform to submit clinical data. [Submitting clinical data](submitting-clinical-data) is easy and intuitive, facilitated by a guided clinical submission interface. In parallel, Molecular Data Submitters can begin submitting molecular data. [Submitting molecular data](submitting-molecular-data) using the Song and Score clients is fast and secure.
