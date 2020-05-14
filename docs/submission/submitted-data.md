@@ -28,15 +28,15 @@ Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-valida
 
 #### % Donors with Tumour & Normal
 
-_Coming Soon:_ Once a donor has a tumour and normal raw read pair [submitted through Song](submitting-molecular-data), they will be counted towards this percentage.
+_Coming Soon:_ Once a donor has a tumour and normal raw read pair [submitted through Song](/docs/submission/submitting-molecular-data), they will be counted towards this percentage.
 
 #### Donors in Molecular Data Processing
 
-_Coming Soon:_ This is the number of donors that currently have samples being processed in the [analysis pipeline](dna-pipeline).
+_Coming Soon:_ This is the number of donors that currently have samples being processed in the [analysis pipeline](/docs/analysis-workflows/dna-pipeline).
 
 #### Files to QC
 
-_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using a [file manifest and the score-client](data-download), and will be available for an embargo period before being released to the public via the File Repository.
+_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using a [file manifest and the score-client](/docs/data-access/data-download), and will be available for an embargo period before being released to the public via the File Repository.
 
 #### Donors with Released Files
 
@@ -44,7 +44,7 @@ _Coming Soon:_ Once the files have passed the embargo period, a data release wil
 
 #### All Files
 
-_Coming Soon:_ The count of all files for the program, i.e. all clinical and molecular analysis files that have either been released to the public or are still in QC for the embargo period. A program member, having DACO approval, can download these files by using the [file manifest with the score-client](data-download).
+_Coming Soon:_ The count of all files for the program, i.e. all clinical and molecular analysis files that have either been released to the public or are still in QC for the embargo period. A program member, having DACO approval, can download these files by using the [file manifest with the score-client](/docs/data-access/data-download).
 
 ## Donor Release Summary
 
@@ -68,7 +68,7 @@ _Coming Soon:_ This line graph shows the number of donors with core clinical com
 
 ## Molecular Data Summary
 
-_Coming Soon:_ This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](dna-pipeline): Raw Read Submission, Alignment and Sanger VC.
+_Coming Soon:_ This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](/docs/analysis-workflows/dna-pipeline): Raw Read Submission, Alignment and Sanger VC.
 
 ## Donor Data Summary
 
@@ -107,7 +107,7 @@ The registered tumour and normal sample count as well as submitted raw reads cou
 
 #### Analysis Status
 
-_Coming Soon:_ The donor summary table also shows where each donor sample is at in the [DNA-Seq Pipeline](dna-pipeline). In the **Alignment** and **Sanger VC** columns, a progress bar will appear if the donor has any samples processing through these workflows.
+_Coming Soon:_ The donor summary table also shows where each donor sample is at in the [DNA-Seq Pipeline](/docs/analysis-workflows/dna-pipeline). In the **Alignment** and **Sanger VC** columns, a progress bar will appear if the donor has any samples processing through these workflows.
 
 ![Dashboard Workflow Status](/assets/submission/dashboard-workflow-statusbar.png)
 

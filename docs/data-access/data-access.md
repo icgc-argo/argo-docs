@@ -8,12 +8,13 @@ The **Data Access Compliance Office (DACO)** handles requests and approvals for 
 
 ## Guidelines for Applying for Access to Controlled Data
 
-While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information.As such, DACO applications will only be considered for individuals or organizations with qualified scientists researching public health objectives.
+While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information. As such, DACO applications will only be considered for qualified scientents (individuals or groups from an institution) researching public health objectives.
 
-As a prerequisite to applying for DACO access, pleae ensure that you:
+As a prerequisite to applying for DACO access, please ensure that you:
 
-- are associated to a research organization or company
-- have a signing officer at your institution
+- are associated to a research institution or company
+- have a signing officer at your institution (authorized institutional representative)
+- have a scientific abstract with at least 3 relevant publications of which you were an author or a co-author
 
 ## How to Apply for Access through DACO
 
@@ -24,7 +25,7 @@ The instructions for applying for DACO can be found here on the [ICGC DACO websi
 1. Once you save your password, you will be taken to your ICGC Dashboard. From your Dashboard, click the link to start a new access application form from the box entitled “Your DACO Access Forms”.
 1. Complete the entire application form. All sections, as well as Appendices, are integral components of the application.
 
-   > **IMPORTANT: For the applicant and any authorized personnel, you will be asked to provide an “OpenID”, which means providing a valid oogle email address (Gmail or GSuite) for each authorized personnel.** This will be the email address you will use to log in to the ARGO Data Platform for accessing controlled data.
+   > **IMPORTANT: For the applicant and any authorized personnel, you will be asked to provide an “OpenID”, which means providing a valid Google email address (Gmail or GSuite) for each authorized personnel.** This will be the email address you will use to log in to the ARGO Data Platform for accessing controlled data.
 
 1. Once the application is completed you can submit it by “finalizing your DACO Application”. This action will prevent you from making further changes to your application without authorization from an administrator.
 1. You will receive an email with further instructions. The next steps will also be listed on the confirmation page. Download and print your finalized application to add the necessary signatures. Once signed, you can fax or mail the application to the DACO office (the contact details are provided on the confirmation page and email).

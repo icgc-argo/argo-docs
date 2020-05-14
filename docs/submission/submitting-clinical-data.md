@@ -45,7 +45,7 @@ There is only one Clinical Submission workspace for each program. All program da
 
 ### Step 3: Validate Clinical Workspace
 
-Uploaded data must be checked for accuracy against the data in the current submission, as well as any data that has previously been submitted for your donors. For a list of descriptions of all the cross-file data validations that are performed, see [this](/docs/submission/clinical-data-validation-rules#cross-file-validations).
+Uploaded data must be checked for accuracy against the data in the current submission, as well as any data that has previously been submitted for your donors. Check out the [Clinical Data Validation Rules](/docs/submission/clinical-data-validation-rules#cross-file-validations) for a list of the cross-file validations that are performed.
 
 ![Validate Files](/assets/submission/clinical-3-validate.png)
 

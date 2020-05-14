@@ -37,4 +37,4 @@ If you do not have DACO access, please see the instructions for [applying to con
 
 ### Program Permission
 
-Under "My Memberships", you will see a list of Programs that you have been granted access to for the purpose of data submission or management, along with your [role](/docs/managing-program-access#user-roles-and-permissions) and permissions for those programs. If you are not part of program that is submitting data to the ARGO Data Platform, then this section will not list any Programs.
+Under "My Memberships", you will see a list of Programs that you have been granted access to for the purpose of data submission or management, along with your [role](/docs/managing-program-access#user-roles-and-permissions) and permissions for those programs. If you are not part of a program that is submitting data to the ARGO Data Platform, then this section will not list any Programs.
