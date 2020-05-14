@@ -11,7 +11,7 @@ The DNA-Seq analysis pipeline identifies various somatic variant types within Wh
 In the future, these procedures will be extended to include:
 
 - Variant Masking
-- Variant Mnnotation
+- Variant Annotation
 - Concencus Calling
 
 ## Alignment

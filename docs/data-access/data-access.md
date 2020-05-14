@@ -41,7 +41,7 @@ The DACO office will notify you by email when your DACO application has been app
 
 ## Next steps after DACO Approval
 
-Please log in to the **[ARGO Data Platform](https://platform.icgc-argo.org/)** using the **same google email address (OpenID)** that is associated with your DACO account.
+Please log in to the **[ARGO Data Platform](https://platform.icgc-argo.org/)** using the **same Google email address (OpenID)** that is associated with your DACO account.
 
 If you have been granted DACO access, you should see a green "DACO Approved" check mark on your [user profile page](https://platform.icgc-argo.org/user). This is also where you can access your API Token to use with the ICGC ARGO download client. For more information, check out [How to Download Data](data-download).
 ![DACO Approval](/assets/data-access/daco-access.png)
