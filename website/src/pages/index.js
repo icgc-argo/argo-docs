@@ -151,9 +151,6 @@ function Index() {
               color="#0774d3"
               icon="img/icons/home/data-release.svg"
             >
-              <span className={styles.contentDescription}>
-                The ARGO Data Platform regularly releases updates to its data and software.
-              </span>
               <ul>
                 <li>
                   View <a href="/docs/release-notes/data-releases">data release details</a>
