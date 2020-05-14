@@ -54,7 +54,7 @@ module.exports = {
         { to: 'docs/submission/submission-overview', label: 'Submission', position: 'right' },
         { to: 'docs/data-access/data-access', label: 'Data Access', position: 'right' },
         {
-          to: 'docs/analysis-workflows/dna-pipeline',
+          to: 'docs/analysis-workflows/analysis-overview',
           label: 'Analysis Workflows',
           position: 'right',
         },

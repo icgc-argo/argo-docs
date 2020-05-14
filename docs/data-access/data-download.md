@@ -3,17 +3,54 @@ id: data-download
 title: How to Download Data
 ---
 
+The ARGO Data Platform uses the score-cient as a file download manager. In order to Score facilitates the transfer and storage of your data seamlessly for cloud-based projects. File bundling, resumable downloads, and BAM/CRAM slicing make data transfer fast and smooth.
+
+Please note:
+
+- Downloads are done in part and can be paused/resumed as needed
+- The score-client will automatically resume downloads if interrupted or paused briefly
+
+## Searching for Files
+
+Use the Platform [File Repository](https://platform.icgc-argo.org/repository) to search for a file set of interest. Query results can be narrowed down by selecting specific file values in the facet filters on the left side of the page. Once you have a file set identified, click `Download > File Manifest` on the top right of the table to download a TSV file manifest.
+
+The file manifest will contain a listing of the files that matched your query, along with some additional metatdata to assist in file identification. This file manifest will be used by the score-client as a list of files to download.
+
 > NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](data-access), or [apply for DACO approval here](https://icgc.org/daco).
 
-### Searching for Files
+## Installing the Score-Client
 
-Use the Platform [File Repository](https://platform.icgc-argo.org/repository) to search for a file set of interest. You can narrow file results down by key facet filters on the left side of the page. Once you have a file set identified, click `Download > File Manifest` to download a TSV file manifest.
+The score-client can be run in different ways depending on your operating system or setup:
 
-The file manifest will contain a listing of the files that matched your query, along with some additional metatdata to assist in file identification.
+- If you are on Windows, use the Docker distribution
+- If you are on a Unix system (IOS/Linux) you can use the Docker distribution, or score-client directly.
 
-### Installing the Score-Client
+## Installing the Score-Client to Download Files
 
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE}-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user values, including:
+### Docker Distribution
+
+Pull the latest version of the Score Docker distribution:
+
+```
+docker pull overture/score
+```
+
+Use the docker run command with the correct variables specified. You will need to define:
+
+- your personal [API Key](user-profile-and-token)
+- the file metadata Song server URL
+- the object storage Score server URL
+- the absoloute directory path where your file manifest is located
+- an output directory path
+
+```
+docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" -e "STORAGE_URL=https://score.argo.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\rbajari\Desktop\download\
+```
+
+### Score-client with Configured Values
+
+Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
+Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user values, including:
 
 - your personal [API Key](user-profile-and-token)
 - the file metadata Song server URL
@@ -32,26 +69,21 @@ metadata.url=https://song.argo.cancercollaboratory.org
 storage.url=https://score.argo.cancercollaboratory.org
 ```
 
-### Using the Score-client to Download Files
-
-## Working in Windows
-
-## Working in IOS/Linux
-
-i could use docker from windows (method above)
-
-- I can use docker from ios/linux
-- i can use score-client with env variables with ios/lunix
-- i can user score-client with the application.yaml values
-- i can user score-client with one of two preconfigured profiles, which are only applicable to ICGC Legacy
-
-Once you have identified files of interest and have downloaded a file manifest from the ARGO Platform, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
+Once you have configured your `application.yaml`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
 
 ```
-score-client-3.1.1/bin/score-client --profile collab download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
+score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-Please note:
+### Score-client with Environment Variables
 
-- Downloads are done in part and can be paused/resumed as needed
-- The score-client will automatically resume downloads if interrupted or paused briefly
+Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
+Alternately, you can define environment variables to specify the correct
+
+```
+METADATA_URL=http://localhost:12345 STORAGE_URL=http://localhost:23456 score-client download --manifest manifest1.txt
+```
+
+//// need details of if the ENV means you have to define acceess token as an env variable???
+
+## BAM Slicing

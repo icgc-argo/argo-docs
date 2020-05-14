@@ -36,7 +36,7 @@ retry:
 
 ### Score-Client
 
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE}-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user and data submission program values, including:
 
 - [API Key](user-profile-and-token)
 - local RDPC Song server URL
@@ -61,7 +61,7 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 /////// NEED THE TAB DISPLAY HERE TO SHOW DIFFEERENT STARTING PAYLOADS {SEQUENCING EXPEIRMETN FOR ONE}
 
-```
+```json
 {
   "studyId": "DASH-CA",
   "analysisType": {
@@ -125,22 +125,22 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 Once you have formatted the payload, use the song-client `submit` command to upload the json payload to the configured Song.
 
 ```
-> ./bin/sing submit -f dash-5-tumour.json
+./bin/sing submit -f dash-5-tumour.json
 ```
 
 If your payload is not formatted correctly, you will receive an error message detailing what is wrong. Please fix any errors and resubmit. If your payload is formatted correctly, you will get an `analysisId` in response.
 
-```
+```json
 {
-  "analysisId" : "a4142a01-1274-45b4-942a-01127465b422",
-  "status" : "OK"
+  "analysisId": "a4142a01-1274-45b4-942a-01127465b422",
+  "status": "OK"
 }
 ```
 
 Use the returned `analysis_id` to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
 
 ```
-> ./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
+./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
 
 Wrote manifest file 'tumor_manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
@@ -150,7 +150,7 @@ Wrote manifest file 'tumor_manifest.txt' for analysisId 'a4142a01-1274-45b4-942a
 Using the score-client `upload` command, upload all files associated with the payload.
 
 ```
-> .bin/score-client  upload --manifest manifest.txt
+.bin/score-client  upload --manifest manifest.txt
 ```
 
 If the file successfully uploads, then you will receive an `Upload completed` message.
