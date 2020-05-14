@@ -26,6 +26,7 @@ Some important things to note about your API Token:
 ## Member Permissions
 
 Member permissions are assigned based on the role that has been granted to you in a specific program, the type of program you are a member of, and your application for access to controlled data.
+
 ![ARGO Member Permissions](/assets/data-access/user-profile-program-access.png)
 
 ### DACO Access
@@ -36,4 +37,4 @@ If you do not have DACO access, please see the instructions for [applying to con
 
 ### Program Permission
 
-Under "My Memberships", you will see a list of Programs that you have been granted access to for the purpose of data submission or management, along with your [role](/docs/managing-program-access#user-roles-and-permissions) and permissions for those programs.
+Under "My Memberships", you will see a list of Programs that you have been granted access to for the purpose of data submission or management, along with your [role](/docs/managing-program-access#user-roles-and-permissions) and permissions for those programs. If you are not part of a program that is submitting data to the ARGO Data Platform, then this section will not list any Programs.

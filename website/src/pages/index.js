@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 import AlgoliaSearch from '../components/AlgoliaSearch';
 
 function HomeSplash() {
-  const SplashContainer = (props) => (
+  const SplashContainer = props => (
     <div className={styles.homeContainer}>
       <div className={styles.homeSplashFade}>
         <div className={styles.homeWrapper}>{props.children}</div>
@@ -20,7 +20,7 @@ function HomeSplash() {
     </div>
   );
 
-  const SearchBanner = (props) => (
+  const SearchBanner = props => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
     </section>
@@ -76,17 +76,19 @@ function Index() {
             >
               <ul>
                 <li>
-                  <a href="/docs/submission-overview">Get started</a>: a quick guide to data
-                  submission
+                  <a href="/docs/submission/submission-overview">Get started</a>: a quick guide to
+                  data submission
                 </li>
                 <li>
-                  How to <a href="/docs/registering-samples">register samples</a>
+                  How to <a href="/docs/submission/registering-samples">register samples</a>
                 </li>
                 <li>
-                  How to <a href="/docs/submitting-clinical-data">submit clinical data</a>
+                  How to{' '}
+                  <a href="/docs/submission/submitting-clinical-data">submit clinical data</a>
                 </li>
                 <li>
-                  How to <a href="/docs/submitting-molecular-data">submit molecular data</a>
+                  How to{' '}
+                  <a href="/docs/submission/submitting-molecular-data">submit molecular data</a>
                 </li>
               </ul>
             </ContentBlock>
@@ -97,13 +99,13 @@ function Index() {
             >
               <ul>
                 <li>
-                  How to <a href="/docs/data-access">access controlled data</a>
+                  How to <a href="/docs/data-access/data-access">access controlled data</a>
                 </li>
                 <li>
-                  How to <a href="/docs/data-download">download data</a>
+                  How to <a href="/docs/data-access/data-download">download data</a>
                 </li>
                 <li>
-                  How to use the <a href="/docs/data-download">Score Download Client</a>
+                  How to use the <a href="/docs/data-access/data-download">Score Download Client</a>
                 </li>
               </ul>
             </ContentBlock>
@@ -139,7 +141,7 @@ function Index() {
               <span className={styles.contentDescription}>
                 How to cite the ARGO Data Platform and datasets within your publication.
               </span>
-              <a className={styles.contentAction} href="/docs/publication-guidelines">
+              <a className={styles.contentAction} href="/docs/data-access/publication-guidelines">
                 Read the Guidelines
                 <img src="img/icons/chevron-right.svg" height={8} width={8} />
               </a>
@@ -149,15 +151,19 @@ function Index() {
               color="#0774d3"
               icon="img/icons/home/data-release.svg"
             >
+              <span className={styles.contentDescription}>
+                The ARGO Data Platform regularly releases updates to its data and software.
+              </span>
               <ul>
                 <li>
-                  View <a href="/docs/data-releases">data release details</a>
+                  View <a href="/docs/release-notes/data-releases">data release details</a>
                 </li>
                 <li>
-                  View <a href="/docs/software-releases">software release details</a>
+                  View <a href="/docs/release-notes/software-releases">software release details</a>
                 </li>
                 <li>
-                  View <a href="/docs/dictionary-releases">dictionary release details</a>
+                  View{' '}
+                  <a href="/docs/release-notes/dictionary-releases">dictionary release details</a>
                 </li>
               </ul>
             </ContentBlock>
