@@ -3,7 +3,7 @@ id: submitting-clinical-data
 title: Submitting Clinical Data
 ---
 
-This guide will describe how to submit clinical data to the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors, including their health data.
+This guide will describe how to submit clinical data using the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors, including their health data.
 
 > Note: Before you can submit clinical data, your donors must be assigned ARGO IDs through the sample registration process. See [Registering Samples](registering-samples) for instructions on how to register samples.
 
@@ -27,7 +27,7 @@ There is only one Clinical Submission workspace for each program. All program da
 
 - To simplify editing the TSV files, open them in Excel:
   - BEFORE pasting your data into the Excel spreadsheet, reformat the cells as text. To do so, select the empty cells where you will paste your data, right click and select "Format cells". Choose the "Text" option and click "Ok".
-  - The first row of the file is reserved for the field headers. DO NOT DELETE THESE, as they act as important keys for data validation.
+  - The first row of the file is reserved for the field headers. DO NOT DELETE THESE, as the headers act as important keys for data validation.
   - Paste your data under the correct header fields.
   - When you save the Excel spreadsheet, make sure it remains a TSV file. Upon saving, you may need to confirm "do you want to keep using that format?", click "Yes".
 - If you are using a text editor, make sure you have invisible characters turned on. This way you can be sure that tabs are correctly separating each field value.
@@ -57,8 +57,8 @@ Uploaded data must be checked for accuracy against the data in the current submi
 
 ![Sign off Submission](/assets/submission/clinical-4-signoff.png)
 
-1. Once you have reviewed the files in the file preview area, click the **Sign Off Submission** button to submit your clinical data.
+1. Once you have reviewed the files in the file preview area and your submission is valid, click the **Sign Off Submission** button to submit your clinical data.
 1. If you have made any updates to already submitted data, your clinical workspace will be locked in a Pending Approval state. A DCC member will review your updates and approve them for submission. If there are any issues, your submission will be reopened and the DCC will notify you, via email, of the required changes.
 1. If your data does not require approval by DCC, it will be submitted automatically.
 
-Once submitted, you will see the clincial data reflected on your [Program Dashboard](/docs/submitted-data).
+Once submitted, you will see the clincial data reflected on your [Program Dashboard](submitted-data).

@@ -1,10 +1,10 @@
 ---
 id: analysis-overview
-title: Harmonization Overview
+title: Analysis Overview
 sidebar_label: Overview
 ---
 
-Data submitted to the the ARGO Data Platform will undergo unified molecular analysis through a harmonized pipeline. Consistent pipeline analysis ensures that data can be considered functionally equivalent across different data sets, including all ARGO programs as well as any other initiatives that have adopted the ARGO harmonization pipelines.
+Data submitted to the the ARGO Data Platform will undergo molecular analysis through a unified pipeline. Consistent pipeline analysis ensures that data can be considered functionally equivalent across different data sets, including all ARGO programs as well as any other initiatives that have adopted the ARGO analysis pipelines.
 
 ARGO will accept a range of datatypes, including:
 
@@ -14,7 +14,7 @@ ARGO will accept a range of datatypes, including:
 - Proteomic data
 - Slide images
 
-Pipelines, and the individual analysis workflows that they are constructed from, have been devloped by the DCC Bioinformatics team based on established and best community practices.
+Pipelines, and the individual analysis workflows that they are constructed from, have been developed by the DCC Bioinformatics team based on established and best community practices.
 
 All ARGO analysis workflows are written in [Nextflow](https://www.nextflow.io/). Nextflow is developed by the Comparative Bioinformatics group at the Barcelona Centre for Genomic Regulation (CRG).
 

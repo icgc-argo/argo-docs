@@ -24,7 +24,7 @@ If you are a Program Administrator, you will have the ability to invite users to
 - View the program dashboard
 - Download program data
 
-> NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](data-access), or [apply for DACO approval here](https://icgc.org/daco).   
+> NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](../data-access/data-access), or [apply for DACO approval here](https://icgc.org/daco).   
 
 ## Adding Users
 

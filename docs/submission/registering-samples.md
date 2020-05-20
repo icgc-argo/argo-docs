@@ -3,7 +3,7 @@ id: registering-samples
 title: Registering Samples
 ---
 
-In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO Identifiers (**ARGO IDs**) used to track the data through the Platform. Each **Donor**, **Specimen**, and **Sample** entity will be assigned an **ARGO ID**, mapping to your program's internal identifiers.
+In the ARGO Data Platform, clinical and molecular data objects are assigned ARGO Identifiers (**ARGO IDs**) used to track the data through the Platform. Each **Donor**, **Specimen**, and **Sample** entity will be assigned an **ARGO ID** that maps to your program's internal identifier.
 
 It is important that the relationships between entities are maintained across all data submissions, as they are fundamental to data integrity across the ARGO Data Platform.
 
@@ -20,7 +20,7 @@ The basic set of data that must be registered for each sample consists of:
 * `submitter_sample_id`
 * `sample_type`
 
-During sample registration, **ARGO IDs** will be assigned to your program data. Any attempts to submit data that does not refer to a registered sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
+During sample registration, **ARGO IDs** will be assigned to your program entities. Any attempts to submit data that does not refer to a registered donor or sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
 
 ## Multiple Data Submitters 
 
@@ -37,12 +37,12 @@ There is only one Sample Registration workspace for each program. All program da
 1. Click on the **Register Samples** section in the left menu for your program.
 1. Download the **TSV Template** for the sample registration file and format it according to the current [Data Dictionary](/dictionary) specifications.
 
-For help with formatting this file, please refer to [Tips for Formatting your TSV files]( submitting-clinical-data#tips-for-formatting-your-tsv-files)
+For help with formatting this file, please refer to [Tips for Formatting your TSV files]( submitting-clinical-data#tips-for-formatting-tsv-files)
 
 ### Step 2: Upload Sample Registration TSV File
 ![Upload Files](/assets/submission/register-2-upload.png)
 
-1. Once your file is formatted, click the **Upload File** button and select your file from the browser. Only TSV file types are supported, and the file name must begin with the *sample-registration* and end with _.tsv_.
+1. Once your file is formatted, click the **Upload File** button and select your file from the browser window. Only TSV file types are supported, and the file name must begin with the *sample-registration* and end with _.tsv_.
 1. Upon uploading, if there are any errors in your file they will be displayed within the Sample Registration workspace. The error report will also be available for download. You must fix all of the errors that are listed within your sample registration file and then reupload it.
 1. Valid files will be available for preview in the Sample Registration workspace.  You can review the new samples (purple star) versus previously registered samples (grey star) by filtering the table on the star column.
 
@@ -51,7 +51,7 @@ For help with formatting this file, please refer to [Tips for Formatting your TS
 
 1. Once you have reviewed the file preview, click on the **Register Samples** button to submit your samples.
 
-Once registered, donors, along with specimen and sample counts, will be visible on your [Program Dashboard](/docs/submitted-data).
+Once registered, donors, along with specimen and sample counts, will be visible on your [Program Dashboard](submitted-data).
 
 ## Correcting Already Registered Data
 Once samples are registered and data processing and analysis proceeds, it can be difficult to correct the data manually.
