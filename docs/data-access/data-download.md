@@ -3,7 +3,7 @@ id: data-download
 title: How to Download Data
 ---
 
-The ARGO Data Platform uses the score-client as a file download manager. Score-client facilitates the transfer of data with resumable download and has built in BAM/CRAM slicing to make data download fast and smooth.
+The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable download and has built in BAM/CRAM slicing to make data download fast and smooth.
 
 Please note:
 
@@ -29,7 +29,7 @@ The score-client can be run in different ways depending on your operating system
 
 ### Docker Distribution
 
-Pull the latest version of the Score-client Docker distribution:
+Pull the latest version of the score-client Docker distribution:
 
 ```
 docker pull overture/score
@@ -37,7 +37,7 @@ docker pull overture/score
 
 Use the `docker run` command with the correct variables specified. You will need to define:
 
-- **ACCESSTOKEN**: your personal [API Key](/docs/data-access/user-profile-and-token)
+- **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 - **METADATA_URL**: the file metadata Song server URL
 - **STORAGE_URL**: the object storage Score server URL
 - the absolute directory path where your file manifest is located
@@ -47,12 +47,12 @@ Use the `docker run` command with the correct variables specified. You will need
 docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" -e "STORAGE_URL=https://score.argo.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\rbajari\Desktop\download\
 ```
 
-### Score-client with Configured Values
+### Score-Client with Configured Values
 
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
+Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
 Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user values, including:
 
-- **accessToken**: your personal [API Key](/docs/data-accessuser-profile-and-token)
+- **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 - **metadata.url**: the file metadata Song server URL
 - **storage.url**: the object storage Score server URL
 
@@ -75,9 +75,9 @@ Once you have configured your `application.yaml`, you will be ready to initiate 
 score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-### Score-client with Environment Variables
+### Score-Client with Environment Variables
 
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
+Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
 
 Alternately, you can define environment variables to specify the correct paths. For example:
 

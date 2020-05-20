@@ -3,7 +3,7 @@ id: submitting-molecular-data
 title: Submitting Molecular Data
 ---
 
-Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Harmonization Pipeline](dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform-ui.qa.argo.cancercollaboratory.org/contact).
+Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](../analysis-workflows/dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
 This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata.
 
@@ -13,10 +13,10 @@ Molecular data is uploaded to the ARGO Data Platform using the Song and Score CL
 
 ### Song-Client
 
-Download the **[latest version of the Song client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.yaml` configuration file with the correct user and data submission program values, including:
 
 - local RDPC Song server URL
-- [API Token](user-profile-and-api-token)
+- [API Token](../data-access/user-profile-and-api-token)
 - ARGO Program Id that you are submitting to (studyId within the config file)
 
 This is an example of how your `application.yaml` configuration file should look:
@@ -36,9 +36,9 @@ retry:
 
 ### Score-Client
 
-Download the **[latest version of the Score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user and data submission program values, including:
 
-- [API Key](user-profile-and-token)
+- [API Token](../data-access/user-profile-and-api-token)
 - local RDPC Song server URL
 - local RDPC Score server URL
 

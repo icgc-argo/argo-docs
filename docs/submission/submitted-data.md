@@ -56,7 +56,7 @@ The status bar in this card shows how many program donors have fully released fi
 The **Program Workspace** consists of the sample registration as well as the clinical submission areas.
 ![Dashbard Program Workspace Status](/assets/submission/dashboard-program-workspace-card.png)
 
-> All program members share the same workspace, so members are encouraged to communicate with each other when sample registration or clinical submission is in progress.
+> All program members share the same workspace, so members are encouraged to communicate with each other when a sample registration or clinical submission is in progress.
 
 **Sample Registration Progress:** this progress bar will show if there are uploaded samples that haven’t been registered yet. A blank status bar means this area is free to register samples.
 
@@ -72,7 +72,7 @@ _Coming Soon:_ This line graph compares how many donors have been processed thro
 
 ## Donor Data Summary
 
-This table is a detailed summary of the clinical data status and DNA-seq pipeline status for each registered donor in the program. It also shows which donors have files that have been released to the public via the File Repository.
+This table is a detailed summary of the clinical data status and DNA-Seq pipeline status for each registered donor in the program. It also shows which donors have files that have been released to the public via the File Repository.
 ![Dashbard Donor Data Summary](/assets/submission/dashboard-donor-table-card.png)
 
 #### Table Actions

@@ -22,7 +22,7 @@ The alignment step uses:
 
 - **[BWA-MEM version 0.7.17-r1188](http://bio-bwa.sourceforge.net/)** as its main aligner
 - **[Biobambam version xxx](https://www.sanger.ac.uk/science/tools/biobambam)** to mark duplicates.
-- **[GrCh37 HL7](need link)** as the reference genome
+- **[GRCh38 HL7](need link)** as the reference genome
 
 //INSERT ALIGNMENT DIAGRAM//
 
