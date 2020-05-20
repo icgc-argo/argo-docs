@@ -1,15 +1,13 @@
-import React from 'react';
 import { useHistory } from '@docusaurus/router';
-import useSearchAvailable from './useSearchAvailable';
+import { isSearchAvailable } from '../utils';
 
 /**
  * Expects id selector for input
  */
 const useAlgolia = (inputRef, options = {}) => {
   const history = useHistory();
-  const searchAvailable = useSearchAvailable();
 
-  if (!searchAvailable) {
+  if (!isSearchAvailable) {
     console.warn('Search not configured');
     return false;
   } else {
