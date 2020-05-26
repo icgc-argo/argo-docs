@@ -5,7 +5,7 @@ title: Submitting Molecular Data
 
 Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](../analysis-workflows/dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
-This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata.
+This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata (data that describes your data).
 
 ## Data Submission Client Configuration
 
@@ -57,78 +57,161 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 ## How to Upload Molecular Data
 
-### 1. Format the payload
+### Understanding Song payload fields
 
-/////// NEED THE TAB DISPLAY HERE TO SHOW DIFFEERENT STARTING PAYLOADS {SEQUENCING EXPEIRMETN FOR ONE}
+Song accepts data in JSON format, which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
+
+The data fields can be broken down into four main sections: `experiment`, `sample`, `read groups` and `files`.
+
+> Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
+
+#### **Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
+
+- `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
+- `**submitter_sequencing_experiment_id`:The unique identifier of the sequencing experiment.
+- `**platform`: The sequencing platform type that was used to generate the submitted data files.
+- `platform_model`: The exact model number of the sequencing machine used.
+- `sequencing_center`: The sequencing center the analysis was performed at.
+- `**experimental_strategy`: Descriptor of the read domain experiment method; sometimes referred to as library strategy.
+- `sequencing_date`: Date sequencing was performed.
+- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
+
+**Sample:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
+
+If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
+
+**Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`.
+
+- `**submitter_read_group_id`: The unique identifier of a read group.
+- `**platform_unit`:
+- `**is_paired_end`: `true` for paired end sequencing, otherwise `false`.
+- `**file_r1`: Name of the read group file to be submitted.
+- `file_r2`: Name of the read group file to be submitted. Required if and only if paired end sequencing was done.
+- `read_length_r1`: Average length of reads in `file_r1`.
+- `read_length_r2`: Average length of reads in `file_r2`.
+- `insert_size`:
+- `sample_barcode`:
+- `**library_name`:
+
+Read Group Data Validations:
+
+1. `submitter_read_group_id` must be unique within each Song payload, and ideally unique across all read groups in an ARGO program.
+1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `\_` .
+1. All `read_groups` in the payload must belong to a single sample.
+1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
+1. The total number of `read_group` objects must match the number specified in `read_group_count`.
+1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
+1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
+
+**Files:** The files section contains metadata about the molecular files to be submitted. If multiple read groups were sequenced, then multiple files should be listed as objects in the payload.
+
+The ARGO Data Platform accepts sequencing data submission for both `BAM` and `FASTQ` files. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files.Compression of FASTQ files is encouraged; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
+
+- `**fileName`: Name of the file, as defined by the data submitter.
+- `**fileSize`: Provided in bytes.
+- `**fileMd5sum`: Compute the md5sum of the file. This must match what is computed when the file is uploaded.
+- `**fileType`: Set to `BAM` or `FASTQ`, based file type being submitted.
+- `**fileAccess`: Set to `controlled`.
+- `**dataType`: Set to `submitted_reads`.
+
+For both FASTQ and BAM submission, all files in the `files` section must be unique.
+
+### 1. Prepare a Song sequencing_experiment payload
+
+This is an example of a correctly formatted `sequencing_experiment` payload, according to the rules presented above:
 
 ```json
 {
-  "studyId": "DASH-CA",
   "analysisType": {
     "name": "sequencing_experiment"
   },
+  "studyId": "TEST-CA",
+  "experiment": {
+    "submitter_sequencing_experiment_id": "EXP12345",
+    "sequencing_center": "OICR",
+    "platform": "ILLUMINA",
+    "platform_model": "HiSeq 2000",
+    "experimental_strategy": "WGS",
+    "sequencing_date": "2014-12-12"
+  },
+  "read_group_count": 3,
+  "read_groups": [
+    {
+      "submitter_read_group_id": "C0HVY.2",
+      "platform_unit": "74_8a",
+      "is_paired_end": true,
+      "file_r1": "test_rg3.bam",
+      "file_r2": "test_rg3.bam",
+      "read_length_r1": 150,
+      "read_length_r2": 150,
+      "insert_size": 232,
+      "sample_barcode": null,
+      "library_name": "Pond-147579"
+    },
+    {
+      "submitter_read_group_id": "D0RE2.1",
+      "platform_unit": "74_8b",
+      "is_paired_end": true,
+      "file_r1": "test_rg3.bam",
+      "file_r2": "test_rg3.bam",
+      "read_length_r1": 150,
+      "read_length_r2": 150,
+      "insert_size": 298,
+      "sample_barcode": null,
+      "library_name": "Pond-147580"
+    },
+    {
+      "submitter_read_group_id": "D0RH0.2",
+      "platform_unit": "74_8c",
+      "is_paired_end": true,
+      "file_r1": "test_rg3.bam",
+      "file_r2": "test_rg3.bam",
+      "read_length_r1": 150,
+      "read_length_r2": 150,
+      "insert_size": 298,
+      "sample_barcode": null,
+      "library_name": "Pond-147580"
+    }
+  ],
   "samples": [
     {
-      "submitterSampleId": "sample-5",
-      "matchedNormalSubmitterSampleId": "sample-5.1",
-      "sampleType": "Amplified DNA",
+      "submitterSampleId": "HCC1143_SMP1",
+      "matchedNormalSubmitterSampleId": "HCC1143_SMP2",
+      "sampleType": "Total DNA",
       "specimen": {
-        "submitterSpecimenId": "specimen-5",
-        "specimenType": "Primary tumour",
+        "submitterSpecimenId": "HCC1143_SPC1",
         "tumourNormalDesignation": "Tumour",
-        "specimenTissueSource": "Bone marrow"
+        "specimenTissueSource": "Solid tissue",
+        "specimenType": "Primary tumour"
       },
       "donor": {
-        "submitterDonorId": "DASH-5",
-        "gender": "Male"
+        "submitterDonorId": "HCC1143",
+        "gender": "Female"
       }
     }
   ],
   "files": [
     {
-      "dataType": "submittedReads",
-      "fileName": "dash-5-tumour.bam",
-      "fileSize": 29,
+      "fileName": "test_rg3.bam",
+      "fileSize": 14911,
+      "fileMd5sum": "178f97f7b1ca8bfc28fd5586bdd56799",
       "fileType": "BAM",
-      "fileMd5sum": "14a754c1066adcd2024620b51b2dc244",
-      "fileAccess": "controlled"
+      "fileAccess": "controlled",
+      "dataType": "submitted_reads"
     }
-  ],
-  "read_groups": [
-    {
-      "file_r1": "dash-r5.bam",
-      "file_r2": "",
-      "insert_size": null,
-      "is_paired_end": true,
-      "library_name": "Dashboard-Testing",
-      "platform_unit": "Dashboard-Testing",
-      "read_length_r1": null,
-      "read_length_r2": null,
-      "sample_barcode": null,
-      "submitter_read_group_id": "dash-1-rg-5"
-    }
-  ],
-  "experiment": {
-    "submitter_sequencing_experiment_id": "DASH-SE-5",
-    "library_strategy": "WGS",
-    "sequencing_center": "",
-    "platform": "ILLUMINA",
-    "platform_model": null,
-    "sequencing_date": null
-  },
-  "read_group_count": 1
+  ]
 }
 ```
 
 ### 2. Upload the payload
 
-Once you have formatted the payload, use the song-client `submit` command to upload the json payload to the configured Song.
+Once you have formatted the payload correctly, use the song-client `submit` command to upload the Song payload.
 
 ```
 ./bin/sing submit -f dash-5-tumour.json
 ```
 
-If your payload is not formatted correctly, you will receive an error message detailing what is wrong. Please fix any errors and resubmit. If your payload is formatted correctly, you will get an `analysisId` in response.
+If your payload is not formatted correctly, you will receive an error message detailing what is wrong. Please fix any errors and resubmit. If your payload is formatted correctly, you will get an `analysisId` in response:
 
 ```json
 {
@@ -137,7 +220,9 @@ If your payload is not formatted correctly, you will receive an error message de
 }
 ```
 
-Use the returned `analysis_id` to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
+### 3. Generate a manifest file
+
+Use the returned `analysis_id` from step 2 to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
 
 ```
 ./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
@@ -145,9 +230,9 @@ Use the returned `analysis_id` to generate a manifest for file upload using the 
 Wrote manifest file 'tumor_manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
 
-### 3. Upload sequencing files
+### 4. Upload sequencing files
 
-Using the score-client `upload` command, upload all files associated with the payload.
+Using the score-client `upload` command, upload all files associated with the payload. This requires the manifest file generated in step 3.
 
 ```
 .bin/score-client  upload --manifest manifest.txt
@@ -155,10 +240,13 @@ Using the score-client `upload` command, upload all files associated with the pa
 
 If the file successfully uploads, then you will receive an `Upload completed` message.
 
-### 4. Publish the payload
+### 5. Publish the payload
 
 ```
+// need publish command
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
+
+Once your `sequencing_experiment` analysis has been successfully submitted, it will be queued for data processing. You can follow the progress of molecular data processing for submitted data on your [Program Dashboard](../submission/submitted-data).
 
 ## Data Processing and Analysis

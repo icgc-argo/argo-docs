@@ -2,6 +2,7 @@ module.exports = {
   docs: {
     Submission: [
       'submission/submission-overview',
+      'submission/dictionary-overview',
       'submission/registering-samples',
       'submission/submitting-clinical-data',
       'submission/clinical-data-validation-rules',
