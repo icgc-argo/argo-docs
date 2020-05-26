@@ -14,7 +14,7 @@ Please note:
 
 Platform users can search for a file set of interest using the [File Repository](https://platform.icgc-argo.org/repository). File sets can be narrowed down by selecting specific values in the filter panel on the left side of the page. Once you have a file set identified, click the `Download > File Manifest` on the top right side of the table to download a TSV file manifest.
 
-The file manifest contains a list of the files match your search query, along with some additional metatdata to assist in file identification. The file manifest will be used by the score-client to identify the list of files to download.
+The file manifest contains a list of the files that match your search query, along with some additional metadata to assist in file identification. The file manifest will be used by the score-client to identify the list of files to download.
 
 > NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](data-access), or [apply for DACO approval here](https://icgc.org/daco).
 
@@ -50,7 +50,7 @@ docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" 
 ### Score-Client with Configured Values
 
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
-Once you have unzipped the tarball, update the `/conf/application.properties` configuration file with the correct user values, including:
+Once you have unzipped the tarball, update the `/conf/application.properties` file with your user values, including:
 
 - **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 - **metadata.url**: the file metadata Song server URL
