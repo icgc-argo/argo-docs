@@ -5,7 +5,7 @@ title: Submitting Molecular Data
 
 Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](../analysis-workflows/dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
-This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata, data that describes your data.
+This guide will describe how to submit molecular data to the ARGO Data Platform. Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata (data that describes your data).
 
 ## Data Submission Client Configuration
 
@@ -59,26 +59,26 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 ### Understanding Song payload fields
 
-Song accepts data in JSON format, which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare SONG metadata payloads conforming to most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
+Song accepts data in JSON format, which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
 
 The data fields can be broken down into four main sections: `experiment`, `sample`, `read groups` and `files`.
 
 > Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
 
-#### **Experiment:** The experiment section contains details relevant the experimental requirements imposed during sequencing.
+#### **Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
 
-- `**studyId`: Corresponds to your ARGO `Program ID`. This is the same Program ID that you see when you log in to the ARGO Data Platform.
+- `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
 - `**submitter_sequencing_experiment_id`:The unique identifier of the sequencing experiment.
 - `**platform`: The sequencing platform type that was used to generate the submitted data files.
 - `platform_model`: The exact model number of the sequencing machine used.
 - `sequencing_center`: The sequencing center the analysis was performed at.
-- `**experimental_strategy`: Descriptor of the read domain experiment method; Sometimes also referred to as library strategy.
+- `**experimental_strategy`: Descriptor of the read domain experiment method; sometimes referred to as library strategy.
 - `sequencing_date`: Date sequencing was performed.
 - `read_group_count`: Number of read groups submitted as part of the raw molecular file.
 
-**Sample:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must already be [registered](../submission/registering-samples) to the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary)
+**Sample:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
 
-If the information for a sample is different than what has been registered, validation will fail immediately upon submission.
+If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
 **Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`.
 
@@ -95,26 +95,26 @@ If the information for a sample is different than what has been registered, vali
 
 Read Group Data Validations:
 
-1. `submitter_read_group_id` must be unique in within each Song payload, and ideally unique across all read groups in an ARGO program.
+1. `submitter_read_group_id` must be unique within each Song payload, and ideally unique across all read groups in an ARGO program.
 1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `\_` .
 1. All `read_groups` in the payload must belong to a single sample.
-1. `platform_units` must be unique in metadata with a one-to-one relationship with `submitter_read_group_id`.
+1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
 1. The total number of `read_group` objects must match the number specified in `read_group_count`.
 1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
-1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_2`.
+1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
 **Files:** The files section contains metadata about the molecular files to be submitted. If multiple read groups were sequenced, then multiple files should be listed as objects in the payload.
 
-ARGO accepts sequencing data submission for both `BAM` and `FASTQ` files. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files. We encourage compression on FASTQ files; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
+The ARGO Data Platform accepts sequencing data submission for both `BAM` and `FASTQ` files. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files.Compression of FASTQ files is encouraged; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
 
 - `**fileName`: Name of the file, as defined by the data submitter.
 - `**fileSize`: Provided in bytes.
 - `**fileMd5sum`: Compute the md5sum of the file. This must match what is computed when the file is uploaded.
-- `**fileType`: Set to `BAM` or `FASTQ` based file type being submitted.
+- `**fileType`: Set to `BAM` or `FASTQ`, based file type being submitted.
 - `**fileAccess`: Set to `controlled`.
 - `**dataType`: Set to `submitted_reads`.
 
-For both FASTQ and BAM submission, all files in `files` section must be unique.
+For both FASTQ and BAM submission, all files in the `files` section must be unique.
 
 ### 1. Prepare a Song sequencing_experiment payload
 
@@ -222,7 +222,7 @@ If your payload is not formatted correctly, you will receive an error message de
 
 ### 3. Generate a manifest file
 
-Use the returned `analysis_id` to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
+Use the returned `analysis_id` from step 2 to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
 
 ```
 ./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
@@ -247,6 +247,6 @@ If the file successfully uploads, then you will receive an `Upload completed` me
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
 
-Once your `sequencing_experiment` analysis has been successfully submitted, it will be queued for data processing. You can follow the progress of submitted data on your [Program Dashboard](../submission/submitted-data).
+Once your `sequencing_experiment` analysis has been successfully submitted, it will be queued for data processing. You can follow the progress of molecular data processing for submitted data on your [Program Dashboard](../submission/submitted-data).
 
 ## Data Processing and Analysis
