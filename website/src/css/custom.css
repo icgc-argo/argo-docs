@@ -1119,3 +1119,7 @@ Algolia
   margin-left: auto;
   margin-right: 5px;
 }
+
+.algolia-docsearch-suggestion--content {
+  text-align: left;
+}
