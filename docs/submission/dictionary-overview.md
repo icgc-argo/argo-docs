@@ -15,7 +15,7 @@ The first list is for the Sample Registration file, which is the only file to be
 
 The lists can be filtered by Data Tier and Attribute, which can help a data submitter identify which fields are necessary for [clinical data completion](clinical-data-validation-rules). 
 
-The dictionary version appears in a dropdown above the lists, as well as a date of when it was last updated. You can explore previous dictionary versions by choosing another version number from the dropdown. This dictionary version will also be reflected in the names of the file templates that are downloaded from the Platform. It is important to use the most current files for the dictionary validation to run smoothly. 
+The dictionary version appears in a dropdown above the lists, as well as a date of when it was last updated. You can explore previous dictionary versions by choosing another version number from the dropdown. This dictionary version will also be reflected in the names of the file templates that are downloaded from the Platform. It is important to use the most current files for the clinical validation to run smoothly. 
 
 ### Field Name & Description
 Each field has a name and a description, the name being the same label that appears in the headers of each TSV file. 
@@ -33,7 +33,7 @@ These core clinical fields are commonly acquired in cohort-based studies and cli
 
 As seen in the dictionary, most core fields are ![Required](/assets/submission/dictionary-required.svg) for [clinical data completion](clinical-data-validation-rules), with the exception of some conditional fields that are dependent on the values of other fields. Upon upload, a validation error will occur, such as *"vital_status is a required field"*, if a core field is missing.
 
-If the field is ![Core](/assets/submission/dictionary-core.svg) + ![Conditional](/assets/submission/dictionary-conditional.svg), then it is required for clinical data completion, only if certains condition are met. The conditions for the permissible value will be described in the notes column for the conditional field. 
+If the field is ![Core](/assets/submission/dictionary-core.svg) + ![Conditional](/assets/submission/dictionary-conditional.svg), then it is required for clinical data completion, only if certain conditions are met. The conditions for the permissible value will be described in the notes column for the conditional field. 
 
 #### Extended Fields
 ![Extended](/assets/submission/dictionary-extended.svg) fields are not required for clinical data completion but it is strongly encouraged to provide as many extended fields as possible to help ensure data quality. In most cases, extended fields have a blank attribute, which means they are not required to be submitted. 
