@@ -163,11 +163,11 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
       id: 'attributes',
       Cell: ({ original: { restrictions, meta } }) => {
         const isRestrictedField = restrictions && restrictions.required;
-        const isDependentField = meta && !!meta.dependsOn;
+        const isConditionalField = meta && !!meta.dependsOn;
         return (
           <TagContainer>
             {isRestrictedField && <Tag type={TAG_TYPES.required} />}
-            {isDependentField && <Tag type={TAG_TYPES.conditional} />}
+            {isConditionalField && <Tag type={TAG_TYPES.conditional} />}
           </TagContainer>
         );
       },
