@@ -2,6 +2,7 @@
 id: data-download
 title: How to Download Data
 ---
+![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable download and has built in BAM/CRAM slicing to make data download fast and smooth.
 
@@ -12,7 +13,7 @@ Please note:
 
 ## Searching for Files
 
-Platform users can search for a file set of interest using the [File Repository](https://platform.icgc-argo.org/repository). File sets can be narrowed down by selecting specific values in the filter panel on the left side of the page. Once you have a file set identified, click the `Download > File Manifest` on the top right side of the table to download a TSV file manifest.
+Platform users can search for a file set of interest using the File Repository. File sets can be narrowed down by selecting specific values in the filter panel on the left side of the page. Once you have a file set identified, click the `Download > File Manifest` on the top right side of the table to download a TSV file manifest.
 
 The file manifest contains a list of the files that match your search query, along with some additional metadata to assist in file identification. The file manifest will be used by the score-client to identify the list of files to download.
 

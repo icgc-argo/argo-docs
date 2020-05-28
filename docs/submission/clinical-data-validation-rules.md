@@ -7,13 +7,13 @@ insert intro
 
 ## Cross File Validations
 
-## Clinical Data Completeness
+## Clinical Data Completion
 
 Once all core clinical fields and files have been submitted for a donor, the donor is considered "clinically complete".
 
 > **A donor must be clinically complete before any of their molecular analysis files are released to the program members for download.**
 
-### How is clinical data completeness calculated?
+### How is clinical data completion calculated?
 
 Complete clinical data means that a donor has a valid value submitted for all fields labelled **"core"** in the [data dictionary](/dictionary), for a minimum set of clinical files. In more detail:
 

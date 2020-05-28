@@ -2,6 +2,7 @@
 id: submitting-molecular-data
 title: Submitting Molecular Data
 ---
+![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](../analysis-workflows/dna-pipeline). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 

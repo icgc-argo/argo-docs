@@ -2,6 +2,7 @@
 id: dna-pipeline
 title: DNA-Seq Analysis Pipeline
 ---
+![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 The DNA-Seq analysis pipeline identifies various somatic variant types within Whole Exome Sequencing (WXS) and Whole Genome Sequencing (WGS) data. The pipeline starts with a reference alignment step followed by co-cleaning to increase the alignment quality. DNA-Seq analysis is implemented across two main procedures:
 
@@ -24,14 +25,20 @@ The alignment step uses:
 - **[Biobambam version xxx](https://www.sanger.ac.uk/science/tools/biobambam)** to mark duplicates.
 - **[GRCh38 HL7](need link)** as the reference genome
 
-//INSERT ALIGNMENT DIAGRAM//
+![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
 The latest version of the ARGO alignment workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
 
-## Variant Calling
+## Sanger WGS Variant Calling
 
 The ARGO DNA Seq pipeline has adoptd the Sanger Variant Calling docker.
 
-//INSERT Variant Calling DIAGRAM//
+![Sanger WGS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WGS-variant-calling.png)
+
+The latest version of the ARGO Variant Calling workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
+
+## Sanger WXS Variant Calling
+
+![Sanger WXS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)
 
 The latest version of the ARGO Variant Calling workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).

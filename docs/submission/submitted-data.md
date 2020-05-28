@@ -24,7 +24,7 @@ Once all core clinical fields and files have been submitted for a donor, they ar
 
 > **A donor must be clinically complete before any of their molecular analysis files are released to the program members.**
 
-Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-validation-rules#clinical-data-completeness) for more information on how clinical completeness is calculated.
+Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-validation-rules) for more information on how clinical completion is calculated.
 
 #### % Donors with Tumour & Normal
 
@@ -64,7 +64,7 @@ The **Program Workspace** consists of the sample registration as well as the cli
 
 ## Completed Core Clinical Data
 
-_Coming Soon:_ This line graph shows the number of donors with core clinical completeness over time.
+_Coming Soon:_ This line graph shows the number of donors that are clinically complete over time.
 
 ## Molecular Data Summary
 
@@ -85,7 +85,7 @@ The table is sorted by default on the last updated date, so a program member wil
 
 #### Released Files Status
 
-Each donor has a **star** ![Dashboard Donor Release Star](/assets/submission/dashboard-donor-star.png) that denotes if they have fully released files, partially released files or no released files. In order to have released files, the embargo period must be over and the donor must have 100% [core fields completeness](/docs/submission/clinical-data-validation-rules#clinical-data-completeness) as well as some molecular analysis completed.
+Each donor has a **star** ![Dashboard Donor Release Star](/assets/submission/dashboard-donor-star.png) that denotes if they have fully released files, partially released files or no released files. In order to have released files, the embargo period must be over and the donor must have 100% [core completeness](/docs/submission/clinical-data-validation-rules) as well as some molecular analysis completed.
 
 #### Clinical Data Submission
 
@@ -93,7 +93,7 @@ The table shows the percentage of **core clinical fields** and percentage of **e
 
 ![Dashboard Clinical Data Submission](/assets/submission/dashboard-clinical-submission.png)
 
-- **The percentage of core fields must be 100% (showing ![Dashboard Donor 100% clinical complete](/assets/submission/dashboard-clinical-complete.png)) for any analysis files to be released to the program members for download**. [See how this percentage is calculated](clinical-data-validation-rules#clinical-data-completeness)
+- **Core completion must be 100% (showing ![Dashboard Donor 100% clinical complete](/assets/submission/dashboard-clinical-complete.png)) for any analysis files to be released to the program members for download**. [See how this percentage is calculated](clinical-data-validation-rules)
 - The extended field percentage does not have to reach 100%, but it is strongly encouraged that data submitters provide as many of these fields as possible for a donor.
 
 #### Sample Status
