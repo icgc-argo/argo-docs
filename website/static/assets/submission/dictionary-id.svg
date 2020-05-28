@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="20px" viewBox="0 0 27 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>dictionary-id</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Pages---Documentation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Documentation/Dictionary-details" transform="translate(-422.000000, -1232.000000)">
+            <g id="content" transform="translate(30.000000, 78.000000)">
+                <g id="Specimen" transform="translate(0.000000, 1031.000000)">
+                    <g id="Table-Copy" transform="translate(0.000000, 86.000000)">
+                        <g id="Field-row" transform="translate(0.000000, 28.000000)">
+                            <g id="data-tier" transform="translate(386.000000, 0.000000)">
+                                <g id="dictionary-id" transform="translate(6.000000, 9.000000)">
+                                    <rect id="Rectangle" fill="#00B3D3" x="0" y="0" width="27" height="20" rx="8"></rect>
+                                    <path d="M10.77,13 L9.05,13 L9.05,6.4 L10.77,6.4 L10.77,13 Z M15.03,6.4 C16.0633385,6.4 16.8549973,6.68499715 17.405,7.255 C17.9550027,7.82500285 18.23,8.6399947 18.23,9.7 C18.23,10.7600053 17.9550027,11.5749971 17.405,12.145 C16.8549973,12.7150028 16.0633385,13 15.03,13 L12.23,13 L12.23,6.4 L15.03,6.4 Z M14.86,11.7 C15.4133361,11.7 15.8199987,11.533335 16.08,11.2 C16.3400013,10.866665 16.47,10.36667 16.47,9.7 C16.47,9.03333 16.3400013,8.533335 16.08,8.2 C15.8199987,7.866665 15.4133361,7.7 14.86,7.7 L13.95,7.7 L13.95,11.7 L14.86,11.7 Z" id="ID" fill="#FFFFFF" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
