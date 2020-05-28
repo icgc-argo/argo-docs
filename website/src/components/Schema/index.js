@@ -167,7 +167,7 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
         return (
           <TagContainer>
             {isRestrictedField && <Tag type={TAG_TYPES.required} />}
-            {isDependentField && <Tag type={TAG_TYPES.dependency} />}
+            {isDependentField && <Tag type={TAG_TYPES.conditional} />}
           </TagContainer>
         );
       },

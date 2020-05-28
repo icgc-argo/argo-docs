@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export const TAG_TYPES = Object.freeze({
   required: 'required',
-  dependency: 'dependency',
+  conditional: 'conditional',
   core: 'core',
   id: 'id',
   extended: 'extended',
@@ -14,9 +14,9 @@ const Tag = ({ type }) => {
   switch (type) {
     case TAG_TYPES.required:
       return <TagComponent className={`${styles.tag} ${styles.required}`}>Required</TagComponent>;
-    case TAG_TYPES.dependency:
+    case TAG_TYPES.conditional:
       return (
-        <TagComponent className={`${styles.tag} ${styles.dependency}`}>Dependency</TagComponent>
+        <TagComponent className={`${styles.tag} ${styles.conditional}`}>Conditional</TagComponent>
       );
     case TAG_TYPES.core:
       return <TagComponent className={`${styles.tag} ${styles.core}`}>Core</TagComponent>;
