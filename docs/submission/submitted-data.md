@@ -93,7 +93,7 @@ The table shows the percentage of **core clinical fields** and percentage of **e
 
 ![Dashboard Clinical Data Submission](/assets/submission/dashboard-clinical-submission.png)
 
-- **Core completion must be 100% (showing ![Dashboard Donor 100% clinical complete](/assets/submission/dashboard-clinical-complete.png)) for any analysis files to be released to the program members for download**. [See how this percentage is calculated](clinical-data-validation-rules)
+- **Core completion must be 100% (showing ![Dashboard Donor 100% clinical complete](/assets/submission/dashboard-clinical-complete.png)) for any analysis files to be released to the program members for download**. [See how this percentage is calculated](/docs/submission/clinical-data-validation-rules)
 - The extended field percentage does not have to reach 100%, but it is strongly encouraged that data submitters provide as many of these fields as possible for a donor.
 
 #### Sample Status
@@ -103,7 +103,7 @@ The registered tumour and normal sample count as well as submitted raw reads cou
 ![Dashboard Donor Sample Status](/assets/submission/dashboard-samples-raw-reads.png)
 
 - In the **samples** column, a 0N (normal) or 0T (tumour) will be highlighted in red for any missing tumour/normal pair (each donor must have at least one normal and one tumour sample registered).
-- _Coming Soon:_ Once raw samples are [submitted through Song](submitting-molecular-data), those counts will appear in the **raw reads** column. Similarly, the raw reads normal and tumour count will be highlighted in red for any instance where the count does not match the registered sample count.
+- _Coming Soon:_ Once raw samples are [submitted through Song](/docs/submission/submitting-molecular-data), those counts will appear in the **raw reads** column. Similarly, the raw reads normal and tumour count will be highlighted in red for any instance where the count does not match the registered sample count.
 
 #### Analysis Status
 
