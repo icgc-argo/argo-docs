@@ -27,7 +27,7 @@ Each field has a data tier and an attribute classification, which reflects the i
 ![Conditional](/assets/submission/dictionary-conditional.svg) classification indicates:
 
 - Field must meet certain conditions, depending on the value of another field.
-- Conditions described in the data dictionary scripts & notes.
+- Conditional rules are described in the data dictionary scripts & notes.
 
 ![Required](/assets/submission/dictionary-required.svg) classification indicates:
 
