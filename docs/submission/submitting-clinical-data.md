@@ -15,7 +15,7 @@ There is only one Clinical Submission workspace for each program. All program da
 
 ## How to Submit Clinical Data
 
-### Step 1: Download and Format Clinical Files
+### Step 1: Download Templates and Format Clinical Files
 
 ![Download and Format Files](/assets/submission/clinical-1-dowload-templates.png)
 
