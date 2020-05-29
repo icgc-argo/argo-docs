@@ -5,7 +5,7 @@ title: Submitting Clinical Data
 
 This guide will describe how to submit clinical data using the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors, including their health data.
 
-> Note: Before you can submit clinical data, your donors must be assigned ARGO IDs through the sample registration process. See [Registering Samples](registering-samples) for instructions on how to register samples.
+> Note: Before you can submit clinical data, your donors must be assigned ARGO IDs through the sample registration process. See [Registering Samples](/docs/submission/registering-samples) for instructions on how to register samples.
 
 ## Multiple Data Submitters
 
@@ -33,7 +33,7 @@ There is only one Clinical Submission workspace for each program. All program da
 - If you are using a text editor, make sure you have invisible characters turned on. This way you can be sure that tabs are correctly separating each field value.
 - You do not need to remove any columns from the TSV file. For example, if the field is labeled "extended" in the dictionary and you do not have a value for that field, simply leave it blank.
 - Each file template name references the corresponding version of the dictionary (e.g argo_submission_templates_v0.7 is referencing version 0.7 of the data dictionary). Please make sure you are using the latest version of these files by referencing the latest [Data Dictionary](/dictionary).
-- Check out [Clinical Data Validation Rules](clinical-data-validation-rules) for the clinical file validation rules.
+- Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-validation-rules) for the clinical file validation rules.
 
 ### Step 2: Upload Clinical TSV Files
 
@@ -61,4 +61,4 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1. If you have made any updates to already submitted data, your clinical workspace will be locked in a Pending Approval state. A DCC member will review your updates and approve them for submission. If there are any issues, your submission will be reopened and the DCC will notify you, via email, of the required changes.
 1. If your data does not require approval by DCC, it will be submitted automatically.
 
-Once submitted, you will see the clincial data reflected on your [Program Dashboard](submitted-data).
+Once submitted, you will see the clincial data reflected on your [Program Dashboard](/docs/submission/submitted-data).

@@ -116,22 +116,17 @@ function Index() {
               color="#7f55cc"
               icon="img/icons/home/analysis-workflows.svg"
             >
-              Coming Soon
-              {/* <ul>
+              <span className={styles.contentDescription}>
+                ICGC ARGO uniformly analyzes molecular data against the <b>GRCh38 Human Reference Genome</b>
+              </span>
+              <ul>
                 <li>
-                  <a href="/docs/submission-getting-started">Get started</a>: a quick guide to data
-                  submission
+                  <a href="/docs/analysis-workflows/analysis-overview">Analysis overview and accepted datatypes</a>
                 </li>
                 <li>
-                  How to <a href="/docs/submitting-clinical-data">submit clinical data</a>
+                  Details about the <a href="/docs/analysis-workflows/dna-pipeline">DNA-Seq analysis pipeline</a>
                 </li>
-                <li>
-                  How to <a href="/docs/submitting-molecular-data">submit molecular data</a>
-                </li>
-                <li>
-                  How to <a href="/docs/managing-program-access">manage program users</a>
-                </li>
-              </ul> */}
+              </ul>
             </ContentBlock>
             <ContentBlock
               title="Publication Guidelines"

@@ -23,7 +23,7 @@ During sample registration, **ARGO IDs** will be assigned to your program entiti
 
 ## Multiple Data Submitters
 
-There is only one Sample Registration workspace for each program. You can check if sample registration is in progress on the [Dashboard> Program Workspace](../submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
+There is only one Sample Registration workspace for each program. You can check if sample registration is in progress on the [Dashboard> Program Workspace](/docs/submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
 
 ![Multiple Data Submitters](/assets/submission/registration-multiple-submitters.png)
 
@@ -37,7 +37,7 @@ There is only one Sample Registration workspace for each program. You can check 
 1. Click on the **Register Samples** section in the left menu for your program.
 1. Download the **TSV Template** for the sample registration file and format it according to the current [Data Dictionary](/dictionary) specifications.
 
-For help with formatting this file, please refer to [Tips for Formatting your TSV files](submitting-clinical-data#tips-for-formatting-tsv-files)
+For help with formatting this file, please refer to [Tips for Formatting your TSV files](/docs/submission/submitting-clinical-data#tips-for-formatting-tsv-files)
 
 ### Step 2: Upload Sample Registration TSV File
 
@@ -53,7 +53,7 @@ For help with formatting this file, please refer to [Tips for Formatting your TS
 
 1. Once you have reviewed the file preview, click on the **Register Samples** button to submit your samples.
 
-Once registered, donors, along with specimen and sample counts, will be visible on your [Program Dashboard](submitted-data).
+Once registered, donors, along with specimen and sample counts, will be visible on your [Program Dashboard](/docs/submission/submitted-data).
 
 ## Correcting Already Registered Data
 

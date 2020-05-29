@@ -6,7 +6,7 @@ title: Submitting Molecular Data
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
 Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata (data that describes your data).
 
-Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](../analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
+Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
 ## Data Submission Client Configuration
 
@@ -17,7 +17,7 @@ Molecular data is uploaded to the ARGO Data Platform using the Song and Score CL
 Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `conf/application.yaml` configuration file with the correct user and data submission program values, including:
 
 - local RDPC Song server URL
-- [API Token](../data-access/user-profile-and-api-token)
+- [API Token](/docs/data-access/user-profile-and-api-token)
 - ARGO Program Id that you are submitting to (studyId within the config file)
 
 This is an example of how your `application.yaml` configuration file should look:
@@ -39,7 +39,7 @@ retry:
 
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `conf/application.properties` configuration file with the correct user and data submission program values, including:
 
-- [API Token](../data-access/user-profile-and-api-token)
+- [API Token](/docs/data-access/user-profile-and-api-token)
 - local RDPC Song server URL
 - local RDPC Score server URL
 
@@ -81,7 +81,7 @@ The data fields can be broken down into five main sections: `body`, `experiment`
 - `**experimental_strategy`: Descriptor of the primary experimental method. For sequencing data it refers to how the sequencing library was made. Permissible values: WGS, WXS, RNA-Seq, Bisulfite-Seq etc.
 - `sequencing_date`: Date sequencing was performed.
 
-**Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
+**Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](/docs/submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
 
 If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
@@ -252,4 +252,4 @@ If the file successfully uploads, then you will receive an `Upload completed` me
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
 
-Once your `sequencing_experiment` analysis has been successfully submitted and published, it will be queued for data processing. You can follow the progress of [molecular data processing](../analysis-workflows/analysis-overview) for submitted data on your [Program Dashboard](../submission/submitted-data).
+Once your `sequencing_experiment` analysis has been successfully submitted and published, it will be queued for data processing. You can follow the progress of [molecular data processing](/docs/analysis-workflows/analysis-overview) for submitted data on your [Program Dashboard](/docs/submission/submitted-data).
