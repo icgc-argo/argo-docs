@@ -101,7 +101,7 @@ If the data for a sample is different than what has been registered, metadata va
 Read Group Data Validations:
 
 1. `submitter_read_group_id` must be unique within each Song payload, and ideally unique across all read groups in an ARGO program.
-1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `\_` .
+1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `_` .
 1. All `read_groups` in the payload must belong to a single sample.
 1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
 1. The total number of `read_group` objects must match the number specified in `read_group_count`.
