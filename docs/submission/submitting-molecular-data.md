@@ -84,7 +84,7 @@ If the data for a sample is different than what has been registered, metadata va
 **Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`.
 
 - `**submitter_read_group_id`: The unique identifier of a read group.
-- `**platform_unit`: Unique identifier that includes three types of information, the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. Platform unit and read group have a one-to-one relationship.
+- `**platform_unit`: Unique identifier that includes three types of information, the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.
 - `**is_paired_end`: `true` for paired end sequencing, otherwise `false`.
 - `**file_r1`: Name of the sequencing file containing reads from the first end of a sequencing run.
 - `file_r2`: Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.

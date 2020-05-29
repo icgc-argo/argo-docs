@@ -47,7 +47,7 @@ The set of core clinical fields were defined by the [Tissue & Clinical Annotatio
 
 ### Permissible Values
 
-- Some fields will only accept certain values from a list that is provided in the permissible values column of the dictionary tables. Terms must match the dictionary spelling exactly, but can be submitted case-insensitive.
+- Some fields will only accept certain values from a list that is provided in the permissible values column of the dictionary tables. Values must match the dictionary spelling exactly, but can be submitted case-insensitive.
 
 - Other fields must meet a regular expression for their value.
 
