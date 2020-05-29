@@ -62,7 +62,7 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 Song accepts metadata in JSON format (also referred as a `Song payload`), which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
 
-The data fields can be broken down into four main sections: `experiment`, `sample`, `read groups` and `files`.
+The data fields can be broken down into four main sections: `experiment`, `samples`, `read groups` and `files`.
 
 > Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
 

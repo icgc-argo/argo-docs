@@ -19,28 +19,28 @@ You can explore previous dictionary versions using the dropdown at the top of th
 
 Each field has a data tier and an attribute classification, which reflects the importance of the field in terms of clinical data completion.
 
-![ID](/assets/submission/dictionary-id.svg) attribute indicates:
+![ID](/assets/submission/dictionary-id.svg) classification indicates:
 
-- An field is a unique identifier that is used for cross file validation.
-- This field is a primary or foreign key.
+- Field is a unique identifier that is used for cross file validation.
+- Field is a primary or foreign key.
 
-![Conditional](/assets/submission/dictionary-conditional.svg) attribute indicates:
+![Conditional](/assets/submission/dictionary-conditional.svg) classification indicates:
 
 - Field must meet certain conditions, depending on the value of another field.
 - Conditions described in the data dictionary scripts & notes.
 
-![Required](/assets/submission/dictionary-required.svg) attribute indicates:
+![Required](/assets/submission/dictionary-required.svg) classification indicates:
 
 - Field must be filled in the submitted TSV file.
 - When pared with the `Conditional` attribute, the field is only required if conditional requirements are met.
 
-![Core](/assets/submission/dictionary-core.svg) attribute indicates:
+![Core](/assets/submission/dictionary-core.svg) classification indicates:
 
 - Field is part of the mandatory minimum set of clinical data that must be submitted.
 - The set of core clinical fields were defined by the [Tissue & Clinical Annotations Working Group](http://www.icgc-argo.org/page/84/tissue-clinical-annotation-working-group) which involved regular discussions with members of the working group and ARGO Programs.
 - Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
 
-![Extended](/assets/submission/dictionary-extended.svg) attribute indicates:
+![Extended](/assets/submission/dictionary-extended.svg) classification indicates:
 
 - Field is not required for clinical data completion.
 - It is _strongly encouraged_ to provide as many extended fields as possible as collected by your research project to provide valuable data.
