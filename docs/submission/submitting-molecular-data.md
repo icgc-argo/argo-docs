@@ -10,7 +10,7 @@ Molecular data will be submitted to your local **Regional Data Processing Centre
 
 ## Data Submission Client Configuration
 
-Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients). Song is an open source system used to track and validate metadata about raw data submissions. Score securely and quickly manages upload and download of files to cloud repositories managed by RDPCs. The Song and Score clients are used in conjunction to upload raw data files while maintaining file metadata and provenance.
+Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients). Song is an open source system used to track and validate metadata about raw data submissions. Score securely and quickly manages upload and download of files to cloud repositories managed by the RDPCs. The Song and Score clients are used in conjunction to upload raw data files while maintaining file metadata and provenance.
 
 ### Song-Client
 
@@ -58,7 +58,7 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 ## How to Upload Molecular Data
 
-### Understanding Song payload fields
+### Understanding the Song metadata fields
 
 Song accepts metadata in JSON format (also referred as a `Song payload`), which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
 
@@ -73,7 +73,7 @@ The data fields can be broken down into four main sections: `experiment`, `sampl
 - `**platform`: The sequencing platform type that was used to generate the submitted data files.
 - `platform_model`: The exact model number of the sequencing machine used.
 - `sequencing_center`: The sequencing center the analysis was performed at.
-- `**experimental_strategy`: Descriptor of primary experimental method. For sequencing data it refers to how the sequencing library was made. Permissible values: WGS, WXS, RNA-Seq, Bisulfite-Seq etc.
+- `**experimental_strategy`: Descriptor of the primary experimental method. For sequencing data it refers to how the sequencing library was made. Permissible values: WGS, WXS, RNA-Seq, Bisulfite-Seq etc.
 - `sequencing_date`: Date sequencing was performed.
 - `read_group_count`: Number of read groups submitted as part of the raw molecular file.
 
@@ -89,7 +89,7 @@ If the data for a sample is different than what has been registered, metadata va
 - `**file_r1`: Name of the sequencing file containing reads from the first end of a sequencing run.
 - `file_r2`: Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.
 - `read_length_r1`: Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.
-- `read_length_r2`: Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the first end.
+- `read_length_r2`: Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.
 - `insert_size`: For paired end sequencing the average size of sequences between two sequencing ends. Required for paired end sequencing.
 - `sample_barcode`: According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.
 - `**library_name`: Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).
@@ -117,9 +117,9 @@ The ARGO Data Platform accepts sequencing data submission for both `BAM` and `FA
 
 For both FASTQ and BAM submission, all files in the `files` section must be unique.
 
-### 1. Prepare a Song sequencing_experiment payload
+### 1. Prepare Song sequencing_experiment metadata
 
-This is an example of a correctly formatted `sequencing_experiment` payload, according to the rules presented above:
+This is an example of a correctly formatted `sequencing_experiment` metadata submission in JSON format, according to the rules presented above:
 
 ```json
 {
@@ -204,7 +204,7 @@ This is an example of a correctly formatted `sequencing_experiment` payload, acc
 }
 ```
 
-### 2. Upload the payload
+### 2. Upload the metadata file
 
 Once you have formatted the payload correctly, use the song-client `submit` command to upload the Song payload.
 
@@ -241,7 +241,7 @@ Using the score-client `upload` command, upload all files associated with the pa
 
 If the file successfully uploads, then you will receive an `Upload completed` message.
 
-### 5. Publish the payload
+### 5. Publish the metadata and sequencing file
 
 ```
 // need publish command

@@ -23,7 +23,7 @@ During sample registration, **ARGO IDs** will be assigned to your program entiti
 
 ## Multiple Data Submitters
 
-There is only one Sample Registration workspace for each program. You can check is sample registration is in progress on the [Dashboard> Program Workspace](../submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
+There is only one Sample Registration workspace for each program. You can check if sample registration is in progress on the [Dashboard> Program Workspace](../submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
 
 ![Multiple Data Submitters](/assets/submission/registration-multiple-submitters.png)
 
@@ -43,7 +43,7 @@ For help with formatting this file, please refer to [Tips for Formatting your TS
 
 ![Upload Files](/assets/submission/register-2-upload.png)
 
-1. Once your file is formatted, click the **Upload File** button and select your file from the browser window. Only TSV file type is supported, and the file name must begin with the _sample-registration_ and end with _.tsv_.
+1. Once your file is formatted, click the **Upload File** button and select your file from the browser window. Only the TSV file type is supported, and the file name must begin with the _sample-registration_ and end with _.tsv_.
 1. Upon uploading, if there are any errors in your file they will be displayed within the Sample Registration workspace. The error report will also be available for download. You must fix all of the errors that are listed within your sample registration file and then reupload it.
 1. Valid files will be available for preview in the Sample Registration workspace. You can review the new samples (purple star) versus previously registered samples (grey star) by filtering the table on the star column.
 

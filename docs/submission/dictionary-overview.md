@@ -31,25 +31,25 @@ Each field has a data tier and an attribute classification, which reflects the i
 
 ![Required](/assets/submission/dictionary-required.svg) classification indicates:
 
-- Field must be filled in the submitted TSV file.
-- When pared with the `Conditional` attribute, the field is only required if conditional requirements are met.
+- Field must be provided in the submitted TSV file.
+- When paired with the `Conditional` attribute, this field is only required if conditional requirements are met.
 
 ![Core](/assets/submission/dictionary-core.svg) classification indicates:
 
 - Field is part of the mandatory minimum set of clinical data that must be submitted.
-- The set of core clinical fields were defined by the [Tissue & Clinical Annotations Working Group](http://www.icgc-argo.org/page/84/tissue-clinical-annotation-working-group) which involved regular discussions with members of the working group and ARGO Programs.
-- Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
+
+The set of core clinical fields were defined by the [Tissue & Clinical Annotations Working Group](http://www.icgc-argo.org/page/84/tissue-clinical-annotation-working-group) which involved regular discussions with members of the working group and ARGO Programs. Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
 
 ![Extended](/assets/submission/dictionary-extended.svg) classification indicates:
 
 - Field is not required for clinical data completion.
-- It is _strongly encouraged_ to provide as many extended fields as possible as collected by your research project to provide valuable data.
+- It is _strongly encouraged_ to provide as many extended fields as possible.
 
 ### Permissible Values
 
 - Some fields will only accept certain values from a list that is provided in the permissible values column of the dictionary tables. Terms must match the dictionary spelling exactly, but can be submitted case-insensitive.
 
-- Other fields must meet a `regular expression` for their value.
+- Other fields must meet a regular expression for their value.
 
 ## Dictionary Reference Databases
 
