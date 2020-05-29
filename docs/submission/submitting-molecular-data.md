@@ -62,26 +62,30 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 Song accepts metadata in JSON format (also referred as a `Song payload`), which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
 
-The data fields can be broken down into four main sections: `experiment`, `samples`, `read groups` and `files`.
+The data fields can be broken down into five main sections: `body`, `experiment`, `samples`, `read groups` and `files`.
 
 > Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
 
+**Body:** The main body of the sequencing payload contains important administrative information.
+
+- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
+- `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
+- `**analysisType`: This object specifies the type of data & metadata that is being submitted. Set to `"name": "sequencing_experiment"` inside the object.
+
 **Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
 
-- `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
 - `**submitter_sequencing_experiment_id`:The unique identifier of the sequencing experiment.
 - `**platform`: The sequencing platform type that was used to generate the submitted data files.
 - `platform_model`: The exact model number of the sequencing machine used.
 - `sequencing_center`: The sequencing center the analysis was performed at.
 - `**experimental_strategy`: Descriptor of the primary experimental method. For sequencing data it refers to how the sequencing library was made. Permissible values: WGS, WXS, RNA-Seq, Bisulfite-Seq etc.
 - `sequencing_date`: Date sequencing was performed.
-- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
 
 **Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
 
 If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
-**Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`.
+**Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`, found in the main submisison body.
 
 - `**submitter_read_group_id`: The unique identifier of a read group.
 - `**platform_unit`: Unique identifier that includes three types of information, the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.
