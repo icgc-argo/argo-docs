@@ -66,7 +66,7 @@ The data fields can be broken down into four main sections: `experiment`, `sampl
 
 > Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
 
-#### **Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
+**Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
 
 - `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
 - `**submitter_sequencing_experiment_id`:The unique identifier of the sequencing experiment.
@@ -77,7 +77,7 @@ The data fields can be broken down into four main sections: `experiment`, `sampl
 - `sequencing_date`: Date sequencing was performed.
 - `read_group_count`: Number of read groups submitted as part of the raw molecular file.
 
-**Sample:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
+**Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](../submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
 
 If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
@@ -248,6 +248,4 @@ If the file successfully uploads, then you will receive an `Upload completed` me
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
 
-Once your `sequencing_experiment` analysis has been successfully submitted and published, it will be queued for data processing. You can follow the progress of molecular data processing for submitted data on your [Program Dashboard](../submission/submitted-data).
-
-## Data Processing and Analysis
+Once your `sequencing_experiment` analysis has been successfully submitted and published, it will be queued for data processing. You can follow the progress of [molecular data processing](../analysis-workflows/analysis-overview) for submitted data on your [Program Dashboard](../submission/submitted-data).
