@@ -4,7 +4,7 @@ title: Submitting Molecular Data
 ---
 
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
-Molecular data consists of all raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata (data that describes your data).
+Molecular data consists of raw data files generated from your program's donors (e.g. sequencing reads, slide images), as well as any associated file metadata (data that describes your data).
 
 Molecular data will be submitted to your local **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
@@ -14,13 +14,20 @@ Molecular data is uploaded to the ARGO Data Platform using the Song and Score CL
 
 ### Song-Client
 
-Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `conf/application.yaml` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
-- local RDPC Song server URL
-- [API Token](/docs/data-access/user-profile-and-api-token)
-- ARGO Program Id that you are submitting to (studyId within the config file)
+```
+gunzip song-client-[RELASE]-dist.tar.gz
+cd song-client-[RELEASE]
+```
 
-This is an example of how your `application.yaml` configuration file should look:
+Update the `conf/application.yaml` configuration file with the correct user and data submission program values, including:
+
+- **serverURL**: The Song server URL for your local RDPC metadata storage server
+- **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
+- **studyID**: The ARGO Program ID that you are submitting data for
+
+To do this, change directories into `conf` folder and open the `application.yaml` file. This is an example of how your `application.yaml` configuration file should look:
 
 ```yml
 client:
@@ -37,13 +44,20 @@ retry:
 
 ### Score-Client
 
-Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, update the `conf/application.properties` configuration file with the correct user and data submission program values, including:
+Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
-- [API Token](/docs/data-access/user-profile-and-api-token)
-- local RDPC Song server URL
-- local RDPC Score server URL
+```
+gunzip score-client-[RELASE]-dist.tar.gz
+cd score-client-[RELEASE]
+```
 
-This is an example of how your `application.properties` configuration file should look:
+Update the `conf/application.properties` configuration file with the correct user and data submission program values, including:
+
+- **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
+- **metadata.url**: the file metadata Song server URL for your local RDPC
+- **storage.url**: the object storage Score server URL for your local RDPC
+
+To do this, change directories into `conf` folder and open the `application.properties` file. This is an example of how your `application.properties` configuration file should look:
 
 ```yaml
 # The access token for authorized access to data
@@ -60,17 +74,27 @@ storage.url=https://score.qa.argo.cancercollaboratory.org
 
 ### Understanding the Song metadata fields
 
-Song accepts metadata in JSON format (also referred as a `Song payload`), which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data to ARGO is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
+Song accepts metadata in JSON format (also referred as a `Song payload`), which is validated against standard JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. The latest `sequencing_experiment` JSON Schema can be found in the ARGO [github repository](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/schemas/sequencing_experiment.json).
 
-The data fields can be broken down into five main sections: `body`, `experiment`, `samples`, `read groups` and `files`.
+The data fields can be broken down into five main sections: `body`, `experiment`, `samples`, `read groups` and `files`. Each of these sections must be submitted in the payload.
 
-> Note: \*\* denotes a required field. These must be provided as part of the metadata payload or it will immediately fail validation upon submission.
+> Note: \*\* denotes a required field. These **must** be provided as part of the metadata payload or it will immediately fail validation upon submission.
 
 **Body:** The main body of the sequencing payload contains important administrative information.
 
-- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
 - `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
-- `**analysisType`: This object specifies the type of data & metadata that is being submitted. Set to `"name": "sequencing_experiment"` inside the object.
+- `**analysisType`: This object specifies the type of data & metadata that is being submitted. Set to `sequencing_experiment`.
+- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
+
+Example of body portion of payload:
+
+```json
+  "analysisType": {
+    "name": "sequencing_experiment"
+  },
+  "studyId": "TEST-CA",
+  "read_group_count": 3
+```
 
 **Experiment:** The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
 
@@ -81,56 +105,9 @@ The data fields can be broken down into five main sections: `body`, `experiment`
 - `**experimental_strategy`: Descriptor of the primary experimental method. For sequencing data it refers to how the sequencing library was made. Permissible values: WGS, WXS, RNA-Seq, Bisulfite-Seq etc.
 - `sequencing_date`: Date sequencing was performed.
 
-**Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](/docs/submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
-
-If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
-
-**Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`, found in the main submisison body.
-
-- `**submitter_read_group_id`: The unique identifier of a read group.
-- `**platform_unit`: Unique identifier that includes three types of information, the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.
-- `**is_paired_end`: `true` for paired end sequencing, otherwise `false`.
-- `**file_r1`: Name of the sequencing file containing reads from the first end of a sequencing run.
-- `file_r2`: Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.
-- `read_length_r1`: Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.
-- `read_length_r2`: Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.
-- `insert_size`: For paired end sequencing the average size of sequences between two sequencing ends. Required for paired end sequencing.
-- `sample_barcode`: According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.
-- `**library_name`: Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).
-
-Read Group Data Validations:
-
-1. `submitter_read_group_id` must be unique within each Song payload, and ideally unique across all read groups in an ARGO program.
-1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `_` .
-1. All `read_groups` in the payload must belong to a single sample.
-1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
-1. The total number of `read_group` objects must match the number specified in `read_group_count`.
-1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
-1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
-
-**Files:** The files section contains metadata about the molecular files to be submitted.
-
-The ARGO Data Platform accepts sequencing data submission for both `BAM` and `FASTQ` files. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files.Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
-
-- `**fileName`: Name of the file, as defined by the data submitter.
-- `**fileSize`: Provided in bytes.
-- `**fileMd5sum`: Compute the md5sum of the file. This must match what is computed when the file is uploaded.
-- `**fileType`: Set to `BAM` or `FASTQ`, based file type being submitted.
-- `**fileAccess`: Set to `controlled`.
-- `**dataType`: Set to `Submitted Reads`.
-
-For both FASTQ and BAM submission, all files in the `files` section must be unique.
-
-### 1. Prepare Song sequencing_experiment metadata
-
-This is an example of a correctly formatted `sequencing_experiment` metadata submission in JSON format, according to the rules presented above:
+Example of experiment portion of payload:
 
 ```json
-{
-  "analysisType": {
-    "name": "sequencing_experiment"
-  },
-  "studyId": "TEST-CA",
   "experiment": {
     "submitter_sequencing_experiment_id": "EXP12345",
     "sequencing_center": "OICR",
@@ -138,46 +115,18 @@ This is an example of a correctly formatted `sequencing_experiment` metadata sub
     "platform_model": "HiSeq 2000",
     "experimental_strategy": "WGS",
     "sequencing_date": "2014-12-12"
-  },
-  "read_group_count": 3,
-  "read_groups": [
-    {
-      "submitter_read_group_id": "C0HVY.2",
-      "platform_unit": "74_8a",
-      "is_paired_end": true,
-      "file_r1": "test_rg3.bam",
-      "file_r2": "test_rg3.bam",
-      "read_length_r1": 150,
-      "read_length_r2": 150,
-      "insert_size": 232,
-      "sample_barcode": null,
-      "library_name": "Pond-147579"
-    },
-    {
-      "submitter_read_group_id": "D0RE2.1",
-      "platform_unit": "74_8b",
-      "is_paired_end": true,
-      "file_r1": "test_rg3.bam",
-      "file_r2": "test_rg3.bam",
-      "read_length_r1": 150,
-      "read_length_r2": 150,
-      "insert_size": 298,
-      "sample_barcode": null,
-      "library_name": "Pond-147580"
-    },
-    {
-      "submitter_read_group_id": "D0RH0.2",
-      "platform_unit": "74_8c",
-      "is_paired_end": true,
-      "file_r1": "test_rg3.bam",
-      "file_r2": "test_rg3.bam",
-      "read_length_r1": 150,
-      "read_length_r2": 150,
-      "insert_size": 298,
-      "sample_barcode": null,
-      "library_name": "Pond-147580"
-    }
-  ],
+  }
+
+```
+
+**Samples:** The sample section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a payload, this data must be [registered](/docs/submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary).
+
+If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
+
+Example of samples portion of payload:
+
+```json
+
   "samples": [
     {
       "submitterSampleId": "HCC1143_SMP1",
@@ -194,19 +143,106 @@ This is an example of a correctly formatted `sequencing_experiment` metadata sub
         "gender": "Female"
       }
     }
-  ],
-  "files": [
-    {
-      "fileName": "test_rg3.bam",
-      "fileSize": 14911,
-      "fileMd5sum": "178f97f7b1ca8bfc28fd5586bdd56799",
-      "fileType": "BAM",
-      "fileAccess": "controlled",
-      "dataType": "Submitted Reads"
-    }
   ]
-}
 ```
+
+**Read Groups:** The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`, found in the main submisison body.
+
+- `**submitter_read_group_id`: The unique identifier of a read group.
+- `**platform_unit`: Unique identifier that includes three types of information, the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.
+- `**is_paired_end`: `true` for paired end sequencing, otherwise `false`.
+- `**file_r1`: Name of the sequencing file containing reads from the first end of a sequencing run.
+- `file_r2`: Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.
+- `read_length_r1`: Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.
+- `read_length_r2`: Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.
+- `insert_size`: For paired end sequencing, the average size of sequences between two sequencing ends. Required for paired end sequencing.
+- `sample_barcode`: According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.
+- `**library_name`: Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).
+
+Read Group Data Validations:
+
+1. `submitter_read_group_id` must be unique within each Song payload, and ideally unique across all read groups in an ARGO program.
+1. `submitter_read_group_id` must not contain any special characters, with the exception of `-` , `.` , and `_` .
+1. All `read_groups` in the payload must belong to a single sample.
+1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
+1. The total number of `read_group` objects must match the number specified in `read_group_count`.
+1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
+1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
+
+Example of read groups portion of payload:
+
+```json
+"read_groups": [
+  {
+    "submitter_read_group_id": "C0HVY.2",
+    "platform_unit": "74_8a",
+    "is_paired_end": true,
+    "file_r1": "test_rg3.bam",
+    "file_r2": "test_rg3.bam",
+    "read_length_r1": 150,
+    "read_length_r2": 150,
+    "insert_size": 232,
+    "sample_barcode": null,
+    "library_name": "Pond-147579"
+  },
+  {
+    "submitter_read_group_id": "D0RE2.1",
+    "platform_unit": "74_8b",
+    "is_paired_end": true,
+    "file_r1": "test_rg3.bam",
+    "file_r2": "test_rg3.bam",
+    "read_length_r1": 150,
+    "read_length_r2": 150,
+    "insert_size": 298,
+    "sample_barcode": null,
+    "library_name": "Pond-147580"
+  },
+  {
+    "submitter_read_group_id": "D0RH0.2",
+    "platform_unit": "74_8c",
+    "is_paired_end": true,
+    "file_r1": "test_rg3.bam",
+    "file_r2": "test_rg3.bam",
+    "read_length_r1": 150,
+    "read_length_r2": 150,
+    "insert_size": 298,
+    "sample_barcode": null,
+    "library_name": "Pond-147580"
+  }
+],
+```
+
+**Files:** The files section contains metadata about the molecular files to be submitted.
+
+The ARGO Data Platform accepts sequencing data submission for both `BAM` and `FASTQ` files. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files. Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
+
+- `**fileName`: Name of the file, as defined by the data submitter.
+- `**fileSize`: Provided in bytes.
+- `**fileMd5sum`: Compute the md5sum of the file. This must match what is computed when the file is uploaded.
+- `**fileType`: Set to `BAM` or `FASTQ`, based file type being submitted.
+- `**fileAccess`: Set to `controlled`.
+- `**dataType`: Set to `Submitted Reads`.
+
+For both FASTQ and BAM submission, all files in the `files` section must be unique.
+
+Example of files groups portion of payload:
+
+```json
+"files": [
+  {
+    "fileName": "test_rg3.bam",
+    "fileSize": 14911,
+    "fileMd5sum": "178f97f7b1ca8bfc28fd5586bdd56799",
+    "fileType": "BAM",
+    "fileAccess": "controlled",
+    "dataType": "Submitted Reads"
+  }
+]
+```
+
+### 1. Prepare Song sequencing_experiment metadata
+
+This is an example of a correctly formatted `sequencing_experiment` metadata submission in JSON format, according to the rules presented above:
 
 ### 2. Upload the metadata file
 
@@ -243,12 +279,12 @@ Using the score-client `upload` command, upload all files associated with the pa
 .bin/score-client  upload --manifest manifest.txt
 ```
 
-If the file successfully uploads, then you will receive an `Upload completed` message.
+If the file successfully uploads, then you will receive an `Upload completed` message. At this point, the data is no longer reffered to as a payload, but is instead is only referred to as a Song analysis.
 
 ### 5. Publish the metadata and sequencing file
 
 ```
-// need publish command
+./bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
 
