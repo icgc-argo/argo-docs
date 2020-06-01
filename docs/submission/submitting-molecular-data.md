@@ -84,7 +84,7 @@ The data fields can be broken down into five main sections: `body`, `experiment`
 
 - `**studyId`: Corresponds to your ARGO `Program ID`. This is the unique id that is assigned to your program. If you have logged into the ARGO Data Platform, this is the Program Id that you see in the Program Services area. For example, PACA-CA is a Program ID.
 - `**analysisType`: This object specifies the type of data & metadata that is being submitted. Set to `sequencing_experiment`.
-- `read_group_count`: Number of read groups submitted as part of the raw molecular file.
+- `**read_group_count`: Number of read groups submitted as part of the raw molecular file.
 
 Example of body portion of payload:
 
