@@ -58,7 +58,7 @@ gunzip score-client-[RELASE NUMBER]-dist.tar.gz
 cd score-client-[RELEASE]
 ```
 
-Update the `/conf/application.properties` file with your user values, including:
+Update the `conf/application.properties` file with your user values, including:
 
 - **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 - **metadata.url**: the file metadata Song server URL
@@ -77,7 +77,7 @@ metadata.url=https://song.argo.cancercollaboratory.org
 storage.url=https://score.argo.cancercollaboratory.org
 ```
 
-Once you have configured your `application.yaml`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
+Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
 
 ```
 score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
