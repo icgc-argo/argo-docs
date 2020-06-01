@@ -52,16 +52,3 @@ The set of core clinical fields were defined by the [Tissue & Clinical Annotatio
 - Other fields must meet a regular expression for their value.
 
 ## Dictionary Reference Databases
-
-### ICD-10 Codes
-
-// link to Reference
-// description of reference (what for)
-
-### Staging Systems
-
-#### AJCC
-
-#### Binet
-
-### RxNorm
