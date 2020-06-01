@@ -261,6 +261,8 @@ If your payload is not formatted correctly, you will receive an error message de
 }
 ```
 
+At this point, since the payload data has successfully been submitted and accepted by Song, it is now referred to as a Song analysis. The newly created analysis will be state `UNPUBLISHED`.
+
 ### 3. Generate a manifest file
 
 Use the returned `analysis_id` from step 2 to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
@@ -271,6 +273,15 @@ Use the returned `analysis_id` from step 2 to generate a manifest for file uploa
 Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
 
+The manifest will be written out to the score directory. You can optionally define a specific output directory for your manifest file using the `-f` parameter. If the directory does not yet exist, it will be created.
+
+```
+./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt -f /my/output/dir/manifest.txt
+
+Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
+
+```
+
 ### 4. Upload sequencing files
 
 Using the score-client `upload` command, upload all files associated with the payload. This requires the manifest file generated in step 3.
@@ -279,9 +290,11 @@ Using the score-client `upload` command, upload all files associated with the pa
 .bin/score-client  upload --manifest manifest.txt
 ```
 
-If the file successfully uploads, then you will receive an `Upload completed` message. At this point, the data is no longer reffered to as a payload, but is instead is only referred to as a Song analysis.
+If the file(s) successfully uploads, then you will receive an `Upload completed` message.
 
 ### 5. Publish the metadata and sequencing file
+
+The final step to submitting molecular data is to set the state of an analysis to `PUBLISHED`. A published analysis signals to the DCC that this data is ready to be processed.
 
 ```
 ./bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
