@@ -2,6 +2,7 @@
 id: data-download
 title: How to Download Data
 ---
+
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable download and has built in BAM/CRAM slicing to make data download fast and smooth.
@@ -50,8 +51,14 @@ docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" 
 
 ### Score-Client with Configured Values
 
-Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
-Once you have unzipped the tarball, update the `/conf/application.properties` file with your user values, including:
+Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
+
+```
+gunzip score-client-[RELASE NUMBER]-dist.tar.gz
+cd score-client-[RELEASE]
+```
+
+Update the `/conf/application.properties` file with your user values, including:
 
 - **accessToken**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 - **metadata.url**: the file metadata Song server URL
