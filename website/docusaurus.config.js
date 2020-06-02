@@ -10,10 +10,7 @@ module.exports = {
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
-  stylesheets: [
-    'https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap',
-    './src/css/algolia.css',
-  ],
+  stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
 
   plugins: [path.resolve(__dirname, './svg-plugin'), path.resolve(__dirname, './dotenv-plugin')],
 
