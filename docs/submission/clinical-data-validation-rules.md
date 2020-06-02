@@ -3,7 +3,7 @@ id: clinical-data-validation-rules
 title: Clinical Data Validation Rules
 ---
 
-insert intro
+![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 ## Cross File Validations
 

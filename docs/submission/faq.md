@@ -3,4 +3,4 @@ id: faq
 title: FAQs
 ---
 
-Coming Soon
+![Reminder Banner](/assets/submission/banner-reminder.svg)
