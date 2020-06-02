@@ -1,6 +1,7 @@
 ---
 id: registering-samples
 title: Registering Samples
+platform_key: DOCS_REGISTERING_SAMPLES_PATH
 ---
 
 It is important that the relationships between entities are maintained across all data submissions, as they are fundamental to data integrity across the ARGO Data Platform. Thus, during sample registration, each **Donor**, **Specimen**, and **Sample** entity will be assigned an **ARGO ID** that maps to your program's internal identifier, (also referred to as **submitter_id**).

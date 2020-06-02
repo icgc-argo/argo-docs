@@ -28,7 +28,8 @@ const generateLink = async (path) => {
   const content = await fse.readFile(path, 'utf8');
   const { attributes } = fm(content);
   const key = get(attributes, FRONT_MATTER_KEY, null);
-  return key ? docsUrlTag`${key}${path}` : null;
+  const docPath = path.substring(path.indexOf('/docs/'));
+  return key ? docsUrlTag`${key}${docPath}` : null;
 };
 
 const generate = async () => {

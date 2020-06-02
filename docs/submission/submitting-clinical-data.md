@@ -1,6 +1,7 @@
 ---
 id: submitting-clinical-data
 title: Submitting Clinical Data
+platform_key: DOCS_SUBMITTING_CLINICAL_DATA_PATH
 ---
 
 This guide will describe how to submit clinical data using the ARGO Data Platform. Clinical data consists of all supporting data about your program's donors, including their health data.
