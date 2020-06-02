@@ -1,14 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 import useAlgolia from '../../hooks/useAlgolia';
+import { isSearchAvailable } from '../../utils';
 
 const Search = (props) => {
+  if (!isSearchAvailable) return null;
+
   const inputRef = React.useRef();
   useAlgolia(inputRef);
 
   return (
-    <div />
-    /*<div className="navbar__search" key="search-box">
+    <div className="navbar__search" key="search-box">
       <span
         aria-label="expand searchbar"
         role="button"
@@ -18,7 +20,6 @@ const Search = (props) => {
         tabIndex={0}
       />
       <input
-        disabled
         ref={inputRef}
         id="search_input_react"
         type="search"
@@ -30,7 +31,7 @@ const Search = (props) => {
           { 'search-bar': !props.isSearchBarExpanded },
         )}
       />
-    </div>*/
+    </div>
   );
 };
 

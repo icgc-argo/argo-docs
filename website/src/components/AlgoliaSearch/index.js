@@ -2,6 +2,7 @@ import React from 'react';
 import style from './styles.module.css';
 import { styled } from '@icgc-argo/uikit';
 import useAlgolia from '../../hooks/useAlgolia';
+import { isSearchAvailable } from '../../utils';
 
 /**
  * CSS Modules hard to use to style parent dynamic div
@@ -28,6 +29,8 @@ const SearchWrapper = styled(`div`)`
 `;
 
 const Search = (props) => {
+  if (!isSearchAvailable) return null;
+
   const inputRef = React.useRef();
   useAlgolia(inputRef);
 
