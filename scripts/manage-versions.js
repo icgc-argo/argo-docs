@@ -29,7 +29,7 @@ function printConfig() {
 async function printVersionsLists() {
   const versions = await fetchDictionaryVersionsList();
 
-  const newVersions = versions.filter((item) => !currentVersions.includes(item));
+  const newVersions = versions.filter(item => !currentVersions.includes(item));
 
   console.log(`\n${chalk.yellow('All Versions')}: ${versions.join(', ')}`);
   console.log(`${chalk.yellow('Current Versions')}: ${currentVersions.join(', ')}`);
@@ -93,8 +93,8 @@ async function fetchDictionaryVersionsList() {
   console.log(chalk.cyan('\nfetching dictionary versions list...'));
   const response = await axios.get(`${apiRoot}/dictionaries`);
   return response.data
-    .filter((item) => item.name === dictionaryName)
-    .map((item) => item.version)
+    .filter(item => item.name === dictionaryName)
+    .map(item => item.version)
     .sort((a, b) => (a.version > b.version ? 1 : -1));
 }
 
@@ -122,12 +122,12 @@ async function fetchDiffForVersions(left, right) {
 
 async function userSelectVersion(versions) {
   console.log('\n');
-  return new Promise((resolve) =>
+  return new Promise(resolve =>
     inquirer
       .prompt([
         { message: 'Select version to add:', name: 'version', type: 'list', choices: versions },
       ])
-      .then((answers) => resolve(answers.version)),
+      .then(answers => resolve(answers.version)),
   );
 }
 
