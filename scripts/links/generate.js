@@ -22,7 +22,7 @@ const traverse = async (path) => {
     .join('');
 };
 
-const docsUrlTag = (strings, key, path) => `export const ${key} = '${path}';`;
+const docsUrlTag = (strings, key, path) => `export const ${key}_PATH = '${path}';`;
 
 const generateLink = async (path) => {
   const content = await fse.readFile(path, 'utf8');
