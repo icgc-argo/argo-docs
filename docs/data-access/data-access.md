@@ -25,31 +25,19 @@ The instructions for applying for DACO can be found here on the [ICGC DACO websi
 1. After registering, you will receive an email instructing you to set your Central User Directory password. Click the link from the email to set up your account password.
 1. Once you save your password, you will be taken to your ICGC Dashboard. From your Dashboard, click the link to start a new access application form from the box entitled “Your DACO Access Forms”.
 1. Complete the entire application form. All sections, as well as Appendices, are integral components of the application.
-   <<<<<<< HEAD:docs/data-access/data-access.md
 
    > **IMPORTANT: For the applicant and any authorized personnel, you will be asked to provide an “OpenID”, which means providing a valid Google email address (Gmail or GSuite) for each authorized personnel.** This will be the email address you will use to log in to the ARGO Data Platform for accessing controlled data.
 
 1. Once the application is complete, you can submit it by “finalizing your DACO Application”. This action will prevent you from making any further changes to your application without authorization from an administrator.
 1. You will receive an email with further instructions. The next steps will also be listed on the confirmation page. Download and print your finalized application and add the necessary signatures. Once signed, you can fax or mail the application to the DACO office (the contact details are provided on the confirmation page and email).
 1. The DACO office will notify you when your application has been approved, or if they require any further information.
-1. # Once your DACO access application is approved, your “OpenID” Google email address will become associated with an ICGC ARGO account and you will be granted access to the controlled datasets available through the ARGO Data Platform.
-1. **IMPORTANT: For the applicant and any authorized personnel, you will be asked to provide an “OpenID”, which means providing a valid google email address (Gmail or Gdrive) for each authorized personnel.** This will be the email address you will use to log in to the ARGO Data Platform for accessing controlled data.
-1. Once the application is completed you can submit it by “finalizing your DACO Application”. This action will prevent you from making further changes to your application without authorization from an administrator.
-1. You will receive an email with further instructions. The next steps will also be listed on the confirmation page. Download and print your finalized application to add the necessary signatures. Once signed, you can fax or mail the application to the DACO office (the contact details are provided on the confirmation page and email).
-1. The DACO office will notify you when your application has been approved, or if they require any further information.
-1. Once your DACO access application is approved, your “OpenID” google email address will become associated with an ICGC ARGO account and you will be granted access to the controlled datasets available through the ARGO Data Platform.
-   > > > > > > > bootstrap generate links script:docs/data-access.md
+1. Once your DACO access application is approved, your “OpenID” Google email address will become associated with an ICGC ARGO account and you will be granted access to the controlled datasets available through the ARGO Data Platform.
 
 ## The DACO Approval Process
 
 The DACO approval process takes approximately 24-48 hours.
 
-<<<<<<< HEAD:docs/data-access/data-access.md
 Your research project will be checked for conformity with the goals and [policies of ICGC ARGO](https://www.icgc-argo.org/page/72/introduction-and-goals-) including, but not limited to, policies concerning the purpose and relevance of the research, the protection of the participants and the security of the participants' data.
-=======
-Your research project will be checked for conformity with the goals and [policies of ICGC ARGO](https://www.icgc-argo.org/page/76/e2-data-management-and-access) including, but not limited to, policies concerning the purpose and relevance of the research, the protection of the participants and the security of the participants' data.
-
-> > > > > > > bootstrap generate links script:docs/data-access.md
 
 The DACO office will notify you by email when your DACO application has been approved, or if they require any further information. Upon approval, access to controlled data will be granted for a **one year period** (starting from the date of acceptance). If your application is refused it remains possible to reapply in the future.
 
