@@ -1,7 +1,7 @@
 ---
 id: submitted-data
 title: Viewing Submitted Data
-platform_key: DOCS_SUBMITTED_DATA_PATH
+platform_key: DOCS_SUBMITTED_DATA
 ---
 
 Program members can track the progress of their program’s clinical and molecular data submission and download analysis files from the **Program Dashboard**.

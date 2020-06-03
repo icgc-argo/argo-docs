@@ -1,7 +1,7 @@
 ---
 id: user-profile-and-api-token
 title: User Profile & API Token
-platform_key: DOCS_API_TOKEN_PATH
+platform_key: DOCS_API_TOKEN
 ---
 
 The ARGO User Profile page displays important user information including:

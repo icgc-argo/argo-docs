@@ -7,6 +7,8 @@ const { resolve } = require('path');
 const DOCS_FOLDER = '../docs';
 const OUTPUT = './links.js';
 const FRONT_MATTER_KEY = 'platform_key';
+const FRONT_MATTER_ID = 'id';
+const URL_ROOT = 'DOCS_URL_ROOT';
 
 const traverse = async (path) => {
   const startingPaths = await fse.readdir(path, { withFileTypes: true });
@@ -22,14 +24,20 @@ const traverse = async (path) => {
     .join('');
 };
 
-const docsUrlTag = (strings, key, path) => `export const ${key}_PATH = '${path}';`;
+const docsUrlTag = (strings, key, path) =>
+  `export const ${key}_PAGE = urljoin(${URL_ROOT},'${path}');`;
 
 const generateLink = async (path) => {
   const content = await fse.readFile(path, 'utf8');
   const { attributes } = fm(content);
   const key = get(attributes, FRONT_MATTER_KEY, null);
+  const id = get(attributes, FRONT_MATTER_ID, null);
+
   const docPath = path.substring(path.indexOf('/docs/'));
-  return key ? docsUrlTag`${key}${docPath}` : null;
+  // routing based on folder/id or file pathname if no id is present
+  const url = id ? `${docPath.substring(0, docPath.lastIndexOf('/'))}/${id}` : docPath;
+  console.log(url);
+  return key ? docsUrlTag`${key}${url}` : null;
 };
 
 const generate = async () => {

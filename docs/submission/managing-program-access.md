@@ -1,7 +1,7 @@
 ---
 id: managing-program-access
 title: Managing Program Access
-platform_key: DOCS_MANAGING_PROGRAM_ACCESS_PATH
+platform_key: DOCS_MANAGING_PROGRAM_ACCESS
 ---
 
 If you are a Program Administrator, you will have the ability to invite users to access your program data. Depending on the role that you assign a program user, they will receive different levels of access to your program data.

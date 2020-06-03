@@ -2,7 +2,7 @@
 id: data-access
 title: Applying for Access to Controlled Data
 sidebar_label: Applying for Access to Controlled Data
-platform_key: DOCS_DATA_ACCESS_PATH
+platform_key: DOCS_DATA_ACCESS
 ---
 
 The **Data Access Compliance Office (DACO)** handles requests and approvals for accessing controlled molecular data in the ARGO Data Platform.
