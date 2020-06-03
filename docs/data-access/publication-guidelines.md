@@ -1,6 +1,7 @@
 ---
 id: publication-guidelines
 title: Publication Guidelines
+platform_key: DOCS_PUBLICATION_GUIDELINE
 ---
 
 The official ARGO [Publication Policy](https://www.icgc-argo.org/page/77/e3-publication-policy) can be found on the ICGC ARGO website.
