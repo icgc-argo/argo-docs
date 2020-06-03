@@ -1,6 +1,6 @@
 ---
 id: data-releases
-title: Data
+title: Data Releases
 platform_key: DOCS_DATA_RELEASES
 ---
 
