@@ -1,6 +1,7 @@
 ---
 id: dictionary-overview
 title: Data Dictionary
+platform_key: DOCS_DICTIONARY_OVERVIEW
 ---
 
 The ICGC ARGO [Data Dictionary](/dictionary) expresses the details of the ARGO data model, which adheres to specific formats and restrictions to ensure a standard of data quality. The Data Dictionary defines a set of files, each related to a clinical concept, that can be submitted to the ARGO Data Platform.

@@ -1,6 +1,7 @@
 ---
 id: clinical-data-validation-rules
 title: Clinical Data Validation Rules
+platform_key: DOCS_CLINICAL_VALIDATION_RULES
 ---
 
 ![Reminder Banner](/assets/submission/banner-reminder.svg)

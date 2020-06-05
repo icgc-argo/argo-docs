@@ -1,6 +1,7 @@
 ---
 id: managing-program-access
 title: Managing Program Access
+platform_key: DOCS_MANAGING_PROGRAM_ACCESS
 ---
 
 If you are a Program Administrator, you will have the ability to invite users to access your program data. Depending on the role that you assign a program user, they will receive different levels of access to your program data.
@@ -24,7 +25,7 @@ If you are a Program Administrator, you will have the ability to invite users to
 - View the program dashboard
 - Download program data
 
-> NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](/docs/data-access/data-access), or [apply for DACO approval here](https://icgc.org/daco).   
+> NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](/docs/data-access/data-access), or [apply for DACO approval here](https://icgc.org/daco).
 
 ## Adding Users
 

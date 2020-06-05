@@ -1,6 +1,7 @@
 ---
 id: submitting-molecular-data
 title: Submitting Molecular Data
+platform_key: DOCS_SUBMITTING_MOLECULAR_DATA
 ---
 
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
