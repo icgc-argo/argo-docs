@@ -5,7 +5,7 @@ const get = require('lodash/get');
 const { resolve } = require('path');
 
 const DOCS_FOLDER = '../docs';
-const OUTPUT = './links.js';
+const OUTPUT = './links/links.js';
 const FRONT_MATTER_KEY = 'platform_key';
 const FRONT_MATTER_ID = 'id';
 const URL_ROOT = 'DOCS_URL_ROOT';
