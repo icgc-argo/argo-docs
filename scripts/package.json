@@ -6,7 +6,7 @@
     "clean": "node clean-data.js",
     "test": "mocha --inline-diff",
     "watch-tests": "mocha ./**/*.test.js --inline-diff -w",
-    "generate-platform-links": "node links/generate.js"
+    "links": "node links/generate.js"
   },
   "devDependencies": {
     "chai": "^4.2.0",
