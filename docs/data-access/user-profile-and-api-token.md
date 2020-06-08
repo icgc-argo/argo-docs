@@ -23,9 +23,9 @@ Some important things to note about your API Token:
 - This is a _personal key_. **Never** share your user credentials with anyone else.
 - If you suspect that your API Token security has been compromised, simply regenerate it from this page. All former API Tokens will be revoked when you regenerate a token.
 
-## Member Permissions
+## Permissions
 
-Member permissions are assigned based on the role that has been granted to you in a specific program, the type of program you are a member of, and your application for access to controlled data.
+Permissions are assigned based on the role that has been granted to you in a specific program, the type of program you are a member of, and your application for access to controlled data.
 
 ![ARGO Member Permissions](/assets/data-access/user-profile-program-access.png)
 

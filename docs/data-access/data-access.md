@@ -8,13 +8,13 @@ The **Data Access Compliance Office (DACO)** handles requests and approvals for 
 
 ## Guidelines for Applying for Access to Controlled Data
 
-While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information. As such, DACO applications will only be considered for qualified scientents (individuals or groups from an institution) researching public health objectives.
+While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information. As such, DACO applications will only be considered for qualified scientists (individuals or groups from an institution) researching public health objectives.
 
 As a prerequisite to applying for DACO access, please ensure that you:
 
 - are associated to a research institution or company,
 - have a signing officer at your institution (authorized institutional representative),
-- have a scientific abstract with at least 3 relevant publications of which you were an author or a co-author.
+- have a scientific abstract outlining the desired use of the ARGO data with at least 3 relevant publications of which you were an author or a co-author.
 
 ## How to Apply for Access through DACO
 
