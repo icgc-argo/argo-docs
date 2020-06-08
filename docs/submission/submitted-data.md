@@ -36,7 +36,7 @@ _Coming Soon:_ This is the number of donors that currently have molecular data b
 
 #### Files to QC
 
-_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using a [file manifest and the score-client](/docs/data-access/data-download), and will be available for an embargo period before being released to the public via the File Repository.
+_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first to QCs. These files can be downloaded using a [file manifest and the score-client](/docs/data-access/data-download), and will be available for an embargo period before being released to the public via the File Repository.
 
 #### Donors with Released Files
 

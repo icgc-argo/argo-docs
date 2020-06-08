@@ -107,7 +107,7 @@ The main body of the sequencing_experiment payload contains important administra
 
 #### **Experiment:**
 
-The experiment section contains details that are relevant to the experimental requirements imposed during sequencing.
+The experiment section contains details that are relevant to the experimental requirements imposed during sequencing. The fields include:
 
 | Payload Field                        | Attribute                                               | Description                                                                                            | Permissible Values               |
 | ------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------- |
@@ -137,7 +137,7 @@ The sample section contains details of the clinical data and key sample descript
 
 If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
-Example of samples portion of payload:
+**Example of samples portion of payload:**
 
 ```json
 
@@ -162,7 +162,7 @@ Example of samples portion of payload:
 
 #### **Read Groups:**
 
-The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`, found in the main submission body.
+The read group section contains details about the reads that were generated from a single run of a sequencing instrument lane. The number of `read_group` objects in the payload must meet the number specified in `read_group_count`, found in the main submission body. The fields include:
 
 | Payload Field             | Attribute                                               | Description                                                                                                                                                                                                                                                                                                                                                                | Permissible Values |
 | ------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
@@ -230,18 +230,25 @@ Read Group Data Validations:
 
 #### **Files:**
 
-The files section contains metadata about the molecular files to be submitted. Sequencing data of both `BAM` and `FASTQ` type files is accepted. There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end). ARGO does not accept interleaved FASTQ files. Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported. For both FASTQ and BAM submission, all files in the `files` section must be unique in the payload.
+The files section contains metadata about the molecular files to be submitted. Sequencing data of both `BAM` and `FASTQ` type files is accepted.
+
+- There is no special requirement for FASTQ files except that paired end data should have the reads in two FASTQ files (one for each end).
+- ARGO does not accept interleaved FASTQ files.
+- Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
+- For both FASTQ and BAM submission, all files in the `files` section must be unique in the payload.
+
+The fields include:
 
 | Payload Field | Attribute                                               | Description                                                                                 | Permissible Values |
 | ------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------ |
 | fileName      | ![Required](/assets/submission/dictionary-required.svg) | Name of the file.                                                                           |                    |
-| fileSize      | ![Required](/assets/submission/dictionary-required.svg) | Site of the file, in bytes.                                                                 |                    |
+| fileSize      | ![Required](/assets/submission/dictionary-required.svg) | Size of the file, in bytes.                                                                 |                    |
 | fileMd5sum    | ![Required](/assets/submission/dictionary-required.svg) | Compute the md5sum of the file. This must match what is computed when the file is uploaded. |
 | fileType      | ![Required](/assets/submission/dictionary-required.svg) | Data format of sequencing files.                                                            | BAM, FASTQ         |
 | fileAccess    | ![Required](/assets/submission/dictionary-required.svg) | Date sequencing was performed.                                                              | open, controlled   |
 | dataType      | ![Required](/assets/submission/dictionary-required.svg) | Date sequencing was performed.                                                              | Submitted Reads    |
 
-**Example of files groups portion of payload:**
+**Example of files portion of payload:**
 
 ```json
 "files": [
