@@ -19,7 +19,7 @@ Platform users can search for a file set of interest using the File Repository. 
 
 The file manifest contains a list of the files that match your search query, along with some additional metadata to assist in file identification. The file manifest will be used by the score-client to identify the list of files to download.
 
-> NOTE: Clinical data can be downloaded by any user. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](/docs/data-access/data-access), or [apply for DACO approval here](https://icgc.org/daco).
+> NOTE: Clinical data can be downloaded by any user and does not require the score-client. In order to download controlled molecular data, you **must have ICGC DACO approval**. Learn more about the [DACO application process here](/docs/data-access/data-access), or [apply for DACO approval here](https://icgc.org/daco).
 
 ## Installing the Score-Client
 
@@ -54,8 +54,11 @@ docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" 
 
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
-```
-gunzip score-client-[RELASE NUMBER]-dist.tar.gz
+```shell
+wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+
+tar xvzf score-client.tar.gz
+
 cd score-client-[RELEASE]
 ```
 
@@ -80,7 +83,7 @@ storage.url=https://score.argo.cancercollaboratory.org
 
 Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
 
-```
+```shell
 score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
@@ -90,7 +93,7 @@ Download the **[latest version of the score-client](https://artifacts.oicr.on.ca
 
 Alternately, you can define environment variables to specify the correct paths. For example:
 
-```
+```shell
 METADATA_URL=http://localhost:12345 STORAGE_URL=http://localhost:23456 score-client download --manifest manifest1.txt
 ```
 
