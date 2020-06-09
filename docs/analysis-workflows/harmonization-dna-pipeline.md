@@ -18,25 +18,24 @@ In the future, these procedures will be extended to include:
 
 ## Alignment
 
-The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligned or unaligned) format. The first processing step in the DNA-Seq Pipeline is uniformly aligning samples to the GRCh38 HL7 reference genome. For details, please see the latest version of the [ARGO DNA Alignment](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
+The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligned or unaligned) format. The first processing step in the DNA-Seq Pipeline is uniformly aligning samples to the GRCh38 reference genome. For details, please see the latest version of the [ARGO DNA Alignment](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
 
 ### Inputs
 
-- All alignments are performed using the human reference genome **[GRCh38 HL7](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome)** as the reference genome
+- All alignments are performed using the human reference genome **[GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome)** as the reference genome
 - Submitted FASTQ or BAM files(s)
 
 ### Preprocessing
 
-- Submitted sequencing reads (FASTQ or BAM) are translated into lane level (i.e read group level) BAMs
-- Use Picard tool `CollectQualityYieldMetrics` for read group
-- QC
+- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs
+- Use Picard tool `CollectQualityYieldMetrics` for read group QC
 
 ### Processing
 
 - For each lane BAM **[BWA-MEM version 0.7.17-r1188](https://github.com/lh3/bwa/archive/v0.7.17.tar.gz)** is run.
-- One all lane BAMS have completed, **[Biobambam version 2.0.153](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz)** is used to mark duplicates.
+- Once all lane BAMS have completed, **[Biobambam version 2.0.153](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz)** is used to merge lane BAMs and mark duplicates.
 - Calculate Alignment QC metrics using `samtools stats`
-- Calculate `OxoQ` score to assess oxidative artifacts is calulated with Picard `CollectOxoGMetrics`
+- Calculate `OxoQ` score to assess oxidative artifacts is calculated with Picard `CollectOxoGMetrics`
 
 ### Outputs
 

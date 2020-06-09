@@ -81,21 +81,21 @@ storage.url=https://score.argo.cancercollaboratory.org
 
 Song accepts metadata in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. This is an example of a Song metadata payload: `<<link test payload>>`
 
-The `sequencing_experiment` payload is broken down into 5 sections: `body`, `experiment`, `samples`, `read groups` and `files`. Each sections **must** be submitted in the payload.
+The `sequencing_experiment` payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
 
 > ![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it immediately fail submission validation.
 
-#### **Body**
+#### **Root level**
 
-The main body of the sequencing_experiment payload contains important administrative information. The fields include:
+The root level of the sequencing_experiment payload contains important administrative information. The fields include:
 
 | Payload Field    | Attribute                                               | Description                                                                                                                                                                 | Permissible Values    |
 | ---------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
 | studyId          | ![Required](/assets/submission/dictionary-required.svg) | ARGO `Program ID`, the unique identifier of your program. If you have logged into the ARGO Data Platform, this is the Program ID that you see in the Program Services area. |                       |
 | analysisType     | ![Required](/assets/submission/dictionary-required.svg) | The type of molecular data that is being submitted in the payload.                                                                                                          | sequencing_experiment |
-| read_group_count | ![Required](/assets/submission/dictionary-required.svg) | The number of read groups submitted.                                                                                                                                        |
+| read_group_count | ![Required](/assets/submission/dictionary-required.svg) | The number of read groups to be submitted.                                                                                                                                  |
 
-**Example of body portion of payload:**
+**Example root level portion of payload:**
 
 ```json
   "analysisType": {
@@ -117,7 +117,7 @@ The experiment section contains details that are relevant to the experimental re
 | experimental_strategy                | ![Required](/assets/submission/dictionary-required.svg) | The primary experimental method. For sequencing data it refers to how the sequencing library was made. | WGS, WXS, RNA-Seq, Bisulfite-Seq |
 | sequencing_date                      |                                                         | Date sequencing was performed.                                                                         |
 
-**Example of experiment portion of payload:**
+**Example experiment portion of payload:**
 
 ```json
   "experiment": {
@@ -137,7 +137,7 @@ The sample section contains details of the clinical data and key sample descript
 
 If the data for a sample is different than what has been registered, metadata validation will fail immediately upon submission.
 
-**Example of samples portion of payload:**
+**Example samples portion of payload:**
 
 ```json
 
@@ -173,7 +173,7 @@ The read group section contains details about the reads that were generated from
 | file_r2                   | ![Required](/assets/submission/dictionary-required.svg) | Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.                                                                                                                                                                                                                   |                    |
 | read_length_r1            |                                                         | Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.                                                                                                                                                                                                                                                             |                    |
 | read_length_r2            |                                                         | Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.                                                                                                                                                                                                                                                            |                    |
-| insert_size               | ![Required](/assets/submission/dictionary-required.svg) | or paired end sequencing, the average size of sequences between two sequencing ends. Required only for paired end sequencing.                                                                                                                                                                                                                                              |                    |
+| insert_size               | ![Required](/assets/submission/dictionary-required.svg) | For paired end sequencing, the average size of sequences between two sequencing ends. Required only for paired end sequencing.                                                                                                                                                                                                                                             |                    |
 | sample_barcode            |                                                         | According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                                                                                                                                                                                                                         |                    |
 | library_name              | ![Required](/assets/submission/dictionary-required.svg) | Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).                                                                                                                                                                                                                                                                         |                    |
 
@@ -185,7 +185,7 @@ Read Group Data Validations:
 1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
 1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
-**Example of read groups portion of payload:**
+**Example read groups portion of payload:**
 
 ```json
 "read_groups": [
@@ -245,10 +245,10 @@ The fields include:
 | fileSize      | ![Required](/assets/submission/dictionary-required.svg) | Size of the file, in bytes.                                                                 |                    |
 | fileMd5sum    | ![Required](/assets/submission/dictionary-required.svg) | Compute the md5sum of the file. This must match what is computed when the file is uploaded. |
 | fileType      | ![Required](/assets/submission/dictionary-required.svg) | Data format of sequencing files.                                                            | BAM, FASTQ         |
-| fileAccess    | ![Required](/assets/submission/dictionary-required.svg) | Date sequencing was performed.                                                              | open, controlled   |
-| dataType      | ![Required](/assets/submission/dictionary-required.svg) | Date sequencing was performed.                                                              | Submitted Reads    |
+| fileAccess    | ![Required](/assets/submission/dictionary-required.svg) | The permission level of a file.                                                             | open, controlled   |
+| dataType      | ![Required](/assets/submission/dictionary-required.svg) | Descriptor of the type of file being submitted.                                             | Submitted Reads    |
 
-**Example of files portion of payload:**
+**Example files portion of payload:**
 
 ```json
 "files": [
