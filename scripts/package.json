@@ -5,7 +5,8 @@
     "add": "node manage-versions.js -a --npm --silent",
     "clean": "node clean-data.js",
     "test": "mocha --inline-diff",
-    "watch-tests": "mocha ./**/*.test.js --inline-diff -w"
+    "watch-tests": "mocha ./**/*.test.js --inline-diff -w",
+    "links": "node links/generate.js"
   },
   "devDependencies": {
     "chai": "^4.2.0",
@@ -19,8 +20,10 @@
   "dependencies": {
     "axios": "^0.19.0",
     "chalk": "^3.0.0",
+    "front-matter": "^4.0.2",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
+    "lodash": "^4.17.15",
     "querystring": "^0.2.0",
     "yargs": "^15.0.1"
   }

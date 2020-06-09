@@ -1,6 +1,7 @@
 ---
 id: data-download
 title: How to Download Data
+platform_key: DOCS_DATA_DOWNLOAD
 ---
 
 ![Reminder Banner](/assets/submission/banner-reminder.svg)

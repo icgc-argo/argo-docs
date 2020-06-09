@@ -1,7 +1,9 @@
 ---
 id: dna-pipeline
 title: DNA-Seq Analysis Pipeline
+platform_key: DOCS_DNA_PIPELINE
 ---
+
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 The DNA-Seq analysis pipeline identifies various somatic variant types within Whole Exome Sequencing (WXS) and Whole Genome Sequencing (WGS) data. The pipeline starts with a reference alignment step followed by co-cleaning to increase the alignment quality. DNA-Seq analysis is implemented across two main procedures:
