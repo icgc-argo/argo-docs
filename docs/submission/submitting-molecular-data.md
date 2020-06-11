@@ -9,6 +9,8 @@ Molecular data consists of raw data files (e.g. sequencing reads), as well as an
 
 Raw molecular data is submitted to a **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
+> [Sample Registration](/docs/submission/registering-samples) is the first step in the data submission life cycle. You **must** register samples before submitting molecular data. Please ensure that your samples are registered on the ARGO Data Platform before continuing with this step.
+
 ## Data Submission Client Configuration
 
 Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients). Song is an open source system used to track and validate metadata about raw data submissions. Score securely manages upload and download of files to cloud repositories managed by the RDPCs. The Song and Score clients are used in conjunction to upload raw data files while maintaining file metadata and provenance.
@@ -22,7 +24,8 @@ Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/
 
 tar xvzf song-client.tar.gz
 
-cd song-client-[RELEASE]
+## Note: Once unzipped, the final directory will be suffixed with the latest release number.
+cd song-client-<latest-release-number>
 ```
 
 Update the `conf/application.yaml` configuration file with the correct user and data submission program values, including:
@@ -35,7 +38,7 @@ To do this, change directories into `conf` folder and open the `application.yaml
 
 ```yml
 client:
-  serverUrl: https://song.argo.cancercollaboratory.org
+  serverUrl: https://song.rdpc.cancercollaboratory.org
   studyId: DASH-CA
   debug: false
   accessToken: 92038829-338c-4aa2-92fc2-a3c241f63ff0
@@ -54,7 +57,8 @@ wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release
 
 tar xvzf score-client.tar.gz
 
-cd score-client-[RELEASE]
+## Note: Once unzipped, the final directory will be suffixed with the latest release number.
+cd score-client-<latest-release-number>
 ```
 
 Update the `conf/application.properties` configuration file with the correct user and data submission program values, including:
@@ -70,10 +74,10 @@ To do this, change directories into `conf` folder and open the `application.prop
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://song.argo.cancercollaboratory.org
+metadata.url=https://song.rdpc.cancercollaboratory.org
 
 # The location of the object storage service (SCORE)
-storage.url=https://score.argo.cancercollaboratory.org
+storage.url=https://score.rdpc.cancercollaboratory.org
 ```
 
 ## How to Upload Molecular Data
@@ -264,11 +268,11 @@ The fields include:
 ]
 ```
 
-### 1. Prepare Song sequencing_experiment metadata
+### Step 1. Prepare Song sequencing_experiment metadata
 
 This is an example of a correctly formatted `sequencing_experiment` metadata submission in JSON format, according to the rules presented above:
 
-### 2. Upload the metadata file
+### Step 2. Upload the metadata file
 
 Once you have formatted the payload correctly, use the song-client `submit` command to upload the Song payload.
 
@@ -287,26 +291,24 @@ If your payload is not formatted correctly, you will receive an error message de
 
 At this point, since the payload data has successfully been submitted and accepted by Song, it is now referred to as a Song analysis. The newly created analysis will be state `UNPUBLISHED`.
 
-### 3. Generate a manifest file
+### Step 3. Generate a manifest file
 
-Use the returned `analysis_id` from step 2 to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
+Use the returned `analysis_id` from step 2 to generate a manifest for file upload. This manifest will be used with the score-client in the next step. Using the song-client `manifest` command, define
+
+- the analysis id using `-a` parameter
+- the location of your input files with the `-d` parameter,
+- the output file path for the manifest file with the `-f` parameter
 
 ```shell
-./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
+
+./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
 
 Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
 
-The manifest will be written out to the score directory. You can optionally define a specific output directory for your manifest file using the `-f` parameter. If the directory does not yet exist, it will be created.
+The `manifest.txt` file will be written out to the directory /some/output/dir/. If the output directory does not exist, it will be automatically created.
 
-```shell
-./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt -f /my/output/dir/manifest.txt
-
-Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
-
-```
-
-### 4. Upload sequencing files
+### Step 4. Upload sequencing files
 
 Using the score-client `upload` command, upload all files associated with the payload. This requires the manifest file generated in step 3.
 
@@ -316,7 +318,7 @@ $ .bin/score-client  upload --manifest manifest.txt
 
 If the file(s) successfully upload, then you will receive an `Upload completed` message.
 
-### 5. Publish the metadata and sequencing file
+### Step 5. Publish the metadata and sequencing file
 
 The final step to submitting molecular data is to set the state of an analysis to `PUBLISHED`. A published analysis signals to the DCC that this data is ready to be processed.
 
