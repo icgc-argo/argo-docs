@@ -259,7 +259,8 @@ Reference:
 | G2 | Total differentiation, mitotic count and necrosis score of 4 or 5 |
 | G3 | Total differentiation, mitotic count and necrosis score of 6, 7, or 8 |
 
-Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 564). American College of Surgeons.
+References: [https://academic.oup.com/jjco/article/49/2/103/5179391](https://academic.oup.com/jjco/article/49/2/103/5179391)
+Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 564). American College of Surgeons.
 
 ### Scarff–Bloom–Richardson (SBR) Grading System
 
