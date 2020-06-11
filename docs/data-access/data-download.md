@@ -47,7 +47,7 @@ Use the `docker run` command with the correct variables specified. You will need
 - an output directory path
 
 ```
-docker run --rm -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\rbajari\Desktop\download\
+docker run --rm -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\username\Desktop\download\
 ```
 
 ### Score-Client with Configured Values
