@@ -38,7 +38,7 @@ To do this, change directories into `conf` folder and open the `application.yaml
 
 ```yml
 client:
-  serverUrl: https://song.argo.cancercollaboratory.org
+  serverUrl: https://song.rdpc.cancercollaboratory.org
   studyId: DASH-CA
   debug: false
   accessToken: 92038829-338c-4aa2-92fc2-a3c241f63ff0
@@ -74,10 +74,10 @@ To do this, change directories into `conf` folder and open the `application.prop
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://song.argo.cancercollaboratory.org
+metadata.url=https://song.rdpc.cancercollaboratory.org
 
 # The location of the object storage service (SCORE)
-storage.url=https://score.argo.cancercollaboratory.org
+storage.url=https://score.rdpc.cancercollaboratory.org
 ```
 
 ## How to Upload Molecular Data
@@ -293,22 +293,20 @@ At this point, since the payload data has successfully been submitted and accept
 
 ### Step 3. Generate a manifest file
 
-Use the returned `analysis_id` from step 2 to generate a manifest for file upload using the song-client `manifest` command. This manifest will be used with the score-client in the next step.
+Use the returned `analysis_id` from step 2 to generate a manifest for file upload. This manifest will be used with the score-client in the next step. Using the song-client `manifest` command, define
+
+- the analysis id using `-a` parameter
+- the location of your input files with the `-d` parameter,
+- the output file path for the manifest file with the `-f` parameter
 
 ```shell
-./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt
+
+./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
 
 Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
 
-The manifest will be written out to the score directory. You can optionally define a specific output directory for your manifest file using the `-f` parameter. If the directory does not yet exist, it will be created.
-
-```shell
-./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f manifest.txt -d /submitting/file/directory
-
-Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
-
-```
+The `manifest.txt` file will be written out to the directory /some/output/dir/. If the output directory does not exist, it will be automatically created.
 
 ### Step 4. Upload sequencing files
 

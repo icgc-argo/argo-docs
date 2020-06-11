@@ -47,7 +47,7 @@ Use the `docker run` command with the correct variables specified. You will need
 - an output directory path
 
 ```
-docker run --rm -it -e "METADATA_URL=https://song.argo.cancercollaboratory.org" -e "STORAGE_URL=https://score.argo.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\rbajari\Desktop\download\
+docker run --rm -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\rbajari\Desktop\download\
 ```
 
 ### Score-Client with Configured Values
@@ -76,10 +76,10 @@ This is an example of how your `application.properties` configuration file shoul
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://song.argo.cancercollaboratory.org
+metadata.url=https://song.rdpc.cancercollaboratory.org
 
 # The location of the object storage service (SCORE)
-storage.url=https://score.argo.cancercollaboratory.org
+storage.url=https://score.rdpc.cancercollaboratory.org
 ```
 
 Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
@@ -95,7 +95,7 @@ Download the **[latest version of the score-client](https://artifacts.oicr.on.ca
 Alternately, you can define environment variables to specify the correct paths. For example:
 
 ```shell
-METADATA_URL=https://song.argo.cancercollaboratory.org STORAGE_URL=https://score.argo.cancercollaboratory.org score-client download --manifest manifest1.txt
+METADATA_URL=https://song.rdpc.cancercollaboratory.org STORAGE_URL=https://score.rdpc.cancercollaboratory.org score-client download --manifest manifest1.txt
 ```
 
 <!---
