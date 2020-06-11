@@ -95,9 +95,11 @@ Download the **[latest version of the score-client](https://artifacts.oicr.on.ca
 Alternately, you can define environment variables to specify the correct paths. For example:
 
 ```shell
-METADATA_URL=http://localhost:12345 STORAGE_URL=http://localhost:23456 score-client download --manifest manifest1.txt
+METADATA_URL=https://song.argo.cancercollaboratory.org STORAGE_URL=https://score.argo.cancercollaboratory.org score-client download --manifest manifest1.txt
 ```
 
-//// need details of if the ENV means you have to define acceess token as an env variable???
+<!---
+//// need details of if the ENV means you have to define aceess token as an env variable???
+-->
 
 ## BAM Slicing
