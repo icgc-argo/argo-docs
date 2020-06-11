@@ -59,7 +59,8 @@ wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release
 
 tar xvzf score-client.tar.gz
 
-cd score-client-[RELEASE]
+## Note: Once unzipped, the final directory will be suffixed with the latest release number.
+cd score-client-<latest-release-number>
 ```
 
 Update the `conf/application.properties` file with your user values, including:
