@@ -41,8 +41,7 @@ To prevent potential identification of donors, actual calendar dates are not per
 
 ### Donors Older than 90 years old
 
-Since the occurrence of individuals over the age of 90 is rare and therefore potentially make the individual identifiable, the `age_at_diagnosis` field is capped at 90.
-
+Since the occurrence of individuals over the age of 90 is rare, it is therefore considered a potentially identifiable value and the allowed value. Thus, the allowed value for the `age_at_diagnosis` field is capped at 90.
 
 
 
