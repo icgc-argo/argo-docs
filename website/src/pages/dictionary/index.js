@@ -328,19 +328,17 @@ function DataDictionary() {
                 </Tabs>
 
                 <div className={styles.downloads}>
-                  <DownloadTooltip>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={(item) => downloadTsvFileTemplate(`all`)}
-                    >
-                      <DownloadButtonContent>File Templates</DownloadButtonContent>
-                    </Button>
-                  </DownloadTooltip>
-
-                  <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
-                    <DownloadButtonContent>PDF</DownloadButtonContent>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={(item) => downloadTsvFileTemplate(`all`)}
+                  >
+                    <DownloadButtonContent>File Templates</DownloadButtonContent>
                   </Button>
+
+                  {/*<Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
+                    <DownloadButtonContent>PDF</DownloadButtonContent>
+                  </Button>*/}
                 </div>
               </div>
 
