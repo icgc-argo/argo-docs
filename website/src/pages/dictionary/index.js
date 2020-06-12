@@ -5,16 +5,16 @@
  * You should have received a copy of the GNU Affero General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY                           
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES                          
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT                           
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,                                
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED                          
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;                               
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER                              
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN                         
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *  
+ *
  *
  */
 
@@ -39,7 +39,7 @@ import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import find from 'lodash/find';
-import { Display } from '../../components/common';
+import { Display, DownloadTooltip, DownloadButtonContent } from '../../components/common';
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
@@ -47,6 +47,9 @@ import { styled } from '@icgc-argo/uikit';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
 import { css } from 'emotion';
+import DropdownButton from '@icgc-argo/uikit/DropdownButton';
+import Icon from '@icgc-argo/uikit/Icon';
+import Button from '@icgc-argo/uikit/Button';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -148,9 +151,8 @@ function DataDictionary() {
     },
   } = context;
 
-  const downloadTsvFileTemplate = (fileName) => {
+  const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
-  };
 
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
@@ -314,48 +316,6 @@ function DataDictionary() {
                   </span>
                 </div>
 
-                {/* <div className={styles.downloads}>
-                  <DownloadTooltip disabled={isLatestSchema}>
-                    <DropdownButton
-                      disabled={!isLatestSchema}
-                      variant="secondary"
-                      size="sm"
-                      onItemClick={item => {
-                        if (item.value === 'all') {
-                          downloadTsvFileTemplate(`all`);
-                        } else {
-                          downloadTsvFileTemplate(`${item.value}.tsv`);
-                        }
-                      }}
-                      menuItems={[
-                        {
-                          display: 'Download All',
-                          value: 'all',
-                        },
-                        ...dictionary.schemas.map(schema => ({
-                          value: schema.name,
-                          display: startCase(schema.name.split('_').join(' ')),
-                        })),
-                      ]}
-                    >
-                      <DownloadButtonContent disabled={!isLatestSchema}>
-                        File Templates
-                        <Icon
-                          name="chevron_down"
-                          fill={!isLatestSchema ? 'white' : 'accent2_dark'}
-                          height="9px"
-                          css={css`
-                            margin-left: 5px;
-                          `}
-                        />
-                      </DownloadButtonContent>
-                    </DropdownButton>
-                  </DownloadTooltip>
-                  {/*
-                  <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
-                    <DownloadButtonContent>PDF</DownloadButtonContent>
-                  </Button>*/}
-                {/*</div> */}
                 <Tabs
                   value={selectedTab}
                   onChange={onTabChange}
@@ -363,10 +323,23 @@ function DataDictionary() {
                     marginBottom: '-2px',
                   }}
                 >
-                  {/*  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" /> 
-                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />*/}
+                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
+                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
                 </Tabs>
-                <div />
+
+                <div className={styles.downloads}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={(item) => downloadTsvFileTemplate(`all`)}
+                  >
+                    <DownloadButtonContent>File Templates</DownloadButtonContent>
+                  </Button>
+
+                  {/*<Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
+                    <DownloadButtonContent>PDF</DownloadButtonContent>
+                  </Button>*/}
+                </div>
               </div>
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
