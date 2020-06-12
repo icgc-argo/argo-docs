@@ -151,9 +151,8 @@ function DataDictionary() {
     },
   } = context;
 
-  const downloadTsvFileTemplate = (fileName) => {
+  const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
-  };
 
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
@@ -329,41 +328,14 @@ function DataDictionary() {
                 </Tabs>
 
                 <div className={styles.downloads}>
-                  <DownloadTooltip disabled={isLatestSchema}>
-                    <DropdownButton
-                      disabled={!isLatestSchema}
+                  <DownloadTooltip>
+                    <Button
                       variant="secondary"
                       size="sm"
-                      onItemClick={(item) => {
-                        if (item.value === 'all') {
-                          downloadTsvFileTemplate(`all`);
-                        } else {
-                          downloadTsvFileTemplate(`${item.value}.tsv`);
-                        }
-                      }}
-                      menuItems={[
-                        {
-                          display: 'Download All',
-                          value: 'all',
-                        },
-                        ...dictionary.schemas.map((schema) => ({
-                          value: schema.name,
-                          display: startCase(schema.name.split('_').join(' ')),
-                        })),
-                      ]}
+                      onClick={(item) => downloadTsvFileTemplate(`all`)}
                     >
-                      <DownloadButtonContent disabled={!isLatestSchema}>
-                        File Templates
-                        <Icon
-                          name="chevron_down"
-                          fill={!isLatestSchema ? 'white' : 'accent2_dark'}
-                          height="9px"
-                          css={css`
-                            margin-left: 5px;
-                          `}
-                        />
-                      </DownloadButtonContent>
-                    </DropdownButton>
+                      <DownloadButtonContent>File Templates</DownloadButtonContent>
+                    </Button>
                   </DownloadTooltip>
 
                   <Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
