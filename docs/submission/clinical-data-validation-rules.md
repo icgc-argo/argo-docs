@@ -25,6 +25,7 @@ These fields must to be coded specifically for ICGC ARGO purposes using the foll
 - Identifiers are assigned by each submitting program and must be unique within all the data submitted by that program (no duplicate IDs allowed).
 - Identifiers referring to the same entity should be consistent across separate program submissions and should not be re-used for different entities. For example, the same donor should not be assigned different identifiers in different files or subsequent data submissions.
 - Identifiers cannot begin with DO, SP, SA, PD, TR or FU. These prefixes are reserved for ICGC ARGO IDs.
+- Identifiers are case-sensitive.
 
 ### Primary Diagnosis, Treatment and Follow Up Identifiers:
 

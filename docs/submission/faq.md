@@ -10,7 +10,7 @@ platform_key: DOCS_FAQ
 
 1. How do I submit multiple values for a field? For example, I want to submit multiple symptoms for the `presenting_symptoms` field.
 
-   When permitted, you can submit multiple values separated with a pipe delimiter '|'. For example: `Anemia|Fatigue|Fever`. Fields that allow multiple values will have these instructions specified in the notes section fo the data dictionary.
+   When permitted, you can submit multiple values separated with a pipe delimiter '|'. For example: `Anemia|Fatigue|Fever`. Fields that allow multiple values will have these instructions specified in the notes section of the data dictionary.
 
 2. Is there any resource to refer to for staging guidelines?
 
