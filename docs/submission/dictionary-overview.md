@@ -54,7 +54,7 @@ The set of core clinical fields were defined by the [Tissue & Clinical Annotatio
 
 ## Dictionary Standards Used
 
-The dictionary codelist values were derived from external standards or common terminology used by ICGC-ARGO projects. These include: 
+The dictionary codelist values were derived from external standards or common terminology used by ICGC ARGO programs. These include:
 
 - [American Joint Committee on Cancer Staging Classifications](https://cancerstaging.org/references-tools/deskreferences/Pages/Cancer-Staging-Forms.aspx)
 - [World Health Organization International Classification of Diseases, 10th Revision (ICD-10)](https://icd.who.int/browse10/2019/en)
@@ -66,7 +66,7 @@ The dictionary codelist values were derived from external standards or common te
 - [ECOG-ACRIN Cancer Research Group](https://ecog-acrin.org/resources/ecog-performance-status)
  
 
-## Tumour staging classifications
+## Tumour Staging Classifications
 
 ### Revised International staging system (RISS)
 
@@ -98,7 +98,7 @@ Note: Hodgkin lymphoma uses A or B designation with stage group.  A/B is no long
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 981). American College of Surgeons.
 
 
-### St. Jude Children's Research Hospital Staging system
+### St. Jude Children's Research Hospital Staging System
 
 | Stage | Description |
 |-------|-------------|
@@ -127,7 +127,7 @@ Reference: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461808/](https://www.n
 Reference: [https://www.ncbi.nlm.nih.gov/books/NBK65726/table/CDR0000062933__557/](https://www.ncbi.nlm.nih.gov/books/NBK65726/table/CDR0000062933__557/)
 
 
-### Rai staging system
+### Rai Staging System
 
 | Stage | Description |
 |-------|-------------|
@@ -139,7 +139,7 @@ Reference: [https://www.ncbi.nlm.nih.gov/books/NBK65726/table/CDR0000062933__557
 Reference: [CLL Society, Inc. Rai Staging of CLL (chronic lymphocytic leukemia).](https://cllsociety.org/2016/03/rai-staging-cll-chronic-lymphocytic-leukemia/)
 
 
-### Durie-Salmon staging system
+### Durie-Salmon Staging System
 
 | Stage | Description |
 |-------|-------------|
@@ -149,7 +149,7 @@ Reference: [CLL Society, Inc. Rai Staging of CLL (chronic lymphocytic leukemia).
 Reference: [https://www.myeloma.org/durie-salmon-staging](https://www.myeloma.org/durie-salmon-staging)
 
 
-### FIGO staging of Cervical carcinomas
+### FIGO Staging of Cervical Carcinomas
 
 | Stage | Description |
 |-------|-------------|
@@ -167,7 +167,7 @@ Reference: [https://www.myeloma.org/durie-salmon-staging](https://www.myeloma.or
 | Stage IVB | Spread to distant organs.|
 Reference: [https://screening.iarc.fr/viaviliappendix1.php](https://screening.iarc.fr/viaviliappendix1.php)
 
-### Binet staging system
+### Binet Staging System
 
 | Stage | Description |
 |-------|-------------|
@@ -177,10 +177,10 @@ Reference: [https://screening.iarc.fr/viaviliappendix1.php](https://screening.ia
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 975). American College of Surgeons.
 
 
-## Tumour grading classifications
+## Tumour Grading Classifications
 
 
-### Two-tier grading system
+### Two-tier Grading System
 
 | Grade |
 |-------|
@@ -189,7 +189,8 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 975). 
 Reference: Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition
 
 
-### Three-grade system
+### Three-tier Grading System
+
 | Grade | Definition |
 |-------|------------|
 | GX | Cannot be assessed |
@@ -199,7 +200,8 @@ Reference: Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition
 Reference: Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition
 
 
-### Four-tier grading system
+### Four-tier Grading System
+
 | Grade | Definition |
 |-------|------------|
 | GX | Grade cannot be assessed |
@@ -219,7 +221,7 @@ Reference: Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 546). American College of Surgeons.
 
 
-### Grading system for GNETs
+### Grading System for GNETs
 
 | Grade | Definition |
 |-------|------------|
@@ -230,7 +232,7 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 546). 
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 374). American College of Surgeons.
 
 
-### ISUP grading system	
+### ISUP Grading System
 	
 | Grade | Definition |
 |-------|------------|
@@ -242,7 +244,7 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 374). 
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 771). American College of Surgeons.
 
 
-### Nuclear grading system for DCIS
+### Nuclear Grading System for DCIS
 
 | Grade | Definition |
 |-------|------------|
@@ -253,7 +255,7 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 771). 
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 641). American College of Surgeons. 
 
 
-### FNCLCC grading system
+### FNCLCC Grading System
 
 | Grade | Definition |
 |-------|------------|
@@ -276,7 +278,7 @@ Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 564). American Co
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 652). American College of Surgeons.
 
 
-### WHO grading system for CNS tumours
+### WHO Grading System for CNS Tumours
 
 | Grade | Definition |
 |-------|------------|
@@ -286,7 +288,7 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 652). 
 | Grade IV | Tumours that are cytologically malignant, mitotically active, and associated with rapid clinical progression and potential for dissemination |
 Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 894). American College of Surgeons.
 
-### Gleason grade group system
+### Gleason Grade Group System
 
 | Grade Group | Gleason score and pattern |
 |-------------|---------------------------|
