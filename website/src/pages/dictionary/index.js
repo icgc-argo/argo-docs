@@ -315,7 +315,7 @@ function DataDictionary() {
                     </Typography>
                   </span>
                 </div>
-
+                {/*}
                 <Tabs
                   value={selectedTab}
                   onChange={onTabChange}
@@ -326,7 +326,7 @@ function DataDictionary() {
                   <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
                   <StyledTab value={TAB_STATE.DETAILS} label="Details" />
                 </Tabs>
-
+                */}
                 <div className={styles.downloads}>
                   <Button
                     variant="secondary"
