@@ -10,11 +10,11 @@ platform_key: DOCS_FAQ
 
 1. How do I submit multiple values for a field? For example, I want to submit multiple symptoms for the `presenting_symptoms` field.
 
-   To include multiple values, separate values with a pipe delimiter '|' within your file. For example: `Anemia|Fatigue|Fever`.
+   When permitted, you can submit multiple values separated with a pipe delimiter '|'. For example: `Anemia|Fatigue|Fever`. Fields that allow multiple values will have these instructions specified in the notes section of the data dictionary.
 
-2. Is there any resource to refer to in order to follow staging guidelines?
+2. Is there any resource to refer to for staging guidelines?
 
-    Please refer to the guidelines provides by the [AJCC Cancer Staging](https://cancerstaging.org/Pages/default.aspx) website. Other helpful resources include the [CAnswer Forum](http://cancerbulletin.facs.org/forums/).
+    Please refer to the guidelines provided by the [AJCC Cancer Staging](https://cancerstaging.org/Pages/default.aspx) website. Another helpful resource is the [CAnswer Forum](http://cancerbulletin.facs.org/forums/).
 
 3. The `tumour_staging_system` field does not contain the staging system I use. Can we request the staging system be added?
 
@@ -22,7 +22,7 @@ platform_key: DOCS_FAQ
 
 4. What assembly version do you use?
 
-    ICGC-ARGO uses GrCh38.
+    ICGC ARGO uses the [GRCh38 Human Reference Genome](https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/).
 
 5. I'm having trouble formatting my clinical submission TSV files in Excel. Do you have any tips on getting the formatting correct?
 
