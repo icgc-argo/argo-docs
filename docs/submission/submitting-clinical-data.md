@@ -62,4 +62,4 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1. If you have made any updates to already submitted data, your clinical workspace will be locked in a Pending Approval state. A DCC member will review your updates and approve them for submission. If there are any issues, your submission will be reopened and the DCC will notify you, via email, of the required changes.
 1. If your data does not require approval by DCC, it will be submitted automatically.
 
-Once submitted, you will see the clincial data reflected on your [Program Dashboard](/docs/submission/submitted-data).
+Once submitted, you will see the clinical data reflected on your [Program Dashboard](/docs/submission/submitted-data).

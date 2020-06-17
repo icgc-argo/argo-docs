@@ -72,7 +72,7 @@ module.exports = {
         { to: 'docs/data-access/data-access', label: 'Data Access', position: 'right' },
         {
           to: 'docs/analysis-workflows/analysis-overview',
-          label: 'Analysis Workflows',
+          label: 'Analysis Pipelines',
           position: 'right',
         },
 

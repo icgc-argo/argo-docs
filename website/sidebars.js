@@ -38,7 +38,7 @@ module.exports = {
       'data-access/programmatic-apis',
       'data-access/publication-guidelines',
     ],
-    'Analysis Workflows': [
+    'Analysis Pipelines': [
       `analysis-workflows/analysis-overview`,
       'analysis-workflows/dna-pipeline',
     ],

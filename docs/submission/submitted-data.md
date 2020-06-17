@@ -21,7 +21,7 @@ Once samples are registered, each corresponding donor will be counted as a perce
 
 #### % Donors with all Core Clinical Data
 
-Once all core clinical fields and files have been submitted for a donor, they are considered **"clinically complete"**.
+Once the minimum amount of required clinical data has been submitted for a donor, they are considered **"clinically complete"**.
 
 > **A donor must be clinically complete before any of their molecular analysis files are released to the program members.**
 
@@ -29,15 +29,15 @@ Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-valida
 
 #### % Donors with Tumour & Normal
 
-_Coming Soon:_ Once a donor has a tumour and normal raw read pair [submitted through Song](/docs/submission/submitting-molecular-data), they will be counted towards this percentage.
+_Coming Soon:_ Once a donor has both a tumour and matched normal raw sequencing data [submitted through Song](/docs/submission/submitting-molecular-data), they will be counted towards this percentage.
 
 #### Donors in Molecular Data Processing
 
-_Coming Soon:_ This is the number of donors that currently have samples being processed in the [analysis pipeline](/docs/analysis-workflows/dna-pipeline).
+_Coming Soon:_ This is the number of donors that currently have molecular data being processed in the [analysis pipeline](/docs/analysis-workflows/analysis-overview).
 
 #### Files to QC
 
-_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first. These files can be downloaded using a [file manifest and the score-client](/docs/data-access/data-download), and will be available for an embargo period before being released to the public via the File Repository.
+_Coming Soon:_ Once an analysis workflow is completed (and the corresponding donor is clinically complete), the analysis files will be available to program members first to QCs. These files can be downloaded using a [file manifest and the score-client](/docs/data-access/data-download), and will be available for an embargo period before being released to the public via the File Repository.
 
 #### Donors with Released Files
 
@@ -49,7 +49,7 @@ _Coming Soon:_ The count of all files for the program, i.e. all clinical and mol
 
 ## Donor Release Summary
 
-The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total committed donors.  
+The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total number of donors committed to ARGO by the program.  
 ![Dashbard Donor Release Summary](/assets/submission/dashboard-donor-release-card.png)
 
 ## Program Workspace Status

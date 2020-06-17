@@ -8,17 +8,7 @@ It is important that the relationships between entities are maintained across al
 
 > Registration is the first step in the data submission life cycle. You **must** register samples before submitting any clinical or molecular data.
 
-The basic set of data that must be registered for each sample consists of:
-
-- `program_id`
-- `submitter_donor_id`
-- `gender`
-- `submitter_specimen_id`
-- `specimen_tissue_source`
-- `tumour_normal_designation`
-- `specimen_type`
-- `submitter_sample_id`
-- `sample_type`
+The basic set of data that must be registered for each sample can be found in the Sample Registration section of the [Data Dictionary](/dictionary).
 
 During sample registration, **ARGO IDs** will be assigned to your program entities. Any attempts to submit data that does not refer to a registered donor, specimen, or sample will result in an error. You will be prompted to complete sample registration before any clinical or molecular data is submitted to your program.
 
