@@ -6,7 +6,7 @@ platform_key: DOCS_DNA_PIPELINE
 
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
 
-The DNA-Seq analysis pipeline identifies various somatic variant types within Whole Exome Sequencing (WXS) and Whole Genome Sequencing (WGS) data. The pipeline starts with a reference alignment step followed by co-cleaning to increase the alignment quality. DNA-Seq analysis is implemented across two main procedures:
+The DNA-Sequencing (DNA-Seq) analysis pipeline identifies multiple types of somatic variant from both Whole Exome Sequencing (WXS) and Whole Genome Sequencing (WGS) sample data. DNA-Seq analysis is implemented across two main procedures:
 
 - Sequence Alignment
 - Variant Calling
@@ -15,32 +15,47 @@ In the future, these procedures will be extended to include:
 
 - Variant Masking
 - Variant Annotation
-- Concensus Calling
+- Consensus Calling
 
 ## Alignment
 
-Before genomes can be compared for variant analysis, they must be aligned to a reference genome. In addition to alignment, this step includes some data cleanup operations that correct for technical biases and makes the data suitable for analysis.
+The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligned or unaligned) format. The first processing step in the DNA-Seq Pipeline is uniformly aligning samples to the GRCh38 reference genome. For details, please see the latest version of the [ARGO DNA Alignment](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
 
-The alignment step uses:
+### Inputs
 
-- **[BWA-MEM version 0.7.17-r1188](http://bio-bwa.sourceforge.net/)** as its main aligner
-- **[Biobambam version xxx](https://www.sanger.ac.uk/science/tools/biobambam)** to mark duplicates.
-- **[GRCh38 HL7](need link)** as the reference genome
+- All alignments are performed using the human reference genome **[GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome)** as the reference genome
+- Submitted FASTQ or BAM files(s)
+
+### Preprocessing
+
+- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs
+- Use Picard tool `CollectQualityYieldMetrics` for read group QC
+
+### Processing
+
+- For each lane BAM **[BWA-MEM version 0.7.17-r1188](https://github.com/lh3/bwa/archive/v0.7.17.tar.gz)** is run.
+- Once all lane BAMS have completed, **[Biobambam version 2.0.153](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz)** is used to merge lane BAMs and mark duplicates.
+- Calculate Alignment QC metrics using `samtools stats`
+- Calculate `OxoQ` score to assess oxidative artifacts is calculated with Picard `CollectOxoGMetrics`
+
+### Outputs
+
+- Aligned Read CRAM file
+- CRAI Index file
+- Alignment QC Metrics
 
 ![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
-The latest version of the ARGO alignment workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
-
 ## Sanger WGS Variant Calling
 
-The ARGO DNA Seq pipeline has adoptd the Sanger Variant Calling docker.
+The ARGO DNA Seq pipeline has adopted the Sanger Variant Calling docker.
 
 ![Sanger WGS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WGS-variant-calling.png)
 
-The latest version of the ARGO Variant Calling workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
+For details, please see the latest version of the [ARGO Sanger WGS Variant Calling workflow](https://github.com/icgc-argo/sanger-wgs-variant-calling/releases).
 
 ## Sanger WXS Variant Calling
 
 ![Sanger WXS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)
 
-The latest version of the ARGO Variant Calling workflow can be found [here](https://github.com/icgc-argo/dna-seq-processing-wfs/releases).
+For details, please see the latest version of the [ARGO Sanger WXS Variant Calling workflow](https://github.com/icgc-argo/sanger-wxs-variant-calling/releases).
