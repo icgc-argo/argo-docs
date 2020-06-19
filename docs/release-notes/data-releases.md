@@ -29,7 +29,7 @@ None to report.
 
 ### New Updates
 
-ICGC ARGO is excited to announce its initial data release including data from 2 newly released programs [PACA-CA](https://www.icgc-argo.org/page/96/panchope) and [OCCAMS-GB](https://www.icgc-argo.org/page/112/occams). While both of these programs were members of the original ICGC-25K data portal, a selection of their data has been reprocessed against the latest GRCH38 reference genome using the [ARGO DNA Seq Pipeline](/docs/analysis-workflows/harmonization-dna-pipeline). This release includes:
+ICGC ARGO is excited to announce its initial data release including data from 2 newly released programs [PACA-CA](https://www.icgc-argo.org/page/96/panchope) and [OCCAMS-GB](https://www.icgc-argo.org/page/112/occams). While both of these programs were members of the original ICGC-25K data portal, a selection of their data has been reprocessed against the latest `GRCH38 Human Reference Genome` using the [ARGO DNA Seq Pipeline](/docs/analysis-workflows/ dna-pipeline). This release includes:
 
 - PACA-CA: 81 donors released with:
   - 164 `Aligned Reads`
