@@ -48,13 +48,13 @@ The set of core clinical fields were defined by the [Tissue & Clinical Annotatio
 
 ### Permissible Values
 
-- Some fields will only accept certain values from a list that is provided in the permissible values column of the dictionary tables. Values must match the dictionary spelling exactly, but can be submitted case-insensitive.
+- Some fields will only accept certain values from a list of controlled terminology that is provided in the permissible values column of the dictionary tables. Values must match the dictionary spelling exactly, but can be submitted case-insensitive.
 
 - Other fields must meet a regular expression for their value.
 
 ## Dictionary Standards Used
 
-The dictionary codelist values were derived from external standards or common terminology used by ICGC ARGO programs. These include:
+The dictionary controlled terminology values were derived from external standards or common terminology used by ICGC ARGO programs. These include:
 
 - [American Joint Committee on Cancer Staging Classifications](https://cancerstaging.org/references-tools/deskreferences/Pages/Cancer-Staging-Forms.aspx)
 - [World Health Organization International Classification of Diseases, 10th Revision (ICD-10)](https://icd.who.int/browse10/2019/en)
