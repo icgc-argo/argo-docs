@@ -4,8 +4,6 @@ title: How to Download Data
 platform_key: DOCS_DATA_DOWNLOAD
 ---
 
-![Reminder Banner](/assets/submission/banner-reminder.svg)
-
 The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable download and has built in BAM/CRAM slicing to make data download fast and smooth.
 
 Please note:
@@ -46,7 +44,7 @@ Use the `docker run` command with the correct variables specified. You will need
 - the absolute directory path where your file manifest is located
 - an output directory path
 
-```
+```shell
 docker run --rm -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\username\Desktop\download\
 ```
 
@@ -88,6 +86,7 @@ Once you have configured your `application.properties`, you will be ready to ini
 score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
+<!---
 ### Score-Client with Environment Variables
 
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**.
@@ -98,8 +97,8 @@ Alternately, you can define environment variables to specify the correct paths. 
 METADATA_URL=https://song.rdpc.cancercollaboratory.org STORAGE_URL=https://score.rdpc.cancercollaboratory.org score-client download --manifest manifest1.txt
 ```
 
-<!---
 //// need details of if the ENV means you have to define aceess token as an env variable???
--->
+
 
 ## BAM Slicing
+-->
