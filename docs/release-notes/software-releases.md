@@ -21,8 +21,8 @@ None to report.
 
 ## Initial Software Release 1.0
 
-Data Platform v1.45.0 -
-API v2.1.0
+Data Platform v1.54.0 -
+API v3.2.0
 
 **Release Date:** June 19, 2020
 
