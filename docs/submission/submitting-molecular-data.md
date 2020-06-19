@@ -4,7 +4,6 @@ title: Submitting Molecular Data
 platform_key: DOCS_SUBMITTING_MOLECULAR_DATA
 ---
 
-![Reminder Banner](/assets/submission/banner-reminder.svg)
 Molecular data consists of raw data files (e.g. sequencing reads), as well as any associated file metadata (data that describes your data).
 
 Raw molecular data is submitted to a **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
@@ -318,7 +317,7 @@ $ .bin/score-client  upload --manifest manifest.txt
 
 If the file(s) successfully upload, then you will receive an `Upload completed` message.
 
-### Step 5. Publish the metadata and sequencing file
+### Step 5. Publish the analysis
 
 The final step to submitting molecular data is to set the state of an analysis to `PUBLISHED`. A published analysis signals to the DCC that this data is ready to be processed.
 

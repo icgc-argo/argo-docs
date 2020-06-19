@@ -4,8 +4,6 @@ title: Clinical Data Validation Rules
 platform_key: DOCS_CLINICAL_VALIDATION_RULES
 ---
 
-![Reminder Banner](/assets/submission/banner-reminder.svg)
-
 ## Clinical Data Encoding Rules
 
 ### Identifier fields
@@ -14,7 +12,7 @@ The data dictionary contains certain data elements regarded as "identifiers". Th
 
 - Donor: `submitter_donor_id`
 - Specimen: `submitter_specimen_id`
-- Sample: `submitter_sample_id` 
+- Sample: `submitter_sample_id`
 - Primary Diagnosis: `submitter_primary_diagnosis_id`
 - Treatment: `submitter_treatment_id`
 - Follow Up: `submitter_follow_up_id`
@@ -43,14 +41,9 @@ To prevent potential identification of donors, actual calendar dates are not per
 
 Since the occurrence of individuals over the age of 90 is rare, it is therefore considered a potentially identifiable value. Thus, the allowed value for the `age_at_diagnosis` field is capped at 90.
 
-
-
 ## Cross File Validations
 
-
 (insert diagram and table here)
-
-
 
 ## Clinical Data Completion
 
@@ -68,6 +61,3 @@ Complete clinical data means that a donor has a valid value submitted for all fi
 - For each registered specimen, a donor must have all specimen core fields provided.
 - A donor must have at least one treatment and a corresponding treatment detail file (if applicable, e.g. for chemotherapy, hormonal therapy or radiation) with all core fields provided.
 - A donor must have at least one followup with all core fields provided.
-
-
-
