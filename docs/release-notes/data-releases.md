@@ -29,7 +29,7 @@ None to report.
 
 ### New Updates
 
-ICGC ARGO is excited to announce its initial data release including whole genome sequencing (WGS) data from pancreatic cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope) and esophageal cancer [(OCCAMS-GB)](https://www.icgc-argo.org/page/112/occams). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest `GRCH38 Human Reference Genome` using the [ARGO DNA Seq Pipeline](/docs/analysis-workflows/dna-pipeline). The resulting somatic mutation calls include single nucleotide variations (SNVs), insertion-deletion (indels), copy number variations (CNVs) and structural variations (SVs). This release includes:
+ICGC ARGO is excited to announce its initial data release including whole genome sequencing (WGS) data from pancreatic cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope) and esophageal cancer [(OCCAMS-GB)](https://www.icgc-argo.org/page/112/occams). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the [ARGO DNA Seq Pipeline](/docs/analysis-workflows/dna-pipeline). The resulting somatic mutation calls include single nucleotide variations (SNVs), insertion-deletion (indels), copy number variations (CNVs) and structural variations (SVs). This release includes:
 
-- PACA-CA: 81 WGS donors with aligned reads, and 62 donors with variant calls.
-- OCCAMS-GB: 96 WGS donors with aligned reads, and 95 donors with variant calls.
+- PACA-CA: 81 donors with aligned WGS reads, and 62 donors with variant calls.
+- OCCAMS-GB: 96 donors with aligned WGS reads, and 95 donors with variant calls.
