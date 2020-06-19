@@ -24,7 +24,7 @@ platform_key: DOCS_FAQ
 
 5. I'm having trouble formatting my clinical submission TSV files in Excel. Do you have any tips on getting the formatting correct?
 
-   Please refer to the [Tips for Formatting TSV files](https://docs.icgc-argo/docs/submission/submitting-clinical-data#tips-for-formatting-tsv-files) section.
+    Please refer to the [Tips for Formatting TSV files](https://docs.icgc-argo.org/docs/submission/submitting-clinical-data#tips-for-formatting-tsv-files) section.
 
 6. I'm interested in applying the script validations on our data. Where do I find them?
 
