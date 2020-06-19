@@ -182,6 +182,7 @@ The read group section contains details about the reads that were generated from
 | sample_barcode            |                                                         | According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                                                                                                                                                                                                                         |                    |
 | library_name              | ![Required](/assets/submission/dictionary-required.svg) | Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).                                                                                                                                                                                                                                                                         |                    |
 
+<br/>
 Read Group Data Validations:
 
 1. All `read_groups` in the payload must belong to a single sample.
