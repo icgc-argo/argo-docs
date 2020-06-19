@@ -158,6 +158,7 @@ function DataDictionary() {
     const schemas = get(dictionary, 'schemas', []);
 
     const fields = schemas.map((schema) => schema.fields);
+
     const filters = flattenDeep(fields).reduce(
       (acc, field) => {
         const meta = get(field, 'meta', {});
@@ -172,7 +173,7 @@ function DataDictionary() {
         }
 
         if (dependsOn) {
-          acc.attributes.push(TAG_TYPES.dependency);
+          acc.attributes.push(TAG_TYPES.conditional);
         }
 
         if (core) {
@@ -215,7 +216,7 @@ function DataDictionary() {
             }
 
             if (
-              (attribute === TAG_TYPES.dependency && Boolean(dependsOn)) ||
+              (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
               (attribute === TAG_TYPES.required && required) ||
               attribute === '' ||
               attribute === NO_ACTIVE_FILTER
