@@ -1143,3 +1143,11 @@ Algolia
 .algolia-docsearch-suggestion--content {
   text-align: left;
 }
+
+/**
+* Markdown - table
+*/
+.markdown table td,
+th {
+  font-size: 14px;
+}
