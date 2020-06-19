@@ -45,7 +45,7 @@ To prevent potential identification of donors, actual calendar dates are not per
 Examples of time interval validation checks:
 
 - If a patient's `vital_status` is `Deceased`, all time intervals must be less than or equal to `survival_time`.
-- The `relapse_interval` must be less than the `interval_of_followup` in the Follow Up the relapse was recorded.
+- The `relapse_interval` must be less than the `interval_of_followup` in the follow up entry that the relapse was recorded.
 - If a follow up is associated with a particular treatment (via the `submitter_treatment_id`), the `interval_of_followup` must be greater than the `treatment_start_interval`.
 
 
@@ -55,7 +55,7 @@ Since the occurrence of individuals over the age of 90 is rare, it is therefore 
 
 ## Cross Field Validations
 
-A number of cross-field consistency checks within files are implemented to ensure quality control and data correctness. This involves requiring the value of another field to validate the current field. The cross-field validation checks are implemented using Javascript. For the advanced user, you will be able to see the actual cross-field validation scripts in the Dictionary Viewer by clicking on `View Script`. Examples include:
+A number of cross-field consistency checks within files are implemented to ensure quality control and data correctness. This requires the value of another field to validate the current field. The cross-field validation checks are implemented using Javascript. For the advanced user, you will be able to see the actual cross-field validation scripts in the Dictionary Viewer by clicking on the `View Script` buttons in the notes column. Examples include:
 
 - Criteria for staging fields are dependent on the selected `clinical_staging_system`.
 - Submitted `tumour_grade` is checked against selected `tumour_grading_system`.
@@ -66,14 +66,14 @@ A number of cross-field consistency checks within files are implemented to ensur
 
 ## Cross File Validations
 
-Relationships between different clinical fields across files are validated to ensure data correctedness. These include for example:
+Relationships between different clinical fields across files are validated to ensure data integrity and correctness. This requires checking the existence and relationships of different identifiers in different files, and checking the value of a field in another file to validate the current field or enforce supplemental file requirements. Examples include:
 
 - A `submitter_sample_id` must belong to only one `submitter_specimen_id`. A `submitter_specimen_id` must belong to only one `submitter_donor_id`.
-- A `submitter_donor_id` or `submitter_specimen_id` submitted in any of the clinical submission files is checked to ensure it exists in the `Sample Registration` file.
+- A `submitter_donor_id` or `submitter_specimen_id` submitted in any of the clinical submission files must have been submitted in the `Sample Registration` file.
 - A `submitter_specimen_id` in the `Specimen` file must belong to a registered `submitter_donor_id` in the `Sample Registration` file.
-- A `submitter_primary_diagnosis_id` in the `Treatment`, `Specimen` or `Follow Up` file must exist in the `Primary Diagnosis` file.
-- A `submitter_treatment_id` in the `Follow Up` file must exist in the `Treatment` file.
-- The value of a specimen's `tumour_normal_designation` field in the `Sample Registration` file is checked to determine whether a field in the `Specimen` file is required.
+- A `submitter_primary_diagnosis_id` in the `Treatment`, `Specimen` or `Follow Up` file must have been submitted using the `Primary Diagnosis` file.
+- A `submitter_treatment_id` in the `Follow Up` file must have been submitted using the `Treatment` file.
+- The value of a specimen's `tumour_normal_designation` field in the `Sample Registration` file is checked to determine whether fields in the `Specimen` file are required.
 - If `survival_time` is submitted in the `Donor` file, all time interval fields are validated to ensure they are less than or equal to the `survival_time`.
 - Depending on the `treatment_type` selected in the Treatment file, additional treatment details may be required to be submitted. For example, if `treatment_type` includes `Chemotherapy`, the supplemental `Chemotherapy` treatment file is required. 
 
