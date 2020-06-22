@@ -3,6 +3,7 @@ id: submitting-molecular-data
 title: Submitting Molecular Data
 platform_key: DOCS_SUBMITTING_MOLECULAR_DATA
 ---
+
 ![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 Molecular data consists of raw data files (e.g. sequencing reads), as well as any associated file metadata (data that describes your data).
@@ -84,7 +85,10 @@ storage.url=https://score.rdpc.cancercollaboratory.org
 
 ### Understanding the Song metadata fields
 
-Song accepts metadata in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. This is an example of a Song metadata payload: `<<link test payload>>`
+Song accepts metadata in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC.
+
+- This is an example of a correctly formatted Song metadata payload from a `normal sample`: https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json
+- This is an example of a correctly formatted Song metadata payload from a `tumour sample`: https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json
 
 The `sequencing_experiment` payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
 
