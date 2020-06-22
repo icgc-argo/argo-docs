@@ -46,8 +46,10 @@ function Footer() {
         </div>
         <div className={styles.footerContent}>
           <section className={styles.footerLinks}>
-            {/* <a href="https://platform.icgc-argo.org/contact">Contact</a>
-            <Slash /> */}
+            <a href="https://platform.icgc-argo.org/contact" target="_blank">
+              Contact
+            </a>
+            <Slash />
             <a href="https://www.icgc-argo.org/page/2/privacy" target="_blank">
               Privacy Policy
             </a>
