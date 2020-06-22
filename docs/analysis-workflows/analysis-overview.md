@@ -4,8 +4,6 @@ title: Analysis Pipelines Overview
 sidebar_label: Overview
 ---
 
-![Reminder Banner](/assets/submission/banner-reminder.svg)
-
 Molecular data submitted to the ARGO Data Platform will undergo molecular analysis through a unified pipeline. Consistent pipeline analysis across different samples ensures that data can be considered functionally equivalent across different data sets, including all ARGO programs as well as any other initiatives that have adopted the ARGO analysis pipelines, increasing the research power of the dataset provided by the ARGO Data Platform.
 
 The ARGO Data Platform will accept a wide range of datatypes, including:
