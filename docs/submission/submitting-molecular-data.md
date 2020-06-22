@@ -3,6 +3,7 @@ id: submitting-molecular-data
 title: Submitting Molecular Data
 platform_key: DOCS_SUBMITTING_MOLECULAR_DATA
 ---
+![Reminder Banner](/assets/submission/banner-reminder.svg)
 
 Molecular data consists of raw data files (e.g. sequencing reads), as well as any associated file metadata (data that describes your data).
 
