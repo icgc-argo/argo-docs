@@ -21,12 +21,12 @@ Molecular data is uploaded to the ARGO Data Platform using the Song and Score CL
 Download the **[latest version of the song-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
- wget -O song-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz
+> wget -O song-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/song-client/[RELEASE]/song-client-[RELEASE]-dist.tar.gz
 
-tar xvzf song-client.tar.gz
+> tar xvzf song-client.tar.gz
 
 ## Note: Once unzipped, the final directory will be suffixed with the latest release number.
-cd song-client-<latest-release-number>
+> cd song-client-<latest-release-number>
 ```
 
 Update the `conf/application.yaml` configuration file with the correct user and data submission program values, including:
@@ -54,12 +54,12 @@ retry:
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
-wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+> wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
 
-tar xvzf score-client.tar.gz
+> tar xvzf score-client.tar.gz
 
 ## Note: Once unzipped, the final directory will be suffixed with the latest release number.
-cd score-client-<latest-release-number>
+> cd score-client-<latest-release-number>
 ```
 
 Update the `conf/application.properties` configuration file with the correct user and data submission program values, including:
@@ -85,10 +85,10 @@ storage.url=https://score.rdpc.cancercollaboratory.org
 
 ### Understanding the Song metadata fields
 
-Song accepts metadata in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC.
+Song accepts metadata in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the Song metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. For example:
 
-- This is an example of a correctly formatted Song metadata payload from a `normal sample`: https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json
-- This is an example of a correctly formatted Song metadata payload from a `tumour sample`: https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json
+- This is an example of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json).
+- This is an example of a correctly formatted payload from a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
 
 The `sequencing_experiment` payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
 
@@ -282,7 +282,7 @@ This is an example of a correctly formatted `sequencing_experiment` metadata sub
 Once you have formatted the payload correctly, use the song-client `submit` command to upload the Song payload.
 
 ```shell
-./bin/sing submit -f dash-5-tumour.json
+> ./bin/sing submit -f dash-5-tumour.json
 ```
 
 If your payload is not formatted correctly, you will receive an error message detailing what is wrong. Please fix any errors and resubmit. If your payload is formatted correctly, you will get an `analysisId` in response:
@@ -306,7 +306,7 @@ Use the returned `analysis_id` from step 2 to generate a manifest for file uploa
 
 ```shell
 
-./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
+> ./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
 
 Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
@@ -318,7 +318,7 @@ The `manifest.txt` file will be written out to the directory /some/output/dir/. 
 Using the score-client `upload` command, upload all files associated with the payload. This requires the manifest file generated in step 3.
 
 ```shell
-$ .bin/score-client  upload --manifest manifest.txt
+> .bin/score-client  upload --manifest manifest.txt
 ```
 
 If the file(s) successfully upload, then you will receive an `Upload completed` message.
@@ -328,7 +328,7 @@ If the file(s) successfully upload, then you will receive an `Upload completed` 
 The final step to submitting molecular data is to set the state of an analysis to `PUBLISHED`. A published analysis signals to the DCC that this data is ready to be processed.
 
 ```shell
-./bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
+> ./bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
 
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
