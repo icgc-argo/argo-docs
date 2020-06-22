@@ -1,10 +1,9 @@
 ---
 id: faq
-title: FAQs
+title: Frequently Asked Questions
+sidebar_label: FAQs
 platform_key: DOCS_FAQ
 ---
-
-## Frequently Asked Questions
 
 1. How do I submit multiple values for a field? For example, I want to submit multiple symptoms for the `presenting_symptoms` field.
 
