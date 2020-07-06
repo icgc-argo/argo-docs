@@ -300,7 +300,7 @@ function DataDictionary() {
                 <Typography variant="paragraph" color="#000">
                   The ICGC ARGO Data Dictionary expresses the details of the data model, which
                   adheres to specific formats and restrictions to ensure a standard of data quality.
-                  The following list describes the attributes and permissible values for all of the
+                  The following views describes the attributes and permissible values for all of the
                   fields within the clinical tsv files for the{' '}
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
