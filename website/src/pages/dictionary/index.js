@@ -118,6 +118,9 @@ function DataDictionary() {
   const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
   const [searchValue, setSearchValue] = useState('');
 
+  //
+  const [compareIsActive, setCompareIsActive] = useState(false);
+
   const updateVersion = async (newVersion) => {
     try {
       const { dict, tree } = await fetchDictionary(newVersion);
@@ -310,10 +313,14 @@ function DataDictionary() {
                 <div>
                   {renderVersionSelect()}
                   <span>
-                    <Typography variant="data">Last updated: </Typography>
+                    <div style={{ display: `${compareIsActive ? 'auto' : 'none'}` }}>
+                      <Button size="sm">Compare with...</Button>
+                    </div>
+                    {/*   <Typography variant="data">Last updated: </Typography>
                     <Typography variant="data" bold>
                       {formatDate(get(dictionary, 'updatedAt', ''), 'MMMM D, YYYY')}
                     </Typography>
+                   */}
                   </span>
                 </div>
                 {/*}
