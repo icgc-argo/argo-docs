@@ -119,7 +119,7 @@ function DataDictionary() {
   const [searchValue, setSearchValue] = useState('');
 
   //
-  const [compareIsActive, setCompareIsActive] = useState(false);
+  const [diffVersion, setDiffVersion] = useState(null);
 
   const updateVersion = async (newVersion) => {
     try {
@@ -132,15 +132,19 @@ function DataDictionary() {
     }
   };
 
-  const renderVersionSelect = () => {
+  const renderVersionSelect = (updateFn, value, excludeCurrent = false) => {
+    const options = data.versions
+      .filter((d) => (excludeCurrent ? d !== version : d))
+      .map((d) => ({ content: `Version ${d}`, value: d }));
+
     return (
       <form>
         <div style={{ width: '150px', marginRight: '10px' }}>
           <Select
             aria-label="version-select"
-            value={version}
-            options={data.versions.map((d) => ({ content: `Version ${d}`, value: d }))}
-            onChange={(val) => updateVersion(val)}
+            value={value || options[0].value}
+            options={options}
+            onChange={(val) => updateFn(val)}
           />
         </div>
       </form>
@@ -308,20 +312,24 @@ function DataDictionary() {
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
-
+              /** - setCompareVersion instead of compareIsActive - setCompareVersion to first that
+              isn't current */
               <div className={styles.infobar}>
                 <div>
-                  {renderVersionSelect()}
-                  <span>
-                    <div style={{ display: `${compareIsActive ? 'auto' : 'none'}` }}>
-                      <Button size="sm">Compare with...</Button>
+                  {renderVersionSelect(updateVersion, version)}
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      setDiffVersion('0.5');
+                    }}
+                  >
+                    Compare with...
+                  </Button>
+                  {diffVersion ? (
+                    <div style={{ display: 'inline' }}>
+                      {renderVersionSelect((d) => setDiffVersion(d), diffVersion, true)}
                     </div>
-                    {/*   <Typography variant="data">Last updated: </Typography>
-                    <Typography variant="data" bold>
-                      {formatDate(get(dictionary, 'updatedAt', ''), 'MMMM D, YYYY')}
-                    </Typography>
-                   */}
-                  </span>
+                  ) : null}
                 </div>
                 {/*}
                 <Tabs
@@ -349,7 +357,6 @@ function DataDictionary() {
                   </Button>*/}
                 </div>
               </div>
-
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
                   className={css`
@@ -379,7 +386,6 @@ function DataDictionary() {
                   />
                 </div>
               </Display>
-
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
                   className={css`
@@ -393,7 +399,6 @@ function DataDictionary() {
                   />
                 </div>
               </Display>
-
               <Display visible={false}>
                 <TreeView searchValue={searchValue} data={treeData} />
               </Display>
