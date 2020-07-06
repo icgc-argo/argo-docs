@@ -248,6 +248,8 @@ function DataDictionary() {
   const StyledTab = styled(Tab)`
     border: 0 none;
     position: relative;
+    color: black;
+    font-size: 15px;
 
     &.active {
       border: 0 none;
@@ -340,18 +342,6 @@ function DataDictionary() {
                     </div>
                   ) : null}
                 </div>
-                {/*}
-                <Tabs
-                  value={selectedTab}
-                  onChange={onTabChange}
-                  styles={{
-                    marginBottom: '-2px',
-                  }}
-                >
-                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
-                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
-                </Tabs>
-                */}
                 <div className={styles.downloads}>
                   <Button
                     variant="secondary"
@@ -366,6 +356,24 @@ function DataDictionary() {
                   </Button>*/}
                 </div>
               </div>
+
+              {/*     
+              <div className={styles.infobar} style={{ justifyContent: 'center' }}>
+                {
+                  <Tabs
+                    value={selectedTab}
+                    onChange={onTabChange}
+                    styles={{
+                      marginBottom: '-2px',
+                    }}
+                  >
+                    <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
+                    <StyledTab value={TAB_STATE.DETAILS} label="Details" />
+                  </Tabs>
+                }
+              </div>
+               */}
+
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
                   className={css`
