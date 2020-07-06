@@ -132,25 +132,6 @@ function DataDictionary() {
     }
   };
 
-  const renderVersionSelect = (updateFn, value, excludeCurrent = false) => {
-    const options = data.versions
-      .filter((d) => (excludeCurrent ? d !== version : d))
-      .map((d) => ({ content: `Version ${d}`, value: d }));
-
-    return (
-      <form>
-        <div style={{ width: '150px', marginRight: '10px' }}>
-          <Select
-            aria-label="version-select"
-            value={value || options[0].value}
-            options={options}
-            onChange={(val) => updateFn(val)}
-          />
-        </div>
-      </form>
-    );
-  };
-
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -283,6 +264,32 @@ function DataDictionary() {
     }
   `;
 
+  // versions
+  const versions = data.versions;
+  const diffVersions = versions.filter((v) => v !== version);
+
+  /**
+   * @param {function} onChange
+   * @param {string[]} versions
+   * @param {string} value
+   */
+  const VersionSelect = ({ value, onChange, versions }) => {
+    const options = versions.map((d) => ({ content: `Version ${d}`, value: d }));
+
+    return (
+      <form>
+        <div style={{ width: '150px', marginRight: '10px' }}>
+          <Select
+            aria-label="version-select"
+            onChange={(val) => onChange(val)}
+            value={value}
+            options={options}
+          />
+        </div>
+      </form>
+    );
+  };
+
   return (
     <ThemeProvider>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -312,22 +319,24 @@ function DataDictionary() {
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
-              /** - setCompareVersion instead of compareIsActive - setCompareVersion to first that
-              isn't current */
               <div className={styles.infobar}>
                 <div>
-                  {renderVersionSelect(updateVersion, version)}
+                  <VersionSelect value={version} versions={versions} onChange={updateVersion} />
                   <Button
                     size="sm"
                     onClick={() => {
-                      setDiffVersion('0.5');
+                      setDiffVersion(diffVersions[0]);
                     }}
                   >
                     Compare with...
                   </Button>
                   {diffVersion ? (
                     <div style={{ display: 'inline' }}>
-                      {renderVersionSelect((d) => setDiffVersion(d), diffVersion, true)}
+                      <VersionSelect
+                        value={diffVersion}
+                        versions={diffVersions}
+                        onChange={setDiffVersion}
+                      />
                     </div>
                   ) : null}
                 </div>
