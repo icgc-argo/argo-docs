@@ -50,6 +50,7 @@ import { css } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
+import { ResetButton } from '../../components/Button';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -115,7 +116,8 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(data.dictionary);
   const [treeData, setTreeData] = useState(dictionaryTreeData);
 
-  const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
+  const defaultSearchParams = { tier: '', attribute: '' };
+  const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
 
   //
@@ -388,21 +390,35 @@ function DataDictionary() {
                   `}
                 >
                   <Meta files={fileCount} fields={fieldCount} />
-                  <FileFilters
-                    dataTiers={DEFAULT_FILTER.concat(
-                      filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                    )}
-                    dataAttributes={DEFAULT_FILTER.concat(
-                      filters.attributes.map((d) => ({
-                        content: startCase(d),
-                        value: d,
-                      })),
-                    )}
-                    searchParams={searchParams}
-                    onSearch={(search) => setSearchParams(search)}
-                  />
+                  <div
+                    className={css`
+                      display: flex;
+                      flex-direction: row;
+                    `}
+                  >
+                    <FileFilters
+                      dataTiers={DEFAULT_FILTER.concat(
+                        filters.tiers.map((d) => ({ content: startCase(d), value: d })),
+                      )}
+                      dataAttributes={DEFAULT_FILTER.concat(
+                        filters.attributes.map((d) => ({
+                          content: startCase(d),
+                          value: d,
+                        })),
+                      )}
+                      searchParams={searchParams}
+                      onSearch={(search) => setSearchParams(search)}
+                    />
+                    <ResetButton
+                      disabled={searchParams.tier === '' && searchParams.attribute === ''}
+                      onClick={() => setSearchParams(defaultSearchParams)}
+                    >
+                      Reset
+                    </ResetButton>
+                  </div>
                 </div>
               </Display>
+
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
                   className={css`
@@ -416,6 +432,7 @@ function DataDictionary() {
                   />
                 </div>
               </Display>
+
               <Display visible={false}>
                 <TreeView searchValue={searchValue} data={treeData} />
               </Display>
