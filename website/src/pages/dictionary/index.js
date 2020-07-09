@@ -50,6 +50,7 @@ import { css } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
+import { ResetButton } from '../../components/Button';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -115,8 +116,12 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(data.dictionary);
   const [treeData, setTreeData] = useState(dictionaryTreeData);
 
-  const [searchParams, setSearchParams] = useState({ tier: '', attribute: '' });
+  const defaultSearchParams = { tier: '', attribute: '' };
+  const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
+
+  //
+  const [diffVersion, setDiffVersion] = useState(null);
 
   const updateVersion = async (newVersion) => {
     try {
@@ -127,21 +132,6 @@ function DataDictionary() {
     } catch (err) {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
-  };
-
-  const renderVersionSelect = () => {
-    return (
-      <form>
-        <div style={{ width: '150px', marginRight: '10px' }}>
-          <Select
-            aria-label="version-select"
-            value={version}
-            options={data.versions.map((d) => ({ content: `Version ${d}`, value: d }))}
-            onChange={(val) => updateVersion(val)}
-          />
-        </div>
-      </form>
-    );
   };
 
   const context = useDocusaurusContext();
@@ -260,6 +250,8 @@ function DataDictionary() {
   const StyledTab = styled(Tab)`
     border: 0 none;
     position: relative;
+    color: black;
+    font-size: 15px;
 
     &.active {
       border: 0 none;
@@ -275,6 +267,32 @@ function DataDictionary() {
       }
     }
   `;
+
+  // versions
+  const versions = data.versions;
+  const diffVersions = versions.filter((v) => v !== version);
+
+  /**
+   * @param {function} onChange
+   * @param {string[]} versions
+   * @param {string} value
+   */
+  const VersionSelect = ({ value, onChange, versions }) => {
+    const options = versions.map((d) => ({ content: `Version ${d}`, value: d }));
+
+    return (
+      <form>
+        <div style={{ width: '150px', marginRight: '10px' }}>
+          <Select
+            aria-label="version-select"
+            onChange={(val) => onChange(val)}
+            value={value}
+            options={options}
+          />
+        </div>
+      </form>
+    );
+  };
 
   return (
     <ThemeProvider>
@@ -300,34 +318,32 @@ function DataDictionary() {
                 <Typography variant="paragraph" color="#000">
                   The ICGC ARGO Data Dictionary expresses the details of the data model, which
                   adheres to specific formats and restrictions to ensure a standard of data quality.
-                  The following list describes the attributes and permissible values for all of the
+                  The following views describes the attributes and permissible values for all of the
                   fields within the clinical tsv files for the{' '}
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
-
               <div className={styles.infobar}>
                 <div>
-                  {renderVersionSelect()}
-                  <span>
-                    <Typography variant="data">Last updated: </Typography>
-                    <Typography variant="data" bold>
-                      {formatDate(get(dictionary, 'updatedAt', ''), 'MMMM D, YYYY')}
-                    </Typography>
-                  </span>
+                  <VersionSelect value={version} versions={versions} onChange={updateVersion} />
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      setDiffVersion(diffVersions[0]);
+                    }}
+                  >
+                    Compare with...
+                  </Button>
+                  {diffVersion ? (
+                    <div style={{ display: 'inline' }}>
+                      <VersionSelect
+                        value={diffVersion}
+                        versions={diffVersions}
+                        onChange={setDiffVersion}
+                      />
+                    </div>
+                  ) : null}
                 </div>
-                {/*}
-                <Tabs
-                  value={selectedTab}
-                  onChange={onTabChange}
-                  styles={{
-                    marginBottom: '-2px',
-                  }}
-                >
-                  <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
-                  <StyledTab value={TAB_STATE.DETAILS} label="Details" />
-                </Tabs>
-                */}
                 <div className={styles.downloads}>
                   <Button
                     variant="secondary"
@@ -343,6 +359,23 @@ function DataDictionary() {
                 </div>
               </div>
 
+              {/*     
+              <div className={styles.infobar} style={{ justifyContent: 'center' }}>
+                {
+                  <Tabs
+                    value={selectedTab}
+                    onChange={onTabChange}
+                    styles={{
+                      marginBottom: '-2px',
+                    }}
+                  >
+                    <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
+                    <StyledTab value={TAB_STATE.DETAILS} label="Details" />
+                  </Tabs>
+                }
+              </div>
+               */}
+
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
                   className={css`
@@ -357,19 +390,32 @@ function DataDictionary() {
                   `}
                 >
                   <Meta files={fileCount} fields={fieldCount} />
-                  <FileFilters
-                    dataTiers={DEFAULT_FILTER.concat(
-                      filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                    )}
-                    dataAttributes={DEFAULT_FILTER.concat(
-                      filters.attributes.map((d) => ({
-                        content: startCase(d),
-                        value: d,
-                      })),
-                    )}
-                    searchParams={searchParams}
-                    onSearch={(search) => setSearchParams(search)}
-                  />
+                  <div
+                    className={css`
+                      display: flex;
+                      flex-direction: row;
+                    `}
+                  >
+                    <FileFilters
+                      dataTiers={DEFAULT_FILTER.concat(
+                        filters.tiers.map((d) => ({ content: startCase(d), value: d })),
+                      )}
+                      dataAttributes={DEFAULT_FILTER.concat(
+                        filters.attributes.map((d) => ({
+                          content: startCase(d),
+                          value: d,
+                        })),
+                      )}
+                      searchParams={searchParams}
+                      onSearch={(search) => setSearchParams(search)}
+                    />
+                    <ResetButton
+                      disabled={searchParams.tier === '' && searchParams.attribute === ''}
+                      onClick={() => setSearchParams(defaultSearchParams)}
+                    >
+                      Reset
+                    </ResetButton>
+                  </div>
                 </div>
               </Display>
 
