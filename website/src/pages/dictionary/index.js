@@ -50,7 +50,7 @@ import { css } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
-import { ResetButton } from '../../components/Button';
+import { ResetButton, ButtonWithIcon } from '../../components/Button';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -238,6 +238,7 @@ function DataDictionary() {
   const menuContents = generateMenuContents(filteredSchemas);
 
   const isLatestSchema = getLatestVersion() === version ? true : false;
+
   const TAB_STATE = Object.freeze({
     OVERVIEW: 'OVERVIEW',
     DETAILS: 'DETAILS',
@@ -335,12 +336,13 @@ function DataDictionary() {
                     Compare with...
                   </Button>
                   {diffVersion ? (
-                    <div style={{ display: 'inline' }}>
+                    <div style={{ display: 'flex' }}>
                       <VersionSelect
                         value={diffVersion}
                         versions={diffVersions}
                         onChange={setDiffVersion}
                       />
+                      <ButtonWithIcon onClick={() => setDiffVersion(null)}>CLEAR</ButtonWithIcon>
                     </div>
                   ) : null}
                 </div>
