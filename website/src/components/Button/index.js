@@ -21,3 +21,19 @@ export const ResetButton = ({ children, onClick, disabled }) => (
     </div>
   </Button>
 );
+
+export const ButtonWithIcon = ({
+  children,
+  onClick,
+  disabled,
+  variant = 'secondary',
+  size = 'sm',
+  Icon = null,
+}) => (
+  <Button variant={variant} size={size} onClick={onClick} disabled={disabled}>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      {Icon ? <Icon disabled={disabled} /> : null}
+      {children}
+    </div>
+  </Button>
+);
