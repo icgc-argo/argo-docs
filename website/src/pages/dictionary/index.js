@@ -51,6 +51,7 @@ import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
+import ComparisonFilters from '../../components/ComparisonFilters';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -398,6 +399,7 @@ function DataDictionary() {
                       flex-direction: row;
                     `}
                   >
+                    <ComparisonFilters />
                     <FileFilters
                       dataTiers={DEFAULT_FILTER.concat(
                         filters.tiers.map((d) => ({ content: startCase(d), value: d })),

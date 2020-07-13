@@ -1,0 +1,47 @@
+.comparisonFilters {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-right: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn {
+  color: black !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  text-transform: none !important;
+  margin-left: 8px !important;
+}
+
+.additions {
+  background-color: #e9fbf7 !important;
+  border: 1px solid #70e7ce !important;
+}
+
+.additions:hover {
+  background-color: #a7f0e1 !important;
+}
+
+.updates {
+  background-color: #fee8cb !important;
+  border: 1px solid #fea430 !important;
+}
+
+.updates:hover {
+  background-color: #fea430 !important;
+}
+
+.deletions {
+  background-color: #fbe8ec !important;
+  border: 1px solid #f2a3b3 !important;
+}
+
+.deletions:hover {
+  background-color: #f2a3b3 !important;
+}
