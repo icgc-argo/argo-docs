@@ -4,7 +4,7 @@ import Button from '@icgc-argo/uikit/Button';
 
 export const ResetIcon = ({ disabled }) => (
   <Icon
-    name="download"
+    name="reset"
     fill={disabled ? 'white' : 'accent2_dark'}
     height="12px"
     style={{
