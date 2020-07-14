@@ -4,27 +4,49 @@ import Icon from '@icgc-argo/uikit/Icon';
 
 import styles from './styles.module.css';
 
-const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33 }) => {
-  // enabled or what here
+export const compareFilterTypes = Object.freeze({
+  ADDITIONS: 'additionIsActive',
+  UPDATES: 'updateIsActive',
+  DELETIONS: 'deletionIsActive',
+});
+
+const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filters, onChange }) => {
+  const { additionIsActive, updateIsActive, deletionIsActive } = filters;
   return (
     <div className={styles.comparisonFilters}>
       Comparison:
-      <Button size="sm" className={`${styles.btn} ${styles.additions}`}>
+      <Button
+        size="sm"
+        className={`${styles.btn} ${styles.additions} ${
+          !additionIsActive ? styles.inactive : null
+        }`}
+        onClick={() => onChange(compareFilterTypes.ADDITIONS)}
+      >
         <div className={styles.row}>
-          <Icon name="star" fill="#00c79d" width={'16px'} />
+          <Icon name="star" fill={'#00c79d'} width={'16px'} />
           {`${additions} new fields`}
         </div>
       </Button>
-      <Button size="sm" className={`${styles.btn} ${styles.updates}`}>
+      <Button
+        size="sm"
+        className={`${styles.btn} ${styles.updates} ${!updateIsActive ? styles.inactive : null}`}
+        onClick={() => onChange(compareFilterTypes.UPDATES)}
+      >
         <div className={styles.row}>
           <Icon name="star" fill="#ec8f17" width={'16px'} />
-          {`${additions} updated fields`}
+          {`${updates} updated fields`}
         </div>
       </Button>
-      <Button size="sm" className={`${styles.btn} ${styles.deletions}`}>
+      <Button
+        size="sm"
+        className={`${styles.btn} ${styles.deletions} ${
+          !deletionIsActive ? styles.inactive : null
+        }`}
+        onClick={() => onChange(compareFilterTypes.DELETIONS)}
+      >
         <div className={styles.row}>
           <Icon name="star" fill="#df1b42" width={'16px'} />
-          {`${additions} deleted fields`}
+          {`${deletions} deleted fields`}
         </div>
       </Button>
     </div>

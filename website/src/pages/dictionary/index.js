@@ -51,7 +51,11 @@ import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
-import ComparisonFilters from '../../components/ComparisonFilters';
+import ComparisonFilters, { compareFilterTypes } from '../../components/ComparisonFilters';
+
+/**
+ * If we're comparing we switch to compare data source
+ */
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -121,8 +125,14 @@ function DataDictionary() {
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
 
-  //
   const [diffVersion, setDiffVersion] = useState(null);
+
+  const defaultCompareFilters = Object.keys(compareFilterTypes).reduce((acc, filterKey) => {
+    const compareFilter = compareFilterTypes[filterKey];
+    return { ...acc, ...{ [compareFilter]: true } };
+  }, {});
+
+  const [compareFilters, setCompareFilters] = useState(defaultCompareFilters);
 
   const updateVersion = async (newVersion) => {
     try {
@@ -186,37 +196,54 @@ function DataDictionary() {
       dictionary.schemas
         .map((schema) => {
           const { tier, attribute } = searchParams;
-          const filteredFields = schema.fields.filter((field) => {
-            const meta = get(field, 'meta', {});
-            const { primaryId = false, core = false, dependsOn = false } = meta;
-            const required = get(field, 'restrictions.required', false);
+          const filteredFields = schema.fields
+            .filter((field) => {
+              const meta = get(field, 'meta', {});
+              const { primaryId = false, core = false, dependsOn = false } = meta;
+              const required = get(field, 'restrictions.required', false);
 
-            let tierBool = false;
-            let attributeBool = false;
+              let tierBool = false;
+              let attributeBool = false;
 
-            if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
+              if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
 
-            if (
-              (tier === TAG_TYPES.id && primaryId) ||
-              (tier === TAG_TYPES.core && core) ||
-              (tier === TAG_TYPES.extended && !core && !primaryId) ||
-              tier === '' ||
-              tier === NO_ACTIVE_FILTER
-            ) {
-              tierBool = true;
-            }
+              if (
+                (tier === TAG_TYPES.id && primaryId) ||
+                (tier === TAG_TYPES.core && core) ||
+                (tier === TAG_TYPES.extended && !core && !primaryId) ||
+                tier === '' ||
+                tier === NO_ACTIVE_FILTER
+              ) {
+                tierBool = true;
+              }
 
-            if (
-              (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
-              (attribute === TAG_TYPES.required && required) ||
-              attribute === '' ||
-              attribute === NO_ACTIVE_FILTER
-            ) {
-              attributeBool = true;
-            }
+              if (
+                (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
+                (attribute === TAG_TYPES.required && required) ||
+                attribute === '' ||
+                attribute === NO_ACTIVE_FILTER
+              ) {
+                attributeBool = true;
+              }
 
-            return tierBool && attributeBool;
-          });
+              return tierBool && attributeBool;
+            })
+            /**
+             * !!!!!!!!!!!!!!!!!!!!!!
+             * Remove this after demo
+             * !!!!!!!!!!!!!!!!!!!!!!
+             */
+            .map((fields, i) => {
+              if (i == 2) {
+                return { ...fields, ...{ compare: 'addition' } };
+              } else if (i == 4) {
+                return { ...fields, ...{ compare: 'deletion' } };
+              } else if (i === 7) {
+                return { ...fields, ...{ compare: 'update' } };
+              } else {
+                return fields;
+              }
+            });
           return { ...schema, fields: filteredFields };
         })
         .filter((schema) => schema.fields.length > 0),
@@ -236,10 +263,14 @@ function DataDictionary() {
       disabled: !activeSchemaNames.includes(schema.name),
     }));
   };
+
+  // Menu Contents
   const menuContents = generateMenuContents(filteredSchemas);
 
+  // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
+  // Tabs
   const TAB_STATE = Object.freeze({
     OVERVIEW: 'OVERVIEW',
     DETAILS: 'DETAILS',
@@ -399,7 +430,22 @@ function DataDictionary() {
                       flex-direction: row;
                     `}
                   >
-                    <ComparisonFilters />
+                    <ComparisonFilters
+                      additions={24}
+                      updates={13}
+                      deletions={53}
+                      filters={compareFilters}
+                      onChange={(type) => {
+                        console.log('type', type);
+                        const newFilters = {
+                          ...compareFilters,
+                          ...{ [type]: !compareFilters[type] },
+                        };
+                        console.log('new filters', newFilters);
+                        setCompareFilters(newFilters);
+                      }}
+                    />
+
                     <FileFilters
                       dataTiers={DEFAULT_FILTER.concat(
                         filters.tiers.map((d) => ({ content: startCase(d), value: d })),
