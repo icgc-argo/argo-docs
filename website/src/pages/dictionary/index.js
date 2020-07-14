@@ -383,7 +383,10 @@ function DataDictionary() {
                         versions={diffVersions}
                         onChange={setDiffVersion}
                       />
-                      <ButtonWithIcon onClick={() => setDiffVersion(null)}>CLEAR</ButtonWithIcon>
+                      <Button variant="secondary" onClick={() => setDiffVersion(null)}>
+                        <Icon name="times" height="8px" />
+                        <span style={{ marginLeft: '5px' }}>CLEAR</span>
+                      </Button>
                     </div>
                   ) : null}
                 </div>
@@ -445,12 +448,10 @@ function DataDictionary() {
                       deletions={53}
                       filters={compareFilters}
                       onChange={(type) => {
-                        console.log('type', type);
                         const newFilters = {
                           ...compareFilters,
                           ...{ [type]: !compareFilters[type] },
                         };
-                        console.log('new filters', newFilters);
                         setCompareFilters(newFilters);
                       }}
                     />
