@@ -1,7 +1,5 @@
 import React from 'react';
-import Button from '@icgc-argo/uikit/Button';
 import Icon from '@icgc-argo/uikit/Icon';
-
 import styles from './styles.module.css';
 
 export const compareFilterTypes = Object.freeze({
@@ -15,8 +13,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
   return (
     <div className={styles.comparisonFilters}>
       Comparison:
-      <Button
-        size="sm"
+      <button
         className={`${styles.btn} ${styles.additions} ${
           !additionIsActive ? styles.inactive : null
         }`}
@@ -26,8 +23,8 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
           <Icon name="star" fill={'#00c79d'} width={'16px'} />
           {`${additions} new fields`}
         </div>
-      </Button>
-      <Button
+      </button>
+      <button
         size="sm"
         className={`${styles.btn} ${styles.updates} ${!updateIsActive ? styles.inactive : null}`}
         onClick={() => onChange(compareFilterTypes.UPDATES)}
@@ -36,8 +33,8 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
           <Icon name="star" fill="#ec8f17" width={'16px'} />
           {`${updates} updated fields`}
         </div>
-      </Button>
-      <Button
+      </button>
+      <button
         size="sm"
         className={`${styles.btn} ${styles.deletions} ${
           !deletionIsActive ? styles.inactive : null
@@ -48,7 +45,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
           <Icon name="star" fill="#df1b42" width={'16px'} />
           {`${deletions} deleted fields`}
         </div>
-      </Button>
+      </button>
     </div>
   );
 };

@@ -11,37 +11,60 @@
   align-items: center;
 }
 
+.row > svg {
+  margin-right: 5px;
+}
+
 .btn {
-  color: black !important;
-  font-size: 12px !important;
-  font-weight: normal !important;
-  text-transform: none !important;
-  margin-left: 8px !important;
+  color: black;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: none;
+  margin-left: 8px;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-shadow: none;
+  border-radius: 100px;
+  border-style: solid;
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn.inactive {
+  background-color: white;
+  border-color: #babcc2;
+  color: #525767;
 }
 
 .additions {
-  background-color: #e9fbf7 !important;
-  border: 1px solid #70e7ce !important;
+  background-color: #e9fbf7;
+  border: 1px solid #70e7ce;
 }
 
 .additions:hover {
-  background-color: #a7f0e1 !important;
+  background-color: #a7f0e1;
 }
 
 .updates {
-  background-color: #fee8cb !important;
-  border: 1px solid #fea430 !important;
+  background-color: #fee8cb;
+  border: 1px solid #fea430;
 }
 
 .updates:hover {
-  background-color: #fea430 !important;
+  background-color: #fea430;
 }
 
 .deletions {
-  background-color: #fbe8ec !important;
-  border: 1px solid #f2a3b3 !important;
+  background-color: #fbe8ec;
+  border: 1px solid #f2a3b3;
 }
 
 .deletions:hover {
-  background-color: #f2a3b3 !important;
+  background-color: #f2a3b3;
 }
