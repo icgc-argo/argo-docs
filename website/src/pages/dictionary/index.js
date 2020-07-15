@@ -43,7 +43,7 @@ import { Display, DownloadTooltip, DownloadButtonContent } from '../../component
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
-import { styled } from '@icgc-argo/uikit';
+import { StyledTab, TAB_STATE } from './tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
 import { css } from 'emotion';
@@ -126,6 +126,8 @@ function DataDictionary() {
   const [searchValue, setSearchValue] = useState('');
 
   const [diffVersion, setDiffVersion] = useState(null);
+
+  const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
   const defaultCompareFilters = Object.keys(compareFilterTypes).reduce((acc, filterKey) => {
     const compareFilter = compareFilterTypes[filterKey];
@@ -279,37 +281,6 @@ function DataDictionary() {
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
-  // Tabs
-  const TAB_STATE = Object.freeze({
-    OVERVIEW: 'OVERVIEW',
-    DETAILS: 'DETAILS',
-  });
-  const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
-  const onTabChange = (e, newValue) => {
-    setSelectedTab(newValue);
-  };
-
-  const StyledTab = styled(Tab)`
-    border: 0 none;
-    position: relative;
-    color: black;
-    font-size: 15px;
-
-    &.active {
-      border: 0 none;
-
-      ::after {
-        content: '';
-        border-bottom: 2px solid #00c79d;
-        position: absolute;
-        bottom: -2px;
-        left: 50%;
-        width: 80%;
-        margin-left: -40%;
-      }
-    }
-  `;
-
   // versions
   const versions = data.versions;
   const diffVersions = versions.filter((v) => v !== version);
@@ -405,12 +376,13 @@ function DataDictionary() {
                 </div>
               </div>
 
-              {/*     
-              <div className={styles.infobar} style={{ justifyContent: 'center' }}>
+              {/*           <div className={styles.infobar} style={{ justifyContent: 'center' }}>
                 {
                   <Tabs
                     value={selectedTab}
-                    onChange={onTabChange}
+                    onChange={(e, newValue) => {
+                      setSelectedTab(newValue);
+                    }}
                     styles={{
                       marginBottom: '-2px',
                     }}
@@ -418,9 +390,8 @@ function DataDictionary() {
                     <StyledTab value={TAB_STATE.OVERVIEW} label="Overview" />
                     <StyledTab value={TAB_STATE.DETAILS} label="Details" />
                   </Tabs>
-                }
-              </div>
-               */}
+                } 
+              </div>*/}
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
