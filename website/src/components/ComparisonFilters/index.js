@@ -9,14 +9,12 @@ export const compareFilterTypes = Object.freeze({
 });
 
 const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filters, onChange }) => {
-  const { additionIsActive, updateIsActive, deletionIsActive } = filters;
+  const { ADDITION, UPDATE, DELETION } = filters;
   return (
     <div className={styles.comparisonFilters}>
       Comparison:
       <button
-        className={`${styles.btn} ${styles.additions} ${
-          !additionIsActive ? styles.inactive : null
-        }`}
+        className={`${styles.btn} ${styles.additions} ${!ADDITION ? styles.inactive : null}`}
         onClick={() => onChange(compareFilterTypes.ADDITION)}
       >
         <div className={styles.row}>
@@ -26,7 +24,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
       </button>
       <button
         size="sm"
-        className={`${styles.btn} ${styles.updates} ${!updateIsActive ? styles.inactive : null}`}
+        className={`${styles.btn} ${styles.updates} ${!UPDATE ? styles.inactive : null}`}
         onClick={() => onChange(compareFilterTypes.UPDATE)}
       >
         <div className={styles.row}>
@@ -36,9 +34,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
       </button>
       <button
         size="sm"
-        className={`${styles.btn} ${styles.deletions} ${
-          !deletionIsActive ? styles.inactive : null
-        }`}
+        className={`${styles.btn} ${styles.deletions} ${!DELETION ? styles.inactive : null}`}
         onClick={() => onChange(compareFilterTypes.DELETION)}
       >
         <div className={styles.row}>
