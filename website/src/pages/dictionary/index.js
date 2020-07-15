@@ -52,10 +52,7 @@ import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
 import ComparisonFilters, { compareFilterTypes } from '../../components/ComparisonFilters';
-
-/**
- * If we're comparing we switch to compare data source
- */
+import Row from '../../components/Row';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -394,18 +391,7 @@ function DataDictionary() {
               </div>*/}
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
-                <div
-                  className={css`
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 8px 15px;
-                    background: var(--argo-grey-4);
-                    border: solid 1px var(--argo-grey-2);
-                    margin-top: 8px;
-                    margin-bottom: 30px;
-                  `}
-                >
+                <Row>
                   <Meta files={fileCount} fields={fieldCount} />
                   <div
                     className={css`
@@ -447,7 +433,7 @@ function DataDictionary() {
                       Reset
                     </ResetButton>
                   </div>
-                </div>
+                </Row>
               </Display>
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
