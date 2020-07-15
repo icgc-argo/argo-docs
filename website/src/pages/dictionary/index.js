@@ -256,7 +256,7 @@ function DataDictionary() {
           return { ...schema, fields: filteredFields };
         })
         .filter((schema) => schema.fields.length > 0),
-    [searchParams, dictionary],
+    [searchParams, dictionary, compareFilters],
   );
 
   const fileCount = filteredSchemas.length;
