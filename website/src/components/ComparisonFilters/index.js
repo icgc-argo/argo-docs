@@ -3,9 +3,9 @@ import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
 
 export const compareFilterTypes = Object.freeze({
-  ADDITIONS: 'additionIsActive',
-  UPDATES: 'updateIsActive',
-  DELETIONS: 'deletionIsActive',
+  ADDITION: 'ADDITION',
+  UPDATE: 'UPDATE',
+  DELETION: 'DELETION',
 });
 
 const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filters, onChange }) => {
@@ -17,7 +17,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
         className={`${styles.btn} ${styles.additions} ${
           !additionIsActive ? styles.inactive : null
         }`}
-        onClick={() => onChange(compareFilterTypes.ADDITIONS)}
+        onClick={() => onChange(compareFilterTypes.ADDITION)}
       >
         <div className={styles.row}>
           <Icon name="star" fill={'#00c79d'} width={'16px'} />
@@ -27,7 +27,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
       <button
         size="sm"
         className={`${styles.btn} ${styles.updates} ${!updateIsActive ? styles.inactive : null}`}
-        onClick={() => onChange(compareFilterTypes.UPDATES)}
+        onClick={() => onChange(compareFilterTypes.UPDATE)}
       >
         <div className={styles.row}>
           <Icon name="star" fill="#ec8f17" width={'16px'} />
@@ -39,7 +39,7 @@ const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33, filter
         className={`${styles.btn} ${styles.deletions} ${
           !deletionIsActive ? styles.inactive : null
         }`}
-        onClick={() => onChange(compareFilterTypes.DELETIONS)}
+        onClick={() => onChange(compareFilterTypes.DELETION)}
       >
         <div className={styles.row}>
           <Icon name="star" fill="#df1b42" width={'16px'} />

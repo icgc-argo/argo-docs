@@ -243,12 +243,12 @@ function DataDictionary() {
               }
 
               const compareVal = get(field, 'compare', '');
-              const { additionIsActive, deletionIsActive, updateIsActive } = compareFilters;
+              const { ADDITION, DELETION, ACTIVE } = compareFilters;
 
               const comparisonBool =
-                (additionIsActive && compareVal === 'addition') ||
-                (deletionIsActive && compareVal === 'deletion') ||
-                (updateIsActive && compareVal === 'update');
+                (ADDITION && compareVal === 'addition') ||
+                (DELETION && compareVal === 'deletion') ||
+                (ACTIVE && compareVal === 'update');
 
               return tierBool && attributeBool && comparisonBool;
             });
