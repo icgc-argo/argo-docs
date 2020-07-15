@@ -84,7 +84,7 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
-const dictionaryTreeData = require('./tree.json');
+//const dictionaryTreeData = require('./tree.json');
 
 async function fetchDictionary(version) {
   try {
@@ -116,7 +116,7 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
 function DataDictionary() {
   const [version, setVersion] = useState(data.currentVersion);
   const [dictionary, setDictionary] = useState(data.dictionary);
-  const [treeData, setTreeData] = useState(dictionaryTreeData);
+  //  const [treeData, setTreeData] = useState(dictionaryTreeData);
 
   const defaultSearchParams = { tier: '', attribute: '' };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
@@ -138,7 +138,7 @@ function DataDictionary() {
       const { dict, tree } = await fetchDictionary(newVersion);
       setVersion(newVersion);
       setDictionary(dict);
-      setTreeData(tree);
+      //  setTreeData(tree);
     } catch (err) {
       alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
     }
@@ -373,7 +373,7 @@ function DataDictionary() {
                 </div>
               </div>
 
-              {/*           <div className={styles.infobar} style={{ justifyContent: 'center' }}>
+              {/*<div className={styles.infobar} style={{ justifyContent: 'center' }}>
                 {
                   <Tabs
                     value={selectedTab}
@@ -451,7 +451,8 @@ function DataDictionary() {
               </Display>
 
               <Display visible={false}>
-                <TreeView searchValue={searchValue} data={treeData} />
+                {/*   <TreeView searchValue={searchValue} data={treeData} />
+                 */}
               </Display>
             </div>
 
