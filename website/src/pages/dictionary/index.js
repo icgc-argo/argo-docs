@@ -263,21 +263,9 @@ function DataDictionary() {
         .map((schema) => {
           const { tier, attribute } = searchParams;
           const filteredFields = schema.fields
-            /**
-             * !!!!!!!!!!!!!!!!!!!!!!
-             * Remove this after demo
-             * !!!!!!!!!!!!!!!!!!!!!!
-             */
-            .map((fields, i) => {
-              if (i === 2) {
-                return { ...fields, ...{ compare: 'addition' } };
-              } else if (i === 3) {
-                return { ...fields, ...{ compare: 'deletion' } };
-              } else if (i === 7) {
-                return { ...fields, ...{ compare: 'update' } };
-              } else {
-                return fields;
-              }
+            .map((fields) => {
+              // comparison filters
+              return fields;
             })
             .filter((field) => {
               const meta = get(field, 'meta', {});
