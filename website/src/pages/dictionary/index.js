@@ -53,6 +53,7 @@ import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
 import ComparisonFilters, { compareFilterTypes } from '../../components/ComparisonFilters';
 import Row from '../../components/Row';
+import VersionSelect from '../../components/VersionSelect';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -85,8 +86,10 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-
 //const dictionaryTreeData = require('./tree.json');
+
+// versions
+const versions = data.versions;
 
 async function fetchDictionary(version) {
   try {
@@ -134,6 +137,9 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
 
+  const [diffVersion, setDiffVersion] = useState(null);
+  const diffVersions = versions.filter((v) => v !== version);
+
   React.useEffect(() => {
     async function updateDictionaryState() {
       const dict = await getDictionary(version, preloadedDictionary);
@@ -145,8 +151,6 @@ function DataDictionary() {
   const defaultSearchParams = { tier: '', attribute: '' };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
-
-  const [diffVersion, setDiffVersion] = useState(null);
 
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
@@ -290,32 +294,6 @@ function DataDictionary() {
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
-
-  // versions
-  const versions = data.versions;
-  const diffVersions = versions.filter((v) => v !== version);
-
-  /**
-   * @param {function} onChange
-   * @param {string[]} versions
-   * @param {string} value
-   */
-  const VersionSelect = ({ value, onChange, versions }) => {
-    const options = versions.map((d) => ({ content: `Version ${d}`, value: d }));
-
-    return (
-      <form>
-        <div style={{ width: '150px', marginRight: '10px' }}>
-          <Select
-            aria-label="version-select"
-            onChange={(val) => onChange(val)}
-            value={value}
-            options={options}
-          />
-        </div>
-      </form>
-    );
-  };
 
   return (
     <ThemeProvider>
