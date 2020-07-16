@@ -5,16 +5,16 @@
  * You should have received a copy of the GNU Affero General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY                           
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES                          
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT                           
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,                                
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED                          
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;                               
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER                              
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN                         
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *  
+ *
  *
  */
 
@@ -35,6 +35,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Icon from '@icgc-argo/uikit/Icon';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -86,7 +87,7 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuItem, isLatestSchema }) => {
+const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
@@ -149,7 +150,37 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
     );
   };
 
+  const CellContentCenter = styled('div')`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const StarIcon = (props) => <Icon name="star" width="16px" height="16px" {...props} />;
+
   const cols = [
+    {
+      id: 'compare',
+      Header: (
+        <CellContentCenter>
+          <StarIcon fill="#babcc2" />
+        </CellContentCenter>
+      ),
+      Cell: ({ original }) => {
+        //  console.log(original);
+        return (
+          <CellContentCenter>
+            <StarIcon fill="blue" />
+          </CellContentCenter>
+        );
+      },
+      resizable: false,
+      width: 40,
+    },
+
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
@@ -230,8 +261,19 @@ const Schema = ({ schema, menuItem, isLatestSchema }) => {
       Cell: ScriptCell,
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ];
+  ].filter((col) => (!diff ? col.id !== 'compare' : true));
+
   const containerRef = React.createRef();
+
+  const tableData = diff
+    ? schema.fields.map((field) => {
+        // check if field has a diff
+        const fieldDiff = get(diff, field.name, null);
+        return fieldDiff ? { ...field, ...{ diff: fieldDiff } } : field;
+      })
+    : schema.fields;
+
+  console.log('table', tableData);
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>

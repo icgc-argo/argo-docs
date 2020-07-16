@@ -108,8 +108,8 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
-const parseDiff = (diff) => {
-  const parsed = diff
+const parseDiff = (diff) =>
+  diff
     .map((schemaFieldArray) => {
       const [schema, field] = schemaFieldArray[0].split('.');
       const { left, right, diff } = schemaFieldArray[1];
@@ -127,13 +127,21 @@ const parseDiff = (diff) => {
       acc[schema] = fields;
       return acc;
     }, {});
-};
 
-const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
-      return <Schema schema={schema} menuItem={menuItem} isLatestSchema={isLatestSchema} />;
+      const schemaDiff = get(diff, schema.name, null);
+      console.log('schemadiff', schemaDiff);
+      return (
+        <Schema
+          schema={schema}
+          menuItem={menuItem}
+          isLatestSchema={isLatestSchema}
+          diff={schemaDiff}
+        />
+      );
     })
   ) : (
     <div>No schemas found</div>
@@ -160,8 +168,8 @@ const getDictionary = async (version, preloadedDictionary) => {
  */
 const getDictionaryDiff = async (version, diffVersion) => {
   const diff = await fetchDiff(version, diffVersion);
-  parseDiff(diff);
-  return diff;
+
+  return parseDiff(diff);
 };
 
 function DataDictionary() {
@@ -483,6 +491,7 @@ function DataDictionary() {
                 >
                   <RenderDictionary
                     schemas={filteredSchemas}
+                    diff={dictionaryDiff}
                     menuContents={menuContents}
                     isLatestSchema={isLatestSchema}
                   />
