@@ -84,6 +84,8 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
+const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
+
 //const dictionaryTreeData = require('./tree.json');
 
 async function fetchDictionary(version) {
@@ -113,10 +115,32 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
     <div>No schemas found</div>
   );
 
+/**
+ *
+ * @param {string} version
+ * @param {{data: Dictionary, version: string}} preloadedDictionary
+ */
+const getDictionary = async (version, preloadedDictionary) => {
+  if (version === preloadedDictionary.version) return preloadedDictionary.data;
+
+  const { dict, tree } = await fetchDictionary(version);
+  console.log('getDictionary', dict, version);
+
+  return dict;
+};
+
 function DataDictionary() {
-  const [version, setVersion] = useState(data.currentVersion);
-  const [dictionary, setDictionary] = useState(data.dictionary);
+  const [version, setVersion] = useState(preloadedDictionary.version);
+  const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
+
+  React.useEffect(() => {
+    async function updateDictionaryState() {
+      const dict = await getDictionary(version, preloadedDictionary);
+      setDictionary(dict);
+    }
+    updateDictionaryState();
+  }, [version]);
 
   const defaultSearchParams = { tier: '', attribute: '' };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
@@ -132,17 +156,6 @@ function DataDictionary() {
   }, {});
 
   const [compareFilters, setCompareFilters] = useState(defaultCompareFilters);
-
-  const updateVersion = async (newVersion) => {
-    try {
-      const { dict, tree } = await fetchDictionary(newVersion);
-      setVersion(newVersion);
-      setDictionary(dict);
-      //  setTreeData(tree);
-    } catch (err) {
-      alert('DICTIONARY FETCHING ERROR - TODO: MAKE THIS A TOASTER');
-    }
-  };
 
   const context = useDocusaurusContext();
   const {
@@ -335,7 +348,13 @@ function DataDictionary() {
               </div>
               <div className={styles.infobar}>
                 <div>
-                  <VersionSelect value={version} versions={versions} onChange={updateVersion} />
+                  <VersionSelect
+                    value={version}
+                    versions={versions}
+                    onChange={(v) => {
+                      setVersion(v);
+                    }}
+                  />
                   <Button
                     size="sm"
                     onClick={() => {
