@@ -108,6 +108,27 @@ async function fetchDiff(version, diffVersion) {
   return response.data;
 }
 
+const parseDiff = (diff) => {
+  const parsed = diff
+    .map((schemaFieldArray) => {
+      const [schema, field] = schemaFieldArray[0].split('.');
+      const { left, right, diff } = schemaFieldArray[1];
+      return {
+        schema,
+        field,
+        left,
+        right,
+        diff,
+      };
+    })
+    .reduce((acc, { schema, field: fieldName, ...rest }) => {
+      const fields = get(acc, [schema], {});
+      fields[fieldName] = rest;
+      acc[schema] = fields;
+      return acc;
+    }, {});
+};
+
 const RenderDictionary = ({ schemas, menuContents, isLatestSchema }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
@@ -138,7 +159,9 @@ const getDictionary = async (version, preloadedDictionary) => {
  * @param {string} diffVersion
  */
 const getDictionaryDiff = async (version, diffVersion) => {
-  return fetchDiff(version, diffVersion);
+  const diff = await fetchDiff(version, diffVersion);
+  parseDiff(diff);
+  return diff;
 };
 
 function DataDictionary() {
