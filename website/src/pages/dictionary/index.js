@@ -46,7 +46,7 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from './tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import { css } from 'emotion';
+import { css, injectGlobal } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
@@ -86,6 +86,7 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
+
 //const dictionaryTreeData = require('./tree.json');
 
 // versions
@@ -191,6 +192,7 @@ function DataDictionary() {
   }, [version]);
 
   React.useEffect(() => {
+    if (diffVersion === null) return;
     async function updateDictionaryDiff() {
       const diff = await getDictionaryDiff(version, diffVersion);
       setDictionaryDiff(diff);
@@ -204,11 +206,11 @@ function DataDictionary() {
 
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
-  const defaultCompareFilters = Object.keys(compareFilterTypes).reduce((acc, filterKey) => {
-    const compareFilter = compareFilterTypes[filterKey];
-    return { ...acc, ...{ [compareFilter]: true } };
-  }, {});
-
+  const defaultCompareFilters = {
+    [compareFilterTypes.ADDITION]: true,
+    [compareFilterTypes.UPDATE]: true,
+    [compareFilterTypes.DELETION]: true,
+  };
   const [compareFilters, setCompareFilters] = useState(defaultCompareFilters);
 
   const context = useDocusaurusContext();
@@ -297,14 +299,14 @@ function DataDictionary() {
               }
 
               const compareVal = get(field, 'compare', '');
-              const { ADDITION, DELETION, ACTIVE } = compareFilters;
+              const { ADDITION, DELETION, UPDATE } = compareFilters;
 
               const comparisonBool =
-                (ADDITION && compareVal === 'addition') ||
-                (DELETION && compareVal === 'deletion') ||
-                (ACTIVE && compareVal === 'update');
+                (ADDITION && compareVal === compareFilterTypes.ADDITION) ||
+                (DELETION && compareVal === compareFilterTypes.DELETION) ||
+                (UPDATE && compareVal === compareFilterTypes.UPDATE);
 
-              return tierBool && attributeBool && comparisonBool;
+              return tierBool && attributeBool;
             });
 
           return { ...schema, fields: filteredFields };
