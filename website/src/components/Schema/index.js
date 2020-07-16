@@ -338,7 +338,7 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
         <Table
           parentRef={containerRef}
           columns={cols}
-          data={schema.fields}
+          data={tableData}
           showPagination={false}
           defaultPageSize={schema.fields.length}
           sortable={true}
