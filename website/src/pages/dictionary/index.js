@@ -132,6 +132,15 @@ const getDictionary = async (version, preloadedDictionary) => {
   return dict;
 };
 
+/**
+ *
+ * @param {string} version
+ * @param {string} diffVersion
+ */
+const getDictionaryDiff = async (version, diffVersion) => {
+  return fetchDiff(version, diffVersion);
+};
+
 function DataDictionary() {
   const [version, setVersion] = useState(preloadedDictionary.version);
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
@@ -140,6 +149,8 @@ function DataDictionary() {
   const [diffVersion, setDiffVersion] = useState(null);
   const diffVersions = versions.filter((v) => v !== version);
 
+  const [dictionaryDiff, setDictionaryDiff] = useState(null);
+
   React.useEffect(() => {
     async function updateDictionaryState() {
       const dict = await getDictionary(version, preloadedDictionary);
@@ -147,6 +158,14 @@ function DataDictionary() {
     }
     updateDictionaryState();
   }, [version]);
+
+  React.useEffect(() => {
+    async function updateDictionaryDiff() {
+      const diff = await getDictionaryDiff(version, diffVersion);
+      setDictionaryDiff(diff);
+    }
+    updateDictionaryDiff();
+  }, [diffVersion]);
 
   const defaultSearchParams = { tier: '', attribute: '' };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
