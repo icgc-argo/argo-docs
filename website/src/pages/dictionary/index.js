@@ -274,29 +274,24 @@ function DataDictionary() {
               const { primaryId = false, core = false, dependsOn = false } = meta;
               const required = get(field, 'restrictions.required', false);
 
-              let tierBool = false;
-              let attributeBool = false;
-
               if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
 
-              if (
+              const tierBool =
                 (tier === TAG_TYPES.id && primaryId) ||
                 (tier === TAG_TYPES.core && core) ||
                 (tier === TAG_TYPES.extended && !core && !primaryId) ||
                 tier === '' ||
                 tier === NO_ACTIVE_FILTER
-              ) {
-                tierBool = true;
-              }
+                  ? true
+                  : false;
 
-              if (
+              const attributeBool =
                 (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
                 (attribute === TAG_TYPES.required && required) ||
                 attribute === '' ||
                 attribute === NO_ACTIVE_FILTER
-              ) {
-                attributeBool = true;
-              }
+                  ? true
+                  : false;
 
               const compareVal = get(field, 'compare', '');
               const { ADDITION, DELETION, UPDATE } = compareFilters;
