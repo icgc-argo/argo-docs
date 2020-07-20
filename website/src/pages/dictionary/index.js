@@ -134,7 +134,7 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
       const schemaDiff = get(diff, schema.name, null);
-      console.log('schemadiff', schemaDiff);
+
       return (
         <Schema
           schema={schema}
@@ -157,7 +157,6 @@ const getDictionary = async (version, preloadedDictionary) => {
   if (version === preloadedDictionary.version) return preloadedDictionary.data;
 
   const { dict, tree } = await fetchDictionary(version);
-  console.log('getDictionary', dict, version);
 
   return dict;
 };

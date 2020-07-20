@@ -273,8 +273,6 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
       })
     : schema.fields;
 
-  console.log('table', tableData);
-
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       {currentShowingScripts && (
