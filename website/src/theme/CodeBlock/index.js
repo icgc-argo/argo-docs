@@ -1,15 +1,30 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
+/*
+ * Copyright (c) 2020 The Ontario Institute for Cancer Research. All rights reserved
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * This program and the accompanying materials are made available under the terms of the GNU Affero General Public License v3.0.
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * This code was originally copied from Facebook at node_modules/@docusaurus/theme-classic (2.0.0-alpha.58)
+ * and modified under MIT license
+ *
  */
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
-import Highlight, {defaultProps} from 'prism-react-renderer';
+import Highlight, { defaultProps } from 'prism-react-renderer';
 import copy from 'copy-text-to-clipboard';
 import rangeParser from 'parse-numeric-range';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -18,9 +33,7 @@ import usePrismTheme from '@theme/hooks/usePrismTheme';
 import styles from './styles.module.css';
 
 const highlightLinesRangeRegex = /{([\d,-]+)}/;
-const getHighlightDirectiveRegex = (
-  languages = ['js', 'jsBlock', 'jsx', 'python', 'html'],
-) => {
+const getHighlightDirectiveRegex = (languages = ['js', 'jsBlock', 'jsx', 'python', 'html']) => {
   // supported types of comments
   const comments = {
     js: {
@@ -45,17 +58,10 @@ const getHighlightDirectiveRegex = (
     },
   };
   // supported directives
-  const directives = [
-    'highlight-next-line',
-    'highlight-start',
-    'highlight-end',
-  ].join('|');
+  const directives = ['highlight-next-line', 'highlight-start', 'highlight-end'].join('|');
   // to be more reliable, the opening and closing comment must match
   const commentPattern = languages
-    .map(
-      (lang) =>
-        `(?:${comments[lang].start}\\s*(${directives})\\s*${comments[lang].end})`,
-    )
+    .map((lang) => `(?:${comments[lang].start}\\s*(${directives})\\s*${comments[lang].end})`)
     .join('|');
   // white space is allowed, but otherwise it should be on it's own line
   return new RegExp(`^\\s*(?:${commentPattern})\\s*$`);
@@ -87,10 +93,10 @@ const highlightDirectiveRegex = (lang) => {
 };
 const codeBlockTitleRegex = /title=".*"/;
 
-export default ({children, className: languageClassName, metastring}) => {
+export default ({ children, className: languageClassName, metastring }) => {
   const {
     siteConfig: {
-      themeConfig: {prism = {}},
+      themeConfig: { prism = {} },
     },
   } = useDocusaurusContext();
 
@@ -115,20 +121,14 @@ export default ({children, className: languageClassName, metastring}) => {
 
   if (metastring && highlightLinesRangeRegex.test(metastring)) {
     const highlightLinesRange = metastring.match(highlightLinesRangeRegex)[1];
-    highlightLines = rangeParser
-      .parse(highlightLinesRange)
-      .filter((n) => n > 0);
+    highlightLines = rangeParser.parse(highlightLinesRange).filter((n) => n > 0);
   }
 
   if (metastring && codeBlockTitleRegex.test(metastring)) {
-    codeBlockTitle = metastring
-      .match(codeBlockTitleRegex)[0]
-      .split('title=')[1]
-      .replace(/"+/g, '');
+    codeBlockTitle = metastring.match(codeBlockTitleRegex)[0].split('title=')[1].replace(/"+/g, '');
   }
 
-  let language =
-    languageClassName && languageClassName.replace(/language-/, '');
+  let language = languageClassName && languageClassName.replace(/language-/, '');
 
   if (!language && prism.defaultLanguage) {
     language = prism.defaultLanguage;
@@ -149,9 +149,7 @@ export default ({children, className: languageClassName, metastring}) => {
       const lineNumber = index + 1;
       const match = line.match(directiveRegex);
       if (match !== null) {
-        const directive = match
-          .slice(1)
-          .reduce((final, item) => final || item, undefined);
+        const directive = match.slice(1).reduce((final, item) => final || item, undefined);
         switch (directive) {
           case 'highlight-next-line':
             range += `${lineNumber},`;
@@ -186,13 +184,8 @@ export default ({children, className: languageClassName, metastring}) => {
   };
 
   return (
-    <Highlight
-      {...defaultProps}
-      key={mounted}
-      theme={prismTheme}
-      code={code}
-      language={language}>
-      {({className, style, tokens, getLineProps, getTokenProps}) => (
+    <Highlight {...defaultProps} key={mounted} theme={prismTheme} code={code} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <>
           {codeBlockTitle && (
             <div style={style} className={styles.codeBlockTitle}>
@@ -207,21 +200,23 @@ export default ({children, className: languageClassName, metastring}) => {
               className={clsx(styles.copyButton, {
                 [styles.copyButtonWithTitle]: codeBlockTitle,
               })}
-              onClick={handleCopyCode}>
+              onClick={handleCopyCode}
+            >
               {showCopied ? 'Copied' : 'Copy'}
             </button>
             <div
               tabIndex="0"
               className={clsx(className, styles.codeBlock, {
                 [styles.codeBlockWithTitle]: codeBlockTitle,
-              })}>
+              })}
+            >
               <div className={styles.codeBlockLines} style={style}>
                 {tokens.map((line, i) => {
                   if (line.length === 1 && line[0].content === '') {
                     line[0].content = '\n'; // eslint-disable-line no-param-reassign
                   }
 
-                  const lineProps = getLineProps({line, key: i});
+                  const lineProps = getLineProps({ line, key: i });
 
                   if (highlightLines.includes(i + 1)) {
                     lineProps.className = `${lineProps.className} docusaurus-highlight-code-line`;
@@ -230,7 +225,7 @@ export default ({children, className: languageClassName, metastring}) => {
                   return (
                     <div key={i} {...lineProps}>
                       {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({token, key})} />
+                        <span key={key} {...getTokenProps({ token, key })} />
                       ))}
                     </div>
                   );
