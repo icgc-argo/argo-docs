@@ -51,7 +51,7 @@ import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
-import ComparisonFilters, { compareFilterTypes } from '../../components/ComparisonFilters';
+import CompareLegend from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
 
@@ -205,13 +205,6 @@ function DataDictionary() {
 
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
-  const defaultCompareFilters = {
-    [compareFilterTypes.ADDITION]: true,
-    [compareFilterTypes.UPDATE]: true,
-    [compareFilterTypes.DELETION]: true,
-  };
-  const [compareFilters, setCompareFilters] = useState(defaultCompareFilters);
-
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -291,14 +284,6 @@ function DataDictionary() {
                 attribute === NO_ACTIVE_FILTER
                   ? true
                   : false;
-
-              const compareVal = get(field, 'compare', '');
-              const { ADDITION, DELETION, UPDATE } = compareFilters;
-
-              const comparisonBool =
-                (ADDITION && compareVal === compareFilterTypes.ADDITION) ||
-                (DELETION && compareVal === compareFilterTypes.DELETION) ||
-                (UPDATE && compareVal === compareFilterTypes.UPDATE);
 
               return tierBool && attributeBool;
             });
@@ -430,20 +415,6 @@ function DataDictionary() {
                       flex-direction: row;
                     `}
                   >
-                    <ComparisonFilters
-                      additions={24}
-                      updates={13}
-                      deletions={53}
-                      filters={compareFilters}
-                      onChange={(type) => {
-                        const newFilters = {
-                          ...compareFilters,
-                          ...{ [type]: !compareFilters[type] },
-                        };
-                        setCompareFilters(newFilters);
-                      }}
-                    />
-
                     <FileFilters
                       dataTiers={DEFAULT_FILTER.concat(
                         filters.tiers.map((d) => ({ content: startCase(d), value: d })),
