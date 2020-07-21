@@ -11,10 +11,8 @@ export const StyledTab = styled(Tab)`
   position: relative;
   color: black;
   font-size: 15px;
-
   &.active {
     border: 0 none;
-
     ::after {
       content: '';
       border-bottom: 2px solid #00c79d;

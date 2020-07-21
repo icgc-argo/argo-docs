@@ -43,7 +43,7 @@ import { Display, DownloadTooltip, DownloadButtonContent } from '../../component
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
-import { StyledTab, TAB_STATE } from './tabs';
+import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
 import { css, injectGlobal } from 'emotion';
