@@ -30,7 +30,11 @@ import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import StyleWrapper from '../../components/StyleWrapper';
 import Schema from '../../components/Schema';
-import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
+import FileFilters, {
+  NO_ACTIVE_FILTER,
+  DEFAULT_FILTER,
+  generateFilter,
+} from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
@@ -424,17 +428,10 @@ function DataDictionary() {
                     `}
                   >
                     <FileFilters
-                      dataTiers={DEFAULT_FILTER.concat(
-                        filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                      )}
-                      dataAttributes={DEFAULT_FILTER.concat(
-                        filters.attributes.map((d) => ({
-                          content: startCase(d),
-                          value: d,
-                        })),
-                      )}
+                      dataTiers={filters.tiers.map(generateFilter)}
+                      dataAttributes={filters.attributes.map(generateFilter)}
                       searchParams={searchParams}
-                      onSearch={(search) => setSearchParams(search)}
+                      onFilter={(search) => setSearchParams(search)}
                     />
                     <ResetButton
                       disabled={searchParams.tier === '' && searchParams.attribute === ''}
