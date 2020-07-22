@@ -46,14 +46,17 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import { css, injectGlobal } from 'emotion';
+import { css as _oldCSS, injectGlobal } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
-import CompareLegend from '../../components/CompareLegend';
+import CompareLegend, { CompareLegendBlue } from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
+import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
+import argoTheme from '../../styles/theme/icgc-argo';
+import { css } from '@emotion/core';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -315,7 +318,7 @@ function DataDictionary() {
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
   return (
-    <ThemeProvider>
+    <EmotionThemeProvider theme={argoTheme}>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
 
       <Layout permalink="dictionary">
@@ -367,6 +370,11 @@ function DataDictionary() {
                         versions={diffVersions}
                         onChange={setDiffVersion}
                       />
+                      <CompareLegend
+                        css={css`
+                          margin: 0 10px;
+                        `}
+                      />
                       <Button variant="secondary" onClick={() => setDiffVersion(null)}>
                         <Icon name="times" height="8px" />
                         <span style={{ marginLeft: '5px' }}>CLEAR</span>
@@ -410,7 +418,7 @@ function DataDictionary() {
                 <Row>
                   <Meta files={fileCount} fields={fieldCount} />
                   <div
-                    className={css`
+                    className={_oldCSS`
                       display: flex;
                       flex-direction: row;
                     `}
@@ -440,7 +448,7 @@ function DataDictionary() {
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
-                  className={css`
+                  className={_oldCSS`
                     margin-top: 30px;
                   `}
                 >
@@ -477,7 +485,7 @@ function DataDictionary() {
           </div>
         </StyleWrapper>
       </Layout>
-    </ThemeProvider>
+    </EmotionThemeProvider>
   );
 }
 
