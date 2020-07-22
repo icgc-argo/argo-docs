@@ -78,4 +78,9 @@ const FileFilters = ({
   );
 };
 
+export const generateFilter = (item: string): FilterSelect => ({
+  content: startCase(item),
+  value: item,
+});
+
 export default FileFilters;
