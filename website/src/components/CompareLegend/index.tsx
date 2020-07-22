@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
+import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import { css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
