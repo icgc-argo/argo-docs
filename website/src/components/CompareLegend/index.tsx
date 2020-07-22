@@ -1,17 +1,55 @@
-import React from 'react';
-import Icon from '@icgc-argo/uikit/Icon';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 
-const ComparisonFilters = ({ additions = 4, updates = 88, deletions = 33 }) => {
+import Icon from '@icgc-argo/uikit/Icon';
+import { css } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
+import { Theme } from '../../styles/theme/icgc-argo';
+
+const Star = ({ fill }: { fill: string }) => (
+  <Icon
+    name="star"
+    fill={fill}
+    width="14px"
+    css={css`
+      margin-right: 4px;
+      margin-left: 8px;
+    `}
+  />
+);
+
+const CompareLegend = ({
+  additions = 4,
+  updates = 88,
+  deletions = 33,
+  css: newCss,
+}: {
+  additions: number;
+  updates: number;
+  deletions: number;
+  css?: any;
+}) => {
+  const theme: Theme = useTheme();
+  const diffColors = theme.diffColors;
+
   return (
-    <div>
-      <Icon name="star" fill={'#00c79d'} width={'16px'} />
+    <div
+      css={[
+        css`
+          display: flex;
+          align-items: center;
+        `,
+        newCss,
+      ]}
+    >
+      <Star fill={diffColors.accent1} />
       {`${additions} new fields`}
-      <Icon name="star" fill="#ec8f17" width={'16px'} />
+      <Star fill={diffColors.accent2} />
       {`${updates} updated fields`}
-      <Icon name="star" fill="#df1b42" width={'16px'} />
+      <Star fill={diffColors.accent3} />
       {`${deletions} deleted fields`}
     </div>
   );
 };
 
-export default ComparisonFilters;
+export default CompareLegend;
