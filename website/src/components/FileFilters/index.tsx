@@ -18,21 +18,22 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+
 import React from 'react';
-import Select from '@icgc-argo/uikit/form/Select';
+//import Select from '@icgc-argo/uikit/form/Select';
+import Select from '../../components/Select';
 import Input from '@icgc-argo/uikit/form/Input';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
 import { styled } from '@icgc-argo/uikit';
 import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
+import { css } from '@emotion/core';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: Array<FilterSelect> = [{ content: 'All', value: NO_ACTIVE_FILTER }];
-
-const StyledSelect = styled(Select)`
-  min-width: 190px;
-`;
 
 type FilterSelect = { content: string; value: string };
 
@@ -40,27 +41,20 @@ type FilterSelect = { content: string; value: string };
 .fileFilters .dataSelectors > div {
   margin: 0 7px 0 5px;
 }
+ */
 
-.fileFilters [role='button'],
-.search > div {
-  min-height: 28px;
-  height: 28px;
-}
-
-.fileFilters .search svg {
-  height: 16px;
-  width: 16px;
-}
-
-.fileFilters > div {
-  display: flex;
-  align-items: center;
-}
+/**
+ *
+ * @param param0
+ *
+ *
+ * searchParams should really  be FILTER_PARAMS
+ * tiers + attrbiutes + search = FILTERED
  */
 
 const FileFilters = ({
-  dataTiers = [],
-  dataAttributes = [],
+  dataTiers = [], // change to tiers
+  dataAttributes = [], // change to attributes
   searchParams = {},
   onFilter,
 }: {
@@ -73,32 +67,39 @@ const FileFilters = ({
   const onSelect = (filterName) => (value) =>
     onFilter({ ...searchParams, ...{ [filterName]: value } });
 
-  const tiers = DEFAULT_FILTER.concat(dataTiers);
-  const attributes = DEFAULT_FILTER.concat(dataAttributes);
-
   //const [inputValue, setInputValue] = React.useState('');
   //const applySearch = debounce(onSearch, 500);
   return (
     <Typography variant="data" color="#151c3d">
-      <div className={styles.fileFilters}>
-        <div className={styles.dataSelectors}>
-          Data Tier:{' '}
-          <StyledSelect
-            aria-label="Data Tier Select"
-            options={dataTiers}
-            value={searchParams.tier}
-            onChange={onSelect('tier')}
-            size="sm"
-          />
-          Attribute:{' '}
-          <StyledSelect
-            aria-label="Data Attribute Select"
-            options={dataAttributes}
-            value={searchParams.attribute}
-            onChange={onSelect('attribute')}
-            size="sm"
-          />
-          {/*<Input
+      <div
+        css={css`
+          display: flex;
+          align-items: center;
+        `}
+      >
+        Data Tier:{' '}
+        <Select
+          aria-label="Data Tier Select"
+          options={DEFAULT_FILTER.concat(dataTiers)}
+          value={searchParams.tier}
+          onChange={onSelect('tier')}
+          size="sm"
+          css={css`
+            min-width: 190px;
+          `}
+        />
+        Attribute:{' '}
+        <Select
+          aria-label="Data Attribute Select"
+          options={DEFAULT_FILTER.concat(dataAttributes)}
+          value={searchParams.attribute}
+          onChange={onSelect('attribute')}
+          size="sm"
+          css={css`
+            min-width: 190px;
+          `}
+        />
+        {/*<Input
             onChange={e => {
               setInputValue(e.target.value);
               applySearch(e.target.value);
@@ -108,7 +109,6 @@ const FileFilters = ({
             preset="search"
             className={styles.search}
           />*/}
-        </div>
       </div>
     </Typography>
   );
