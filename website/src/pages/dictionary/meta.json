@@ -1,5 +1,7 @@
 {
-  "updates": 142,
-  "deletions": 50,
-  "additions": 3
+  "comparison": {
+    "updates": 142,
+    "deletions": 50,
+    "additions": 3
+  }
 }

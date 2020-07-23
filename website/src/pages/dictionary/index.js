@@ -93,6 +93,9 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
+//  meta containing filters and counts
+
+const dictionaryMeta = require('./meta.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -183,6 +186,8 @@ function DataDictionary() {
   const [version, setVersion] = useState(preloadedDictionary.version);
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
+  const [meta, setMeta] = useState(dictionaryMeta);
+  console.log(meta);
 
   const [diffVersion, setDiffVersion] = useState(null);
   const diffVersions = versions.filter((v) => v !== version);
@@ -206,7 +211,11 @@ function DataDictionary() {
     updateDictionaryDiff();
   }, [diffVersion]);
 
-  const defaultSearchParams = { tier: DEFAULT_FILTER.value, attribute: DEFAULT_FILTER.value };
+  const defaultSearchParams = {
+    tier: DEFAULT_FILTER.value,
+    attribute: DEFAULT_FILTER.value,
+    comparison: DEFAULT_FILTER.value,
+  };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
 
@@ -222,6 +231,10 @@ function DataDictionary() {
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
+  /**
+   * we can generate these filters at build time when we pull data
+   */
+  console.log(dictionaryDiff);
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
 
@@ -321,6 +334,12 @@ function DataDictionary() {
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
+  const comparisonFilterDisplay = {
+    updates: 'Updated fields',
+    deletions: 'Deleted fields',
+    additions: 'Added fields',
+  };
+
   return (
     <EmotionThemeProvider theme={argoTheme}>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
@@ -367,7 +386,7 @@ function DataDictionary() {
                   >
                     Compare with...
                   </Button>
-                  {diffVersion ? (
+                  {true ? (
                     <div style={{ display: 'flex' }}>
                       <VersionSelect
                         value={diffVersion}
@@ -375,9 +394,7 @@ function DataDictionary() {
                         onChange={setDiffVersion}
                       />
                       <CompareLegend
-                        additions={meta.additions}
-                        deletions={meta.deletions}
-                        updates={meta.updates}
+                        comparison={meta.comparison}
                         css={css`
                           margin: 0 10px;
                         `}
@@ -433,6 +450,9 @@ function DataDictionary() {
                     <FileFilters
                       dataTiers={filters.tiers.map(generateFilter)}
                       dataAttributes={filters.attributes.map(generateFilter)}
+                      comparisons={Object.keys(meta.comparison).map((k) =>
+                        generateFilter(comparisonFilterDisplay[k]),
+                      )}
                       searchParams={searchParams}
                       onFilter={(search) => setSearchParams(search)}
                     />
