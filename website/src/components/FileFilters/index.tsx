@@ -102,6 +102,12 @@ const FileFilters = ({
   );
 };
 
+export const comparisonFilterDisplay = {
+  updates: 'Updated fields',
+  deletions: 'Deleted fields',
+  additions: 'Added fields',
+};
+
 export const generateFilter = (item: string): FilterSelect => ({
   content: startCase(item),
   value: item,

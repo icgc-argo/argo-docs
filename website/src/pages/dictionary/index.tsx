@@ -34,6 +34,7 @@ import FileFilters, {
   NO_ACTIVE_FILTER,
   generateFilter,
   DEFAULT_FILTER,
+  comparisonFilterDisplay,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
@@ -333,12 +334,6 @@ function DataDictionary() {
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
-
-  const comparisonFilterDisplay = {
-    updates: 'Updated fields',
-    deletions: 'Deleted fields',
-    additions: 'Added fields',
-  };
 
   return (
     <EmotionThemeProvider theme={argoTheme}>
