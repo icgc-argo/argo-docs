@@ -32,8 +32,6 @@ import styled from '@emotion/styled';
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
 
-type FilterSelect = { content: string; value: string };
-
 const Select = styled(SelectComp)`
   min-width: 190px;
 `;
