@@ -375,6 +375,9 @@ function DataDictionary() {
                         onChange={setDiffVersion}
                       />
                       <CompareLegend
+                        additions={meta.additions}
+                        deletions={meta.deletions}
+                        updates={meta.updates}
                         css={css`
                           margin: 0 10px;
                         `}
