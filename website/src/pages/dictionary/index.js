@@ -32,8 +32,8 @@ import StyleWrapper from '../../components/StyleWrapper';
 import Schema from '../../components/Schema';
 import FileFilters, {
   NO_ACTIVE_FILTER,
-  DEFAULT_FILTER,
   generateFilter,
+  DEFAULT_FILTER,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
@@ -206,7 +206,7 @@ function DataDictionary() {
     updateDictionaryDiff();
   }, [diffVersion]);
 
-  const defaultSearchParams = { tier: '', attribute: '' };
+  const defaultSearchParams = { tier: DEFAULT_FILTER.value, attribute: DEFAULT_FILTER.value };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
 
