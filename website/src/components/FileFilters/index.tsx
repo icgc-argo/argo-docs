@@ -33,7 +33,7 @@ import startCase from 'lodash/startCase';
 import { css } from '@emotion/core';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
-export const DEFAULT_FILTER: Array<FilterSelect> = [{ content: 'All', value: NO_ACTIVE_FILTER }];
+export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
 
 type FilterSelect = { content: string; value: string };
 
@@ -80,7 +80,7 @@ const FileFilters = ({
         Data Tier:{' '}
         <Select
           aria-label="Data Tier Select"
-          options={DEFAULT_FILTER.concat(dataTiers)}
+          options={[DEFAULT_FILTER, ...dataTiers]}
           value={searchParams.tier}
           onChange={onSelect('tier')}
           size="sm"
@@ -91,7 +91,7 @@ const FileFilters = ({
         Attribute:{' '}
         <Select
           aria-label="Data Attribute Select"
-          options={DEFAULT_FILTER.concat(dataAttributes)}
+          options={[DEFAULT_FILTER, ...dataAttributes]}
           value={searchParams.attribute}
           onChange={onSelect('attribute')}
           size="sm"
