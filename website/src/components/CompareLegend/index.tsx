@@ -20,19 +20,19 @@ const Star = ({ fill }: { fill: string }) => (
 );
 
 const CompareLegend = ({
-  additions = 4,
-  updates = 88,
-  deletions = 33,
+  comparison,
   css: newCss,
 }: {
-  additions: number;
-  updates: number;
-  deletions: number;
+  comparison: {
+    additions: number;
+    updates: number;
+    deletions: number;
+  };
   css?: any;
 }) => {
   const theme: Theme = useTheme();
   const diffColors = theme.diffColors;
-
+  const { additions, deletions, updates } = comparison;
   return (
     <div
       css={[
