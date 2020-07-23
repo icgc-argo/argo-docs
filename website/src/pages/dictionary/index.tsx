@@ -252,7 +252,6 @@ function DataDictionary() {
   /**
    * we can generate these filters at build time when we pull data
    */
-
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
 
@@ -362,6 +361,12 @@ function DataDictionary() {
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
+
+  const comparisonFilterDisplay = {
+    updates: 'Updated fields',
+    deletions: 'Deleted fields',
+    additions: 'Added fields',
+  };
 
   return (
     <EmotionThemeProvider theme={argoTheme}>
