@@ -22,44 +22,32 @@
 import { jsx } from '@emotion/core';
 
 import React from 'react';
-//import Select from '@icgc-argo/uikit/form/Select';
-import Select from '../../components/Select';
-import Input from '@icgc-argo/uikit/form/Input';
-import styles from './styles.module.css';
+import SelectComp from '../../components/Select';
 import Typography from '@icgc-argo/uikit/Typography';
-import { styled } from '@icgc-argo/uikit';
 import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
 import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
 
 type FilterSelect = { content: string; value: string };
 
-/* 
-.fileFilters .dataSelectors > div {
-  margin: 0 7px 0 5px;
-}
- */
-
-/**
- *
- * @param param0
- *
- *
- * searchParams should really  be FILTER_PARAMS
- * tiers + attrbiutes + search = FILTERED
- */
+const Select = styled(SelectComp)`
+  min-width: 190px;
+`;
 
 const FileFilters = ({
   dataTiers = [], // change to tiers
   dataAttributes = [], // change to attributes
+  comparisons = [],
   searchParams = {},
   onFilter,
 }: {
   dataTiers: Array<FilterSelect>;
   dataAttributes: Array<FilterSelect>;
+  comparisons: Array<FilterSelect>;
   searchParams: { [key: string]: string };
   onFilter: (any) => void;
 }) => {
@@ -77,27 +65,29 @@ const FileFilters = ({
           align-items: center;
         `}
       >
-        Data Tier:{' '}
+        Comparison:
+        <Select
+          aria-label="Comparison Attribute Select"
+          options={[DEFAULT_FILTER, ...comparisons]}
+          value={searchParams.comparison}
+          onChange={onSelect('comparison')}
+          size="sm"
+        />
+        Data Tier:
         <Select
           aria-label="Data Tier Select"
           options={[DEFAULT_FILTER, ...dataTiers]}
           value={searchParams.tier}
           onChange={onSelect('tier')}
           size="sm"
-          css={css`
-            min-width: 190px;
-          `}
         />
-        Attribute:{' '}
+        Attribute:
         <Select
           aria-label="Data Attribute Select"
           options={[DEFAULT_FILTER, ...dataAttributes]}
           value={searchParams.attribute}
           onChange={onSelect('attribute')}
           size="sm"
-          css={css`
-            min-width: 190px;
-          `}
         />
         {/*<Input
             onChange={e => {
