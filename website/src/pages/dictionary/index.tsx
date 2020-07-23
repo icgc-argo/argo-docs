@@ -362,12 +362,6 @@ function DataDictionary() {
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
-  const comparisonFilterDisplay = {
-    updates: 'Updated fields',
-    deletions: 'Deleted fields',
-    additions: 'Added fields',
-  };
-
   return (
     <EmotionThemeProvider theme={argoTheme}>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
