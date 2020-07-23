@@ -19,7 +19,8 @@
  */
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Table from '@icgc-argo/uikit/Table';
+//import Table from '@icgc-argo/uikit/Table';
+import Table from '../../components/Table';
 import Tag, { TAG_TYPES } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag from '@icgc-argo/uikit/Tag';
