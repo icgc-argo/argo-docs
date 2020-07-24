@@ -342,6 +342,8 @@ function DataDictionary() {
     [searchParams, dictionary],
   );
 
+  console.log('c', filteredSchemas);
+
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
 
