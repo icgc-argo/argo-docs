@@ -5,9 +5,9 @@ const argoColors = argo.colors;
 
 export type DiffColors = { [key: string]: string };
 const diffColors: DiffColors = {
-  accent1: argoColors.accent1_dimmed,
-  accent2: argoColors.warning_dark,
-  accent3: argoColors.error,
+  created: argoColors.accent1_dimmed,
+  updated: argoColors.warning_dark,
+  deleted: argoColors.error,
 };
 
 const schema: { row: { [key in ChangeType]: string } } = {

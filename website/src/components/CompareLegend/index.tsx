@@ -43,11 +43,11 @@ const CompareLegend = ({
         newCss,
       ]}
     >
-      <Star fill={diffColors.accent1} />
+      <Star fill={diffColors.created} />
       {`${additions} new fields`}
-      <Star fill={diffColors.accent2} />
+      <Star fill={diffColors.updated} />
       {`${updates} updated fields`}
-      <Star fill={diffColors.accent3} />
+      <Star fill={diffColors.deleted} />
       {`${deletions} deleted fields`}
     </div>
   );
