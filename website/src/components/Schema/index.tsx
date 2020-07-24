@@ -90,7 +90,7 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
+const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
   // SSR fix
   if (typeof schema === 'undefined') return null;
 
@@ -167,21 +167,23 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
   const cols = [
     {
       id: 'compare',
+      headerClassName: 'reset',
       Header: (
         <CellContentCenter>
           <StarIcon fill="#babcc2" />
         </CellContentCenter>
       ),
       Cell: ({ original }) => {
-        //  console.log(original);
-        return (
+        const changeType = original.changeType;
+        return changeType ? (
           <CellContentCenter>
-            <StarIcon fill="blue" />
+            <StarIcon fill={theme.diffColors[changeType]} />
           </CellContentCenter>
-        );
+        ) : null;
       },
       resizable: false,
       width: 40,
+      headerStyle: { textAlign: 'center' },
     },
 
     {
@@ -264,7 +266,7 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
       Cell: ScriptCell,
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ].filter((col) => (!diff ? col.id !== 'compare' : true));
+  ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
 
