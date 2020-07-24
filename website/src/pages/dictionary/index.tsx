@@ -142,7 +142,8 @@ const parseDiff = (diff) =>
       return acc;
     }, {});
 
-const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
+// todo: send in schemas with diff data already there, toggle it in the ui Schema
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff, isDiffShowing }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
@@ -154,6 +155,7 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}
           diff={schemaDiff}
+          isDiffShowing={isDiffShowing}
         />
       );
     })
@@ -196,6 +198,8 @@ function DataDictionary() {
   const diffVersions = versions.filter((v) => v !== version);
 
   const [dictionaryDiff, setDictionaryDiff] = useState(null);
+
+  const [isDiffShowing, setIsDiffShowing] = useState(false);
 
   React.useEffect(() => {
     async function updateDictionaryState() {
@@ -389,15 +393,10 @@ function DataDictionary() {
                       setVersion(v);
                     }}
                   />
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      setDiffVersion(diffVersions[0]);
-                    }}
-                  >
+                  <Button size="sm" onClick={() => setIsDiffShowing(true)}>
                     Compare with...
                   </Button>
-                  {true ? (
+                  <Display visible={isDiffShowing}>
                     <div style={{ display: 'flex' }}>
                       <VersionSelect
                         value={diffVersion}
@@ -410,12 +409,12 @@ function DataDictionary() {
                           margin: 0 10px;
                         `}
                       />
-                      <Button variant="secondary" onClick={() => setDiffVersion(null)}>
+                      <Button variant="secondary" onClick={() => setIsDiffShowing(false)}>
                         <Icon name="times" height="8px" />
                         <span style={{ marginLeft: '5px' }}>CLEAR</span>
                       </Button>
                     </div>
-                  ) : null}
+                  </Display>
                 </div>
                 <div className={styles.downloads}>
                   <Button
@@ -488,6 +487,7 @@ function DataDictionary() {
                     diff={dictionaryDiff}
                     menuContents={menuContents}
                     isLatestSchema={isLatestSchema}
+                    isDiffShowing={isDiffShowing}
                   />
                 </div>
               </Display>
