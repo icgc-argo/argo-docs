@@ -56,12 +56,14 @@ import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import Button from '@icgc-argo/uikit/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
-import CompareLegend, { CompareLegendBlue } from '../../components/CompareLegend';
+import CompareLegend from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
 import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
+import sample from 'lodash/sample';
+import { ChangeType } from '../../components/Schema';
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -278,9 +280,18 @@ function DataDictionary() {
         .map((schema) => {
           const { tier, attribute } = searchParams;
           const filteredFields = schema.fields
-            .map((fields) => {
+            .map((field) => {
+              console.log(field);
               // comparison filters
-              return fields;
+              return {
+                ...field,
+                changeType: sample([
+                  ChangeType.CREATED,
+                  ChangeType.DELETED,
+                  ChangeType.UPDATED,
+                  null,
+                ]),
+              };
             })
             .filter((field) => {
               const meta = get(field, 'meta', {});
@@ -309,11 +320,16 @@ function DataDictionary() {
               return tierBool && attributeBool;
             });
 
-          return { ...schema, fields: filteredFields };
+          return {
+            ...schema,
+            fields: filteredFields,
+          };
         })
         .filter((schema) => schema.fields.length > 0),
     [searchParams, dictionary],
   );
+
+  console.log('c', filteredSchemas);
 
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);

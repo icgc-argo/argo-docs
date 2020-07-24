@@ -20,14 +20,14 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 //import Table from '@icgc-argo/uikit/Table';
-import Table from '../../components/Table';
+import Table from '../Table';
 import Tag, { TAG_TYPES } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import { DownloadButtonContent, DownloadTooltip } from '../../components/common';
+import { DownloadButtonContent, DownloadTooltip } from '../common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, useModalState } from '../../pages/dictionary';
@@ -37,6 +37,8 @@ import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
+import { useTheme } from 'emotion-theming';
+import { Theme } from '../../styles/theme/icgc-argo';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -274,6 +276,15 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
       })
     : schema.fields;
 
+  const theme: Theme = useTheme();
+  const rowColors = theme.schema.row;
+
+  const highlightRowDiff = (changeType) => ({
+    style: {
+      background: rowColors[changeType],
+    },
+  });
+
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       {currentShowingScripts && (
@@ -335,6 +346,10 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
 
       <div ref={containerRef}>
         <Table
+          getTrProps={(state, rowInfo) => {
+            const changeType = rowInfo.original.changeType;
+            return changeType ? highlightRowDiff(changeType) : {};
+          }}
           parentRef={containerRef}
           columns={cols}
           data={tableData}
@@ -343,10 +358,17 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema }) => {
           sortable={true}
           cellAlignment="top"
           withOutsideBorder
+          highlight={false}
         />
       </div>
     </div>
   );
 };
+
+export enum ChangeType {
+  CREATED = 'created',
+  UPDATED = 'updated',
+  DELETED = 'deleted',
+}
 
 export default Schema;
