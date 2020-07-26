@@ -18,12 +18,12 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import Tooltip from '@icgc-argo/uikit/Tooltip';
 import { css } from '@emotion/core';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 
 export const DownloadIcon = ({ disabled }) => (
   <Icon

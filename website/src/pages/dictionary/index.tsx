@@ -76,16 +76,6 @@ const InfoBar = styled('div')`
   align-items: center;
   border-bottom: 2px solid #dcdde1;
   padding-bottom: 8px;
-
-/*   & .downloads button:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  & .infobar > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
- */  }
 `;
 
 export const useModalState = () => {

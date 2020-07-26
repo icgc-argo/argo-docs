@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-
 import React, { FC } from 'react';
 import SelectComp from '@icgc-argo/uikit/form/Select';
 import { withTheme } from 'emotion-theming';
