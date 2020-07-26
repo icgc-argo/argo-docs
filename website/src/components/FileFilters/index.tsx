@@ -20,7 +20,6 @@
 
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-
 import React from 'react';
 import SelectComp from '../../components/Select';
 import Typography from '@icgc-argo/uikit/Typography';
@@ -28,13 +27,10 @@ import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import { Filter } from './components';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
-
-const Select = styled(SelectComp)`
-  min-width: 190px;
-`;
 
 const FileFilters = ({
   dataTiers = [], // change to tiers
@@ -63,30 +59,30 @@ const FileFilters = ({
           align-items: center;
         `}
       >
-        Comparison:
-        <Select
-          aria-label="Comparison Attribute Select"
+        <Filter
+          label="Comparison"
+          ariaLabel="Comparison Attribute Select"
           options={[DEFAULT_FILTER, ...comparisons]}
           value={searchParams.comparison}
           onChange={onSelect('comparison')}
-          size="sm"
         />
-        Data Tier:
-        <Select
-          aria-label="Data Tier Select"
+
+        <Filter
+          label="Data Tier"
+          ariaLabel="Data Tier Select"
           options={[DEFAULT_FILTER, ...dataTiers]}
           value={searchParams.tier}
           onChange={onSelect('tier')}
-          size="sm"
         />
-        Attribute:
-        <Select
-          aria-label="Data Attribute Select"
+
+        <Filter
+          label="Attribute"
+          ariaLabel="Data Attribute Select"
           options={[DEFAULT_FILTER, ...dataAttributes]}
           value={searchParams.attribute}
           onChange={onSelect('attribute')}
-          size="sm"
         />
+
         {/*<Input
             onChange={e => {
               setInputValue(e.target.value);

@@ -1,6 +1,10 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
-import Button from '@icgc-argo/uikit/Button';
+import ButtonComp from '@icgc-argo/uikit/Button';
+import { withTheme } from 'emotion-theming';
+import { css } from '@emotion/core';
 
 export const ResetIcon = ({ disabled }) => (
   <Icon
@@ -14,12 +18,12 @@ export const ResetIcon = ({ disabled }) => (
 );
 
 export const ResetButton = ({ children, onClick, disabled }) => (
-  <Button variant="secondary" size="sm" onClick={onClick} disabled={disabled}>
+  <ButtonComp variant="secondary" size="sm" onClick={onClick} disabled={disabled}>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
       <ResetIcon disabled={disabled} />
       {children}
     </div>
-  </Button>
+  </ButtonComp>
 );
 
 export const ButtonWithIcon = ({
@@ -30,10 +34,26 @@ export const ButtonWithIcon = ({
   size = 'sm',
   Icon = null,
 }) => (
-  <Button variant={variant} size={size} onClick={onClick} disabled={disabled}>
+  <ButtonComp variant={variant} size={size} onClick={onClick} disabled={disabled}>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
       {Icon ? <Icon disabled={disabled} /> : null}
       {children}
     </div>
-  </Button>
+  </ButtonComp>
 );
+
+const Button = withTheme(({ children, ...props }) => (
+  <ButtonComp {...props}>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      `}
+    >
+      {children}
+    </div>
+  </ButtonComp>
+));
+
+export default Button;

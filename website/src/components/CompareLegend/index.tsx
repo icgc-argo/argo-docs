@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import { css } from '@emotion/core';
@@ -21,29 +20,28 @@ const Star = ({ fill }: { fill: string }) => (
 
 const CompareLegend = ({
   comparison,
-  css: newCss,
+  styles,
 }: {
   comparison: {
     additions: number;
     updates: number;
     deletions: number;
   };
-  css?: any;
+  styles?: any;
 }) => {
+  console.log('xaaa', styles);
   const theme: Theme = useTheme();
   const diffColors = theme.diffColors;
   const { additions, deletions, updates } = comparison;
   return (
     <div
-      css={[
-        css`
-          display: flex;
-          align-items: center;
-          font-size: 12px;
-          font-weight: bold;
-        `,
-        newCss,
-      ]}
+      css={css`
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        font-weight: bold;
+        ${styles}
+      `}
     >
       <Star fill={diffColors.created} />
       {`${additions} new fields`}

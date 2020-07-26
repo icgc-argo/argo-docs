@@ -56,7 +56,8 @@ import Meta from '../../components/Meta';
 import { css as _oldCSS, injectGlobal } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
-import Button from '@icgc-argo/uikit/Button';
+import OldButton from '@icgc-argo/uikit/Button';
+import Button from '../../components/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
 import CompareLegend from '../../components/CompareLegend';
 import Row from '../../components/Row';
@@ -216,8 +217,8 @@ function DataDictionary() {
   const [meta, setMeta] = useState(dictionaryMeta);
   console.log(meta);
 
-  const [diffVersion, setDiffVersion] = useState(null);
   const diffVersions = versions.filter((v) => v !== version);
+  const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
 
   const [dictionaryDiff, setDictionaryDiff] = useState(null);
 
@@ -419,13 +420,14 @@ function DataDictionary() {
                       setVersion(v);
                     }}
                   />
-                  <Button size="sm" onClick={() => setIsDiffShowing(true)}>
+                  <OldButton size="sm" onClick={() => setIsDiffShowing(true)}>
                     Compare with...
-                  </Button>
+                  </OldButton>
                   <Display
                     visible={isDiffShowing}
                     visibleStyle={css`
                       display: flex;
+                      align-items: center;
                     `}
                   >
                     <VersionSelect
@@ -435,33 +437,31 @@ function DataDictionary() {
                     />
                     <CompareLegend
                       comparison={meta.comparison}
-                      css={css`
+                      styles={css`
                         margin: 0 10px;
                       `}
                     />
                     <Button variant="secondary" size="sm" onClick={() => setIsDiffShowing(false)}>
-                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon
-                          name="times"
-                          height="8px"
-                          css={css`
-                            margin-right: 8px;
-                          `}
-                        />
-                        CLEAR
-                      </div>
+                      <Icon
+                        name="times"
+                        height="8px"
+                        css={css`
+                          padding-right: 5px;
+                        `}
+                      />
+                      CLEAR
                     </Button>
                   </Display>
                 </div>
 
                 <div>
-                  <Button
+                  <OldButton
                     variant="secondary"
                     size="sm"
                     onClick={(item) => downloadTsvFileTemplate(`all`)}
                   >
                     <DownloadButtonContent>File Templates</DownloadButtonContent>
-                  </Button>
+                  </OldButton>
 
                   {/*<Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
                     <DownloadButtonContent>PDF</DownloadButtonContent>
