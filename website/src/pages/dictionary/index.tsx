@@ -18,6 +18,8 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { useState, createRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
@@ -64,6 +66,26 @@ import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
 import sample from 'lodash/sample';
 import { ChangeType } from '../../components/Schema';
+import styled from '@emotion/styled';
+
+const InfoBar = styled('div')`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #dcdde1;
+  padding-bottom: 8px;
+
+/*   & .downloads button:not(:last-child) {
+    margin-right: 8px;
+  }
+
+  & .infobar > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ */  }
+`;
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -384,8 +406,12 @@ function DataDictionary() {
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
-              <div className={styles.infobar}>
-                <div>
+              <InfoBar>
+                <div
+                  css={css`
+                    display: flex;
+                  `}
+                >
                   <VersionSelect
                     value={version}
                     versions={versions}
@@ -396,27 +422,39 @@ function DataDictionary() {
                   <Button size="sm" onClick={() => setIsDiffShowing(true)}>
                     Compare with...
                   </Button>
-                  <Display visible={isDiffShowing}>
-                    <div style={{ display: 'flex' }}>
-                      <VersionSelect
-                        value={diffVersion}
-                        versions={diffVersions}
-                        onChange={setDiffVersion}
-                      />
-                      <CompareLegend
-                        comparison={meta.comparison}
-                        css={css`
-                          margin: 0 10px;
-                        `}
-                      />
-                      <Button variant="secondary" onClick={() => setIsDiffShowing(false)}>
-                        <Icon name="times" height="8px" />
-                        <span style={{ marginLeft: '5px' }}>CLEAR</span>
-                      </Button>
-                    </div>
+                  <Display
+                    visible={isDiffShowing}
+                    visibleStyle={css`
+                      display: flex;
+                    `}
+                  >
+                    <VersionSelect
+                      value={diffVersion}
+                      versions={diffVersions}
+                      onChange={setDiffVersion}
+                    />
+                    <CompareLegend
+                      comparison={meta.comparison}
+                      css={css`
+                        margin: 0 10px;
+                      `}
+                    />
+                    <Button variant="secondary" size="sm" onClick={() => setIsDiffShowing(false)}>
+                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Icon
+                          name="times"
+                          height="8px"
+                          css={css`
+                            margin-right: 8px;
+                          `}
+                        />
+                        CLEAR
+                      </div>
+                    </Button>
                   </Display>
                 </div>
-                <div className={styles.downloads}>
+
+                <div>
                   <Button
                     variant="secondary"
                     size="sm"
@@ -429,8 +467,7 @@ function DataDictionary() {
                     <DownloadButtonContent>PDF</DownloadButtonContent>
                   </Button>*/}
                 </div>
-              </div>
-
+              </InfoBar>
               {/*<div className={styles.infobar} style={{ justifyContent: 'center' }}>
                 {
                   <Tabs

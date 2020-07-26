@@ -21,6 +21,9 @@
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import Tooltip from '@icgc-argo/uikit/Tooltip';
+import { css } from '@emotion/core';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 
 export const DownloadIcon = ({ disabled }) => (
   <Icon
@@ -49,6 +52,23 @@ export const DownloadTooltip = ({ children, disabled }) => (
   </Tooltip>
 );
 
-export const Display = ({ children, visible }: { children: React.ReactNode, visible: boolean }) => (
-  <div style={{ display: visible ? 'block' : 'none' }}>{children}</div>
+export const Display = ({
+  children,
+  visible,
+  visibleStyle = css`
+    display: block;
+  `,
+}: {
+  children: React.ReactNode;
+  visible: boolean;
+  visbleStyle: any;
+}) => (
+  <div
+    css={css`
+      display: none;
+      ${visible ? visibleStyle : null}
+    `}
+  >
+    {children}
+  </div>
 );

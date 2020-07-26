@@ -39,6 +39,8 @@ const CompareLegend = ({
         css`
           display: flex;
           align-items: center;
+          font-size: 12px;
+          font-weight: bold;
         `,
         newCss,
       ]}
