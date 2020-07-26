@@ -26,7 +26,6 @@ import Typography from '@icgc-argo/uikit/Typography';
 import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
 import { css } from '@emotion/core';
-import styled from '@emotion/styled';
 import { Filter } from './components';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
