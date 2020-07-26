@@ -7,6 +7,15 @@ import styled from '@emotion/styled';
 
 export const Select = styled(SelectComp)`
   min-width: 190px;
+
+  & div[role='button'] {
+    min-height: 28px;
+    height: 28px;
+  }
+
+  & ol li {
+    height: 18px;
+  }
 `;
 
 const Label = styled('div')`

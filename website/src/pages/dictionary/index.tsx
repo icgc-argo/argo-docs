@@ -504,7 +504,11 @@ function DataDictionary() {
                       onFilter={(search) => setSearchParams(search)}
                     />
                     <ResetButton
-                      disabled={searchParams.tier === '' && searchParams.attribute === ''}
+                      disabled={
+                        searchParams.tier === NO_ACTIVE_FILTER &&
+                        searchParams.attribute === NO_ACTIVE_FILTER &&
+                        searchParams.comparison === NO_ACTIVE_FILTER
+                      }
                       onClick={() => setSearchParams(defaultSearchParams)}
                     >
                       Reset
