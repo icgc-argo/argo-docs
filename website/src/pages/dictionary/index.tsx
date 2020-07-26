@@ -215,7 +215,6 @@ function DataDictionary() {
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
   const [meta, setMeta] = useState(dictionaryMeta);
-  console.log(meta);
 
   const diffVersions = versions.filter((v) => v !== version);
   const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
@@ -264,7 +263,7 @@ function DataDictionary() {
   /**
    * we can generate these filters at build time when we pull data
    */
-  console.log(dictionaryDiff);
+
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
 
@@ -308,8 +307,7 @@ function DataDictionary() {
           const { tier, attribute } = searchParams;
           const filteredFields = schema.fields
             .map((field) => {
-              console.log(field);
-              // comparison filters
+              // comparison filters DEMO
               return {
                 ...field,
                 changeType: sample([
@@ -355,8 +353,6 @@ function DataDictionary() {
         .filter((schema) => schema.fields.length > 0),
     [searchParams, dictionary],
   );
-
-  console.log('c', filteredSchemas);
 
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
