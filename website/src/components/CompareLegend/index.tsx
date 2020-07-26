@@ -29,7 +29,6 @@ const CompareLegend = ({
   };
   styles?: any;
 }) => {
-  console.log('xaaa', styles);
   const theme: Theme = useTheme();
   const diffColors = theme.diffColors;
   const { additions, deletions, updates } = comparison;
