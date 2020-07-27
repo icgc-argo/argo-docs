@@ -3,14 +3,15 @@ import { ChangeType } from '../../../components/Schema';
 
 const argoColors = argo.colors;
 
-export type DiffColors = { [key: string]: string };
+export type DiffColors = { [key in ChangeType]: string };
+
 const diffColors: DiffColors = {
   created: argoColors.accent1_dimmed,
   updated: argoColors.warning_dark,
   deleted: argoColors.error,
 };
 
-const schema: { row: { [key in ChangeType]: string } } = {
+const schema: { row: DiffColors } = {
   row: {
     updated: argoColors.warning_4,
     created: argoColors.accent1_4,
