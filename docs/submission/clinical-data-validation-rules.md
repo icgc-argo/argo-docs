@@ -35,7 +35,7 @@ These identifier fields allow for linking across the different clinical events a
 
 ### Time Intervals
 
-To prevent potential identification of donors, actual calendar dates are not permitted. The timing of different clinical events are collected in days counted from the date of primary diagnosis. The date of primary diagnosis is the date on which a definitive diagnostic procedure was performed. Validation checks are in place to ensure the values submitted for the different time interval fields make sense according to the following assumptions:
+To prevent potential identification of donors, actual calendar dates are not permitted. The timing of different clinical events are collected in days counted from the date of primary diagnosis. The date of primary diagnosis should be the date of the earliest diagnosis. Validation checks are in place to ensure the values submitted for the different time interval fields make sense according to the following assumptions:
 
 - The `age_at_primary_diagnosis` is used as the reference time point.
 - The day the patient dies is the clinical endpoint (`survival_time`).
