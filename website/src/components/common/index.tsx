@@ -18,22 +18,57 @@
  *
  */
 
-.fileFilters .dataSelectors > div {
-  margin: 0 7px 0 5px;
-}
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+import React from 'react';
+import Icon from '@icgc-argo/uikit/Icon';
+import Tooltip from '@icgc-argo/uikit/Tooltip';
+import { css } from '@emotion/core';
 
-.fileFilters [role='button'],
-.search > div {
-  min-height: 28px;
-  height: 28px;
-}
+export const DownloadIcon = ({ disabled }) => (
+  <Icon
+    name="download"
+    fill={disabled ? 'white' : 'accent2_dark'}
+    height="12px"
+    style={{
+      marginRight: '5px',
+    }}
+  />
+);
 
-.fileFilters .search svg {
-  height: 16px;
-  width: 16px;
-}
+export const DownloadButtonContent = ({ children, disabled }) => (
+  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+    <DownloadIcon disabled={disabled} />
+    {children}
+  </div>
+);
 
-.fileFilters > div {
-  display: flex;
-  align-items: center;
-}
+export const DownloadTooltip = ({ children, disabled }) => (
+  <Tooltip
+    disabled={disabled}
+    html={<span>Please select latest schema version to download templates</span>}
+  >
+    {children}
+  </Tooltip>
+);
+
+export const Display = ({
+  children,
+  visible,
+  visibleStyle = css`
+    display: block;
+  `,
+}: {
+  children: React.ReactNode;
+  visible: boolean;
+  visbleStyle: any;
+}) => (
+  <div
+    css={css`
+      display: none;
+      ${visible ? visibleStyle : null}
+    `}
+  >
+    {children}
+  </div>
+);

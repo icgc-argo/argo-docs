@@ -18,6 +18,8 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { useState, createRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
@@ -30,7 +32,12 @@ import Typography from '@icgc-argo/uikit/Typography';
 import Select from '@icgc-argo/uikit/form/Select';
 import StyleWrapper from '../../components/StyleWrapper';
 import Schema from '../../components/Schema';
-import FileFilters, { NO_ACTIVE_FILTER, DEFAULT_FILTER } from '../../components/FileFilters';
+import FileFilters, {
+  NO_ACTIVE_FILTER,
+  generateFilter,
+  DEFAULT_FILTER,
+  comparisonFilterDisplay,
+} from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
@@ -46,14 +53,29 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import { css, injectGlobal } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
-import Button from '@icgc-argo/uikit/Button';
+import OldButton from '@icgc-argo/uikit/Button';
+import Button from '../../components/Button';
 import { ResetButton, ButtonWithIcon } from '../../components/Button';
-import ComparisonFilters, { compareFilterTypes } from '../../components/ComparisonFilters';
+import CompareLegend from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
+import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
+import argoTheme from '../../styles/theme/icgc-argo';
+import { css } from '@emotion/core';
+import sample from 'lodash/sample';
+import { ChangeType } from '../../components/Schema';
+import styled from '@emotion/styled';
+
+const InfoBar = styled('div')`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #dcdde1;
+  padding-bottom: 8px;
+`;
 
 export const useModalState = () => {
   const [visibility, setVisibility] = useState(false);
@@ -86,6 +108,9 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
+//  meta containing filters and counts
+
+const dictionaryMeta = require('./meta.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -129,7 +154,8 @@ const parseDiff = (diff) =>
       return acc;
     }, {});
 
-const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
+// todo: send in schemas with diff data already there, toggle it in the ui Schema
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff, isDiffShowing }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
@@ -141,6 +167,7 @@ const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff }) =>
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}
           diff={schemaDiff}
+          isDiffShowing={isDiffShowing}
         />
       );
     })
@@ -176,11 +203,14 @@ function DataDictionary() {
   const [version, setVersion] = useState(preloadedDictionary.version);
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
+  const [meta, setMeta] = useState(dictionaryMeta);
 
-  const [diffVersion, setDiffVersion] = useState(null);
   const diffVersions = versions.filter((v) => v !== version);
+  const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
 
   const [dictionaryDiff, setDictionaryDiff] = useState(null);
+
+  const [isDiffShowing, setIsDiffShowing] = useState(false);
 
   React.useEffect(() => {
     async function updateDictionaryState() {
@@ -199,18 +229,15 @@ function DataDictionary() {
     updateDictionaryDiff();
   }, [diffVersion]);
 
-  const defaultSearchParams = { tier: '', attribute: '' };
+  const defaultSearchParams = {
+    tier: DEFAULT_FILTER.value,
+    attribute: DEFAULT_FILTER.value,
+    comparison: DEFAULT_FILTER.value,
+  };
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
 
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
-
-  const defaultCompareFilters = {
-    [compareFilterTypes.ADDITION]: true,
-    [compareFilterTypes.UPDATE]: true,
-    [compareFilterTypes.DELETION]: true,
-  };
-  const [compareFilters, setCompareFilters] = useState(defaultCompareFilters);
 
   const context = useDocusaurusContext();
   const {
@@ -221,6 +248,10 @@ function DataDictionary() {
 
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+
+  /**
+   * we can generate these filters at build time when we pull data
+   */
 
   const filters = React.useMemo(() => {
     const schemas = get(dictionary, 'schemas', []);
@@ -264,9 +295,17 @@ function DataDictionary() {
         .map((schema) => {
           const { tier, attribute } = searchParams;
           const filteredFields = schema.fields
-            .map((fields) => {
-              // comparison filters
-              return fields;
+            .map((field) => {
+              // comparison filters DEMO
+              return {
+                ...field,
+                changeType: sample([
+                  ChangeType.CREATED,
+                  ChangeType.DELETED,
+                  ChangeType.UPDATED,
+                  null,
+                ]),
+              };
             })
             .filter((field) => {
               const meta = get(field, 'meta', {});
@@ -292,21 +331,16 @@ function DataDictionary() {
                   ? true
                   : false;
 
-              const compareVal = get(field, 'compare', '');
-              const { ADDITION, DELETION, UPDATE } = compareFilters;
-
-              const comparisonBool =
-                (ADDITION && compareVal === compareFilterTypes.ADDITION) ||
-                (DELETION && compareVal === compareFilterTypes.DELETION) ||
-                (UPDATE && compareVal === compareFilterTypes.UPDATE);
-
               return tierBool && attributeBool;
             });
 
-          return { ...schema, fields: filteredFields };
+          return {
+            ...schema,
+            fields: filteredFields,
+          };
         })
         .filter((schema) => schema.fields.length > 0),
-    [searchParams, dictionary, compareFilters],
+    [searchParams, dictionary],
   );
 
   const fileCount = filteredSchemas.length;
@@ -330,7 +364,7 @@ function DataDictionary() {
   const isLatestSchema = getLatestVersion() === version ? true : false;
 
   return (
-    <ThemeProvider>
+    <EmotionThemeProvider theme={argoTheme}>
       <div id="modalCont" className={styles.modalCont} ref={modalPortalRef} />
 
       <Layout permalink="dictionary">
@@ -358,8 +392,12 @@ function DataDictionary() {
                   <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
-              <div className={styles.infobar}>
-                <div>
+              <InfoBar>
+                <div
+                  css={css`
+                    display: flex;
+                  `}
+                >
                   <VersionSelect
                     value={version}
                     versions={versions}
@@ -367,43 +405,54 @@ function DataDictionary() {
                       setVersion(v);
                     }}
                   />
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      setDiffVersion(diffVersions[0]);
-                    }}
-                  >
+                  <OldButton size="sm" onClick={() => setIsDiffShowing(true)}>
                     Compare with...
-                  </Button>
-                  {diffVersion ? (
-                    <div style={{ display: 'flex' }}>
-                      <VersionSelect
-                        value={diffVersion}
-                        versions={diffVersions}
-                        onChange={setDiffVersion}
+                  </OldButton>
+                  <Display
+                    visible={isDiffShowing}
+                    visibleStyle={css`
+                      display: flex;
+                      align-items: center;
+                    `}
+                  >
+                    <VersionSelect
+                      value={diffVersion}
+                      versions={diffVersions}
+                      onChange={setDiffVersion}
+                    />
+                    <CompareLegend
+                      comparison={meta.comparison}
+                      styles={css`
+                        margin: 0 10px;
+                      `}
+                    />
+                    <Button variant="secondary" size="sm" onClick={() => setIsDiffShowing(false)}>
+                      <Icon
+                        name="times"
+                        height="8px"
+                        css={css`
+                          padding-right: 5px;
+                        `}
                       />
-                      <Button variant="secondary" onClick={() => setDiffVersion(null)}>
-                        <Icon name="times" height="8px" />
-                        <span style={{ marginLeft: '5px' }}>CLEAR</span>
-                      </Button>
-                    </div>
-                  ) : null}
+                      CLEAR
+                    </Button>
+                  </Display>
                 </div>
-                <div className={styles.downloads}>
-                  <Button
+
+                <div>
+                  <OldButton
                     variant="secondary"
                     size="sm"
                     onClick={(item) => downloadTsvFileTemplate(`all`)}
                   >
                     <DownloadButtonContent>File Templates</DownloadButtonContent>
-                  </Button>
+                  </OldButton>
 
                   {/*<Button variant="secondary" size="sm" onClick={() => console.log('pdf')}>
                     <DownloadButtonContent>PDF</DownloadButtonContent>
                   </Button>*/}
                 </div>
-              </div>
-
+              </InfoBar>
               {/*<div className={styles.infobar} style={{ justifyContent: 'center' }}>
                 {
                   <Tabs
@@ -425,40 +474,26 @@ function DataDictionary() {
                 <Row>
                   <Meta files={fileCount} fields={fieldCount} />
                   <div
-                    className={css`
+                    css={css`
                       display: flex;
                       flex-direction: row;
                     `}
                   >
-                    <ComparisonFilters
-                      additions={24}
-                      updates={13}
-                      deletions={53}
-                      filters={compareFilters}
-                      onChange={(type) => {
-                        const newFilters = {
-                          ...compareFilters,
-                          ...{ [type]: !compareFilters[type] },
-                        };
-                        setCompareFilters(newFilters);
-                      }}
-                    />
-
                     <FileFilters
-                      dataTiers={DEFAULT_FILTER.concat(
-                        filters.tiers.map((d) => ({ content: startCase(d), value: d })),
-                      )}
-                      dataAttributes={DEFAULT_FILTER.concat(
-                        filters.attributes.map((d) => ({
-                          content: startCase(d),
-                          value: d,
-                        })),
+                      dataTiers={filters.tiers.map(generateFilter)}
+                      dataAttributes={filters.attributes.map(generateFilter)}
+                      comparisons={Object.keys(meta.comparison).map((k) =>
+                        generateFilter(comparisonFilterDisplay[k]),
                       )}
                       searchParams={searchParams}
-                      onSearch={(search) => setSearchParams(search)}
+                      onFilter={(search) => setSearchParams(search)}
                     />
                     <ResetButton
-                      disabled={searchParams.tier === '' && searchParams.attribute === ''}
+                      disabled={
+                        searchParams.tier === NO_ACTIVE_FILTER &&
+                        searchParams.attribute === NO_ACTIVE_FILTER &&
+                        searchParams.comparison === NO_ACTIVE_FILTER
+                      }
                       onClick={() => setSearchParams(defaultSearchParams)}
                     >
                       Reset
@@ -469,7 +504,7 @@ function DataDictionary() {
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
-                  className={css`
+                  css={css`
                     margin-top: 30px;
                   `}
                 >
@@ -478,6 +513,7 @@ function DataDictionary() {
                     diff={dictionaryDiff}
                     menuContents={menuContents}
                     isLatestSchema={isLatestSchema}
+                    isDiffShowing={isDiffShowing}
                   />
                 </div>
               </Display>
@@ -506,7 +542,7 @@ function DataDictionary() {
           </div>
         </StyleWrapper>
       </Layout>
-    </ThemeProvider>
+    </EmotionThemeProvider>
   );
 }
 
