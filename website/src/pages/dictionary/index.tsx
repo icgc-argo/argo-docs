@@ -53,7 +53,6 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import { css as _oldCSS, injectGlobal } from 'emotion';
 import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import OldButton from '@icgc-argo/uikit/Button';
@@ -475,7 +474,7 @@ function DataDictionary() {
                 <Row>
                   <Meta files={fileCount} fields={fieldCount} />
                   <div
-                    className={_oldCSS`
+                    css={css`
                       display: flex;
                       flex-direction: row;
                     `}
@@ -505,7 +504,7 @@ function DataDictionary() {
 
               <Display visible={selectedTab === TAB_STATE.DETAILS}>
                 <div
-                  className={_oldCSS`
+                  css={css`
                     margin-top: 30px;
                   `}
                 >
