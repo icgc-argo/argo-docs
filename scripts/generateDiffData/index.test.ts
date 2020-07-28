@@ -83,7 +83,20 @@ const expectedResult = {
         },
       },
     },
-    updated: {},
+    updated: {
+      gender: {
+        description: {
+          left:
+            'Description of the donor self-reported gender. Gender is described as the assemblage of properties that distinguish people on the basis of their societal roles.',
+          right: 'needs to be here ',
+        },
+      },
+      specimen_tissue_source: {},
+      tumour_normal_designation: {},
+      specimen_type: {},
+      submitter_sample_id: {},
+      sample_type: {},
+    },
   },
   donor: {
     created: {},

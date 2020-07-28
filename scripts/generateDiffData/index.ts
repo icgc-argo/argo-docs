@@ -24,12 +24,24 @@ type Diff = {
   };
 };
 
+const checkField = (field) => {
+  const changes = {};
+  const { left: leftDiff, right: rightDiff, diff } = field;
+  if (diff.description) {
+    const left = leftDiff.description;
+    const right = rightDiff.description;
+    changes['description'] = { left, right };
+  }
+
+  return changes;
+};
+
 const generateDiffChanges = (schemaDiff: any): any => {
   return schemaDiff.reduce((acc, val) => {
     const [name, changes] = val;
     const { schemaName, fieldName } = parseDiffFieldName(name);
     console.log(schemaName, fieldName, acc);
-    const diff = changes.diff;
+    const fieldChanges = changes.diff;
     schemaName in acc ||
       (acc[schemaName] = {
         [ChangeTypeName.UPDATED]: {},
@@ -37,11 +49,15 @@ const generateDiffChanges = (schemaDiff: any): any => {
         [ChangeTypeName.DELETED]: {},
       });
 
-    if (diff.type === ChangeTypeName.CREATED || diff.type === ChangeTypeName.DELETED) {
+    if (
+      fieldChanges.type === ChangeTypeName.CREATED ||
+      fieldChanges.type === ChangeTypeName.DELETED
+    ) {
       // created or deleted field
-      acc[schemaName][diff.type][fieldName] = diff.data;
+      acc[schemaName][fieldChanges.type][fieldName] = fieldChanges.data;
     } else {
-      // created field
+      // updated field, find out which fields updated
+      acc[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
     }
 
     //console.log(acc);
