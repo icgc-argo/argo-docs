@@ -36,6 +36,7 @@ const checkField = (field) => {
   return changes;
 };
 
+// created and deleted fields will just be displayed, no need to diff properties
 const generateDiffChanges = (schemaDiff: any): any => {
   return schemaDiff.reduce((acc, val) => {
     const [name, changes] = val;
@@ -45,8 +46,8 @@ const generateDiffChanges = (schemaDiff: any): any => {
     schemaName in acc ||
       (acc[schemaName] = {
         [ChangeTypeName.UPDATED]: {},
-        [ChangeTypeName.CREATED]: {},
-        [ChangeTypeName.DELETED]: {},
+        [ChangeTypeName.CREATED]: [],
+        [ChangeTypeName.DELETED]: [],
       });
 
     if (
@@ -54,7 +55,7 @@ const generateDiffChanges = (schemaDiff: any): any => {
       fieldChanges.type === ChangeTypeName.DELETED
     ) {
       // created or deleted field
-      acc[schemaName][fieldChanges.type][fieldName] = fieldChanges.data;
+      acc[schemaName][fieldChanges.type].push({ [fieldName]: fieldChanges.data });
     } else {
       // updated field, find out which fields updated
       acc[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
@@ -162,4 +163,4 @@ function x(schemaDiff) {
   return diffs;
 }
 
-export { generateDiffChanges, x };
+export default generateDiffChanges;
