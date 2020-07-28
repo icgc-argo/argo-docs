@@ -113,7 +113,7 @@ const preloadedDictionary = { data: data.dictionary, version: data.currentVersio
 const dictionaryMeta = require('./meta.json');
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/1.1/1.1-diff-1.0.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/0.2/0.2-diff-0.1.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
