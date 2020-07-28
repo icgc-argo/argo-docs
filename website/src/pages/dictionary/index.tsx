@@ -108,9 +108,12 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-//  meta containing filters and counts
 
+//  meta containing filters and counts
 const dictionaryMeta = require('./meta.json');
+
+// one version (that has been downloaded) behind latest version
+const preloadedDiff = require('../../../static/data/schemas/diffs/1.1/1.1-diff-1.0.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -120,7 +123,7 @@ const versions = data.versions;
 async function fetchDictionary(version) {
   try {
     const dict = await axios.get(`/data/schemas/${version}.json`);
-    const tree = await axios.get(`/data/schemas/${version}_tree.json`);
+    const tree = await axios.get(`/data/schemas/${version}_tree.writeFile`);
     return { dict: dict.data, tree: tree.data };
   } catch (e) {
     throw e;
@@ -154,19 +157,18 @@ const parseDiff = (diff) =>
       return acc;
     }, {});
 
-// todo: send in schemas with diff data already there, toggle it in the ui Schema
 const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff, isDiffShowing }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
-      const schemaDiff = get(diff, schema.name, null);
+      //const schemaDiff = get(diff, schema.name, null);
 
       return (
         <Schema
           schema={schema}
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}
-          diff={schemaDiff}
+          diff={diff[schema.name]}
           isDiffShowing={isDiffShowing}
         />
       );
@@ -208,7 +210,7 @@ function DataDictionary() {
   const diffVersions = versions.filter((v) => v !== version);
   const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
 
-  const [dictionaryDiff, setDictionaryDiff] = useState(null);
+  const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
@@ -293,45 +295,32 @@ function DataDictionary() {
       dictionary.schemas
         .map((schema) => {
           const { tier, attribute } = searchParams;
-          const filteredFields = schema.fields
-            .map((field) => {
-              // comparison filters DEMO
-              return {
-                ...field,
-                changeType: sample([
-                  ChangeType.CREATED,
-                  ChangeType.DELETED,
-                  ChangeType.UPDATED,
-                  null,
-                ]),
-              };
-            })
-            .filter((field) => {
-              const meta = get(field, 'meta', {});
-              const { primaryId = false, core = false, dependsOn = false } = meta;
-              const required = get(field, 'restrictions.required', false);
+          const filteredFields = schema.fields.filter((field) => {
+            const meta = get(field, 'meta', {});
+            const { primaryId = false, core = false, dependsOn = false } = meta;
+            const required = get(field, 'restrictions.required', false);
 
-              if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
+            if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
 
-              const tierBool =
-                (tier === TAG_TYPES.id && primaryId) ||
-                (tier === TAG_TYPES.core && core) ||
-                (tier === TAG_TYPES.extended && !core && !primaryId) ||
-                tier === '' ||
-                tier === NO_ACTIVE_FILTER
-                  ? true
-                  : false;
+            const tierBool =
+              (tier === TAG_TYPES.id && primaryId) ||
+              (tier === TAG_TYPES.core && core) ||
+              (tier === TAG_TYPES.extended && !core && !primaryId) ||
+              tier === '' ||
+              tier === NO_ACTIVE_FILTER
+                ? true
+                : false;
 
-              const attributeBool =
-                (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
-                (attribute === TAG_TYPES.required && required) ||
-                attribute === '' ||
-                attribute === NO_ACTIVE_FILTER
-                  ? true
-                  : false;
+            const attributeBool =
+              (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
+              (attribute === TAG_TYPES.required && required) ||
+              attribute === '' ||
+              attribute === NO_ACTIVE_FILTER
+                ? true
+                : false;
 
-              return tierBool && attributeBool;
-            });
+            return tierBool && attributeBool;
+          });
 
           return {
             ...schema,

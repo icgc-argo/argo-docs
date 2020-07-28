@@ -39,6 +39,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
+import { FieldDescription } from './TableComponents';
 
 const Notes = styled('div')`
   margin-bottom: 15px;
@@ -75,13 +76,6 @@ const HeaderName = ({ name }) => {
     </SchemaTitle>
   );
 };
-
-const FieldDescription = ({ name, description }) => (
-  <div className={styles.fieldDescription}>
-    <div className={styles.name}>{name}</div>
-    <div>{description}</div>
-  </div>
-);
 
 const FieldsTag = ({ fieldCount }) => (
   <DefaultTag
@@ -189,8 +183,8 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description } }) => (
-        <FieldDescription name={name} description={description} />
+      Cell: ({ original: { name, description, diff } }) => (
+        <FieldDescription name={name} description={description} diff={diff && diff.description} />
       ),
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
@@ -269,15 +263,23 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
+  console.log('diff', diff);
 
+  // dont want this map each time
+  // toggle diff display in cells to avoid computation on toggling
+  const { created, updated, deleted } = diff || {};
   const tableData = diff
-    ? schema.fields.map((field) => {
-        // check if field has a diff
-        const fieldDiff = get(diff, field.name, null);
-        return fieldDiff ? { ...field, ...{ diff: fieldDiff } } : field;
-      })
+    ? schema.fields
+        .map((field) => {
+          // check if field has a diff
+          return field.name in updated
+            ? { ...field, changeType: 'updated', diff: updated[field.name] }
+            : field;
+        })
+        .concat(created, deleted)
     : schema.fields;
 
+  console.log('table data', tableData);
   const theme: Theme = useTheme();
   const rowColors = theme.schema.row;
 
