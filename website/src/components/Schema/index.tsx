@@ -259,20 +259,24 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
   const mapToFieldArr = (map, type) =>
     Object.keys(map).map((k) => ({ ...map[k], changeType: type }));
 
+  // todo default sort alpha field
   const tableData = diff
     ? schema.fields
         .filter((field) => {
           // filter out fields which have deleted
+          //console.log(field.name, deleted);
           return !(field.name in deleted);
         })
         .map((field) => {
-          // check if field has a diff
-          // if(deleted) return deleted (keeps order to some degree)
+          // map fields (updated and created) that are present already
           return field.name in updated
             ? { ...field, changeType: 'updated', diff: updated[field.name] }
+            : field.name in created
+            ? { ...field, changeType: 'created' }
             : field;
         })
-        .concat(mapToFieldArr(created, 'created'), mapToFieldArr(deleted, 'deleted'))
+        // add deleted fields
+        .concat(mapToFieldArr(deleted, 'deleted'))
     : schema.fields;
   console.log(tableData);
 
@@ -355,7 +359,7 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
           columns={cols}
           data={tableData}
           showPagination={false}
-          defaultPageSize={schema.fields.length}
+          defaultPageSize={tableData.length}
           sortable={true}
           cellAlignment="top"
           withOutsideBorder
