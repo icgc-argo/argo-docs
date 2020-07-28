@@ -28,9 +28,14 @@ const checkField = (field) => {
   const changes = {};
   const { left: leftDiff, right: rightDiff, diff } = field;
   if (diff.description) {
-    const left = leftDiff.description;
-    const right = rightDiff.description;
-    changes['description'] = { left, right };
+    changes['description'] = { left: leftDiff.description, right: rightDiff.description };
+  }
+
+  if (diff.meta) {
+    if (diff.meta.notes) {
+      'meta' in changes || (changes['meta'] = {});
+      changes['meta']['notes'] = { left: leftDiff.meta.notes, right: rightDiff.meta.notes };
+    }
   }
 
   return changes;
@@ -38,16 +43,17 @@ const checkField = (field) => {
 
 // created and deleted fields will just be displayed, no need to diff properties
 const generateDiffChanges = (schemaDiff: any): any => {
+  console.log(schemaDiff);
   return schemaDiff.reduce((acc, val) => {
     const [name, changes] = val;
     const { schemaName, fieldName } = parseDiffFieldName(name);
-    console.log(schemaName, fieldName, acc);
+    // console.log(schemaName, fieldName, acc);
     const fieldChanges = changes.diff;
     schemaName in acc ||
       (acc[schemaName] = {
         [ChangeTypeName.UPDATED]: {},
-        [ChangeTypeName.CREATED]: [],
-        [ChangeTypeName.DELETED]: [],
+        [ChangeTypeName.CREATED]: {},
+        [ChangeTypeName.DELETED]: {},
       });
 
     if (
@@ -55,7 +61,10 @@ const generateDiffChanges = (schemaDiff: any): any => {
       fieldChanges.type === ChangeTypeName.DELETED
     ) {
       // created or deleted field
-      acc[schemaName][fieldChanges.type].push({ [fieldName]: fieldChanges.data });
+      acc[schemaName][fieldChanges.type][fieldName] = {
+        changeType: fieldChanges.type,
+        ...fieldChanges.data,
+      };
     } else {
       // updated field, find out which fields updated
       acc[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
@@ -132,7 +141,7 @@ function x(schemaDiff) {
    * generating further objects from the change object
    */
   const changes = generateDiffChanges(schemaDiff);
-  console.log('changes', changes);
+  //console.log('changes', changes);
   const { metaChanges, restrictionsChanges } = changes;
   const diffs = {};
   Object.keys(restrictionsChanges).map((k) => {
@@ -159,7 +168,7 @@ function x(schemaDiff) {
       createEntry(fieldChange, diffs, ChangeTypeName.UPDATED, 'meta');
     }
   });
-  console.log('diffs', diffs);
+  // console.log('diffs', diffs);
   return diffs;
 }
 

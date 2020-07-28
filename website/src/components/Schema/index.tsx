@@ -39,12 +39,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
-import { FieldDescription } from './TableComponents';
-
-const Notes = styled('div')`
-  margin-bottom: 15px;
-  white-space: pre-wrap;
-`;
+import { FieldDescription, Script } from './TableComponents';
 
 const TagContainer = styled('div')`
   display: flex;
@@ -124,28 +119,6 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
   const isCodeListExpanded = (field) => expandedCodeLists[field];
 
   const [currentShowingScripts, setCurrentShowingScripts] = React.useState(null);
-  const ScriptCell = ({ original: { meta, restrictions, name } }) => {
-    const scripts = restrictions && restrictions.script;
-    return (
-      <div>
-        {meta && meta.notes && <Notes>{meta.notes}</Notes>}
-        {scripts && (
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              setCurrentShowingScripts({
-                fieldName: name,
-                content: scripts,
-              });
-            }}
-          >
-            View Script
-          </Button>
-        )}
-      </div>
-    );
-  };
 
   const CellContentCenter = styled('div')`
     width: 100%;
@@ -257,29 +230,53 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ScriptCell,
+      Cell: ({ original: { name, meta, restrictions, diff } }) => {
+        console.log(diff);
+        const notes = meta && meta.notes;
+        const script = restrictions && restrictions.script;
+        return (
+          <Script
+            name={name}
+            notes={notes}
+            script={script}
+            diff={diff}
+            showScript={setCurrentShowingScripts}
+          />
+        );
+      },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
-  console.log('diff', diff);
+  // console.log('diff', diff);
 
   // dont want this map each time
   // toggle diff display in cells to avoid computation on toggling
   const { created, updated, deleted } = diff || {};
+  //console.log(diff);
+
+  const mapToFieldArr = (map, type) =>
+    Object.keys(map).map((k) => ({ ...map[k], changeType: type }));
+
   const tableData = diff
     ? schema.fields
+        .filter((field) => {
+          // filter out fields which have deleted
+          return !(field.name in deleted);
+        })
         .map((field) => {
           // check if field has a diff
+          // if(deleted) return deleted (keeps order to some degree)
           return field.name in updated
             ? { ...field, changeType: 'updated', diff: updated[field.name] }
             : field;
         })
-        .concat(created, deleted)
+        .concat(mapToFieldArr(created, 'created'), mapToFieldArr(deleted, 'deleted'))
     : schema.fields;
+  console.log(tableData);
 
-  console.log('table data', tableData);
+  //console.log('table data', tableData);
   const theme: Theme = useTheme();
   const rowColors = theme.schema.row;
 

@@ -1,6 +1,9 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import React from 'react';
+import Button from '../../components/Button';
+import styled from '@emotion/styled';
+import get from 'lodash/get';
 
 /* const diffPartial = ({ diff }) => css`
 ${diff.type === 'updated' ?  'orange' : diff.type ===}`; */
@@ -52,4 +55,34 @@ const FieldDescription = ({
   </div>
 );
 
-export { FieldDescription };
+const Script = ({ script, notes, name, diff, showScript }) => {
+  //console.log('notes', notes, diff);
+  const notesDiff = get(diff, 'meta.notes', null);
+  const scriptDiff = get(diff, 'restrictions.script', null);
+  return (
+    <div>
+      {notesDiff ? (
+        <CompareText oldText={notesDiff.left} newText={notesDiff.right} />
+      ) : notes ? (
+        <div>{notes}</div>
+      ) : null}
+
+      {script && (
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => {
+            showScript({
+              fieldName: name,
+              content: script,
+            });
+          }}
+        >
+          View Script
+        </Button>
+      )}
+    </div>
+  );
+};
+
+export { FieldDescription, Script };
