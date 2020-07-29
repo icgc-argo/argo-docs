@@ -31,7 +31,6 @@ import { DownloadButtonContent, DownloadTooltip } from '../common';
 import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal, useModalState } from '../../pages/dictionary';
-import ScriptModal from '../ScriptModal';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
@@ -40,6 +39,10 @@ import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
 import { FieldDescription, Script } from './TableComponents';
+import Modal from '../Modal';
+import Typography from '@icgc-argo/uikit/Typography';
+import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
+import { css } from '@emotion/core';
 
 const TagContainer = styled('div')`
   display: flex;
@@ -118,7 +121,11 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
 
   const isCodeListExpanded = (field) => expandedCodeLists[field];
 
-  const [currentShowingScripts, setCurrentShowingScripts] = React.useState(null);
+  const [currentShowingScript, setCurrentShowingScripts] = React.useState<{
+    diff?: { left: string[]; right: string[] };
+    content?: string[];
+    fieldName: string;
+  }>(null);
 
   const CellContentCenter = styled('div')`
     width: 100%;
@@ -231,7 +238,7 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff } }) => {
-        console.log(diff);
+        // console.log(diff);
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
         return (
@@ -292,15 +299,36 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
-      {currentShowingScripts && (
+      {currentShowingScript && (
         <ModalPortal>
-          <ScriptModal
-            field={currentShowingScripts.fieldName}
-            scripts={currentShowingScripts.content}
+          <Modal
+            css={css`
+              min-width: 600px;
+            `}
+            title={
+              <Typography variant="subtitle">
+                Field Script Restriction for:{' '}
+                <span style={{ fontWeight: 600 }}>{currentShowingScript.fieldName}</span>
+              </Typography>
+            }
             onCloseClick={() => {
               setCurrentShowingScripts(null);
             }}
-          />
+            onCancelClick={() => {
+              setCurrentShowingScripts(null);
+            }}
+            actionVisible={false}
+            buttonSize="sm"
+          >
+            {currentShowingScript.diff ? (
+              <CompareCodeBlock
+                left={currentShowingScript.diff.left}
+                right={currentShowingScript.diff.right}
+              />
+            ) : (
+              <CodeBlock codes={currentShowingScript.content} />
+            )}
+          </Modal>
         </ModalPortal>
       )}
       <div

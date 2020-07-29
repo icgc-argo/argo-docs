@@ -55,10 +55,24 @@ const FieldDescription = ({
   </div>
 );
 
-const Script = ({ script, notes, name, diff, showScript }) => {
-  //console.log('notes', notes, diff);
+type TextDiff = { left: string; right: string };
+
+const Script = ({
+  script,
+  notes,
+  name,
+  diff,
+  showScript,
+}: {
+  script: string[];
+  notes: string;
+  name: string;
+  diff: TextDiff;
+  showScript: any;
+}) => {
   const notesDiff = get(diff, 'meta.notes', null);
   const scriptDiff = get(diff, 'restrictions.script', null);
+  console.log('script diff', scriptDiff);
   return (
     <div>
       {notesDiff ? (
@@ -67,7 +81,31 @@ const Script = ({ script, notes, name, diff, showScript }) => {
         <div>{notes}</div>
       ) : null}
 
-      {script && (
+      {scriptDiff ? (
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            showScript({
+              diff: { left: scriptDiff.left, right: scriptDiff.right },
+              fieldName: name,
+            })
+          }
+          css={css`
+            color: white;
+            border: 1px solid #ec8f17;
+            background-color: #ec8f17;
+
+            &:hover,
+            &:active,
+            &:focus {
+              color: black;
+            }
+          `}
+        >
+          View Script Updates
+        </Button>
+      ) : script ? (
         <Button
           variant="secondary"
           size="sm"
@@ -80,7 +118,7 @@ const Script = ({ script, notes, name, diff, showScript }) => {
         >
           View Script
         </Button>
-      )}
+      ) : null}
     </div>
   );
 };
