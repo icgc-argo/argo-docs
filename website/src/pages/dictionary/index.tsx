@@ -157,18 +157,16 @@ const parseDiff = (diff) =>
       return acc;
     }, {});
 
-const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff, isDiffShowing }) =>
+const RenderDictionary = ({ schemas, menuContents, isLatestSchema, isDiffShowing }) =>
   schemas.length > 0 ? (
     schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
-      //const schemaDiff = get(diff, schema.name, null);
 
       return (
         <Schema
           schema={schema}
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}
-          diff={diff[schema.name]}
           isDiffShowing={isDiffShowing}
         />
       );
@@ -201,6 +199,41 @@ const getDictionaryDiff = async (version, diffVersion) => {
   return parseDiff(diff);
 };
 
+const compareDictionaries = () => {};
+
+/**
+ * isDiffShowing show deleted ie. dont filter
+ * join here because we need to show meta
+ */
+
+type DiffType = {};
+
+/**
+ *
+ * @param schema
+ * @param schemaDiff
+ * add diff data to object
+ */
+const mergeSchemaData = (schema, schemaDiff) => {
+  console.log(schema, schemaDiff);
+  const { created, deleted, updated } = schemaDiff;
+  const fieldsToAdd = Object.values(deleted);
+
+  // if a field has been created or updated, add this data
+  const allFields = schema.fields
+    .map((field) => {
+      const fieldName = field.name;
+      return updated[fieldName]
+        ? { ...field, diff: updated[fieldName], changeType: ChangeType.UPDATED }
+        : created[fieldName]
+        ? { ...field, diff: updated[fieldName], changeType: ChangeType.CREATED }
+        : field;
+    })
+    .concat(fieldsToAdd);
+
+  return { ...schema, fields: allFields };
+};
+
 function DataDictionary() {
   const [version, setVersion] = useState(preloadedDictionary.version);
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
@@ -208,12 +241,12 @@ function DataDictionary() {
   const [meta, setMeta] = useState(dictionaryMeta);
 
   const diffVersions = versions.filter((v) => v !== version);
-  const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
 
+  const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
   const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
-
+  console.log('dict', dictionary);
   React.useEffect(() => {
     async function updateDictionaryState() {
       const dict = await getDictionary(version, preloadedDictionary);

@@ -82,10 +82,18 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
-  // SSR fix
-  if (typeof schema === 'undefined') return null;
+const getTableData = (isDiffShowing, schema) =>
+  isDiffShowing
+    ? schema.fields
+    : schema.fields
+        .filter((field) => {
+          // filter out fields which have deleted or created
+          // return field.changeType !== ChangeType.DELETED;
+          return field.changeType !== ChangeType.DELETED;
+        })
+        .map((field) => ({ ...field, changeType: null, diff: null }));
 
+const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -259,35 +267,10 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
   // console.log('diff', diff);
 
   // dont want this map each time
-  // toggle diff display in cells to avoid computation on toggling
-  const { created, updated, deleted } = diff || {};
-  //console.log(diff);
 
   const mapToFieldArr = (map, type) =>
     Object.keys(map).map((k) => ({ ...map[k], changeType: type }));
 
-  // todo default sort alpha field
-  const tableData = diff
-    ? schema.fields
-        .filter((field) => {
-          // filter out fields which have deleted
-          //console.log(field.name, deleted);
-          return !(field.name in deleted);
-        })
-        .map((field) => {
-          // map fields (updated and created) that are present already
-          return field.name in updated
-            ? { ...field, changeType: 'updated', diff: updated[field.name] }
-            : field.name in created
-            ? { ...field, changeType: 'created' }
-            : field;
-        })
-        // add deleted fields
-        .concat(mapToFieldArr(deleted, 'deleted'))
-    : schema.fields;
-  console.log(tableData);
-
-  //console.log('table data', tableData);
   const theme: Theme = useTheme();
   const rowColors = theme.schema.row;
 
@@ -296,6 +279,8 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
       background: rowColors[changeType],
     },
   });
+
+  const tableData = getTableData(isDiffShowing, schema);
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
@@ -383,11 +368,13 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
             const changeType = rowInfo.original.changeType;
             return changeType ? highlightRowDiff(changeType) : {};
           }}
+          resolveData={(data) => data.map((row) => row)}
           parentRef={containerRef}
           columns={cols}
           data={tableData}
           showPagination={false}
           defaultPageSize={tableData.length}
+          pageSize={tableData.length}
           sortable={true}
           cellAlignment="top"
           withOutsideBorder
