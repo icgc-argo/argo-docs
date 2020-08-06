@@ -36,12 +36,14 @@ const FileFilters = ({
   dataAttributes = [], // change to attributes
   comparisons = [],
   searchParams = {},
+  isDiffShowing,
   onFilter,
 }: {
   dataTiers: Array<FilterSelect>;
   dataAttributes: Array<FilterSelect>;
   comparisons: Array<FilterSelect>;
   searchParams: { [key: string]: string };
+  isDiffShowing: boolean;
   onFilter: (any) => void;
 }) => {
   // update search params
@@ -58,13 +60,15 @@ const FileFilters = ({
           align-items: center;
         `}
       >
-        <Filter
-          label="Comparison"
-          ariaLabel="Comparison Attribute Select"
-          options={[DEFAULT_FILTER, ...comparisons]}
-          value={searchParams.comparison}
-          onChange={onSelect('comparison')}
-        />
+        {isDiffShowing ? (
+          <Filter
+            label="Comparison"
+            ariaLabel="Comparison Attribute Select"
+            options={[DEFAULT_FILTER, ...comparisons]}
+            value={searchParams.comparison}
+            onChange={onSelect('comparison')}
+          />
+        ) : null}
 
         <Filter
           label="Data Tier"
@@ -97,11 +101,16 @@ const FileFilters = ({
   );
 };
 
-export const comparisonFilterDisplay = {
-  updates: 'Updated fields',
-  deletions: 'Deleted fields',
-  additions: 'Added fields',
+const comparisonFilterDisplay = {
+  updated: 'Updated fields',
+  deleted: 'Deleted fields',
+  created: 'Added fields',
 };
+
+export const generateComparisonFilter = (key: string) => ({
+  content: comparisonFilterDisplay[key],
+  value: key,
+});
 
 export const generateFilter = (item: string): FilterSelect => ({
   content: startCase(item),
