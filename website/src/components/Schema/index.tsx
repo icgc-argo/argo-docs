@@ -27,10 +27,8 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import { DownloadButtonContent, DownloadTooltip } from '../common';
-import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
-import { ModalPortal, useModalState } from '../../pages/dictionary';
+import { ModalPortal } from '../../pages/dictionary';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
@@ -264,12 +262,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
-  // console.log('diff', diff);
-
-  // dont want this map each time
-
-  const mapToFieldArr = (map, type) =>
-    Object.keys(map).map((k) => ({ ...map[k], changeType: type }));
 
   const theme: Theme = useTheme();
   const rowColors = theme.schema.row;
@@ -368,7 +360,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
             const changeType = rowInfo.original.changeType;
             return changeType ? highlightRowDiff(changeType) : {};
           }}
-          resolveData={(data) => data.map((row) => row)}
           parentRef={containerRef}
           columns={cols}
           data={tableData}
