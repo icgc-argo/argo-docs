@@ -1,7 +1,3 @@
-import get from 'lodash/get';
-import { analyzer } from '@overturebio-stack/lectern-client';
-import { parse } from 'querystring';
-
 type Field = {};
 type TextChange = { left: string; right: string };
 
@@ -27,14 +23,83 @@ type Diff = {
 const checkField = (field) => {
   const changes = {};
   const { left: leftDiff, right: rightDiff, diff } = field;
+
   if (diff.description) {
     changes['description'] = { left: leftDiff.description, right: rightDiff.description };
   }
 
-  if (diff.meta) {
-    if (diff.meta.notes) {
-      'meta' in changes || (changes['meta'] = {});
+  const meta = diff.meta;
+  if (meta) {
+    'meta' in changes || (changes['meta'] = {});
+    if (meta.notes) {
       changes['meta']['notes'] = { left: leftDiff.meta.notes, right: rightDiff.meta.notes };
+    }
+
+    if (meta.validationDependency) {
+      changes['meta']['validationDependency'] = {
+        left: leftDiff.meta.validationDependency,
+        right: rightDiff.meta.validationDependency,
+      };
+    }
+
+    if (meta.core) {
+      changes['meta']['core'] = { left: leftDiff.meta.core, right: rightDiff.meta.core };
+    }
+
+    if (meta.displayName) {
+      changes['meta']['displayName'] = {
+        left: leftDiff.meta.displayName,
+        right: rightDiff.meta.displayName,
+      };
+    }
+
+    // deleted fields
+    if (meta.type && meta.type === 'deleted') {
+      const deletedFields = meta.data;
+      for (let [key, value] of Object.entries(deletedFields)) {
+        changes['meta'][key] = { left: value, right: null };
+      }
+    }
+  }
+
+  const restrictions = diff.restrictions;
+  if (restrictions) {
+    'restrictions' in changes || (changes['restrictions'] = {});
+    if (restrictions.script) {
+      changes['restrictions']['script'] = {
+        left: leftDiff.restrictions.script,
+        right: rightDiff.restrictions.script,
+      };
+    }
+
+    if (restrictions.codeList) {
+      changes['restrictions']['codeList'] = {
+        left: leftDiff.restrictions.codeList,
+        right: rightDiff.restrictions.codeList,
+        data: diff.restrictions.codeList.data,
+      };
+    }
+
+    if (restrictions.required) {
+      changes['restrictions']['required'] = {
+        left: leftDiff.restrictions.required,
+        right: rightDiff.restrictions.required,
+      };
+    }
+
+    if (restrictions.regex) {
+      changes['restrictions']['regex'] = {
+        left: leftDiff.restrictions.regex,
+        right: rightDiff.restrictions.regex,
+      };
+    }
+
+    // deleted fields
+    if (restrictions.type && restrictions.type === 'deleted') {
+      const deletedFields = restrictions.data;
+      for (let [key, value] of Object.entries(deletedFields)) {
+        changes['restrictions'][key] = { left: value, right: null };
+      }
     }
   }
 
@@ -43,7 +108,6 @@ const checkField = (field) => {
 
 // created and deleted fields will just be displayed, no need to diff properties
 const generateDiffChanges = (schemaDiff: any): any => {
-  console.log(schemaDiff);
   return schemaDiff.reduce((acc, val) => {
     const [name, changes] = val;
     const { schemaName, fieldName } = parseDiffFieldName(name);
@@ -62,7 +126,7 @@ const generateDiffChanges = (schemaDiff: any): any => {
     ) {
       // created or deleted field
       acc[schemaName][fieldChanges.type][fieldName] = {
-        changeType: fieldChanges.type,
+        //  changeType: fieldChanges.type,
         ...fieldChanges.data,
       };
     } else {
@@ -108,68 +172,5 @@ const parseDiffFieldName = (fieldName: string): { schemaName: string; fieldName:
   const strArray = fieldName.split('.');
   return { schemaName: strArray[0], fieldName: strArray[1] };
 };
-
-const createEntry = (fieldChange, diffs, type, fieldType) => {
-  const { field, definition } = fieldChange;
-  const { schemaName, fieldName } = parseDiffFieldName(field);
-  console.log(schemaName, fieldName, definition);
-  schemaName in diffs || (diffs[schemaName] = {});
-  fieldName in diffs[schemaName] || (diffs[schemaName][fieldName] = {});
-  diffs[schemaName][fieldName][fieldType] = {
-    type,
-    diff: definition,
-  };
-};
-
-/* const iterateFieldType = (fieldType) => {
-  Object.keys(fieldType).map((k) => {
-    const { created, deleted, updated } = fieldType[k];
-    for (const fieldChange of created) {
-      createEntry(fieldChange, diffs, ChangeTypeName.CREATED);
-    }
-    for (const fieldChange of deleted) {
-      createEntry(fieldChange, diffs, ChangeTypeName.DELETED);
-    }
-    for (const fieldChange of updated) {
-      createEntry(fieldChange, diffs, ChangeTypeName.UPDATED);
-    }
-}
- */
-function x(schemaDiff) {
-  /**
-   * extra step here, using js-lectern-client code to generate a change object
-   * generating further objects from the change object
-   */
-  const changes = generateDiffChanges(schemaDiff);
-  //console.log('changes', changes);
-  const { metaChanges, restrictionsChanges } = changes;
-  const diffs = {};
-  Object.keys(restrictionsChanges).map((k) => {
-    const { created, deleted, updated } = restrictionsChanges[k];
-    for (const fieldChange of created) {
-      createEntry(fieldChange, diffs, ChangeTypeName.CREATED, 'restrictions');
-    }
-    for (const fieldChange of deleted) {
-      createEntry(fieldChange, diffs, ChangeTypeName.DELETED, 'restrictions');
-    }
-    for (const fieldChange of updated) {
-      createEntry(fieldChange, diffs, ChangeTypeName.UPDATED, 'restrictions');
-    }
-  });
-  Object.keys(metaChanges).map((k) => {
-    const { created, deleted, updated } = metaChanges[k];
-    for (const fieldChange of created) {
-      createEntry(fieldChange, diffs, ChangeTypeName.CREATED, 'meta');
-    }
-    for (const fieldChange of deleted) {
-      createEntry(fieldChange, diffs, ChangeTypeName.DELETED, 'meta');
-    }
-    for (const fieldChange of updated) {
-      createEntry(fieldChange, diffs, ChangeTypeName.UPDATED, 'meta');
-    }
-  });
-  // console.log('diffs', diffs);
-  return diffs;
-}
 
 export default generateDiffChanges;

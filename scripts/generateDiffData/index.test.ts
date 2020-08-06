@@ -26,6 +26,8 @@ import * as fse from 'fs-extra';
 const expect = chai.expect;
 
 const expectedResult = {
+  // counts: { updated: 2, deleted: 17, created: 1 },
+  // schemas: {
   sample_registration: {
     deleted: {
       program_id: {
@@ -90,10 +92,61 @@ const expectedResult = {
             'Description of the donor self-reported gender. Gender is described as the assemblage of properties that distinguish people on the basis of their societal roles.',
           right: 'needs to be here ',
         },
+        restrictions: {
+          codeList: {
+            left: ['Female', 'Male', 'Other'],
+            right: ['Female', 'Other'],
+            data: {
+              added: [],
+              deleted: ['Male'],
+            },
+          },
+          required: {
+            left: true,
+            right: false,
+          },
+        },
       },
-      specimen_tissue_source: {},
-      tumour_normal_designation: {},
-      specimen_type: {},
+      specimen_tissue_source: {
+        meta: {
+          core: {
+            left: true,
+            right: false,
+          },
+          displayName: {
+            left: 'Specimen Tissue Source',
+            right: 'Specimen Tissue Source dedited',
+          },
+          validationDependency: {
+            left: true,
+            right: false,
+          },
+        },
+      },
+      tumour_normal_designation: {
+        restrictions: {
+          codeList: {
+            left: ['Normal', 'Tumour'],
+            right: null,
+          },
+          required: {
+            left: true,
+            right: null,
+          },
+        },
+      },
+      specimen_type: {
+        restrictions: {
+          script: {
+            left: [
+              '(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: "Ok"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === "normal"){\n            const validTypes = ["normal", "normal - tissue adjacent to primary tumour", "cell line - derived from normal"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: "Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal."};\n            }\n        }\n        else if (designation === "tumour") {\n            const invalidTypes = ["normal", "cell line - derived from normal"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: "Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour."};\n            }\n        }\n        return result;\n    })()',
+            ],
+            right: [
+              '(function shouldValidate() {\n\n        const row = $row;\n        let result = {valid: true, message: "Ok"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === "normal"){\n            const validTypes = ["normal", "normal - tissue adjacent to primary tumour", "cell line - derived from normal"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: "Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal."};\n            }\n        }\n        else if (designation === "tumour") {\n            const invalidTypes = ["normal", "cell line - derived from normal"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: "Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour."};\n            }\n        }\n        return result;\n    })()',
+            ],
+          },
+        },
+      },
       submitter_sample_id: {
         meta: {
           notes: {
@@ -104,7 +157,22 @@ const expectedResult = {
           },
         },
       },
-      sample_type: {},
+      sample_type: {
+        meta: {
+          core: {
+            left: true,
+            right: null,
+          },
+          displayName: {
+            left: 'Sample Type',
+            right: null,
+          },
+          validationDependency: {
+            left: true,
+            right: null,
+          },
+        },
+      },
     },
   },
   donor: {
@@ -325,17 +393,11 @@ const expectedResult = {
   },
 };
 
-// write own diff change because js-lectern-client has too many steps, generating one object just to dismantle
+// write own diff change because js-lectern-client output still needs to be modified
 describe('Diff data', () => {
   it('should generate change object for a schema diff', () => {
     const result = generateDiffChanges(diff);
     fse.writeJSONSync('./test.json', result);
     expect(result).to.deep.eq(expectedResult);
   });
-
-  /*  it('should generate diff mapping for documentation display', () => {
-    const result = x(schemaDiff);
-    fse.writeJSONSync('./changes.json', result);
-    expect(true);
-  }); */
 });
