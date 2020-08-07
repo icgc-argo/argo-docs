@@ -18,8 +18,9 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
-//import Table from '@icgc-argo/uikit/Table';
 import Table from '../Table';
 import Tag, { TAG_TYPES } from '../Tag';
 import styles from './styles.module.css';
@@ -222,15 +223,22 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, restrictions = {}, meta } = original;
-        const { regex = null, codeList = null } = restrictions;
-        const examples = meta && meta.examples && meta.examples.split(',');
+        const { name: field, restrictions, meta, diff } = original;
+
+        const regex = get(restrictions, 'regex', null);
+
+        const codeList = get(restrictions, 'codeList', null);
+        const codeListDiff = get(diff, 'restrictions.codeList', null);
+
+        const examples = get(meta, 'examples', '');
+
         if (regex) {
-          return <Regex regex={regex} examples={examples} />;
+          return <Regex regex={regex} examples={examples.split(',')} />;
         } else if (codeList) {
           return (
             <CodeList
               codeList={codeList}
+              diff={codeListDiff}
               onToggle={onCodelistExpandToggle(field)}
               isExpanded={isCodeListExpanded(field)}
             />
@@ -244,7 +252,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff } }) => {
-        // console.log(diff);
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
         return (
