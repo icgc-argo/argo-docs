@@ -249,8 +249,6 @@ function DictionaryPage() {
   const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
   const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
   const [isDiffShowing, setIsDiffShowing] = useState(false);
-  console.log('dictionary diff', dictionaryDiff);
-  console.log('dictionary', dictionary);
 
   React.useEffect(() => {
     async function updateDictionaryState() {
@@ -323,18 +321,30 @@ function DictionaryPage() {
 
   const schemas = resolveSchemas(dictionary.schemas, dictionaryDiff.schemas);
 
-  const filteredSchemas = React.useMemo(
+  // filter out diff fields
+  const filteredDiffSchemas = React.useMemo(
     () =>
       schemas
+        .map((schema) => ({
+          ...schema,
+          fields: schema.fields.filter((field) =>
+            isDiffShowing
+              ? Boolean
+              : field.changeType !== ChangeType.CREATED && field.changeType !== ChangeType.DELETED,
+          ),
+        }))
+        // filter out schemas with no fields
+        .filter((schema) => schema.fields.length > 0),
+    [schemas, isDiffShowing],
+  );
+
+  // filter based on search results
+  const filteredSchemas = React.useMemo(
+    () =>
+      filteredDiffSchemas
         .map((schema) => {
           const { tier, attribute, comparison } = searchParams;
           const filteredFields = schema.fields
-            .filter((field) =>
-              isDiffShowing
-                ? Boolean
-                : field.changeType !== ChangeType.CREATED &&
-                  field.changeType !== ChangeType.DELETED,
-            )
             .filter(
               tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER
                 ? Boolean
@@ -384,8 +394,43 @@ function DictionaryPage() {
           };
         })
         .filter((schema) => schema.fields.length > 0),
-    [searchParams, dictionary, isDiffShowing],
+    [searchParams, isDiffShowing],
   );
+
+  // create filters dynamically based on active schemas
+  const filters = React.useMemo(() => {
+    const fields = filteredDiffSchemas.map((schema) => schema.fields);
+
+    const filters = flattenDeep(fields).reduce(
+      (acc, field) => {
+        const meta = get(field, 'meta', {});
+        const { primaryId = false, core = false, dependsOn = false } = meta;
+        const restrictions = get(field, 'restrictions', false);
+        if (primaryId) {
+          acc.tiers.push(TAG_TYPES.id);
+        }
+
+        if (!!restrictions) {
+          acc.attributes.push(TAG_TYPES.required);
+        }
+
+        if (dependsOn) {
+          acc.attributes.push(TAG_TYPES.conditional);
+        }
+
+        if (core) {
+          acc.tiers.push(TAG_TYPES.core);
+        }
+
+        if (!core && !primaryId) {
+          acc.tiers.push(TAG_TYPES.extended);
+        }
+        return acc;
+      },
+      { tiers: [], attributes: [] },
+    );
+    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
+  }, [schemas]);
 
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
