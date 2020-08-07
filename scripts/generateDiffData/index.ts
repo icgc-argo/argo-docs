@@ -1,24 +1,64 @@
-type Field = {};
-type TextChange = { left: string; right: string };
+type Meta = {
+  validationDependency: boolean;
+  primaryId: boolean;
+  examples: string;
+  notes: string;
+  displayName: string;
+  core: boolean;
+};
 
-type DiffField = {
-  description?: TextChange;
-  restrictions?: {
-    regex?: TextChange;
+type Field = {
+  name: string;
+  valueType: string;
+  description: string;
+  meta: Meta;
+  restrictions: {
+    required: boolean;
+    regex: string;
+    script: string;
+  };
+};
+
+type FieldDiff = {
+  valueType?: string;
+  description?: {
+    type: string;
+    data: string;
   };
   meta?: {
-    notes: TextChange;
-    examples: TextChange;
+    type: string;
+    data: Meta;
+  };
+  restrictions?: {
+    required?: {
+      type: string;
+      data: boolean;
+    };
+    codeList?: {
+      type: string;
+      data: {
+        added: string[];
+        deleted: string[];
+      };
+    };
+    regex?: {};
+    script?: { type: string; data: { added: string[]; deleted: string[] } };
   };
 };
 
-type Diff = {
-  [key: string]: {
-    [key in ChangeTypeName]: {
-      [key: string]: Field | DiffField;
-    };
-  };
+type InputDiffField = {
+  left?: Field;
+  right?: Field;
+  diff?: FieldDiff;
 };
+
+type Diffs = { schemas: any; counts: { updated: number; created: number; deleted: number } };
+
+export enum ChangeTypeName {
+  CREATED = 'created',
+  DELETED = 'deleted',
+  UPDATED = 'updated',
+}
 
 const checkField = (field) => {
   const changes = {};
@@ -107,7 +147,7 @@ const checkField = (field) => {
 };
 
 // created and deleted fields will just be displayed, no need to diff properties
-const generateDiffChanges = (schemaDiff: any): any =>
+const generateDiffChanges = (schemaDiff: any): Diffs =>
   schemaDiff.reduce(
     (acc, val) => {
       const schemas = acc.schemas;
@@ -145,35 +185,6 @@ const generateDiffChanges = (schemaDiff: any): any =>
     },
     { schemas: {}, counts: { updated: 0, deleted: 0, created: 0 } },
   );
-
-export enum ChangeTypeName {
-  CREATED = 'created',
-  DELETED = 'deleted',
-  UPDATED = 'updated',
-}
-
-type Change<T> = {
-  type: ChangeTypeName;
-  definition: T;
-};
-
-type DiffMap = {
-  [fieldName: string]: {
-    metaChanges: {
-      key?: Change<boolean>;
-      core?: Change<boolean>;
-      default?: any;
-      examples?: Change<string>;
-    };
-    restrictionChanges?: {
-      regex?: Change<string>;
-      codelist?: Change<Array<string | number>>;
-      required?: Change<boolean>;
-      script?: Change<Array<string> | string>;
-      range?: Change<any>;
-    };
-  };
-};
 
 const parseDiffFieldName = (fieldName: string): { schemaName: string; fieldName: string } => {
   const strArray = fieldName.split('.');

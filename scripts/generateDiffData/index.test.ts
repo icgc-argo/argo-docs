@@ -419,7 +419,7 @@ const expectedResult = {
 describe('Diff data', () => {
   it('should generate change object for a schema diff', () => {
     const result = generateDiffChanges(diff);
-    fse.writeJSONSync('./test.json', result);
+    //fse.writeJSONSync('./test.json', result);
     expect(result).to.deep.eq(expectedResult);
   });
 });
