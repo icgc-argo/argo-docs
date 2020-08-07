@@ -107,37 +107,44 @@ const checkField = (field) => {
 };
 
 // created and deleted fields will just be displayed, no need to diff properties
-const generateDiffChanges = (schemaDiff: any): any => {
-  return schemaDiff.reduce((acc, val) => {
-    const [name, changes] = val;
-    const { schemaName, fieldName } = parseDiffFieldName(name);
-    // console.log(schemaName, fieldName, acc);
-    const fieldChanges = changes.diff;
-    schemaName in acc ||
-      (acc[schemaName] = {
-        [ChangeTypeName.UPDATED]: {},
-        [ChangeTypeName.CREATED]: {},
-        [ChangeTypeName.DELETED]: {},
-      });
+const generateDiffChanges = (schemaDiff: any): any =>
+  schemaDiff.reduce(
+    (acc, val) => {
+      const schemas = acc.schemas;
+      const counts = acc.counts;
+      const [name, changes] = val;
+      const { schemaName, fieldName } = parseDiffFieldName(name);
+      // console.log(schemaName, fieldName, acc);
+      const fieldChanges = changes.diff;
+      schemaName in schemas ||
+        (schemas[schemaName] = {
+          [ChangeTypeName.UPDATED]: {},
+          [ChangeTypeName.CREATED]: {},
+          [ChangeTypeName.DELETED]: {},
+        });
 
-    if (
-      fieldChanges.type === ChangeTypeName.CREATED ||
-      fieldChanges.type === ChangeTypeName.DELETED
-    ) {
-      // created or deleted field
-      acc[schemaName][fieldChanges.type][fieldName] = {
-        //  changeType: fieldChanges.type,
-        ...fieldChanges.data,
-      };
-    } else {
-      // updated field, find out which fields updated
-      acc[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
-    }
+      if (
+        fieldChanges.type === ChangeTypeName.CREATED ||
+        fieldChanges.type === ChangeTypeName.DELETED
+      ) {
+        // created or deleted field
+        schemas[schemaName][fieldChanges.type][fieldName] = {
+          changeType: fieldChanges.type,
+          ...fieldChanges.data,
+        };
 
-    //console.log(acc);
-    return acc;
-  }, {});
-};
+        // update counts
+        fieldChanges.type === ChangeTypeName.CREATED ? counts.created++ : counts.deleted++;
+      } else {
+        // updated field, find out which fields updated
+        schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
+        counts.updated++;
+      }
+
+      return { schemas, counts };
+    },
+    { schemas: {}, counts: { updated: 0, deleted: 0, created: 0 } },
+  );
 
 export enum ChangeTypeName {
   CREATED = 'created',
