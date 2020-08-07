@@ -12,6 +12,7 @@ spec:
   containers:
   - name: node
     image: node:12.18.3
+    tty: true
   - name: docker
     image: docker:18-git
     tty: true
