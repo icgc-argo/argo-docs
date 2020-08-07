@@ -4,7 +4,7 @@
     "list": "node manage-versions.js -l --npm",
     "add": "ts-node-script manage-versions.ts -a --npm --silent --inspect",
     "clean": "node clean-data.js",
-    "test": "mocha --inline-diff",
+    "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.ts",
     "links": "node links/generate.js"
   },
