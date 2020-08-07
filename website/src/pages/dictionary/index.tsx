@@ -24,29 +24,23 @@ import React, { useState, createRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
 import axios from 'axios';
-import { ThemeProvider } from '@icgc-argo/uikit';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
-import Select from '@icgc-argo/uikit/form/Select';
 import StyleWrapper from '../../components/StyleWrapper';
-import Schema from '../../components/Schema';
 import FileFilters, {
   NO_ACTIVE_FILTER,
   generateFilter,
   DEFAULT_FILTER,
-  comparisonFilterDisplay,
   generateComparisonFilter,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
-import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
-import find from 'lodash/find';
 import { Display, DownloadTooltip, DownloadButtonContent } from '../../components/common';
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
@@ -54,7 +48,6 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import OldButton from '@icgc-argo/uikit/Button';
 import Button from '../../components/Button';
@@ -65,7 +58,6 @@ import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
 import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
-import sample from 'lodash/sample';
 import { ChangeType } from '../../components/Schema';
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
@@ -112,7 +104,7 @@ const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/0.2/0.2-diff-0.1.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -280,45 +272,6 @@ function DictionaryPage() {
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  /**
-   * we can generate these filters at build time when we pull data
-   */
-  const filters = React.useMemo(() => {
-    const schemas = get(dictionary, 'schemas', []);
-
-    const fields = schemas.map((schema) => schema.fields);
-
-    const filters = flattenDeep(fields).reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.tiers.push(TAG_TYPES.id);
-        }
-
-        if (!!restrictions) {
-          acc.attributes.push(TAG_TYPES.required);
-        }
-
-        if (dependsOn) {
-          acc.attributes.push(TAG_TYPES.conditional);
-        }
-
-        if (core) {
-          acc.tiers.push(TAG_TYPES.core);
-        }
-
-        if (!core && !primaryId) {
-          acc.tiers.push(TAG_TYPES.extended);
-        }
-        return acc;
-      },
-      { tiers: [], attributes: [] },
-    );
-    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
-  }, [dictionary]);
-
   const schemas = resolveSchemas(dictionary.schemas, dictionaryDiff.schemas);
 
   // filter out diff fields
@@ -446,7 +399,6 @@ function DictionaryPage() {
     }));
   };
 
-  console.log('Filtered schmeas', filteredSchemas);
   // Menu Contents
   const menuContents = generateMenuContents(filteredSchemas);
 
