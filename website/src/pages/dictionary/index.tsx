@@ -24,28 +24,23 @@ import React, { useState, createRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
 import axios from 'axios';
-import { ThemeProvider } from '@icgc-argo/uikit';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import Typography from '@icgc-argo/uikit/Typography';
-import Select from '@icgc-argo/uikit/form/Select';
 import StyleWrapper from '../../components/StyleWrapper';
-import Schema from '../../components/Schema';
 import FileFilters, {
   NO_ACTIVE_FILTER,
   generateFilter,
   DEFAULT_FILTER,
-  comparisonFilterDisplay,
+  generateComparisonFilter,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
 import { TAG_TYPES } from '../../components/Tag';
-import { format as formatDate } from 'date-fns';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
-import find from 'lodash/find';
 import { Display, DownloadTooltip, DownloadButtonContent } from '../../components/common';
 import { getLatestVersion } from '../../utils';
 import uniq from 'lodash/uniq';
@@ -53,7 +48,6 @@ import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
 import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
-import DropdownButton from '@icgc-argo/uikit/DropdownButton';
 import Icon from '@icgc-argo/uikit/Icon';
 import OldButton from '@icgc-argo/uikit/Button';
 import Button from '../../components/Button';
@@ -64,9 +58,9 @@ import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
 import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
-import sample from 'lodash/sample';
 import { ChangeType } from '../../components/Schema';
 import styled from '@emotion/styled';
+import Dictionary from '../../components/Dictionary';
 
 const InfoBar = styled('div')`
   display: flex;
@@ -108,9 +102,9 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-//  meta containing filters and counts
 
-const dictionaryMeta = require('./meta.json');
+// one version (that has been downloaded) behind latest version
+const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -120,7 +114,7 @@ const versions = data.versions;
 async function fetchDictionary(version) {
   try {
     const dict = await axios.get(`/data/schemas/${version}.json`);
-    const tree = await axios.get(`/data/schemas/${version}_tree.json`);
+    const tree = await axios.get(`/data/schemas/${version}_tree.writeFile`);
     return { dict: dict.data, tree: tree.data };
   } catch (e) {
     throw e;
@@ -154,27 +148,6 @@ const parseDiff = (diff) =>
       return acc;
     }, {});
 
-// todo: send in schemas with diff data already there, toggle it in the ui Schema
-const RenderDictionary = ({ schemas, menuContents, isLatestSchema, diff, isDiffShowing }) =>
-  schemas.length > 0 ? (
-    schemas.map((schema) => {
-      const menuItem = find(menuContents, { name: startCase(schema.name) });
-      const schemaDiff = get(diff, schema.name, null);
-
-      return (
-        <Schema
-          schema={schema}
-          menuItem={menuItem}
-          isLatestSchema={isLatestSchema}
-          diff={schemaDiff}
-          isDiffShowing={isDiffShowing}
-        />
-      );
-    })
-  ) : (
-    <div>No schemas found</div>
-  );
-
 /**
  *
  * @param {string} version
@@ -189,27 +162,84 @@ const getDictionary = async (version, preloadedDictionary) => {
 };
 
 /**
- *
  * @param {string} version
  * @param {string} diffVersion
  */
 const getDictionaryDiff = async (version, diffVersion) => {
   const diff = await fetchDiff(version, diffVersion);
-
   return parseDiff(diff);
 };
 
-function DataDictionary() {
+/**
+ * @param schema
+ * @param schemaDiff
+ * add diff data to object
+ */
+const updateSchemaField = (schema, schemaDiff) => {
+  const { created = {}, deleted = {}, updated = {} } = schemaDiff;
+  const fieldsToAdd = Object.values(deleted);
+
+  // if a field has been created or updated, add this data
+  const allFields = schema.fields
+    .map((field) => {
+      const fieldName = field.name;
+      return updated[fieldName]
+        ? { ...field, diff: updated[fieldName], changeType: ChangeType.UPDATED }
+        : created[fieldName]
+        ? { ...field, diff: updated[fieldName], changeType: ChangeType.CREATED }
+        : field;
+    })
+    .concat(fieldsToAdd);
+
+  return { ...schema, fields: allFields };
+};
+
+const diffObjectToArray = (diff) => Object.entries(diff).map((fieldPair) => fieldPair[1]);
+
+const resolveSchemas = (dictionarySchemas, diffSchemas) => {
+  const dictionarySchemaNames = new Set();
+  dictionarySchemas.forEach((schema) => dictionarySchemaNames.add(schema.name));
+
+  const resolvedSchemas = Object.keys(diffSchemas).reduce((acc, diffSchemaName) => {
+    const diffSchema = diffSchemas[diffSchemaName];
+    const { created, deleted, updated, description = 'destription' } = diffSchema;
+    if (dictionarySchemaNames.has(diffSchemaName)) {
+      // field needs updating
+      const schema = updateSchemaField(
+        dictionarySchemas.find((schema) => schema.name === diffSchemaName),
+        diffSchema,
+      );
+      return acc.concat(schema);
+    } else {
+      // created or deleted field
+      return acc.concat({
+        name: diffSchemaName,
+        fields: [...diffObjectToArray(created), ...diffObjectToArray(deleted)],
+        description,
+      });
+    }
+  }, []);
+
+  return resolvedSchemas;
+};
+
+function DictionaryPage() {
+  // docusaurus context
+  const context = useDocusaurusContext();
+  const {
+    siteConfig: {
+      customFields: { PLATFORM_UI_ROOT = '', GATEWAY_API_ROOT = '' },
+    },
+  } = context;
+
   const [version, setVersion] = useState(preloadedDictionary.version);
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
-  const [meta, setMeta] = useState(dictionaryMeta);
 
   const diffVersions = versions.filter((v) => v !== version);
+
   const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
-
-  const [dictionaryDiff, setDictionaryDiff] = useState(null);
-
+  const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
   React.useEffect(() => {
@@ -239,24 +269,90 @@ function DataDictionary() {
 
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
-  const context = useDocusaurusContext();
-  const {
-    siteConfig: {
-      customFields: { PLATFORM_UI_ROOT = '', GATEWAY_API_ROOT = '' },
-    },
-  } = context;
-
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  /**
-   * we can generate these filters at build time when we pull data
-   */
+  const schemas = resolveSchemas(dictionary.schemas, dictionaryDiff.schemas);
 
+  // filter out diff fields
+  const filteredDiffSchemas = React.useMemo(
+    () =>
+      schemas
+        .map((schema) => ({
+          ...schema,
+          fields: schema.fields.filter((field) =>
+            isDiffShowing
+              ? Boolean
+              : field.changeType !== ChangeType.CREATED && field.changeType !== ChangeType.DELETED,
+          ),
+        }))
+        // filter out schemas with no fields
+        .filter((schema) => schema.fields.length > 0),
+    [schemas, isDiffShowing],
+  );
+
+  // filter based on search results
+  const filteredSchemas = React.useMemo(
+    () =>
+      filteredDiffSchemas
+        .map((schema) => {
+          const { tier, attribute, comparison } = searchParams;
+          const filteredFields = schema.fields
+            .filter(
+              tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER
+                ? Boolean
+                : (field) => {
+                    const meta = get(field, 'meta', {});
+                    const { primaryId = false, core = false, dependsOn = false } = meta;
+                    const required = get(field, 'restrictions.required', false);
+
+                    const tierBool =
+                      (tier === TAG_TYPES.id && primaryId) ||
+                      (tier === TAG_TYPES.core && core) ||
+                      (tier === TAG_TYPES.extended && !core && !primaryId) ||
+                      tier === '' ||
+                      tier === NO_ACTIVE_FILTER
+                        ? true
+                        : false;
+
+                    const attributeBool =
+                      (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
+                      (attribute === TAG_TYPES.required && required) ||
+                      attribute === '' ||
+                      attribute === NO_ACTIVE_FILTER
+                        ? true
+                        : false;
+
+                    return tierBool && attributeBool;
+                  },
+            )
+            .filter(
+              comparison === NO_ACTIVE_FILTER
+                ? Boolean
+                : (field) => {
+                    // check if field has a change
+                    const change = get(
+                      dictionaryDiff.schemas,
+                      [schema.name, comparison, field.name],
+                      false,
+                    );
+
+                    return change;
+                  },
+            );
+
+          return {
+            ...schema,
+            fields: filteredFields,
+          };
+        })
+        .filter((schema) => schema.fields.length > 0),
+    [searchParams, isDiffShowing],
+  );
+
+  // create filters dynamically based on active schemas
   const filters = React.useMemo(() => {
-    const schemas = get(dictionary, 'schemas', []);
-
-    const fields = schemas.map((schema) => schema.fields);
+    const fields = filteredDiffSchemas.map((schema) => schema.fields);
 
     const filters = flattenDeep(fields).reduce(
       (acc, field) => {
@@ -287,68 +383,14 @@ function DataDictionary() {
       { tiers: [], attributes: [] },
     );
     return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
-  }, [dictionary]);
-
-  const filteredSchemas = React.useMemo(
-    () =>
-      dictionary.schemas
-        .map((schema) => {
-          const { tier, attribute } = searchParams;
-          const filteredFields = schema.fields
-            .map((field) => {
-              // comparison filters DEMO
-              return {
-                ...field,
-                changeType: sample([
-                  ChangeType.CREATED,
-                  ChangeType.DELETED,
-                  ChangeType.UPDATED,
-                  null,
-                ]),
-              };
-            })
-            .filter((field) => {
-              const meta = get(field, 'meta', {});
-              const { primaryId = false, core = false, dependsOn = false } = meta;
-              const required = get(field, 'restrictions.required', false);
-
-              if (tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER) return true;
-
-              const tierBool =
-                (tier === TAG_TYPES.id && primaryId) ||
-                (tier === TAG_TYPES.core && core) ||
-                (tier === TAG_TYPES.extended && !core && !primaryId) ||
-                tier === '' ||
-                tier === NO_ACTIVE_FILTER
-                  ? true
-                  : false;
-
-              const attributeBool =
-                (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
-                (attribute === TAG_TYPES.required && required) ||
-                attribute === '' ||
-                attribute === NO_ACTIVE_FILTER
-                  ? true
-                  : false;
-
-              return tierBool && attributeBool;
-            });
-
-          return {
-            ...schema,
-            fields: filteredFields,
-          };
-        })
-        .filter((schema) => schema.fields.length > 0),
-    [searchParams, dictionary],
-  );
+  }, [schemas]);
 
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
 
   const generateMenuContents = (activeSchemas) => {
     const activeSchemaNames = activeSchemas.map((s) => s.name);
-    return dictionary.schemas.map((schema) => ({
+    return activeSchemas.map((schema) => ({
       key: schema.name,
       name: startCase(schema.name),
       contentRef: createRef(),
@@ -421,7 +463,7 @@ function DataDictionary() {
                       onChange={setDiffVersion}
                     />
                     <CompareLegend
-                      comparison={meta.comparison}
+                      comparison={dictionaryDiff.counts}
                       styles={css`
                         margin: 0 10px;
                       `}
@@ -482,9 +524,8 @@ function DataDictionary() {
                     <FileFilters
                       dataTiers={filters.tiers.map(generateFilter)}
                       dataAttributes={filters.attributes.map(generateFilter)}
-                      comparisons={Object.keys(meta.comparison).map((k) =>
-                        generateFilter(comparisonFilterDisplay[k]),
-                      )}
+                      comparisons={Object.keys(dictionaryDiff.counts).map(generateComparisonFilter)}
+                      isDiffShowing={isDiffShowing}
                       searchParams={searchParams}
                       onFilter={(search) => setSearchParams(search)}
                     />
@@ -508,9 +549,8 @@ function DataDictionary() {
                     margin-top: 30px;
                   `}
                 >
-                  <RenderDictionary
+                  <Dictionary
                     schemas={filteredSchemas}
-                    diff={dictionaryDiff}
                     menuContents={menuContents}
                     isLatestSchema={isLatestSchema}
                     isDiffShowing={isDiffShowing}
@@ -546,4 +586,4 @@ function DataDictionary() {
   );
 }
 
-export default DataDictionary;
+export default DictionaryPage;

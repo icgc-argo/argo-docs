@@ -18,23 +18,24 @@
  *
  */
 
-const axios = require('axios');
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const querystring = require('querystring');
-const fs = require('fs');
-const argv = require('yargs').argv;
-const fse = require('fs-extra');
-const generateTreeData = require('./generateData');
+import axios from 'axios';
+import chalk from 'chalk';
+import inquirer from 'inquirer';
+import querystring from 'querystring';
+import fs from 'fs';
+import { argv } from 'yargs';
+import fse from 'fs-extra';
+import generateTreeData from './generateData';
+import generateDiffChanges from './generateDiffData';
 
 const constants = require('./constants');
 
 const apiRoot = 'https://lectern.platform.icgc-argo.org';
+//const apiRoot = 'http://localhost:3200';
 const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
-
 function ensureDirectoryExistence(path) {
   if (!fs.existsSync(path)) {
     fs.mkdirSync(path);
@@ -49,7 +50,7 @@ function printConfig() {
 async function printVersionsLists() {
   const versions = await fetchDictionaryVersionsList();
 
-  const newVersions = versions.filter(item => !currentVersions.includes(item));
+  const newVersions = versions.filter((item) => !currentVersions.includes(item));
 
   console.log(`\n${chalk.yellow('All Versions')}: ${versions.join(', ')}`);
   console.log(`${chalk.yellow('Current Versions')}: ${currentVersions.join(', ')}`);
@@ -61,8 +62,8 @@ function saveFiles(version, data) {
   const dataFile = `${schemaPath}/${version}.json`;
   const treeFile = `${schemaPath}/${version}_tree.json`;
   fse.writeJSONSync(dataFile, data);
-  const treeData = generateTreeData(data);
-  fse.writeJSONSync(treeFile, treeData);
+  // const treeData = generateTreeData(data);
+  // fse.writeJSONSync(treeFile, treeData);
 }
 
 function saveVersionsFile(data) {
@@ -77,8 +78,8 @@ function saveDataFiles(dictionary, versions) {
     currentVersion: versions[0],
   };
   fs.writeFileSync(dataFilename, JSON.stringify(content));
-  const treeData = generateTreeData(content.dictionary);
-  fse.writeJSONSync(dataFileTreeName, treeData);
+  //const treeData = generateTreeData(content.dictionary);
+  //fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
 async function fetchAndSaveDiffsForVersion(version) {
@@ -94,15 +95,20 @@ async function fetchAndSaveDiffsForVersion(version) {
 
     try {
       ensureDirectoryExistence(path);
-      const response = await fetchDiffForVersions(high, low);
+      const schemaDiff = await fetchDiffForVersions(high, low);
       console.log(
         `${chalk.cyan('saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
           '...',
         )}`,
       );
-      fs.writeFileSync(filename, JSON.stringify(response));
+      console.log('fetch and save diffs');
+
+      const diffs = generateDiffChanges(schemaDiff);
+
+      fse.writeJSONSync(filename, diffs);
+      //  fs.writeFileSync(filename, JSON.stringify(response));
     } catch (e) {
-      console.log(chalk.red(`Error fetching or saving diff!`));
+      console.log(chalk.red(`Error fetching or saving diff!`, e));
     }
   }
 }
@@ -113,8 +119,8 @@ async function fetchDictionaryVersionsList() {
   console.log(chalk.cyan('\nfetching dictionary versions list...'));
   const response = await axios.get(`${apiRoot}/dictionaries`);
   return response.data
-    .filter(item => item.name === dictionaryName)
-    .map(item => item.version)
+    .filter((item) => item.name === dictionaryName)
+    .map((item) => item.version)
     .sort((a, b) => (a.version > b.version ? 1 : -1));
 }
 
@@ -142,12 +148,12 @@ async function fetchDiffForVersions(left, right) {
 
 async function userSelectVersion(versions) {
   console.log('\n');
-  return new Promise(resolve =>
+  return new Promise((resolve) =>
     inquirer
       .prompt([
         { message: 'Select version to add:', name: 'version', type: 'list', choices: versions },
       ])
-      .then(answers => resolve(answers.version)),
+      .then((answers) => resolve(answers.version)),
   );
 }
 
@@ -194,6 +200,8 @@ async function runAdd() {
   saveDataFiles(dictionary, updatedVersions);
 
   console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
+
+  process.exit(0);
 }
 
 function runHelp() {
