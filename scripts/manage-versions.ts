@@ -18,17 +18,15 @@
  *
  */
 
-import { exists } from 'fs-extra';
-
-const axios = require('axios');
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const querystring = require('querystring');
-const fs = require('fs');
-const argv = require('yargs').argv;
-const fse = require('fs-extra');
-const generateTreeData = require('./generateData');
-const generateDiffChanges = require('./generateDiffData').default;
+import axios from 'axios';
+import chalk from 'chalk';
+import inquirer from 'inquirer';
+import querystring from 'querystring';
+import fs from 'fs';
+import { argv } from 'yargs';
+import fse from 'fs-extra';
+import generateTreeData from './generateData';
+import generateDiffChanges from './generateDiffData';
 
 const constants = require('./constants');
 
@@ -38,7 +36,6 @@ const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTree
 const currentVersions = require(versionsFilename);
 
 /* Util Functions */
-
 function ensureDirectoryExistence(path) {
   if (!fs.existsSync(path)) {
     fs.mkdirSync(path);
@@ -105,9 +102,9 @@ async function fetchAndSaveDiffsForVersion(version) {
         )}`,
       );
       console.log('fetch and save diffs');
-      fse.writeJSONSync('ciaran.json', schemaDiff);
+
       const diffs = generateDiffChanges(schemaDiff);
-      console.log('diffs', diffs);
+
       fse.writeJSONSync(filename, diffs);
       //  fs.writeFileSync(filename, JSON.stringify(response));
     } catch (e) {
