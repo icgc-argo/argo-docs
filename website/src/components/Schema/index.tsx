@@ -18,8 +18,9 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
-//import Table from '@icgc-argo/uikit/Table';
 import Table from '../Table';
 import Tag, { TAG_TYPES } from '../Tag';
 import styles from './styles.module.css';
@@ -27,11 +28,8 @@ import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
-import { DownloadButtonContent, DownloadTooltip } from '../common';
-import Button from '@icgc-argo/uikit/Button';
 import { DataTypography, SchemaTitle } from '../Typography';
-import { ModalPortal, useModalState } from '../../pages/dictionary';
-import ScriptModal from '../ScriptModal';
+import { ModalPortal } from '../../pages/dictionary';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
@@ -39,11 +37,11 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
-
-const Notes = styled('div')`
-  margin-bottom: 15px;
-  white-space: pre-wrap;
-`;
+import { FieldDescription, Script } from './TableComponents';
+import Modal from '../Modal';
+import Typography from '@icgc-argo/uikit/Typography';
+import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
+import { css } from '@emotion/core';
 
 const TagContainer = styled('div')`
   display: flex;
@@ -76,13 +74,6 @@ const HeaderName = ({ name }) => {
   );
 };
 
-const FieldDescription = ({ name, description }) => (
-  <div className={styles.fieldDescription}>
-    <div className={styles.name}>{name}</div>
-    <div>{description}</div>
-  </div>
-);
-
 const FieldsTag = ({ fieldCount }) => (
   <DefaultTag
     className={`${styles.tag} ${styles.fields}`}
@@ -90,10 +81,18 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
-  // SSR fix
-  if (typeof schema === 'undefined') return null;
+const getTableData = (isDiffShowing, schema) =>
+  isDiffShowing
+    ? schema.fields
+    : schema.fields
+        .filter((field) => {
+          // filter out fields which have deleted or created
+          // return field.changeType !== ChangeType.DELETED;
+          return field.changeType !== ChangeType.DELETED;
+        })
+        .map((field) => ({ ...field, changeType: null, diff: null }));
 
+const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -129,29 +128,11 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
 
   const isCodeListExpanded = (field) => expandedCodeLists[field];
 
-  const [currentShowingScripts, setCurrentShowingScripts] = React.useState(null);
-  const ScriptCell = ({ original: { meta, restrictions, name } }) => {
-    const scripts = restrictions && restrictions.script;
-    return (
-      <div>
-        {meta && meta.notes && <Notes>{meta.notes}</Notes>}
-        {scripts && (
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              setCurrentShowingScripts({
-                fieldName: name,
-                content: scripts,
-              });
-            }}
-          >
-            View Script
-          </Button>
-        )}
-      </div>
-    );
-  };
+  const [currentShowingScript, setCurrentShowingScripts] = React.useState<{
+    diff?: { left: string[]; right: string[] };
+    content?: string[];
+    fieldName: string;
+  }>(null);
 
   const CellContentCenter = styled('div')`
     width: 100%;
@@ -189,8 +170,8 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description } }) => (
-        <FieldDescription name={name} description={description} />
+      Cell: ({ original: { name, description, diff } }) => (
+        <FieldDescription name={name} description={description} diff={diff && diff.description} />
       ),
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
@@ -242,15 +223,22 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, restrictions = {}, meta } = original;
-        const { regex = null, codeList = null } = restrictions;
-        const examples = meta && meta.examples && meta.examples.split(',');
+        const { name: field, restrictions, meta, diff } = original;
+
+        const regex = get(restrictions, 'regex', null);
+
+        const codeList = get(restrictions, 'codeList', null);
+        const codeListDiff = get(diff, 'restrictions.codeList', null);
+
+        const examples = get(meta, 'examples', '');
+
         if (regex) {
-          return <Regex regex={regex} examples={examples} />;
+          return <Regex regex={regex} examples={examples.split(',')} />;
         } else if (codeList) {
           return (
             <CodeList
               codeList={codeList}
+              diff={codeListDiff}
               onToggle={onCodelistExpandToggle(field)}
               isExpanded={isCodeListExpanded(field)}
             />
@@ -263,20 +251,24 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ScriptCell,
+      Cell: ({ original: { name, meta, restrictions, diff } }) => {
+        const notes = meta && meta.notes;
+        const script = restrictions && restrictions.script;
+        return (
+          <Script
+            name={name}
+            notes={notes}
+            script={script}
+            diff={diff}
+            showScript={setCurrentShowingScripts}
+          />
+        );
+      },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
-
-  const tableData = diff
-    ? schema.fields.map((field) => {
-        // check if field has a diff
-        const fieldDiff = get(diff, field.name, null);
-        return fieldDiff ? { ...field, ...{ diff: fieldDiff } } : field;
-      })
-    : schema.fields;
 
   const theme: Theme = useTheme();
   const rowColors = theme.schema.row;
@@ -287,17 +279,40 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
     },
   });
 
+  const tableData = getTableData(isDiffShowing, schema);
+
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
-      {currentShowingScripts && (
+      {currentShowingScript && (
         <ModalPortal>
-          <ScriptModal
-            field={currentShowingScripts.fieldName}
-            scripts={currentShowingScripts.content}
+          <Modal
+            css={css`
+              min-width: 600px;
+            `}
+            title={
+              <Typography variant="subtitle">
+                Field Script Restriction for:{' '}
+                <span style={{ fontWeight: 600 }}>{currentShowingScript.fieldName}</span>
+              </Typography>
+            }
             onCloseClick={() => {
               setCurrentShowingScripts(null);
             }}
-          />
+            onCancelClick={() => {
+              setCurrentShowingScripts(null);
+            }}
+            actionVisible={false}
+            buttonSize="sm"
+          >
+            {currentShowingScript.diff ? (
+              <CompareCodeBlock
+                left={currentShowingScript.diff.left}
+                right={currentShowingScript.diff.right}
+              />
+            ) : (
+              <CodeBlock codes={currentShowingScript.content} />
+            )}
+          </Modal>
         </ModalPortal>
       )}
       <div
@@ -356,7 +371,8 @@ const Schema = ({ schema, menuItem, diff, isLatestSchema, isDiffShowing }) => {
           columns={cols}
           data={tableData}
           showPagination={false}
-          defaultPageSize={schema.fields.length}
+          defaultPageSize={tableData.length}
+          pageSize={tableData.length}
           sortable={true}
           cellAlignment="top"
           withOutsideBorder

@@ -23,15 +23,15 @@ const CompareLegend = ({
   styles,
 }: {
   comparison: {
-    additions: number;
-    updates: number;
-    deletions: number;
+    updated: number;
+    created: number;
+    deleted: number;
   };
   styles?: any;
 }) => {
   const theme: Theme = useTheme();
   const diffColors = theme.diffColors;
-  const { additions, deletions, updates } = comparison;
+  const { updated, deleted, created } = comparison;
   return (
     <div
       css={css`
@@ -43,11 +43,11 @@ const CompareLegend = ({
       `}
     >
       <Star fill={diffColors.created} />
-      {`${additions} new fields`}
+      {`${created} new fields`}
       <Star fill={diffColors.updated} />
-      {`${updates} updated fields`}
+      {`${updated} updated fields`}
       <Star fill={diffColors.deleted} />
-      {`${deletions} deleted fields`}
+      {`${deleted} deleted fields`}
     </div>
   );
 };

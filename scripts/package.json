@@ -2,15 +2,20 @@
   "scripts": {
     "help": "node manage-versions.js -h --npm",
     "list": "node manage-versions.js -l --npm",
-    "add": "node manage-versions.js -a --npm --silent",
+    "add": "ts-node-script manage-versions.ts -a --npm --silent --inspect",
     "clean": "node clean-data.js",
-    "test": "mocha --inline-diff",
-    "watch-tests": "mocha ./**/*.test.js --inline-diff -w",
+    "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
+    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.ts",
     "links": "node links/generate.js"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/fs-extra": "^9.0.1",
+    "@types/mocha": "^8.0.0",
     "chai": "^4.2.0",
-    "mocha": "^7.1.1"
+    "mocha": "^8.0.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   },
   "prettier": {
     "printWidth": 100,

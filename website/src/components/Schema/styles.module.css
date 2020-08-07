@@ -35,14 +35,6 @@
   text-align: center;
 }
 
-.fieldDescription {
-  font-size: 12px;
-}
-
-.fieldEnumValue {
-  font-size: 12px;
-}
-
 /* Fields Tag */
 .tag.fields {
   margin-left: 8px;
@@ -51,17 +43,6 @@
 
 .fileExampleHighlight {
   font-weight: 600;
-}
-
-/* Field Description */
-.fieldDescription {
-  width: 100%;
-  font-size: 12px;
-}
-
-.fieldDescription .name {
-  font-weight: bold;
-  margin-bottom: 5px;
 }
 
 /* Permissible Values */

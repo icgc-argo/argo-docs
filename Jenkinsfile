@@ -38,7 +38,13 @@ spec:
 
         stage('Test') {
             steps {
-                sh "echo No Docusaurus Tests"
+                script {
+                    try {
+                        sh "npm run test"
+                    }catch(err){
+                        echo "Tests failed"
+                    }
+                }
             }
         }
 

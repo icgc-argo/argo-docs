@@ -19,6 +19,7 @@
  */
 
 const dictionaryName = 'ICGC-ARGO Data Dictionary';
+//const dictionaryName = 'diff-test';
 const schemaPath = '../website/static/data/schemas';
 const versionsFilename = `${schemaPath}/schema-versions.json`;
 const dataFilename = '../website/src/pages/dictionary/data.json';
