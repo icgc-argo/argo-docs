@@ -43,7 +43,6 @@ const CodeBlock = ({
   className?: any;
   prismTheme?: any;
 }) => {
-  console.log('code block', codes);
   return (
     <div className={className}>
       {codes.map((code) => (

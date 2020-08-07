@@ -51,7 +51,6 @@ const Code = ({ code, format }: { code: string; format: TextChange | null }) => 
 };
 
 const CodeList = ({ codeList = [], onToggle, isExpanded, diff }) => {
-  console.log('codelist', diff);
   const maxEnumLength = 5;
   const deletedCodes = get(diff, 'data.deleted', []);
   const createdCodes = get(diff, 'data.added', []);
