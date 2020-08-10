@@ -38,7 +38,7 @@ import FileFilters, {
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
 import get from 'lodash/get';
-import { TAG_TYPES } from '../../components/Tag';
+import { TagVariant } from '../../components/Tag';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import { Display, DownloadTooltip, DownloadButtonContent } from '../../components/common';
@@ -61,6 +61,7 @@ import { css } from '@emotion/core';
 import { ChangeType } from '../../components/Schema';
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
+import { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 
 const InfoBar = styled('div')`
   display: flex;
@@ -307,17 +308,17 @@ function DictionaryPage() {
                     const required = get(field, 'restrictions.required', false);
 
                     const tierBool =
-                      (tier === TAG_TYPES.id && primaryId) ||
-                      (tier === TAG_TYPES.core && core) ||
-                      (tier === TAG_TYPES.extended && !core && !primaryId) ||
+                      (tier === TagVariant.ID && primaryId) ||
+                      (tier === TagVariant.CORE && core) ||
+                      (tier === TagVariant.EXTENDED && !core && !primaryId) ||
                       tier === '' ||
                       tier === NO_ACTIVE_FILTER
                         ? true
                         : false;
 
                     const attributeBool =
-                      (attribute === TAG_TYPES.conditional && Boolean(dependsOn)) ||
-                      (attribute === TAG_TYPES.required && required) ||
+                      (attribute === TagVariant.CONDITIONAL && Boolean(dependsOn)) ||
+                      (attribute === TagVariant.REQUIRED && required) ||
                       attribute === '' ||
                       attribute === NO_ACTIVE_FILTER
                         ? true
@@ -360,23 +361,23 @@ function DictionaryPage() {
         const { primaryId = false, core = false, dependsOn = false } = meta;
         const restrictions = get(field, 'restrictions', false);
         if (primaryId) {
-          acc.tiers.push(TAG_TYPES.id);
+          acc.tiers.push(TagVariant.ID);
         }
 
         if (!!restrictions) {
-          acc.attributes.push(TAG_TYPES.required);
+          acc.attributes.push(TagVariant.REQUIRED);
         }
 
         if (dependsOn) {
-          acc.attributes.push(TAG_TYPES.conditional);
+          acc.attributes.push(TagVariant.CONDITIONAL);
         }
 
         if (core) {
-          acc.tiers.push(TAG_TYPES.core);
+          acc.tiers.push(TagVariant.CORE);
         }
 
         if (!core && !primaryId) {
-          acc.tiers.push(TAG_TYPES.extended);
+          acc.tiers.push(TagVariant.EXTENDED);
         }
         return acc;
       },
