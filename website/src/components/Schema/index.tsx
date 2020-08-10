@@ -22,7 +22,7 @@
 import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
 import Table from '../Table';
-import Tag, { TAG_TYPES } from '../Tag';
+import Tag, { TagVariant } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
@@ -179,18 +179,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Data Tier',
       Cell: ({ original }) => {
         const meta = get(original, 'meta', {});
-        if (isEmpty(meta)) {
-          return <Tag type={TAG_TYPES.extended} />;
-        } else {
-          const { primaryId, core } = meta;
-          return primaryId ? (
-            <Tag type={TAG_TYPES.id} />
-          ) : core ? (
-            <Tag type={TAG_TYPES.core} />
-          ) : (
-            <Tag type={TAG_TYPES.extended} />
-          );
-        }
+        return <Tag variant={getDataTier(meta)} />;
       },
       style: { padding: '8px' },
       width: 85,
@@ -203,8 +192,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const isConditionalField = meta && !!meta.dependsOn;
         return (
           <TagContainer>
-            {isRestrictedField && <Tag type={TAG_TYPES.required} />}
-            {isConditionalField && <Tag type={TAG_TYPES.conditional} />}
+            {isRestrictedField && <Tag variant={TagVariant.REQUIRED} />}
+            {isConditionalField && <Tag variant={TagVariant.CONDITIONAL} />}
           </TagContainer>
         );
       },
@@ -280,6 +269,11 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   });
 
   const tableData = getTableData(isDiffShowing, schema);
+
+  const getDataTier = (meta) => {
+    const { primaryId, core } = meta;
+    return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
+  };
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>

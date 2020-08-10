@@ -1,5 +1,6 @@
 import argo from '@icgc-argo/uikit/theme/defaultTheme';
 import { ChangeType } from '../../../components/Schema';
+import { TagVariant } from '../../../components/Tag';
 
 const argoColors = argo.colors;
 
@@ -19,6 +20,14 @@ const schema: { row: DiffColors } = {
   },
 };
 
+const tag: { [k in TagVariant]: string } = {
+  required: '#e75471',
+  conditional: '#ec8f17',
+  id: '#00b3d3',
+  core: '#00c79d',
+  extended: '#a1a4b1',
+};
+
 /**
  * This project very heavily depedendant on UIKIT right now, which is dependant on certain theme format
  * for now keep passing through all of uikit default theme
@@ -27,6 +36,7 @@ const theme = {
   ...argo,
   diffColors,
   schema,
+  tag,
 };
 
 export default theme;

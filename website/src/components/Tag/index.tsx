@@ -18,41 +18,36 @@
  *
  */
 
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 import React from 'react';
 import TagComponent from '@icgc-argo/uikit/Tag';
-import styles from './styles.module.css';
+import { withTheme } from 'emotion-theming';
 
-export enum Tag {
-  required: 'required',
-  conditional: 'conditional',
-  core: 'core',
-  id: 'id',
-  extended: 'extended',
-};
-
-const Tag = ({ type }) => {
-  switch (type) {
-    case TAG_TYPES.required:
-      return <TagComponent className={`${styles.tag} ${styles.required}`}>Required</TagComponent>;
-    case TAG_TYPES.conditional:
-      return (
-        <TagComponent className={`${styles.tag} ${styles.conditional}`}>Conditional</TagComponent>
-      );
-    case TAG_TYPES.core:
-      return <TagComponent className={`${styles.tag} ${styles.core}`}>Core</TagComponent>;
-    case TAG_TYPES.id:
-      return <TagComponent className={`${styles.tag} ${styles.id}`}>ID</TagComponent>;
-    case TAG_TYPES.extended:
-      return <TagComponent className={`${styles.tag} ${styles.extended}`}>Extended</TagComponent>;
-    default:
-      return null;
-  }
-};
-
-const displayName = {
-  
+export enum TagVariant {
+  REQUIRED = 'required',
+  CONDITIONAL = 'conditional',
+  CORE = 'core',
+  ID = 'id',
+  EXTENDED = 'extended',
 }
 
-const Tag = ({ type }) => <TagComponent type={type}>{displayName[type]}</TagComponent>;
+const displayName = {
+  required: 'Required',
+  conditional: 'Conditional',
+  core: 'Core',
+  id: 'ID',
+  extended: 'Extended',
+};
 
-export default Tag;
+const Tag = ({ variant }: { variant: TagVariant }) => (
+  <TagComponent
+    css={(theme) => css`
+      background-color: ${theme.tag[variant]};
+    `}
+  >
+    {displayName[variant]}
+  </TagComponent>
+);
+
+export default withTheme((props) => <Tag {...props} />);
