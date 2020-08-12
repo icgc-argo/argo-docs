@@ -62,6 +62,28 @@ export enum ChangeTypeName {
   UPDATED = 'updated',
 }
 
+const checkDiff = (name, field, leftDiff, rightDiff) =>
+  Object.entries(field).reduce((changes, val) => {
+    const [fieldName] = val;
+    const left = get(leftDiff, [name, fieldName], null);
+    const right = get(rightDiff, [name, fieldName], null);
+    console.log(fieldName, left, right);
+    changes[fieldName] = {
+      left,
+      right,
+    };
+    return changes;
+  }, {});
+
+const checkDeleted = (field) => {
+  const changes = {};
+  const deletedFields = field.data;
+  for (let [key, value] of Object.entries(deletedFields)) {
+    changes[key] = { left: value, right: null };
+  }
+  return changes;
+};
+
 const checkField = (field) => {
   const changes = {};
   const { left: leftDiff, right: rightDiff, diff } = field;
@@ -81,26 +103,13 @@ const checkField = (field) => {
 
     if (!meta.type) {
       // construct changes, null on left if created, null on right if deleted
-      const metaChanges = Object.entries(meta).reduce((metaChanges, val) => {
-        const [fieldName, data] = val;
-        const left = get(leftDiff, ['meta', fieldName], null);
-        const right = get(rightDiff, ['meta', fieldName], null);
-        console.log(fieldName, left, right);
-        metaChanges[fieldName] = {
-          left,
-          right,
-        };
-        return metaChanges;
-      }, {});
-
+      const metaChanges = checkDiff('meta', meta, leftDiff, rightDiff);
       changes['meta'] = metaChanges;
     }
+
     // deleted fields
     else if (meta.type && meta.type === 'deleted') {
-      const deletedFields = meta.data;
-      for (let [key, value] of Object.entries(deletedFields)) {
-        changes['meta'][key] = { left: value, right: null };
-      }
+      changes['meta'] = { ...changes['meta'], ...checkDeleted(meta) };
     }
   }
 
@@ -108,41 +117,21 @@ const checkField = (field) => {
   if (restrictions) {
     'restrictions' in changes || (changes['restrictions'] = {});
 
-    if (restrictions.script) {
-      changes['restrictions']['script'] = {
-        left: leftDiff.restrictions.script,
-        right: rightDiff.restrictions.script,
-      };
-    }
-
-    if (restrictions.codeList) {
-      changes['restrictions']['codeList'] = {
-        left: leftDiff.restrictions.codeList,
-        right: rightDiff.restrictions.codeList,
-        data: diff.restrictions.codeList.data,
-      };
-    }
-
-    if (restrictions.required) {
-      changes['restrictions']['required'] = {
-        left: leftDiff.restrictions.required,
-        right: rightDiff.restrictions.required,
-      };
-    }
-
-    if (restrictions.regex) {
-      changes['restrictions']['regex'] = {
-        left: leftDiff.restrictions.regex,
-        right: rightDiff.restrictions.regex,
-      };
+    if (!restrictions.type) {
+      const restrictionsChanges = checkDiff('restrictions', restrictions, leftDiff, rightDiff);
+      changes['restrictions'] = restrictionsChanges;
+      if (restrictions.codeList) {
+        changes['restrictions']['codeList'] = {
+          left: leftDiff.restrictions.codeList,
+          right: rightDiff.restrictions.codeList,
+          data: diff.restrictions.codeList.data,
+        };
+      }
     }
 
     // deleted fields
-    if (restrictions.type && restrictions.type === 'deleted') {
-      const deletedFields = restrictions.data;
-      for (let [key, value] of Object.entries(deletedFields)) {
-        changes['restrictions'][key] = { left: value, right: null };
-      }
+    else if (restrictions.type && restrictions.type === 'deleted') {
+      changes['restrictions'] = { ...changes['restrictions'], ...checkDeleted(restrictions) };
     }
   }
 
@@ -180,7 +169,6 @@ const generateDiffChanges = (schemaDiff: any): Diffs =>
         fieldChanges.type === ChangeTypeName.CREATED ? counts.created++ : counts.deleted++;
       } else {
         // updated field, find out which fields updated
-        console.log('field name', fieldName);
         schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
         counts.updated++;
       }
