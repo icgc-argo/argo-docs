@@ -16,8 +16,8 @@ const createdStyle = css`
 // don't use fragment, bug in emotion 10 https://github.com/emotion-js/emotion/issues/1303
 export const DiffText = ({ oldText, newText }: { oldText: string; newText: string }) => (
   <div>
-    <div css={deletedStyle}>{oldText}</div>
-    <div css={createdStyle}>{newText}</div>
+    {oldText ? <div css={deletedStyle}>{oldText}</div> : null}
+    {newText ? <div css={createdStyle}>{newText}</div> : null}
   </div>
 );
 
