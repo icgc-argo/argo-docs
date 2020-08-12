@@ -22,7 +22,7 @@
 import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
 import Table from '../Table';
-import Tag, { TagVariant } from '../Tag';
+import Tag, { TagVariant, TagContainer, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
@@ -42,19 +42,7 @@ import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-
-const TagContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  div {
-    display: inline;
-    :not(:first-child) {
-      margin-top: 5px;
-    }
-  }
-`;
+import { DiffText } from './DiffText';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -116,6 +104,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       }, {}),
     [schema],
   );
+
+  console.log('Schema', schema);
 
   const [expandedCodeLists, setExpandedCodeLists] = useState(initialExpandingFields);
 
@@ -179,7 +169,18 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Data Tier',
       Cell: ({ original }) => {
         const meta = get(original, 'meta', {});
-        return <Tag variant={getDataTier(meta)} />;
+        const diffMeta = get(original, 'diff.meta', null);
+
+        if (diffMeta && diffMeta.core && diffMeta.primaryId) {
+          const { primaryId, core } = diffMeta;
+          const oldTier = getDataTier(primaryId.left, core.left);
+          const newTier = getDataTier(primaryId.right, core.right);
+          return (
+            <DiffText newText={TAG_DISPLAY_NAME[newTier]} oldText={TAG_DISPLAY_NAME[oldTier]} />
+          );
+        } else {
+          return <Tag variant={getDataTier(meta.primaryId, meta.core)} />;
+        }
       },
       style: { padding: '8px' },
       width: 85,
@@ -270,8 +271,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const tableData = getTableData(isDiffShowing, schema);
 
-  const getDataTier = (meta) => {
-    const { primaryId, core } = meta;
+  const getDataTier = (primaryId: boolean | null, core: boolean | null) => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
 
