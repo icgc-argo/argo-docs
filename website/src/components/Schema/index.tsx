@@ -221,7 +221,13 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Type',
       id: 'valueType',
-      accessor: ({ valueType }) => formatFieldType(valueType),
+      Cell: ({ original: { valueType, diff } }) => {
+        return diff && diff.valueType ? (
+          <DiffText oldText={diff.valueType.left} newText={diff.valueType.right} />
+        ) : (
+          formatFieldType(valueType)
+        );
+      },
       style: { padding: '8px' },
       width: 70,
     },
