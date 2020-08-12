@@ -26,7 +26,7 @@ import * as fse from 'fs-extra';
 const expect = chai.expect;
 
 const expectedResult = {
-  counts: { updated: 6, deleted: 19, created: 1 },
+  counts: { updated: 7, deleted: 19, created: 1 },
   schemas: {
     sample_registration: {
       deleted: {
@@ -95,18 +95,42 @@ const expectedResult = {
               'Description of the donor self-reported gender. Gender is described as the assemblage of properties that distinguish people on the basis of their societal roles.',
             right: 'needs to be here ',
           },
+          meta: {
+            core: {
+              left: true,
+              right: null,
+            },
+            primaryId: {
+              left: null,
+              right: true,
+            },
+          },
           restrictions: {
             codeList: {
-              left: ['Female', 'Male', 'Other'],
-              right: ['Female', 'Other'],
+              left: ['Female', 'Other'],
+              right: ['Female', 'Male'],
               data: {
-                added: [],
-                deleted: ['Male'],
+                added: ['Male'],
+                deleted: ['Other'],
               },
             },
             required: {
               left: true,
               right: false,
+            },
+          },
+        },
+        submitter_specimen_id: {
+          meta: {
+            dependsOn: {
+              left: null,
+              right: 'sample_registration.gender',
+            },
+          },
+          restrictions: {
+            required: {
+              left: null,
+              right: true,
             },
           },
         },
@@ -127,6 +151,10 @@ const expectedResult = {
           },
         },
         tumour_normal_designation: {
+          valueType: {
+            left: 'string',
+            right: 'integer',
+          },
           restrictions: {
             codeList: {
               left: ['Normal', 'Tumour'],
@@ -152,6 +180,10 @@ const expectedResult = {
         },
         submitter_sample_id: {
           meta: {
+            primaryId: {
+              left: true,
+              right: false,
+            },
             notes: {
               left:
                 'To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`.',
