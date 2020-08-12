@@ -24,7 +24,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Table from '../Table';
 import Tag, { TagVariant, TagContainer, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
-import DefaultTag from '@icgc-argo/uikit/Tag';
+import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import CodeList from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
@@ -42,7 +42,7 @@ import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-import { DiffText } from './DiffText';
+import { DiffText, DiffTextSegment, TextChange } from './DiffText';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -188,10 +188,27 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Attributes',
       id: 'attributes',
-      Cell: ({ original: { restrictions, meta } }) => {
+      Cell: ({ original: { restrictions, meta, diff } }) => {
+        const isConditionalDiff = get(diff, 'meta.dependsOn', null);
+        const isRestrictedDiff = get(diff, 'restrictions.required', null);
+
         const isRestrictedField = restrictions && restrictions.required;
         const isConditionalField = meta && !!meta.dependsOn;
-        return (
+
+        const requiredText = TAG_DISPLAY_NAME[TagVariant.REQUIRED];
+        const conditionalText = TAG_DISPLAY_NAME[TagVariant.CONDITIONAL];
+
+        return isConditionalDiff ? (
+          <DiffText
+            oldText={isConditionalDiff.left && conditionalText}
+            newText={isConditionalDiff.right && conditionalText}
+          />
+        ) : isRestrictedDiff ? (
+          <DiffText
+            oldText={isRestrictedDiff.left && requiredText}
+            newText={isRestrictedDiff.right && requiredText}
+          />
+        ) : (
           <TagContainer>
             {isRestrictedField && <Tag variant={TagVariant.REQUIRED} />}
             {isConditionalField && <Tag variant={TagVariant.CONDITIONAL} />}
@@ -271,7 +288,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const tableData = getTableData(isDiffShowing, schema);
 
-  const getDataTier = (primaryId: boolean | null, core: boolean | null) => {
+  const getDataTier = (primaryId: boolean, core: boolean) => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
 
