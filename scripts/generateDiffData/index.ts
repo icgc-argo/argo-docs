@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+
 type Meta = {
   validationDependency: boolean;
   primaryId: boolean;
@@ -68,33 +70,33 @@ const checkField = (field) => {
     changes['description'] = { left: leftDiff.description, right: rightDiff.description };
   }
 
+  if (diff.valueType) {
+    changes['valueType'] = { left: leftDiff.valueType, right: rightDiff.valueType };
+  }
+
   const meta = diff.meta;
+
   if (meta) {
     'meta' in changes || (changes['meta'] = {});
-    if (meta.notes) {
-      changes['meta']['notes'] = { left: leftDiff.meta.notes, right: rightDiff.meta.notes };
-    }
 
-    if (meta.validationDependency) {
-      changes['meta']['validationDependency'] = {
-        left: leftDiff.meta.validationDependency,
-        right: rightDiff.meta.validationDependency,
-      };
-    }
+    if (!meta.type) {
+      // construct changes, null on left if created, null on right if deleted
+      const metaChanges = Object.entries(meta).reduce((metaChanges, val) => {
+        const [fieldName, data] = val;
+        const left = get(leftDiff, ['meta', fieldName], null);
+        const right = get(rightDiff, ['meta', fieldName], null);
+        console.log(fieldName, left, right);
+        metaChanges[fieldName] = {
+          left,
+          right,
+        };
+        return metaChanges;
+      }, {});
 
-    if (meta.core) {
-      changes['meta']['core'] = { left: leftDiff.meta.core, right: rightDiff.meta.core };
+      changes['meta'] = metaChanges;
     }
-
-    if (meta.displayName) {
-      changes['meta']['displayName'] = {
-        left: leftDiff.meta.displayName,
-        right: rightDiff.meta.displayName,
-      };
-    }
-
     // deleted fields
-    if (meta.type && meta.type === 'deleted') {
+    else if (meta.type && meta.type === 'deleted') {
       const deletedFields = meta.data;
       for (let [key, value] of Object.entries(deletedFields)) {
         changes['meta'][key] = { left: value, right: null };
@@ -105,6 +107,7 @@ const checkField = (field) => {
   const restrictions = diff.restrictions;
   if (restrictions) {
     'restrictions' in changes || (changes['restrictions'] = {});
+
     if (restrictions.script) {
       changes['restrictions']['script'] = {
         left: leftDiff.restrictions.script,
@@ -177,6 +180,7 @@ const generateDiffChanges = (schemaDiff: any): Diffs =>
         fieldChanges.type === ChangeTypeName.CREATED ? counts.created++ : counts.deleted++;
       } else {
         // updated field, find out which fields updated
+        console.log('field name', fieldName);
         schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
         counts.updated++;
       }
