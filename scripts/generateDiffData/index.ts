@@ -62,12 +62,13 @@ export enum ChangeTypeName {
   UPDATED = 'updated',
 }
 
+// gets fields, left null means created, right null means deleted
 const checkDiff = (name, field, leftDiff, rightDiff) =>
   Object.entries(field).reduce((changes, val) => {
     const [fieldName] = val;
     const left = get(leftDiff, [name, fieldName], null);
     const right = get(rightDiff, [name, fieldName], null);
-    console.log(fieldName, left, right);
+
     changes[fieldName] = {
       left,
       right,
@@ -75,6 +76,7 @@ const checkDiff = (name, field, leftDiff, rightDiff) =>
     return changes;
   }, {});
 
+// checks entire field deletions
 const checkDeleted = (field) => {
   const changes = {};
   const deletedFields = field.data;
@@ -89,11 +91,17 @@ const checkField = (field) => {
   const { left: leftDiff, right: rightDiff, diff } = field;
 
   if (diff.description) {
-    changes['description'] = { left: leftDiff.description, right: rightDiff.description };
+    changes['description'] = {
+      left: get(leftDiff, 'description', null),
+      right: get(rightDiff, 'description', null),
+    };
   }
 
   if (diff.valueType) {
-    changes['valueType'] = { left: leftDiff.valueType, right: rightDiff.valueType };
+    changes['valueType'] = {
+      left: get(leftDiff, 'valueType', null),
+      right: get(rightDiff, 'valueType', null),
+    };
   }
 
   const meta = diff.meta;
@@ -107,7 +115,7 @@ const checkField = (field) => {
       changes['meta'] = metaChanges;
     }
 
-    // deleted fields
+    // add deleted fields
     else if (meta.type && meta.type === 'deleted') {
       changes['meta'] = { ...changes['meta'], ...checkDeleted(meta) };
     }
@@ -129,7 +137,7 @@ const checkField = (field) => {
       }
     }
 
-    // deleted fields
+    // add deleted fields
     else if (restrictions.type && restrictions.type === 'deleted') {
       changes['restrictions'] = { ...changes['restrictions'], ...checkDeleted(restrictions) };
     }
@@ -155,18 +163,24 @@ const generateDiffChanges = (schemaDiff: any): Diffs =>
           [ChangeTypeName.DELETED]: {},
         });
 
-      if (
-        fieldChanges.type === ChangeTypeName.CREATED ||
-        fieldChanges.type === ChangeTypeName.DELETED
-      ) {
-        // created or deleted field
+      if (fieldChanges.type === ChangeTypeName.CREATED) {
+        // created field, pass data through
         schemas[schemaName][fieldChanges.type][fieldName] = {
           changeType: fieldChanges.type,
           ...fieldChanges.data,
         };
 
-        // update counts
-        fieldChanges.type === ChangeTypeName.CREATED ? counts.created++ : counts.deleted++;
+        counts.created++;
+      } else if (fieldChanges.type === ChangeTypeName.DELETED) {
+        // deleted field, add nulls for right diff
+        console.log(changes);
+        const fieldChanges = { ...changes, diff: changes.diff.data };
+        schemas[schemaName][ChangeTypeName.DELETED][fieldName] = {
+          changeType: 'deleted',
+          ...checkField(fieldChanges),
+        };
+
+        counts.deleted++;
       } else {
         // updated field, find out which fields updated
         schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
