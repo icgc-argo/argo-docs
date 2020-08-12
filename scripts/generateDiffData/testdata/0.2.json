@@ -42,13 +42,13 @@
             "dependsOn": "sample_registration.gender",
             "validationDependency": true,
             "primaryId": true,
-            "examples": "LAML_PO,00445,THY_099-tumour",
+            "examples": "new example LAML_PO,00445,THY_099-tumour",
             "displayName": "Submitter Specimen ID",
             "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
           },
           "restrictions": {
             "required": true,
-            "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
+            "regex": "$(changed)\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
           }
         },
         {

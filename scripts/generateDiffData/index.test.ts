@@ -26,44 +26,56 @@ import * as fse from 'fs-extra';
 const expect = chai.expect;
 
 const expectedResult = {
-  counts: { updated: 7, deleted: 19, created: 1 },
+  counts: { updated: 7, deleted: 5, created: 1 },
   schemas: {
     sample_registration: {
       deleted: {
         program_id: {
           changeType: 'deleted',
-          name: 'program_id',
-          valueType: 'string',
-          description: 'Unique identifier of the ARGO program.',
+
+          valueType: { left: 'string', right: null },
+          description: { left: 'Unique identifier of the ARGO program.', right: null },
           meta: {
-            validationDependency: true,
-            primaryId: true,
-            examples: 'TEST-CA',
-            notes:
-              'This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.',
-            displayName: 'Program ID',
+            validationDependency: { left: true, right: null },
+            primaryId: { left: true, right: null },
+            examples: { left: 'TEST-CA', right: null },
+            notes: {
+              left:
+                'This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.',
+              right: null,
+            },
+            displayName: { left: 'Program ID', right: null },
           },
           restrictions: {
-            required: true,
+            required: { left: true, right: null },
           },
         },
         submitter_donor_id: {
           changeType: 'deleted',
-          name: 'submitter_donor_id',
-          valueType: 'string',
-          description: 'Unique identifier of the donor, assigned by the data provider.',
+
+          valueType: { left: 'string', right: null },
+          description: {
+            left: 'Unique identifier of the donor, assigned by the data provider.',
+            right: null,
+          },
           meta: {
-            validationDependency: true,
-            primaryId: true,
-            examples: '90234,BLD_donor_89,AML-90',
-            displayName: 'Submitter Donor ID',
-            notes:
-              'To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`.',
+            validationDependency: { left: true, right: null },
+            primaryId: { left: true, right: null },
+            examples: { left: '90234,BLD_donor_89,AML-90', right: null },
+            displayName: { left: 'Submitter Donor ID', right: null },
+            notes: {
+              left:
+                'To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`.',
+              right: null,
+            },
           },
           restrictions: {
-            required: true,
-            regex:
-              '\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}',
+            required: { left: true, right: null },
+            regex: {
+              left:
+                '\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}',
+              right: null,
+            },
           },
         },
       },
@@ -126,11 +138,22 @@ const expectedResult = {
               left: null,
               right: 'sample_registration.gender',
             },
+
+            examples: {
+              left: 'LAML_PO,00445,THY_099-tumour',
+              right: 'new example LAML_PO,00445,THY_099-tumour',
+            },
           },
           restrictions: {
             required: {
               left: null,
               right: true,
+            },
+            regex: {
+              left:
+                '\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}',
+              right:
+                '$(changed)\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}',
             },
           },
         },
@@ -213,231 +236,38 @@ const expectedResult = {
     donor: {
       created: {},
       deleted: {
-        program_id: {
-          changeType: 'deleted',
-          name: 'program_id',
-          valueType: 'string',
-          description: 'Unique identifier of the ARGO program.',
-          meta: {
-            validationDependency: true,
-            primaryId: true,
-            foreignKey: 'sample_registration.program_id',
-            displayName: 'Program ID',
-          },
-          restrictions: {
-            required: true,
-          },
-        },
-        submitter_donor_id: {
-          changeType: 'deleted',
-          description: 'Unique identifier of the donor, assigned by the data provider.',
-          name: 'submitter_donor_id',
-          valueType: 'string',
-          meta: {
-            validationDependency: true,
-            primaryId: true,
-            foreignKey: 'sample_registration.submitter_donor_id',
-            displayName: 'Submitter Donor ID',
-            notes:
-              'To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`.',
-          },
-          restrictions: {
-            required: true,
-            regex:
-              '\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}',
-          },
-        },
-        vital_status: {
-          changeType: 'deleted',
-          description: "Donor's last known state of living or deceased.",
-          name: 'vital_status',
-          restrictions: {
-            codeList: ['Alive', 'Deceased', 'Unknown'],
-            required: true,
-          },
-          valueType: 'string',
-          meta: {
-            validationDependency: true,
-            core: true,
-            displayName: 'Vital Status',
-          },
-        },
-        cause_of_death: {
-          changeType: 'deleted',
-          description: "Indicate the cause of a donor's death.",
-          name: 'cause_of_death',
-          restrictions: {
-            codeList: ['Died of cancer', 'Died of other reasons', 'Unknown'],
-            script: [
-              '(function validate() {\n        let result = {valid: true, message: "Ok"};\n        const currField = typeof($field) === \'string\' ? $field.trim().toLowerCase() : $field;\n        const vitalStatus = $row.vital_status.trim().toLowerCase();\n    \n        if (!currField && vitalStatus === "deceased"){\n            result = {valid: false, message: `${$name} must be provided when the donor\'s vital_status is deceased.`}\n        }\n        else if (currField && vitalStatus != "deceased"){\n            result = {valid: false, message: `${$name} cannot be provided if the donor\'s vital_status is not deceased.`}\n        }\n        return result;\n    })()',
-            ],
-          },
-          valueType: 'string',
-          meta: {
-            core: true,
-            dependsOn: 'donor.vital_status',
-            notes:
-              "Cause of death is only required to be submitted if the donor's vital_status is Deceased.",
-            displayName: 'Cause of Death',
-          },
-        },
-        survival_time: {
-          changeType: 'deleted',
-          description:
-            'Interval of how long the donor has survived since primary diagnosis, in days.',
-          name: 'survival_time',
-          valueType: 'integer',
-          meta: {
-            dependsOn: 'donor.vital_status',
-            notes:
-              "Survival_time is only required to be submitted if the donor's vital_status is Deceased.",
-            validationDependency: true,
-            units: 'days',
-            core: 'true',
-            displayName: 'Survival Time',
-          },
-          restrictions: {
-            script: [
-              '(function validate() {\n        let result = {valid: true, message: "Ok"};\n        const currField = typeof($field) === \'string\' ? $field.trim().toLowerCase() : $field;\n        const vitalStatus = $row.vital_status.trim().toLowerCase();\n    \n        if (!currField && vitalStatus === "deceased"){\n            result = {valid: false, message: `${$name} must be provided when the donor\'s vital_status is deceased.`}\n        }\n        else if (currField && vitalStatus != "deceased"){\n            result = {valid: false, message: `${$name} cannot be provided if the donor\'s vital_status is not deceased.`}\n        }\n        return result;\n    })()',
-            ],
-          },
-        },
-        primary_site: {
-          changeType: 'deleted',
-          name: 'primary_site',
-          valueType: 'string',
-          description:
-            "The text term used to describe the primary site of disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). This categorization groups cases into general categories.",
-          meta: {
-            displayName: 'Primary Site',
-            core: true,
-          },
-          restrictions: {
-            required: true,
-            codeList: ['Accessory sinuses', 'Adrenal gland', 'Vulva', 'Unknown'],
-          },
-        },
-        prior_malignancy: {
-          changeType: 'deleted',
-          description: 'Prior malignancy affecting donor.',
-          name: 'prior_malignancy',
-          restrictions: {
-            codeList: ['Yes', 'No', 'Unknown'],
-          },
-          valueType: 'string',
-          meta: {
-            displayName: 'Prior Malignancy',
-            examples: 'C41.1, C16.9, C00.5, D46.9',
-          },
-        },
-        cancer_type_prior_malignancy: {
-          changeType: 'deleted',
-          description:
-            'The code to represent the cancer type of a prior malignancy using the WHO ICD-10 code (https://icd.who.int/browse10/2019/en) classification.',
-          name: 'cancer_type_prior_malignancy',
-          restrictions: {
-            regex: '^[C|D][0-9]{2}(.[0-9]{1,3}[A-Z]{0,1})?$',
-          },
-          valueType: 'string',
-          meta: {
-            displayName: 'Cancer Type Prior Malignancy',
-          },
-        },
-        age_at_prior_malignancy: {
-          changeType: 'deleted',
-          description:
-            'If donor has history of prior malignancy, indicate age at previous diagnosis, in years.',
-          name: 'age_at_prior_malignancy',
-          valueType: 'integer',
-          meta: {
-            displayName: 'Age at Prior Malignancy',
-          },
-        },
-        laterality_of_prior_malignancy: {
-          changeType: 'deleted',
-          description:
-            'If donor has history of prior malignancy, indicate laterality of previous diagnosis. (Codelist reference: NCI CDE: 4122391)',
-          name: 'laterality_of_prior_malignancy',
-          valueType: 'string',
-          restrictions: {
-            codeList: ['Bilateral', 'Left', 'Unknown'],
-          },
-          meta: {
-            displayName: 'Laterality at Prior Malignancy',
-          },
-        },
         height: {
           changeType: 'deleted',
-          description: "Indicate the donor's height, in centimeters (cm).",
-          name: 'height',
-          valueType: 'integer',
+          description: {
+            left: "Indicate the donor's height, in centimeters (cm).",
+            right: null,
+          },
+
+          valueType: { left: 'integer', right: null },
           meta: {
-            displayName: 'Height',
+            displayName: { left: 'Height', right: null },
           },
         },
         weight: {
           changeType: 'deleted',
-          description: "Indicate the donor's weight, in kilograms (kg).",
-          name: 'weight',
-          valueType: 'integer',
+          description: { left: "Indicate the donor's weight, in kilograms (kg).", right: null },
+
+          valueType: { left: 'integer', right: null },
           meta: {
-            displayName: 'Weight',
+            displayName: { left: 'Weight', right: null },
           },
         },
+
         bmi: {
           changeType: 'deleted',
-          description: "Indicate the donor's Body Mass Index (BMI) in kg/m².",
-          name: 'bmi',
-          valueType: 'integer',
-          meta: {
-            displayName: 'BMI',
+          description: {
+            left: "Indicate the donor's Body Mass Index (BMI) in kg/m².",
+            right: null,
           },
-        },
-        menopause_status: {
-          changeType: 'deleted',
-          description:
-            "Indicate the donor's menopause status at the time of primary diagnosis. (Codelist reference: NCI CDE ID: 2434914)",
-          name: 'menopause_status',
-          restrictions: {
-            codeList: [
-              'Indeterminate or unknown',
-              'Not applicable',
-              'Perimenopausal',
-              'Postmenopausal',
-              'Premenopausal',
-            ],
-          },
-          valueType: 'string',
+
+          valueType: { left: 'integer', right: null },
           meta: {
-            displayName: 'Menopause Status',
-          },
-        },
-        age_at_menarche: {
-          changeType: 'deleted',
-          description:
-            "Indicate the donor's age of menarche, the first occurrence of menstruation.",
-          name: 'age_at_menarche',
-          valueType: 'integer',
-          meta: {
-            displayName: 'Age at Menarche',
-          },
-        },
-        number_of_pregnancies: {
-          changeType: 'deleted',
-          description: 'Indicate the number of pregnancies a donor has had.',
-          name: 'number_of_pregnancies',
-          valueType: 'integer',
-          meta: {
-            displayName: 'Number of Pregnancies',
-          },
-        },
-        number_of_children: {
-          changeType: 'deleted',
-          description: 'Indicate the number of children the donor has birthed.',
-          name: 'number_of_children',
-          valueType: 'integer',
-          meta: {
-            displayName: 'Number of Children',
+            displayName: { left: 'BMI', right: null },
           },
         },
       },
