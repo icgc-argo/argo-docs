@@ -46,6 +46,8 @@ import { DiffText, DiffTextSegment, TextChange } from './DiffText';
 
 const formatFieldType = (value) => {
   switch (value) {
+    case null:
+      return '';
     case 'string':
       return 'TEXT';
     default:
@@ -160,9 +162,10 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description, diff } }) => (
-        <FieldDescription name={name} description={description} diff={diff && diff.description} />
-      ),
+      Cell: ({ original: { name, description, diff } }) => {
+        console.log('diff', diff);
+        return <FieldDescription name={name} description={description} diff={diff} />;
+      },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
@@ -170,8 +173,15 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Cell: ({ original }) => {
         const meta = get(original, 'meta', {});
         const diffMeta = get(original, 'diff.meta', null);
+        const changeType = get(original, 'diff.changeType', null);
 
-        if (diffMeta && diffMeta.core && diffMeta.primaryId) {
+        if (changeType === ChangeType.DELETED) {
+          return (
+            <DiffTextSegment type={TextChange.DELETED}>
+              {startCase(getDataTier(meta.primaryId, meta.core))}
+            </DiffTextSegment>
+          );
+        } else if (diffMeta && diffMeta.core && diffMeta.primaryId) {
           const { primaryId, core } = diffMeta;
           const oldTier = getDataTier(primaryId.left, core.left);
           const newTier = getDataTier(primaryId.right, core.right);
@@ -189,6 +199,9 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Attributes',
       id: 'attributes',
       Cell: ({ original: { restrictions, meta, diff } }) => {
+        const changeType = get(diff, 'changeType', null);
+        const isFieldDeleted = changeType === ChangeType.DELETED;
+
         const isConditionalDiff = get(diff, 'meta.dependsOn', null);
         const isRestrictedDiff = get(diff, 'restrictions.required', null);
 
@@ -210,8 +223,25 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
           />
         ) : (
           <TagContainer>
-            {isRestrictedField && <Tag variant={TagVariant.REQUIRED} />}
-            {isConditionalField && <Tag variant={TagVariant.CONDITIONAL} />}
+            {isFieldDeleted ? (
+              isRestrictedField ? (
+                <DiffTextSegment type={TextChange.DELETED}>
+                  {startCase(TagVariant.REQUIRED)}
+                </DiffTextSegment>
+              ) : (
+                <Tag variant={TagVariant.REQUIRED} />
+              )
+            ) : null}
+
+            {isFieldDeleted ? (
+              isConditionalField ? (
+                <DiffTextSegment type={TextChange.DELETED}>
+                  {startCase(TagVariant.CONDITIONAL)}
+                </DiffTextSegment>
+              ) : (
+                <Tag variant={TagVariant.CONDITIONAL} />
+              )
+            ) : null}
           </TagContainer>
         );
       },
@@ -221,13 +251,15 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Type',
       id: 'valueType',
-      Cell: ({ original: { valueType, diff } }) => {
-        return diff && diff.valueType ? (
-          <DiffText oldText={diff.valueType.left} newText={diff.valueType.right} />
+      Cell: ({ original: { valueType, diff } }) =>
+        diff && diff.valueType ? (
+          <DiffText
+            oldText={formatFieldType(diff.valueType.left)}
+            newText={formatFieldType(diff.valueType.right)}
+          />
         ) : (
           formatFieldType(valueType)
-        );
-      },
+        ),
       style: { padding: '8px' },
       width: 70,
     },
@@ -267,6 +299,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Cell: ({ original: { name, meta, restrictions, diff } }) => {
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
+        console.log('diff', name, diff);
         return (
           <Script
             name={name}
