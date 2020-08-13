@@ -105,7 +105,7 @@ const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0.5.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
@@ -176,9 +176,9 @@ const getDictionaryDiff = async (version, diffVersion) => {
  * @param schemaDiff
  * add diff data to object
  */
-const updateSchemaField = (schema, schemaDiff) => {
+const updateSchemaFields = (schema, schemaDiff) => {
   const { created = {}, deleted = {}, updated = {} } = schemaDiff;
-  const fieldsToAdd = Object.values(deleted);
+  const deletedFields = Object.values(deleted);
 
   // if a field has been created or updated, add this data
   const allFields = schema.fields
@@ -190,14 +190,20 @@ const updateSchemaField = (schema, schemaDiff) => {
         ? { ...field, diff: updated[fieldName], changeType: ChangeType.CREATED }
         : field;
     })
-    .concat(fieldsToAdd);
+    .concat(
+      deletedFields.map(({ name, ...rest }) => ({
+        changeType: ChangeType.DELETED,
+        name,
+        diff: rest,
+      })),
+    );
 
   return { ...schema, fields: allFields };
 };
 
 const diffObjectToArray = (diff) => Object.entries(diff).map((fieldPair) => fieldPair[1]);
 
-const resolveSchemas = (dictionarySchemas, diffSchemas) => {
+const resolveSchemaDiffs = (dictionarySchemas, diffSchemas) => {
   const dictionarySchemaNames = new Set();
   dictionarySchemas.forEach((schema) => dictionarySchemaNames.add(schema.name));
 
@@ -206,7 +212,7 @@ const resolveSchemas = (dictionarySchemas, diffSchemas) => {
     const { created, deleted, updated, description = 'destription' } = diffSchema;
     if (dictionarySchemaNames.has(diffSchemaName)) {
       // field needs updating
-      const schema = updateSchemaField(
+      const schema = updateSchemaFields(
         dictionarySchemas.find((schema) => schema.name === diffSchemaName),
         diffSchema,
       );
@@ -273,8 +279,8 @@ function DictionaryPage() {
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  const schemas = resolveSchemas(dictionary.schemas, dictionaryDiff.schemas);
-
+  const schemas = resolveSchemaDiffs(dictionary.schemas, dictionaryDiff.schemas);
+  console.log('schemas', schemas);
   // filter out diff fields
   const filteredDiffSchemas = React.useMemo(
     () =>
