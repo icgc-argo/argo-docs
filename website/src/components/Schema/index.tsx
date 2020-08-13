@@ -278,7 +278,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const examples = get(meta, 'examples', '');
 
         if (regex) {
-          return <Regex regex={regex} examples={examples.split(',')} />;
+          return <Regex regex={regex} examples={examples} diff={diff} />;
         } else if (codeList) {
           return (
             <CodeList
