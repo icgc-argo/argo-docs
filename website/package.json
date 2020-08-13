@@ -4,7 +4,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts"
   },
   "prettier": {
     "printWidth": 100,
@@ -28,9 +29,15 @@
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.2",
+    "chai": "^4.2.0",
     "commander": "^4.1.0",
     "dotenv-webpack": "^1.7.0",
-    "svg-inline-loader": "^0.8.0"
+    "mocha": "^8.1.1",
+    "svg-inline-loader": "^0.8.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   },
   "browserslist": {
     "production": [
