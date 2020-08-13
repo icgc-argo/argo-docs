@@ -177,6 +177,7 @@ const generateDiffChanges = (schemaDiff: any): Diffs =>
         const fieldChanges = { ...changes, diff: changes.diff.data };
         schemas[schemaName][ChangeTypeName.DELETED][fieldName] = {
           changeType: 'deleted',
+          name: fieldName,
           ...checkField(fieldChanges),
         };
 
