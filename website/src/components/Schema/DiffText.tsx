@@ -23,7 +23,13 @@ export const DiffText = ({ oldText, newText }: { oldText: string; newText: strin
   </div>
 );
 
-export const DiffTextSegment = ({ children, type }: { children: string; type: TextChange }) => (
+export const DiffTextSegment = ({
+  children,
+  type,
+}: {
+  children: React.ReactChild;
+  type: TextChange;
+}) => (
   <div
     css={
       type === TextChange.CREATED ? createdStyle : type === TextChange.DELETED ? deletedStyle : null

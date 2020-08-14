@@ -42,7 +42,14 @@ import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-import { DiffText, DiffTextSegment, TextChange, deletedStyle, createdStyle } from './DiffText';
+import {
+  DiffText,
+  DiffTextSegment,
+  TextChange,
+  deletedStyle,
+  createdStyle,
+  updatedStyle,
+} from './DiffText';
 import union from 'lodash/union';
 
 const formatFieldType = (value) => {
@@ -70,6 +77,79 @@ const FieldsTag = ({ fieldCount }) => (
     className={`${styles.tag} ${styles.fields}`}
     style={{ marginTop: '3px' }}
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
+);
+
+const FileExample = ({ name }) => (
+  <div>
+    File Name Example:{' '}
+    <span
+      css={css`
+        font-weight: 600;
+      `}
+    >{`${name}`}</span>
+    [-optional-extension]
+    <span
+      css={css`
+        font-weight: 600;
+      `}
+    >
+      .tsv
+    </span>
+  </div>
+);
+
+const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
+  <DiffTextSegment type={changeType}>
+    <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginBottom: '11px',
+        }}
+      >
+        <HeaderName name={name} />
+        <FieldsTag fieldCount={fieldCount} />
+      </div>
+
+      <div
+        style={{
+          marginBottom: '11px',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+        }}
+      >
+        <DataTypography>
+          {diff && diff.description ? (
+            <div>
+              <div css={updatedStyle}>{diff.description.left}</div>
+              <div css={deletedStyle}>{diff.description.right}</div>
+            </div>
+          ) : description ? (
+            description
+          ) : null}
+          <FileExample name={name} />
+        </DataTypography>
+        {/* <DownloadTooltip disabled={isLatestSchema}>
+          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+            <Button
+              disabled={!isLatestSchema}
+              variant="secondary"
+              size="sm"
+              onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
+            >
+              <DownloadButtonContent disabled={!isLatestSchema}>
+                File Template
+              </DownloadButtonContent>
+            </Button>
+          </div>
+        </DownloadTooltip> */}
+      </div>
+    </div>
+  </DiffTextSegment>
 );
 
 /**
@@ -415,51 +495,14 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
           </Modal>
         </ModalPortal>
       )}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: '11px',
-        }}
-      >
-        <HeaderName name={schema.name} />
-        <FieldsTag fieldCount={schema.fields.length} />
-      </div>
 
-      <div
-        style={{
-          marginBottom: '11px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-        }}
-      >
-        <DataTypography style={{ flex: 1 }}>
-          {schema && schema.description}
-          <div>
-            File Name Example:{' '}
-            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
-          </div>
-        </DataTypography>
-
-        {/* <DownloadTooltip disabled={isLatestSchema}>
-          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-            <Button
-              disabled={!isLatestSchema}
-              variant="secondary"
-              size="sm"
-              onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
-            >
-              <DownloadButtonContent disabled={!isLatestSchema}>
-                File Template
-              </DownloadButtonContent>
-            </Button>
-          </div>
-        </DownloadTooltip> */}
-      </div>
+      <SchemaMeta
+        changeType={schema.changeType}
+        description={schema.description}
+        name={schema.name}
+        fieldCount={schema.fields.length}
+        diff={schema.diff}
+      />
 
       <div ref={containerRef}>
         <Table
