@@ -25,7 +25,7 @@ import Table from '../Table';
 import Tag, { TagVariant, TagContainer, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
-import CodeList from './CodeList';
+import CodeList, { Code } from './CodeList';
 import Regex from './Regex';
 import startCase from 'lodash/startCase';
 import { DataTypography, SchemaTitle } from '../Typography';
@@ -42,7 +42,8 @@ import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-import { DiffText, DiffTextSegment, TextChange } from './DiffText';
+import { DiffText, DiffTextSegment, TextChange, deletedStyle, createdStyle } from './DiffText';
+import union from 'lodash/union';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -247,7 +248,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       style: { padding: '8px' },
       width: 102,
     },
-    /*
+
     {
       Header: 'Type',
       id: 'valueType',
@@ -268,32 +269,66 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, restrictions, meta, diff } = original;
+        const { name: field, diff, isFieldDeleted, ...rest } = original;
 
-        const regex = get(restrictions, 'regex', null);
+        const regex = get(rest, 'restrictions.regex', null);
+        const codeList = get(rest, 'restrictions.codeList', null);
+        const examples = get(rest, 'meta.examples', '');
 
-        const codeList = get(restrictions, 'codeList', null);
-        const codeListDiff = get(diff, 'restrictions.codeList', null);
+        if (diff && diff.changeType === ChangeType.UPDATED) {
+          if (checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples'])) {
+            const diffRegex = get(diff, 'restrictions.regex');
+            const diffExamples = get(diff, 'meta.examples');
 
-        const examples = get(meta, 'examples', '');
+            return (
+              <div css={css``}>
+                <Regex regex={diffRegex.left} examples={diffExamples.left} style={deletedStyle} />
+                <Regex regex={diffRegex.right} examples={diffRegex.right} style={createdStyle} />
+              </div>
+            );
+          }
 
-        if (regex) {
-          return <Regex regex={regex} examples={examples} diff={diff} />;
-        } else if (codeList) {
-          return (
-            <CodeList
-              codeList={codeList}
-              diff={codeListDiff}
-              onToggle={onCodelistExpandToggle(field)}
-              isExpanded={isCodeListExpanded(field)}
-            />
-          );
+          if (checkDiff(diff, ['restrictions.codeList'])) {
+            const diffCodeList = get(diff, 'restrictions.codeList', codeList);
+            const allCodes: string[] = union(diffCodeList.left, diffCodeList.right);
+            const createdCodes = diffCodeList.data.added;
+            const deletedCodes = diffCodeList.data.deleted;
+
+            return (
+              <div>
+                {allCodes.map((code) => {
+                  const formatter = deletedCodes.includes(code)
+                    ? TextChange.DELETED
+                    : createdCodes.includes(code)
+                    ? TextChange.CREATED
+                    : null;
+
+                  return <Code code={code} format={formatter} />;
+                })}
+              </div>
+            );
+          }
         } else {
-          return null;
+          // no diff components
+          if (regex) {
+            return <Regex regex={regex} examples={examples} />;
+          }
+
+          if (codeList) {
+            return (
+              <CodeList
+                codeList={codeList}
+                onToggle={onCodelistExpandToggle(field)}
+                isExpanded={isCodeListExpanded(field)}
+              />
+            );
+          }
         }
+        return null;
       },
+
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    },
+    } /*    
     {
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff } }) => {
@@ -311,7 +346,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    }, */
+    }, */,
   ];
 
   //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
