@@ -71,6 +71,8 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
+const checkDiff = (diff, field) => get(diff, field, null);
+
 const getTableData = (isDiffShowing, schema) =>
   isDiffShowing
     ? schema.fields
@@ -147,6 +149,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         </CellContentCenter>
       ),
       Cell: ({ original }) => {
+        console.log('cell', original);
         const changeType = original.changeType;
         return changeType ? (
           <CellContentCenter>
@@ -162,9 +165,16 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description, diff } }) => {
-        console.log('diff', diff);
-        return <FieldDescription name={name} description={description} diff={diff} />;
+      Cell: ({ original }) => {
+        console.log('cell', original);
+        const { name, description, diff } = original;
+        const hasDiff = checkDiff(diff, 'description');
+
+        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
+          <DiffText oldText={diff.description.left} newText={diff.description.right} />
+        ) : (
+          <FieldDescription name={name} description={description} />
+        );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
@@ -312,7 +322,9 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
+  ];
+
+  //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
 

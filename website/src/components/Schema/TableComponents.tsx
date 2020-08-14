@@ -2,50 +2,26 @@
 import { jsx, css } from '@emotion/core';
 import React from 'react';
 import Button from '../../components/Button';
-import styled from '@emotion/styled';
 import get from 'lodash/get';
 import { DiffText, DiffTextSegment, TextChange } from './DiffText';
-import { ChangeType } from '.';
 
-const FieldDescription = ({
-  name,
-  description,
-  diff,
-}: {
-  name: string;
-  description: string;
-  diff: any;
-}) => {
-  // a name can only be created or destroyed, a new name is a new field
-  const diffType = get(diff, 'changeType', null);
-  const diffDescription = get(diff, 'description', null);
-  return (
+const FieldDescription = ({ name, description }: { name: string; description: string }) => (
+  <div
+    css={css`
+      font-size: 12px;
+    `}
+  >
     <div
       css={css`
-        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 5px;
       `}
     >
-      <div
-        css={css`
-          font-weight: bold;
-          margin-bottom: 5px;
-        `}
-      >
-        {diffType === ChangeType.DELETED ? (
-          <DiffTextSegment type={TextChange.DELETED}>{name}</DiffTextSegment>
-        ) : (
-          name
-        )}
-      </div>
-
-      {diffDescription ? (
-        <DiffText oldText={diffDescription.left} newText={diffDescription.right} />
-      ) : (
-        <div>{description}</div>
-      )}
+      {name}
     </div>
-  );
-};
+    {description}
+  </div>
+);
 
 type TextDiff = { left: string; right: string };
 
