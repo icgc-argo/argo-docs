@@ -26,7 +26,7 @@ import HighlightedRegex from './HighlightedRegex';
 import get from 'lodash/get';
 import { ChangeType } from '.';
 
-const RegexExamples = ({ regex, examples }) => (
+export const RegexExamples = ({ regex, examples }) => (
   <div>
     <br />
     <div>Examples:</div>
@@ -48,15 +48,7 @@ const RegexExamples = ({ regex, examples }) => (
   </div>
 );
 
-const Regex = ({
-  regex,
-  examples = [],
-  style,
-}: {
-  regex: string;
-  examples: string[];
-  style?: any;
-}) => (
+const Regex = ({ regex, style }: { regex: string; style?: any }) => (
   <div
     css={css`
       margin-bottom: 5px;
@@ -65,7 +57,6 @@ const Regex = ({
   >
     <div>Values must meet the regular expression</div>
     <HighlightedRegex regex={regex} />
-    {examples && <RegexExamples regex={regex} examples={examples} />}
   </div>
 );
 
