@@ -48,44 +48,25 @@ const RegexExamples = ({ regex, examples }) => (
   </div>
 );
 
-const Regex = ({ regex, examples = [], diff }) => {
-  const diffExamples = get(diff, 'meta.examples', null);
-  const diffRegex = get(diff, 'restrictions.regex', null);
-  const changeType = get(diff, 'changeType', null);
-
-  const compsToRender =
-    diffExamples || diffRegex
-      ? [
-          { regex: diffRegex.left, examples: diffExamples.left, type: ChangeType.DELETED },
-          { regex: diffRegex.right, examples: diffExamples.right, type: ChangeType.CREATED },
-        ]
-      : [{ regex, examples, type: changeType === ChangeType.DELETED && ChangeType.DELETED }];
-
-  return (
-    <div>
-      {compsToRender.map(({ regex, examples, type }) => (
-        <div
-          css={css`
-            margin-bottom: 5px;
-            ${type === ChangeType.DELETED
-              ? css`
-                  text-decoration: line-through;
-                  background: #f6c5cf;
-                `
-              : type === ChangeType.CREATED
-              ? css`
-                  background: #d3f7f0;
-                `
-              : null}
-          `}
-        >
-          <div>Values must meet the regular expression</div>
-          <HighlightedRegex regex={regex} />
-          {examples && <RegexExamples regex={regex} examples={examples} />}
-        </div>
-      ))}
-    </div>
-  );
-};
+const Regex = ({
+  regex,
+  examples = [],
+  style,
+}: {
+  regex: string;
+  examples: string[];
+  style?: any;
+}) => (
+  <div
+    css={css`
+      margin-bottom: 5px;
+      ${style}
+    `}
+  >
+    <div>Values must meet the regular expression</div>
+    <HighlightedRegex regex={regex} />
+    {examples && <RegexExamples regex={regex} examples={examples} />}
+  </div>
+);
 
 export default Regex;

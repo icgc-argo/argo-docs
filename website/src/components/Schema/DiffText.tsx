@@ -2,14 +2,16 @@
 import { jsx, css } from '@emotion/core';
 import React from 'react';
 
-const deletedStyle = css`
+export const deletedStyle = css`
   background: #f6c5cf;
   text-decoration: line-through;
 `;
-const updatedStyle = css`
+
+export const updatedStyle = css`
   background: #15846c;
 `;
-const createdStyle = css`
+
+export const createdStyle = css`
   background: #d3f7f0;
 `;
 
