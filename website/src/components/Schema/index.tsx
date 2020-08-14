@@ -188,9 +188,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Data Tier',
       Cell: ({ original }) => {
         console.log('cell', original);
-        const { meta, diff } = original;
-        const primaryId = get(meta, 'primaryId');
-        const core = get(meta, 'core');
+        const { meta = {}, diff } = original;
 
         const hasDiff = checkDiff(diff, ['meta.core', 'meta.primaryId']);
         const isFieldDeleted = false;
@@ -203,83 +201,53 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         ) : isFieldDeleted ? (
           TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]
         ) : (
-          <Tag variant={getDataTier(primaryId, core)} />
+          <Tag variant={getDataTier(meta.primaryId, meta.core)} />
         );
-        /* 
-        if (changeType === ChangeType.DELETED) {
-          return (
-            <DiffTextSegment type={TextChange.DELETED}>
-              {startCase(getDataTier(meta.primaryId, meta.core))}
-            </DiffTextSegment>
-          );
-        } else if (diffMeta && diffMeta.core && diffMeta.primaryId) {
-          const { primaryId, core } = diffMeta;
-          const oldTier = getDataTier(primaryId.left, core.left);
-          const newTier = getDataTier(primaryId.right, core.right);
-          return (
-            <DiffText newText={TAG_DISPLAY_NAME[newTier]} oldText={TAG_DISPLAY_NAME[oldTier]} />
-          );
-        } else {
-          return <Tag variant={getDataTier(meta.primaryId, meta.core)} />;
-        }
- */
       },
       style: { padding: '8px' },
       width: 85,
-    } /* 
+    },
     {
       Header: 'Attributes',
       id: 'attributes',
-      Cell: ({ original: { restrictions, meta, diff } }) => {
-        const changeType = get(diff, 'changeType', null);
-        const isFieldDeleted = changeType === ChangeType.DELETED;
+      Cell: ({ original }) => {
+        const { restrictions = {}, meta = {}, diff } = original;
 
-        const isConditionalDiff = get(diff, 'meta.dependsOn', null);
-        const isRestrictedDiff = get(diff, 'restrictions.required', null);
+        const hasDiff =
+          checkDiff(diff, ['meta.dependsOn']) || checkDiff(diff, ['restrictions.required']);
 
-        const isRestrictedField = restrictions && restrictions.required;
-        const isConditionalField = meta && !!meta.dependsOn;
+        const isFieldDeleted = false;
 
-        const requiredText = TAG_DISPLAY_NAME[TagVariant.REQUIRED];
-        const conditionalText = TAG_DISPLAY_NAME[TagVariant.CONDITIONAL];
+        const attribute = getAttribute(restrictions.required, meta.dependsOn);
+        const diffRequired = get(diff, 'restrictions.required', null);
+        const diffDependsOn = get(diff, 'meta.dependsOn', null);
 
-        return isConditionalDiff ? (
+        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
           <DiffText
-            oldText={isConditionalDiff.left && conditionalText}
-            newText={isConditionalDiff.right && conditionalText}
+            newText={
+              TAG_DISPLAY_NAME[
+                getAttribute(
+                  diffRequired && diffRequired.right,
+                  diffDependsOn && diffDependsOn.right,
+                )
+              ]
+            }
+            oldText={
+              TAG_DISPLAY_NAME[
+                getAttribute(diffRequired && diffRequired.left, diffDependsOn && diffDependsOn.left)
+              ]
+            }
           />
-        ) : isRestrictedDiff ? (
-          <DiffText
-            oldText={isRestrictedDiff.left && requiredText}
-            newText={isRestrictedDiff.right && requiredText}
-          />
+        ) : isFieldDeleted ? (
+          TAG_DISPLAY_NAME[getAttribute(diff.restrictions.required.left, diff.meta.dependsOn.left)]
         ) : (
-          <TagContainer>
-            {isFieldDeleted ? (
-              isRestrictedField ? (
-                <DiffTextSegment type={TextChange.DELETED}>
-                  {startCase(TagVariant.REQUIRED)}
-                </DiffTextSegment>
-              ) : (
-                <Tag variant={TagVariant.REQUIRED} />
-              )
-            ) : null}
-
-            {isFieldDeleted ? (
-              isConditionalField ? (
-                <DiffTextSegment type={TextChange.DELETED}>
-                  {startCase(TagVariant.CONDITIONAL)}
-                </DiffTextSegment>
-              ) : (
-                <Tag variant={TagVariant.CONDITIONAL} />
-              )
-            ) : null}
-          </TagContainer>
+          attribute && <Tag variant={attribute} />
         );
       },
       style: { padding: '8px' },
       width: 102,
     },
+    /*
     {
       Header: 'Type',
       id: 'valueType',
@@ -343,7 +311,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    }, */,
+    }, */
   ];
 
   //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
@@ -364,6 +332,9 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const getDataTier = (primaryId: boolean, core: boolean): TagVariant => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
+
+  const getAttribute = (required: boolean, dependsOn: boolean): TagVariant =>
+    required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
