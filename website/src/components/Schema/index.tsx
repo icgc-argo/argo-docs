@@ -71,7 +71,14 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const checkDiff = (diff, field) => get(diff, field, null);
+/**
+ *
+ * @param diff
+ * @param fields
+ * Check if all fields present in diff object
+ */
+const checkDiff = (diff, fields) =>
+  fields.reduce((acc, field) => acc && Boolean(get(diff, field, false)), true);
 
 const getTableData = (isDiffShowing, schema) =>
   isDiffShowing
@@ -166,9 +173,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Field & Description',
       id: 'fieldDescription',
       Cell: ({ original }) => {
-        console.log('cell', original);
         const { name, description, diff } = original;
-        const hasDiff = checkDiff(diff, 'description');
+        const hasDiff = checkDiff(diff, ['description']);
 
         return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
           <DiffText oldText={diff.description.left} newText={diff.description.right} />
@@ -181,10 +187,25 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Data Tier',
       Cell: ({ original }) => {
-        const meta = get(original, 'meta', {});
-        const diffMeta = get(original, 'diff.meta', null);
-        const changeType = get(original, 'diff.changeType', null);
+        console.log('cell', original);
+        const { meta, diff } = original;
+        const primaryId = get(meta, 'primaryId');
+        const core = get(meta, 'core');
 
+        const hasDiff = checkDiff(diff, ['meta.core', 'meta.primaryId']);
+        const isFieldDeleted = false;
+
+        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
+          <DiffText
+            newText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.right, diff.meta.core.right)]}
+            oldText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]}
+          />
+        ) : isFieldDeleted ? (
+          TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]
+        ) : (
+          <Tag variant={getDataTier(primaryId, core)} />
+        );
+        /* 
         if (changeType === ChangeType.DELETED) {
           return (
             <DiffTextSegment type={TextChange.DELETED}>
@@ -201,10 +222,11 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         } else {
           return <Tag variant={getDataTier(meta.primaryId, meta.core)} />;
         }
+ */
       },
       style: { padding: '8px' },
       width: 85,
-    },
+    } /* 
     {
       Header: 'Attributes',
       id: 'attributes',
@@ -321,7 +343,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    },
+    }, */,
   ];
 
   //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
@@ -339,7 +361,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const tableData = getTableData(isDiffShowing, schema);
 
-  const getDataTier = (primaryId: boolean, core: boolean) => {
+  const getDataTier = (primaryId: boolean, core: boolean): TagVariant => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
 
