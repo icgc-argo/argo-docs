@@ -328,25 +328,40 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       },
 
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    } /*    
+    },
     {
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff } }) => {
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
-        console.log('diff', name, diff);
-        return (
-          <Script
-            name={name}
-            notes={notes}
-            script={script}
-            diff={diff}
-            showScript={setCurrentShowingScripts}
-          />
-        );
+        const diffScript = get(diff, 'restrictions.script');
+
+        if (diff && diff.changeType === ChangeType.UPDATED) {
+          console.log('diff', diff);
+          if (checkDiff(diff, ['meta.notes'])) {
+            const diffNotes = get(diff, 'meta.notes');
+            return <DiffText newText={diffNotes.right} oldText={diffNotes.left} />;
+          }
+        } else {
+          if (notes) {
+            return <div>{notes}</div>;
+          }
+
+          if (script || diffScript) {
+            return (
+              <Script
+                name={name}
+                script={script}
+                diff={diffScript}
+                showScript={setCurrentShowingScripts}
+              />
+            );
+          }
+        }
+        return null;
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    }, */,
+    },
   ];
 
   //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));

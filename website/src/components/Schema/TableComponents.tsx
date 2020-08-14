@@ -27,35 +27,24 @@ type TextDiff = { left: string; right: string };
 
 const Script = ({
   script,
-  notes,
   name,
   diff,
   showScript,
 }: {
   script: string[];
-  notes: string;
   name: string;
   diff: TextDiff;
   showScript: any;
 }) => {
-  const notesDiff = get(diff, 'meta.notes', null);
-  const scriptDiff = get(diff, 'restrictions.script', null);
-
   return (
     <div>
-      {notesDiff ? (
-        <DiffText oldText={notesDiff.left} newText={notesDiff.right} />
-      ) : notes ? (
-        <div>{notes}</div>
-      ) : null}
-
-      {scriptDiff ? (
+      {diff ? (
         <Button
           variant="secondary"
           size="sm"
           onClick={() =>
             showScript({
-              diff: { left: scriptDiff.left, right: scriptDiff.right },
+              diff: { left: diff.left, right: diff.right },
               fieldName: name,
             })
           }
