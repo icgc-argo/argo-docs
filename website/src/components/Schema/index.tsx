@@ -26,7 +26,7 @@ import Tag, { TagVariant, TagContainer, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import CodeList, { Code } from './CodeList';
-import Regex from './Regex';
+import Regex, { RegexExamples } from './Regex';
 import startCase from 'lodash/startCase';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal } from '../../pages/dictionary';
@@ -254,10 +254,25 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const { name, description, diff, changeType } = original;
         const hasDiff = checkDiff(diff, ['description']);
 
-        return changeType === ChangeType.UPDATED && hasDiff ? (
-          <DiffText oldText={diff.description.left} newText={diff.description.right} />
-        ) : (
-          <FieldDescription name={name} description={description} />
+        return (
+          <div
+            css={css`
+              font-size: 12px;
+            `}
+          >
+            <div
+              css={css`
+                font-weight: 600;
+              `}
+            >
+              {name}
+            </div>
+            {changeType === ChangeType.UPDATED && hasDiff ? (
+              <DiffText oldText={diff.description.left} newText={diff.description.right} />
+            ) : (
+              description
+            )}
+          </div>
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
@@ -338,7 +353,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       style: { padding: '8px' },
       width: 70,
     },
-
     {
       Header: 'Permissible Values',
       id: 'permissibleValues',
@@ -350,56 +364,51 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const codeList = get(rest, 'restrictions.codeList', null);
         const examples = get(rest, 'meta.examples', '');
 
-        if (changeType === ChangeType.UPDATED) {
-          if (checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples'])) {
-            const diffRegex = get(diff, 'restrictions.regex');
-            const diffExamples = get(diff, 'meta.examples');
+        const diffRegex = get(diff, 'restrictions.regex');
+        const diffExamples = get(diff, 'meta.examples');
 
-            return (
-              <div css={css``}>
-                <Regex regex={diffRegex.left} examples={diffExamples.left} style={deletedStyle} />
-                <Regex regex={diffRegex.right} examples={diffRegex.right} style={createdStyle} />
+        const diffCodeList = get(diff, 'restrictions.codeList');
+        const formattedCodes = getFormattedCodes(diffCodeList);
+        return (
+          <div>
+            {checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples']) ? (
+              <div
+                css={css`
+                  div {
+                    margin-top: 5px;
+                  }
+                `}
+              >
+                <div css={deletedStyle}>
+                  <Regex regex={diffRegex.left} />
+                  <RegexExamples regex={diffRegex.left} examples={diffExamples.left} />
+                </div>
+                <div css={createdStyle}>
+                  <Regex regex={diffRegex.right} />
+                  <RegexExamples regex={diffRegex.right} examples={diffExamples.right} />
+                </div>
               </div>
-            );
-          }
-
-          if (checkDiff(diff, ['restrictions.codeList'])) {
-            const diffCodeList = get(diff, 'restrictions.codeList', codeList);
-            const allCodes: string[] = union(diffCodeList.left, diffCodeList.right);
-            const createdCodes = diffCodeList.data.added;
-            const deletedCodes = diffCodeList.data.deleted;
-
-            return (
-              <div>
-                {allCodes.map((code) => {
-                  const formatter = deletedCodes.includes(code)
-                    ? TextChange.DELETED
-                    : createdCodes.includes(code)
-                    ? TextChange.CREATED
-                    : null;
-
-                  return <Code code={code} format={formatter} />;
-                })}
-              </div>
-            );
-          }
-        } else {
-          // no diff components
-          if (regex) {
-            return <Regex regex={regex} examples={examples} />;
-          }
-
-          if (codeList) {
-            return (
-              <CodeList
-                codeList={codeList}
-                onToggle={onCodelistExpandToggle(field)}
-                isExpanded={isCodeListExpanded(field)}
-              />
-            );
-          }
-        }
-        return null;
+            ) : (
+              regex && (
+                <>
+                  <Regex regex={regex} />
+                  <RegexExamples regex={regex} examples={examples} />
+                </>
+              )
+            )}
+            {checkDiff(diff, ['restrictions.codeList']) ? (
+              <div>{formattedCodes}</div>
+            ) : (
+              codeList && (
+                <CodeList
+                  codeList={codeList}
+                  onToggle={onCodelistExpandToggle(field)}
+                  isExpanded={isCodeListExpanded(field)}
+                />
+              )
+            )}
+          </div>
+        );
       },
 
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
@@ -410,35 +419,29 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
         const diffScript = get(diff, 'restrictions.script');
+        const diffNotes = get(diff, 'meta.notes');
 
-        if (changeType === ChangeType.UPDATED) {
-          if (checkDiff(diff, ['meta.notes'])) {
-            const diffNotes = get(diff, 'meta.notes');
-            return <DiffText newText={diffNotes.right} oldText={diffNotes.left} />;
-          }
-        } else {
-          if (notes) {
-            return <div>{notes}</div>;
-          }
-
-          if (script || diffScript) {
-            return (
+        return (
+          <div>
+            {changeType === ChangeType.UPDATED && checkDiff(diff, ['meta.notes']) ? (
+              <DiffText newText={diffNotes.right} oldText={diffNotes.left} />
+            ) : (
+              notes
+            )}
+            {(script || diffScript) && (
               <Script
                 name={name}
                 script={script}
                 diff={diffScript}
                 showScript={setCurrentShowingScripts}
               />
-            );
-          }
-        }
-        return null;
+            )}
+          </div>
+        );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ];
-
-  //.filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
+  ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
 
@@ -460,6 +463,28 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const getAttribute = (required: boolean, dependsOn: boolean): TagVariant =>
     required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
+
+  const getFormattedCodes = (codeList) => {
+    if (!codeList) return null;
+
+    const allCodes: string[] = union(codeList.left, codeList.right);
+    const createdCodes = codeList.data.added;
+    const deletedCodes = codeList.data.deleted;
+
+    return (
+      <div>
+        {allCodes.map((code) => {
+          const formatter = deletedCodes.includes(code)
+            ? TextChange.DELETED
+            : createdCodes.includes(code)
+            ? TextChange.CREATED
+            : null;
+
+          return <Code code={code} format={formatter} />;
+        })}
+      </div>
+    );
+  };
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
