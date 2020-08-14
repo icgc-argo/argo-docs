@@ -156,10 +156,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
           <StarIcon fill="#babcc2" />
         </CellContentCenter>
       ),
-      Cell: ({ original }) => {
-        console.log('cell', original);
-        const changeType = original.changeType;
-        return changeType ? (
+      Cell: ({ original: { diff, changeType } }) => {
+        return changeType && changeType !== ChangeType.NONE ? (
           <CellContentCenter>
             <StarIcon fill={theme.diffColors[changeType]} />
           </CellContentCenter>
@@ -169,15 +167,14 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       width: 40,
       headerStyle: { textAlign: 'center' },
     },
-
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
       Cell: ({ original }) => {
-        const { name, description, diff } = original;
+        const { name, description, diff, changeType } = original;
         const hasDiff = checkDiff(diff, ['description']);
 
-        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
+        return changeType === ChangeType.UPDATED && hasDiff ? (
           <DiffText oldText={diff.description.left} newText={diff.description.right} />
         ) : (
           <FieldDescription name={name} description={description} />
@@ -188,21 +185,21 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Data Tier',
       Cell: ({ original }) => {
-        console.log('cell', original);
-        const { meta = {}, diff } = original;
+        const { meta = {}, diff, changeType } = original;
 
         const hasDiff = checkDiff(diff, ['meta.core', 'meta.primaryId']);
-        const isFieldDeleted = false;
 
-        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
+        const tier = getDataTier(meta.primaryId, meta.core);
+
+        return changeType === ChangeType.UPDATED && hasDiff ? (
           <DiffText
             newText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.right, diff.meta.core.right)]}
             oldText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]}
           />
-        ) : isFieldDeleted ? (
-          TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]
+        ) : changeType === ChangeType.DELETED ? (
+          TAG_DISPLAY_NAME[tier]
         ) : (
-          <Tag variant={getDataTier(meta.primaryId, meta.core)} />
+          <Tag variant={tier} />
         );
       },
       style: { padding: '8px' },
@@ -212,18 +209,16 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Attributes',
       id: 'attributes',
       Cell: ({ original }) => {
-        const { restrictions = {}, meta = {}, diff } = original;
+        const { restrictions = {}, meta = {}, diff, changeType } = original;
 
         const hasDiff =
           checkDiff(diff, ['meta.dependsOn']) || checkDiff(diff, ['restrictions.required']);
-
-        const isFieldDeleted = false;
 
         const attribute = getAttribute(restrictions.required, meta.dependsOn);
         const diffRequired = get(diff, 'restrictions.required', null);
         const diffDependsOn = get(diff, 'meta.dependsOn', null);
 
-        return diff && diff.changeType === ChangeType.UPDATED && hasDiff ? (
+        return changeType === ChangeType.UPDATED && hasDiff ? (
           <DiffText
             newText={
               TAG_DISPLAY_NAME[
@@ -239,16 +234,15 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
               ]
             }
           />
-        ) : isFieldDeleted ? (
-          TAG_DISPLAY_NAME[getAttribute(diff.restrictions.required.left, diff.meta.dependsOn.left)]
-        ) : (
-          attribute && <Tag variant={attribute} />
-        );
+        ) : changeType === ChangeType.DELETED && attribute ? (
+          TAG_DISPLAY_NAME[attribute]
+        ) : attribute ? (
+          <Tag variant={attribute} />
+        ) : null;
       },
       style: { padding: '8px' },
       width: 102,
     },
-
     {
       Header: 'Type',
       id: 'valueType',
@@ -264,18 +258,19 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       style: { padding: '8px' },
       width: 70,
     },
+
     {
       Header: 'Permissible Values',
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, diff, isFieldDeleted, ...rest } = original;
+        const { name: field, diff, changeType, ...rest } = original;
 
         const regex = get(rest, 'restrictions.regex', null);
         const codeList = get(rest, 'restrictions.codeList', null);
         const examples = get(rest, 'meta.examples', '');
 
-        if (diff && diff.changeType === ChangeType.UPDATED) {
+        if (changeType === ChangeType.UPDATED) {
           if (checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples'])) {
             const diffRegex = get(diff, 'restrictions.regex');
             const diffExamples = get(diff, 'meta.examples');
@@ -331,13 +326,12 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ({ original: { name, meta, restrictions, diff } }) => {
+      Cell: ({ original: { name, meta, restrictions, diff, changeType } }) => {
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
         const diffScript = get(diff, 'restrictions.script');
 
-        if (diff && diff.changeType === ChangeType.UPDATED) {
-          console.log('diff', diff);
+        if (changeType === ChangeType.UPDATED) {
           if (checkDiff(diff, ['meta.notes'])) {
             const diffNotes = get(diff, 'meta.notes');
             return <DiffText newText={diffNotes.right} oldText={diffNotes.left} />;
@@ -374,6 +368,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const highlightRowDiff = (changeType) => ({
     style: {
       background: rowColors[changeType],
+      textDecoration: changeType === ChangeType.DELETED ? 'line-through' : null,
     },
   });
 
@@ -492,6 +487,7 @@ export enum ChangeType {
   CREATED = 'created',
   UPDATED = 'updated',
   DELETED = 'deleted',
+  NONE = 'NONE',
 }
 
 export default Schema;
