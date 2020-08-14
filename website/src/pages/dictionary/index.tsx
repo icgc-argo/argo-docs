@@ -23,7 +23,6 @@ import { jsx } from '@emotion/core';
 import React, { useState, createRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
-import axios from 'axios';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
@@ -62,6 +61,7 @@ import { ChangeType } from '../../components/Schema';
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
 import { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
+import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from './helpers';
 
 const InfoBar = styled('div')`
   display: flex;
@@ -112,124 +112,6 @@ const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0
 // versions
 const versions = data.versions;
 
-async function fetchDictionary(version) {
-  try {
-    const dict = await axios.get(`/data/schemas/${version}.json`);
-    const tree = await axios.get(`/data/schemas/${version}_tree.writeFile`);
-    return { dict: dict.data, tree: tree.data };
-  } catch (e) {
-    throw e;
-  }
-}
-
-async function fetchDiff(version, diffVersion) {
-  const response = await axios.get(
-    `/data/schemas/diffs/${version}/${version}-diff-${diffVersion}.json`,
-  );
-  return response.data;
-}
-
-const parseDiff = (diff) =>
-  diff
-    .map((schemaFieldArray) => {
-      const [schema, field] = schemaFieldArray[0].split('.');
-      const { left, right, diff } = schemaFieldArray[1];
-      return {
-        schema,
-        field,
-        left,
-        right,
-        diff,
-      };
-    })
-    .reduce((acc, { schema, field: fieldName, ...rest }) => {
-      const fields = get(acc, [schema], {});
-      fields[fieldName] = rest;
-      acc[schema] = fields;
-      return acc;
-    }, {});
-
-/**
- *
- * @param {string} version
- * @param {{data: Dictionary, version: string}} preloadedDictionary
- */
-const getDictionary = async (version, preloadedDictionary) => {
-  if (version === preloadedDictionary.version) return preloadedDictionary.data;
-
-  const { dict, tree } = await fetchDictionary(version);
-
-  return dict;
-};
-
-/**
- * @param {string} version
- * @param {string} diffVersion
- */
-const getDictionaryDiff = async (version, diffVersion) => {
-  const diff = await fetchDiff(version, diffVersion);
-  return parseDiff(diff);
-};
-
-/**
- * @param schema
- * @param schemaDiff
- * add diff data to object
- */
-const updateSchemaFields = (schema, schemaDiff) => {
-  const { created = {}, deleted = {}, updated = {} } = schemaDiff;
-  const deletedFields = Object.values(deleted);
-
-  // if a field has been created or updated, add this data
-  const allFields = schema.fields
-    .map((field) => {
-      const fieldName = field.name;
-      return updated[fieldName]
-        ? { ...field, diff: updated[fieldName], changeType: ChangeType.UPDATED }
-        : created[fieldName]
-        ? { ...field, diff: updated[fieldName], changeType: ChangeType.CREATED }
-        : field;
-    })
-    .concat(
-      deletedFields.map(({ name, ...rest }) => ({
-        changeType: ChangeType.DELETED,
-        name,
-        diff: rest,
-      })),
-    );
-
-  return { ...schema, fields: allFields };
-};
-
-const diffObjectToArray = (diff) => Object.entries(diff).map((fieldPair) => fieldPair[1]);
-
-const resolveSchemaDiffs = (dictionarySchemas, diffSchemas) => {
-  const dictionarySchemaNames = new Set();
-  dictionarySchemas.forEach((schema) => dictionarySchemaNames.add(schema.name));
-
-  const resolvedSchemas = Object.keys(diffSchemas).reduce((acc, diffSchemaName) => {
-    const diffSchema = diffSchemas[diffSchemaName];
-    const { created, deleted, updated, description = 'destription' } = diffSchema;
-    if (dictionarySchemaNames.has(diffSchemaName)) {
-      // field needs updating
-      const schema = updateSchemaFields(
-        dictionarySchemas.find((schema) => schema.name === diffSchemaName),
-        diffSchema,
-      );
-      return acc.concat(schema);
-    } else {
-      // created or deleted field
-      return acc.concat({
-        name: diffSchemaName,
-        fields: [...diffObjectToArray(created), ...diffObjectToArray(deleted)],
-        description,
-      });
-    }
-  }, []);
-
-  return resolvedSchemas;
-};
-
 function DictionaryPage() {
   // docusaurus context
   const context = useDocusaurusContext();
@@ -271,16 +153,17 @@ function DictionaryPage() {
     attribute: DEFAULT_FILTER.value,
     comparison: DEFAULT_FILTER.value,
   };
+
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
-
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  const schemas = resolveSchemaDiffs(dictionary.schemas, dictionaryDiff.schemas);
-  console.log('schemas', schemas);
+  const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
+  console.log('resolved schemas', schemas);
+
   // filter out diff fields
   const filteredDiffSchemas = React.useMemo(
     () =>
