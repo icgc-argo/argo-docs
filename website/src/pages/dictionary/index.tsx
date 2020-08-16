@@ -57,11 +57,12 @@ import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
 import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
-import { ChangeType } from '../../components/Schema';
+
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
 import { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from './helpers';
+import { ChangeType, Schema, Field } from '../../../types';
 
 const InfoBar = styled('div')`
   display: flex;
@@ -103,14 +104,46 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-
+console.log('data', data);
 // one version (that has been downloaded) behind latest version
 const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0.5.json');
 
 //const dictionaryTreeData = require('./tree.json');
 
 // versions
-const versions = data.versions;
+const versions: string[] = data.versions;
+
+// filters
+const comparisonFilter = (comparison: ChangeType) => (field: Field) => {
+  if (comparison === NO_ACTIVE_FILTER) return true;
+  field.changeType === comparison;
+};
+
+const attributeFilter = (attribute) => (field: Field) => {
+  if (attribute === NO_ACTIVE_FILTER) return true;
+  const required = get(field, 'restrictions.required', false);
+  const dependsOn = get(field, 'meta.dependsOn', false);
+
+  return (
+    (attribute === TagVariant.CONDITIONAL && Boolean(dependsOn)) ||
+    (attribute === TagVariant.REQUIRED && required) ||
+    false
+  );
+};
+
+const tierFilter = (tier) => (field: Field) => {
+  if (tier === NO_ACTIVE_FILTER) return true;
+
+  const primaryId = get(field, 'meta.primaryId', false);
+  const core = get(field, 'meta.core', false);
+
+  return (
+    (tier === TagVariant.ID && primaryId) ||
+    (tier === TagVariant.CORE && core) ||
+    (tier === TagVariant.EXTENDED && !core && !primaryId) ||
+    false
+  );
+};
 
 function DictionaryPage() {
   // docusaurus context
@@ -121,16 +154,39 @@ function DictionaryPage() {
     },
   } = context;
 
-  const [version, setVersion] = useState(preloadedDictionary.version);
+  const diffVersions: string[] = versions.filter((v) => v !== preloadedDictionary.version);
+
+  const [version, setVersion] = useState<string>(preloadedDictionary.version);
+  const [diffVersion, setDiffVersion] = useState<string>(diffVersions[0]);
+
+  // Check if current schema is the latest version
+  const isLatestSchema = getLatestVersion() === version ? true : false;
+
   const [dictionary, setDictionary] = useState(preloadedDictionary.data);
   //  const [treeData, setTreeData] = useState(dictionaryTreeData);
 
-  const diffVersions = versions.filter((v) => v !== version);
-
-  const [diffVersion, setDiffVersion] = useState(diffVersions[0]);
   const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
+  const [activeSchemas, setActiveSchemas] = useState<Schema[]>([]);
+  console.log('active schema', activeSchemas);
+
+  React.useEffect(() => {
+    async function resolveSchemas() {
+      try {
+        const dict = await getDictionary(version, preloadedDictionary);
+        const diff = await getDictionaryDiff(version, diffVersion);
+        const schemas = createSchemasWithDiffs(dict.schemas, diff.schemas);
+        setActiveSchemas(schemas);
+      } catch (e) {
+        console.error('Cannot resolve schemas', e);
+        setActiveSchemas([]);
+      }
+    }
+    resolveSchemas();
+  }, [version, diffVersion]);
+
+  /* 
   React.useEffect(() => {
     async function updateDictionaryState() {
       const dict = await getDictionary(version, preloadedDictionary);
@@ -147,7 +203,7 @@ function DictionaryPage() {
     }
     updateDictionaryDiff();
   }, [diffVersion]);
-
+ */
   const defaultSearchParams = {
     tier: DEFAULT_FILTER.value,
     attribute: DEFAULT_FILTER.value,
@@ -162,87 +218,40 @@ function DictionaryPage() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
   const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
-  console.log('resolved schemas', schemas);
+  console.log('schemas', 'active schemas', activeSchemas);
 
-  // filter out diff fields
-  const filteredDiffSchemas = React.useMemo(
-    () =>
-      schemas
-        .map((schema) => ({
-          ...schema,
-          fields: schema.fields.filter((field) =>
-            isDiffShowing
-              ? Boolean
-              : field.changeType !== ChangeType.CREATED && field.changeType !== ChangeType.DELETED,
-          ),
-        }))
-        // filter out schemas with no fields
-        .filter((schema) => schema.fields.length > 0),
-    [schemas, isDiffShowing],
-  );
-
-  // filter based on search results
+  // filter schemas
   const filteredSchemas = React.useMemo(
     () =>
-      filteredDiffSchemas
+      //  filter CREATED schemas out if not showing diff
+      activeSchemas
+        .filter((schema) => schema.changeType !== ChangeType.CREATED && schema.fields.length > 0)
+        .map((schema) => ({
+          ...schema,
+          fields: schema.fields.filter((field) => field.changeType !== ChangeType.CREATED),
+        }))
+        // filter schemas based on active/search
         .map((schema) => {
           const { tier, attribute, comparison } = searchParams;
+
           const filteredFields = schema.fields
-            .filter(
-              tier === NO_ACTIVE_FILTER && attribute === NO_ACTIVE_FILTER
-                ? Boolean
-                : (field) => {
-                    const meta = get(field, 'meta', {});
-                    const { primaryId = false, core = false, dependsOn = false } = meta;
-                    const required = get(field, 'restrictions.required', false);
-
-                    const tierBool =
-                      (tier === TagVariant.ID && primaryId) ||
-                      (tier === TagVariant.CORE && core) ||
-                      (tier === TagVariant.EXTENDED && !core && !primaryId) ||
-                      tier === '' ||
-                      tier === NO_ACTIVE_FILTER
-                        ? true
-                        : false;
-
-                    const attributeBool =
-                      (attribute === TagVariant.CONDITIONAL && Boolean(dependsOn)) ||
-                      (attribute === TagVariant.REQUIRED && required) ||
-                      attribute === '' ||
-                      attribute === NO_ACTIVE_FILTER
-                        ? true
-                        : false;
-
-                    return tierBool && attributeBool;
-                  },
-            )
-            .filter(
-              comparison === NO_ACTIVE_FILTER
-                ? Boolean
-                : (field) => {
-                    // check if field has a change
-                    const change = get(
-                      dictionaryDiff.schemas,
-                      [schema.name, comparison, field.name],
-                      false,
-                    );
-
-                    return change;
-                  },
-            );
+            .filter(tierFilter(tier))
+            .filter(attributeFilter(attribute))
+            .filter(comparisonFilter(comparison));
 
           return {
             ...schema,
             fields: filteredFields,
           };
-        })
-        .filter((schema) => schema.fields.length > 0),
-    [searchParams, isDiffShowing],
+        }),
+    [activeSchemas, isDiffShowing, searchParams],
   );
+
+  console.log('filtered schemas', filteredSchemas);
 
   // create filters dynamically based on active schemas
   const filters = React.useMemo(() => {
-    const fields = filteredDiffSchemas.map((schema) => schema.fields);
+    const fields = schemas.map((schema) => schema.fields);
 
     const filters = flattenDeep(fields).reduce(
       (acc, field) => {
@@ -291,9 +300,6 @@ function DictionaryPage() {
 
   // Menu Contents
   const menuContents = generateMenuContents(filteredSchemas);
-
-  // Check if current schema is the latest version
-  const isLatestSchema = getLatestVersion() === version ? true : false;
 
   return (
     <EmotionThemeProvider theme={argoTheme}>
