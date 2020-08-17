@@ -249,6 +249,9 @@ function DictionaryPage() {
                   `}
                 >
                   <VersionSelect
+                    style={css`
+                      margin-right: 10px;
+                    `}
                     value={version}
                     versions={versions}
                     onChange={(v) => {
@@ -266,6 +269,9 @@ function DictionaryPage() {
                     `}
                   >
                     <VersionSelect
+                      style={css`
+                        margin-left: 10px;
+                      `}
                       value={diffVersion}
                       versions={diffVersions}
                       onChange={setDiffVersion}
