@@ -37,15 +37,15 @@ export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
 
 const FileFilters = ({
-  dataTiers = [], // change to tiers
-  dataAttributes = [], // change to attributes
+  tiers = [],
+  attributes = [],
   comparisons = [],
   searchParams = {},
   isDiffShowing,
   onFilter,
 }: {
-  dataTiers: Array<FilterSelect>;
-  dataAttributes: Array<FilterSelect>;
+  tiers: Array<FilterSelect>;
+  attributes: Array<FilterSelect>;
   comparisons: Array<FilterSelect>;
   searchParams: { [key: string]: string };
   isDiffShowing: boolean;
@@ -78,7 +78,7 @@ const FileFilters = ({
         <Filter
           label="Data Tier"
           ariaLabel="Data Tier Select"
-          options={[DEFAULT_FILTER, ...dataTiers]}
+          options={[DEFAULT_FILTER, ...tiers]}
           value={searchParams.tier}
           onChange={onSelect('tier')}
         />
@@ -86,7 +86,7 @@ const FileFilters = ({
         <Filter
           label="Attribute"
           ariaLabel="Data Attribute Select"
-          options={[DEFAULT_FILTER, ...dataAttributes]}
+          options={[DEFAULT_FILTER, ...attributes]}
           value={searchParams.attribute}
           onChange={onSelect('attribute')}
         />
@@ -131,6 +131,7 @@ export const createFilters = (schemas: Schema[]) => {
       const core = get(field, 'meta.core');
       const dependsOn = get(field, 'meta.dependsOn');
       const restrictions = get(field, 'restrictions', false);
+      const changeType = field.changeType;
 
       if (primaryId) {
         filters.tiers.push(TagVariant.ID);
@@ -151,15 +152,23 @@ export const createFilters = (schemas: Schema[]) => {
       if (!core && !primaryId) {
         filters.tiers.push(TagVariant.EXTENDED);
       }
+
+      filters.comparison.push(changeType);
+
       return filters;
     },
-    { tiers: [], attributes: [] },
+    { tiers: [], attributes: [], comparison: [] },
   );
-  return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
+  return {
+    tiers: uniq(filters.tiers),
+    attributes: uniq(filters.attributes),
+    comparison: uniq(filters.comparison),
+  };
 };
 
 export const comparisonFilter = (comparison: ChangeType) => (field: Field) => {
   if (comparison === NO_ACTIVE_FILTER) return true;
+  console.log('xxxx', field.changeType, comparison);
   return field.changeType === comparison;
 };
 
