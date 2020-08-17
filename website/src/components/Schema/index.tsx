@@ -51,6 +51,7 @@ import {
   updatedStyle,
 } from './DiffText';
 import union from 'lodash/union';
+import { ChangeType } from '../../../types';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -161,13 +162,12 @@ const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
 const checkDiff = (diff, fields) =>
   fields.reduce((acc, field) => acc && Boolean(get(diff, field, false)), true);
 
-const getTableData = (isDiffShowing, schema) =>
+// TODO: dont like this, cells should render based on isDiffShowing
+const getTableData = (isDiffShowing, fields) =>
   isDiffShowing
-    ? schema.fields
-    : schema.fields
+    ? fields
+    : fields
         .filter((field) => {
-          // filter out fields which have deleted or created
-          // return field.changeType !== ChangeType.DELETED;
           return field.changeType !== ChangeType.DELETED;
         })
         .map((field) => ({ ...field, changeType: null, diff: null }));
@@ -251,6 +251,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Field & Description',
       id: 'fieldDescription',
       Cell: ({ original }) => {
+        console.log(original);
         const { name, description, diff, changeType } = original;
         const hasDiff = checkDiff(diff, ['description']);
 
@@ -277,7 +278,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-    {
+    /* {
       Header: 'Data Tier',
       Cell: ({ original }) => {
         const { meta = {}, diff, changeType } = original;
@@ -440,7 +441,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    },
+    }, */
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
@@ -455,7 +456,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     },
   });
 
-  const tableData = getTableData(isDiffShowing, schema);
+  const tableData = getTableData(isDiffShowing, schema.fields);
 
   const getDataTier = (primaryId: boolean, core: boolean): TagVariant => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
@@ -550,12 +551,5 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     </div>
   );
 };
-
-export enum ChangeType {
-  CREATED = 'created',
-  UPDATED = 'updated',
-  DELETED = 'deleted',
-  NONE = 'NONE',
-}
 
 export default Schema;

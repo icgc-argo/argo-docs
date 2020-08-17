@@ -104,9 +104,7 @@ const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0.5.json');
-
-//const dictionaryTreeData = require('./tree.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/0.5/0.5-diff-0.6.json');
 
 // versions
 const versions: string[] = data.versions;
@@ -127,7 +125,6 @@ function DictionaryPage() {
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
   const [activeSchemas, setActiveSchemas] = useState<Schema[]>([]);
-  console.log('active schema', activeSchemas);
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
@@ -137,6 +134,16 @@ function DictionaryPage() {
       try {
         const dict = await getDictionary(version, preloadedDictionary);
         const diff = await getDictionaryDiff(version, diffVersion);
+        console.log(
+          'version',
+          version,
+          'diffversion',
+          diffVersion,
+          'diff',
+          diff.schemas,
+          'dict',
+          dict.schemas,
+        );
         const schemas = createSchemasWithDiffs(dict.schemas, diff.schemas);
         setActiveSchemas(schemas);
       } catch (e) {
@@ -148,24 +155,22 @@ function DictionaryPage() {
   }, [version, diffVersion]);
 
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
-  const [searchValue, setSearchValue] = useState('');
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  //const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
-  console.log('schemas', 'active schemas', activeSchemas);
-
   // filter schemas
   const filteredSchemas = React.useMemo(
     () =>
-      //  filter CREATED schemas out if not showing diff
+      //  filter DELETED schemas out if not showing diff
       activeSchemas
-        .filter((schema) => schema.changeType !== ChangeType.CREATED && schema.fields.length > 0)
+        .filter((schema) => (isDiffShowing ? Boolean : schema.changeType !== ChangeType.DELETED))
         .map((schema) => ({
           ...schema,
-          fields: schema.fields.filter((field) => field.changeType !== ChangeType.CREATED),
+          fields: schema.fields.filter((field) =>
+            isDiffShowing ? Boolean : field.changeType !== ChangeType.DELETED,
+          ),
         }))
         // filter schemas based on active/search
         .map((schema) => {
@@ -180,16 +185,16 @@ function DictionaryPage() {
             ...schema,
             fields: filteredFields,
           };
-        }),
+        })
+        .filter((schema) => schema.fields.length > 0),
     [activeSchemas, isDiffShowing, searchParams],
   );
 
+  console.log('schemas::', 'active', activeSchemas, 'filtered', filteredSchemas);
+
   const comparisonCounts = generateComparisonCounts(filteredSchemas);
-  console.log('counts', filteredSchemas, comparisonCounts);
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
-
-  console.log('filtered schemas', filteredSchemas);
 
   // create filters dynamically based on active schemas
   const filters = React.useMemo(() => createFilters(activeSchemas), [activeSchemas]);
