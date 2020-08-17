@@ -51,7 +51,7 @@ import Icon from '@icgc-argo/uikit/Icon';
 import OldButton from '@icgc-argo/uikit/Button';
 import Button from '../../components/Button';
 import { ResetButton } from '../../components/Button';
-import CompareLegend from '../../components/CompareLegend';
+import CompareLegend, { generateComparisonCounts } from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
@@ -121,21 +121,16 @@ function DictionaryPage() {
   } = context;
 
   const diffVersions: string[] = versions.filter((v) => v !== preloadedDictionary.version);
-
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
   const [diffVersion, setDiffVersion] = useState<string>(diffVersions[0]);
 
-  // Check if current schema is the latest version
-  const isLatestSchema = getLatestVersion() === version ? true : false;
-
-  const [dictionary, setDictionary] = useState(preloadedDictionary.data);
-  //  const [treeData, setTreeData] = useState(dictionaryTreeData);
-
-  const [dictionaryDiff, setDictionaryDiff] = useState(preloadedDiff);
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
   const [activeSchemas, setActiveSchemas] = useState<Schema[]>([]);
   console.log('active schema', activeSchemas);
+
+  // Check if current schema is the latest version
+  const isLatestSchema = getLatestVersion() === version ? true : false;
 
   React.useEffect(() => {
     async function resolveSchemas() {
@@ -159,8 +154,8 @@ function DictionaryPage() {
   const downloadTsvFileTemplate = (fileName) =>
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
-  const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
-  console.log('schemas', schemas, 'active schemas', activeSchemas);
+  //const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
+  console.log('schemas', 'active schemas', activeSchemas);
 
   // filter schemas
   const filteredSchemas = React.useMemo(
@@ -179,7 +174,7 @@ function DictionaryPage() {
           const filteredFields = schema.fields
             .filter(tierFilter(tier))
             .filter(attributeFilter(attribute))
-            .filter(comparisonFilter(comparison));
+            .filter(comparisonFilter(comparison as ChangeType));
 
           return {
             ...schema,
@@ -189,6 +184,8 @@ function DictionaryPage() {
     [activeSchemas, isDiffShowing, searchParams],
   );
 
+  const comparisonCounts = generateComparisonCounts(filteredSchemas);
+  console.log('counts', filteredSchemas, comparisonCounts);
   const fileCount = filteredSchemas.length;
   const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
 
@@ -269,7 +266,7 @@ function DictionaryPage() {
                       onChange={setDiffVersion}
                     />
                     <CompareLegend
-                      comparison={dictionaryDiff.counts}
+                      comparison={comparisonCounts}
                       styles={css`
                         margin: 0 10px;
                       `}
@@ -328,9 +325,9 @@ function DictionaryPage() {
                     `}
                   >
                     <FileFilters
-                      dataTiers={filters.tiers.map(generateFilter)}
-                      dataAttributes={filters.attributes.map(generateFilter)}
-                      comparisons={Object.keys(dictionaryDiff.counts).map(generateComparisonFilter)}
+                      tiers={filters.tiers.map(generateFilter)}
+                      attributes={filters.attributes.map(generateFilter)}
+                      comparisons={filters.comparison.map(generateComparisonFilter)}
                       isDiffShowing={isDiffShowing}
                       searchParams={searchParams}
                       onFilter={(search) => setSearchParams(search)}
