@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import React from 'react';
+import { ChangeType } from '../../../types';
 
 export const deletedStyle = css`
   background: #f6c5cf;
@@ -28,18 +29,13 @@ export const DiffTextSegment = ({
   type,
 }: {
   children: React.ReactChild;
-  type: TextChange;
+  type: ChangeType;
 }) => (
   <div
     css={
-      type === TextChange.CREATED ? createdStyle : type === TextChange.DELETED ? deletedStyle : null
+      type === ChangeType.CREATED ? createdStyle : type === ChangeType.DELETED ? deletedStyle : null
     }
   >
     {children}
   </div>
 );
-
-export enum TextChange {
-  CREATED = 'created',
-  DELETED = 'deleted',
-}

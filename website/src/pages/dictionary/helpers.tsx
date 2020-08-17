@@ -1,32 +1,50 @@
-import { ChangeType } from '../../components/Schema';
-import { Schema } from '../../ts/interfaces/schema';
 import axios from 'axios';
 import get from 'lodash/get';
+import { ChangeType, Schema } from '../../../types';
+import isEmpty from 'lodash/isEmpty';
 
 /**
  *
  * @param schemas
  * @param diffs
  * Add diffs to schemas
+ * Updated fields will be present already
+ * Deleted fields will be present
+ * Created fields/schemas need to be added explicitly as they have no related field/schema
  */
-export const createSchemasWithDiffs = (schemas: Array<Schema>, diffs) => {
-  const schemasWithDiffs = schemas.map((schema) => {
+export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
+  let schemasToAdd = Object.keys(diffs) || [];
+
+  const schemaWithUpdates = schemas.map((schema) => {
     const schemaName = schema.name;
     const schemaDiff = diffs[schemaName];
+    schemasToAdd = schemasToAdd.filter((s) => s !== schemaName);
 
-    const existingFieldDiffs = { ...schemaDiff.updated, ...schemaDiff.deleted };
-
+    const { updated, created } = schemaDiff;
     // add diffs to existing fields
     const fieldsWithDiffs = schema.fields.map((field) => {
       const fieldName = field.name;
+      const updatedField = updated[fieldName];
+      const createdField = created[fieldName];
 
-      const diff = existingFieldDiffs[fieldName] || { changeType: 'unchanged' };
+      // add diff fields for updated (need left and right data)
+      const diff = updatedField ? updatedField : null;
 
-      return { ...field, diff };
+      // add changetype
+      const changeType = updatedField
+        ? ChangeType.UPDATED
+        : createdField
+        ? ChangeType.CREATED
+        : ChangeType.NONE;
+
+      return { ...field, diff, changeType };
     });
 
     // newly created fields won't exist already, add them
-    const newFields = Object.keys(schemaDiff.created).map((key) => schemaDiff.created[key]);
+    const newFields = Object.keys(schemaDiff.deleted).map((key) => ({
+      ...schemaDiff.deleted[key],
+      changeType: ChangeType.DELETED,
+    }));
 
     // join all modified fields
     const fields = [...fieldsWithDiffs, ...newFields];
@@ -35,12 +53,37 @@ export const createSchemasWithDiffs = (schemas: Array<Schema>, diffs) => {
     return { ...schema, fields };
   });
 
-  return schemasWithDiffs;
+  // add created and deleted schemas
+  const newSchemas = schemasToAdd.map((schemaName) => {
+    const diffSchema = diffs[schemaName];
+    const changeType = !isEmpty(diffSchema.created)
+      ? ChangeType.CREATED
+      : !isEmpty(diffSchema.deleted)
+      ? ChangeType.DELETED
+      : !isEmpty(diffSchema.updated)
+      ? ChangeType.UPDATED
+      : ChangeType.NONE;
+
+    const allFields = { ...diffSchema.created, ...diffSchema.deleted };
+    const fields = Object.keys(allFields).map((f) => allFields[f]);
+
+    return {
+      name: schemaName,
+      changeType,
+      description: diffSchema.description || '',
+      fields,
+    };
+  });
+
+  const x = [...schemaWithUpdates, ...newSchemas];
+  console.log('schema with diff', schemas);
+  return x;
 };
 
-export async function fetchDictionary(version) {
+async function fetchDictionary(version) {
   try {
     const dict = await axios.get(`/data/schemas/${version}.json`);
+    console.log('fetchDictionary', dict.data.schemas);
     //const tree = await axios.get(`/data/schemas/${version}_tree.writeFile`);
     return { dict: dict.data, tree: null };
   } catch (e) {
@@ -48,9 +91,9 @@ export async function fetchDictionary(version) {
   }
 }
 
-export async function fetchDiff(version, diffVersion) {
+async function fetchDiff(version, diffVersion) {
   const response = await axios.get(
-    `/data/schemas/diffs/${version}/${version}-diff-${diffVersion}.json`,
+    `/data/schemas/diffs/${diffVersion}/${diffVersion}-diff-${version}.json`,
   );
   return response.data;
 }
@@ -83,7 +126,7 @@ export const parseDiff = (diff) => {
  * @param {{data: Dictionary, version: string}} preloadedDictionary
  */
 export const getDictionary = async (version, preloadedDictionary) => {
-  if (version === preloadedDictionary.version) return preloadedDictionary.data;
+  // if (version === preloadedDictionary.version) return preloadedDictionary.data;
   const { dict, tree } = await fetchDictionary(version);
   return dict;
 };
@@ -94,67 +137,6 @@ export const getDictionary = async (version, preloadedDictionary) => {
  */
 export const getDictionaryDiff = async (version, diffVersion) => {
   const diff = await fetchDiff(version, diffVersion);
-  return parseDiff(diff);
+  return diff;
+  //return parseDiff(diff);
 };
-/* 
-export const resolveSchemaDiffs = (schemas: Array<Schema>, diffs) => {
-  console.log('schemas', schemas, 'diffs', diffs);
-  const dictionarySchemaNames = new Set();
-  schemas.forEach((schema) => dictionarySchemaNames.add(schema.name));
-
-  const resolvedSchemas = Object.keys(diffs).reduce((acc, diffSchemaName) => {
-    const diffSchema = diffs[diffSchemaName];
-    const { created, deleted, updated, description = 'destription' } = diffSchema;
-    if (dictionarySchemaNames.has(diffSchemaName)) {
-      // field needs updating
-      const schema = updateSchemaFields(
-        schemas.find((schema) => schema.name === diffSchemaName),
-        diffSchema,
-      );
-      return acc.concat(schema);
-    } else {
-      // created or deleted field
-      return acc.concat({
-        name: diffSchemaName,
-        fields: [...diffObjectToArray(created), ...diffObjectToArray(deleted)],
-        description,
-      });
-    }
-  }, []);
-
-  return resolvedSchemas;
-};
-
-/**
- * @param schema
- * @param schemaDiff
- * add diff data to object
- *
-const updateSchemaFields = (schema, schemaDiff) => {
-  const { created = {}, deleted = {}, updated = {} } = schemaDiff;
-  const deletedFields = Object.values(deleted);
-
-  // if a field has been created or updated, add this data
-  const allFields = schema.fields
-    .map((field) => {
-      const fieldName = field.name;
-      return updated[fieldName]
-        ? { ...field, diff: updated[fieldName], changeType: ChangeType.UPDATED }
-        : created[fieldName]
-        ? { ...field, diff: updated[fieldName], changeType: ChangeType.CREATED }
-        : field;
-    })
-    // add deleted fields
-    .concat(
-      deletedFields.map(({ name, ...rest }) => ({
-        changeType: ChangeType.DELETED,
-        name,
-        diff: rest,
-      })),
-    );
-
-  return { ...schema, fields: allFields };
-};
-
-const diffObjectToArray = (diff) => Object.entries(diff).map((fieldPair) => fieldPair[1]);
- */
