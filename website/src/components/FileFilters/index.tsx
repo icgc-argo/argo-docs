@@ -27,6 +27,11 @@ import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
 import { css } from '@emotion/core';
 import { Filter } from './components';
+import get from 'lodash/get';
+import flattenDeep from 'lodash/flattenDeep';
+import uniq from 'lodash/uniq';
+import { TagVariant } from '../../components/Tag';
+import { Schema, ChangeType, Field } from '../../../types';
 
 export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
@@ -116,5 +121,78 @@ export const generateFilter = (item: string): FilterSelect => ({
   content: startCase(item),
   value: item,
 });
+
+export const createFilters = (schemas: Schema[]) => {
+  const fields = schemas.map((schema) => schema.fields);
+
+  const filters = flattenDeep(fields).reduce(
+    (filters, field) => {
+      const primaryId = get(field, 'meta.primaryId');
+      const core = get(field, 'meta.core');
+      const dependsOn = get(field, 'meta.dependsOn');
+      const restrictions = get(field, 'restrictions', false);
+
+      if (primaryId) {
+        filters.tiers.push(TagVariant.ID);
+      }
+
+      if (!!restrictions) {
+        filters.attributes.push(TagVariant.REQUIRED);
+      }
+
+      if (dependsOn) {
+        filters.attributes.push(TagVariant.CONDITIONAL);
+      }
+
+      if (core) {
+        filters.tiers.push(TagVariant.CORE);
+      }
+
+      if (!core && !primaryId) {
+        filters.tiers.push(TagVariant.EXTENDED);
+      }
+      return filters;
+    },
+    { tiers: [], attributes: [] },
+  );
+  return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
+};
+
+export const comparisonFilter = (comparison: ChangeType) => (field: Field) => {
+  if (comparison === NO_ACTIVE_FILTER) return true;
+  return field.changeType === comparison;
+};
+
+export const attributeFilter = (attribute) => (field: Field) => {
+  if (attribute === NO_ACTIVE_FILTER) return true;
+  const required = get(field, 'restrictions.required', false);
+  const dependsOn = get(field, 'meta.dependsOn', false);
+
+  return (
+    (attribute === TagVariant.CONDITIONAL && Boolean(dependsOn)) ||
+    (attribute === TagVariant.REQUIRED && required) ||
+    false
+  );
+};
+
+export const tierFilter = (tier) => (field: Field) => {
+  if (tier === NO_ACTIVE_FILTER) return true;
+
+  const primaryId = get(field, 'meta.primaryId', false);
+  const core = get(field, 'meta.core', false);
+
+  return (
+    (tier === TagVariant.ID && primaryId) ||
+    (tier === TagVariant.CORE && core) ||
+    (tier === TagVariant.EXTENDED && !core && !primaryId) ||
+    false
+  );
+};
+
+export const defaultSearchParams = {
+  tier: DEFAULT_FILTER.value,
+  attribute: DEFAULT_FILTER.value,
+  comparison: DEFAULT_FILTER.value,
+};
 
 export default FileFilters;

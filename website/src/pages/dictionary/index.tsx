@@ -31,38 +31,36 @@ import StyleWrapper from '../../components/StyleWrapper';
 import FileFilters, {
   NO_ACTIVE_FILTER,
   generateFilter,
-  DEFAULT_FILTER,
   generateComparisonFilter,
+  createFilters,
+  attributeFilter,
+  tierFilter,
+  comparisonFilter,
+  defaultSearchParams,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
-import get from 'lodash/get';
-import { TagVariant } from '../../components/Tag';
 import Modal from '@icgc-argo/uikit/Modal';
 import SchemaMenu from '../../components/ContentMenu';
 import { Display, DownloadTooltip, DownloadButtonContent } from '../../components/common';
 import { getLatestVersion } from '../../utils';
-import uniq from 'lodash/uniq';
 import Tabs, { Tab } from '@icgc-argo/uikit/Tabs';
 import { StyledTab, TAB_STATE } from '../../components/Tabs';
-import flattenDeep from 'lodash/flattenDeep';
 import Meta from '../../components/Meta';
 import Icon from '@icgc-argo/uikit/Icon';
 import OldButton from '@icgc-argo/uikit/Button';
 import Button from '../../components/Button';
-import { ResetButton, ButtonWithIcon } from '../../components/Button';
+import { ResetButton } from '../../components/Button';
 import CompareLegend from '../../components/CompareLegend';
 import Row from '../../components/Row';
 import VersionSelect from '../../components/VersionSelect';
 import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
 import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
-
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
-import { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from './helpers';
-import { ChangeType, Schema, Field } from '../../../types';
+import { ChangeType, Schema } from '../../../types';
 
 const InfoBar = styled('div')`
   display: flex;
@@ -104,7 +102,7 @@ export const ModalPortal = ({ children }) => {
 
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-console.log('data', data);
+
 // one version (that has been downloaded) behind latest version
 const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0.5.json');
 
@@ -112,38 +110,6 @@ const preloadedDiff = require('../../../static/data/schemas/diffs/0.6/0.6-diff-0
 
 // versions
 const versions: string[] = data.versions;
-
-// filters
-const comparisonFilter = (comparison: ChangeType) => (field: Field) => {
-  if (comparison === NO_ACTIVE_FILTER) return true;
-  field.changeType === comparison;
-};
-
-const attributeFilter = (attribute) => (field: Field) => {
-  if (attribute === NO_ACTIVE_FILTER) return true;
-  const required = get(field, 'restrictions.required', false);
-  const dependsOn = get(field, 'meta.dependsOn', false);
-
-  return (
-    (attribute === TagVariant.CONDITIONAL && Boolean(dependsOn)) ||
-    (attribute === TagVariant.REQUIRED && required) ||
-    false
-  );
-};
-
-const tierFilter = (tier) => (field: Field) => {
-  if (tier === NO_ACTIVE_FILTER) return true;
-
-  const primaryId = get(field, 'meta.primaryId', false);
-  const core = get(field, 'meta.core', false);
-
-  return (
-    (tier === TagVariant.ID && primaryId) ||
-    (tier === TagVariant.CORE && core) ||
-    (tier === TagVariant.EXTENDED && !core && !primaryId) ||
-    false
-  );
-};
 
 function DictionaryPage() {
   // docusaurus context
@@ -186,30 +152,6 @@ function DictionaryPage() {
     resolveSchemas();
   }, [version, diffVersion]);
 
-  /* 
-  React.useEffect(() => {
-    async function updateDictionaryState() {
-      const dict = await getDictionary(version, preloadedDictionary);
-      setDictionary(dict);
-    }
-    updateDictionaryState();
-  }, [version]);
-
-  React.useEffect(() => {
-    if (diffVersion === null) return;
-    async function updateDictionaryDiff() {
-      const diff = await getDictionaryDiff(version, diffVersion);
-      setDictionaryDiff(diff);
-    }
-    updateDictionaryDiff();
-  }, [diffVersion]);
- */
-  const defaultSearchParams = {
-    tier: DEFAULT_FILTER.value,
-    attribute: DEFAULT_FILTER.value,
-    comparison: DEFAULT_FILTER.value,
-  };
-
   const [searchParams, setSearchParams] = useState(defaultSearchParams);
   const [searchValue, setSearchValue] = useState('');
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
@@ -218,7 +160,7 @@ function DictionaryPage() {
     window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
 
   const schemas = createSchemasWithDiffs(dictionary.schemas, dictionaryDiff.schemas);
-  console.log('schemas', 'active schemas', activeSchemas);
+  console.log('schemas', schemas, 'active schemas', activeSchemas);
 
   // filter schemas
   const filteredSchemas = React.useMemo(
@@ -247,45 +189,13 @@ function DictionaryPage() {
     [activeSchemas, isDiffShowing, searchParams],
   );
 
+  const fileCount = filteredSchemas.length;
+  const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+
   console.log('filtered schemas', filteredSchemas);
 
   // create filters dynamically based on active schemas
-  const filters = React.useMemo(() => {
-    const fields = schemas.map((schema) => schema.fields);
-
-    const filters = flattenDeep(fields).reduce(
-      (acc, field) => {
-        const meta = get(field, 'meta', {});
-        const { primaryId = false, core = false, dependsOn = false } = meta;
-        const restrictions = get(field, 'restrictions', false);
-        if (primaryId) {
-          acc.tiers.push(TagVariant.ID);
-        }
-
-        if (!!restrictions) {
-          acc.attributes.push(TagVariant.REQUIRED);
-        }
-
-        if (dependsOn) {
-          acc.attributes.push(TagVariant.CONDITIONAL);
-        }
-
-        if (core) {
-          acc.tiers.push(TagVariant.CORE);
-        }
-
-        if (!core && !primaryId) {
-          acc.tiers.push(TagVariant.EXTENDED);
-        }
-        return acc;
-      },
-      { tiers: [], attributes: [] },
-    );
-    return { tiers: uniq(filters.tiers), attributes: uniq(filters.attributes) };
-  }, [schemas]);
-
-  const fileCount = filteredSchemas.length;
-  const fieldCount = filteredSchemas.reduce((acc, schema) => acc + schema.fields.length, 0);
+  const filters = React.useMemo(() => createFilters(activeSchemas), [activeSchemas]);
 
   const generateMenuContents = (activeSchemas) => {
     const activeSchemaNames = activeSchemas.map((s) => s.name);
