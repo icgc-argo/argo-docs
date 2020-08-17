@@ -100,41 +100,40 @@ const FileExample = ({ name }) => (
 );
 
 const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
-  <DiffTextSegment type={changeType}>
-    <div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: '11px',
-        }}
-      >
-        <HeaderName name={name} />
-        <FieldsTag fieldCount={fieldCount} />
-      </div>
+  <div css={css``}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: '11px',
+      }}
+    >
+      <HeaderName name={name} />
+      <FieldsTag fieldCount={fieldCount} />
+    </div>
 
-      <div
-        style={{
-          marginBottom: '11px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-        }}
-      >
-        <DataTypography>
-          {diff && diff.description ? (
-            <div>
-              <div css={updatedStyle}>{diff.description.left}</div>
-              <div css={deletedStyle}>{diff.description.right}</div>
-            </div>
-          ) : description ? (
-            description
-          ) : null}
-          <FileExample name={name} />
-        </DataTypography>
-        {/* <DownloadTooltip disabled={isLatestSchema}>
+    <div
+      style={{
+        marginBottom: '11px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+      }}
+    >
+      <DataTypography>
+        {diff && diff.description ? (
+          <div>
+            <div css={updatedStyle}>{diff.description.left}</div>
+            <div css={deletedStyle}>{diff.description.right}</div>
+          </div>
+        ) : description ? (
+          description
+        ) : null}
+        <FileExample name={name} />
+      </DataTypography>
+      {/* <DownloadTooltip disabled={isLatestSchema}>
           <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
             <Button
               disabled={!isLatestSchema}
@@ -148,9 +147,8 @@ const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
             </Button>
           </div>
         </DownloadTooltip> */}
-      </div>
     </div>
-  </DiffTextSegment>
+  </div>
 );
 
 /**
@@ -278,7 +276,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-    /* {
+    {
       Header: 'Data Tier',
       Cell: ({ original }) => {
         const { meta = {}, diff, changeType } = original;
@@ -369,7 +367,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const diffExamples = get(diff, 'meta.examples');
 
         const diffCodeList = get(diff, 'restrictions.codeList');
-        const formattedCodes = getFormattedCodes(diffCodeList);
+        const formattedCodes = diffCodeList ? getFormattedCodes(diffCodeList) : null;
+
         return (
           <div>
             {checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples']) ? (
@@ -414,7 +413,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-    {
+    /*{
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff, changeType } }) => {
         const notes = meta && meta.notes;
@@ -466,19 +465,20 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
 
   const getFormattedCodes = (codeList) => {
-    if (!codeList) return null;
+    const createdCodes = get(codeList, 'data.added', []);
+    const deletedCodes = get(codeList, 'data.deleted', []);
 
-    const allCodes: string[] = union(codeList.left, codeList.right);
-    const createdCodes = codeList.data.added;
-    const deletedCodes = codeList.data.deleted;
+    const left = codeList.left || [];
+    const right = codeList.right || [];
+    const allCodes: string[] = union(left, right);
 
     return (
       <div>
         {allCodes.map((code) => {
           const formatter = deletedCodes.includes(code)
-            ? TextChange.DELETED
+            ? ChangeType.DELETED
             : createdCodes.includes(code)
-            ? TextChange.CREATED
+            ? ChangeType.CREATED
             : null;
 
           return <Code code={code} format={formatter} />;
