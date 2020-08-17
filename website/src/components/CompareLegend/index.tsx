@@ -5,6 +5,7 @@ import Icon from '@icgc-argo/uikit/Icon';
 import { css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
+import { Schema, ChangeType } from '../../../types';
 
 const Star = ({ fill }: { fill: string }) => (
   <Icon
@@ -51,5 +52,35 @@ const CompareLegend = ({
     </div>
   );
 };
+
+const defaultCount = { updated: 0, created: 0, deleted: 0 };
+export const generateComparisonCounts = (schemas: Schema[]) =>
+  schemas.reduce(
+    (dictionaryCount, schema) => {
+      const schemaCount = schema.fields.reduce(
+        (fieldCount, field) => {
+          switch (field.changeType) {
+            case ChangeType.CREATED:
+              fieldCount.created++;
+              break;
+            case ChangeType.DELETED:
+              fieldCount.deleted++;
+              break;
+            case ChangeType.UPDATED:
+              fieldCount.updated++;
+          }
+          return fieldCount;
+        },
+        { ...defaultCount },
+      );
+
+      return {
+        updated: dictionaryCount.updated + schemaCount.updated,
+        deleted: dictionaryCount.deleted + schemaCount.deleted,
+        created: dictionaryCount.created + schemaCount.deleted,
+      };
+    },
+    { ...defaultCount },
+  );
 
 export default CompareLegend;
