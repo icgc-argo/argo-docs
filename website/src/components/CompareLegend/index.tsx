@@ -19,6 +19,8 @@ const Star = ({ fill }: { fill: string }) => (
   />
 );
 
+const pluralise = (count: number, noun: string) => (count > 1 ? noun + 's' : noun);
+
 const CompareLegend = ({
   comparison,
   styles,
@@ -44,11 +46,11 @@ const CompareLegend = ({
       `}
     >
       <Star fill={diffColors.created} />
-      {`${created} new fields`}
+      {`${created} new ${pluralise(created, 'field')}`}
       <Star fill={diffColors.updated} />
-      {`${updated} updated fields`}
+      {`${updated} updated ${pluralise(updated, 'field')}`}
       <Star fill={diffColors.deleted} />
-      {`${deleted} deleted fields`}
+      {`${deleted} deleted ${pluralise(deleted, 'field')}`}
     </div>
   );
 };
@@ -73,11 +75,11 @@ export const generateComparisonCounts = (schemas: Schema[]) =>
         },
         { ...defaultCount },
       );
-
+      console.log('schema count', schemaCount);
       return {
         updated: dictionaryCount.updated + schemaCount.updated,
         deleted: dictionaryCount.deleted + schemaCount.deleted,
-        created: dictionaryCount.created + schemaCount.deleted,
+        created: dictionaryCount.created + schemaCount.created,
       };
     },
     { ...defaultCount },
