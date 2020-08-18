@@ -75,15 +75,13 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
     };
   });
 
-  const x = [...schemaWithUpdates, ...newSchemas];
-  console.log('schema with diff', schemas);
-  return x;
+  return [...schemaWithUpdates, ...newSchemas];
 };
 
 async function fetchDictionary(version) {
   try {
     const dict = await axios.get(`/data/schemas/${version}.json`);
-    console.log('fetchDictionary', dict.data.schemas);
+
     //const tree = await axios.get(`/data/schemas/${version}_tree.writeFile`);
     return { dict: dict.data, tree: null };
   } catch (e) {
@@ -92,14 +90,18 @@ async function fetchDictionary(version) {
 }
 
 async function fetchDiff(version, diffVersion) {
-  const response = await axios.get(
-    `/data/schemas/diffs/${diffVersion}/${diffVersion}-diff-${version}.json`,
-  );
-  return response.data;
+  try {
+    const response = await axios.get(
+      `/data/schemas/diffs/${diffVersion}/${diffVersion}-diff-${version}.json`,
+    );
+    return response.data;
+  } catch (e) {
+    console.error('fetchDiff failed: ', e);
+    return null;
+  }
 }
 
 export const parseDiff = (diff) => {
-  console.log(diff);
   return diff
     .map((schemaFieldArray) => {
       const [schema, field] = schemaFieldArray[0].split('.');

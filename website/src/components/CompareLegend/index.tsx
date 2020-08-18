@@ -75,7 +75,7 @@ export const generateComparisonCounts = (schemas: Schema[]) =>
         },
         { ...defaultCount },
       );
-      console.log('schema count', schemaCount);
+
       return {
         updated: dictionaryCount.updated + schemaCount.updated,
         deleted: dictionaryCount.deleted + schemaCount.deleted,

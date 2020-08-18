@@ -128,7 +128,7 @@ function DictionaryPage() {
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
-  console.log('active schemas', activeSchemas);
+
   React.useEffect(() => {
     async function resolveSchemas() {
       try {

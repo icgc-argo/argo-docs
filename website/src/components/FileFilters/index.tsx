@@ -168,7 +168,7 @@ export const createFilters = (schemas: Schema[]) => {
 
 export const comparisonFilter = (comparison: ChangeType) => (field: Field) => {
   if (comparison === NO_ACTIVE_FILTER) return true;
-  console.log('xxxx', field.changeType, comparison);
+
   return field.changeType === comparison;
 };
 

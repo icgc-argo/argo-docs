@@ -2,10 +2,6 @@
 import { jsx, css } from '@emotion/core';
 import React from 'react';
 import Button from '../../components/Button';
-import get from 'lodash/get';
-import { DiffText, DiffTextSegment, TextChange } from './DiffText';
-
-type TextDiff = { left: string; right: string };
 
 const Script = ({
   script,
