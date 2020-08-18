@@ -1,26 +1,7 @@
 import get from 'lodash/get';
+import { Meta, ChangeType } from '../../website/types';
 
-type Meta = {
-  validationDependency: boolean;
-  primaryId: boolean;
-  examples: string;
-  notes: string;
-  displayName: string;
-  core: boolean;
-};
-
-type Field = {
-  name: string;
-  valueType: string;
-  description: string;
-  meta: Meta;
-  restrictions: {
-    required: boolean;
-    regex: string;
-    script: string;
-  };
-};
-
+/* 
 type FieldDiff = {
   valueType?: string;
   description?: {
@@ -55,12 +36,13 @@ type InputDiffField = {
 };
 
 type Diffs = { schemas: any; counts: { updated: number; created: number; deleted: number } };
-
-export enum ChangeTypeName {
+ *
+export enum ChangeType {
   CREATED = 'created',
   DELETED = 'deleted',
   UPDATED = 'updated',
 }
+*/
 
 // gets fields, left null means created, right null means deleted
 const checkDiff = (name, field, leftDiff, rightDiff) =>
@@ -81,7 +63,11 @@ const checkDeleted = (field) => {
   const changes = {};
   const deletedFields = field.data;
   for (let [key, value] of Object.entries(deletedFields)) {
-    changes[key] = { left: value, right: null };
+    if (key === 'codeList') {
+      changes[key] = { left: value, right: null, data: { added: [], deleted: value } };
+    } else {
+      changes[key] = { left: value, right: null };
+    }
   }
   return changes;
 };
@@ -129,9 +115,12 @@ const checkField = (field) => {
       const restrictionsChanges = checkDiff('restrictions', restrictions, leftDiff, rightDiff);
       changes['restrictions'] = restrictionsChanges;
       if (restrictions.codeList) {
+        const left = leftDiff.restrictions.codeList;
+        const right = rightDiff.restrictions.codeList;
         changes['restrictions']['codeList'] = {
-          left: leftDiff.restrictions.codeList,
-          right: rightDiff.restrictions.codeList,
+          left,
+          right,
+          //  created or deleted still needs data to be passed
           data: diff.restrictions.codeList.data,
         };
       }
@@ -147,50 +136,37 @@ const checkField = (field) => {
 };
 
 // created and deleted fields will just be displayed, no need to diff properties
-const generateDiffChanges = (schemaDiff: any): Diffs =>
+const generateDiffChanges = (schemaDiff: any) =>
   schemaDiff.reduce(
-    (acc, val) => {
+    (acc, schemaFieldDiff) => {
       const schemas = acc.schemas;
-      const counts = acc.counts;
-      const [name, changes] = val;
+      const [name, changes] = schemaFieldDiff;
+
       const { schemaName, fieldName } = parseDiffFieldName(name);
       // console.log(schemaName, fieldName, acc);
       const fieldChanges = changes.diff;
+
       schemaName in schemas ||
         (schemas[schemaName] = {
-          [ChangeTypeName.UPDATED]: {},
-          [ChangeTypeName.CREATED]: {},
-          [ChangeTypeName.DELETED]: {},
+          [ChangeType.UPDATED]: {},
+          [ChangeType.CREATED]: {},
+          [ChangeType.DELETED]: {},
         });
 
-      if (fieldChanges.type === ChangeTypeName.CREATED) {
-        // created field, pass data through
+      if (fieldChanges.type === ChangeType.CREATED || fieldChanges.type === ChangeType.DELETED) {
+        // created or deleted field, pass data through, no diff field
         schemas[schemaName][fieldChanges.type][fieldName] = {
           changeType: fieldChanges.type,
           ...fieldChanges.data,
         };
-
-        counts.created++;
-      } else if (fieldChanges.type === ChangeTypeName.DELETED) {
-        // deleted field, add nulls for right diff
-        console.log(changes);
-        const fieldChanges = { ...changes, diff: changes.diff.data };
-        schemas[schemaName][ChangeTypeName.DELETED][fieldName] = {
-          changeType: 'deleted',
-          name: fieldName,
-          ...checkField(fieldChanges),
-        };
-
-        counts.deleted++;
       } else {
         // updated field, find out which fields updated
-        schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
-        counts.updated++;
+        schemas[schemaName][ChangeType.UPDATED][fieldName] = checkField(changes);
       }
 
-      return { schemas, counts };
+      return { schemas };
     },
-    { schemas: {}, counts: { updated: 0, deleted: 0, created: 0 } },
+    { schemas: {} },
   );
 
 const parseDiffFieldName = (fieldName: string): { schemaName: string; fieldName: string } => {

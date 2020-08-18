@@ -5,7 +5,7 @@
     "add": "ts-node-script manage-versions.ts -a --npm --silent --inspect",
     "clean": "node clean-data.js",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
-    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.ts",
+    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
     "links": "node links/generate.js"
   },
   "devDependencies": {
