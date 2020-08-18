@@ -1,8 +1,9 @@
+import defaultTheme from './default';
+
 export default {
+  ...defaultTheme,
   plain: {
-    color: 'black',
-    backgroundColor: '#fbe8ec',
+    ...defaultTheme.plain,
     textDecoration: 'line-through',
   },
-  styles: [],
 };
