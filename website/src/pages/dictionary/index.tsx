@@ -118,8 +118,8 @@ function DictionaryPage() {
     },
   } = context;
 
-  const diffVersions: string[] = versions.filter((v) => v !== preloadedDictionary.version);
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
+  const diffVersions: string[] = versions.filter((v) => v !== version);
   const [diffVersion, setDiffVersion] = useState<string>(diffVersions[0]);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
@@ -128,23 +128,13 @@ function DictionaryPage() {
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
-
+  console.log('active schemas', activeSchemas);
   React.useEffect(() => {
     async function resolveSchemas() {
       try {
         const dict = await getDictionary(version, preloadedDictionary);
         const diff = await getDictionaryDiff(version, diffVersion);
-        console.log(
-          'version',
-          version,
-          'diffversion',
-          diffVersion,
-          'diff',
-          diff.schemas,
-          'dict',
-          dict.schemas,
-        );
-        const schemas = createSchemasWithDiffs(dict.schemas, diff.schemas);
+        const schemas = diff ? createSchemasWithDiffs(dict.schemas, diff.schemas) : dict.schemas;
         setActiveSchemas(schemas);
       } catch (e) {
         console.error('Cannot resolve schemas', e);

@@ -216,11 +216,12 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const CellContentCenter = styled('div')`
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 8px;
   `;
 
   const StarIcon = (props) => <Icon name="star" width="16px" height="16px" {...props} />;
@@ -230,7 +231,11 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       id: 'compare',
       headerClassName: 'reset',
       Header: (
-        <CellContentCenter>
+        <CellContentCenter
+          css={css`
+            top: 2px;
+          `}
+        >
           <StarIcon fill="#babcc2" />
         </CellContentCenter>
       ),
@@ -249,7 +254,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Header: 'Field & Description',
       id: 'fieldDescription',
       Cell: ({ original }) => {
-        console.log(original);
         const { name, description, diff, changeType } = original;
         const hasDiff = checkDiff(diff, ['description']);
 
