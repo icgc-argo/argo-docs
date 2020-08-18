@@ -14,7 +14,10 @@
           "displayName": "Program ID"
         },
         "restrictions": {
-          "required": true
+          "required": true,
+          "script": [
+            "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+          ]
         }
       },
       "diff": {
@@ -31,7 +34,10 @@
             "displayName": "Program ID"
           },
           "restrictions": {
-            "required": true
+            "required": true,
+            "script": [
+              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+            ]
           }
         }
       }
@@ -420,7 +426,15 @@
         },
         "restrictions": {
           "required": true,
-          "codeList": ["Amplified DNA", "ctDNA", "Other DNA enrichments"]
+          "codeList": [
+            "Amplified DNA",
+            "ctDNA",
+            "Other DNA enrichments",
+            "ctDNA-0",
+            "ctDNA-1",
+            "ctDNA-2",
+            "ctDNA-3"
+          ]
         }
       },
       "right": {
@@ -429,7 +443,16 @@
         "description": "Description of the type of molecular sample used for testing.",
         "restrictions": {
           "required": true,
-          "codeList": ["Amplified DNA", "ctDNA", "Other DNA enrichments"]
+          "codeList": [
+            "Amplified DNA",
+            "ctDNA",
+            "Other DNA enrichments",
+            "ctDNA-0",
+            "ctDNA-1",
+            "ctDNA-2",
+            "ctDNA-3",
+            "added_to_list"
+          ]
         }
       },
       "diff": {
@@ -439,6 +462,15 @@
             "validationDependency": true,
             "core": true,
             "displayName": "Sample Type"
+          }
+        },
+        "restrictions": {
+          "codeList": {
+            "type": "updated",
+            "data": {
+              "added": ["added_to_list"],
+              "deleted": []
+            }
           }
         }
       }
@@ -552,6 +584,72 @@
             "required": false,
             "regex": "\\b(?!([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
           }
+        }
+      }
+    }
+  ],
+  [
+    "treatment.adverse_events",
+    {
+      "right": {
+        "name": "adverse_events",
+        "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
+        "valueType": "string",
+        "meta": {
+          "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
+        },
+        "restrictions": {
+          "codeList": ["Abducens nerve disorder", "item-0"]
+        }
+      },
+      "diff": {
+        "type": "created",
+        "data": {
+          "name": "adverse_events",
+          "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
+          "valueType": "string",
+          "meta": {
+            "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
+          },
+          "restrictions": {
+            "codeList": ["Abducens nerve disorder", "item-0"]
+          }
+        }
+      }
+    }
+  ],
+  [
+    "treatment.outcome_of_treatment",
+    {
+      "right": {
+        "name": "outcome_of_treatment",
+        "description": "Indicate the donor's outcome of the prescribed treatment.",
+        "valueType": "string"
+      },
+      "diff": {
+        "type": "created",
+        "data": {
+          "name": "outcome_of_treatment",
+          "description": "Indicate the donor's outcome of the prescribed treatment.",
+          "valueType": "string"
+        }
+      }
+    }
+  ],
+  [
+    "treatment.number_of_cycles",
+    {
+      "right": {
+        "name": "number_of_cycles",
+        "description": "Indicate the number of treatment cycles.",
+        "valueType": "integer"
+      },
+      "diff": {
+        "type": "created",
+        "data": {
+          "name": "number_of_cycles",
+          "description": "Indicate the number of treatment cycles.",
+          "valueType": "integer"
         }
       }
     }

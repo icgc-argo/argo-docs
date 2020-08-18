@@ -14,7 +14,12 @@
             "notes": "This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.",
             "displayName": "Program ID"
           },
-          "restrictions": { "required": true }
+          "restrictions": {
+            "required": true,
+            "script": [
+              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+            ]
+          }
         },
         "submitter_donor_id": {
           "changeType": "deleted",
@@ -136,6 +141,33 @@
             "core": { "left": true, "right": null },
             "displayName": { "left": "Sample Type", "right": null },
             "validationDependency": { "left": true, "right": null }
+          },
+          "restrictions": {
+            "codeList": {
+              "data": {
+                "added": ["added_to_list"],
+                "deleted": []
+              },
+              "left": [
+                "Amplified DNA",
+                "ctDNA",
+                "Other DNA enrichments",
+                "ctDNA-0",
+                "ctDNA-1",
+                "ctDNA-2",
+                "ctDNA-3"
+              ],
+              "right": [
+                "Amplified DNA",
+                "ctDNA",
+                "Other DNA enrichments",
+                "ctDNA-0",
+                "ctDNA-1",
+                "ctDNA-2",
+                "ctDNA-3",
+                "added_to_list"
+              ]
+            }
           }
         }
       }
@@ -167,6 +199,36 @@
           "meta": { "displayName": "BMI" }
         }
       },
+      "updated": {}
+    },
+    "treatment": {
+      "created": {
+        "adverse_events": {
+          "changeType": "created",
+          "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
+          "meta": {
+            "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
+          },
+          "name": "adverse_events",
+          "restrictions": {
+            "codeList": ["Abducens nerve disorder", "item-0"]
+          },
+          "valueType": "string"
+        },
+        "number_of_cycles": {
+          "changeType": "created",
+          "description": "Indicate the number of treatment cycles.",
+          "name": "number_of_cycles",
+          "valueType": "integer"
+        },
+        "outcome_of_treatment": {
+          "changeType": "created",
+          "description": "Indicate the donor's outcome of the prescribed treatment.",
+          "name": "outcome_of_treatment",
+          "valueType": "string"
+        }
+      },
+      "deleted": {},
       "updated": {}
     }
   }

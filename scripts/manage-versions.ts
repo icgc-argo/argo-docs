@@ -18,6 +18,8 @@
  *
  */
 
+require('dotenv').config();
+
 import axios from 'axios';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
@@ -30,8 +32,7 @@ import generateDiffChanges from './generateDiffData';
 
 const constants = require('./constants');
 
-const apiRoot = 'https://lectern.platform.icgc-argo.org';
-//const apiRoot = 'http://localhost:3200';
+const apiRoot = process.env.LECTERN_ROOT;
 const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 const currentVersions = require(versionsFilename);
 
