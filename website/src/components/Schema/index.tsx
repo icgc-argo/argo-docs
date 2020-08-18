@@ -195,8 +195,6 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     [schema],
   );
 
-  console.log('Schema', schema);
-
   const [expandedCodeLists, setExpandedCodeLists] = useState(initialExpandingFields);
 
   useEffect(() => {
