@@ -1,22 +1,24 @@
 import argo from '@icgc-argo/uikit/theme/defaultTheme';
-import { ChangeType } from '../../../components/Schema';
+import { ChangeType } from '../../../../types';
 import { TagVariant } from '../../../components/Tag';
 
-const argoColors = argo.colors;
+export type DiffColors = { [key in Exclude<ChangeType, ChangeType.NONE>]: string };
 
-export type DiffColors = { [key in ChangeType]: string };
-
-const diffColors: DiffColors = {
-  created: argoColors.accent1_dimmed,
-  updated: argoColors.warning_dark,
-  deleted: argoColors.error,
-};
-
-const schema: { row: DiffColors } = {
-  row: {
-    updated: argoColors.warning_4,
-    created: argoColors.accent1_4,
-    deleted: argoColors.error_4,
+const diffColors: { star: DiffColors; schemaField: DiffColors; fieldProperty: DiffColors } = {
+  star: {
+    created: '#00C79D',
+    updated: '#ec8f17',
+    deleted: '#df1b42',
+  },
+  schemaField: {
+    updated: '#fef6ea',
+    created: '#e9fbf7',
+    deleted: '#fbe8ec',
+  },
+  fieldProperty: {
+    deleted: '#f6c5cf',
+    updated: '#15846c',
+    created: '#d3f7f0',
   },
 };
 
@@ -35,7 +37,6 @@ const tag: { [k in TagVariant]: string } = {
 const theme = {
   ...argo,
   diffColors,
-  schema,
   tag,
 };
 
