@@ -104,7 +104,7 @@ const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/0.5/0.5-diff-0.6.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/0.7/0.7-diff-0.8.json');
 
 // versions
 const versions: string[] = data.versions;
