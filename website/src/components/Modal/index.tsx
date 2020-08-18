@@ -5,7 +5,9 @@ import ModalComp from '@icgc-argo/uikit/Modal';
 import { withTheme } from 'emotion-theming';
 import styled from '@emotion/styled';
 
-const StyledModal = styled(ModalComp)``;
+const StyledModal = styled(ModalComp)`
+  max-width: 75%;
+`;
 
 const Modal = withTheme((props) => <StyledModal {...props} />);
 
