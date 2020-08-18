@@ -121,16 +121,52 @@
           "description": "Description of the type of molecular sample used for testing.",
           "restrictions": {
             "required": true,
-            "codeList": ["Amplified DNA", "ctDNA", "Other DNA enrichments"]
+            "codeList": [
+              "Amplified DNA",
+              "ctDNA",
+              "Other DNA enrichments",
+              "ctDNA-0",
+              "ctDNA-1",
+              "ctDNA-2",
+              "ctDNA-3",
+              "added_to_list"
+            ]
           }
+        }
+      ]
+    },
+    {
+      "name": "treatment",
+      "description": "The collection of data elements related to a donor's treatment at a specific point in the clinical record. To submit multiple treatments for a single donor, please submit treatment rows in the treatment file for this donor      ",
+      "fields": [
+        {
+          "name": "adverse_events",
+          "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
+          "valueType": "string",
+          "meta": {
+            "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
+          },
+          "restrictions": {
+            "codeList": ["Abducens nerve disorder", "item-0"]
+          }
+        },
+        {
+          "name": "outcome_of_treatment",
+          "description": "Indicate the donor's outcome of the prescribed treatment.",
+          "valueType": "string"
+        },
+        {
+          "name": "number_of_cycles",
+          "description": "Indicate the number of treatment cycles.",
+          "valueType": "integer"
         }
       ]
     }
   ],
-  "_id": "5f1f4a606473b33fbccaa207",
+  "_id": "5f3c2e646b4024065103a64f",
   "name": "diff-test",
-  "version": "0.2",
-  "createdAt": "2020-07-27T21:42:56.379Z",
-  "updatedAt": "2020-07-27T21:42:56.379Z",
+  "version": "0.8",
+  "createdAt": "2020-08-18T19:39:16.820Z",
+  "updatedAt": "2020-08-18T19:39:16.820Z",
   "__v": 0
 }

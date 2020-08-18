@@ -16,7 +16,10 @@
             "displayName": "Program ID"
           },
           "restrictions": {
-            "required": true
+            "required": true,
+            "script": [
+              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+            ]
           }
         },
         {
@@ -143,7 +146,15 @@
           },
           "restrictions": {
             "required": true,
-            "codeList": ["Amplified DNA", "ctDNA", "Other DNA enrichments"]
+            "codeList": [
+              "Amplified DNA",
+              "ctDNA",
+              "Other DNA enrichments",
+              "ctDNA-0",
+              "ctDNA-1",
+              "ctDNA-2",
+              "ctDNA-3"
+            ]
           }
         }
       ]
@@ -182,10 +193,10 @@
       ]
     }
   ],
-  "_id": "5f1f48f66473b33fbccaa206",
+  "_id": "5f3c2d2b6b4024065103a64e",
   "name": "diff-test",
-  "version": "0.1",
-  "createdAt": "2020-07-27T21:36:54.042Z",
-  "updatedAt": "2020-07-27T21:36:54.042Z",
+  "version": "0.7",
+  "createdAt": "2020-08-18T19:34:03.019Z",
+  "updatedAt": "2020-08-18T19:34:03.019Z",
   "__v": 0
 }
