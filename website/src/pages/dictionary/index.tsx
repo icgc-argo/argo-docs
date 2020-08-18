@@ -59,7 +59,7 @@ import argoTheme from '../../styles/theme/icgc-argo';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Dictionary from '../../components/Dictionary';
-import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from './helpers';
+import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from '../../helpers/schema';
 import { ChangeType, Schema } from '../../../types';
 
 const InfoBar = styled('div')`
