@@ -394,10 +394,10 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
               </div>
             ) : (
               regex && (
-                <>
+                <div>
                   <Regex regex={regex} />
                   <RegexExamples regex={regex} examples={examples} />
-                </>
+                </div>
               )
             )}
             {checkDiff(diff, ['restrictions.codeList']) ? (
@@ -417,7 +417,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-    /*{
+    {
       Header: 'Notes & Scripts',
       Cell: ({ original: { name, meta, restrictions, diff, changeType } }) => {
         const notes = meta && meta.notes;
@@ -444,7 +444,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    }, */
+    },
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
