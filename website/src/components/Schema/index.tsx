@@ -22,7 +22,7 @@
 import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
 import Table from '../Table';
-import Tag, { TagVariant, TagContainer, TAG_DISPLAY_NAME } from '../Tag';
+import Tag, { TagVariant, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import CodeList, { Code } from './CodeList';
@@ -31,25 +31,17 @@ import startCase from 'lodash/startCase';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal } from '../../pages/dictionary';
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
-import { FieldDescription, Script } from './TableComponents';
+import { Script } from './TableComponents';
 import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-import {
-  DiffText,
-  DiffTextSegment,
-  TextChange,
-  deletedStyle,
-  createdStyle,
-  updatedStyle,
-} from './DiffText';
+import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
 import { ChangeType } from '../../../types';
 
@@ -102,25 +94,25 @@ const FileExample = ({ name }) => (
 const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
   <div css={css``}>
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: '11px',
-      }}
+      css={css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 11px;
+      `}
     >
       <HeaderName name={name} />
       <FieldsTag fieldCount={fieldCount} />
     </div>
 
     <div
-      style={{
-        marginBottom: '11px',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-      }}
+      css={css`
+        margin-bottom: 11px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      `}
     >
       <DataTypography>
         {diff && diff.description ? (
@@ -240,7 +232,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       Cell: ({ original: { diff, changeType } }) => {
         return changeType && changeType !== ChangeType.NONE ? (
           <CellContentCenter>
-            <StarIcon fill={theme.diffColors[changeType]} />
+            <StarIcon fill={theme.diffColors.star[changeType]} />
           </CellContentCenter>
         ) : null;
       },
@@ -448,7 +440,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const containerRef = React.createRef();
 
   const theme: Theme = useTheme();
-  const rowColors = theme.schema.row;
+  const rowColors = theme.diffColors.schemaField;
 
   const highlightRowDiff = (changeType) => ({
     style: {

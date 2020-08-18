@@ -33,7 +33,7 @@ const CompareLegend = ({
   styles?: any;
 }) => {
   const theme: Theme = useTheme();
-  const diffColors = theme.diffColors;
+  const diffColors = theme.diffColors.star;
   const { updated, deleted, created } = comparison;
   return (
     <div
