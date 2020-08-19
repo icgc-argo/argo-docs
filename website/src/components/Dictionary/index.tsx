@@ -18,7 +18,7 @@ const Dictionary = ({ schemas, menuContents, isLatestSchema, isDiffShowing }) =>
       );
     })
   ) : (
-    <div>No schemas found</div>
+    <div>No results found</div>
   );
 
 export default Dictionary;

@@ -18,6 +18,8 @@
  *
  */
 
+require('dotenv').config();
+
 import axios from 'axios';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
@@ -30,8 +32,7 @@ import generateDiffChanges from './generateDiffData';
 
 const constants = require('./constants');
 
-const apiRoot = 'https://lectern.platform.icgc-argo.org';
-//const apiRoot = 'http://localhost:3200';
+const apiRoot = process.env.LECTERN_ROOT;
 const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 const currentVersions = require(versionsFilename);
 
@@ -90,23 +91,27 @@ async function fetchAndSaveDiffsForVersion(version) {
     const high = parseFloat(version) > parseFloat(otherVersion) ? version : otherVersion;
     const low = parseFloat(version) < parseFloat(otherVersion) ? version : otherVersion;
 
-    const path = `${schemaPath}/diffs/${high}`;
-    const filename = `${path}/${high}-diff-${low}.json`;
+    const pathHigh = `${schemaPath}/diffs/${high}`;
+    const pathLow = `${schemaPath}/diffs/${low}`;
+    const fileNameHL = `${pathHigh}/${high}-diff-${low}.json`;
+    const fileNameLH = `${pathLow}/${low}-diff-${high}.json`;
 
     try {
-      ensureDirectoryExistence(path);
-      const schemaDiff = await fetchDiffForVersions(high, low);
+      ensureDirectoryExistence(pathHigh);
+      ensureDirectoryExistence(pathLow);
+
       console.log(
         `${chalk.cyan('saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
           '...',
         )}`,
       );
-      console.log('fetch and save diffs');
 
-      const diffs = generateDiffChanges(schemaDiff);
-
-      fse.writeJSONSync(filename, diffs);
-      //  fs.writeFileSync(filename, JSON.stringify(response));
+      const schemaDiffHL = await fetchDiffForVersions(high, low);
+      const schemaDiffLH = await fetchDiffForVersions(low, high);
+      const diffsHL = generateDiffChanges(schemaDiffHL);
+      const diffsLH = generateDiffChanges(schemaDiffLH);
+      fse.writeJSONSync(fileNameLH, diffsLH);
+      fse.writeJSONSync(fileNameHL, diffsHL);
     } catch (e) {
       console.log(chalk.red(`Error fetching or saving diff!`, e));
     }

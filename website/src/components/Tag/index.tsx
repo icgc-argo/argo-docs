@@ -18,19 +18,50 @@
  *
  */
 
-import * as chai from 'chai';
-import diff from './testdata/diff.json';
-import generateDiffChanges from '.';
-import * as fse from 'fs-extra';
-import expectedResult from './expectedResult.json';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import React from 'react';
+import TagComponent from '@icgc-argo/uikit/Tag';
+import { withTheme } from 'emotion-theming';
+import styled from '@emotion/styled';
 
-const expect = chai.expect;
+export enum TagVariant {
+  REQUIRED = 'required',
+  CONDITIONAL = 'conditional',
+  CORE = 'core',
+  ID = 'id',
+  EXTENDED = 'extended',
+}
 
-// write own diff change because js-lectern-client output still needs to be modified
-describe('Diff data', () => {
-  it('should generate change object for a schema diff', () => {
-    const result = generateDiffChanges(diff);
-    //fse.writeJSONSync('./test.json', result);
-    expect(result).to.deep.eq(expectedResult);
-  });
+export const TAG_DISPLAY_NAME = Object.freeze({
+  required: 'Required',
+  conditional: 'Conditional',
+  core: 'Core',
+  id: 'ID',
+  extended: 'Extended',
 });
+
+const Tag = ({ variant }: { variant: TagVariant }) => (
+  <TagComponent
+    css={(theme) => css`
+      background-color: ${theme.tag[variant]};
+    `}
+  >
+    {TAG_DISPLAY_NAME[variant]}
+  </TagComponent>
+);
+
+export const TagContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  div {
+    display: inline;
+    :not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+`;
+
+export default withTheme((props) => <Tag {...props} />);

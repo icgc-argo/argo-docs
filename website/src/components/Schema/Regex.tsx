@@ -18,19 +18,46 @@
  *
  */
 
-import * as chai from 'chai';
-import diff from './testdata/diff.json';
-import generateDiffChanges from '.';
-import * as fse from 'fs-extra';
-import expectedResult from './expectedResult.json';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
+import React from 'react';
+import styles from './styles.module.css';
+import HighlightedRegex from './HighlightedRegex';
+import get from 'lodash/get';
+import { ChangeType } from '.';
 
-const expect = chai.expect;
+export const RegexExamples = ({ regex, examples }) => (
+  <div>
+    <br />
+    <div>Examples:</div>
+    <div>
+      {examples.split(',').map((example, i) => {
+        const uriRegex = encodeURIComponent(regex);
+        const uriInput = encodeURIComponent(example);
+        return (
+          <a
+            href={`http://www.regexplanet.com/advanced/xregexp/index.html?regex=${uriRegex}&input=${uriInput}`}
+            target="_blank"
+            key={i}
+          >
+            {`${example}${i < examples.length - 1 ? ', ' : ''}`}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+);
 
-// write own diff change because js-lectern-client output still needs to be modified
-describe('Diff data', () => {
-  it('should generate change object for a schema diff', () => {
-    const result = generateDiffChanges(diff);
-    //fse.writeJSONSync('./test.json', result);
-    expect(result).to.deep.eq(expectedResult);
-  });
-});
+const Regex = ({ regex, style }: { regex: string; style?: any }) => (
+  <div
+    css={css`
+      margin-bottom: 5px;
+      ${style}
+    `}
+  >
+    <div>Values must meet the regular expression</div>
+    <HighlightedRegex regex={regex} />
+  </div>
+);
+
+export default Regex;

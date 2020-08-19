@@ -1,1 +1,4 @@
-type FilterSelect = { content: string; value: string };
+interface FilterSelect {
+  content: string;
+  value: string;
+}

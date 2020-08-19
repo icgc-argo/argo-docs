@@ -1,145 +1,91 @@
-type Meta = {
-  validationDependency: boolean;
-  primaryId: boolean;
-  examples: string;
-  notes: string;
-  displayName: string;
-  core: boolean;
-};
+import get from 'lodash/get';
+import { ChangeType } from '../../website/types';
 
-type Field = {
-  name: string;
-  valueType: string;
-  description: string;
-  meta: Meta;
-  restrictions: {
-    required: boolean;
-    regex: string;
-    script: string;
-  };
-};
+// gets fields, left null means created, right null means deleted
+const checkDiff = (name, field, leftDiff, rightDiff) =>
+  Object.entries(field).reduce((changes, val) => {
+    const [fieldName] = val;
+    const left = get(leftDiff, [name, fieldName], null);
+    const right = get(rightDiff, [name, fieldName], null);
 
-type FieldDiff = {
-  valueType?: string;
-  description?: {
-    type: string;
-    data: string;
-  };
-  meta?: {
-    type: string;
-    data: Meta;
-  };
-  restrictions?: {
-    required?: {
-      type: string;
-      data: boolean;
+    changes[fieldName] = {
+      left,
+      right,
     };
-    codeList?: {
-      type: string;
-      data: {
-        added: string[];
-        deleted: string[];
-      };
-    };
-    regex?: {};
-    script?: { type: string; data: { added: string[]; deleted: string[] } };
-  };
+    return changes;
+  }, {});
+
+// checks entire field deletions
+const checkDeleted = (field) => {
+  const changes = {};
+  const deletedFields = field.data;
+  for (let [key, value] of Object.entries(deletedFields)) {
+    if (key === 'codeList') {
+      changes[key] = { left: value, right: null, data: { added: [], deleted: value } };
+    } else {
+      changes[key] = { left: value, right: null };
+    }
+  }
+  return changes;
 };
-
-type InputDiffField = {
-  left?: Field;
-  right?: Field;
-  diff?: FieldDiff;
-};
-
-type Diffs = { schemas: any; counts: { updated: number; created: number; deleted: number } };
-
-export enum ChangeTypeName {
-  CREATED = 'created',
-  DELETED = 'deleted',
-  UPDATED = 'updated',
-}
 
 const checkField = (field) => {
   const changes = {};
   const { left: leftDiff, right: rightDiff, diff } = field;
 
   if (diff.description) {
-    changes['description'] = { left: leftDiff.description, right: rightDiff.description };
+    changes['description'] = {
+      left: get(leftDiff, 'description', null),
+      right: get(rightDiff, 'description', null),
+    };
+  }
+
+  if (diff.valueType) {
+    changes['valueType'] = {
+      left: get(leftDiff, 'valueType', null),
+      right: get(rightDiff, 'valueType', null),
+    };
   }
 
   const meta = diff.meta;
+
   if (meta) {
     'meta' in changes || (changes['meta'] = {});
-    if (meta.notes) {
-      changes['meta']['notes'] = { left: leftDiff.meta.notes, right: rightDiff.meta.notes };
+
+    if (!meta.type) {
+      // construct changes, null on left if created, null on right if deleted
+      const metaChanges = checkDiff('meta', meta, leftDiff, rightDiff);
+      changes['meta'] = metaChanges;
     }
 
-    if (meta.validationDependency) {
-      changes['meta']['validationDependency'] = {
-        left: leftDiff.meta.validationDependency,
-        right: rightDiff.meta.validationDependency,
-      };
-    }
-
-    if (meta.core) {
-      changes['meta']['core'] = { left: leftDiff.meta.core, right: rightDiff.meta.core };
-    }
-
-    if (meta.displayName) {
-      changes['meta']['displayName'] = {
-        left: leftDiff.meta.displayName,
-        right: rightDiff.meta.displayName,
-      };
-    }
-
-    // deleted fields
-    if (meta.type && meta.type === 'deleted') {
-      const deletedFields = meta.data;
-      for (let [key, value] of Object.entries(deletedFields)) {
-        changes['meta'][key] = { left: value, right: null };
-      }
+    // add deleted fields
+    else if (meta.type && meta.type === 'deleted') {
+      changes['meta'] = { ...changes['meta'], ...checkDeleted(meta) };
     }
   }
 
   const restrictions = diff.restrictions;
   if (restrictions) {
     'restrictions' in changes || (changes['restrictions'] = {});
-    if (restrictions.script) {
-      changes['restrictions']['script'] = {
-        left: leftDiff.restrictions.script,
-        right: rightDiff.restrictions.script,
-      };
-    }
 
-    if (restrictions.codeList) {
-      changes['restrictions']['codeList'] = {
-        left: leftDiff.restrictions.codeList,
-        right: rightDiff.restrictions.codeList,
-        data: diff.restrictions.codeList.data,
-      };
-    }
-
-    if (restrictions.required) {
-      changes['restrictions']['required'] = {
-        left: leftDiff.restrictions.required,
-        right: rightDiff.restrictions.required,
-      };
-    }
-
-    if (restrictions.regex) {
-      changes['restrictions']['regex'] = {
-        left: leftDiff.restrictions.regex,
-        right: rightDiff.restrictions.regex,
-      };
-    }
-
-    // deleted fields
-    if (restrictions.type && restrictions.type === 'deleted') {
-      const deletedFields = restrictions.data;
-      for (let [key, value] of Object.entries(deletedFields)) {
-        changes['restrictions'][key] = { left: value, right: null };
+    if (!restrictions.type) {
+      const restrictionsChanges = checkDiff('restrictions', restrictions, leftDiff, rightDiff);
+      changes['restrictions'] = restrictionsChanges;
+      if (restrictions.codeList) {
+        const left = leftDiff.restrictions.codeList;
+        const right = rightDiff.restrictions.codeList;
+        changes['restrictions']['codeList'] = {
+          left,
+          right,
+          //  created or deleted still needs data to be passed
+          data: diff.restrictions.codeList.data,
+        };
       }
+    }
+
+    // add deleted fields
+    else if (restrictions.type && restrictions.type === 'deleted') {
+      changes['restrictions'] = { ...changes['restrictions'], ...checkDeleted(restrictions) };
     }
   }
 
@@ -147,43 +93,37 @@ const checkField = (field) => {
 };
 
 // created and deleted fields will just be displayed, no need to diff properties
-const generateDiffChanges = (schemaDiff: any): Diffs =>
+const generateDiffChanges = (schemaDiff: any) =>
   schemaDiff.reduce(
-    (acc, val) => {
+    (acc, schemaFieldDiff) => {
       const schemas = acc.schemas;
-      const counts = acc.counts;
-      const [name, changes] = val;
+      const [name, changes] = schemaFieldDiff;
+
       const { schemaName, fieldName } = parseDiffFieldName(name);
       // console.log(schemaName, fieldName, acc);
       const fieldChanges = changes.diff;
+
       schemaName in schemas ||
         (schemas[schemaName] = {
-          [ChangeTypeName.UPDATED]: {},
-          [ChangeTypeName.CREATED]: {},
-          [ChangeTypeName.DELETED]: {},
+          [ChangeType.UPDATED]: {},
+          [ChangeType.CREATED]: {},
+          [ChangeType.DELETED]: {},
         });
 
-      if (
-        fieldChanges.type === ChangeTypeName.CREATED ||
-        fieldChanges.type === ChangeTypeName.DELETED
-      ) {
-        // created or deleted field
+      if (fieldChanges.type === ChangeType.CREATED || fieldChanges.type === ChangeType.DELETED) {
+        // created or deleted field, pass data through, no diff field
         schemas[schemaName][fieldChanges.type][fieldName] = {
           changeType: fieldChanges.type,
           ...fieldChanges.data,
         };
-
-        // update counts
-        fieldChanges.type === ChangeTypeName.CREATED ? counts.created++ : counts.deleted++;
       } else {
         // updated field, find out which fields updated
-        schemas[schemaName][ChangeTypeName.UPDATED][fieldName] = checkField(changes);
-        counts.updated++;
+        schemas[schemaName][ChangeType.UPDATED][fieldName] = checkField(changes);
       }
 
-      return { schemas, counts };
+      return { schemas };
     },
-    { schemas: {}, counts: { updated: 0, deleted: 0, created: 0 } },
+    { schemas: {} },
   );
 
 const parseDiffFieldName = (fieldName: string): { schemaName: string; fieldName: string } => {

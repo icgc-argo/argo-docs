@@ -1,37 +1,48 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import React from 'react';
+import { ChangeType } from '../../../types';
 
-const deletedStyle = css`
+const padding = css`
+  padding: 2px;
+`;
+
+export const deletedStyle = css`
   background: #f6c5cf;
   text-decoration: line-through;
+  ${padding}
 `;
-const updatedStyle = css`
+
+export const updatedStyle = css`
   background: #15846c;
+  ${padding}
 `;
-const createdStyle = css`
+
+export const createdStyle = css`
   background: #d3f7f0;
+  ${padding}
 `;
 
 // don't use fragment, bug in emotion 10 https://github.com/emotion-js/emotion/issues/1303
 export const DiffText = ({ oldText, newText }: { oldText: string; newText: string }) => (
   <div>
-    <div css={deletedStyle}>{oldText}</div>
-    <div css={createdStyle}>{newText}</div>
+    {oldText ? <div css={deletedStyle}>{oldText}</div> : null}
+    {newText ? <div css={createdStyle}>{newText}</div> : null}
   </div>
 );
 
-export const DiffTextSegment = ({ children, type }: { children: string; type: TextChange }) => (
+export const DiffTextSegment = ({
+  children,
+  type,
+}: {
+  children: React.ReactChild;
+  type: ChangeType;
+}) => (
   <div
     css={
-      type === TextChange.CREATED ? createdStyle : type === TextChange.DELETED ? deletedStyle : null
+      type === ChangeType.CREATED ? createdStyle : type === ChangeType.DELETED ? deletedStyle : null
     }
   >
     {children}
   </div>
 );
-
-export enum TextChange {
-  CREATED = 'created',
-  DELETED = 'deleted',
-}

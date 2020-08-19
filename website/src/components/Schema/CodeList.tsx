@@ -22,9 +22,7 @@ import { jsx, css } from '@emotion/core';
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
-import get from 'lodash/get';
 import { TextChange, DiffTextSegment } from './DiffText';
-import union from 'lodash/union';
 
 const ToggleMore = ({ children, onToggle }) => (
   <div
@@ -37,35 +35,29 @@ const ToggleMore = ({ children, onToggle }) => (
   </div>
 );
 
-const Code = ({ code, format }: { code: string; format: TextChange | null }) => {
-  return (
-    <div
-      key={code}
-      css={css`
-        font-size: 12px;
-      `}
-    >
-      <strong>{format ? <DiffTextSegment type={format}>{code}</DiffTextSegment> : code}</strong>
-    </div>
-  );
-};
+export const Code = ({ code, format }: { code: string; format: TextChange | null }) => (
+  <div
+    key={code}
+    css={css`
+      font-size: 12px;
+    `}
+  >
+    <strong>{format ? <DiffTextSegment type={format}>{code}</DiffTextSegment> : code}</strong>
+  </div>
+);
 
-const CodeList = ({ codeList = [], onToggle, isExpanded, diff }) => {
+const CodeList = ({
+  codeList = [],
+  onToggle,
+  isExpanded,
+}: {
+  codeList: string[];
+  onToggle: any;
+  isExpanded: boolean;
+}) => {
   const maxEnumLength = 5;
-  const deletedCodes = get(diff, 'data.deleted', []);
-  const createdCodes = get(diff, 'data.added', []);
 
-  const list = diff ? union(diff.left, diff.right) : codeList;
-
-  const fullOutput = list.map((code) => {
-    const formatter = deletedCodes.includes(code)
-      ? TextChange.DELETED
-      : createdCodes.includes(code)
-      ? TextChange.CREATED
-      : null;
-
-    return <Code code={code} format={formatter} />;
-  });
+  const fullOutput = codeList.map((code) => <Code code={code} format={null} />);
 
   return (
     <div className={styles.codeList}>

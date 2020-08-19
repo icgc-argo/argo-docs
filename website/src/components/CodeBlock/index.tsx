@@ -21,7 +21,7 @@
 import { jsx } from '@emotion/core';
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import defaultTheme from 'prism-react-renderer/themes/palenight';
+import defaultTheme from './default';
 import styles from './styles.module.css';
 import { css } from '@emotion/core';
 import codeCreated from './createdTheme';
@@ -85,7 +85,7 @@ export const CompareCodeBlock = ({ left, right }: { left: string[]; right: strin
       `}
       prismTheme={codeDeleted}
     />
-    <CodeBlock codes={right} prismTheme={codeCreated} />
+    <CodeBlock codes={right} prismTheme={defaultTheme} />
   </div>
 );
 

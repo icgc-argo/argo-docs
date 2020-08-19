@@ -22,42 +22,33 @@
 import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect } from 'react';
 import Table from '../Table';
-import Tag, { TAG_TYPES } from '../Tag';
+import Tag, { TagVariant, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
-import DefaultTag from '@icgc-argo/uikit/Tag';
-import CodeList from './CodeList';
-import Regex from './Regex';
+import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
+import CodeList, { Code } from './CodeList';
+import Regex, { RegexExamples } from './Regex';
 import startCase from 'lodash/startCase';
 import { DataTypography, SchemaTitle } from '../Typography';
 import { ModalPortal } from '../../pages/dictionary';
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import { styled } from '@icgc-argo/uikit';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Icon from '@icgc-argo/uikit/Icon';
 import { useTheme } from 'emotion-theming';
 import { Theme } from '../../styles/theme/icgc-argo';
-import { FieldDescription, Script } from './TableComponents';
+import { Script } from './TableComponents';
 import Modal from '../Modal';
 import Typography from '@icgc-argo/uikit/Typography';
 import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
-
-const TagContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  div {
-    display: inline;
-    :not(:first-child) {
-      margin-top: 5px;
-    }
-  }
-`;
+import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
+import union from 'lodash/union';
+import { ChangeType } from '../../../types';
 
 const formatFieldType = (value) => {
   switch (value) {
+    case null:
+      return '';
     case 'string':
       return 'TEXT';
     default:
@@ -81,13 +72,92 @@ const FieldsTag = ({ fieldCount }) => (
   >{`${fieldCount} Field${fieldCount > 1 ? 's' : ''}`}</DefaultTag>
 );
 
-const getTableData = (isDiffShowing, schema) =>
+const FileExample = ({ name }) => (
+  <div>
+    File Name Example:{' '}
+    <span
+      css={css`
+        font-weight: 600;
+      `}
+    >{`${name}`}</span>
+    [-optional-extension]
+    <span
+      css={css`
+        font-weight: 600;
+      `}
+    >
+      .tsv
+    </span>
+  </div>
+);
+
+const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
+  <div css={css``}>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 11px;
+      `}
+    >
+      <HeaderName name={name} />
+      <FieldsTag fieldCount={fieldCount} />
+    </div>
+
+    <div
+      css={css`
+        margin-bottom: 11px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      `}
+    >
+      <DataTypography>
+        {diff && diff.description ? (
+          <div>
+            <div css={updatedStyle}>{diff.description.left}</div>
+            <div css={deletedStyle}>{diff.description.right}</div>
+          </div>
+        ) : description ? (
+          description
+        ) : null}
+        <FileExample name={name} />
+      </DataTypography>
+      {/* <DownloadTooltip disabled={isLatestSchema}>
+          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
+            <Button
+              disabled={!isLatestSchema}
+              variant="secondary"
+              size="sm"
+              onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
+            >
+              <DownloadButtonContent disabled={!isLatestSchema}>
+                File Template
+              </DownloadButtonContent>
+            </Button>
+          </div>
+        </DownloadTooltip> */}
+    </div>
+  </div>
+);
+
+/**
+ *
+ * @param diff
+ * @param fields
+ * Check if all fields present in diff object
+ */
+const checkDiff = (diff, fields) =>
+  fields.reduce((acc, field) => acc && Boolean(get(diff, field, false)), true);
+
+// TODO: dont like this, cells should render based on isDiffShowing
+const getTableData = (isDiffShowing, fields) =>
   isDiffShowing
-    ? schema.fields
-    : schema.fields
+    ? fields
+    : fields
         .filter((field) => {
-          // filter out fields which have deleted or created
-          // return field.changeType !== ChangeType.DELETED;
           return field.changeType !== ChangeType.DELETED;
         })
         .map((field) => ({ ...field, changeType: null, diff: null }));
@@ -136,11 +206,12 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
   const CellContentCenter = styled('div')`
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 8px;
   `;
 
   const StarIcon = (props) => <Icon name="star" width="16px" height="16px" {...props} />;
@@ -150,15 +221,18 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       id: 'compare',
       headerClassName: 'reset',
       Header: (
-        <CellContentCenter>
+        <CellContentCenter
+          css={css`
+            top: 2px;
+          `}
+        >
           <StarIcon fill="#babcc2" />
         </CellContentCenter>
       ),
-      Cell: ({ original }) => {
-        const changeType = original.changeType;
-        return changeType ? (
+      Cell: ({ original: { diff, changeType } }) => {
+        return changeType && changeType !== ChangeType.NONE ? (
           <CellContentCenter>
-            <StarIcon fill={theme.diffColors[changeType]} />
+            <StarIcon fill={theme.diffColors.star[changeType]} />
           </CellContentCenter>
         ) : null;
       },
@@ -166,31 +240,55 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       width: 40,
       headerStyle: { textAlign: 'center' },
     },
-
     {
       Header: 'Field & Description',
       id: 'fieldDescription',
-      Cell: ({ original: { name, description, diff } }) => (
-        <FieldDescription name={name} description={description} diff={diff && diff.description} />
-      ),
+      Cell: ({ original }) => {
+        const { name, description, diff, changeType } = original;
+        const hasDiff = checkDiff(diff, ['description']);
+
+        return (
+          <div
+            css={css`
+              font-size: 12px;
+            `}
+          >
+            <div
+              css={css`
+                font-weight: 600;
+              `}
+            >
+              {name}
+            </div>
+            {changeType === ChangeType.UPDATED && hasDiff ? (
+              <DiffText oldText={diff.description.left} newText={diff.description.right} />
+            ) : (
+              description
+            )}
+          </div>
+        );
+      },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
       Header: 'Data Tier',
       Cell: ({ original }) => {
-        const meta = get(original, 'meta', {});
-        if (isEmpty(meta)) {
-          return <Tag type={TAG_TYPES.extended} />;
-        } else {
-          const { primaryId, core } = meta;
-          return primaryId ? (
-            <Tag type={TAG_TYPES.id} />
-          ) : core ? (
-            <Tag type={TAG_TYPES.core} />
-          ) : (
-            <Tag type={TAG_TYPES.extended} />
-          );
-        }
+        const { meta = {}, diff, changeType } = original;
+
+        const hasDiff = checkDiff(diff, ['meta.core', 'meta.primaryId']);
+
+        const tier = getDataTier(meta.primaryId, meta.core);
+
+        return changeType === ChangeType.UPDATED && hasDiff ? (
+          <DiffText
+            newText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.right, diff.meta.core.right)]}
+            oldText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]}
+          />
+        ) : changeType === ChangeType.DELETED ? (
+          TAG_DISPLAY_NAME[tier]
+        ) : (
+          <Tag variant={tier} />
+        );
       },
       style: { padding: '8px' },
       width: 85,
@@ -198,15 +296,37 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Attributes',
       id: 'attributes',
-      Cell: ({ original: { restrictions, meta } }) => {
-        const isRestrictedField = restrictions && restrictions.required;
-        const isConditionalField = meta && !!meta.dependsOn;
-        return (
-          <TagContainer>
-            {isRestrictedField && <Tag type={TAG_TYPES.required} />}
-            {isConditionalField && <Tag type={TAG_TYPES.conditional} />}
-          </TagContainer>
-        );
+      Cell: ({ original }) => {
+        const { restrictions = {}, meta = {}, diff, changeType } = original;
+
+        const hasDiff =
+          checkDiff(diff, ['meta.dependsOn']) || checkDiff(diff, ['restrictions.required']);
+
+        const attribute = getAttribute(restrictions.required, meta.dependsOn);
+        const diffRequired = get(diff, 'restrictions.required', null);
+        const diffDependsOn = get(diff, 'meta.dependsOn', null);
+
+        return changeType === ChangeType.UPDATED && hasDiff ? (
+          <DiffText
+            newText={
+              TAG_DISPLAY_NAME[
+                getAttribute(
+                  diffRequired && diffRequired.right,
+                  diffDependsOn && diffDependsOn.right,
+                )
+              ]
+            }
+            oldText={
+              TAG_DISPLAY_NAME[
+                getAttribute(diffRequired && diffRequired.left, diffDependsOn && diffDependsOn.left)
+              ]
+            }
+          />
+        ) : changeType === ChangeType.DELETED && attribute ? (
+          TAG_DISPLAY_NAME[attribute]
+        ) : attribute ? (
+          <Tag variant={attribute} />
+        ) : null;
       },
       style: { padding: '8px' },
       width: 102,
@@ -214,7 +334,15 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     {
       Header: 'Type',
       id: 'valueType',
-      accessor: ({ valueType }) => formatFieldType(valueType),
+      Cell: ({ original: { valueType, diff } }) =>
+        diff && diff.valueType ? (
+          <DiffText
+            oldText={formatFieldType(diff.valueType.left)}
+            newText={formatFieldType(diff.valueType.right)}
+          />
+        ) : (
+          formatFieldType(valueType)
+        ),
       style: { padding: '8px' },
       width: 70,
     },
@@ -223,45 +351,86 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       id: 'permissibleValues',
       accessor: 'restrictions',
       Cell: ({ original }) => {
-        const { name: field, restrictions, meta, diff } = original;
+        const { name: field, diff, changeType, ...rest } = original;
 
-        const regex = get(restrictions, 'regex', null);
+        const regex = get(rest, 'restrictions.regex', null);
+        const codeList = get(rest, 'restrictions.codeList', null);
+        const examples = get(rest, 'meta.examples', '');
 
-        const codeList = get(restrictions, 'codeList', null);
-        const codeListDiff = get(diff, 'restrictions.codeList', null);
+        const diffRegex = get(diff, 'restrictions.regex');
+        const diffExamples = get(diff, 'meta.examples');
 
-        const examples = get(meta, 'examples', '');
+        const diffCodeList = get(diff, 'restrictions.codeList');
+        const formattedCodes = diffCodeList ? getFormattedCodes(diffCodeList) : null;
 
-        if (regex) {
-          return <Regex regex={regex} examples={examples.split(',')} />;
-        } else if (codeList) {
-          return (
-            <CodeList
-              codeList={codeList}
-              diff={codeListDiff}
-              onToggle={onCodelistExpandToggle(field)}
-              isExpanded={isCodeListExpanded(field)}
-            />
-          );
-        } else {
-          return null;
-        }
+        return (
+          <div>
+            {checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples']) ? (
+              <div
+                css={css`
+                  div {
+                    margin-top: 5px;
+                  }
+                `}
+              >
+                <div css={deletedStyle}>
+                  <Regex regex={diffRegex.left} />
+                  <RegexExamples regex={diffRegex.left} examples={diffExamples.left} />
+                </div>
+                <div css={createdStyle}>
+                  <Regex regex={diffRegex.right} />
+                  <RegexExamples regex={diffRegex.right} examples={diffExamples.right} />
+                </div>
+              </div>
+            ) : (
+              regex && (
+                <div>
+                  <Regex regex={regex} />
+                  <RegexExamples regex={regex} examples={examples} />
+                </div>
+              )
+            )}
+            {checkDiff(diff, ['restrictions.codeList']) ? (
+              <div>{formattedCodes}</div>
+            ) : (
+              codeList && (
+                <CodeList
+                  codeList={codeList}
+                  onToggle={onCodelistExpandToggle(field)}
+                  isExpanded={isCodeListExpanded(field)}
+                />
+              )
+            )}
+          </div>
+        );
       },
+
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
       Header: 'Notes & Scripts',
-      Cell: ({ original: { name, meta, restrictions, diff } }) => {
+      Cell: ({ original: { name, meta, restrictions, diff, changeType } }) => {
         const notes = meta && meta.notes;
         const script = restrictions && restrictions.script;
+        const diffScript = get(diff, 'restrictions.script');
+        const diffNotes = get(diff, 'meta.notes');
+
         return (
-          <Script
-            name={name}
-            notes={notes}
-            script={script}
-            diff={diff}
-            showScript={setCurrentShowingScripts}
-          />
+          <div>
+            {changeType === ChangeType.UPDATED && checkDiff(diff, ['meta.notes']) ? (
+              <DiffText newText={diffNotes.right} oldText={diffNotes.left} />
+            ) : (
+              notes
+            )}
+            {(script || diffScript) && (
+              <Script
+                name={name}
+                script={script}
+                diff={diffScript}
+                showScript={setCurrentShowingScripts}
+              />
+            )}
+          </div>
         );
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
@@ -271,15 +440,46 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const containerRef = React.createRef();
 
   const theme: Theme = useTheme();
-  const rowColors = theme.schema.row;
+  const rowColors = theme.diffColors.schemaField;
 
   const highlightRowDiff = (changeType) => ({
     style: {
       background: rowColors[changeType],
+      textDecoration: changeType === ChangeType.DELETED ? 'line-through' : null,
     },
   });
 
-  const tableData = getTableData(isDiffShowing, schema);
+  const tableData = getTableData(isDiffShowing, schema.fields);
+
+  const getDataTier = (primaryId: boolean, core: boolean): TagVariant => {
+    return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
+  };
+
+  const getAttribute = (required: boolean, dependsOn: boolean): TagVariant =>
+    required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
+
+  const getFormattedCodes = (codeList) => {
+    const createdCodes = get(codeList, 'data.added', []);
+    const deletedCodes = get(codeList, 'data.deleted', []);
+
+    const left = codeList.left || [];
+    const right = codeList.right || [];
+    const allCodes: string[] = union(left, right);
+
+    return (
+      <div>
+        {allCodes.map((code) => {
+          const formatter = deletedCodes.includes(code)
+            ? ChangeType.DELETED
+            : createdCodes.includes(code)
+            ? ChangeType.CREATED
+            : null;
+
+          return <Code code={code} format={formatter} />;
+        })}
+      </div>
+    );
+  };
 
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
@@ -315,51 +515,14 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
           </Modal>
         </ModalPortal>
       )}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: '11px',
-        }}
-      >
-        <HeaderName name={schema.name} />
-        <FieldsTag fieldCount={schema.fields.length} />
-      </div>
 
-      <div
-        style={{
-          marginBottom: '11px',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-        }}
-      >
-        <DataTypography style={{ flex: 1 }}>
-          {schema && schema.description}
-          <div>
-            File Name Example:{' '}
-            <span className={styles.fileExampleHighlight}>{`${schema.name}`}</span>
-            [-optional-extension]<span className={styles.fileExampleHighlight}>.tsv</span>
-          </div>
-        </DataTypography>
-
-        {/* <DownloadTooltip disabled={isLatestSchema}>
-          <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
-            <Button
-              disabled={!isLatestSchema}
-              variant="secondary"
-              size="sm"
-              onClick={() => downloadTsvFileTemplate(`${schema.name}.tsv`)}
-            >
-              <DownloadButtonContent disabled={!isLatestSchema}>
-                File Template
-              </DownloadButtonContent>
-            </Button>
-          </div>
-        </DownloadTooltip> */}
-      </div>
+      <SchemaMeta
+        changeType={schema.changeType}
+        description={schema.description}
+        name={schema.name}
+        fieldCount={schema.fields.length}
+        diff={schema.diff}
+      />
 
       <div ref={containerRef}>
         <Table
@@ -382,11 +545,5 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     </div>
   );
 };
-
-export enum ChangeType {
-  CREATED = 'created',
-  UPDATED = 'updated',
-  DELETED = 'deleted',
-}
 
 export default Schema;
