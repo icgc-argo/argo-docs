@@ -1,48 +1,5 @@
 import get from 'lodash/get';
-import { Meta, ChangeType } from '../../website/types';
-
-/* 
-type FieldDiff = {
-  valueType?: string;
-  description?: {
-    type: string;
-    data: string;
-  };
-  meta?: {
-    type: string;
-    data: Meta;
-  };
-  restrictions?: {
-    required?: {
-      type: string;
-      data: boolean;
-    };
-    codeList?: {
-      type: string;
-      data: {
-        added: string[];
-        deleted: string[];
-      };
-    };
-    regex?: {};
-    script?: { type: string; data: { added: string[]; deleted: string[] } };
-  };
-};
-
-type InputDiffField = {
-  left?: Field;
-  right?: Field;
-  diff?: FieldDiff;
-};
-
-type Diffs = { schemas: any; counts: { updated: number; created: number; deleted: number } };
- *
-export enum ChangeType {
-  CREATED = 'created',
-  DELETED = 'deleted',
-  UPDATED = 'updated',
-}
-*/
+import { ChangeType } from '../../website/types';
 
 // gets fields, left null means created, right null means deleted
 const checkDiff = (name, field, leftDiff, rightDiff) =>
