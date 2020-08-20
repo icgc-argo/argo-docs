@@ -106,6 +106,10 @@ const preloadedDictionary = { data: data.dictionary, version: data.currentVersio
 
 // one version (that has been downloaded) behind latest version
 const preloadedDiff = require('../../../static/data/schemas/diffs/0.7/0.7-diff-0.8.json');
+const initActiveSchemas = createSchemasWithDiffs(
+  preloadedDictionary.data.schemas,
+  preloadedDiff.schemas,
+);
 
 // versions
 const versions: string[] = data.versions;
@@ -125,7 +129,7 @@ function DictionaryPage() {
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
-  const [activeSchemas, setActiveSchemas] = useState<Schema[]>([]);
+  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(initActiveSchemas);
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
@@ -180,8 +184,6 @@ function DictionaryPage() {
         .filter((schema) => schema.fields.length > 0),
     [activeSchemas, isDiffShowing, searchParams],
   );
-
-  console.log('schemas::', 'active', activeSchemas, 'filtered', filteredSchemas);
 
   const comparisonCounts = generateComparisonCounts(filteredSchemas);
   const fileCount = filteredSchemas.length;

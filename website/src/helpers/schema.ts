@@ -12,7 +12,7 @@ import isEmpty from 'lodash/isEmpty';
  * Deleted fields will be present
  * Created fields/schemas need to be added explicitly as they have no related field/schema
  */
-export const createSchemasWithDiffs = (schemas, diffs): ISchema[] => {
+export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
   const { updatedSchemas, createdSchemas, deletedSchemas } = Object.keys(diffs).reduce(
     (acc, schemaName) => {
       const schema = diffs[schemaName];
