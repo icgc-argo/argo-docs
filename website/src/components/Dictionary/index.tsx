@@ -10,6 +10,7 @@ const Dictionary = ({ schemas, menuContents, isLatestSchema, isDiffShowing }) =>
 
       return (
         <Schema
+          key={schema.name}
           schema={schema}
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}

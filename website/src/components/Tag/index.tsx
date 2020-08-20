@@ -57,7 +57,6 @@ export const TagContainer = styled('div')`
   align-items: flex-start;
 
   div {
-    display: inline;
     :not(:first-child) {
       margin-top: 5px;
     }

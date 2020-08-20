@@ -11,7 +11,7 @@ const Script = ({
 }: {
   script: string[];
   name: string;
-  diff: TextDiff;
+  diff: { left: string; right: string };
   showScript: any;
 }) => {
   return (

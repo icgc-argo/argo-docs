@@ -47,13 +47,19 @@ const CompareLegend = ({
       `}
     >
       <Star fill={diffColors.created} />
-      {`${created} new ${pluralise(created, 'field')}`}
+      {`${created} ${compareText.created} ${pluralise(created, 'field')}`}
       <Star fill={diffColors.updated} />
-      {`${updated} updated ${pluralise(updated, 'field')}`}
+      {`${updated} ${compareText.updated} ${pluralise(updated, 'field')}`}
       <Star fill={diffColors.deleted} />
-      {`${deleted} deleted ${pluralise(deleted, 'field')}`}
+      {`${deleted} ${compareText.deleted} ${pluralise(deleted, 'field')}`}
     </div>
   );
+};
+
+export const compareText = {
+  [ChangeType.UPDATED]: 'Updated',
+  [ChangeType.DELETED]: 'Deleted',
+  [ChangeType.CREATED]: 'New',
 };
 
 const defaultCount = { updated: 0, created: 0, deleted: 0 };

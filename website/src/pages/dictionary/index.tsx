@@ -37,6 +37,7 @@ import FileFilters, {
   tierFilter,
   comparisonFilter,
   defaultSearchParams,
+  DEFAULT_FILTER,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
@@ -105,6 +106,10 @@ const preloadedDictionary = { data: data.dictionary, version: data.currentVersio
 
 // one version (that has been downloaded) behind latest version
 const preloadedDiff = require('../../../static/data/schemas/diffs/0.7/0.7-diff-0.8.json');
+const initActiveSchemas = createSchemasWithDiffs(
+  preloadedDictionary.data.schemas,
+  preloadedDiff.schemas,
+);
 
 // versions
 const versions: string[] = data.versions;
@@ -119,12 +124,13 @@ function DictionaryPage() {
   } = context;
 
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
-  const diffVersions: string[] = versions.filter((v) => v !== version);
-  const [diffVersion, setDiffVersion] = useState<string>(diffVersions[0]);
+
+  // set diff version to 2nd version to compare to
+  const [diffVersion, setDiffVersion] = useState<string>(versions[1]);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
-  const [activeSchemas, setActiveSchemas] = useState<Schema[]>([]);
+  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(initActiveSchemas);
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
@@ -179,8 +185,6 @@ function DictionaryPage() {
         .filter((schema) => schema.fields.length > 0),
     [activeSchemas, isDiffShowing, searchParams],
   );
-
-  console.log('schemas::', 'active', activeSchemas, 'filtered', filteredSchemas);
 
   const comparisonCounts = generateComparisonCounts(filteredSchemas);
   const fileCount = filteredSchemas.length;
@@ -263,7 +267,7 @@ function DictionaryPage() {
                         margin-left: 10px;
                       `}
                       value={diffVersion}
-                      versions={diffVersions}
+                      versions={versions}
                       onChange={setDiffVersion}
                     />
                     <CompareLegend
@@ -272,7 +276,14 @@ function DictionaryPage() {
                         margin: 0 10px;
                       `}
                     />
-                    <Button variant="secondary" size="sm" onClick={() => setIsDiffShowing(false)}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => {
+                        setIsDiffShowing(false);
+                        setSearchParams({ ...searchParams, comparison: DEFAULT_FILTER.value });
+                      }}
+                    >
                       <Icon
                         name="times"
                         height="8px"
@@ -328,7 +339,11 @@ function DictionaryPage() {
                     <FileFilters
                       tiers={filters.tiers.map(generateFilter)}
                       attributes={filters.attributes.map(generateFilter)}
-                      comparisons={filters.comparison.map(generateComparisonFilter)}
+                      comparisons={
+                        version === diffVersion
+                          ? []
+                          : filters.comparison.map(generateComparisonFilter)
+                      }
                       isDiffShowing={isDiffShowing}
                       searchParams={searchParams}
                       onFilter={(search) => setSearchParams(search)}

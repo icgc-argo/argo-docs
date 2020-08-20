@@ -20,9 +20,9 @@
 
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Fragment } from 'react';
 import Table from '../Table';
-import Tag, { TagVariant, TAG_DISPLAY_NAME } from '../Tag';
+import Tag, { TagVariant, TAG_DISPLAY_NAME, TagContainer } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import CodeList, { Code } from './CodeList';
@@ -43,7 +43,9 @@ import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
 import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
-import { ChangeType } from '../../../types';
+import { ChangeType, Schema } from '../../../types';
+import Button from '../Button';
+import { compareText } from '../CompareLegend';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -91,41 +93,57 @@ const FileExample = ({ name }) => (
   </div>
 );
 
-const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
-  <div css={css``}>
-    <div
-      css={css`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-bottom: 11px;
-      `}
-    >
-      <HeaderName name={name} />
-      <FieldsTag fieldCount={fieldCount} />
-    </div>
+const styleSchemaDiff = (theme, changeType) =>
+  changeType !== ChangeType.NONE && changeType !== ChangeType.UPDATED
+    ? css`
+        > div,
+        h3 {
+          padding: 2px;
+          text-decoration: ${changeType === ChangeType.DELETED && 'line-through'};
+          background: ${theme.diffColors.schemaField[changeType]};
+          width: fit-content;
+        }
+      `
+    : null;
 
-    <div
-      css={css`
-        margin-bottom: 11px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-      `}
-    >
-      <DataTypography>
-        {diff && diff.description ? (
-          <div>
-            <div css={updatedStyle}>{diff.description.left}</div>
-            <div css={deletedStyle}>{diff.description.right}</div>
-          </div>
-        ) : description ? (
-          description
-        ) : null}
-        <FileExample name={name} />
-      </DataTypography>
-      {/* <DownloadTooltip disabled={isLatestSchema}>
+type SchemaMetaProps = { schema: Schema; fieldCount: number; isDiffShowing: boolean };
+const SchemaMeta = ({ schema, fieldCount, isDiffShowing }: SchemaMetaProps) => {
+  const { name, changeType, description, diff } = schema;
+  return (
+    <div css={(theme) => isDiffShowing && styleSchemaDiff(theme, changeType)}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 11px;
+        `}
+      >
+        <HeaderName name={name} />
+        <FieldsTag fieldCount={fieldCount} />
+      </div>
+
+      <div
+        css={css`
+          margin-bottom: 11px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+        `}
+      >
+        <DataTypography>
+          {diff && diff.description ? (
+            <div>
+              <div css={updatedStyle}>{diff.description.left}</div>
+              <div css={deletedStyle}>{diff.description.right}</div>
+            </div>
+          ) : description ? (
+            description
+          ) : null}
+          <FileExample name={name} />
+        </DataTypography>
+        {/* <DownloadTooltip disabled={isLatestSchema}>
           <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
             <Button
               disabled={!isLatestSchema}
@@ -139,9 +157,10 @@ const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
             </Button>
           </div>
         </DownloadTooltip> */}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /**
  *
@@ -162,7 +181,17 @@ const getTableData = (isDiffShowing, fields) =>
         })
         .map((field) => ({ ...field, changeType: null, diff: null }));
 
-const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
+const SchemaView = ({
+  schema,
+  menuItem,
+  isLatestSchema,
+  isDiffShowing,
+}: {
+  schema: Schema;
+  menuItem: any;
+  isLatestSchema: boolean;
+  isDiffShowing: boolean;
+}) => {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -204,14 +233,24 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     fieldName: string;
   }>(null);
 
-  const CellContentCenter = styled('div')`
+  const ComparisonCell = styled('div')`
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    align-items: left;
     position: relative;
     top: 8px;
+    font-weight: bold;
+    box-sizing: unset;
+    svg {
+      margin-right: 3px;
+      flex-shrink: 0;
+    }
+
+    span {
+      position: relative;
+      top: 1px;
+    }
   `;
 
   const StarIcon = (props) => <Icon name="star" width="16px" height="16px" {...props} />;
@@ -219,25 +258,18 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   const cols = [
     {
       id: 'compare',
-      headerClassName: 'reset',
-      Header: (
-        <CellContentCenter
-          css={css`
-            top: 2px;
-          `}
-        >
-          <StarIcon fill="#babcc2" />
-        </CellContentCenter>
-      ),
+      Header: 'Comparison',
+
       Cell: ({ original: { diff, changeType } }) => {
         return changeType && changeType !== ChangeType.NONE ? (
-          <CellContentCenter>
+          <ComparisonCell>
             <StarIcon fill={theme.diffColors.star[changeType]} />
-          </CellContentCenter>
+            <span>{compareText[changeType]}</span>
+          </ComparisonCell>
         ) : null;
       },
       resizable: false,
-      width: 40,
+      width: 82,
       headerStyle: { textAlign: 'center' },
     },
     {
@@ -302,31 +334,41 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         const hasDiff =
           checkDiff(diff, ['meta.dependsOn']) || checkDiff(diff, ['restrictions.required']);
 
-        const attribute = getAttribute(restrictions.required, meta.dependsOn);
+        const attributes = getAttributes(restrictions.required, meta.dependsOn);
         const diffRequired = get(diff, 'restrictions.required', null);
         const diffDependsOn = get(diff, 'meta.dependsOn', null);
 
-        return changeType === ChangeType.UPDATED && hasDiff ? (
-          <DiffText
-            newText={
-              TAG_DISPLAY_NAME[
-                getAttribute(
-                  diffRequired && diffRequired.right,
-                  diffDependsOn && diffDependsOn.right,
-                )
-              ]
-            }
-            oldText={
-              TAG_DISPLAY_NAME[
-                getAttribute(diffRequired && diffRequired.left, diffDependsOn && diffDependsOn.left)
-              ]
-            }
-          />
-        ) : changeType === ChangeType.DELETED && attribute ? (
-          TAG_DISPLAY_NAME[attribute]
-        ) : attribute ? (
-          <Tag variant={attribute} />
-        ) : null;
+        const leftAttributes = getAttributes(
+          diffRequired && diffRequired.left,
+          diffDependsOn && diffDependsOn.left,
+        );
+        const rightAttributes = getAttributes(
+          diffRequired && diffRequired.right,
+          diffDependsOn && diffDependsOn.right,
+        );
+
+        return (
+          <TagContainer>
+            {changeType === ChangeType.UPDATED && hasDiff ? (
+              <div>
+                <div css={rightAttributes.length > 0 && createdStyle}>
+                  {rightAttributes.map((att) => (
+                    <div key={att}>{TAG_DISPLAY_NAME[att]}</div>
+                  ))}
+                </div>
+                <div css={leftAttributes.length > 0 && deletedStyle}>
+                  {leftAttributes.map((att) => (
+                    <div key={att}>{TAG_DISPLAY_NAME[att]}</div>
+                  ))}
+                </div>
+              </div>
+            ) : changeType === ChangeType.DELETED && attributes.length > 0 ? (
+              attributes.map((attribute) => TAG_DISPLAY_NAME[attribute])
+            ) : attributes.length > 0 ? (
+              attributes.map((attribute) => <Tag variant={attribute} key={attribute} />)
+            ) : null}
+          </TagContainer>
+        );
       },
       style: { padding: '8px' },
       width: 102,
@@ -422,14 +464,18 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
             ) : (
               notes
             )}
-            {(script || diffScript) && (
+            {script && changeType === ChangeType.DELETED ? (
+              <Button variant="secondary" size="sm" disabled>
+                View Scripts
+              </Button>
+            ) : script || diffScript ? (
               <Script
                 name={name}
                 script={script}
                 diff={diffScript}
                 showScript={setCurrentShowingScripts}
               />
-            )}
+            ) : null}
           </div>
         );
       },
@@ -455,8 +501,12 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
 
-  const getAttribute = (required: boolean, dependsOn: boolean): TagVariant =>
-    required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
+  const getAttributes = (required: boolean, dependsOn: boolean): TagVariant[] => {
+    const attributes = [];
+    if (required) attributes.push(TagVariant.REQUIRED);
+    if (dependsOn) attributes.push(TagVariant.CONDITIONAL);
+    return attributes;
+  };
 
   const getFormattedCodes = (codeList) => {
     const createdCodes = get(codeList, 'data.added', []);
@@ -475,7 +525,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
             ? ChangeType.CREATED
             : null;
 
-          return <Code code={code} format={formatter} />;
+          return <Code key={code} code={code} format={formatter} />;
         })}
       </div>
     );
@@ -516,13 +566,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
         </ModalPortal>
       )}
 
-      <SchemaMeta
-        changeType={schema.changeType}
-        description={schema.description}
-        name={schema.name}
-        fieldCount={schema.fields.length}
-        diff={schema.diff}
-      />
+      <SchemaMeta isDiffShowing={isDiffShowing} fieldCount={schema.fields.length} schema={schema} />
 
       <div ref={containerRef}>
         <Table
@@ -530,6 +574,7 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
             const changeType = rowInfo.original.changeType;
             return changeType ? highlightRowDiff(changeType) : {};
           }}
+          withRowBorder
           parentRef={containerRef}
           columns={cols}
           data={tableData}
@@ -546,4 +591,4 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
   );
 };
 
-export default Schema;
+export default SchemaView;
