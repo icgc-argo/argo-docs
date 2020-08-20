@@ -11,6 +11,11 @@ export interface Schema {
   name: string;
   description: string;
   fields: Array<Field>;
+  diff: SchemaDiff;
+}
+
+interface SchemaDiff {
+  description: Diff<string>;
 }
 
 export enum ChangeType {
