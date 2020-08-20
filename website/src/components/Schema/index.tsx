@@ -22,7 +22,7 @@
 import { jsx } from '@emotion/core';
 import React, { useState, useMemo, useEffect, Fragment } from 'react';
 import Table from '../Table';
-import Tag, { TagVariant, TAG_DISPLAY_NAME } from '../Tag';
+import Tag, { TagVariant, TAG_DISPLAY_NAME, TagContainer } from '../Tag';
 import styles from './styles.module.css';
 import DefaultTag, { TAG_VARIANTS } from '@icgc-argo/uikit/Tag';
 import CodeList, { Code } from './CodeList';
@@ -334,31 +334,41 @@ const Schema = ({
         const hasDiff =
           checkDiff(diff, ['meta.dependsOn']) || checkDiff(diff, ['restrictions.required']);
 
-        const attribute = getAttribute(restrictions.required, meta.dependsOn);
+        const attributes = getAttributes(restrictions.required, meta.dependsOn);
         const diffRequired = get(diff, 'restrictions.required', null);
         const diffDependsOn = get(diff, 'meta.dependsOn', null);
 
-        return changeType === ChangeType.UPDATED && hasDiff ? (
-          <DiffText
-            newText={
-              TAG_DISPLAY_NAME[
-                getAttribute(
-                  diffRequired && diffRequired.right,
-                  diffDependsOn && diffDependsOn.right,
-                )
-              ]
-            }
-            oldText={
-              TAG_DISPLAY_NAME[
-                getAttribute(diffRequired && diffRequired.left, diffDependsOn && diffDependsOn.left)
-              ]
-            }
-          />
-        ) : changeType === ChangeType.DELETED && attribute ? (
-          TAG_DISPLAY_NAME[attribute]
-        ) : attribute ? (
-          <Tag variant={attribute} />
-        ) : null;
+        const leftAttributes = getAttributes(
+          diffRequired && diffRequired.left,
+          diffDependsOn && diffDependsOn.left,
+        );
+        const rightAttributes = getAttributes(
+          diffRequired && diffRequired.right,
+          diffDependsOn && diffDependsOn.right,
+        );
+
+        return (
+          <TagContainer>
+            {changeType === ChangeType.UPDATED && hasDiff ? (
+              <div>
+                <div css={rightAttributes.length > 0 && createdStyle}>
+                  {rightAttributes.map((att) => (
+                    <div>{TAG_DISPLAY_NAME[att]}</div>
+                  ))}
+                </div>
+                <div css={leftAttributes.length > 0 && deletedStyle}>
+                  {leftAttributes.map((att) => (
+                    <div>{TAG_DISPLAY_NAME[att]}</div>
+                  ))}
+                </div>
+              </div>
+            ) : changeType === ChangeType.DELETED && attributes.length > 0 ? (
+              attributes.map((attribute) => TAG_DISPLAY_NAME[attribute])
+            ) : attributes.length > 0 ? (
+              attributes.map((attribute, i) => <Tag variant={attribute} key={i} />)
+            ) : null}
+          </TagContainer>
+        );
       },
       style: { padding: '8px' },
       width: 102,
@@ -491,8 +501,12 @@ const Schema = ({
     return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
   };
 
-  const getAttribute = (required: boolean, dependsOn: boolean): TagVariant =>
-    required ? TagVariant.REQUIRED : dependsOn ? TagVariant.CONDITIONAL : null;
+  const getAttributes = (required: boolean, dependsOn: boolean): TagVariant[] => {
+    const attributes = [];
+    if (required) attributes.push(TagVariant.REQUIRED);
+    if (dependsOn) attributes.push(TagVariant.CONDITIONAL);
+    return attributes;
+  };
 
   const getFormattedCodes = (codeList) => {
     const createdCodes = get(codeList, 'data.added', []);
