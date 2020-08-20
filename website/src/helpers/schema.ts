@@ -12,14 +12,46 @@ import isEmpty from 'lodash/isEmpty';
  * Deleted fields will be present
  * Created fields/schemas need to be added explicitly as they have no related field/schema
  */
-export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
-  let schemasToAdd = Object.keys(diffs) || [];
+export const createSchemasWithDiffs = (schemas, diffs): ISchema[] => {
+  const { updatedSchemas, createdSchemas, deletedSchemas } = Object.keys(diffs).reduce(
+    (acc, schemaName) => {
+      const schema = diffs[schemaName];
+      const { created, deleted, updated } = schema;
+      const currentSchema = { ...schema, name: schemaName };
 
-  const schemaWithUpdates = schemas.map((schema) => {
-    const schemaName = schema.name;
-    const schemaDiff = diffs[schemaName];
-    schemasToAdd = schemasToAdd.filter((s) => s !== schemaName);
+      // updated schema may have deleted and created fields too
+      if (!isEmpty(updated)) {
+        return {
+          ...acc,
+          updatedSchemas: acc.updatedSchemas.concat({
+            ...currentSchema,
+            changeType: ChangeType.UPDATED,
+          }),
+        };
+      } else if (!isEmpty(deleted) && isEmpty(updated) && isEmpty(created)) {
+        return {
+          ...acc,
+          deletedSchemas: acc.deletedSchemas.concat({
+            ...currentSchema,
+            changeType: ChangeType.DELETED,
+          }),
+        };
+      } else if (!isEmpty(created) && isEmpty(updated) && isEmpty(deleted)) {
+        return {
+          ...acc,
+          createdSchemas: acc.createdSchemas.concat({
+            ...currentSchema,
+            changeType: ChangeType.CREATED,
+          }),
+        };
+      }
+      return acc;
+    },
+    { updatedSchemas: [], createdSchemas: [], deletedSchemas: [] },
+  );
 
+  const schemasWithUpdates = updatedSchemas.map((schemaDiff) => {
+    const schema = schemas.find((schema) => schema.name === schemaDiff.name);
     const { updated, created } = schemaDiff;
     // add diffs to existing fields
     const fieldsWithDiffs = schema.fields.map((field) => {
@@ -40,7 +72,7 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
       return { ...field, diff, changeType };
     });
 
-    // newly created fields won't exist already, add them
+    // deleted fields won't exist already, add them
     const newFields = Object.keys(schemaDiff.deleted).map((key) => ({
       ...schemaDiff.deleted[key],
       changeType: ChangeType.DELETED,
@@ -53,29 +85,22 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
     return { ...schema, fields };
   });
 
-  // add created and deleted schemas
-  const newSchemas = schemasToAdd.map((schemaName) => {
-    const diffSchema = diffs[schemaName];
-    const changeType = !isEmpty(diffSchema.created)
-      ? ChangeType.CREATED
-      : !isEmpty(diffSchema.deleted)
-      ? ChangeType.DELETED
-      : !isEmpty(diffSchema.updated)
-      ? ChangeType.UPDATED
-      : ChangeType.NONE;
-
-    const allFields = { ...diffSchema.created, ...diffSchema.deleted };
+  // add created and deleted schemas, add changeType field
+  const schemasToAdd = [...createdSchemas, ...deletedSchemas].map((schema) => {
+    const allFields = { ...schema.created, ...schema.deleted };
     const fields = Object.keys(allFields).map((f) => allFields[f]);
 
     return {
-      name: schemaName,
-      changeType,
-      description: diffSchema.description || '',
+      name: schema.name,
+      changeType: schema.changeType,
+      description:
+        schema.description ||
+        'This is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donor',
       fields,
     };
   });
 
-  return [...schemaWithUpdates, ...newSchemas];
+  return [...schemasWithUpdates, ...schemasToAdd];
 };
 
 async function fetchDictionary(version) {

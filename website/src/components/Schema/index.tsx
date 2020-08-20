@@ -43,7 +43,7 @@ import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
 import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
-import { ChangeType } from '../../../types';
+import { ChangeType, Schema as SchemaType } from '../../../types';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -91,8 +91,29 @@ const FileExample = ({ name }) => (
   </div>
 );
 
-const SchemaMeta = ({ name, fieldCount, changeType, description, diff }) => (
-  <div css={css``}>
+const styleSchemaDiff = (theme, changeType) =>
+  changeType !== ChangeType.NONE && changeType !== ChangeType.UPDATED
+    ? css`
+        > div,
+        h3 {
+          padding: 2px;
+          text-decoration: ${changeType === ChangeType.DELETED && 'line-through'};
+          background: ${theme.diffColors.schemaField[changeType]};
+          width: fit-content;
+        }
+      `
+    : null;
+
+type ISchemaMeta = Omit<SchemaType, 'fields'> & { fieldCount: number; isDiffShowing: boolean };
+const SchemaMeta = ({
+  name,
+  fieldCount,
+  changeType,
+  description,
+  diff,
+  isDiffShowing,
+}: ISchemaMeta) => (
+  <div css={(theme) => isDiffShowing && styleSchemaDiff(theme, changeType)}>
     <div
       css={css`
         display: flex;
@@ -162,7 +183,17 @@ const getTableData = (isDiffShowing, fields) =>
         })
         .map((field) => ({ ...field, changeType: null, diff: null }));
 
-const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
+const Schema = ({
+  schema,
+  menuItem,
+  isLatestSchema,
+  isDiffShowing,
+}: {
+  schema: Schema;
+  menuItem: any;
+  isLatestSchema: boolean;
+  isDiffShowing: boolean;
+}) => {
   const context = useDocusaurusContext();
   const {
     siteConfig: {
@@ -481,6 +512,8 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
     );
   };
 
+  const { changeType, description, name: schemaName, fields, diff } = schema;
+
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       {currentShowingScript && (
@@ -517,11 +550,12 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
       )}
 
       <SchemaMeta
-        changeType={schema.changeType}
-        description={schema.description}
-        name={schema.name}
-        fieldCount={schema.fields.length}
-        diff={schema.diff}
+        isDiffShowing={isDiffShowing}
+        changeType={changeType}
+        description={description}
+        name={schemaName}
+        fieldCount={fields.length}
+        diff={diff}
       />
 
       <div ref={containerRef}>
