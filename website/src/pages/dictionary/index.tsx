@@ -120,8 +120,8 @@ function DictionaryPage() {
   } = context;
 
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
-  const diffVersions: string[] = versions.filter((v) => v !== version);
-  const [diffVersion, setDiffVersion] = useState<string>(diffVersions[0]);
+
+  const [diffVersion, setDiffVersion] = useState<string>(versions[1]);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
@@ -264,7 +264,7 @@ function DictionaryPage() {
                         margin-left: 10px;
                       `}
                       value={diffVersion}
-                      versions={diffVersions}
+                      versions={versions}
                       onChange={setDiffVersion}
                     />
                     <CompareLegend
