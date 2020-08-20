@@ -20,7 +20,7 @@
 
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Fragment } from 'react';
 import Table from '../Table';
 import Tag, { TagVariant, TAG_DISPLAY_NAME } from '../Tag';
 import styles from './styles.module.css';
@@ -44,6 +44,7 @@ import { css } from '@emotion/core';
 import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
 import { ChangeType, Schema as SchemaType } from '../../../types';
+import Button from '../Button';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -453,14 +454,18 @@ const Schema = ({
             ) : (
               notes
             )}
-            {(script || diffScript) && (
+            {script && changeType === ChangeType.DELETED ? (
+              <Button variant="secondary" size="sm" disabled>
+                View Scripts
+              </Button>
+            ) : script || diffScript ? (
               <Script
                 name={name}
                 script={script}
                 diff={diffScript}
                 showScript={setCurrentShowingScripts}
               />
-            )}
+            ) : null}
           </div>
         );
       },

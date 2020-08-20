@@ -93,9 +93,7 @@ export const createSchemasWithDiffs = (schemas, diffs): ISchema[] => {
     return {
       name: schema.name,
       changeType: schema.changeType,
-      description:
-        schema.description ||
-        'This is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donorThis is a temporary very long description for donor',
+      description: schema.description || '',
       fields,
     };
   });
