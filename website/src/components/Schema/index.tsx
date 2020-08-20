@@ -468,14 +468,14 @@ const Schema = ({ schema, menuItem, isLatestSchema, isDiffShowing }) => {
 
     return (
       <div>
-        {allCodes.map((code) => {
+        {allCodes.map((code, i) => {
           const formatter = deletedCodes.includes(code)
             ? ChangeType.DELETED
             : createdCodes.includes(code)
             ? ChangeType.CREATED
             : null;
 
-          return <Code code={code} format={formatter} />;
+          return <Code key={i} code={code} format={formatter} />;
         })}
       </div>
     );

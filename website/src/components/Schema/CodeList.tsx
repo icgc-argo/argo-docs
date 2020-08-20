@@ -57,7 +57,7 @@ const CodeList = ({
 }) => {
   const maxEnumLength = 5;
 
-  const fullOutput = codeList.map((code) => <Code code={code} format={null} />);
+  const fullOutput = codeList.map((code, i) => <Code key={i} code={code} format={null} />);
 
   return (
     <div className={styles.codeList}>
