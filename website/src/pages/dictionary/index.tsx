@@ -37,6 +37,7 @@ import FileFilters, {
   tierFilter,
   comparisonFilter,
   defaultSearchParams,
+  DEFAULT_FILTER,
 } from '../../components/FileFilters';
 import TreeView from '../../components/TreeView';
 import startCase from 'lodash/startCase';
@@ -272,7 +273,14 @@ function DictionaryPage() {
                         margin: 0 10px;
                       `}
                     />
-                    <Button variant="secondary" size="sm" onClick={() => setIsDiffShowing(false)}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => {
+                        setIsDiffShowing(false);
+                        setSearchParams({ ...searchParams, comparison: DEFAULT_FILTER.value });
+                      }}
+                    >
                       <Icon
                         name="times"
                         height="8px"
