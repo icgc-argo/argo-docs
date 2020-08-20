@@ -45,6 +45,7 @@ import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
 import { ChangeType, Schema as SchemaType } from '../../../types';
 import Button from '../Button';
+import { compareText } from '../CompareLegend';
 
 const formatFieldType = (value) => {
   switch (value) {
@@ -236,14 +237,24 @@ const Schema = ({
     fieldName: string;
   }>(null);
 
-  const CellContentCenter = styled('div')`
+  const ComparisonCell = styled('div')`
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    align-items: left;
     position: relative;
     top: 8px;
+    font-weight: bold;
+    box-sizing: unset;
+    svg {
+      margin-right: 3px;
+      flex-shrink: 0;
+    }
+
+    span {
+      position: relative;
+      top: 1px;
+    }
   `;
 
   const StarIcon = (props) => <Icon name="star" width="16px" height="16px" {...props} />;
@@ -251,25 +262,18 @@ const Schema = ({
   const cols = [
     {
       id: 'compare',
-      headerClassName: 'reset',
-      Header: (
-        <CellContentCenter
-          css={css`
-            top: 2px;
-          `}
-        >
-          <StarIcon fill="#babcc2" />
-        </CellContentCenter>
-      ),
+      Header: 'Comparison',
+
       Cell: ({ original: { diff, changeType } }) => {
         return changeType && changeType !== ChangeType.NONE ? (
-          <CellContentCenter>
+          <ComparisonCell>
             <StarIcon fill={theme.diffColors.star[changeType]} />
-          </CellContentCenter>
+            <span>{compareText[changeType]}</span>
+          </ComparisonCell>
         ) : null;
       },
       resizable: false,
-      width: 40,
+      width: 82,
       headerStyle: { textAlign: 'center' },
     },
     {
@@ -481,7 +485,7 @@ const Schema = ({
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ];
+  ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef();
 
