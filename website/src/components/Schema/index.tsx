@@ -357,19 +357,19 @@ const Schema = ({
               <div>
                 <div css={rightAttributes.length > 0 && createdStyle}>
                   {rightAttributes.map((att) => (
-                    <div>{TAG_DISPLAY_NAME[att]}</div>
+                    <div key={att}>{TAG_DISPLAY_NAME[att]}</div>
                   ))}
                 </div>
                 <div css={leftAttributes.length > 0 && deletedStyle}>
                   {leftAttributes.map((att) => (
-                    <div>{TAG_DISPLAY_NAME[att]}</div>
+                    <div key={att}>{TAG_DISPLAY_NAME[att]}</div>
                   ))}
                 </div>
               </div>
             ) : changeType === ChangeType.DELETED && attributes.length > 0 ? (
               attributes.map((attribute) => TAG_DISPLAY_NAME[attribute])
             ) : attributes.length > 0 ? (
-              attributes.map((attribute, i) => <Tag variant={attribute} key={i} />)
+              attributes.map((attribute) => <Tag variant={attribute} key={attribute} />)
             ) : null}
           </TagContainer>
         );
@@ -522,14 +522,14 @@ const Schema = ({
 
     return (
       <div>
-        {allCodes.map((code, i) => {
+        {allCodes.map((code) => {
           const formatter = deletedCodes.includes(code)
             ? ChangeType.DELETED
             : createdCodes.includes(code)
             ? ChangeType.CREATED
             : null;
 
-          return <Code key={i} code={code} format={formatter} />;
+          return <Code key={code} code={code} format={formatter} />;
         })}
       </div>
     );

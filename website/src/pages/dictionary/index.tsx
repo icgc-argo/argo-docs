@@ -125,6 +125,7 @@ function DictionaryPage() {
 
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
 
+  // set diff version to 2nd version to compare to
   const [diffVersion, setDiffVersion] = useState<string>(versions[1]);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);

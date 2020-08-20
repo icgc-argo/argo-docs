@@ -22,7 +22,7 @@ import { jsx, css } from '@emotion/core';
 import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
-import { TextChange, DiffTextSegment } from './DiffText';
+import { DiffTextSegment } from './DiffText';
 
 const ToggleMore = ({ children, onToggle }) => (
   <div
@@ -57,7 +57,7 @@ const CodeList = ({
 }) => {
   const maxEnumLength = 5;
 
-  const fullOutput = codeList.map((code, i) => <Code key={i} code={code} format={null} />);
+  const fullOutput = codeList.map((code) => <Code key={code} code={code} format={null} />);
 
   return (
     <div className={styles.codeList}>

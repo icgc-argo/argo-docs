@@ -5,12 +5,12 @@ import Schema from '../Schema';
 
 const Dictionary = ({ schemas, menuContents, isLatestSchema, isDiffShowing }) =>
   schemas.length > 0 ? (
-    schemas.map((schema, i) => {
+    schemas.map((schema) => {
       const menuItem = find(menuContents, { name: startCase(schema.name) });
 
       return (
         <Schema
-          key={i}
+          key={schema.name}
           schema={schema}
           menuItem={menuItem}
           isLatestSchema={isLatestSchema}
