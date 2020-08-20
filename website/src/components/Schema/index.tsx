@@ -471,7 +471,7 @@ const Schema = ({
       },
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-  ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
+  ];
 
   const containerRef = React.createRef();
 
@@ -569,6 +569,7 @@ const Schema = ({
             const changeType = rowInfo.original.changeType;
             return changeType ? highlightRowDiff(changeType) : {};
           }}
+          withRowBorder
           parentRef={containerRef}
           columns={cols}
           data={tableData}
