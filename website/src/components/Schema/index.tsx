@@ -43,7 +43,7 @@ import CodeBlock, { CompareCodeBlock } from '../CodeBlock';
 import { css } from '@emotion/core';
 import { DiffText, deletedStyle, createdStyle, updatedStyle } from './DiffText';
 import union from 'lodash/union';
-import { ChangeType, Schema as SchemaType } from '../../../types';
+import { ChangeType, Schema } from '../../../types';
 import Button from '../Button';
 import { compareText } from '../CompareLegend';
 
@@ -106,49 +106,44 @@ const styleSchemaDiff = (theme, changeType) =>
       `
     : null;
 
-type ISchemaMeta = Omit<SchemaType, 'fields'> & { fieldCount: number; isDiffShowing: boolean };
-const SchemaMeta = ({
-  name,
-  fieldCount,
-  changeType,
-  description,
-  diff,
-  isDiffShowing,
-}: ISchemaMeta) => (
-  <div css={(theme) => isDiffShowing && styleSchemaDiff(theme, changeType)}>
-    <div
-      css={css`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-bottom: 11px;
-      `}
-    >
-      <HeaderName name={name} />
-      <FieldsTag fieldCount={fieldCount} />
-    </div>
+type SchemaMetaProps = { schema: Schema; fieldCount: number; isDiffShowing: boolean };
+const SchemaMeta = ({ schema, fieldCount, isDiffShowing }: SchemaMetaProps) => {
+  const { name, changeType, description, diff } = schema;
+  return (
+    <div css={(theme) => isDiffShowing && styleSchemaDiff(theme, changeType)}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 11px;
+        `}
+      >
+        <HeaderName name={name} />
+        <FieldsTag fieldCount={fieldCount} />
+      </div>
 
-    <div
-      css={css`
-        margin-bottom: 11px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-      `}
-    >
-      <DataTypography>
-        {diff && diff.description ? (
-          <div>
-            <div css={updatedStyle}>{diff.description.left}</div>
-            <div css={deletedStyle}>{diff.description.right}</div>
-          </div>
-        ) : description ? (
-          description
-        ) : null}
-        <FileExample name={name} />
-      </DataTypography>
-      {/* <DownloadTooltip disabled={isLatestSchema}>
+      <div
+        css={css`
+          margin-bottom: 11px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+        `}
+      >
+        <DataTypography>
+          {diff && diff.description ? (
+            <div>
+              <div css={updatedStyle}>{diff.description.left}</div>
+              <div css={deletedStyle}>{diff.description.right}</div>
+            </div>
+          ) : description ? (
+            description
+          ) : null}
+          <FileExample name={name} />
+        </DataTypography>
+        {/* <DownloadTooltip disabled={isLatestSchema}>
           <div style={{ marginLeft: '50px', alignSelf: 'flex-start' }}>
             <Button
               disabled={!isLatestSchema}
@@ -162,9 +157,10 @@ const SchemaMeta = ({
             </Button>
           </div>
         </DownloadTooltip> */}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /**
  *
@@ -185,7 +181,7 @@ const getTableData = (isDiffShowing, fields) =>
         })
         .map((field) => ({ ...field, changeType: null, diff: null }));
 
-const Schema = ({
+const SchemaView = ({
   schema,
   menuItem,
   isLatestSchema,
@@ -535,8 +531,6 @@ const Schema = ({
     );
   };
 
-  const { changeType, description, name: schemaName, fields, diff } = schema;
-
   return (
     <div ref={menuItem.contentRef} data-menu-title={menuItem.name} className={styles.schema}>
       {currentShowingScript && (
@@ -572,14 +566,7 @@ const Schema = ({
         </ModalPortal>
       )}
 
-      <SchemaMeta
-        isDiffShowing={isDiffShowing}
-        changeType={changeType}
-        description={description}
-        name={schemaName}
-        fieldCount={fields.length}
-        diff={diff}
-      />
+      <SchemaMeta isDiffShowing={isDiffShowing} fieldCount={schema.fields.length} schema={schema} />
 
       <div ref={containerRef}>
         <Table
@@ -604,4 +591,4 @@ const Schema = ({
   );
 };
 
-export default Schema;
+export default SchemaView;
