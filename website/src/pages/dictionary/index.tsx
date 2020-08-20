@@ -336,7 +336,11 @@ function DictionaryPage() {
                     <FileFilters
                       tiers={filters.tiers.map(generateFilter)}
                       attributes={filters.attributes.map(generateFilter)}
-                      comparisons={filters.comparison.map(generateComparisonFilter)}
+                      comparisons={
+                        version === diffVersion
+                          ? []
+                          : filters.comparison.map(generateComparisonFilter)
+                      }
                       isDiffShowing={isDiffShowing}
                       searchParams={searchParams}
                       onFilter={(search) => setSearchParams(search)}
