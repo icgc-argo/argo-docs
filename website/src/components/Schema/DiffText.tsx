@@ -4,7 +4,7 @@ import React from 'react';
 import { ChangeType } from '../../../types';
 
 const padding = css`
-  padding: 2px;
+  padding: 0 2px;
 `;
 
 export const deletedStyle = css`
@@ -27,7 +27,16 @@ export const createdStyle = css`
 export const DiffText = ({ oldText, newText }: { oldText: string; newText: string }) => (
   <div>
     {oldText ? <div css={deletedStyle}>{oldText}</div> : null}
-    {newText ? <div css={createdStyle}>{newText}</div> : null}
+    {newText ? (
+      <div
+        css={css`
+          margin-top: 4px;
+          ${createdStyle}
+        `}
+      >
+        {newText}
+      </div>
+    ) : null}
   </div>
 );
 
