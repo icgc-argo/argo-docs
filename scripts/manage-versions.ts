@@ -45,7 +45,7 @@ function ensureDirectoryExistence(path) {
 
 function printConfig() {
   console.log(`${chalk.yellow('Lectern Root')}: ${apiRoot}`);
-  console.log(`${chalk.yellow('Dictionary Name')}: ${dictionaryName}`);
+  console.log(`${chalk.yellow('Dictionary Name')}: ${dictionaryName}\n`);
 }
 
 async function printVersionsLists() {
@@ -53,9 +53,9 @@ async function printVersionsLists() {
 
   const newVersions = versions.filter((item) => !currentVersions.includes(item));
 
-  console.log(`\n${chalk.yellow('All Versions')}: ${versions.join(', ')}`);
-  console.log(`${chalk.yellow('Current Versions')}: ${currentVersions.join(', ')}`);
-  console.log(`\n${chalk.yellow('New Versions')}: ${newVersions.join(', ')}`);
+  console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
+  console.log(`\n${chalk.yellow('Current Versions:')}\n${currentVersions.join('\n')}`);
+  console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
   return newVersions;
 }
 
@@ -118,15 +118,31 @@ async function fetchAndSaveDiffsForVersion(version) {
   }
 }
 
-/* Lectern API */
+const versionSort = (a, b) => {
+  // sort version strings eg. 1.0, 0.10, 0.1
+  const [x1, y1] = a.split('.').map((x) => Number(x));
+  const [x2, y2] = b.split('.').map((x) => Number(x));
+  if (x1 > x2) {
+    return 1;
+  } else if (x2 > x1) {
+    return -1;
+  } else {
+    if (y1 > y2) {
+      return 1;
+    } else if (y2 > y1) {
+      return -1;
+    }
+  }
+};
 
+/* Lectern API */
 async function fetchDictionaryVersionsList() {
-  console.log(chalk.cyan('\nfetching dictionary versions list...'));
+  console.log(chalk.cyan('\nFetching dictionary versions list...'));
   const response = await axios.get(`${apiRoot}/dictionaries`);
   return response.data
     .filter((item) => item.name === dictionaryName)
     .map((item) => item.version)
-    .sort((a, b) => (a.version > b.version ? 1 : -1));
+    .sort(versionSort);
 }
 
 async function fetchDictionaryForVersion(version) {
