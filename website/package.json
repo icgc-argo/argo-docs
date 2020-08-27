@@ -4,7 +4,8 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy"
+    "deploy": "docusaurus deploy",
+    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts"
   },
   "prettier": {
     "printWidth": 100,
@@ -12,22 +13,31 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@babel/core": "^7.7.2",
-    "@docusaurus/core": "^2.0.0-alpha.35",
-    "@docusaurus/preset-classic": "2.0.0-alpha.37",
-    "@icgc-argo/uikit": "^1.0.11",
+    "@docusaurus/core": "^2.0.0-alpha.58",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.58",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@icgc-argo/uikit": "^1.7.0",
     "axios": "^0.19.0",
     "clipboard": "^2.0.4",
     "docsearch.js": "^2.6.3",
     "emotion": "^10.0.27",
+    "emotion-theming": "^10.0.27",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-zoom-pan-pinch": "^1.6.1"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.2",
+    "chai": "^4.2.0",
     "commander": "^4.1.0",
     "dotenv-webpack": "^1.7.0",
-    "svg-inline-loader": "^0.8.0"
+    "mocha": "^8.1.1",
+    "svg-inline-loader": "^0.8.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   },
   "browserslist": {
     "production": [

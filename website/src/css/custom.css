@@ -345,7 +345,7 @@ div.menu {
   padding: 0px;
 }
 
-.contents.contents__left-border {
+.table-of-contents.table-of-contents__left-border {
   color: #045093;
   border-left: 2px solid #0774d3;
   padding: 0px;
@@ -353,27 +353,27 @@ div.menu {
   color: #717171;
   line-height: 16px;
 }
-.contents.contents__left-border li {
+.table-of-contents.table-of-contents__left-border li {
   margin: 0px;
 }
-.contents.contents__left-border ul {
+.table-of-contents.table-of-contents__left-border ul {
   padding: 0px;
 }
-.contents.contents__left-border li ul a.contents__link {
+.table-of-contents.table-of-contents__left-border li ul a.table-of-contents__link {
   padding-left: 24px;
 }
-.contents.contents__left-border .contents__link {
+.table-of-contents.table-of-contents__left-border .table-of-contents__link {
   text-decoration: none;
   display: block;
   padding: 8px 12px 8px 18px;
   max-width: 200px;
 }
-.contents.contents__left-border .contents__link--active {
+.table-of-contents.table-of-contents__left-border .table-of-contents__link--active {
   color: #045093;
   background-color: #e6f1fa;
   font-weight: 600;
 }
-.contents.contents__left-border .contents__link:hover {
+.table-of-contents.table-of-contents__left-border .table-of-contents__link:hover {
   background-color: #e6f1fa;
   color: #151c3d;
   background-color: #f2f2f8;

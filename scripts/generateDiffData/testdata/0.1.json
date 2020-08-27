@@ -1,0 +1,202 @@
+{
+  "schemas": [
+    {
+      "name": "sample_registration",
+      "description": "The collection of data elements required to register the required Donor-Specimen-Sample data to the ARGO Data Platform. Registration of samples is required before molecular and clinical data submission can proceed.",
+      "fields": [
+        {
+          "name": "program_id",
+          "valueType": "string",
+          "description": "Unique identifier of the ARGO program.",
+          "meta": {
+            "validationDependency": true,
+            "primaryId": true,
+            "examples": "TEST-CA",
+            "notes": "This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.",
+            "displayName": "Program ID"
+          },
+          "restrictions": {
+            "required": true,
+            "script": [
+              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+            ]
+          }
+        },
+        {
+          "name": "submitter_donor_id",
+          "valueType": "string",
+          "description": "Unique identifier of the donor, assigned by the data provider.",
+          "meta": {
+            "validationDependency": true,
+            "primaryId": true,
+            "examples": "90234,BLD_donor_89,AML-90",
+            "displayName": "Submitter Donor ID",
+            "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
+          }
+        },
+        {
+          "name": "gender",
+          "valueType": "string",
+          "description": "Description of the donor self-reported gender. Gender is described as the assemblage of properties that distinguish people on the basis of their societal roles.",
+          "meta": {
+            "validationDependency": true,
+            "core": true,
+            "displayName": "Gender"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["Female", "Other"]
+          }
+        },
+        {
+          "name": "submitter_specimen_id",
+          "valueType": "string",
+          "description": "Unique identifier of the specimen, assigned by the data provider.",
+          "meta": {
+            "validationDependency": true,
+            "primaryId": true,
+            "examples": "LAML_PO,00445,THY_099-tumour",
+            "displayName": "Submitter Specimen ID",
+            "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
+          },
+          "restrictions": {
+            "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
+          }
+        },
+        {
+          "name": "specimen_tissue_source",
+          "valueType": "string",
+          "description": "Tissue source of the biospecimen.",
+          "meta": {
+            "validationDependency": true,
+            "core": true,
+            "displayName": "Specimen Tissue Source"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["Blood derived - bone marrow", "Bone marrow", "Spleen", "Urine"]
+          }
+        },
+        {
+          "name": "tumour_normal_designation",
+          "valueType": "string",
+          "description": "Description of specimens tumour/normal status for data processing.",
+          "restrictions": {
+            "required": true,
+            "codeList": ["Normal", "Tumour"]
+          },
+          "meta": {
+            "validationDependency": true,
+            "core": true,
+            "displayName": "Tumour Normal Designation"
+          }
+        },
+        {
+          "name": "specimen_type",
+          "valueType": "string",
+          "description": "Description of the kind of specimen that was collected with respect to tumour/normal tissue origin.",
+          "restrictions": {
+            "required": true,
+            "codeList": [
+              "Cell line - derived from normal",
+              "Metastatic tumour - metastasis to distant location",
+              "Metastatic tumour",
+              "Primary tumour",
+              "Recurrent tumour",
+              "Xenograft - derived from tumour cell line"
+            ],
+            "script": [
+              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
+            ]
+          },
+          "meta": {
+            "validationDependency": true,
+            "core": true,
+            "displayName": "Specimen Type"
+          }
+        },
+        {
+          "name": "submitter_sample_id",
+          "valueType": "string",
+          "description": "Unique identifier of the sample, assigned by the data provider.",
+          "meta": {
+            "validationDependency": true,
+            "primaryId": true,
+            "examples": "hnc_12,CCG_34_94583,BRCA47832-3239",
+            "displayName": "Submitter Sample ID",
+            "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
+          }
+        },
+        {
+          "name": "sample_type",
+          "valueType": "string",
+          "description": "Description of the type of molecular sample used for testing.",
+          "meta": {
+            "validationDependency": true,
+            "core": true,
+            "displayName": "Sample Type"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": [
+              "Amplified DNA",
+              "ctDNA",
+              "Other DNA enrichments",
+              "ctDNA-0",
+              "ctDNA-1",
+              "ctDNA-2",
+              "ctDNA-3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "donor",
+      "description": "The collection of data elements related to a specific donor in an ARGO program.",
+      "meta": {
+        "parent": "specimen"
+      },
+      "fields": [
+        {
+          "description": "Indicate the donor's height, in centimeters (cm).",
+          "name": "height",
+          "valueType": "integer",
+          "meta": {
+            "displayName": "Height"
+          }
+        },
+        {
+          "description": "Indicate the donor's weight, in kilograms (kg).",
+          "name": "weight",
+          "valueType": "integer",
+          "meta": {
+            "displayName": "Weight"
+          }
+        },
+        {
+          "description": "Indicate the donor's Body Mass Index (BMI) in kg/m².",
+          "name": "bmi",
+          "valueType": "integer",
+          "meta": {
+            "displayName": "BMI"
+          }
+        }
+      ]
+    }
+  ],
+  "_id": "5f3c2d2b6b4024065103a64e",
+  "name": "diff-test",
+  "version": "0.7",
+  "createdAt": "2020-08-18T19:34:03.019Z",
+  "updatedAt": "2020-08-18T19:34:03.019Z",
+  "__v": 0
+}
