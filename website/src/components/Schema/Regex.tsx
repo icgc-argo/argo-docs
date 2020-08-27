@@ -20,33 +20,33 @@
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import React from 'react';
-import styles from './styles.module.css';
 import HighlightedRegex from './HighlightedRegex';
-import get from 'lodash/get';
-import { ChangeType } from '.';
+import isEmpty from 'lodash/isEmpty';
 
-export const RegexExamples = ({ regex, examples }) => (
-  <div>
-    <br />
-    <div>Examples:</div>
+export const RegexExamples = ({ regex, examples }) => {
+  if (isEmpty(examples)) return null;
+  return (
     <div>
-      {examples.split(',').map((example, i) => {
-        const uriRegex = encodeURIComponent(regex);
-        const uriInput = encodeURIComponent(example);
-        return (
-          <a
-            href={`http://www.regexplanet.com/advanced/xregexp/index.html?regex=${uriRegex}&input=${uriInput}`}
-            target="_blank"
-            key={i}
-          >
-            {`${example}${i < examples.length - 1 ? ', ' : ''}`}
-          </a>
-        );
-      })}
+      <br />
+      <div>Examples:</div>
+      <div>
+        {examples.split(',').map((example, i) => {
+          const uriRegex = encodeURIComponent(regex);
+          const uriInput = encodeURIComponent(example);
+          return (
+            <a
+              href={`http://www.regexplanet.com/advanced/xregexp/index.html?regex=${uriRegex}&input=${uriInput}`}
+              target="_blank"
+              key={i}
+            >
+              {`${example}${i < examples.length - 1 ? ', ' : ''}`}
+            </a>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Regex = ({ regex, style }: { regex: string; style?: any }) => (
   <div

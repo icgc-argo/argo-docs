@@ -401,13 +401,13 @@ const SchemaView = ({
 
         const diffRegex = get(diff, 'restrictions.regex');
         const diffExamples = get(diff, 'meta.examples');
-
         const diffCodeList = get(diff, 'restrictions.codeList');
+
         const formattedCodes = diffCodeList ? getFormattedCodes(diffCodeList) : null;
 
         return (
           <div>
-            {checkDiff(diff, ['restrictions.regex']) || checkDiff(diff, ['meta.examples']) ? (
+            {diffRegex || diffExamples ? (
               <div
                 css={css`
                   div {
@@ -416,12 +416,17 @@ const SchemaView = ({
                 `}
               >
                 <div css={deletedStyle}>
-                  <Regex regex={diffRegex.left} />
-                  <RegexExamples regex={diffRegex.left} examples={diffExamples.left} />
+                  {diffRegex && <Regex regex={diffRegex.left} />}
+                  {diffRegex && diffExamples && (
+                    <RegexExamples regex={diffRegex.left} examples={diffExamples.left} />
+                  )}
                 </div>
+
                 <div css={createdStyle}>
-                  <Regex regex={diffRegex.right} />
-                  <RegexExamples regex={diffRegex.right} examples={diffExamples.right} />
+                  {diffRegex && <Regex regex={diffRegex.right} />}
+                  {diffRegex && diffExamples && (
+                    <RegexExamples regex={diffRegex.right} examples={diffExamples.right} />
+                  )}
                 </div>
               </div>
             ) : (
