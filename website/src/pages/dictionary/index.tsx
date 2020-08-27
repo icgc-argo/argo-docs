@@ -105,7 +105,7 @@ const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
 // one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/0.7/0.7-diff-0.8.json');
+const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
 const initActiveSchemas = createSchemasWithDiffs(
   preloadedDictionary.data.schemas,
   preloadedDiff.schemas,
