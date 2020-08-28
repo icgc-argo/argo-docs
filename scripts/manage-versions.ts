@@ -34,7 +34,6 @@ const constants = require('./constants');
 
 const apiRoot = process.env.LECTERN_ROOT;
 const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
-const currentVersions = require(versionsFilename);
 
 /* Util Functions */
 function ensureDirectoryExistence(path) {
@@ -47,12 +46,11 @@ function printConfig() {
   console.log(`${chalk.yellow('Lectern Root')}: ${apiRoot}`);
   console.log(`${chalk.yellow('Dictionary Name')}: ${dictionaryName}\n`);
 }
-
+//current versions not getting updateds
 async function printVersionsLists() {
+  const currentVersions = fse.readJSONSync(versionsFilename);
   const versions = await fetchDictionaryVersionsList();
-
   const newVersions = versions.filter((item) => !currentVersions.includes(item));
-
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
   console.log(`\n${chalk.yellow('Current Versions:')}\n${currentVersions.join('\n')}`);
   console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
@@ -83,7 +81,7 @@ function saveDataFiles(dictionary, versions) {
   //fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
-async function fetchAndSaveDiffsForVersion(version) {
+async function fetchAndSaveDiffsForVersion(version, currentVersions) {
   for (let i = 0; i < currentVersions.length; i++) {
     const otherVersion = currentVersions[i];
 
@@ -99,9 +97,8 @@ async function fetchAndSaveDiffsForVersion(version) {
     try {
       ensureDirectoryExistence(pathHigh);
       ensureDirectoryExistence(pathLow);
-
       console.log(
-        `${chalk.cyan('saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
+        `${chalk.cyan('Saving diff for versions')} ${high} ${chalk.cyan('and')} ${low} ${chalk.cyan(
           '...',
         )}`,
       );
@@ -114,24 +111,19 @@ async function fetchAndSaveDiffsForVersion(version) {
       fse.writeJSONSync(fileNameHL, diffsHL);
     } catch (e) {
       console.log(chalk.red(`Error fetching or saving diff!`, e));
+      throw new Error(e);
     }
   }
 }
 
-const versionSort = (a, b) => {
+const versionSort = (v1, v2) => {
   // sort version strings eg. 1.0, 0.10, 0.1
-  const [x1, y1] = a.split('.').map((x) => Number(x));
-  const [x2, y2] = b.split('.').map((x) => Number(x));
-  if (x1 > x2) {
-    return 1;
-  } else if (x2 > x1) {
-    return -1;
+  const [v1Major, v1Minor] = v1.split('.').map(Number);
+  const [v2Major, v2Minor] = v2.split('.').map(Number);
+  if (v2Major === v1Major) {
+    return v1Minor - v2Minor;
   } else {
-    if (y1 > y2) {
-      return 1;
-    } else if (y2 > y1) {
-      return -1;
-    }
+    return v1Major - v2Major;
   }
 };
 
@@ -155,9 +147,9 @@ async function fetchDictionaryForVersion(version) {
 
 async function fetchDiffForVersions(left, right) {
   console.log(
-    `${chalk.cyan('\nfetching diff for versions')} ${left} ${chalk.cyan(
-      'vs',
-    )} ${right} ${chalk.cyan('...')}`,
+    `${chalk.cyan('Fetching diff for versions')} ${left} ${chalk.cyan('vs')} ${right} ${chalk.cyan(
+      '...',
+    )}`,
   );
   const response = await axios.get(
     `${apiRoot}/diff?${querystring.stringify({ name: dictionaryName, left, right })}`,
@@ -166,15 +158,19 @@ async function fetchDiffForVersions(left, right) {
 }
 
 /* User Prompts */
-
-async function userSelectVersion(versions) {
+async function userSelectVersion(versions): Promise<string[]> {
   console.log('\n');
   return new Promise((resolve) =>
     inquirer
       .prompt([
-        { message: 'Select version to add:', name: 'version', type: 'list', choices: versions },
+        {
+          message: 'Select versions to add:',
+          name: 'versions',
+          type: 'checkbox',
+          choices: versions,
+        },
       ])
-      .then((answers) => resolve(answers.version)),
+      .then((answers) => resolve(answers.versions)),
   );
 }
 
@@ -189,36 +185,31 @@ async function runAdd() {
   console.log(chalk.green(`Lets add a new dicitonary version!`));
   printConfig();
   console.log(chalk.green(`\nListing all available dictionary versions:`));
+
   const newVersions = await printVersionsLists();
 
   // User select a version
-  const selectedVersion = await userSelectVersion(newVersions);
+  const selectedVersions = await userSelectVersion(newVersions);
 
-  // Fetch the dictionary for this version and save data and tree files
-  const dictionary = await fetchDictionaryForVersion(selectedVersion);
-  saveFiles(selectedVersion, dictionary);
+  for await (const selectedVersion of selectedVersions) {
+    const currentVersions = fse.readJSONSync(versionsFilename);
 
-  console.log(chalk.cyan('dictionary saved...'));
+    // Fetch the dictionary for this version and save data and tree files
+    const dictionary = await fetchDictionaryForVersion(selectedVersion);
+    saveFiles(selectedVersion, dictionary);
 
-  // Fetch all Diffs and save
-  console.log(chalk.cyan('fetching diffs vs stored versions...'));
-  await fetchAndSaveDiffsForVersion(selectedVersion);
+    console.log(chalk.cyan('Dictionary saved...'));
 
-  // Update versions file
-  const updatedVersions = currentVersions.concat(selectedVersion).sort((v1, v2) => {
-    const [v1Major, v1Minor] = v1.split('.').map(Number);
-    const [v2Major, v2Minor] = v2.split('.').map(Number);
-    if (v2Major === v1Major) {
-      return v2Minor - v1Minor;
-    } else {
-      return v2Major - v1Major;
-    }
-  });
-  console.log(chalk.cyan('\nupdating list of data dictionary versions...'));
-  saveVersionsFile(updatedVersions);
+    // Fetch all Diffs and save
+    console.log(chalk.cyan('Fetching diffs vs stored versions...'));
+    await fetchAndSaveDiffsForVersion(selectedVersion, currentVersions);
 
-  console.log(chalk.cyan('\nupdating data dictionary input file...'));
-  saveDataFiles(dictionary, updatedVersions);
+    // Update versions file
+    console.log(chalk.cyan('Updating list of data dictionary versions...'));
+    const updatedVersions = currentVersions.concat(selectedVersion).sort(versionSort);
+    saveVersionsFile(updatedVersions);
+    console.log(chalk.cyan('\n=================================\n'));
+  }
 
   console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
 
