@@ -30,10 +30,12 @@ import fse from 'fs-extra';
 import generateTreeData from './generateData';
 import generateDiffChanges from './generateDiffData';
 
-const constants = require('./constants');
+import constants from './constants';
 
-const apiRoot = process.env.LECTERN_ROOT;
-const { dictionaryName, schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
+let apiRoot = process.env.LECTERN_ROOT;
+let dictionaryName = process.env.DICTIONARY_NAME;
+
+const { schemaPath, versionsFilename, dataFilename, dataFileTreeName } = constants;
 
 /* Util Functions */
 function ensureDirectoryExistence(path) {
@@ -240,7 +242,12 @@ function run() {
   if (argv.l || argv.list) {
     // LIST ALL VERSIONS
     runList();
-  } else if (argv.a || argv.add) {
+  } else if (argv.add) {
+    // set urls
+    if (argv.test) {
+      apiRoot = process.env.TEST_LECTERN_ROOT;
+      dictionaryName = process.env.TEST_DICTIONARY_NAME;
+    }
     // ADD A NEW VERSION (first list all to show, then query the add)
     runAdd();
   } else {

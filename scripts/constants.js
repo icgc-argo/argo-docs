@@ -18,17 +18,14 @@
  *
  */
 
-const dictionaryName = process.env.DICTIONARY_NAME;
 const schemaPath = './data/test/schemas';
 const versionsFilename = `${schemaPath}/schema-versions.json`;
-
 const dataDirPath = './data/test/schemas';
 
 const dataFilename = '../website/src/pages/dictionary/data.json';
 const dataFileTreeName = '../website/src/pages/dictionary/tree.json';
 
 module.exports = {
-  dictionaryName,
   schemaPath,
   versionsFilename,
   dataFilename,
