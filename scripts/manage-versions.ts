@@ -31,6 +31,7 @@ import generateDiffChanges from './generateDiffData';
 import getConfig from './config';
 
 const config = getConfig();
+console.log('config', config);
 
 /* Util Functions */
 function ensureDirectoryExistence(path) {
@@ -64,18 +65,6 @@ function saveFiles(version, data) {
 
 function saveVersionsFile(data) {
   fs.writeFileSync(config.versionsFilename, JSON.stringify(data));
-}
-
-// The data file is the file used on load in the data dictionary.
-function saveDataFiles(dictionary, versions) {
-  const content = {
-    dictionary,
-    versions,
-    currentVersion: versions[0],
-  };
-  fs.writeFileSync(config.dataFilename, JSON.stringify(content));
-  //const treeData = generateTreeData(content.dictionary);
-  //fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
 async function fetchAndSaveDiffsForVersion(version, currentVersions) {

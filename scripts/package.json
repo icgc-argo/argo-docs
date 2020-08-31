@@ -3,8 +3,8 @@
     "help": "ts-node manage-versions.ts --help --npm",
     "list": "ts-node manage-versions.ts --list --npm",
     "add": "ts-node manage-versions.ts --add --npm",
-    "postadd": "ts-node move-data.ts",
-    "clean": "node clean-data.js",
+    "postadd": "ts-node -r dotenv/config copy-data.ts",
+    "clean": "ts-node -r dotenv/config clean-data.ts",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
     "links": "node links/generate.js"
@@ -32,6 +32,7 @@
     "inquirer": "^7.0.0",
     "lodash": "^4.17.19",
     "querystring": "^0.2.0",
+    "shelljs": "^0.8.4",
     "yargs": "^15.0.1"
   }
 }
