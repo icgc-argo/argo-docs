@@ -31,7 +31,6 @@ import generateDiffChanges from './generateDiffData';
 import getConfig from './config';
 
 const config = getConfig();
-console.log('config', config);
 
 /* Util Functions */
 function ensureDirectoryExistence(path) {
@@ -61,6 +60,18 @@ function saveFiles(version, data) {
   fse.writeJSONSync(dataFile, data);
   // const treeData = generateTreeData(data);
   // fse.writeJSONSync(treeFile, treeData);
+}
+
+// The data file is the file used on load in the data dictionary.
+function saveDataFiles(dictionary, versions) {
+  const content = {
+    dictionary,
+    versions,
+    currentVersion: versions[0],
+  };
+  fs.writeFileSync('../website/src/pages/dictionary/data.json', JSON.stringify(content));
+  //const treeData = generateTreeData(content.dictionary);
+  //fse.writeJSONSync(dataFileTreeName, treeData);
 }
 
 function saveVersionsFile(data) {
@@ -198,6 +209,9 @@ async function runAdd() {
     const updatedVersions = currentVersions.concat(selectedVersion).sort(versionSort);
     saveVersionsFile(updatedVersions);
     console.log(chalk.cyan('\n=================================\n'));
+
+    console.log(chalk.cyan('\nupdating data dictionary input file...'));
+    saveDataFiles(dictionary, updatedVersions);
   }
 
   console.log(chalk.green('\n\nALL CHANGES COMPLETE :D'));
