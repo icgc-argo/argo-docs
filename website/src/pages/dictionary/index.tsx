@@ -63,6 +63,8 @@ import Dictionary from '../../components/Dictionary';
 import { createSchemasWithDiffs, getDictionary, getDictionaryDiff } from '../../helpers/schema';
 import { ChangeType, Schema } from '../../../types';
 
+const FF_COMPARISON = process.env.FF_COMPARISON === 'true' ? true : false;
+
 const InfoBar = styled('div')`
   display: flex;
   flex-direction: row;
@@ -252,9 +254,11 @@ function DictionaryPage() {
                       setVersion(v);
                     }}
                   />
-                  <OldButton size="sm" onClick={() => setIsDiffShowing(true)}>
-                    Compare with...
-                  </OldButton>
+                  {FF_COMPARISON && (
+                    <OldButton size="sm" onClick={() => setIsDiffShowing(true)}>
+                      Compare with...
+                    </OldButton>
+                  )}
                   <Display
                     visible={isDiffShowing}
                     visibleStyle={css`
