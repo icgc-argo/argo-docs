@@ -104,13 +104,6 @@ export const ModalPortal = ({ children }) => {
 const data = require('./data.json');
 const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
 
-// one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
-const initActiveSchemas = createSchemasWithDiffs(
-  preloadedDictionary.data.schemas,
-  preloadedDiff.schemas,
-);
-
 // versions
 const versions: string[] = data.versions;
 
@@ -130,7 +123,7 @@ function DictionaryPage() {
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
-  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(initActiveSchemas);
+  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(preloadedDictionary.data.schemas);
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
