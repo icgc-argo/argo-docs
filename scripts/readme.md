@@ -1,7 +1,5 @@
 # Generate data
 
-Generate data scripts
-
 # Generate links
 
 External projects eg. `platform-ui` link to docs site. Sometimes urls change so we need to update code.
