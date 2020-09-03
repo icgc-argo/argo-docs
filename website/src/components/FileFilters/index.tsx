@@ -165,6 +165,7 @@ export const createFilters = (schemas: Schema[]) => {
     // comparison type NONE already accounted for in default filter
     comparison: uniq(filters.comparison)
       .filter((f) => f !== ChangeType.NONE)
+      // filter out undefined comparison value
       .filter(Boolean),
   };
 };
