@@ -162,7 +162,10 @@ export const createFilters = (schemas: Schema[]) => {
   return {
     tiers: uniq(filters.tiers),
     attributes: uniq(filters.attributes),
-    comparison: uniq(filters.comparison),
+    // comparison type NONE already accounted for in default filter
+    comparison: uniq(filters.comparison)
+      .filter((f) => f !== ChangeType.NONE)
+      .filter(Boolean),
   };
 };
 
