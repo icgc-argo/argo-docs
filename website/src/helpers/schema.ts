@@ -100,7 +100,11 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
   });
 
   const modifiedSchemas = [...schemasWithUpdates, ...schemasToAdd];
-  const allSchemas = [...schemas.filter((s) => !diffKeys.includes(s.name)), ...modifiedSchemas];
+
+  const allSchemas = schemas.map((schema) => {
+    const modifiedSchema = modifiedSchemas.find((ms) => ms.name === schema.name);
+    return modifiedSchema ? modifiedSchema : schema;
+  });
 
   return allSchemas;
 };
