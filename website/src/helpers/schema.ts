@@ -13,7 +13,8 @@ import isEmpty from 'lodash/isEmpty';
  * Created fields/schemas need to be added explicitly as they have no related field/schema
  */
 export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
-  const { updatedSchemas, createdSchemas, deletedSchemas } = Object.keys(diffs).reduce(
+  const diffKeys = Object.keys(diffs);
+  const { updatedSchemas, createdSchemas, deletedSchemas } = diffKeys.reduce(
     (acc, schemaName) => {
       const schema = diffs[schemaName];
       const { created, deleted, updated } = schema;
@@ -98,7 +99,14 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
     };
   });
 
-  return [...schemasWithUpdates, ...schemasToAdd];
+  const modifiedSchemas = [...schemasWithUpdates, ...schemasToAdd];
+
+  const allSchemas = schemas.map((schema) => {
+    const modifiedSchema = modifiedSchemas.find((ms) => ms.name === schema.name);
+    return modifiedSchema ? modifiedSchema : schema;
+  });
+
+  return allSchemas;
 };
 
 async function fetchDictionary(version) {
