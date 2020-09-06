@@ -1,18 +1,22 @@
 {
   "scripts": {
-    "help": "node manage-versions.js -h --npm",
-    "list": "node manage-versions.js -l --npm",
-    "add": "ts-node-script manage-versions.ts -a --npm --silent --inspect",
-    "clean": "node clean-data.js",
+    "help": "ts-node manage-versions.ts --help --npm",
+    "list": "ts-node manage-versions.ts --list --npm",
+    "add": "ts-node manage-versions.ts --add --npm",
+    "postadd": "ts-node -r dotenv/config copy-data.ts",
+    "clean": "ts-node -r dotenv/config clean-data.ts",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
-    "links": "node links/generate.js"
+    "links": "node links/generate.js",
+    "add-prod-schema": "cross-env IS_DEV=false npm run add",
+    "add-test-schema": "cross-env IS_DEV=true npm run add"
   },
   "devDependencies": {
     "@types/chai": "^4.2.12",
     "@types/fs-extra": "^9.0.1",
     "@types/mocha": "^8.0.0",
     "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
     "mocha": "^8.0.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
@@ -31,6 +35,7 @@
     "inquirer": "^7.0.0",
     "lodash": "^4.17.19",
     "querystring": "^0.2.0",
+    "shelljs": "^0.8.4",
     "yargs": "^15.0.1"
   }
 }

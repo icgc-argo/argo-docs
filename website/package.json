@@ -7,11 +7,6 @@
     "deploy": "docusaurus deploy",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts"
   },
-  "prettier": {
-    "printWidth": 100,
-    "trailingComma": "all",
-    "singleQuote": true
-  },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.58",
     "@docusaurus/preset-classic": "^2.0.0-alpha.58",
