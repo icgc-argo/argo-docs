@@ -3,6 +3,7 @@ const config = () => {
 
   const schemaPath = `./data/${isDev ? 'test' : 'prod'}/schemas`;
   return {
+    isDev,
     apiRoot: process.env.LECTERN_ROOT,
     dictionaryName: process.env.DICTIONARY_NAME,
     schemaPath,

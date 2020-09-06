@@ -7,13 +7,16 @@
     "clean": "ts-node -r dotenv/config clean-data.ts",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
-    "links": "node links/generate.js"
+    "links": "node links/generate.js",
+    "add-prod-schema": "cross-env IS_DEV=false npm run add",
+    "add-test-schema": "cross-env IS_DEV=true npm run add"
   },
   "devDependencies": {
     "@types/chai": "^4.2.12",
     "@types/fs-extra": "^9.0.1",
     "@types/mocha": "^8.0.0",
     "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
     "mocha": "^8.0.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"

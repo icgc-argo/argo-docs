@@ -41,7 +41,8 @@ function ensureDirectoryExistence(path) {
 
 function printConfig() {
   console.log(`${chalk.yellow('Lectern Root')}: ${config.apiRoot}`);
-  console.log(`${chalk.yellow('Dictionary Name')}: ${config.dictionaryName}\n`);
+  console.log(`${chalk.yellow('Dictionary Name')}: ${config.dictionaryName}`);
+  console.log(`${chalk.yellow('Dev environment?')}: ${config.isDev}\n`);
 }
 //current versions not getting updateds
 async function printVersionsLists() {
