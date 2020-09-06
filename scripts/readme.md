@@ -1,18 +1,20 @@
 # Generate data
 
+Firstly create your `.env` file based on the `.env.schema` file in the `scripts` folder.
+Make sure your `LECTERN_ROOT` and `DICTIONARY_NAME` are set.
+
+The scripts will write data to either a `data/prod` folder, or a `data/test` and then copy it to the website directory. This is to provide an easy way to test data without worrying about keeping the prod data up to date.
+
 To generate data run:
 
 ```
-npm run add
+npm run add-prod-schema
 ```
 
-this will generate data for production and move into the website for deployment.
-
-To generate test data, add the `--test` flag.
-This will generate data using `TEST_` env variables and will move it into website deployment for testing
+or
 
 ```
-npm run add -- --test
+npm run add-test-schema
 ```
 
 # Generate links
