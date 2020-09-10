@@ -48,9 +48,14 @@ function printConfig() {
 async function printVersionsLists() {
   const currentVersions = fse.readJSONSync(config.versionsFilename);
   const versions = await fetchDictionaryVersionsList();
-  const newVersions = versions.filter((item) => !currentVersions.includes(item));
+
+  const newVersions = versions.filter((item) =>
+    currentVersions.find((cv) => cv.version === item) === undefined ? true : false,
+  );
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
-  console.log(`\n${chalk.yellow('Current Versions:')}\n${currentVersions.join('\n')}`);
+  console.log(
+    `\n${chalk.yellow('Current Versions:')}\n${currentVersions.map((v) => v.version).join('\n')}`,
+  );
   console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
   return newVersions;
 }
@@ -209,7 +214,8 @@ async function runAdd() {
     console.log(chalk.cyan('Updating list of data dictionary versions...'));
     const updatedVersions = currentVersions
       .concat({ version: selectedVersion, date: dictionary.updatedAt || '' })
-      .sort((a, b) => versionSort(a.version, b.version));
+      // desc order for display eg. 1.0, 0.9, 0.2
+      .sort((a, b) => versionSort(b.version, a.version));
     saveVersionsFile(updatedVersions);
     console.log(chalk.cyan('\n=================================\n'));
 
