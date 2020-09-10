@@ -9,13 +9,16 @@ import Select from '@icgc-argo/uikit/form/Select';
  * @param {string} value
  */
 const VersionSelect = ({ value, onChange, versions, style }) => {
-  const options = versions.map((d) => ({ content: `Version ${d}`, value: d }));
+  const options = versions.map((v) => ({
+    content: `Version ${v.version} (${v.date.substring(0, 10)})`,
+    value: v.version,
+  }));
 
   return (
     <form>
       <div
         css={css`
-          width: 150px;
+          width: 225px;
           ${style}
         `}
       >

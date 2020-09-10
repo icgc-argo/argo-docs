@@ -1,1 +1,0 @@
-{"schemas":{"sample_registration":{"updated":{"gender":{"restrictions":{"codeList":{"left":["Female","Other"],"right":["Female","Male","Other"],"data":{"added":["Male"],"deleted":[]}}}},"submitter_specimen_id":{"restrictions":{"required":{"left":null,"right":true}}}},"created":{},"deleted":{}}}}

@@ -48,9 +48,14 @@ function printConfig() {
 async function printVersionsLists() {
   const currentVersions = fse.readJSONSync(config.versionsFilename);
   const versions = await fetchDictionaryVersionsList();
-  const newVersions = versions.filter((item) => !currentVersions.includes(item));
+
+  const newVersions = versions.filter(
+    (item) => currentVersions.find((cv) => cv.version === item) === undefined,
+  );
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
-  console.log(`\n${chalk.yellow('Current Versions:')}\n${currentVersions.join('\n')}`);
+  console.log(
+    `\n${chalk.yellow('Current Versions:')}\n${currentVersions.map((v) => v.version).join('\n')}`,
+  );
   console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
   return newVersions;
 }
@@ -81,7 +86,7 @@ function saveVersionsFile(data) {
 
 async function fetchAndSaveDiffsForVersion(version, currentVersions) {
   for (let i = 0; i < currentVersions.length; i++) {
-    const otherVersion = currentVersions[i];
+    const otherVersion = currentVersions[i].version;
 
     // Ternary with comparison instead of min/max to avoid removing the decimal when the version has a .0
     const high = parseFloat(version) > parseFloat(otherVersion) ? version : otherVersion;
@@ -207,7 +212,10 @@ async function runAdd() {
 
     // Update versions file
     console.log(chalk.cyan('Updating list of data dictionary versions...'));
-    const updatedVersions = currentVersions.concat(selectedVersion).sort(versionSort);
+    const updatedVersions = currentVersions
+      .concat({ version: selectedVersion, date: dictionary.updatedAt || '' })
+      // desc order for display eg. 1.0, 0.9, 0.2
+      .sort((a, b) => versionSort(b.version, a.version));
     saveVersionsFile(updatedVersions);
     console.log(chalk.cyan('\n=================================\n'));
 
