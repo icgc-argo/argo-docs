@@ -49,8 +49,8 @@ async function printVersionsLists() {
   const currentVersions = fse.readJSONSync(config.versionsFilename);
   const versions = await fetchDictionaryVersionsList();
 
-  const newVersions = versions.filter((item) =>
-    currentVersions.find((cv) => cv.version === item) === undefined ? true : false,
+  const newVersions = versions.filter(
+    (item) => currentVersions.find((cv) => cv.version === item) === undefined,
   );
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
   console.log(
