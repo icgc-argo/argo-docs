@@ -102,17 +102,11 @@ export const ModalPortal = ({ children }) => {
 };
 
 const data = require('./data.json');
-const preloadedDictionary = { data: data.dictionary, version: data.currentVersion };
-
-// one version (that has been downloaded) behind latest version
-const preloadedDiff = require('../../../static/data/schemas/diffs/1.2/1.2-diff-1.1.json');
-const initActiveSchemas = createSchemasWithDiffs(
-  preloadedDictionary.data.schemas,
-  preloadedDiff.schemas,
-);
+const preloadedDictionary = { data: data.dictionary, version: data.currentVersion.version };
 
 // versions
-const versions: string[] = data.versions;
+const versions: Array<{ version: string; date: string }> = data.versions;
+console.log('versions', versions);
 
 function DictionaryPage() {
   // docusaurus context
@@ -126,11 +120,11 @@ function DictionaryPage() {
   const [version, setVersion] = useState<string>(preloadedDictionary.version);
 
   // set diff version to 2nd version to compare to
-  const [diffVersion, setDiffVersion] = useState<string>(versions[1]);
+  const [diffVersion, setDiffVersion] = useState<string>(versions[1].version);
 
   const [isDiffShowing, setIsDiffShowing] = useState(false);
 
-  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(initActiveSchemas);
+  const [activeSchemas, setActiveSchemas] = useState<Schema[]>(preloadedDictionary.data.schemas);
 
   // Check if current schema is the latest version
   const isLatestSchema = getLatestVersion() === version ? true : false;
@@ -138,7 +132,7 @@ function DictionaryPage() {
   React.useEffect(() => {
     async function resolveSchemas() {
       try {
-        const dict = await getDictionary(version, preloadedDictionary);
+        const dict = await getDictionary(version);
         const diff = await getDictionaryDiff(version, diffVersion);
         const schemas = diff ? createSchemasWithDiffs(dict.schemas, diff.schemas) : dict.schemas;
         setActiveSchemas(schemas);

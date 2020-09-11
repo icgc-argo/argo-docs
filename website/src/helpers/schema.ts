@@ -158,10 +158,9 @@ export const parseDiff = (diff) => {
  * @param {string} version
  * @param {{data: Dictionary, version: string}} preloadedDictionary
  */
-export const getDictionary = async (version, preloadedDictionary) => {
-  // if (version === preloadedDictionary.version) return preloadedDictionary.data;
+export const getDictionary = async (version) => {
   const { dict, tree } = await fetchDictionary(version);
-  return dict;
+  return dict ? dict : [];
 };
 
 /**
