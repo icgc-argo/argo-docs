@@ -4,13 +4,13 @@ title: Data Types Overview
 sidebar_label: Data Types and File Formats
 ---
 
-ICGC ARGO provides access to harmonized data from new programs
+ICGC ARGO provides access to harmonized data from new programs.
 
 ## Reads
 
 ### Submitted Reads
 
-Raw reads submitted by ARGO member programs that are used as inputs to the ARGO analytic pipeline(s). Data is accepted in FASTQ or BAM format and must be compressed.
+Raw reads submitted by ARGO member programs are used as inputs within the ARGO analytic pipeline. Data is accepted in FASTQ or BAM (aligned or unaligned) formats, must be compressed, and can be aligned or unaligned.
 
 #### File Types
 
@@ -22,7 +22,7 @@ Raw reads submitted by ARGO member programs that are used as inputs to the ARGO 
 
 ### Aligned Reads
 
-A read is a sequence obtained from a single sequencing experiment. An aligned read, is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that stores only reads different from the reference sequence) format.
+A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that stores only reads different from the reference sequence) format. ARGO reads are aligned to the GRCh38 Human Reference Genome.
 
 #### File Types
 
@@ -32,21 +32,21 @@ A read is a sequence obtained from a single sequencing experiment. An aligned re
 
 ### Aligned Reads Index
 
-Secondary files that are external index files for CRAM format files. CRAI files follow a naming convention to correspond to their matching CRAM file of the orginal filename suffixed with `.cram.crai`. Index files are required for selective access to genomic data inside a CRAM via CRAM slicing.
+These are secondary files that are external index files for CRAM format files. CRAI files follow a naming convention that corresponds to their matching CRAM file of the original filename suffixed with `.cram.crai`. Index files are required for selective access to genomic data inside a CRAM via CRAM slicing.
 
 #### File Types
 
 | Filename Pattern | Description                                                 | Analysis Type    | Data Category    | Generating Workflow(s) |
 | ---------------- | ----------------------------------------------------------- | ---------------- | ---------------- | ---------------------- |
-| \*.aln.cram.crai | Cram Index file format. Requires a corresponding CRAM file. | sequencing_reads | Sequencing Reads | DNA Seq Alignment      |
+| \*.aln.cram.crai | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_reads | Sequencing Reads | DNA Seq Alignment      |
 
 ## Quality Control Metrics
 
-Quality control metrics are collected and recorded at several checkpoints in the ARGO Analytics pipeline to ensure that only high-quality data is released. All QC Metrics are associated to a corresponding analysis/file set that they annotate.
+Quality control metrics are collected and recorded at several checkpoints in the ARGO Analysis pipeline to ensure that only high-quality data is released. All QC Metrics are associated to a corresponding analysis/file set that they annotate.
 
 ### Read Group QC
 
-file containing read group (lane) level QC metrics including --,--?.
+File containing read group (lane) level QC metrics.
 
 #### File Types
 
