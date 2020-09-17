@@ -153,7 +153,7 @@ Data files containing the structural variation data called from aligned reads, w
 
 ### Raw CNV Calls
 
-Data files containing the copy number segments data called from aligned reads, which which have not yet been annotated or filtered.
+Data files containing the copy number segments data called from aligned reads, which have not yet been annotated or filtered.
 
 #### File Types
 
