@@ -26,20 +26,20 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 
 ### Preprocessing
 
-- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs
-- [Picard CollectQualityYieldMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360042475912-CollectQualityYieldMetrics-Picard-) is used for read group level BAM QC
+- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs.
+- [Picard CollectQualityYieldMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360042475912-CollectQualityYieldMetrics-Picard-) is used for read group level BAM QC.
 
 ### Processing
 
 - [BWA-MEM (version 0.7.17-r1188)](https://github.com/lh3/bwa/archive/v0.7.17.tar.gz) is performed to map the reads to the reference genome for each read group.
 - [Biobambam (version 2.0.153)](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz) is used to merge all read group level mapped BAMs into sample level BAM and mark duplicates per library.
-- [Samtools stats](http://www.htslib.org/doc/samtools-stats.html) is used to calculate Alignment QC metrics
-- [Picard CollectOxoGMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360040098852-CollectOxoGMetrics-Picard-) is used to calculate the `OxoQ` score for oxidative artifact assessment
+- [Samtools stats](http://www.htslib.org/doc/samtools-stats.html) is used to calculate Alignment QC metrics.
+- [Picard CollectOxoGMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360040098852-CollectOxoGMetrics-Picard-) is used to calculate the `OxoQ` score for oxidative artifact assessment.
 
 ### Outputs
 
-- Aligned read CRAM and index files
-- Alignment QC metrics files
+- [Aligned read CRAM](docs/analysis-workflows/data-types#aligned-reads) and [index files](/docs/analysis-workflows/data-types#aligned-reads-index)
+- [Alignment QC metrics](/docs/analysis-workflows/data-types#alignment-qc) files
 
 ![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
