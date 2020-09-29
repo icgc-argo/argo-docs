@@ -41,8 +41,8 @@ module.exports = {
     'Analysis Pipelines': [
       `analysis-workflows/analysis-overview`,
       'analysis-workflows/dna-pipeline',
-      `analysis-workflows/data-types`,
     ],
+    'Data and File Types': [`data/reads`, 'data/variant-calls', `data/qc-metrics`],
     'Release Notes': [
       'release-notes/data-releases',
       'release-notes/software-releases',
