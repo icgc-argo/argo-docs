@@ -70,11 +70,11 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
 
 ### Outputs
 
-- [SNV VCF](/docs/data/variant-calling#raw-snv-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [InDel VCF](/docs/data/variant-calling#raw-indel-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [CNV VCF](/docs/data/variant-calling#raw-cnv-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [SV VCF](/docs/data/variant-callings#raw-sv-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [Variant calling supplement](/docs/data/variant-calling#variant-calling-supplements) files
+- [SNV VCF](/docs/data/variant-calls#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [CNV VCF](/docs/data/variant-calls#raw-cnv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [SV VCF](/docs/data/variant-callss#raw-sv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplement) files
 - QC metrics files
   - [Alignment QC](/docs/data/qc-metrics#alignment-qc) for both the Tumour and Normal samples
   - [Ploidy and Purity Estimation](/docs/data/qc-metrics#ploidy-and-purity-estimation)
@@ -104,9 +104,9 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 
 ### Outputs
 
-- [SNV VCF](/docs/data/variant-calling#raw-snv-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [InDel VCF](/docs/data/variant-calling#raw-indel-calls) and [index files](/docs/data/variant-calling#vcf-index)
-- [Variant calling supplement](/docs/data/variant-calling#variant-calling-supplements) files
+- [SNV VCF](/docs/data/variant-calling#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplements) files
 - QC Metrics
   - [Alignment QC](/docs/data/reads#alignment-qc) for both the Tumour and Normal samples
 
