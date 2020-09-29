@@ -38,8 +38,9 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 
 ### Outputs
 
-- [Aligned read CRAM](docs/analysis-workflows/data-types#aligned-reads) and [index files](/docs/analysis-workflows/data-types#aligned-reads-index)
+- [Aligned read CRAM](/docs/analysis-workflows/data-types#aligned-reads) and [index files](/docs/analysis-workflows/data-types#aligned-reads-index)
 - [Alignment QC metrics](/docs/analysis-workflows/data-types#alignment-qc) files
+- [OxoG Metrics](/docs/analysis-workflows/data-types#oxog-metrics)
 
 ![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
@@ -69,12 +70,16 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
 
 ### Outputs
 
-- SNV VCF and index files
-- InDel VCF and index files
-- CNV VCF and index files
-- SV VCF and index files
-- Variant calling supplement files
+- [SNV VCF](/docs/analysis-workflows/data-types#raw-snv-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [InDel VCF](/docs/analysis-workflows/data-types#raw-indel-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [CNV VCF](/docs/analysis-workflows/data-types#raw-cnv-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [SV VCF](/docs/analysis-workflows/data-types#raw-sv-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [Variant calling supplement](/docs/analysis-workflows/data-types#variant-calling-supplements) files
 - QC metrics files
+  - [Alignment QC](/docs/analysis-workflows/data-types#alignment-qc) for both the Tumour and Normal samples
+  - [Ploidy and Purity Estimation](/docs/analysis-workflows/data-types#ploidy-and-purity-estimation)
+  - [Genotyping Inferred Gender](/docs/analysis-workflows/data-types#genotyping-inferred-gender)
+  - [Cross Sample Contamination](/docs/analysis-workflows/data-types#cross-sample-contamination)
 
 ![Sanger WGS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WGS-variant-calling.png)
 
@@ -99,9 +104,10 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 
 ### Outputs
 
-- SNV VCF and index files
-- InDel VCF and index files
-- Variant calling supplement files
-- QC metrics files
+- [SNV VCF](/docs/analysis-workflows/data-types#raw-snv-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [InDel VCF](/docs/analysis-workflows/data-types#raw-indel-calls) and [index files](/docs/analysis-workflows/data-types#vcf-index)
+- [Variant calling supplement](/docs/analysis-workflows/data-types#variant-calling-supplements) files
+- QC Metrics
+  - [Alignment QC](/docs/analysis-workflows/data-types#alignment-qc) for both the Tumour and Normal samples
 
 ![Sanger WXS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)
