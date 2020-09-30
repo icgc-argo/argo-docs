@@ -8,7 +8,7 @@ ICGC ARGO provides access to data from ARGO member programs generated through th
 
 ## Submitted Reads
 
-Raw reads submitted by ARGO member programs are used as inputs within the ARGO analytic pipeline. Data is accepted in FASTQ, unaligned BAM, or aligned BAM formats, and must be compressed for sunmission.
+Raw reads submitted by ARGO member programs are used as inputs within the ARGO analytic pipeline. Data is accepted in FASTQ, unaligned BAM, or aligned BAM formats, and must be compressed for submission.
 
 ### File Types
 
