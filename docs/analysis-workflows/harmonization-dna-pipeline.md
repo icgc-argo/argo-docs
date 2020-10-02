@@ -41,6 +41,8 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 - [Aligned read CRAM](/docs/data/reads#aligned-reads) and [index files](/docs/data/reads#aligned-reads-index)
 - [Alignment QC metrics](/docs/data/qc-metrics#alignment-qc) files
 - [OxoG Metrics](/docs/data/qc-metrics#oxog-metrics) files
+- [Duplicates Metrics](/docs/data/qc-metrics#duplicates-metrics) files
+- [Read Group QC Metrics](/docs/data/qc-metrics#read-group-qc) files for each submitted read group
 
 ![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
