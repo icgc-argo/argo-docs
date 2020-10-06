@@ -10,7 +10,7 @@ ICGC ARGO provides access to data from ARGO member programs generated through th
 
 Raw reads submitted by ARGO member programs are used as inputs within the ARGO analytic pipeline. Data is accepted in FASTQ, unaligned BAM, or aligned BAM formats, and must be compressed for submission.
 
-### File Types
+#### File Types
 
 | Filename Pattern        | Description                             | Analysis Type    | Data Category    | Generating Workflow(s) |
 | ----------------------- | --------------------------------------- | ---------------- | ---------------- | ---------------------- |
@@ -20,9 +20,9 @@ Raw reads submitted by ARGO member programs are used as inputs within the ARGO a
 
 ## Aligned Reads
 
-A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that stores only reads different from the reference sequence) format. ARGO reads are aligned to the GRCh38 Human Reference Genome.
+A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that stores only reads different from the reference sequence) format. ARGO reads are aligned to the [GRCh38 Human Reference Genome](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome).
 
-### File Types
+#### File Types
 
 | Filename Pattern | Description                               | Analysis Type    | Data Category    | Generating Workflow(s) |
 | ---------------- | ----------------------------------------- | ---------------- | ---------------- | ---------------------- |
@@ -32,7 +32,7 @@ A read is a sequence obtained from a single sequencing experiment. An aligned re
 
 These are secondary files that are external index files for CRAM format files. CRAI files follow a naming convention that corresponds to their matching CRAM file of the original filename suffixed with `.cram.crai`. Index files are required for selective access to genomic data inside a CRAM via CRAM slicing.
 
-### File Types
+#### File Types
 
 | Filename Pattern | Description                                                 | Analysis Type    | Data Category    | Generating Workflow(s) |
 | ---------------- | ----------------------------------------------------------- | ---------------- | ---------------- | ---------------------- |

@@ -12,7 +12,7 @@ Quality control metrics are collected and recorded at several checkpoints in the
 
 File containing read group (lane) level QC metrics.
 
-### File Types
+#### File Types
 
 | Filename Pattern       | Description                                    | Analysis Type | Data Category           | Generating Workflow(s) |
 | ---------------------- | ---------------------------------------------- | ------------- | ----------------------- | ---------------------- |
@@ -22,7 +22,7 @@ File containing read group (lane) level QC metrics.
 
 Files containing quality control metrics for aligned CRAM files.
 
-### File Types
+#### File Types
 
 | Filename Pattern   | Description                             | Analysis Type | Data Category           | Generating Workflow(s)                                 |
 | ------------------ | --------------------------------------- | ------------- | ----------------------- | ------------------------------------------------------ |
@@ -33,7 +33,7 @@ Files containing quality control metrics for aligned CRAM files.
 
 This is the data file containing duplicates metrics for aligned CRAM files. Multiple reads that match at the same position in the genome are located and tagged as duplicate reads in the CRAM file, where duplicate reads are defined as originating from a single fragment of DNA.
 
-### File Types
+#### File Types
 
 | Filename Pattern          | Description                                | Analysis Type | Data Category           | Generating Workflow(s) |
 | ------------------------- | ------------------------------------------ | ------------- | ----------------------- | ---------------------- |
@@ -43,7 +43,7 @@ This is the data file containing duplicates metrics for aligned CRAM files. Mult
 
 Data file containing OxoG metrics. OxoG quantifies the error rate resulting from oxidative artifacts for aligned CRAM files.
 
-### File Types
+#### File Types
 
 | Filename Pattern    | Description                          | Analysis Type | Data Category           | Generating Workflow(s) |
 | ------------------- | ------------------------------------ | ------------- | ----------------------- | ---------------------- |
@@ -53,7 +53,7 @@ Data file containing OxoG metrics. OxoG quantifies the error rate resulting from
 
 Data file containing tumour purity and ploidy estimate.
 
-### File Types
+#### File Types
 
 | Filename Pattern     | Description                          | Analysis Type | Data Category           | Generating Workflow(s)     |
 | -------------------- | ------------------------------------ | ------------- | ----------------------- | -------------------------- |
@@ -63,7 +63,7 @@ Data file containing tumour purity and ploidy estimate.
 
 Data file containing cross sample contamination estimate.
 
-### File Types
+#### File Types
 
 | Filename Pattern             | Description                                                                                                                                     | Analysis Type | Data Category           | Generating Workflow(s)     |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------- | -------------------------- |
@@ -73,7 +73,7 @@ Data file containing cross sample contamination estimate.
 
 Data file containing genotypes comparison results of CRAM files from the same donor, including the fraction of matched genotypes and inferred donor gender.
 
-### File Types
+#### File Types
 
 | Filename Pattern                | Description                                          | Analysis Type | Data Category           | Generating Workflow(s)     |
 | ------------------------------- | ---------------------------------------------------- | ------------- | ----------------------- | -------------------------- |
