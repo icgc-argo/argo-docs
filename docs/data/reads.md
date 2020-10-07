@@ -20,7 +20,7 @@ Raw reads submitted by ARGO member programs are used as inputs within the ARGO A
 
 ## Aligned Reads
 
-A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that stores only reads different from the reference sequence) format. ARGO reads are aligned to the [GRCh38 Human Reference Genome](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome).
+A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that only stores reads different from the reference sequence) format. ARGO reads are aligned to the [GRCh38 Human Reference Genome](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome).
 
 #### File Types
 
