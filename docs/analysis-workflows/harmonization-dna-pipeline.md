@@ -26,20 +26,23 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 
 ### Preprocessing
 
-- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs
-- [Picard CollectQualityYieldMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360042475912-CollectQualityYieldMetrics-Picard-) is used for read group level BAM QC
+- Submitted sequencing reads (FASTQ or BAM) are converted into lane level (i.e read group level) BAMs.
+- [Picard CollectQualityYieldMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360042475912-CollectQualityYieldMetrics-Picard-) is used for read group level BAM QC.
 
 ### Processing
 
 - [BWA-MEM (version 0.7.17-r1188)](https://github.com/lh3/bwa/archive/v0.7.17.tar.gz) is performed to map the reads to the reference genome for each read group.
 - [Biobambam (version 2.0.153)](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz) is used to merge all read group level mapped BAMs into sample level BAM and mark duplicates per library.
-- [Samtools stats](http://www.htslib.org/doc/samtools-stats.html) is used to calculate Alignment QC metrics
-- [Picard CollectOxoGMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360040098852-CollectOxoGMetrics-Picard-) is used to calculate the `OxoQ` score for oxidative artifact assessment
+- [Samtools stats](http://www.htslib.org/doc/samtools-stats.html) is used to calculate Alignment QC metrics.
+- [Picard CollectOxoGMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360040098852-CollectOxoGMetrics-Picard-) is used to calculate the `OxoQ` score for oxidative artifact assessment.
 
 ### Outputs
 
-- Aligned read CRAM and index files
-- Alignment QC metrics files
+- [Aligned read CRAM](/docs/data/reads#aligned-reads) and [index files](/docs/data/reads#aligned-reads-index)
+- [Alignment QC metrics](/docs/data/qc-metrics#alignment-qc) files
+- [OxoG Metrics](/docs/data/qc-metrics#oxog-metrics) files
+- [Duplicates Metrics](/docs/data/qc-metrics#duplicates-metrics) files
+- [Read Group QC Metrics](/docs/data/qc-metrics#read-group-qc) files for each submitted read group
 
 ![Alignment Workflow](/assets/analysis-workflows/ARGO-Alignment.png)
 
@@ -69,12 +72,16 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
 
 ### Outputs
 
-- SNV VCF and index files
-- InDel VCF and index files
-- CNV VCF and index files
-- SV VCF and index files
-- Variant calling supplement files
+- [SNV VCF](/docs/data/variant-calls#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [CNV VCF](/docs/data/variant-calls#raw-cnv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [SV VCF](/docs/data/variant-callss#raw-sv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplement) files
 - QC metrics files
+  - [Alignment QC](/docs/data/qc-metrics#alignment-qc) for both the Tumour and Normal samples
+  - [Ploidy and Purity Estimation](/docs/data/qc-metrics#ploidy-and-purity-estimation)
+  - [Genotyping Inferred Gender](/docs/data/qc-metrics#genotyping-inferred-gender)
+  - [Cross Sample Contamination](/docs/data/qc-metrics#cross-sample-contamination)
 
 ![Sanger WGS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WGS-variant-calling.png)
 
@@ -99,9 +106,10 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 
 ### Outputs
 
-- SNV VCF and index files
-- InDel VCF and index files
-- Variant calling supplement files
-- QC metrics files
+- [SNV VCF](/docs/data/variant-calling#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplements) files
+- QC Metrics
+  - [Alignment QC](/docs/data/reads#alignment-qc) for both the Tumour and Normal samples
 
 ![Sanger WXS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)

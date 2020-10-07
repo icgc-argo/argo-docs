@@ -92,7 +92,7 @@ Song accepts metadata in JSON format (called a `payload`), which is validated ag
 
 The `sequencing_experiment` payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
 
-> ![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it immediately fail submission validation.
+> ![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it will immediately fail submission validation.
 
 #### **Root level**
 
