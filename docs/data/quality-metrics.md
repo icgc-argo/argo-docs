@@ -10,7 +10,7 @@ Quality control metrics are collected and recorded at several checkpoints in the
 
 ## Read Group QC
 
-File containing read group (lane) level QC metrics.
+Data files containing read group (lane) level QC metrics.
 
 #### File Types
 
@@ -20,7 +20,7 @@ File containing read group (lane) level QC metrics.
 
 ## Alignment QC
 
-Files containing quality control metrics for aligned CRAM files.
+Data files containing quality control metrics for aligned CRAM files.
 
 #### File Types
 
@@ -31,7 +31,7 @@ Files containing quality control metrics for aligned CRAM files.
 
 ## Duplicates Metrics
 
-This is the data file containing duplicates metrics for aligned CRAM files. Multiple reads that match at the same position in the genome are located and tagged as duplicate reads in the CRAM file, where duplicate reads are defined as originating from a single fragment of DNA.
+Data files containing duplicates metrics for aligned CRAM files. Multiple reads that match at the same position in the genome are located and tagged as duplicate reads in the CRAM file, where duplicate reads are defined as originating from a single fragment of DNA.
 
 #### File Types
 
@@ -41,7 +41,7 @@ This is the data file containing duplicates metrics for aligned CRAM files. Mult
 
 ## OxoG Metrics
 
-Data file containing OxoG metrics. OxoG quantifies the error rate resulting from oxidative artifacts for aligned CRAM files.
+Data files containing OxoG metrics. OxoG quantifies the error rate resulting from oxidative artifacts for aligned CRAM files.
 
 #### File Types
 
@@ -51,7 +51,7 @@ Data file containing OxoG metrics. OxoG quantifies the error rate resulting from
 
 ## Ploidy and Purity Estimation
 
-Data file containing tumour purity and ploidy estimate.
+Data files containing tumour purity and ploidy estimate.
 
 #### File Types
 
@@ -61,7 +61,7 @@ Data file containing tumour purity and ploidy estimate.
 
 ## Cross Sample Contamination
 
-Data file containing cross sample contamination estimate.
+Data files containing cross sample contamination estimate.
 
 #### File Types
 
@@ -71,7 +71,7 @@ Data file containing cross sample contamination estimate.
 
 ## Genotyping Inferred Gender
 
-Data file containing genotypes comparison results of CRAM files from the same donor, including the fraction of matched genotypes and inferred donor gender.
+Data files containing genotypes comparison results of CRAM files from the same donor, including the fraction of matched genotypes and inferred donor gender.
 
 #### File Types
 

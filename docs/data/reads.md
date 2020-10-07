@@ -30,7 +30,7 @@ A read is a sequence obtained from a single sequencing experiment. An aligned re
 
 ## Aligned Reads Index
 
-These are secondary files that are external index files for CRAM format files. CRAI files follow a naming convention that corresponds to their matching CRAM file of the original filename suffixed with `.cram.crai`. Index files are required for selective access to genomic data inside a CRAM via CRAM slicing.
+Secondary files that are external index files for CRAM format files. CRAI files follow a naming convention that corresponds to their matching CRAM file of the original filename suffixed with `.cram.crai`. Index files are required for selective access to genomic data inside a CRAM via CRAM slicing.
 
 #### File Types
 
