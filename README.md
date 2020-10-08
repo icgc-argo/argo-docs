@@ -112,3 +112,6 @@ npm run add
 - Increment each version and test for breaking changes
 - nb. "swizzled" components are prone to breaking changes eg. prop name change
   - easy to find out new values by swizzling same component in new version of Docusaurus
+- be sure to run `npm run build` to make sure build isn't broken
+  - Docusaurus has some nice validators that run in the build step
+- be sure to manual test site for breaking changes
