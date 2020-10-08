@@ -106,7 +106,6 @@ const preloadedDictionary = { data: data.dictionary, version: data.currentVersio
 
 // versions
 const versions: Array<{ version: string; date: string }> = data.versions;
-console.log('versions', versions);
 
 function DictionaryPage() {
   // docusaurus context
