@@ -8,8 +8,8 @@
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.62",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.62",
+    "@docusaurus/core": "^2.0.0-alpha.63",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.63",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@icgc-argo/uikit": "^1.7.0",
