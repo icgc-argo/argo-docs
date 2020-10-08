@@ -106,3 +106,9 @@ npm run add
    ```
 
 6. Open a PR in the Argo Docs github using `develop` as the base branch.
+
+## Upgrading Docusaurus
+
+- Increment each version and test for breaking changes
+- nb. "swizzled" components are prone to breaking changes eg. prop name change
+  - easy to find out new values by swizzling same component in new version of Docusaurus
