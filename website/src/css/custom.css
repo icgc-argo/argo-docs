@@ -583,6 +583,18 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
   flex: none;
 }
 
+@media only screen and (max-width: 1190px) {
+  .navbar .navbar__inner a.navbar__link {
+    display: none;
+  }
+}
+
+@media (max-width: 1190px) {
+  .navbar__toggle {
+    display: inherit;
+  }
+}
+
 /*******************
 Algolia
 *******************/
