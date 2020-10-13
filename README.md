@@ -115,3 +115,11 @@ npm run add
 - be sure to run `npm run build` to make sure build isn't broken
   - Docusaurus has some nice validators that run in the build step
 - be sure to manual test site for breaking changes
+
+# Styling
+
+ref: https://github.com/facebook/docusaurus/issues/1763
+docusaurus theme classic uses Infima stylesheets/component lib by default
+This is still currently a private Facebook repo so it can be hard to find out where styles are coming from/what they're doing
+
+Best approach right now is inspect the styles in a browser and override in custom.css
