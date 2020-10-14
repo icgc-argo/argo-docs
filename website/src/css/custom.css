@@ -587,11 +587,22 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
   .navbar .navbar__inner a.navbar__link {
     display: none;
   }
-}
 
-@media (max-width: 1190px) {
   .navbar__toggle {
     display: inherit;
+  }
+  .navbar-sidebar {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .sidebar_src-theme-DocSidebar- div.menu {
+    padding-top: 0;
+  }
+
+  .docSidebarContainer_src-theme-DocPage- {
+    border-right: none !important;
   }
 }
 
