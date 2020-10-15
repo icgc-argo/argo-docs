@@ -122,4 +122,4 @@ ref: https://github.com/facebook/docusaurus/issues/1763
 docusaurus theme classic uses Infima stylesheets/component lib by default
 This is still currently a private Facebook repo so it can be hard to find out where styles are coming from/what they're doing
 
-Best approach right now is inspect the styles in a browser and override in custom.css
+Best approach right now is to swizzle a component and use Emotion as we are developing our own components simiarly.
