@@ -6,7 +6,9 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts",
-    "type-check": "tsc -p ./tsconfig.json"
+    "type-check": "tsc -p ./tsconfig.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.65",
@@ -25,13 +27,19 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.65",
-    "@emotion/babel-preset-css-prop": "^10.0.27",
     "@tsconfig/docusaurus": "^1.0.2",
-    "@types/chai": "^4.2.12",
-    "@types/mocha": "^8.0.2",
     "@types/react": "^16.9.53",
     "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.6",
+    "@babel/core": "^7.12.1",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/react": "^6.0.26",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.2",
+    "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "commander": "^4.1.0",
     "dotenv-webpack": "^1.7.0",
@@ -39,6 +47,7 @@
     "mocha": "^8.1.1",
     "prettier": "^2.1.2",
     "pretty-quick": "^3.1.0",
+    "react-is": "^16.13.1",
     "svg-inline-loader": "^0.8.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
