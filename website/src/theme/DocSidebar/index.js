@@ -19,7 +19,8 @@
  * and modified under MIT license
  *
  */
-
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -32,6 +33,7 @@ import Link from '@docusaurus/Link';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 
 import styles from './styles.module.css';
+import { css } from '@emotion/core';
 
 const MOBILE_TOGGLE_SIZE = 24;
 
@@ -221,6 +223,11 @@ function DocSidebar(props) {
           'menu--show': showResponsiveSidebar,
           [styles.menuWithAnnouncementBar]: !isAnnouncementBarClosed && scrollY === 0,
         })}
+        css={css`
+          @media only screen and (max-width: 1000px) {
+            padding-top: 0 !important;
+          }
+        `}
       >
         <button
           aria-label={showResponsiveSidebar ? 'Close Menu' : 'Open Menu'}
