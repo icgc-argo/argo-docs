@@ -2,10 +2,11 @@
   "version": "0.1.25",
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "npm run type-check && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts"
+    "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts",
+    "type-check": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.65",
