@@ -30,10 +30,16 @@
     "chai": "^4.2.0",
     "commander": "^4.1.0",
     "dotenv-webpack": "^1.7.0",
+    "husky": "^4.3.0",
     "mocha": "^8.1.1",
     "svg-inline-loader": "^0.8.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run type-check"
+    }
   },
   "browserslist": {
     "production": [
