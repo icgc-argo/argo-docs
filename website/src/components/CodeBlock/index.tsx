@@ -19,12 +19,10 @@
  */
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import defaultTheme from './default';
 import styles from './styles.module.css';
 import { css } from '@emotion/core';
-import codeCreated from './createdTheme';
 import codeDeleted from './deletedTheme';
 
 const exampleCode = `function validate() {\r\n  var result = { valid: true, message: \"only required if on post_therapy_tumour_staging_system is AJCC\" };
@@ -51,7 +49,12 @@ const CodeBlock = ({
             margin-bottom: 10px;
           `}
         >
-          <Highlight {...defaultProps} code={code} language="js" theme={prismTheme || defaultTheme}>
+          <Highlight
+            {...defaultProps}
+            code={code}
+            language="javascript"
+            theme={prismTheme || defaultTheme}
+          >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={`${className} ${styles.code}`} style={style}>
                 {tokens.map((line, i) => (

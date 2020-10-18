@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
-import ButtonComp from '@icgc-argo/uikit/Button';
+import ButtonComp, { BUTTON_SIZES, BUTTON_VARIANTS } from '@icgc-argo/uikit/Button';
 import { withTheme } from 'emotion-theming';
 import { css } from '@emotion/core';
 
@@ -30,8 +29,8 @@ export const ButtonWithIcon = ({
   children,
   onClick,
   disabled,
-  variant = 'secondary',
-  size = 'sm',
+  variant = BUTTON_VARIANTS.SECONDARY,
+  size = BUTTON_SIZES.SM,
   Icon = null,
 }) => (
   <ButtonComp variant={variant} size={size} onClick={onClick} disabled={disabled}>
