@@ -36,7 +36,13 @@ export const DownloadIcon = ({ disabled }) => (
   />
 );
 
-export const DownloadButtonContent = ({ children, disabled }) => (
+export const DownloadButtonContent = ({
+  children,
+  disabled,
+}: {
+  children: React.ReactNode;
+  disabled?: boolean;
+}) => (
   <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
     <DownloadIcon disabled={disabled} />
     {children}
@@ -61,7 +67,7 @@ export const Display = ({
 }: {
   children: React.ReactNode;
   visible: boolean;
-  visbleStyle: any;
+  visibleStyle?: any;
 }) => (
   <div
     css={css`

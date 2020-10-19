@@ -88,7 +88,8 @@ export const useModalState = () => {
   return [visibility, setModalVisibility];
 };
 
-const modalPortalRef = React.createRef();
+const modalPortalRef = React.createRef<HTMLDivElement>();
+
 export const ModalPortal = ({ children }) => {
   const ref = modalPortalRef.current;
   return ref
