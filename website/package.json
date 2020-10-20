@@ -7,7 +7,7 @@
     "deploy": "docusaurus deploy",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts",
     "type-check": "tsc -p ./tsconfig.json",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./static -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
