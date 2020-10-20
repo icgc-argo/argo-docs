@@ -66,7 +66,7 @@ module.exports = {
       title: '',
       logo: {
         alt: 'ICGC-ARGO',
-        src: 'img/logos/icgc_argo_name.svg',
+        src: 'img/logos/icgc_argo_name_stacked.svg',
       },
       items: [
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },

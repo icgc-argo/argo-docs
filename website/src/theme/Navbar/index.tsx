@@ -21,6 +21,8 @@ import useLogo from '@theme/hooks/useLogo';
 
 import styles from './styles.module.css';
 import NavbarItem from '@theme/NavbarItem';
+import RespImage from '../../components/RespImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // retrocompatible with v1
 const DefaultNavItemPosition = 'right';
@@ -134,7 +136,13 @@ function Navbar(): JSX.Element {
           )}
           <Link className="navbar__brand" to={logoLink} {...logoLinkProps}>
             {logoImageUrl != null && (
-              <img key={isClient} className="navbar__logo" src={logoImageUrl} alt={logoAlt} />
+              <picture style={{ height: '100%' }}>
+                <source
+                  srcSet={useBaseUrl('/img/logos/icgc_argo_name.svg')}
+                  media="(min-width: 630px)"
+                />
+                <img key={isClient} className="navbar__logo" src={logoImageUrl} alt={logoAlt} />
+              </picture>
             )}
             {title != null && (
               <strong
