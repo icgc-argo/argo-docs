@@ -170,10 +170,18 @@ function Navbar(): JSX.Element {
               onChange={onToggleChange}
             />
           )}
-          <SearchBar
-            handleSearchBarToggle={setIsSearchBarExpanded}
-            isSearchBarExpanded={isSearchBarExpanded}
-          />
+          <div
+            css={css`
+              @media only screen and (max-width: 385px) {
+                display: none;
+              }
+            `}
+          >
+            <SearchBar
+              handleSearchBarToggle={setIsSearchBarExpanded}
+              isSearchBarExpanded={isSearchBarExpanded}
+            />
+          </div>
         </div>
       </div>
       <div role="presentation" className="navbar-sidebar__backdrop" onClick={hideSidebar} />
