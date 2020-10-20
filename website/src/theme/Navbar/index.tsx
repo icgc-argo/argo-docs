@@ -6,7 +6,7 @@
  */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -136,13 +136,16 @@ function Navbar(): JSX.Element {
           )}
           <Link className="navbar__brand" to={logoLink} {...logoLinkProps}>
             {logoImageUrl != null && (
-              <picture style={{ height: '100%' }}>
-                <source
-                  srcSet={useBaseUrl('/img/logos/icgc_argo_name.svg')}
-                  media="(min-width: 630px)"
-                />
+              <RespImage
+                sources={[
+                  {
+                    src: useBaseUrl('/img/logos/icgc_argo_name.svg'),
+                    media: '(min-width: 630px)',
+                  },
+                ]}
+              >
                 <img key={isClient} className="navbar__logo" src={logoImageUrl} alt={logoAlt} />
-              </picture>
+              </RespImage>
             )}
             {title != null && (
               <strong

@@ -32,7 +32,7 @@ export interface RespImageProps {
 }
 
 const RespImage = ({ children, sources }: RespImageProps) => (
-  <picture>
+  <picture style={{ height: '100%' }}>
     {sources.length > 0 &&
       sources.map(({ src, media }, i) => <source key={i} srcSet={src} media={media} />)}
     {children}
