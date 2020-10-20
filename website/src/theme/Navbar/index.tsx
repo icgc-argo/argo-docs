@@ -6,7 +6,7 @@
  */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -21,6 +21,8 @@ import useLogo from '@theme/hooks/useLogo';
 
 import styles from './styles.module.css';
 import NavbarItem from '@theme/NavbarItem';
+import RespImage from '../../components/RespImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 // retrocompatible with v1
 const DefaultNavItemPosition = 'right';
@@ -134,7 +136,16 @@ function Navbar(): JSX.Element {
           )}
           <Link className="navbar__brand" to={logoLink} {...logoLinkProps}>
             {logoImageUrl != null && (
-              <img key={isClient} className="navbar__logo" src={logoImageUrl} alt={logoAlt} />
+              <RespImage
+                sources={[
+                  {
+                    src: useBaseUrl('/img/logos/icgc_argo_name.svg'),
+                    media: '(min-width: 630px)',
+                  },
+                ]}
+              >
+                <img key={isClient} className="navbar__logo" src={logoImageUrl} alt={logoAlt} />
+              </RespImage>
             )}
             {title != null && (
               <strong
@@ -162,10 +173,18 @@ function Navbar(): JSX.Element {
               onChange={onToggleChange}
             />
           )}
-          <SearchBar
-            handleSearchBarToggle={setIsSearchBarExpanded}
-            isSearchBarExpanded={isSearchBarExpanded}
-          />
+          <div
+            css={css`
+              @media only screen and (max-width: 385px) {
+                display: none;
+              }
+            `}
+          >
+            <SearchBar
+              handleSearchBarToggle={setIsSearchBarExpanded}
+              isSearchBarExpanded={isSearchBarExpanded}
+            />
+          </div>
         </div>
       </div>
       <div role="presentation" className="navbar-sidebar__backdrop" onClick={hideSidebar} />

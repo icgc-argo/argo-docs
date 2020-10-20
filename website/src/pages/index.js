@@ -5,27 +5,28 @@
  * You should have received a copy of the GNU Affero General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY                           
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES                          
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT                           
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,                                
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED                          
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;                               
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER                              
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN                         
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *  
+ *
  *
  */
 
-const React = require('react');
-
+/** @jsx jsx */
+import React from 'react';
+import { css, jsx } from '@emotion/core';
 import Layout from '@theme/Layout';
 import styles from './styles.module.css';
 import AlgoliaSearch from '../components/AlgoliaSearch';
 
 function HomeSplash() {
-  const SplashContainer = props => (
+  const SplashContainer = (props) => (
     <div className={styles.homeContainer}>
       <div className={styles.homeSplashFade}>
         <div className={styles.homeWrapper}>{props.children}</div>
@@ -33,10 +34,18 @@ function HomeSplash() {
     </div>
   );
 
-  const SearchBanner = props => (
+  const SearchBanner = (props) => (
     <section className={styles.searchBanner}>
       <span className={styles.bannerText}>How can we help?</span>
-      <AlgoliaSearch />
+      <div
+        css={css`
+          @media only screen and (max-width: 550px) {
+            display: none;
+          }
+        `}
+      >
+        <AlgoliaSearch />
+      </div>
     </section>
   );
 
@@ -131,14 +140,18 @@ function Index() {
               icon="img/icons/home/analysis-workflows.svg"
             >
               <span className={styles.contentDescription}>
-                ICGC ARGO uniformly analyzes molecular data against the <b>GRCh38 Human Reference Genome</b>
+                ICGC ARGO uniformly analyzes molecular data against the{' '}
+                <b>GRCh38 Human Reference Genome</b>
               </span>
               <ul>
                 <li>
-                  <a href="/docs/analysis-workflows/analysis-overview">Analysis overview and accepted datatypes</a>
+                  <a href="/docs/analysis-workflows/analysis-overview">
+                    Analysis overview and accepted datatypes
+                  </a>
                 </li>
                 <li>
-                  Details about the <a href="/docs/analysis-workflows/dna-pipeline">DNA-Seq analysis pipeline</a>
+                  Details about the{' '}
+                  <a href="/docs/analysis-workflows/dna-pipeline">DNA-Seq analysis pipeline</a>
                 </li>
               </ul>
             </ContentBlock>
