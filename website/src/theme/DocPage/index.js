@@ -19,7 +19,8 @@
  * and modified under MIT license
  *
  */
-
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -32,15 +33,19 @@ import NotFound from '@theme/NotFound';
 import { matchPath } from '@docusaurus/router';
 
 import styles from './styles.module.css';
+import { css } from '@emotion/core';
+import EmotionThemeProvider from '../../styles/EmotionThemeProvider';
+import argoTheme from '../../styles/theme/icgc-argo';
 
 function DocPage(props) {
-  const { route: baseRoute, docsMetadata, location } = props;
+  const { route: baseRoute, versionMetadata, location } = props;
   // case-sensitive route such as it is defined in the sidebar
   const currentRoute =
     baseRoute.routes.find((route) => {
       return matchPath(location.pathname, route);
     }) || {};
-  const { permalinkToSidebar, docsSidebars, version } = docsMetadata;
+
+  const { permalinkToSidebar, docsSidebars, version } = versionMetadata;
   const sidebar = permalinkToSidebar[currentRoute.path];
   const { siteConfig: { themeConfig = {} } = {}, isClient } = useDocusaurusContext();
 
@@ -51,23 +56,33 @@ function DocPage(props) {
   }
 
   return (
-    <Layout version={version} key={isClient}>
-      <div className={styles.docPage}>
-        {sidebar && (
-          <div className={styles.docSidebarContainer} role="complementary">
-            <DocSidebar
-              docsSidebars={docsSidebars}
-              path={currentRoute.path}
-              sidebar={sidebar}
-              sidebarCollapsible={sidebarCollapsible}
-            />
-          </div>
-        )}
-        <main className={styles.docMainContainer}>
-          <MDXProvider components={MDXComponents}>{renderRoutes(baseRoute.routes)}</MDXProvider>
-        </main>
-      </div>
-    </Layout>
+    <EmotionThemeProvider theme={argoTheme}>
+      <Layout version={version} key={isClient}>
+        <div className={styles.docPage}>
+          {sidebar && (
+            <div
+              className={styles.docSidebarContainer}
+              role="complementary"
+              css={css`
+                @media only screen and (max-width: 1000px) {
+                  border-right: none;
+                }
+              `}
+            >
+              <DocSidebar
+                docsSidebars={docsSidebars}
+                path={currentRoute.path}
+                sidebar={sidebar}
+                sidebarCollapsible={sidebarCollapsible}
+              />
+            </div>
+          )}
+          <main className={styles.docMainContainer}>
+            <MDXProvider components={MDXComponents}>{renderRoutes(baseRoute.routes)}</MDXProvider>
+          </main>
+        </div>
+      </Layout>
+    </EmotionThemeProvider>
   );
 }
 

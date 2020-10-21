@@ -59,14 +59,16 @@ module.exports = {
       // theme: require('prism-react-renderer/themes/dracula'),
     },
 
-    disableDarkMode: true,
+    colorMode: {
+      disableSwitch: true,
+    },
     navbar: {
       title: '',
       logo: {
         alt: 'ICGC-ARGO',
-        src: 'img/logos/icgc_argo_name.svg',
+        src: 'img/logos/icgc_argo_name_stacked.svg',
       },
-      links: [
+      items: [
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
         { to: 'docs/submission/submission-overview', label: 'Submission', position: 'right' },
         { to: 'docs/data-access/data-access', label: 'Data Access', position: 'right' },
@@ -84,7 +86,7 @@ module.exports = {
       ],
     },
     footer: {
-      logo: null,
+      logo: {},
       copyright: `© ${new Date().getFullYear()} ICGC ARGO. All Rights reserved.`,
     },
   },

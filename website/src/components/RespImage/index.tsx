@@ -20,61 +20,23 @@
 
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
-import Icon from '@icgc-argo/uikit/Icon';
-import Tooltip from '@icgc-argo/uikit/Tooltip';
-import { css } from '@emotion/core';
 
-export const DownloadIcon = ({ disabled }) => (
-  <Icon
-    name="download"
-    fill={disabled ? 'white' : 'accent2_dark'}
-    height="12px"
-    style={{
-      marginRight: '5px',
-    }}
-  />
-);
+interface Source {
+  src: string;
+  media: string;
+}
 
-export const DownloadButtonContent = ({
-  children,
-  disabled,
-}: {
+export interface RespImageProps {
   children: React.ReactNode;
-  disabled?: boolean;
-}) => (
-  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-    <DownloadIcon disabled={disabled} />
+  sources: Array<Source>;
+}
+
+const RespImage = ({ children, sources }: RespImageProps) => (
+  <picture style={{ height: '100%' }}>
+    {sources.length > 0 &&
+      sources.map(({ src, media }, i) => <source key={i} srcSet={src} media={media} />)}
     {children}
-  </div>
+  </picture>
 );
 
-export const DownloadTooltip = ({ children, disabled }) => (
-  <Tooltip
-    disabled={disabled}
-    html={<span>Please select latest schema version to download templates</span>}
-  >
-    {children}
-  </Tooltip>
-);
-
-export const Display = ({
-  children,
-  visible,
-  visibleStyle = css`
-    display: block;
-  `,
-}: {
-  children: React.ReactNode;
-  visible: boolean;
-  visibleStyle?: any;
-}) => (
-  <div
-    css={css`
-      display: none;
-      ${visible ? visibleStyle : null}
-    `}
-  >
-    {children}
-  </div>
-);
+export default RespImage;

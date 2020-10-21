@@ -48,7 +48,7 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 
 ## Sanger WGS Variant Calling
 
-Whole genome sequencing (WGS) aligned CRAM files are processed through the Sanger WGS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Genome Sequencing Analysis Docker Image](quay.io/wtsicgp/dockstore-cgpwgs:2.1.0) as the base workflow. For details, please see the latest version of the [ARGO Sanger WGS Variant Calling workflow](https://github.com/icgc-argo/sanger-wgs-variant-calling/releases).
+Whole genome sequencing (WGS) aligned CRAM files are processed through the Sanger WGS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Genome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwgs:2.1.0) as the base workflow. For details, please see the latest version of the [ARGO Sanger WGS Variant Calling workflow](https://github.com/icgc-argo/sanger-wgs-variant-calling/releases).
 
 ### Inputs
 
@@ -75,7 +75,7 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
 - [SNV VCF](/docs/data/variant-calls#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
 - [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
 - [CNV VCF](/docs/data/variant-calls#raw-cnv-calls) and [index files](/docs/data/variant-calls#vcf-index)
-- [SV VCF](/docs/data/variant-callss#raw-sv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [SV VCF](/docs/data/variant-calls#raw-sv-calls) and [index files](/docs/data/variant-calls#vcf-index)
 - [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplement) files
 - QC metrics files
   - [Alignment QC](/docs/data/qc-metrics#alignment-qc) for both the Tumour and Normal samples
@@ -87,7 +87,7 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
 
 ## Sanger WXS Variant Calling
 
-Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger WXS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Exome Sequencing Analysis Docker Image](quay.io/wtsicgp/dockstore-cgpwxs:3.1.6) as the base workflow. For details, please see the latest version of the [ARGO Sanger WXS Variant Calling workflow](https://github.com/icgc-argo/sanger-wxs-variant-calling/releases).
+Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger WXS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Exome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwxs:3.1.6) as the base workflow. For details, please see the latest version of the [ARGO Sanger WXS Variant Calling workflow](https://github.com/icgc-argo/sanger-wxs-variant-calling/releases).
 
 ### Inputs
 
@@ -106,7 +106,7 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 
 ### Outputs
 
-- [SNV VCF](/docs/data/variant-calling#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
+- [SNV VCF](/docs/data/variant-calls#raw-snv-calls) and [index files](/docs/data/variant-calls#vcf-index)
 - [InDel VCF](/docs/data/variant-calls#raw-indel-calls) and [index files](/docs/data/variant-calls#vcf-index)
 - [Variant calling supplement](/docs/data/variant-calls#variant-calling-supplements) files
 - QC Metrics

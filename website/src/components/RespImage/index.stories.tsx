@@ -17,64 +17,24 @@
  *
  *
  */
-
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 import React from 'react';
-import Icon from '@icgc-argo/uikit/Icon';
-import Tooltip from '@icgc-argo/uikit/Tooltip';
-import { css } from '@emotion/core';
+import RespImage, { RespImageProps } from '.';
+import { Story } from '@storybook/react/types-6-0';
 
-export const DownloadIcon = ({ disabled }) => (
-  <Icon
-    name="download"
-    fill={disabled ? 'white' : 'accent2_dark'}
-    height="12px"
-    style={{
-      marginRight: '5px',
-    }}
-  />
-);
+export default {
+  title: 'Responsive Image',
+  component: RespImage,
+};
 
-export const DownloadButtonContent = ({
-  children,
-  disabled,
-}: {
-  children: React.ReactNode;
-  disabled?: boolean;
-}) => (
-  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-    <DownloadIcon disabled={disabled} />
-    {children}
-  </div>
-);
+const Template: Story<RespImageProps> = (args) => <RespImage {...args} />;
 
-export const DownloadTooltip = ({ children, disabled }) => (
-  <Tooltip
-    disabled={disabled}
-    html={<span>Please select latest schema version to download templates</span>}
-  >
-    {children}
-  </Tooltip>
-);
-
-export const Display = ({
-  children,
-  visible,
-  visibleStyle = css`
-    display: block;
-  `,
-}: {
-  children: React.ReactNode;
-  visible: boolean;
-  visibleStyle?: any;
-}) => (
-  <div
-    css={css`
-      display: none;
-      ${visible ? visibleStyle : null}
-    `}
-  >
-    {children}
-  </div>
-);
+export const FirstStory: Story<RespImageProps> = Template.bind({});
+FirstStory.args = {
+  children: <img src="/img/logos/icgc_argo_name_stacked.svg" />,
+  sources: [
+    {
+      src: '/img/logos/icgc_argo_name.svg',
+      media: '(min-width: 600px)',
+    },
+  ],
+};

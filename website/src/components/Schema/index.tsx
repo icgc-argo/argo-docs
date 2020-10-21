@@ -488,7 +488,7 @@ const SchemaView = ({
     },
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
-  const containerRef = React.createRef();
+  const containerRef = React.createRef<HTMLDivElement>();
 
   const theme: Theme = useTheme();
   const rowColors = theme.diffColors.schemaField;

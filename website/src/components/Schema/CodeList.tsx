@@ -19,10 +19,10 @@
  */
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import React from 'react';
 import Icon from '@icgc-argo/uikit/Icon';
 import styles from './styles.module.css';
 import { DiffTextSegment } from './DiffText';
+import { ChangeType } from '../../../types';
 
 const ToggleMore = ({ children, onToggle }) => (
   <div
@@ -35,7 +35,7 @@ const ToggleMore = ({ children, onToggle }) => (
   </div>
 );
 
-export const Code = ({ code, format }: { code: string; format: TextChange | null }) => (
+export const Code = ({ code, format }: { code: string; format: ChangeType | null }) => (
   <div
     key={code}
     css={css`

@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React from 'react';
 import ModalComp, { ModalContainer } from '@icgc-argo/uikit/Modal';
 import { withTheme } from 'emotion-theming';
 import styled from '@emotion/styled';

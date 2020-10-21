@@ -88,7 +88,8 @@ export const useModalState = () => {
   return [visibility, setModalVisibility];
 };
 
-const modalPortalRef = React.createRef();
+const modalPortalRef = React.createRef<HTMLDivElement>();
+
 export const ModalPortal = ({ children }) => {
   const ref = modalPortalRef.current;
   return ref
@@ -106,7 +107,6 @@ const preloadedDictionary = { data: data.dictionary, version: data.currentVersio
 
 // versions
 const versions: Array<{ version: string; date: string }> = data.versions;
-console.log('versions', versions);
 
 function DictionaryPage() {
   // docusaurus context

@@ -22,17 +22,16 @@ const Star = ({ fill }: { fill: string }) => (
 
 const pluralise = (count: number, noun: string) => (count > 1 ? noun + 's' : noun);
 
-const CompareLegend = ({
-  comparison,
-  styles,
-}: {
+export interface CompareLegendProps {
   comparison: {
     updated: number;
     created: number;
     deleted: number;
   };
   styles?: any;
-}) => {
+}
+
+const CompareLegend = ({ comparison, styles }: CompareLegendProps) => {
   const theme: Theme = useTheme();
   const diffColors = theme.diffColors.star;
   const { updated, deleted, created } = comparison;
