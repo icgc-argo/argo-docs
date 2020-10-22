@@ -6,22 +6,29 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/data-access).
 
-<!---
 ## Data Release 2.0
 
-**Release Date:**
+**Release Date:** October 23, 2020
 
 ### New Updates
 
+Data release 2.0 includes the first release whole genome sequencing (WGS) data from papillary thyroid cancer [PTC-SA](https://www.icgc-argo.org/page/98/ptcp) data and the first release whole exome sequencing (WX) lung cancer [LUKA-KR](https://www.icgc-argo.org/page/91/pgcklc) data. Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline. The resulting somatic mutation calls include single nucleotide variations (SNVs), insertion-deletion (indels), copy number variations (CNVs) and structural variations (SVs).
+
+This release includes:
+
+- PACA-CA: 54 new donors with aligned WGS reads, and 59 donors with variant calls.
+- PTC-SA: 30 donors with aligned WGS reads, and 29 donors with variant calls.
+- LUCA-KR: 142 donors with aligned WXS reads, and 140 donors with variant calls.
+
+In addition to these genomic files, the first release of pipeline Quality Control metrics is included. For a breakdown of the provided QC metrics being released, please review the [qc metrics file type documentation](https://docs.icgc-argo.org/docs/data/qc-metrics). For an explanation of qc metrics as they are generated through the pipeline, please review the [pipeline documentation](https://docs.icgc-argo.org/docs/analysis-workflows/dna-pipeline)
 
 ### Bug Fixes
 
-None to report.
+- Two donors had alignment and variant data removed from release due to an issue in file naming in the analysis workflow. The data is being reprocessed and will be re-released in the next release.
 
 ### Known Issues
 
 None to report.
------->
 
 ## Data Release 1.0
 
