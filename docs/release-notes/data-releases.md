@@ -12,13 +12,13 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 ### New Updates
 
-Data release 2.0 includes the first release of whole genome sequencing (WGS) data from papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp) and the first release of whole exome sequencing (WXS) data from lung cancer [(LUKA-KR)](https://www.icgc-argo.org/page/91/pgcklc). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline.
+Data release 2.0 includes the first release of whole exome sequencing (WXS) data from papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp) and the first release of whole genome sequencing (WGS) data from lung cancer [(LUKA-KR)](https://www.icgc-argo.org/page/91/pgcklc). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline.
 
 This release includes:
 
 - PACA-CA: 54 new donors with aligned WGS reads, and 59 donors with variant calls.
-- PTC-SA: 30 donors with aligned WGS reads, and 29 donors with variant calls.
-- LUCA-KR: 142 donors with aligned WXS reads, and 140 donors with variant calls.
+- LUCA-KR: 30 donors with aligned WGS reads, and 29 donors with variant calls.
+- PTC-SA: 142 donors with aligned WXS reads, and 140 donors with variant calls.
 
 In addition to these genomic files, the first release of pipeline Quality Control metrics is also included. For a breakdown of the provided QC metrics, please review the [qc metrics file type](/docs/data/qc-metrics) documentation. For an explanation of qc metrics as they are generated through the pipeline, please review the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-pipeline) documentation.
 
