@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 ### New Updates
 
-Data release 2.0 includes the first release whole genome sequencing (WGS) data from papillary thyroid cancer [PTC-SA](https://www.icgc-argo.org/page/98/ptcp) data and the first release whole exome sequencing (WX) lung cancer [LUKA-KR](https://www.icgc-argo.org/page/91/pgcklc) data. Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline. The resulting somatic mutation calls include single nucleotide variations (SNVs), insertion-deletion (indels), copy number variations (CNVs) and structural variations (SVs).
+Data release 2.0 includes the first release of whole genome sequencing (WGS) data from papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp) and the first release of whole exome sequencing (WXS) data from lung cancer [(LUKA-KR)](https://www.icgc-argo.org/page/91/pgcklc). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline.
 
 This release includes:
 
@@ -20,11 +20,11 @@ This release includes:
 - PTC-SA: 30 donors with aligned WGS reads, and 29 donors with variant calls.
 - LUCA-KR: 142 donors with aligned WXS reads, and 140 donors with variant calls.
 
-In addition to these genomic files, the first release of pipeline Quality Control metrics is included. For a breakdown of the provided QC metrics being released, please review the [qc metrics file type documentation](https://docs.icgc-argo.org/docs/data/qc-metrics). For an explanation of qc metrics as they are generated through the pipeline, please review the [pipeline documentation](https://docs.icgc-argo.org/docs/analysis-workflows/dna-pipeline)
+In addition to these genomic files, the first release of pipeline Quality Control metrics is also included. For a breakdown of the provided QC metrics, please review the [qc metrics file type](/docs/data/qc-metrics) documentation. For an explanation of qc metrics as they are generated through the pipeline, please review the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-pipeline) documentation.
 
 ### Bug Fixes
 
-- Two donors had alignment and variant data removed from release due to an issue in file naming in the analysis workflow. The data is being reprocessed and will be re-released in the next release.
+- Two OCCAMS-GB donors had alignment and variant data removed from release due to an issue in file naming in the analysis workflow. The data is being reprocessed and will be re-released in the next release.
 
 ### Known Issues
 
