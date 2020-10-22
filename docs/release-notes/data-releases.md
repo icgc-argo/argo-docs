@@ -17,6 +17,7 @@ Data release 2.0 includes the first release of whole exome sequencing (WXS) data
 This release includes:
 
 - PACA-CA: 54 new donors with aligned WGS reads, and 59 donors with variant calls.
+- PACA-CA: 12 new donors with aligned WXS reads, and 12 donors with variant calls.
 - LUCA-KR: 30 donors with aligned WGS reads, and 29 donors with variant calls.
 - PTC-SA: 142 donors with aligned WXS reads, and 140 donors with variant calls.
 
