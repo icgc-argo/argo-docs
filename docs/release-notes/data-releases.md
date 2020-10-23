@@ -18,7 +18,7 @@ This release includes:
 
 - PACA-CA: PACA-CA: 52 new donors with WGS data totaling 133 donors with WGS reads and 121 donors with variant calls
 - PACA-CA: 12 new donors with aligned WXS reads
-- LUCA-KR: 30 donors with aligned WGS reads, and 29 donors with variant calls.
+- LUCA-KR: 29 donors with aligned WGS reads, and 29 donors with variant calls.
 - PTC-SA: 142 donors with aligned WXS reads, and 140 donors with variant calls.
 
 In addition to these genomic files, the first release of pipeline Quality Control metrics is also included. For a breakdown of the provided QC metrics, please review the [qc metrics file type](/docs/data/qc-metrics) documentation. For an explanation of qc metrics as they are generated through the pipeline, please review the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-pipeline) documentation.
