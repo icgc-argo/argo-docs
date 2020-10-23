@@ -25,7 +25,7 @@ In addition to these genomic files, the first release of pipeline Quality Contro
 
 ### Bug Fixes
 
-- Two OCCAMS-GB donors had alignment and variant data removed from release due to an issue in file naming in the analysis workflow. The data is being reprocessed and will be re-released in the next release.
+- Three OCCAMS-GB donors had alignment and variant data removed from release due to an issue in file naming in the analysis workflow. The data is being reprocessed and will be re-released in the next release.
 
 ### Known Issues
 
