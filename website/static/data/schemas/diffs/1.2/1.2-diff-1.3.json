@@ -1,0 +1,125 @@
+{
+  "schemas": {
+    "specimen": {
+      "updated": {
+        "percent_proliferating_cells": {
+          "meta": {
+            "core": { "left": true, "right": null },
+            "notes": {
+              "left": "This field is only required if the specimen is a tumour.",
+              "right": ""
+            }
+          }
+        },
+        "percent_inflammatory_tissue": {
+          "meta": {
+            "core": { "left": true, "right": null },
+            "notes": {
+              "left": "This field is only required if the specimen is a tumour.",
+              "right": ""
+            }
+          }
+        },
+        "percent_stromal_cells": {
+          "meta": {
+            "core": { "left": true, "right": null },
+            "notes": {
+              "left": "This field is only required if the specimen is a tumour.",
+              "right": ""
+            }
+          }
+        },
+        "percent_necrosis": {
+          "meta": {
+            "core": { "left": true, "right": null },
+            "notes": {
+              "left": "This field is only required if the specimen is a tumour.",
+              "right": ""
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "primary_diagnosis": {
+      "updated": {
+        "presenting_symptoms": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Abdominal Pain",
+                "Anemia",
+                "Back Pain",
+                "Bloating",
+                "Cholangitis",
+                "Constipation",
+                "Dark Urine",
+                "Decreased Appetite",
+                "Diabetes",
+                "Diarrhea",
+                "Fatigue",
+                "Fever",
+                "Hypoglycemia",
+                "Jaundice",
+                "Loss of Appetite",
+                "Nausea",
+                "None",
+                "Pale Stools",
+                "Pancreatitis",
+                "Pruritus/Itchiness",
+                "Steatorrhea",
+                "Unknown",
+                "Vomiting",
+                "Weight Loss"
+              ],
+              "right": [
+                "Abdominal Pain",
+                "Anemia",
+                "Back Pain",
+                "Bloating",
+                "Cholangitis",
+                "Constipation",
+                "Dark Urine",
+                "Decreased Appetite",
+                "Diabetes",
+                "Diarrhea",
+                "Fatigue",
+                "Fever",
+                "Hypoglycemia",
+                "Jaundice",
+                "Loss of Appetite",
+                "Nausea",
+                "None",
+                "Not Reported",
+                "Pale Stools",
+                "Pancreatitis",
+                "Pruritus/Itchiness",
+                "Steatorrhea",
+                "Swelling in the Neck",
+                "Unknown",
+                "Vomiting",
+                "Weight Loss"
+              ],
+              "data": { "added": ["Not Reported", "Swelling in the Neck"], "deleted": [] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "chemotherapy": {
+      "updated": {
+        "cumulative_drug_dosage": {
+          "description": {
+            "left": "Indicate the total drug dose in the same units specified in chemotherapy_dosage_units.",
+            "right": "Indicate the total actual drug dose in the same units specified in chemotherapy_dosage_units."
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}
