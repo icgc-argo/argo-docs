@@ -19,7 +19,17 @@ Coming soon.
 None to report.
 ------>
 
-## Initial Dictionary Release 1.0.0
+## Release 1.3
+
+**Release Date:** November 24, 2020
+
+The following updates are included:
+
+- Changed Attribute for percent_proliferating_cells, percent_inflammatory_tissue, percent_stromal_cells and percent_necrosis fields from Required to Conditional.
+- Updated description for cumulative_drug_dosage field to indicate that the actual drug dose should be submitted.
+- Added two new terms ("Swelling in the Neck" and "Not Reported") to controlled terminology for presenting_symptoms field.
+
+## Initial Dictionary Release 1.0
 
 **Release Date:** June 19, 2020
 
