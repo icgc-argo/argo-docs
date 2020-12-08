@@ -29,6 +29,7 @@ import { argv } from 'yargs';
 import fse from 'fs-extra';
 import generateDiffChanges from './generateDiffData';
 import getConfig from './config';
+import { schemaPath, versionsFilename } from './constants';
 
 const config = getConfig();
 
@@ -46,7 +47,7 @@ function printConfig() {
 
 //current versions not getting updateds
 async function printVersionsLists() {
-  const savedVersions = fse.readJSONSync(config.versionsFilename);
+  const savedVersions = fse.readJSONSync(versionsFilename);
   const versions = await fetchDictionaryVersionsList();
 
   const availableVersions = versions.filter(
@@ -63,8 +64,8 @@ async function printVersionsLists() {
 }
 
 function saveFiles(version, data) {
-  const dataFile = `${config.schemaPath}/${version}.json`;
-  const treeFile = `${config.schemaPath}/${version}_tree.json`;
+  const dataFile = `${schemaPath}/${version}.json`;
+  const treeFile = `${schemaPath}/${version}_tree.json`;
   fse.writeJSONSync(dataFile, data);
   // const treeData = generateTreeData(data);
   // fse.writeJSONSync(treeFile, treeData);
@@ -83,7 +84,7 @@ function saveDataFiles(dictionary, versions) {
 }
 
 function saveVersionsFile(data) {
-  fs.writeFileSync(config.versionsFilename, JSON.stringify(data));
+  fs.writeFileSync(versionsFilename, JSON.stringify(data));
 }
 
 async function fetchAndSaveDiffsForVersion(version, currentVersions) {
@@ -94,8 +95,8 @@ async function fetchAndSaveDiffsForVersion(version, currentVersions) {
     const high = parseFloat(version) > parseFloat(otherVersion) ? version : otherVersion;
     const low = parseFloat(version) < parseFloat(otherVersion) ? version : otherVersion;
 
-    const pathHigh = `${config.schemaPath}/diffs/${high}`;
-    const pathLow = `${config.schemaPath}/diffs/${low}`;
+    const pathHigh = `${schemaPath}/diffs/${high}`;
+    const pathLow = `${schemaPath}/diffs/${low}`;
     const fileNameHL = `${pathHigh}/${high}-diff-${low}.json`;
     const fileNameLH = `${pathLow}/${low}-diff-${high}.json`;
 
@@ -200,7 +201,7 @@ async function runAdd() {
   const selectedVersions = await userSelectVersion(newVersions);
 
   for await (const selectedVersion of selectedVersions) {
-    const currentVersions = fse.readJSONSync(config.versionsFilename);
+    const currentVersions = fse.readJSONSync(versionsFilename);
 
     // Fetch the dictionary for this version and save data and tree files
     const dictionary = await fetchDictionaryForVersion(selectedVersion);

@@ -20,17 +20,14 @@
 
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import getConfig from './config';
 import sh from 'shelljs';
-
-const config = getConfig();
+import { schemaPath, versionsFilename } from './constants';
 
 /**
  * Deletes all data files, keeps dir structure and empty schema-versions.json
  */
 async function cleanDataFolder() {
-  const { schemaPath, versionsFilename } = config;
-  const path = `./data/${process.env.IS_DEV ? 'test' : 'prod'}`;
+  const path = `./data/`;
   try {
     console.log(chalk.yellow('Deleting data folder...'));
     await fse.remove(path);
