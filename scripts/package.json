@@ -2,14 +2,11 @@
   "scripts": {
     "help": "ts-node manage-versions.ts --help --npm",
     "list": "ts-node manage-versions.ts --list --npm",
-    "add": "ts-node manage-versions.ts --add --npm",
-    "postadd": "ts-node -r dotenv/config copy-data.ts",
+    "add": "ts-node manage-versions.ts --add --npm && copy-data.ts",
     "clean": "ts-node -r dotenv/config clean-data.ts",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
-    "links": "node links/generate.js",
-    "add-prod-schema": "cross-env IS_DEV=false npm run add",
-    "add-test-schema": "cross-env IS_DEV=true npm run add"
+    "links": "node links/generate.js"
   },
   "devDependencies": {
     "@types/chai": "^4.2.12",
