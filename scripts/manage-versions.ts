@@ -42,22 +42,24 @@ function ensureDirectoryExistence(path) {
 function printConfig() {
   console.log(`${chalk.yellow('Lectern Root')}: ${config.apiRoot}`);
   console.log(`${chalk.yellow('Dictionary Name')}: ${config.dictionaryName}`);
-  console.log(`${chalk.yellow('Dev environment?')}: ${config.isDev}\n`);
 }
+
 //current versions not getting updateds
 async function printVersionsLists() {
-  const currentVersions = fse.readJSONSync(config.versionsFilename);
+  const savedVersions = fse.readJSONSync(config.versionsFilename);
   const versions = await fetchDictionaryVersionsList();
 
-  const newVersions = versions.filter(
-    (item) => currentVersions.find((cv) => cv.version === item) === undefined,
+  const availableVersions = versions.filter(
+    (item) => savedVersions.find((cv) => cv.version === item) === undefined,
   );
+
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
   console.log(
-    `\n${chalk.yellow('Current Versions:')}\n${currentVersions.map((v) => v.version).join('\n')}`,
+    `\n${chalk.yellow('Saved Versions:')}\n${savedVersions.map((v) => v.version).join('\n')}`,
   );
-  console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
-  return newVersions;
+  console.log(`\n${chalk.yellow('Available Versions:')}\n${availableVersions.join('\n')}`);
+
+  return availableVersions;
 }
 
 function saveFiles(version, data) {
