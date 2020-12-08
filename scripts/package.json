@@ -2,7 +2,8 @@
   "scripts": {
     "help": "ts-node manage-versions.ts --help --npm",
     "list": "ts-node manage-versions.ts --list --npm",
-    "add": "ts-node manage-versions.ts --add --npm && copy-data.ts",
+    "add": "ts-node manage-versions.ts --add --npm && npm run copy",
+    "copy": "ts-node copy-data.ts",
     "clean": "ts-node -r dotenv/config clean-data.ts",
     "test": "mocha --inline-diff --require ts-node/register ./**/*.ts",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./**/*.test.ts",
