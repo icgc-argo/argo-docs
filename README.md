@@ -63,31 +63,32 @@ The site should open in a new page in your browser at the address: [localhost:30
 
 The Data Dictionary content is not updated dynamically when the dictionary is updated. Instead, the dictionary content is included as static files included in this repository. This allows the docs site to be completely static and not have to load the dictionary from the source everytime it is requested.
 
-To simplify updating the dictonary content, the process has been scripted so it can be run by following the commands below.
+To simplify updating the dictonary content, the process has been scripted so it can be run by following the commands below. Files will be saved in `scripts/data` folder and then moved to website directory by `copy-data` script.
 
-**Note: By default this connects with the production version of Lectern.**
+1. Firstly create `.env` file based on the `.env.schema` file in the `scripts` folder.
+   Ensure `LECTERN_ROOT` and `DICTIONARY_NAME` variables are set.
 
-1. From the argo-docs root directory:
+2. From the argo-docs root directory:
 
 ```
 cd scripts
 ```
 
-2. Install script dependencies:
+3. Install script dependencies:
 
 ```
 npm ci
 ```
 
-3. Run the 'Add Dictionary' script:
+4. Run the 'Add Dictionary' script:
 
 ```
 npm run add
 ```
 
-4. Follow the prompts in the script - Use keyboard arrow keys to highlight the version you want to add. Hit enter when you have selected the desired version.
+5. Follow the prompts in the script - Use keyboard arrow keys to highlight the versions you want to add. Hit enter when you have selected the desired versions.
 
-5. The script has added files in the following places:
+6. The script has added files in the following places:
 
    - /website/static/data/schemas/{{version number}}
    - /website/static/data/schemas/diffs/{{version number}}
@@ -105,7 +106,25 @@ npm run add
    git commit
    ```
 
-6. Open a PR in the Argo Docs github using `develop` as the base branch.
+7. Open a PR in the Argo Docs github using `develop` as the base branch.
+
+## Cleaning dictionary script data
+
+```
+npm run clean
+```
+
+Cleans `scripts/data` folder. Destructive action. Will remove everything. All versions will have to be added again.
+
+## Generate links
+
+External projects eg. `platform-ui` link to docs site. Sometimes urls change so we need to update code.
+The following script is a convienence to help generate these new urls
+It outputs constants into a file called `links.js`
+
+```
+npm run links
+```
 
 ## Upgrading Docusaurus
 
