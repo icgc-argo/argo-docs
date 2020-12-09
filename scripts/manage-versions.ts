@@ -29,6 +29,7 @@ import { argv } from 'yargs';
 import fse from 'fs-extra';
 import generateDiffChanges from './generateDiffData';
 import getConfig from './config';
+import { schemaPath, versionsFilename } from './constants';
 
 const config = getConfig();
 
@@ -42,27 +43,29 @@ function ensureDirectoryExistence(path) {
 function printConfig() {
   console.log(`${chalk.yellow('Lectern Root')}: ${config.apiRoot}`);
   console.log(`${chalk.yellow('Dictionary Name')}: ${config.dictionaryName}`);
-  console.log(`${chalk.yellow('Dev environment?')}: ${config.isDev}\n`);
 }
+
 //current versions not getting updateds
 async function printVersionsLists() {
-  const currentVersions = fse.readJSONSync(config.versionsFilename);
+  const savedVersions = fse.readJSONSync(versionsFilename);
   const versions = await fetchDictionaryVersionsList();
 
-  const newVersions = versions.filter(
-    (item) => currentVersions.find((cv) => cv.version === item) === undefined,
+  const availableVersions = versions.filter(
+    (item) => savedVersions.find((cv) => cv.version === item) === undefined,
   );
+
   console.log(`\n${chalk.yellow('All Versions:')}\n${versions.join('\n')}`);
   console.log(
-    `\n${chalk.yellow('Current Versions:')}\n${currentVersions.map((v) => v.version).join('\n')}`,
+    `\n${chalk.yellow('Saved Versions:')}\n${savedVersions.map((v) => v.version).join('\n')}`,
   );
-  console.log(`\n${chalk.yellow('New Versions:')}\n${newVersions.join('\n')}`);
-  return newVersions;
+  console.log(`\n${chalk.yellow('Available Versions:')}\n${availableVersions.join('\n')}`);
+
+  return availableVersions;
 }
 
 function saveFiles(version, data) {
-  const dataFile = `${config.schemaPath}/${version}.json`;
-  const treeFile = `${config.schemaPath}/${version}_tree.json`;
+  const dataFile = `${schemaPath}/${version}.json`;
+  const treeFile = `${schemaPath}/${version}_tree.json`;
   fse.writeJSONSync(dataFile, data);
   // const treeData = generateTreeData(data);
   // fse.writeJSONSync(treeFile, treeData);
@@ -81,7 +84,7 @@ function saveDataFiles(dictionary, versions) {
 }
 
 function saveVersionsFile(data) {
-  fs.writeFileSync(config.versionsFilename, JSON.stringify(data));
+  fs.writeFileSync(versionsFilename, JSON.stringify(data));
 }
 
 async function fetchAndSaveDiffsForVersion(version, currentVersions) {
@@ -92,8 +95,8 @@ async function fetchAndSaveDiffsForVersion(version, currentVersions) {
     const high = parseFloat(version) > parseFloat(otherVersion) ? version : otherVersion;
     const low = parseFloat(version) < parseFloat(otherVersion) ? version : otherVersion;
 
-    const pathHigh = `${config.schemaPath}/diffs/${high}`;
-    const pathLow = `${config.schemaPath}/diffs/${low}`;
+    const pathHigh = `${schemaPath}/diffs/${high}`;
+    const pathLow = `${schemaPath}/diffs/${low}`;
     const fileNameHL = `${pathHigh}/${high}-diff-${low}.json`;
     const fileNameLH = `${pathLow}/${low}-diff-${high}.json`;
 
@@ -198,7 +201,7 @@ async function runAdd() {
   const selectedVersions = await userSelectVersion(newVersions);
 
   for await (const selectedVersion of selectedVersions) {
-    const currentVersions = fse.readJSONSync(config.versionsFilename);
+    const currentVersions = fse.readJSONSync(versionsFilename);
 
     // Fetch the dictionary for this version and save data and tree files
     const dictionary = await fetchDictionaryForVersion(selectedVersion);
