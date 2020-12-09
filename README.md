@@ -65,30 +65,32 @@ The Data Dictionary content is not updated dynamically when the dictionary is up
 
 To simplify updating the dictonary content, the process has been scripted so it can be run by following the commands below. Files will be saved in `scripts/data` folder and then moved to website directory by `copy-data` script.
 
-1. Firstly create `.env` file based on the `.env.schema` file in the `scripts` folder.
+1. Pull latest code and branch off `develop`
+
+2. Firstly create `.env` file based on the `.env.schema` file in the `scripts` folder.
    Ensure `LECTERN_ROOT` and `DICTIONARY_NAME` variables are set.
 
-2. From the argo-docs root directory:
+3. From the argo-docs root directory:
 
 ```
 cd scripts
 ```
 
-3. Install script dependencies:
+4. Install script dependencies:
 
 ```
 npm ci
 ```
 
-4. Run the 'Add Dictionary' script:
+5. Run the 'Add Dictionary' script:
 
 ```
 npm run add
 ```
 
-5. Follow the prompts in the script - Use keyboard arrow keys to highlight the versions you want to add. Hit enter when you have selected the desired versions.
+6. Follow the prompts in the script - Use keyboard arrow keys to highlight the versions you want to add. Hit enter when you have selected the desired versions.
 
-6. The script has added files in the following places:
+7. The script has added files in the following places:
 
    - /website/static/data/schemas/{{version number}}
    - /website/static/data/schemas/diffs/{{version number}}
@@ -106,7 +108,7 @@ npm run add
    git commit
    ```
 
-7. Open a PR in the Argo Docs github using `develop` as the base branch.
+8. Open a PR in the Argo Docs github using `develop` as the base branch.
 
 ## Cleaning dictionary script data
 
