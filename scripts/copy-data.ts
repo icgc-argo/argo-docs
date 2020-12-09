@@ -7,7 +7,7 @@ const websiteDir = '../website/static/data';
  */
 const copyData = () => {
   sh.rm('-r', `${websiteDir}/*`);
-  sh.cp('-R', `./data/`, websiteDir);
+  sh.cp('-r', `./data/*`, websiteDir);
 };
 
 copyData();
