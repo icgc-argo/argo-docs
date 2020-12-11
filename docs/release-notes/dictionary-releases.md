@@ -19,6 +19,14 @@ Coming soon.
 None to report.
 ------>
 
+## Release 1.5
+
+**Release Date:** December 11, 2020
+
+The following updates are included:
+
+- Removed ID prefix restriction and all notes referencing this restriction.
+
 ## Release 1.3
 
 **Release Date:** November 24, 2020
