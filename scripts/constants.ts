@@ -18,27 +18,9 @@
  *
  */
 
-import chalk from 'chalk';
-import fse from 'fs-extra';
-import sh from 'shelljs';
-import { schemaPath, versionsFilename } from './constants';
+const schemaPath = './data/schemas';
+const versionsFilename = `${schemaPath}/schema-versions.json`;
 
-/**
- * Deletes all data files, keeps dir structure and empty schema-versions.json
- */
-async function cleanDataFolder() {
-  const path = `./data/`;
-  try {
-    console.log(chalk.yellow('Deleting data folder...'));
-    await fse.remove(path);
-    console.log(chalk.yellow('Creating placeholder folders...'));
-    sh.mkdir('-p', `${schemaPath}/diffs`);
-    console.log(chalk.yellow('Creating schema versions file...'));
-    await fse.writeJson(`${versionsFilename}`, []);
-  } catch (err) {
-    console.log(chalk.red('Error deleting data'));
-    console.error(err);
-  }
-}
+const dataFileTreeName = '../website/src/pages/dictionary/tree.json';
 
-cleanDataFolder();
+export { schemaPath, versionsFilename, dataFileTreeName };
