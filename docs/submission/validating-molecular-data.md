@@ -6,29 +6,25 @@ platform_key: DOCS_VALIDATING_MOLECULAR_DATA
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-It is very important that molecular data is submitted with valid metadata.  As a helpful tool during metadata preparation, we have prepared a validation client that can be run on your data locally before submitting data officially.  The validation client will make sure that the prepared metadata and the metadata in the BAM headers is matching. 
+The ARGO DCC requires that necessary information describing molecular data files, called metadata, is be submitted at the same time as the molecular data to facilitate automated downstream analysis. This metadata is submitted to the ARGO metadata repository, called Song. 
 
-Verification will help you ensure your data is formatted correctly (with accurate identifier assignments between metadata and molecular data files) and that your submission goes smoothly while also helping the DCC ensure that the downstream [Analysis Pipelines](/docs/analysis-workflows/analysis-overview) will function seamlessly.  
+## Preparing Molecular Metadata Payloads
 
-This validation tool will check: 
-- Data submitted in the metadata payload and BAM/FASTQ files aligns
-- Each submission is for a single sample
+### Understanding the payload fields
 
-
-## Preparing Metadata Payloads
-
-### Understanding the Song metadata fields
-
-The ARGO DCC requires that necessary information describing sequencing metadata to be submitted at the same time as the molecular data. Metadata is submitted in JSON format (called a `payload`), which is validated against JSON Schema to ensure data quality. The first step of submitting sequencing data is to prepare the metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. For example:
+Molecular data is submitted in conjunction with metadata submitted in JSON format (called a payload), which is validated against JSON Schema to ensure data quality. The first step of submitting molecular data is to prepare the metadata payloads conforming to the most recent JSON schema that has been defined by the DCC.
 
 - This is an example of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json).
 - This is an example of a correctly formatted payload from a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
 
-Once the metadata has been prepared, both the payload and the molecular data files can be submitted together. 
+Once the metadata has been prepared, both the payload and the molecular data files can be [submitted](/docs/submission/submitting-molecular-data) together. 
 
-The `sequencing_experiment` payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
 
-> ![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it will immediately fail submission validation.
+The metadata payload is broken down into 5 sections: `root level`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
+
+:::note   
+![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it will immediately fail submission validation.
+:::
 
 #### **Root level**
 The root level of the sequencing_experiment payload contains important administrative information. The fields include:
@@ -37,7 +33,7 @@ The root level of the sequencing_experiment payload contains important administr
 | ---------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
 | studyId          | ![Required](/assets/submission/dictionary-required.svg) | ARGO `Program ID`, the unique identifier of your program. If you have logged into the ARGO Data Platform, this is the Program ID that you see in the Program Services area. |                       |
 | analysisType     | ![Required](/assets/submission/dictionary-required.svg) | The type of molecular data that is being submitted in the payload.                                                                                                          | sequencing_experiment |
-| read_group_count | ![Required](/assets/submission/dictionary-required.svg) | The number of read groups to be submitted.                                                                                                                                  |
+| read_group_count | ![Required](/assets/submission/dictionary-required.svg) | The number of read groups in the molecular files being submitted submitted.                                                                                                                                  |
 
 **Example root level portion of payload:**
 
@@ -46,7 +42,6 @@ The root level of the sequencing_experiment payload contains important administr
     "name": "sequencing_experiment"
   },
   "studyId": "TEST-CA",
-  "read_group_count": 3
 ```
 
 #### **Experiment:**
@@ -56,7 +51,7 @@ The experiment section contains details that are relevant to the experimental re
 | Payload Field                        | Attribute                                               | Description                                                                                            | Permissible Values               |
 | ------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------- |
 | submitter_sequencing\_ experiment_id | ![Required](/assets/submission/dictionary-required.svg) | The unique identifier of the sequencing experiment.                                                    |                                  |
-| platform                             | ![Required](/assets/submission/dictionary-required.svg) | The sequencing platform type used in data generation.                                                  |                                  |
+| platform                             | ![Required](/assets/submission/dictionary-required.svg) | The sequencing platform type used in data generation.                                                  |CAPILLARY, LS454, ILLUMINA, SOLID, HELICOS, IONTORRENT, ONT, PACBIO, Nanopore, BGI|
 | platform_model                       |                                                         | The model number of the sequencing machine used in data generation.                                    |                                  |
 | experimental_strategy                | ![Required](/assets/submission/dictionary-required.svg) | The primary experimental method. For sequencing data it refers to how the sequencing library was made. | WGS, WXS, RNA-Seq, Bisulfite-Seq |
 | sequencing_date                      |                                                         | Date sequencing was performed.                                                                         |
@@ -121,57 +116,114 @@ The read group section contains details about the reads that were generated from
 | sample_barcode            |                                                         | According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                                                                                                                                                                                                                         |                    |
 | library_name              | ![Required](/assets/submission/dictionary-required.svg) | Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).                                                                                                                                                                                                                                                                         |                    |
 
-<br/>
 Read Group Data Validations:
 
-1. All `read_groups` in the payload must belong to a single sample.
+1. All `read_groups` in the payload and BAM header must belong to a single sample.
 1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
 1. The total number of `read_group` objects must match the number specified in `read_group_count`.
 1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
+1. For paired-end sequencing, `file_r1` and `file_r2` must not be the same file. 
 1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
 **Example read groups portion of payload:**
 
+
+
+Examples of correctly formatted `read groups` that meet these rules are shown here. 
+<!---  Tabs start here -->
+
+<Tabs
+  defaultValue="BAM-paired"
+  values={[
+    { label: 'BAM (paired)', value: 'BAM-paired', },
+    { label: 'BAM (single)', value: 'BAM-single', },
+    { label: 'FASTQ (paired)', value: 'FASTQ-paired', },
+    { label: 'FASTQ (single)', value: 'FASTQ-single', },
+  ]
+}>
+<TabItem value="BAM-paired">
+
 ```json
-"read_groups": [
-  {
+  "read_group_count": 1,
+  "read_groups": {
+  	"read_group_id_in_bam": "C0HVY.2",
+  	"submitter_read_group_id": "C0HVY.2",
+  	"platform_unit": "74_8a",
+  	"is_paired_end": true,
+  	"file_r1": "test_rg3.bam",
+  	"file_r2": "test_rg4.bam",
+  	"read_length_r1": 150,
+  	"read_length_r2": 16,
+  	"insert_size": 232,
+  	"sample_barcode": null,
+  	"library_name": "Pond-147579"
+  }
+```
+
+</TabItem>
+<TabItem value="BAM-single">
+
+```json
+  "read_group_count": 1,
+  "read_groups": {
+    "read_group_id_in_bam": "C0HVY.2", 
     "submitter_read_group_id": "C0HVY.2",
     "platform_unit": "74_8a",
     "is_paired_end": true,
-    "file_r1": "test_rg3.bam",
-    "file_r2": "test_rg3.bam",
+    "file_r1": "test_rg55.bam",
+    "file_r2": null,
     "read_length_r1": 150,
-    "read_length_r2": 150,
+    "read_length_r2": null,
     "insert_size": 232,
     "sample_barcode": null,
     "library_name": "Pond-147579"
-  },
-  {
-    "submitter_read_group_id": "D0RE2.1",
+  }
+```
+
+</TabItem>
+<TabItem value="FASTQ-paired">
+
+```json
+  "read_group_count": 1,
+  "read_groups": {
+    "read_group_id_in_bam": null, 
+    "submitter_read_group_id": "C0HVY.2",
     "platform_unit": "74_8b",
     "is_paired_end": true,
-    "file_r1": "test_rg3.bam",
-    "file_r2": "test_rg3.bam",
+    "file_r1": "test_rg23.fq",
+    "file_r2": "test_rg24.fq",
     "read_length_r1": 150,
-    "read_length_r2": 150,
-    "insert_size": 298,
-    "sample_barcode": null,
-    "library_name": "Pond-147580"
-  },
-  {
-    "submitter_read_group_id": "D0RH0.2",
-    "platform_unit": "74_8c",
-    "is_paired_end": true,
-    "file_r1": "test_rg3.bam",
-    "file_r2": "test_rg3.bam",
-    "read_length_r1": 150,
-    "read_length_r2": 150,
+    "read_length_r2": 125, 
     "insert_size": 298,
     "sample_barcode": null,
     "library_name": "Pond-147580"
   }
-],
 ```
+
+</TabItem>
+<TabItem value="FASTQ-single">
+
+```json
+  "read_group_count": 1,
+  "read_groups": {
+    "read_group_id_in_bam": null, 
+    "submitter_read_group_id": "C0HVY.2",
+    "platform_unit": "74_8b",
+    "is_paired_end": false,
+    "file_r1": "test_rg5.fq",
+    "file_r2": null,
+    "read_length_r1": 150,
+    "read_length_r2": null, 
+    "insert_size": 298,
+    "sample_barcode": null,
+    "library_name": "Pond-147580"
+  }
+```
+
+</TabItem>
+</Tabs>
+
+<!---  Tabs end here -->
 
 #### **Files:**
 
@@ -209,6 +261,15 @@ The fields include:
 ```
 
 ## Validating Metadata 
+
+It is very important that molecular data is submitted with valid metadata that meets all of the rules described above.  As a helpful tool during metadata preparation, we have prepared a validation client that can be run on your data locally before submitting data officially.  The validation client will make sure that the prepared metadata and the metadata in the BAM headers is matching. 
+
+Verification will help you ensure your data is formatted correctly (with accurate identifier assignments between metadata and molecular data files) and that your submission goes smoothly while also helping the DCC ensure that the downstream [Analysis Pipelines](/docs/analysis-workflows/analysis-overview) will function seamlessly.  
+
+This validation tool will check: 
+- Data submitted in the metadata payload and BAM/FASTQ files aligns
+- Each submission is for a single sample
+
 
 ### Installing the Validation Client 
 
@@ -268,7 +329,7 @@ alias seq-tools-in-docker="docker run -t -v `pwd`:`pwd` -w `pwd` quay.io/icgc-ar
 <!---  Tabs end here -->
 
 
-## Validating Song Payloads 
+## Validating Metadata Payloads 
 You can validate your Song payloads in multiple ways, depending on how you have your data structured. 
 
 ### Structured Directory  
@@ -345,98 +406,3 @@ cat validation_report.PASS.jsonl | jq . | less # view details for PASS metadata 
 cat validation_report.INVALID.jsonl | jq . | less # view details for PASS-with-WARNING metadata files
 cat validation_report.PASS-with-WARNING.jsonl | jq . | less # view details for PASS metadata files
 ```
-## Payload Validation Rules 
-
-
-
-Examples of correctly formatted `read groups` that meet these rules are shown here. 
-<!---  Tabs start here -->
-
-<Tabs
-  defaultValue="BAM-paired"
-  values={[
-    { label: 'BAM (paired)', value: 'BAM-paired', },
-    { label: 'BAM (single)', value: 'BAM-single', },
-    { label: 'FASTQ (paired)', value: 'FASTQ-paired', },
-    { label: 'FASTQ (single)', value: 'FASTQ-single', },
-  ]
-}>
-<TabItem value="BAM-paired">
-
-```json
-  {
-    "read_group_id_in_bam": "C0HVY.2", 
-    "submitter_read_group_id": "C0HVY.2",
-    "platform_unit": "74_8a",
-    "is_paired_end": true,
-    "file_r1": "test_rg3.bam",
-    "file_r2": "test_rg4.bam",
-    "read_length_r1": 150,
-    "read_length_r2": 16,
-    "insert_size": 232,
-    "sample_barcode": null,
-    "library_name": "Pond-147579"
-  }
-```
-
-</TabItem>
-<TabItem value="BAM-single">
-
-```json
-  {
-    "read_group_id_in_bam": "C0HVY.2", 
-    "submitter_read_group_id": "C0HVY.2",
-    "platform_unit": "74_8a",
-    "is_paired_end": true,
-    "file_r1": "test_rg55.bam",
-    "file_r2": null,
-    "read_length_r1": 150,
-    "read_length_r2": null,
-    "insert_size": 232,
-    "sample_barcode": null,
-    "library_name": "Pond-147579"
-  }
-```
-
-</TabItem>
-<TabItem value="FASTQ-paired">
-
-```json
-  {
-    "read_group_id_in_bam": null, 
-    "submitter_read_group_id": "C0HVY.2",
-    "platform_unit": "74_8b",
-    "is_paired_end": true,
-    "file_r1": "test_rg23.fq",
-    "file_r2": test_rg24.fq",
-    "read_length_r1": 150,
-    "read_length_r2": 125, 
-    "insert_size": 298,
-    "sample_barcode": null,
-    "library_name": "Pond-147580"
-  }
-```
-
-</TabItem>
-<TabItem value="FASTQ-single">
-
-```json
-{
-    "read_group_id_in_bam": null, 
-    "submitter_read_group_id": "C0HVY.2",
-    "platform_unit": "74_8b",
-    "is_paired_end": false,
-    "file_r1": "test_rg5.fq",
-    "file_r2": null,
-    "read_length_r1": 150,
-    "read_length_r2": null, 
-    "insert_size": 298,
-    "sample_barcode": null,
-    "library_name": "Pond-147580"
-  }
-```
-
-</TabItem>
-</Tabs>
-
-<!---  Tabs end here -->
