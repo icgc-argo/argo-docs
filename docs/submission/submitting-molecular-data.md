@@ -3,15 +3,13 @@ id: submitting-molecular-data
 title: Submitting Molecular Data
 platform_key: DOCS_SUBMITTING_MOLECULAR_DATA
 ---
-
-![Reminder Banner](/assets/submission/banner-reminder.svg)
-
 Molecular data consists of raw molecular data files (e.g. sequencing reads), as well as any associated file metadata (data that describes your data).
 
 Raw molecular data is submitted to a **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
-> [Sample Registration](/docs/submission/registering-samples) is the first step in the data submission life cycle. You **must** register samples before submitting molecular data. Please ensure that your samples are registered on the ARGO Data Platform before continuing with this step.
-
+:::note
+ [Sample Registration](/docs/submission/registering-samples) is the first step in the data submission life cycle. You **must** register samples before submitting molecular data. Please ensure that your samples are registered on the ARGO Data Platform before continuing with this step.
+:::
 ## Data Submission Client Configuration
 
 Molecular data is uploaded to the ARGO Data Platform using the Song and Score CLIs (Command Line Clients). Song is an open source system used to track and validate metadata about raw data submissions. Score securely manages upload and download of files to cloud repositories managed by the RDPCs. The Song and Score clients are used in conjunction to upload raw data files while maintaining file metadata and provenance.
@@ -40,7 +38,7 @@ To do this, change directories into `conf` folder and open the `application.yaml
 ```yml
 client:
   serverUrl: https://submission-song.rdpc.cancercollaboratory.org
-  studyId: DASH-CA
+  studyId: DASH-CA #add your Program ID here
   debug: false
   accessToken: 92038829-338c-4aa2-92fc2-a3c241f63ff0
 retry:
@@ -82,15 +80,12 @@ storage.url=https://submission-score.rdpc.cancercollaboratory.org
 ```
 
 ## How to Upload Molecular Data
-### Step 1. Prepare Song sequencing_experiment metadata
-Before proceeding, please read the instructions on how to [prepare and validate](/docs/submission/molecular-data-prep). 
-
-- This is an example of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json).
-- This is an example of a correctly formatted payload from a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
+### Step 1. Prepare molecular metadata sequencing_experiment payload
+Before proceeding, please read the instructions on how to [prepare and validate](/docs/submission/molecular-data-prep) molecular metadata payloads.
 
 ### Step 2. Upload the metadata file
 
-Once you have formatted the payload correctly, use the song-client `submit` command to upload the Song payload.
+Once you have formatted the payload correctly, use the song-client `submit` command to upload the payload.
 
 ```shell
 > ./bin/sing submit -f dash-5-tumour.json
@@ -105,7 +100,7 @@ If your payload is not formatted correctly, you will receive an error message de
 }
 ```
 
-At this point, since the payload data has successfully been submitted and accepted by Song, it is now referred to as a Song analysis. The newly created analysis will be state `UNPUBLISHED`.
+At this point, since the payload data has successfully been submitted and accepted by Song, it is now referred to as an analysis. The newly created analysis will be state `UNPUBLISHED`.
 
 ### Step 3. Generate a manifest file
 
