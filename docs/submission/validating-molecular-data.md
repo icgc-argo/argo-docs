@@ -175,7 +175,7 @@ Depending on the type of sequencing that was done, the `read_groups` section of 
   	"file_r1": "test_rg3.bam",
   	"file_r2": "test_rg4.bam",
   	"read_length_r1": 150,
-  	"read_length_r2": 16,
+  	"read_length_r2": 125,
   	"insert_size": 232,
   	"sample_barcode": null,
   	"library_name": "Pond-147579"
@@ -236,7 +236,7 @@ Depending on the type of sequencing that was done, the `read_groups` section of 
     "file_r2": null,
     "read_length_r1": 150,
     "read_length_r2": null, 
-    "insert_size": 298,
+    "insert_size": null,
     "sample_barcode": null,
     "library_name": "Pond-147580"
   }
@@ -248,14 +248,14 @@ Depending on the type of sequencing that was done, the `read_groups` section of 
 <!---  Tabs end here -->
 ### File and Data Validation Rules
 
-Sequencing data of both `BAM` and `FASTQ` type files is accepted, with the exception of interleaved FASTQ files.  Metadata payloads like the example above must follow these data validations:
+Sequencing data of both `BAM` and `FASTQ` type files are accepted, with the exception of interleaved FASTQ files.  Metadata payloads like the example above must follow these data validations:
 
 1. Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
 1. For both FASTQ and BAM submission, all files in the `files` section must be unique in the payload.
 1. All `read_groups` in the payload and BAM header must belong to a single sample.
 1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
 1. The total number of `read_group` objects must match the number specified in `read_group_count`.
-1. For paired end sequencing, both `file_r1` and `file_r2` are required, otherwise, only `file_r1` is required (`file_r2` must not be populated).
+1. For paired-end sequencing, both `file_r1` and `file_r2` are required.  For single-end sequencing, only `file_r1` is required (`file_r2` must not be populated).
 1. For paired-end sequencing, `file_r1` and `file_r2` must not be the same file. 
 1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
@@ -266,47 +266,47 @@ Sequencing data of both `BAM` and `FASTQ` type files is accepted, with the excep
 
 The metadata payload is broken down into 4 sections: `experiment`, `samples`, `read groups` and `files`, with all other fields being at the root level. Each section **must** be submitted in the payload.
 
-The `samples` section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a metadata payload, this data must be [registered](/docs/submission/registering-samples) in the ARGO Data Platform. For allowed values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary). If the data for a sample is different than what has been registered, metadata submission will fail.
+The `samples` section contains details of the clinical data and key sample descriptors related to the submitted files. In order to submit a metadata payload, samples must be [registered](/docs/submission/registering-samples) in the ARGO Data Platform. For permissible values of all fields, please see the Sample Registration file of the [Data Dictionary](/dictionary). If the data for a sample is different than what has been registered, metadata submission will fail.
 
 A description of all other payload sections is shown below: 
 
 |  Payload Field     | Payload Section |  Attribute                                                |  Description                                                                                                                                                                  |  Permissible Values     |  
 |-|-|-|-|-|
-|  studyId           |  |  ![Required](/assets/submission/dictionary-required.svg)  |  ARGO `Program ID`, the unique identifier of your program. If you have logged into the ARGO Data Platform, this is the Program ID that you see in the Program Services area.  |                         |  
-|  analysisType      |  |  ![Required](/assets/submission/dictionary-required.svg)  |  The type of molecular data that is being submitted in the payload.                                                                                                           |  sequencing_experiment  |  
-|  submitter_sequencing\_ experiment_id  | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The unique identifier of the sequencing experiment.                                                     |                                    |  
-|  platform                              | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The sequencing platform type used in data generation.                                                   | CAPILLARY, LS454, ILLUMINA, SOLID, HELICOS, IONTORRENT, ONT, PACBIO, Nanopore, BGI |  
-|  platform_model                        | experiment |                                                           |  The model number of the sequencing machine used in data generation.                                     |                                    |  
-|  experimental_strategy                 | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The primary experimental method. For sequencing data it refers to how the sequencing library was made.  |  WGS, WXS, RNA-Seq, Bisulfite-Seq  |  
-|  sequencing_date                       | experiment |                                                           |  Date sequencing was performed.      |datetime format, for example: 2019-06-16,    2019-06-16T20:20:39+00:00  |  
-|  read_group_count  |  |  ![Required](/assets/submission/dictionary-required.svg)  |  The number of read groups in the molecular files being submitted.                                                                                                               |   |  
-| read_group_id_in_bam | read_groups |   |  Optional field indicating the read group id that is in the BAM.  This **cannot** be submitted for FASTQ files. |                                                                      |  
-|  submitter_read\_ group_id  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  The unique identifier of a read group; must be unique within each payload.                                                                                                                                                                                                                                                                                         |                      |  
-|  platform_unit              | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Unique identifier including the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.  |                      |  
-|  is_paired_end              | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Indicate if paired end sequencing was performed.                                                                                                                                                                                                                                                                                                                            |  true, false         |  
-|  file_r1                    | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the sequencing file containing reads from the first end of a sequencing run.                                                                                                                                                                                                                                                                                        |                      |  
-|  file_r2                    | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the sequencing file containing reads from the second end of a paired end sequencing run. Required if and only if paired end sequencing was done.                                                                                                                                                                                                                    |                      |  
-|  read_length_r1             | read_groups |                                                           |  Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.                                                                                                                                                                                                                                                              |                      |  
-|  read_length_r2             | read_groups |                                                           |  Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.                                                                                                                                                                                                                                                             |                      |  
-|  insert_size                | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  For paired end sequencing, the average size of sequences between two sequencing ends. Required only for paired end sequencing.                                                                                                                                                                                                                                              |                      |  
-|  sample_barcode             | read_groups |                                                           |  According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                                                                                                                                                                                                                          |                      |  
-|  library_name               | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).                                                                                                                                                                                                                                                                          |                      |  
-|  fileName       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the file.                                                                            |                      |  
-|  fileSize       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Size of the file, in bytes.                                                                  |                      |  
-|  fileMd5sum     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Compute the md5sum of the file. This must match what is computed when the file is uploaded.  |  |  |
-|  fileType       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Data format of sequencing files.                                                             |  BAM, FASTQ          |  
-|  fileAccess     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  The permission level of a file.                                                              |  open, controlled    |
-|  dataType       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Descriptor of the type of file being submitted.                                              |  Submitted Reads     | 
+|  **studyId**           |  |  ![Required](/assets/submission/dictionary-required.svg)  |  ARGO `Program ID`, the unique identifier of your program. If you have logged into the ARGO Data Platform, this is the Program ID that you see in the Program Services area.  |                         |  
+|  **analysisType**      |  |  ![Required](/assets/submission/dictionary-required.svg)  |  The type of molecular data that is being submitted in the payload.                                                                                                           |  **sequencing_experiment**  |  
+|  **submitter_sequencing**\_ **experiment_id**  | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The unique identifier of the sequencing experiment**.                                                     |                                    |  
+|  **platform**                              | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The sequencing platform type used in data generation.                                                   | CAPILLARY, LS454, ILLUMINA, SOLID, HELICOS, IONTORRENT, ONT, PACBIO, Nanopore, BGI |  
+|  **platform_model**                        | experiment |                                                           |  The model number of the sequencing machine used in data generation.                                     |                                    |  
+|  **experimental_strategy**                | experiment |  ![Required](/assets/submission/dictionary-required.svg)  |  The primary experimental method. For sequencing data it refers to how the sequencing library was made.  |  WGS, WXS, RNA-Seq, Bisulfite-Seq  |  
+|  **sequencing_date**                       | experiment |                                                           |  Date sequencing was performed.      |datetime format, for example: 2019-06-16 or  2019-06-16T20:20:39+00:00  |  
+|  **read_group_count**  |  |  ![Required](/assets/submission/dictionary-required.svg)  |  The number of read groups in the molecular files being submitted.                                                                                                               |   |  
+| **read_group_id_in_bam** | read_groups |   |  Optional field indicating the read group id that is in the BAM.  If submitted, this will be used to map the RD ID in the BAM header to the `submitter_read_group_id` in the payload.  After submission, the RG iD in the payload will be taken as the id for all future headers.  This **cannot** be submitted for FASTQ files. |                                                                      |  
+|  **submitter_read**\_ **group_id**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  The unique identifier of a read group; must be unique within each payload.                                                                                                                                                                                                                                                                                         |                      |  
+|  **platform_unit**              | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Unique identifier including the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.  |                      |  
+|  **is_paired_end**              | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Indicate if paired-end sequencing was performed.                                                                                                                                                                                                                                                                                                                            |  true, false         |  
+|  **file_r1**                    | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the sequencing file containing reads from the first end of a sequencing run.                                                                                                                                                                                                                                                                                        |                      |  
+|  **file_r2**                    | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the sequencing file containing reads from the second end of a paired-end sequencing run. Required if and only if paired-end sequencing was done.                                                                                                                                                                                                                    |                      |  
+|  **read_length_r1**            | read_groups |                                                           |  Length of sequencing reads in `file_r1`; this corresponds to the number of sequencing cycles of the first end.                                                                                                                                                                                                                                                              |                      |  
+|  **read_length_r2**             | read_groups |                                                           |  Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end.                                                                                                                                                                                                                                                             |                      |  
+|  **insert_size**                | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  For paired-end sequencing, the average size of sequences between two sequencing ends. Required only for paired-end sequencing.                                                                                                                                                                                                                                              |                      |  
+|  **sample_barcode**             | read_groups |                                                           |  According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                                                                                                                                                                                                                          |                      |  
+|  **library_name**               | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).                                                                                                                                                                                                                                                                          |                      |  
+|  **fileName**       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the file.                                                                            |                      |  
+|  **fileSize**       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Size of the file, in bytes.                                                                  |                      |  
+|  **fileMd5sum**     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Compute the md5sum of the file. This must match what is computed when the file is uploaded.  |  |  |
+|  **fileType**       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Data format of sequencing files.                                                             |  BAM, FASTQ          |  
+|  **fileAccess**     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  The permission level of a file.                                                              |  open, controlled    |
+|  **dataType**      | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Descriptor of the type of file being submitted.                                              |  Submitted Reads     | 
 
 
 ## Validating Metadata Payloads
 
-It is very important that molecular data is submitted with valid metadata. As a helpful tool during metadata preparation, we have prepared a validation client that can be run on your data locally before submitting data officially. 
+It is very important that molecular data is submitted with valid metadata. As a helpful tool during metadata preparation, we have prepared a validation client that can be run on your data locally before officially submitting. 
 
-Validation will help you ensure your data is formatted correctly (with accurate identifier assignments between metadata and molecular data files) and that your submission goes smoothly while also helping the DCC ensure that the downstream [Analysis Pipelines](/docs/analysis-workflows/analysis-overview) will function seamlessly.  
+Validation will help you ensure your data is formatted correctly (with accurate identifier assignments between metadata and molecular data files) and that your submission goes smoothly.  It also helps the DCC ensure that the downstream [Analysis Pipelines](/docs/analysis-workflows/analysis-overview) will function seamlessly.  
 
-This validation tool will check: 
-- Data submitted in the metadata payload and BAM/FASTQ files aligns.
+This validation client will check: 
+- Data submitted in the metadata payload aligns with the BAM/FASTQ files.
 - Each submission is for a single sample.
 - Each payload is formatted according to the [data validation rules](/docs/submission/molecular-data-prep#file-and-data-validation-rules) stated above.
 
@@ -433,7 +433,7 @@ seq-tools-in-docker validate -d ../sequencing-data-directory/ submission-payload
 You can use this method to build your own script to validate payloads in different locations. 
 
 ### Understanding the Validation Report
-Validation report summaries can be found in the top level submission directory where you ran `seq-tools`.  The report.  Reports are separated into three categories:
+Validation report summaries can be found in the top level submission directory where you ran `seq-tools`. Reports are separated into three categories:
 - **PASS:** This status indicates that these payload(s) are ready for submission. 
 - **PASS-with-WARNING:** This status indicates that these payload(s) are ready for submission, however there may be a parameter you want to double check before submission. 
 - **INVALID:** This status indicates that these payload(s) are _not_ ready for submission. 
