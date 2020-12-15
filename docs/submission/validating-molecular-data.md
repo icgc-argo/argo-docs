@@ -295,7 +295,7 @@ A description of all other payload sections is shown below:
 |  **fileSize**       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Size of the file, in bytes.                                                                  |                      |  
 |  **fileMd5sum**     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Compute the md5sum of the file. This must match what is computed when the file is uploaded.  |  |  |
 |  **fileType**       | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Data format of sequencing files.                                                             |  BAM, FASTQ          |  
-|  **fileAccess**     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  The permission level of a file.                                                              |  open, controlled    |
+|  **fileAccess**     | files |  ![Required](/assets/submission/dictionary-required.svg)  |  The permission level of a file for public access                                                              |  open, controlled|
 |  **dataType**      | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Descriptor of the type of file being submitted.                                              |  Submitted Reads     | 
 
 
