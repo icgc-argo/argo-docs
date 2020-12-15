@@ -22,7 +22,6 @@ These fields must to be coded specifically for ICGC ARGO purposes using the foll
 - These identifiers should not be derived from biobank or hospital identifiers or any other personal identifying information. These IDs are to be coded in such a way that they cannot be tracked back to the individual donors, except by the submitting program. Only the program will keep the key that will permit the data to be linked back to the individual donors. This key must not be communicated to the data users.
 - Identifiers are assigned by each submitting program and must be unique within all the data submitted by that program (no duplicate IDs allowed).
 - Identifiers referring to the same entity should be consistent across separate program submissions and should not be re-used for different entities. For example, the same donor should not be assigned different identifiers in different files or subsequent data submissions.
-- Identifiers cannot begin with DO, SP, SA, PD, TR or FU. These prefixes are reserved for ICGC ARGO IDs.
 - Identifiers are case-sensitive.
 
 ### Primary Diagnosis, Treatment and Follow Up Identifiers:
@@ -92,4 +91,4 @@ Complete clinical data means that a donor has a valid value submitted for all fi
 - A donor must have at least one tumour and one normal specimen submitted.
 - For each registered specimen, a donor must have all specimen core fields provided.
 - A donor must have at least one treatment and a corresponding treatment detail file (if applicable, e.g. for chemotherapy, hormonal therapy or radiation) with all core fields provided.
-- A donor must have at least one followup with all core fields provided.
+- A donor must have at least one follow up with all core fields provided.
