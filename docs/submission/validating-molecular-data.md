@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 Molecular data files are submitted in conjunction with necessary, descriptive data about molecular files and samples, called metadata. The DCC requires that metadata is submitted at the same time as the molecular data to facilitate automated downstream analysis. Metadata is submitted in JSON format, called a payload. The payload is validated against a JSON Schema to ensure data quality. This metadata is submitted to the ARGO metadata repository, called Song.  To prepare the molecular metadata, you will need to follow these steps: 
 
 1. Prepare metadata payloads according to the correct format (described below).
-2. Validate the metadata payload(s) and molecular files with the ARGO `seq-tools` client. 
+2. Validate the metadata payload(s) and molecular files with the ARGO [`seq-tools`](/docs/submission/molecular-data-prep#installing-the-validation-client) client. 
 3. Once the metadata has passed validation, both the metadata payload and the molecular data files can be [submitted](/docs/submission/submitting-molecular-data) together. 
 
 ## Preparing Metadata Payloads
@@ -255,7 +255,7 @@ Sequencing data of both `BAM` and `FASTQ` type files are accepted, with the exce
 1. All `read_groups` in the payload and BAM header must belong to a single sample.
 1. `platform_units` must be unique with a one-to-one relationship with `submitter_read_group_id`.
 1. The total number of `read_group` objects must match the number specified in `read_group_count`.
-1. For paired-end sequencing, both `file_r1` and `file_r2` are required.  For single-end sequencing, only `file_r1` is required (`file_r2` must not be populated).
+1. For paired-end sequencing, both `file_r1` and `file_r2` are required.  For single-end sequencing, only `file_r1` is required (`file_r2` must be populated with `null`).
 1. For paired-end sequencing, `file_r1` and `file_r2` must not be the same file. 
 1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
