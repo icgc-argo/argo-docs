@@ -147,7 +147,7 @@ These are examples of correctly formatted payloads:
 
 See github for the same example of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json) and a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
 
-Depending on the type of sequencing that was done, the `read_groups` section of the payload will need to be adjusted. Examples of correctly formatted `read groups` that meet [the rules](/docs/submission/submitting-molecular-data2#file-and-data-validations) for paired-end vs single-end sequencing are are shown here as examples. 
+Depending on the type of sequencing that was done, the `read_groups` section of the payload will need to be adjusted. Examples of correctly formatted `read groups` that meet [the rules](/docs/submission/submitting-molecular-data#file-and-data-validation-rules) for paired-end vs single-end sequencing are are shown here as examples. 
 
 <!---  Tabs start here -->
 
