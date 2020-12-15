@@ -285,6 +285,7 @@ This validation tool will check:
   ]
 }>
 <TabItem value="client">
+
 A required pre-requisite is to have the [`samtools`](http://www.htslib.org/) package installed, which is used to retrieve BAM header information. To read JSON/JSONL outputs in a friendly manner, we also suggest installing the `jq` package. 
 
 ```bash

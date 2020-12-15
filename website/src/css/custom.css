@@ -141,6 +141,8 @@ li + li {
 
   --ifm-navbar-height: 57px;
 
+  --ifm-tabs-color-active: #25c2a0;
+  
   --argo-grey-2: #dcdde1;
   --argo-grey-4: #f8f8fb;
 }
