@@ -8,7 +8,7 @@ Molecular data consists of raw molecular data files (e.g. sequencing reads), as 
 Raw molecular data is submitted to a **Regional Data Processing Centre (RDPC)**. RDPCs are responsible for processing your program's molecular data according to the [Analysis Pipeline](/docs/analysis-workflows/analysis-overview). If you are unsure which RDPC you should submit to, please [contact the DCC](https://platform.icgc-argo.org/contact).
 
 :::note
- [Sample Registration](/docs/submission/registering-samples) is the first step in the data submission life cycle. You **must** register samples before submitting molecular data. Please ensure that your samples are registered on the ARGO Data Platform before continuing with this step.
+ [Sample Registration](/docs/submission/registering-samples) is the first step in the data submission process. You **must** register samples before submitting molecular data. Please ensure that your samples are registered on the ARGO Data Platform before continuing with this step.
 :::
 ## Data Submission Client Configuration
 
