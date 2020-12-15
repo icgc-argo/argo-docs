@@ -12,11 +12,11 @@ The DCC requires that metadata (necessary information describing molecular data 
 2. Validate the payloads and molecular files with the ARGO `seq-tools` client. 
 3. Once the metadata has been prepared, both the payload and the molecular data files can be [submitted](/docs/submission/submitting-molecular-data) together. 
 
-## Preparing Molecular Metadata Payloads
+## Preparing Metadata Payloads
 
-### Understanding the payload format
+### Understanding the Payload Format
 
-Molecular data is submitted in conjunction with metadata submitted in JSON format (called a payload), which is validated against JSON Schema to ensure data quality. The first step of submitting molecular data is to prepare the metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. Once the metadata has been prepared, both the payload and the molecular data files can be [submitted](/docs/submission/submitting-molecular-data) together. 
+Molecular data is submitted in conjunction with metadata submitted in JSON format, called a payload. The payload is validated against a JSON Schema to ensure data quality. The first step of submitting molecular data is to prepare the metadata payloads conforming to the most recent JSON schema that has been defined by the DCC. Once the metadata has been prepared, both the payload and the molecular data files can be [submitted](/docs/submission/submitting-molecular-data) together.
 
 These are examples of correctly formatted payloads:
 <!---  Tabs start here -->
@@ -244,12 +244,12 @@ Depending on the type of sequencing that was done, the `read_groups` section of 
 
 <!---  Tabs end here -->
 
-### Understanding the payload fields
+### Understanding the Payload Fields
 :::note   
 ![Required](/assets/submission/dictionary-required.svg) indicates a required field that **must** be included in the payload or it will immediately fail submission.
 :::
 
-The metadata payload is broken down into 5 sections: `root`, `experiment`, `samples`, `read groups` and `files`. Each section **must** be submitted in the payload.
+The metadata payload is broken down into 4 sections: `experiment`, `samples`, `read groups` and `files`, with all other fields being at the root level. Each section **must** be submitted in the payload.
 
 
 |  Payload Field     | Payload Section |  Attribute                                                |  Description                                                                                                                                                                  |  Permissible Values     |  |
@@ -293,7 +293,7 @@ Sequencing data of both `BAM` and `FASTQ` type files is accepted.
 1. For paired-end sequencing, `file_r1` and `file_r2` must not be the same file. 
 1. For FASTQ submission, no file can appear more than once in `file_r1` or `file_r2` across read group objects.
 
-## Validating Metadata 
+## Validating Metadata Payloads
 
 It is very important that molecular data is submitted with valid metadata that meets all of the rules described above.  As a helpful tool during metadata preparation, we have prepared a validation client that can be run on your data locally before submitting data officially.  The validation client will make sure that the prepared metadata and the metadata in the BAM headers is matching. 
 
@@ -344,7 +344,7 @@ You can verify that the installation worked by checking the version:
 ```bash
 seq-tools -v
 ```
-To update the client to the latest version, pull the latest verions on the repository and run: 
+To update the client to the latest version, pull the latest version of the repository and run: 
 ```bash
 cd seq-tools
 pip3 install .
@@ -364,10 +364,7 @@ alias seq-tools-in-docker="docker run -t -v `pwd`:`pwd` -w `pwd` quay.io/icgc-ar
 <!---  Tabs end here -->
 
 
-## Validating Metadata Payloads 
-You can validate your metadata payloads in multiple ways, depending on how you have your data structured. 
-
-### Structured Directory  
+### Structured Directory Validation
 One method to quickly complete validation is to structure your data in a pre-determined format that `seq-tools` is expecting. Under a submission directory, compile each submission as a folder, with the JSON payload and the associated data files in the same folder. 
 
 Each submission folder **must** contain:
@@ -415,7 +412,7 @@ You will see an interactive prompt of the results of validation as the tool runs
 cat validation_report.PASS.jsonl | jq . | less
 cat validation_report.INVALID.jsonl | jq . | less
 ```
-### Scriptable Location 
+### Scriptable Location Validation
 
 If you do not want to use the structured directory, you can use the '-d' option if data files are located in a different directory than where the metadata payloads are listed.
 
@@ -427,6 +424,8 @@ Or validate all metadata payloads in a directory at once using a wildcard:
 seq-tools validate -d ../sequencing-data-directory/ submission-payload-directory/*/*.json  
 seq-tools-in-docker validate -d ../sequencing-data-directory/ submission-payload-directory/*/*.json
 ```
+
+You can use this method to build your own script to validate payloads in different locations. 
 
 ### Understanding the Validation Report
 Validation report summaries can be found in the top level submission directory where you ran `seq-tools`.  The report.  Reports are separated into three categories:
