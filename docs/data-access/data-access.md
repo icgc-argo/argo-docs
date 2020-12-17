@@ -19,11 +19,11 @@ As a prerequisite to applying for DACO access, please ensure that you:
 
 ## How to Apply for Access through DACO
 
-The instructions for applying for DACO can be found here on the [ICGC DACO website](https://icgc.org/daco), as well as a selection of [help guide videos](https://icgc.org/daco/help-guide-section).
+The instructions for applying for DACO can be found here on the [ICGC DACO website](https://daco.icgc.org/), as well as a selection of [help guide videos](https://daco.icgc.org/help-guides/daco-help-guides/).
 
-1. Register a DACO account at [www.icgc.org/user/register](https://icgc.org/user/register). If you already have an account, you can log in from here [www.icgc.org/user/login](https://icgc.org/user/login).
+1. Register a DACO account at https://daco.icgc.org/user/#/register. If you already have an account, you can log in from https://daco.icgc.org/user/#/login. 
 1. After registering, you will receive an email instructing you to set your Central User Directory password. Click the link from the email to set up your account password.
-1. Once you save your password, you will be taken to your ICGC Dashboard. From your Dashboard, click the link to start a new access application form from the box entitled “Your DACO Access Forms”.
+1. Once you save your password, you will be taken to your ICGC Dashboard. From your Dashboard, click the "Start New Application" button the box entitled “Manage Your Submissions”.
 1. Complete the entire application form. All sections, as well as Appendices, are integral components of the application.
 
    > **IMPORTANT: For the applicant and any authorized personnel, you will be asked to provide an “OpenID”, which means providing a valid Google email address (Gmail or GSuite) for each authorized personnel.** This will be the email address you will use to log in to the ARGO Data Platform for accessing controlled data.
