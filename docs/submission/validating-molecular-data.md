@@ -21,7 +21,7 @@ curl --location --request GET 'https://submission-song.rdpc.cancercollaboratory.
 ```
 The JSON Schema can be complicated to follow, so we suggest using the examples below as a starting point.  
 
-The main types of submission are for `Tumour` and `Normal` samples; each of these types has a specific set of data rules to follow in the metadata format.  These are examples of correctly formatted payloads for both `Tumour` and `Normal` sample types:
+The main types of submission are for `Tumour` and `Normal` samples; each of these types has a specific set of data rules to follow in the metadata format.  The following are examples of correctly formatted payloads for both `Tumour` and `Normal` sample types:
 <!---  Tabs start here -->
 
 <Tabs
@@ -148,7 +148,7 @@ The main types of submission are for `Tumour` and `Normal` samples; each of thes
 
 <!---  Tabs end here -->
 
-See github for the same example of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json) and a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
+See github for the same examples of a correctly formatted payload from a [normal sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_normal.json) and a [tumour sample](https://github.com/icgc-argo/argo-metadata-schemas/blob/master/example_payloads/dash1_tumour.json).
 
 Depending on the type of sequencing that was done, the `read_groups` section of the payload will need to be adjusted. The following are examples of correctly formatted `read_groups` that meet [the rules](/docs/submission/molecular-data-prep#file-and-data-validation-rules) for paired-end vs single-end sequencing:
 
@@ -282,7 +282,7 @@ A description of all other payload sections is shown below:
 |  **sequencing_date**  | experiment |                                                           |  Date sequencing was performed.      |datetime format, for example: 2019-06-16 or  2019-06-16T20:20:39+00:00  |  
 |  **read_group_count**  |  |  ![Required](/assets/submission/dictionary-required.svg)  |  The number of read groups in the molecular files being submitted.  | A minimum of 1 is required.  |  
 | **read_group_id_in_bam** | read_groups |   |  Optional field indicating the @RD ID in the BAM.  If submitted, this will be used to map the @RG ID in the BAM header to the `submitter_read_group_id` in the payload.  After submission, the @RG ID in the payload will be used for all future headers.  This **cannot** be submitted for FASTQ files. | String value must meet the regular expression `^[a-zA-Z0-9\\-_:\\.']+$`.|  
-|  **submitter_read**\_ **group_id**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  The unique identifier of a read group; must be unique within each payload. |   String values that meet the regular expression `^[a-zA-Z0-9\\-_:\\.']+$` or `null`. |  
+|  **submitter_read**\_ **group_id**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  The identifier of a read group; must be unique within each payload. |   String values that meet the regular expression `^[a-zA-Z0-9\\-_:\\.']+$` or `null`. |  
 |  **platform_unit**    | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Unique identifier including the {FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}. The {FLOWCELL_BARCODE} refers to the unique identifier for a particular flow cell. The {LANE} indicates the lane of the flow cell and the {SAMPLE_BARCODE} is a sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.  |     Any string value.                 |  
 |  **is_paired_end**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Indicate if paired-end sequencing was performed.                                                           |  true, false         |  
 |  **file_r1**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the sequencing file containing reads from the first end of a sequencing run. | Any string value. Must match a fileName identified in the `files` section.|  
@@ -291,7 +291,7 @@ A description of all other payload sections is shown below:
 |  **read_length_r2**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Length of sequencing reads in `file_r2`; this corresponds to the number of sequencing cycles of the second end. |  Integer with a minimum value of 20  or `null`. |  
 |  **insert_size**  | read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  For paired-end sequencing, the average size of sequences between two sequencing ends. Required only for paired-end sequencing. |    Integer with a minimum value of 0  or `null`. |  
 |  **sample_barcode**| read_groups |![Required](/assets/submission/dictionary-required.svg)                                              |  According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.      |    Any string value or `null`.                  |  
-|  **library_name** |read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing.| Any string value.           |  
+|  **library_name** |read_groups |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of a sequencing library made from a molecular sample or a sample pool (multiplex sequencing).| Any string value.           |  
 |  **fileName**  | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Name of the file.                       |  String values must meet the regular expression `^[A-Za-z0-9_\\.\\-\\[\\]\\(\\)]+$`.  No paths are allowed in the file name. 
 |  **fileSize** | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Size of the file, in bytes.                                                                  |                      |  
 |  **fileMd5sum**  | files |  ![Required](/assets/submission/dictionary-required.svg)  |  Computed md5sum of the file. This must match the payload, and the md5sum computed when the file is uploaded.  | String values must meet the regular expression `^[a-fA-F0-9]{32}$`|
@@ -326,7 +326,7 @@ This validation client will check:
 }>
 <TabItem value="client">
 
-A required pre-requisite is to have the [`samtools`](http://www.htslib.org/) package installed, which is used to retrieve BAM header information. To read JSON/JSONL outputs in a friendly manner, we also suggest installing the `jq` package. 
+A pre-requisite is to have the [`samtools`](http://www.htslib.org/) package installed, which is used to retrieve BAM header information. To read JSON/JSONL outputs in a friendly manner, we also suggest installing the `jq` package. 
 
 ```bash
 sudo apt install samtools
@@ -360,7 +360,7 @@ pip3 install .
 </TabItem>
 <TabItem value="docker">
 
-A required pre-requisite is to have Docker  installed and configured on your operating system.  Depending on your permissions, this may or may not be allowed.  In that case, it is best to use the Client version. 
+A pre-requisite is to have Docker installed and configured on your operating system.  Depending on your system permissions, this may or may not be allowed.  In that case, it is best to use the Client version. 
 
 ```bash
 docker pull quay.io/icgc-argo/seq-tools:1.0.0
@@ -374,7 +374,7 @@ alias seq-tools-in-docker="docker run -t -v `pwd`:`pwd` -w `pwd` quay.io/icgc-ar
 
 
 ### Structured Directory Validation
-One method to quickly complete validation is to structure your data in a pre-determined format that `seq-tools` is expecting. Under a submission directory (e.g. molecular-data-submission in the following example), compile each submission as a folder, with the JSON payload and the associated data files in the same folder. 
+One method to quickly complete validation is to structure your data in a predetermined format that `seq-tools` is expecting. Under a submission directory (e.g. molecular-data-submission in the following example), compile each submission as a folder, with the JSON payload and the associated data files in the same folder. 
 
 Each submission folder **must** contain:
 - The metadata payload as a `.json` file. Only one `.json` file must be present in the submission folder.
@@ -422,7 +422,7 @@ cat validation_report.INVALID.jsonl | jq . | less
 ```
 ### Scriptable Location Validation
 
-If your data files are located in a different directory than where the metadata payloads are listed, and you do NOT want to re-organize them into the above structured directory, you can use the '-d' option to provide the data files location. You can also use this to validate all metadata payloads in a directory at once using a wildcard.  
+If data files are located in a different directory than where the metadata payloads are listed, and you do NOT want to reorganize them into the above structured directory, you can use the '-d' option to provide the data files location. You can also use this to validate all metadata payloads in a directory at once using a wildcard.  
 
 For example: 
 ![Example Non-Directory Structure](/assets/submission/molecular_submission_validation_directory_all_files.png)
@@ -463,9 +463,9 @@ You can use these methods to build your own script to validate payloads in diffe
 
 ### Understanding the Validation Report
 Validation report summaries can be found in the folder where you ran `seq-tools`. Reports are separated into three categories:
-- **PASS:** This status indicates that these payload(s) are ready for submission. 
-- **PASS-with-WARNING:** This status indicates that these payload(s) are ready for submission, however there may be a parameter you want to double check before submission. 
-- **INVALID:** This status indicates that these payload(s) are _not_ ready for submission. 
+- **PASS:** This status indicates that the payload(s) are ready for submission. 
+- **PASS-with-WARNING:** This status indicates that the payload(s) are ready for submission, however there may be a parameter you want to double check before submission. 
+- **INVALID:** This status indicates that the payload(s) are _not_ ready for submission. 
 
 In the **INVALID** summary report, each reason for failure is listed. Errors must be fixed before you attempt to submit this payload.  To view all reports that are generated:
 
