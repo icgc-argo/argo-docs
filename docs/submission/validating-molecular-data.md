@@ -333,7 +333,7 @@ sudo apt install samtools
 sudo apt install jq
 ```
 
-Once samtools is installed, clone the repository:
+Once `samtools` is installed, clone the repository:
 
 ```bash
 git clone https://github.com/icgc-argo/seq-tools.git
@@ -360,7 +360,7 @@ pip3 install .
 </TabItem>
 <TabItem value="docker">
 
-A pre-requisite is to have Docker installed and configured on your operating system.  Depending on your system permissions, this may or may not be allowed.  In that case, it is best to use the Client version. 
+A pre-requisite is to have Docker installed and configured on your operating system.  Depending on your system permissions, this may or may not be allowed. If you do not have permission, it is best to use the Client version. 
 
 ```bash
 docker pull quay.io/icgc-argo/seq-tools:1.0.0
