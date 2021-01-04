@@ -26,7 +26,6 @@ module.exports = {
       'submission/registering-samples',
       'submission/clinical-data-validation-rules',
       'submission/submitting-clinical-data',
-      'submission/clinical-data-validation-rules',
       'submission/molecular-data-prep',
       'submission/submitting-molecular-data',
       'submission/submitted-data',
