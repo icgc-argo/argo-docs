@@ -74,10 +74,10 @@ This is an example of how your `application.properties` configuration file shoul
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://api.platform.icgc-argo.org/storage-api
+metadata.url=https://song.rdpc.cancercollaboratory.org
 
 # The location of the object storage service (SCORE)
-storage.url=https://api.platform.icgc-argo.org/storage-api
+storage.url=https://score.rdpc.cancercollaboratory.org
 ```
 
 Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
