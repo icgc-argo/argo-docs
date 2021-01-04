@@ -74,10 +74,10 @@ This is an example of how your `application.properties` configuration file shoul
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://song.rdpc.cancercollaboratory.org
+metadata.url=https://api.platform.icgc-argo.org/storage-api
 
 # The location of the object storage service (SCORE)
-storage.url=https://score.rdpc.cancercollaboratory.org
+storage.url=https://api.platform.icgc-argo.org/storage-api
 ```
 
 Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
@@ -86,10 +86,12 @@ Once you have configured your `application.properties`, you will be ready to ini
 > score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-Or download a single file by object id: 
+Or download a single file by object id:
+
 ```shell
 > score-client-3.1.1/bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
+
 <!---
 ### Score-Client with Environment Variables
 
