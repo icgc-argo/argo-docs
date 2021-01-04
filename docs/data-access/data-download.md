@@ -45,7 +45,7 @@ Use the `docker run` command with the correct variables specified. You will need
 - an output directory path
 
 ```shell
-> docker run --rm -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\username\Desktop\download\
+> docker run --rm -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score..rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" -v "C:\Users\username\Desktop\directory-path\" overture/score:latest score-client download --manifest /directory-path/score-manifest.20200520.tsv --output-dir C:\Users\username\Desktop\download\
 ```
 
 ### Score-Client with Configured Values
@@ -74,16 +74,22 @@ This is an example of how your `application.properties` configuration file shoul
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
 # The location of the metadata service (SONG)
-metadata.url=https://api.platform.icgc-argo.org/storage-api
+metadata.url=https://song.rdpc.cancercollaboratory.org
 
 # The location of the object storage service (SCORE)
-storage.url=https://api.platform.icgc-argo.org/storage-api
+storage.url=https://score.rdpc.cancercollaboratory.org
 ```
 
 Once you have configured your `application.properties`, you will be ready to initiate your download. Run the score-client from within the `/bin` directory using the `download` command.
 
 ```shell
 > score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
+```
+
+Or download a single file by object id:
+
+```shell
+> score-client-3.1.1/bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
 
 <!---
