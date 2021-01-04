@@ -86,10 +86,12 @@ Once you have configured your `application.properties`, you will be ready to ini
 > score-client-3.1.1/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-Or download a single file by object id: 
+Or download a single file by object id:
+
 ```shell
 > score-client-3.1.1/bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
+
 <!---
 ### Score-Client with Environment Variables
 
