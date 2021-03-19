@@ -34,6 +34,8 @@ module.exports = {
 
   plugins: [path.resolve(__dirname, './dotenv-plugin')],
 
+  scripts: ['https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js'],
+
   presets: [
     [
       '@docusaurus/preset-classic',
