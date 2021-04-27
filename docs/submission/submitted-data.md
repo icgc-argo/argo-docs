@@ -26,7 +26,7 @@ Program progress is summarized within the following dashboard "cards":
 
 	> **A donor must be clinically complete before any of their molecular analysis files are released to the program members.**
 	
-	> **A donor must also have data for at least one T/N pair before submitted before molecular processing will begin**
+	> **A donor must also have data for at least one T/N pair before submitted before molecular processing will begin.**
 
 ### Donor Release Summary
 
