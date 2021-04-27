@@ -18,6 +18,23 @@ None to report.
 
 None to report.
 ------>
+## April 27, 2021: Clinical Submission and Program Dashboard Updates
+Data Platform v1.93.0
+API v 3.16.0
+
+### New Features 
+- A New version of the [Program Dashboard](/docs/submission/submitted-data) has been released to help report on data submission and molecular data processing progress has been released. Updates to this section includes: 
+    - Redone program statistics bar
+	- Donor clinical completeness tracking chart showing a programs progress over times towards submitting complete clinical data for all committed program donors. 
+	- Donor molecular processing completeness chart showing processing progress over times towards having completed molecular processing  complete for all committed program donors. 
+	- Updated column in the Donor Summary table showing real-time tracking of the progression of a specific donor through the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-pipeline).
+- Two new clinical data entities can be submitted through the Clinical Submission 
+	- Family History: A donor's familial relationships and familial cancer history. 
+	- Immunotherapy: Treatment regimen details of immunotherapy drugs. 
+
+### Bug Fixes
+
+- The docs site dictionary viewer would occasionally crash if the page was left open or scrolled too much. This has been resolved.   
 
 ## Initial Software Release
 
