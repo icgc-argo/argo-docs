@@ -24,8 +24,8 @@ None to report.
 **Release Date:** April 27, 2021
 
 ### Updates
-Two **new** data type tables have been added to the dictionary for submission:
-1. **Immunotherapy**: For treatment regimens that include immunotherapy, these details can now be submitted.  Similar to the `chemotherapy` and `hormone_therapy`, `immunotherapy drugs are recorded using the standardized vocabulary from the [RxNorm database](https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH. 
+Two **new** clinical tables .have been added to the dictionary and the file template downloads for submission:
+1. **Immunotherapy**: For treatment regimens that include immunotherapy, these details can now be submitted.  Similar to the `chemotherapy` and `hormone_therapy`, `immunotherapy` drugs are recorded using the standardized vocabulary from the [RxNorm database](https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH. 
 
 2. **Family History**: A donor's familial relationships and familial cancer history. 
 
@@ -35,9 +35,9 @@ The following updates are also included:
 
 
 ### Bug Fixes
-- Previously missing stage groups `Stage IVE` and `Stage IVS` for Ann Abor staging system has been added, as well as adding support for the `Stage II bulky` for the Lugano staging system. 
+- Previously missing stage groups `Stage IVE` and `Stage IVS` for Ann Arbor staging system has been added, as well as adding support for the `Stage II bulky` for the Lugano staging system. 
 
-- In the `primary_diagnosis` table, there was a misleading combination of field indicating the status/number of lymph nodes examined during clinical diagnosis. When the `number_lymph_nodes_examined` is left blank, a value of 0 for `number_lymph_nodes_positive` could be unclearly misinterpreted as several things: 
+- In the `primary_diagnosis` table, there was a misleading combination of fields indicating the status/number of lymph nodes examined during clinical diagnosis. When the `number_lymph_nodes_examined` is left blank, a value of 0 for `number_lymph_nodes_positive` could be misinterpreted as several things: 
   - an unknown number of lymph nodes were tested or
   - none were found to be positive for cancer or 
   - no lymph nodes were examined.
@@ -46,7 +46,7 @@ The following updates are also included:
 
 |lymph_nodes_examined_status|number_lymph_nodes_examined|number_lymph_nodes_positive|
 |----|-----|-----|
-|Yes|Optional: If left blank, then means unknown/missing. If number is submitted, it must be greater than 0|Required: If number_lymph_nodes_examined is > 0, then number_lymph_nodes_positive >= number_lymph_nodes_examined |
+|Yes|Optional: If left blank, this means unknown/missing. If number is submitted, it must be greater than 0|Required: If number_lymph_nodes_examined is > 0, then number_lymph_nodes_positive >= number_lymph_nodes_examined |
 |No | 0 or left blank | Should be left blank |
 |Not applicable | 0 or left blank | Should be left blank |
 |No lymph nodes found in resected specimen | 0 or left blank | Should be left blank |
