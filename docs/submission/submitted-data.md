@@ -12,7 +12,7 @@ When a program member logs in to the ARGO Data Platform, and navigates to the **
 
 ## Program Overview: Statistics and Progress
 
-The first half of the Program Dashboard highlights import metrics of progress and statistics to display a programs completion status of molecular and clinical data against the number of donors that have been committed for submission to ARGO. 
+The first half of the Program Dashboard highlights important metrics of progress and statistics to display a program's completion status of molecular and clinical data against the number of donors that have been committed for submission to ARGO. 
 
 Program progress is summarized within the following dashboard "cards":
 
@@ -33,6 +33,8 @@ Program progress is summarized within the following dashboard "cards":
 _Coming Soon:_ The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total number of donors committed to ARGO by the program.  
 
 ### Program Workspace Status
+https://us04web.zoom.us/j/8978040763?pwd=bEpWaEFHaEZGWmlFMkNIMUxXTnVnQT09
+
 
 The **Program Workspace** consists of the sample registration as well as the clinical submission areas.
 
@@ -44,15 +46,15 @@ The **Program Workspace** consists of the sample registration as well as the cli
 
 ### Clinical Completeness Data Summary
 
-This line graph compares how many donors have complete clinical data over time. 
+This line graph tracks how many donors have complete clinical data over time. 
 - Check out [Clinical Data Validation Rules](/docs/submission/clinical-data-validation-rules) for more information on how clinical completion is calculated.
-- As soon as a donors clinical data is completed, this chart will update in real-time. 
+- As soon as a donor's clinical data is completed, this chart will update in real-time. 
 
 ### Molecular Data Summary
 
 This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](/docs/analysis-workflows/dna-pipeline) (Raw Read Submission, Alignment, Sanger VC...) over time.
 - Use the legend to toggle different pipeline steps on/off to check progress of different processing steps. 
-- This chart is kept up-to-date as data is processed in real-time.  While the data may be processed on the chart, it may not yet be released to the program if a donors is lacking complete clinical data. 
+- This chart is updated in real-time. While the data may show that a donor has been processed in the molecular summary chart, the donor files may not yet be released to the program if that donor is lacking complete clinical data. 
 
 ## Donor Data Summary
 
@@ -62,8 +64,7 @@ This table is a detailed summary of the clinical data status and DNA-Seq pipelin
 
 ### Table Actions
 
-Using the buttons above the table, a program member can download all clinical data that has been submitted for the program donors. The download will be in the same file format that was submitted through the sample registration and clinical submission sections.
-![Dashboard Workflow Status](/assets/submission/dashboard-workflow-statusbar.png)
+Using the button above the table, a program member can download all clinical data that has been submitted for the program donors. The download will be in the same file format that was submitted through the sample registration and clinical submission sections.
 
 The table is sorted by default on the last updated date, so a program member will always see the donors with the most recent activity first. The table can be sorted by another column by clicking on any other column header.
 
@@ -71,7 +72,7 @@ The table is sorted by default on the last updated date, so a program member wil
 
 Each donor has a **star** ![Dashboard Donor Release Star](/assets/submission/dashboard-donor-star.png) that denotes if they have fully released files, partially released files or no released files. In order to have released files, the embargo period must be over and the donor must have 100% [core completeness](/docs/submission/clinical-data-validation-rules#clinical-data-completion) as well as some molecular analysis completed.
 
-### Clinical Data Submission
+### Clinical Data Status
 
 The table shows the percentage of **core clinical fields** that have been submitted for a donor.
 
@@ -82,7 +83,7 @@ The table shows the percentage of **core clinical fields** that have been submit
 
 ### Sample Status
 
-A donors registered tumour and normal sample count as well as submitted raw reads count are also tracked within this table.
+A donor's registered tumour and normal sample count as well as submitted raw reads count are also tracked within this table.
 
 ![Dashboard Donor Sample Status](/assets/submission/dashboard-samples-raw-reads.png)
 
