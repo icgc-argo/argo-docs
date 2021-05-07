@@ -18,6 +18,29 @@ Coming soon.
 
 None to report.
 ------>
+## Release 1.9
+
+**Release Date:** May 10, 2021
+
+### Updates
+- Integer fields now all contain validation based on the acceptable ranges allowed for those fields. 
+- `primary_site` now accepts multiple values.
+- Optional clinical fields detailing genetic disorders, hormone replacement therapy and contraception details have been added to the `Donor`  file. 
+- Validation was added to ensure that hematological_toxicity is only included for hematological toxicity types: 
+
+| toxicity_type | hematological_toxicity |
+|--|--|
+| Hematological | Allowed to be submitted |
+| Non-hematological | Should not be submitted |
+- Validation was added to ensure that if a treatment has been marked as the `primary_treatment`, it is not assigned an advanced `line of treatment`:
+
+|is_primary_treatment | line_of_treatment |
+|--|--|
+| No or Unknown | Allowed to have a value |
+| Yes | Should be left empty |
+### Bug Fixes
+- Some fields/permissible values in the treatment table containing the word `hematological` were misspelled `hemotological`. These have all been resolved. 
+- `height`, `weight` and `bmi` can now be submitted as decimal values. 
 
 ## Release 1.8
 
@@ -51,6 +74,7 @@ The following updates are also included:
 |Not applicable | 0 or left blank | Should be left blank |
 |No lymph nodes found in resected specimen | 0 or left blank | Should be left blank |
 | Cannot be determined | 0 or left blank | Should be left blank |
+
 ## Release 1.5
 
 **Release Date:** December 11, 2020

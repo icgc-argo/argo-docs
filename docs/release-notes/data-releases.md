@@ -6,6 +6,17 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/data-access).
 
+## Data Release 3.0
+
+**Release Date:** May 10, 2021
+
+### New Updates
+
+### Bug Fixes
+
+### Known Issues
+
+
 ## Data Release 2.0
 
 **Release Date:** October 23, 2020
