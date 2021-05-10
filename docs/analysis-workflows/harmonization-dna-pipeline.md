@@ -113,7 +113,7 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 
 - [Raw SNV Calls](/docs/data/variant-calls#raw-snv-calls) and [VCF Index](/docs/data/variant-calls#vcf-index)
 - [Raw InDel Calls](/docs/data/variant-calls#raw-indel-calls) and [VCF Index](/docs/data/variant-calls#vcf-index)
-- [SV Supplement](/docs/data/variant-calls#sv-supplement) files
+- [SNV Supplement](/docs/data/variant-calls#snv-supplement) files
 - [InDel Supplement](/docs/data/variant-calls#indel-supplement) files
 - QC Metrics
   - [Alignment Metrics](/docs/data/qc-metrics#aligned-reads-qc) for both the Tumour and Normal samples
