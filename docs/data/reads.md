@@ -12,11 +12,11 @@ Raw reads submitted by ARGO member programs are used as inputs within the ARGO A
 
 #### File Types
 
-| Filename Pattern        | Description                             | Analysis Type    | Data Category    | Generating Workflow(s) |
-| ----------------------- | --------------------------------------- | ---------------- | ---------------- | ---------------------- |
-| \*.fq.gz, \*.fastq.gz   | FASTQ file format compressed with gzip  | sequencing_reads | Sequencing Reads | N/A                    |
-| \*.fq.bz2, \*.fastq.bz2 | FASTQ file format compressed with bzip2 | sequencing_reads | Sequencing Reads | N/A                    |
-| \*.bam                  | Binary Alignment Map (BAM) file format  | sequencing_reads | Sequencing Reads | N/A                    |
+| Filename Pattern        | Description                             | Analysis Type         | Data Category    | Generating Workflow(s) |
+| ----------------------- | --------------------------------------- | --------------------- | ---------------- | ---------------------- |
+| \*.fq.gz, \*.fastq.gz   | FASTQ file format compressed with gzip  | sequencing_experiment | Sequencing Reads | N/A                    |
+| \*.fq.bz2, \*.fastq.bz2 | FASTQ file format compressed with bzip2 | sequencing_experiment | Sequencing Reads | N/A                    |
+| \*.bam                  | Binary Alignment Map (BAM) file format  | sequencing_experiment | Sequencing Reads | N/A                    |
 
 ## Aligned Reads
 
@@ -24,9 +24,9 @@ A read is a sequence obtained from a single sequencing experiment. An aligned re
 
 #### File Types
 
-| Filename Pattern | Description                               | Analysis Type    | Data Category    | Generating Workflow(s) |
-| ---------------- | ----------------------------------------- | ---------------- | ---------------- | ---------------------- |
-| \*.aln.cram      | CRAM file format and compressed with gzip | sequencing_reads | Sequencing Reads | DNA Seq Alignment      |
+| Filename Pattern | Description                               | Analysis Type        | Data Category    | Generating Workflow(s) |
+| ---------------- | ----------------------------------------- | -------------------- | ---------------- | ---------------------- |
+| \*.aln.cram      | CRAM file format and compressed with gzip | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
 
 ## Aligned Reads Index
 
@@ -34,6 +34,6 @@ Secondary files that are external index files for CRAM format files. CRAI files 
 
 #### File Types
 
-| Filename Pattern | Description                                                 | Analysis Type    | Data Category    | Generating Workflow(s) |
-| ---------------- | ----------------------------------------------------------- | ---------------- | ---------------- | ---------------------- |
-| \*.aln.cram.crai | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_reads | Sequencing Reads | DNA Seq Alignment      |
+| Filename Pattern | Description                                                 | Analysis Type        | Data Category    | Generating Workflow(s) |
+| ---------------- | ----------------------------------------------------------- | -------------------- | ---------------- | ---------------------- |
+| \*.aln.cram.crai | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
