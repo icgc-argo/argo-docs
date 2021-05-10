@@ -154,4 +154,4 @@ Whole genome/exome sequencing (WGS/WXS) aligned CRAM files are processed through
   - [Variant Filtering Stats](/docs/data/qc-metrics#analysis-qc)
   - [Variant Callable Stats](/docs/data/qc-metrics#analysis-qc)
 
-![GATK Mutect2 Variant Calling workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)
+![GATK Mutect2 Variant Calling workflow](/assets/analysis-workflows/ARGO-Mutect2-variant-calling.png)

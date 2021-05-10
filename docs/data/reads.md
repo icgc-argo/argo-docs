@@ -24,9 +24,9 @@ A read is a sequence obtained from a single sequencing experiment. An aligned re
 
 #### File Types
 
-| Filename Pattern | Description                               | Analysis Type        | Data Category    | Generating Workflow(s) |
-| ---------------- | ----------------------------------------- | -------------------- | ---------------- | ---------------------- |
-| \*.aln.cram      | CRAM file format and compressed with gzip | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
+| Filename Pattern | Description                                                        | Analysis Type        | Data Category    | Generating Workflow(s) |
+| ---------------- | ------------------------------------------------------------------ | -------------------- | ---------------- | ---------------------- |
+| \*.aln.cram      | CRAM file format represents a compressed version of the alignment. | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
 
 ## Aligned Reads Index
 
