@@ -11,11 +11,17 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 **Release Date:** May 10, 2021
 
 ### New Updates
+We are happy to announce a release of a **new** DNA-Seq Pipeline Variant calling data type: [GATK Mutect2](/docs/analysis-workflows/dna-pipeline#gatk-mutect2-variant-calling), available now for both WXS and WGS samples.
+
+This release includes:
+
+- PACA-CA: 1 new donor with aligned reads, Sanger and Mutect2 variant calls with.  Additionally, 135 previously released donors now have GATK Mutect2 variant calls.  
+- OCCAMS-GB: 130 new donors with aligned WGS reads, Sanger and Mutect2 variant calls. 94 previously released donors additionally have Mutect2 variant calls. 
+- PTC-SA: 99 new donors with aligned WXS reads, Sanger and Mutect2 variant calls.  Additionally, 140 previously released donors now have Mutect2 variant calls. 
+- LUCA-KR: 130 new donors with aligned reads, Sanger and Mutect2 variant calls.  Additionally, 29 previously released donors now have Mutect2 variant calls. 
 
 ### Bug Fixes
-
-### Known Issues
-
+- PACA-CA/DO35226 was removed as only a Tumour Sample has completed workflow processing. We are working on resolving processing issues for this donor.  
 
 ## Data Release 2.0
 
@@ -23,7 +29,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 ### New Updates
 
-Data release 2.0 includes the first release of whole exome sequencing (WXS) data from papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp) and the first release of whole genome sequencing (WGS) data from lung cancer [(LUKA-KR)](https://www.icgc-argo.org/page/91/pgcklc). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline.
+Data Release 2.0 includes the first release of whole exome sequencing (WXS) data from papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp) and the first release of whole genome sequencing (WGS) data from lung cancer [(LUKA-KR)](https://www.icgc-argo.org/page/91/pgcklc). Both programs were members of the original ICGC-25K data portal. While clinical data will soon be submitted by the programs, a selection of their molecular data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO DNA Seq Pipeline.
 
 This release includes:
 
