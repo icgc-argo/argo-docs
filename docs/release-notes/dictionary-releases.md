@@ -26,18 +26,19 @@ None to report.
 - Integer fields now all contain validation based on the acceptable ranges allowed for those fields. 
 - `primary_site` now accepts multiple values.
 - Optional clinical fields detailing genetic disorders, hormone replacement therapy and contraception details have been added to the `Donor`  file. 
-- Validation was added to ensure that hematological_toxicity is only included for hematological toxicity types: 
+- Validation was added to ensure that hematological_toxicity is only included for hematological toxicity types and non-hematological_toxicity is only included for non-hematological toxicity types: 
 
-| toxicity_type | hematological_toxicity |
-|--|--|
-| Hematological | Allowed to be submitted |
-| Non-hematological | Should not be submitted |
+| toxicity_type | hematological_toxicity | non-hematological_toxicity |
+|--|--|--|
+| Hematological | Allowed to be submitted | Should not be submitted |
+| Non-hematological | Should not be submitted | Allowed to be submitted |
+
 - Validation was added to ensure that if a treatment has been marked as the `primary_treatment`, it is not assigned an advanced `line of treatment`:
 
 |is_primary_treatment | line_of_treatment |
 |--|--|
-| No or Unknown | Allowed to have a value |
-| Yes | Should be left empty |
+| No | Allowed to have a value |
+| Yes or Unknown | Should be left empty |
 ### Bug Fixes
 - Some fields/permissible values in the treatment table containing the word `hematological` were misspelled `hemotological`. These have all been resolved. 
 - `height`, `weight` and `bmi` can now be submitted as decimal values. 
