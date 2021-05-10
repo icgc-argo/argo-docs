@@ -133,9 +133,9 @@ Whole genome/exome sequencing (WGS/WXS) aligned CRAM files are processed through
 
 ### Processing
 
-- `BQSR Subworkflow` is an optional data pre-processing step that detects systematic errors made by the sequencing machine when it estimates the accuracy of each base call.
+- `BQSR Subworkflow` is an optional data pre-processing step that detects systematic errors made by the sequencing machine when it estimates the accuracy of each base call. While availble as part of the workflow, this is not run as part of the ARGO pipeline. 
 - `Mutect2` calls SNV and InDel simultaneously via local de-novo assembly of haplotypes in an active region.
-- `Learn Read Orientation` implements the read orientation model, which produces the --orientation-bias-artifact-priors input to step Filter Variants.
+- `Learn Read Orientation` implements the read orientation model, which produces the --orientation-bias-artifact-priors input to the step Filter Variants.
 - `Calculate Contamination Subworkflow` emits an estimate of the fraction of reads due to cross-sample contamination for both normal and tumour samples. It also generates an estimate of the allelic copy number segmentation of each tumour sample.
 - `Filter Variants` applies filters to the raw output of Mutect2.
 
