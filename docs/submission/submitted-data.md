@@ -33,9 +33,6 @@ Program progress is summarized within the following dashboard "cards":
 _Coming Soon:_ The status bar in this card shows how many program donors have fully released files (dark blue bar), partially released files (light blue bar) and no released files (white bar) out of the total number of donors committed to ARGO by the program.  
 
 ### Program Workspace Status
-https://us04web.zoom.us/j/8978040763?pwd=bEpWaEFHaEZGWmlFMkNIMUxXTnVnQT09
-
-
 The **Program Workspace** consists of the sample registration as well as the clinical submission areas.
 
 > All program members share the same workspace, so members are encouraged to communicate with each other when a sample registration or clinical submission is in progress.
