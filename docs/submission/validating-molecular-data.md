@@ -263,7 +263,7 @@ values={[
 
 Sequencing data of both `BAM` and `FASTQ` type files are accepted, with the exception of interleaved FASTQ files. Metadata payloads like the example above must follow these data validations:
 
-1. Compression of FASTQ files is **required**; both _gzip_ (suffix .fq.gz or .fastq.gz) or _bz2_ (suffix .fq.bz2 or .fastq.bz2) are supported.
+1. Compression of FASTQ files is **required**; both _gzip_ (suffix \*.fq.gz or \*.fastq.gz) or _bz2_ (suffix \*.fq.bz2 or \*.fastq.bz2) are supported.
 1. For both FASTQ and BAM submissions, all files in the `files` section must be unique in the payload.
 1. All `read_groups` in the payload and BAM header must belong to a single sample.
 1. All `submitter_read_group_id` must be unique across the payload.
