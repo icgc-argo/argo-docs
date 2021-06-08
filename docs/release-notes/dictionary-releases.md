@@ -21,14 +21,14 @@ None to report.
 
 ## Release 1.10
 
-**Release Date:** June 07, 2021
+**Release Date:** June 08, 2021
 
 ### Updates
 
-Two **new** clinical tables .have been added to the dictionary and the file template downloads for submission:
+Two **new** clinical tables have been added to the dictionary along with the file template downloads for submission:
 1. **Exposure**: A donor's clinically relevant information not immediately resulting from genetic predispositions (e.g diet, drug use, smoking).
 
-2. **Comorbidity**: A donor's comorbidities are any distinct entity that has existed or may occur during the clinical course of a donor who has the index disease under study (e.g diabetes, prior cancer malignancies).
+2. **Comorbidity**: A donor's comorbidities are any medical condition that has existed or may occur during the clinical course of the donor who has the index disease under study (e.g diabetes, prior cancer malignancies).
 
 ### Bug Fixes
 - `immuotherapy.immunotherapy_type` was not marked as a required field. It is now correctly identified. 
@@ -65,7 +65,7 @@ Two **new** clinical tables .have been added to the dictionary and the file temp
 **Release Date:** April 27, 2021
 
 ### Updates
-Two **new** clinical tables .have been added to the dictionary and the file template downloads for submission:
+Two **new** clinical tables have been added to the dictionary and the file template downloads for submission:
 1. **Immunotherapy**: For treatment regimens that include immunotherapy, these details can now be submitted.  Similar to the `chemotherapy` and `hormone_therapy`, `immunotherapy` drugs are recorded using the standardized vocabulary from the [RxNorm database](https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH. 
 
 2. **Family History**: A donor's familial relationships and familial cancer history. 
