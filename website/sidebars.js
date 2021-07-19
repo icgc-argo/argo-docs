@@ -34,7 +34,7 @@ module.exports = {
         'submission/submitting-molecular-data',
         'submission/submitted-data',
         'submission/managing-program-access',
-        'submission/faq',
+        'submission/faq'
       ],
     },
     {
@@ -42,11 +42,28 @@ module.exports = {
       label: 'Data Access',
       collapsed: true,
       items: [
-        'data-access/data-access',
-        'data-access/data-download',
-        'data-access/user-profile-and-api-token',
-        'data-access/programmatic-apis',
-        'data-access/publication-guidelines',
+        {
+          type: 'category',
+          label: 'ICGC DACO',
+          collapsed: false,
+          items: [
+            'data-access/daco/applying',
+            'data-access/daco/approval',
+            'data-access/daco/renew-close',
+            'data-access/daco/daco-faq',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ICGC ARGO',
+          collapsed: false,
+          items: [
+            'data-access/data-download',
+            'data-access/user-profile-and-api-token',
+            'data-access/programmatic-apis',
+            'data-access/publication-guidelines',
+          ],
+        },
       ],
     },
     {
@@ -54,30 +71,17 @@ module.exports = {
       label: 'Analysis Pipelines',
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          label: 'Overview',
-          id: 'analysis-workflows/analysis-overview',
-        },
-        {
-          type: 'category',
-          label: 'DNA-Seq Analysis',
-          collapsed: false,
-          items: [
-            'analysis-workflows/dna-alignment',
-            'analysis-workflows/dna-sanger-wgs-vc',
-            'analysis-workflows/dna-sanger-wxs-vc',
-            'analysis-workflows/dna-gatk-mutect2-vc',
-            'analysis-workflows/dna-open-access-filtering',
-          ],
-        },
+        'analysis-workflows/analysis-overview',
+        'analysis-workflows/dna-pipeline',
       ],
     },
     {
       type: 'category',
       label: 'Data and File Types',
       collapsed: true,
-      items: ['data/reads', 'data/variant-calls', 'data/qc-metrics'],
+      items: [
+        'data/reads', 'data/variant-calls', 'data/qc-metrics'
+      ],
     },
     {
       type: 'category',
@@ -91,3 +95,4 @@ module.exports = {
     },
   ],
 };
+
