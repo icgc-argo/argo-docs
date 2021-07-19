@@ -19,35 +19,79 @@
  */
 
 module.exports = {
-  docs: {
-    Submission: [
-      'submission/submission-overview',
-      'submission/dictionary-overview',
-      'submission/registering-samples',
-      'submission/clinical-data-validation-rules',
-      'submission/submitting-clinical-data',
-      'submission/molecular-data-prep',
-      'submission/submitting-molecular-data',
-      'submission/submitted-data',
-      'submission/managing-program-access',
-      'submission/faq',
-    ],
-    'Data Access': [
-      'data-access/data-access',
-      'data-access/data-download',
-      'data-access/user-profile-and-api-token',
-      'data-access/programmatic-apis',
-      'data-access/publication-guidelines',
-    ],
-    'Analysis Pipelines': [
-      `analysis-workflows/analysis-overview`,
-      'analysis-workflows/dna-pipeline',
-    ],
-    'Data and File Types': [`data/reads`, 'data/variant-calls', `data/qc-metrics`],
-    'Release Notes': [
-      'release-notes/data-releases',
-      'release-notes/software-releases',
-      'release-notes/dictionary-releases',
-    ],
-  },
+  docs: [
+    {
+      type: 'category',
+      label: 'Submission',
+      collapsed: true,
+      items: [
+        'submission/submission-overview',
+        'submission/dictionary-overview',
+        'submission/registering-samples',
+        'submission/clinical-data-validation-rules',
+        'submission/submitting-clinical-data',
+        'submission/molecular-data-prep',
+        'submission/submitting-molecular-data',
+        'submission/submitted-data',
+        'submission/managing-program-access',
+        'submission/faq'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Data Access',
+      collapsed: true,
+      items: [
+        {
+          type: 'category',
+          label: 'ICGC DACO',
+          collapsed: false,
+          items: [
+            'data-access/daco/applying',
+            'data-access/daco/approval',
+            'data-access/daco/daco-faq',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ICGC ARGO',
+          collapsed: false,
+          items: [
+            'data-access/data-download',
+            'data-access/user-profile-and-api-token',
+            'data-access/programmatic-apis',
+            'data-access/publication-guidelines',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Analysis Pipelines',
+      collapsed: true,
+      items: [
+        'analysis-workflows/analysis-overview',
+        'analysis-workflows/dna-pipeline',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Data and File Types',
+      collapsed: true,
+      items: [
+        'data/reads', 'data/variant-calls', 'data/qc-metrics'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Release Notes',
+      collapsed: true,
+      items: [
+        'release-notes/data-releases',
+        'release-notes/software-releases',
+        'release-notes/dictionary-releases',
+      ],
+    },
+  ],
 };
+

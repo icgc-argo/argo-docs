@@ -253,7 +253,9 @@ div.sidebar_node_modules-\@docusaurus-theme-classic-src-theme-DocSidebar- {
 }
 .menu ul.menu__list li {
   padding: 0;
-  margin: 0;
+  margin: 2px;
+  margin-left: 10px;
+  margin-right: 0px;
 }
 
 .menu ul.menu__list a.menu__link {
