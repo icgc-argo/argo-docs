@@ -43,7 +43,7 @@ apt-get install openjdk-11-jdk
 
 If using the Docker distribution, Java is bundled and does not need to be installed.
 
-By default the Score Client is configured to use a maximum of 8G of RAM. Most of time this is more than sufficient for fast downloads.
+By default the score-client is configured to use a maximum of 8G of RAM. Most of time this is more than sufficient for fast downloads.
 
 ### Distributions
 
@@ -69,8 +69,8 @@ Pull the latest version of the score-client Docker distribution:
 Once pulled, you can open a shell in the container by executing:
 
 ```shell
-docker run -it overture/score
-score-client
+> docker run -it overture/score
+> score-client
 ```
 
 Update the docker configuration with your user values, including:
@@ -157,7 +157,7 @@ This section provides information on how to use the score-client once it has bee
 
 The score-client has the general syntax:
 
-```
+```shell
 score-client [options] [command] [command options]
 ```
 
@@ -199,8 +199,8 @@ For example:
 
 You can also specify multiple object id's separated by spaces:
 
-```
-bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
+```shell
+> bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
 ```
 
 ## BAM/CRAM Slicing
@@ -209,22 +209,20 @@ The view command is a minimal version of [samtools](http://www.htslib.org/doc/sa
 
 The following example will download reads overlapping the region 1 - 10,000 on chromosome 1:
 
-```
-bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
+```shell
+> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
 ```
 
-The BAI is automatically discovered and streamed as part of the operation.
+The BAI is automatically discovered and streamed as part of the operation. For quickly accessing only the BAM header one can issue:
 
-For quickly accessing only the BAM header one can issue:
-
-```
-bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
+```shell
+> bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
 ```
 
 It is also possible to pipe the output of the above to `samtools`, etc. for pipelining a workflow:
 
-```
-bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
+```shell
+> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
 ```
 
 ## FUSE Mounting
@@ -234,7 +232,7 @@ The mount command can be used to mount the remote S3 bucket as a read-only FUSE 
 In order to use the mount feature, `FUSE` is required. On most Linux based systems, this will require installing `libfuse-dev`, `fuse` and other packages. Below is the command to install them on Ubuntu.
 
 ```shell
-sudo apt-get install -y libfuse-dev fuse curl wget software-properties-common
+> sudo apt-get install -y libfuse-dev fuse curl wget software-properties-common
 ```
 
 Files are organized into a virtual directory structure. The following shows the default bundle layout:
@@ -255,64 +253,81 @@ where `bundleId` and `fileName` are the original Bundle ID and file name of the 
 
 The file system implementation's performance is optimized for serial reads. Frequent random access patterns will lead to very poor performance. Under the covers, each random seek requires a new HTTP connection to S3 with the appropriate Range header set which is an expensive operation. For this reason, it is only recommended for streaming analysis (e.g. `samtools view` like functionality).
 
-### Mount All Files
+### Mount a manifest of files
 
-You can mount files from a manifest list of files:
+<!---  Tabs start here -->
 
-For example:
+<Tabs
+groupId="operating-systems"
+defaultValue="Client"
+values={[
+{ label: 'Client', value: 'Client', },
+{ label: 'Docker', value: 'Docker', },
+]
+}>
+<TabItem value="Client">
 
 ```shell
 # Create the mount point
-sudo mkdir /mnt/icgc-argo
-sudo chmod 777 /mnt/icgc-argo
+> sudo mkdir /mnt/icgc-argo
+> sudo chmod 777 /mnt/icgc-argo
 
 # Mount
-bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
+> bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
 ```
 
 Once mounted, you can use standard analysis tools against files found under the mount point:
 
 ```shell
-samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+> samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
 ```
 
-### Mount in Docker
+</TabItem>
+
+<TabItem value="Docker">
 
 To avoid having to install the FUSE and Java dependencies when working with the mount command, it is very convenient to mount from within a Docker container. This is also useful for creating a custom image for analysis that derives from the one published by ICGC. First, ensure that both Docker and the score-client image are installed.
 
-Next, export the access token generated from the portal:
+Next, export your personal [API Token](/docs/data-access/user-profile-and-api-token) generated from the ARGO Data Platform:
 
 ```shell
 # Export access token, please replace accessToken with your own token
-export ACCESSTOKEN=<accessToken>
+> export ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0
 ```
 
 And then mount the file system inside the container against the empty /mnt directory:
 
-# Alias for ease of use, assume we use collab profile
-
-alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client --profile collab"
+```shell
+# Alias for ease of use
+> alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client"
 
 # Mount the file system in the container
+docker-score-client mount --mount-point /mnt --manifest manifest_file_name.txt
+```
 
-docker-score-client mount --mount-point /mnt --manifest <manifest_id or manifest/manifest_file>
-Note that the --privileged Docker option is required for FUSE in order to access the host's /dev/fuse device.
+Note that the `--privileged` Docker option is required for FUSE in order to access the host's /dev/fuse device.
 
 In another terminal, you can access the newly mounted file system:
 
+```shell
 # List all files recursively
+> docker exec -it $(docker ps -lq) find /mnt
+```
 
-docker exec -it $(docker ps -lq) find /mnt
 To perform analysis within the container:
 
+```shell
 # Open a shell in the previously created container
-
-docker exec -it $(docker ps -lq) bash
+> docker exec -it $(docker ps -lq) bash
 
 # Install samtools
-
-apt-get install samtools
+> apt-get install samtools
 
 # Slice
+> samtools view /mnt/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+```
 
-samtools view /mnt/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+</TabItem>
+</Tabs>
+
+<!---  Tabs end here -->
