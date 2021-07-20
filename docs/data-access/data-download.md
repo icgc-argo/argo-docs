@@ -24,7 +24,7 @@ Platform users can search for a file set of interest using the File Repository. 
 
 The file manifest contains a list of the files that match your search query, along with some additional metadata to assist in file identification. The file manifest will be used by the score-client to identify the list of files to download.
 
-> NOTE: Clinical data can be downloaded by any user and does not require the score-client. In order to download controlled molecular data, you **must have ICGC DACO approval for access to controlled data**. Learn more about the [DACO application process here](/docs/data-access/daco/applying), or [apply for DACO approval here](https://daco.icgc-argo.org/).
+> NOTE: Clinical data can be downloaded by any user and does not require the score-client. In order to download controlled molecular data, you **must have ICGC DACO approval for access to controlled data**. Learn more about the [DACO application process here](/docs/data-access/data-access), or [apply for DACO approval here](https://daco.icgc.org/).
 
 ## Installing the score-client
 
@@ -43,7 +43,7 @@ apt-get install openjdk-11-jdk
 
 If using the Docker distribution, Java is bundled and does not need to be installed.
 
-By default the Score Client is configured to use a maximum of 8G of RAM. Most of time this is more than sufficient for fast downloads.
+By default the score-client is configured to use a maximum of 8G of RAM. Most of time this is more than sufficient for fast downloads.
 
 ### Distributions
 
@@ -164,10 +164,33 @@ score-client [options] [command] [command options]
 It offers a set of commands, where each command has its own set of options to influence its operation. You can find all options with `--help`:
 
 ```
-score-client [options] [command] [command options]
+  Options:
+        --silent
+       Do not produce any informational messages
+       Default: false
+        --help
+       Show help information
+       Default: false
+        --profile
+       Define environment profile used to resolve configuration properties
+       Default: default
+        --quiet
+       Reduce output for non-interactive usage
+       Default: false
+        --version
+       Show version information
+       Default: false
+  Commands:
+    view      Locally store/display some or all of a remote SAM/BAM file object
+    version   Display application version information
+    mount     Mount a read-only FUSE file system view of the remote storage repository
+    url       Resolve the URL of a specified remote file object
+    help      Display help information for a specified command name
+    info      Display application configuration information
+    manifest  Resolve a file object manifest and display it
+    download  Retrieve file object(s) from the remote storage repository
+    upload    Upload file object(s) to the remote storage repository
 ```
-
-<<<<<<< HEAD
 
 ## Download
 
@@ -177,19 +200,7 @@ score-client [options] [command] [command options]
 
 Using a manifest is ideal for downloading multiple files identified through the [ARGO Platform](https://platform.icgc-argo.org/repository).
 
-# Run the score-client using the `download` command. Define your options:
-
-It offers a set of commands, where each command has its own set of options to influence its operation.
-
-## Download
-
-### Download a list of files by manifest
-
-Using a manifest is ideal for downloading multiple files identified through the [ARGO Platform](https://platform.icgc-argo.org/repository).
-
-Run the score-client using the `download` command. Define your parameters:
-
-> > > > > > > initialize-docs-structure
+Run the score-client using the `download` command. Define your options:
 
 - **--manifest** : location of the manifest file listing files to be downloaded
 - **--output-dir**: location you want the downloaded files to be written to
@@ -197,10 +208,10 @@ Run the score-client using the `download` command. Define your parameters:
 For example:
 
 ```shell
-> score-client/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
+> bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-It offers a set of commands, where each command has its own set of options to influence its operation. You can find all options with `--help`:
+The optional `--output-layout` option can be used to organize the downloads into a couple of predefined directory layouts. See the `--help` option for additional information.
 
 ### Download a single file by object ID
 
@@ -218,7 +229,7 @@ For example:
 You can also specify multiple object id's separated by spaces:
 
 ```shell
-> score-client-/bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
+> bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
 ```
 
 ## BAM/CRAM Slicing
@@ -227,22 +238,20 @@ The view command is a minimal version of [samtools](http://www.htslib.org/doc/sa
 
 The following example will download reads overlapping the region 1 - 10,000 on chromosome 1:
 
-```
-bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
+```shell
+> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
 ```
 
-The BAI is automatically discovered and streamed as part of the operation.
+The BAI is automatically discovered and streamed as part of the operation. For quickly accessing only the BAM header one can issue:
 
-For quickly accessing only the BAM header one can issue:
-
-```
-bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
+```shell
+> bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
 ```
 
 It is also possible to pipe the output of the above to `samtools`, etc. for pipelining a workflow:
 
-```
-bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
+```shell
+> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
 ```
 
 ## FUSE Mounting
@@ -277,73 +286,80 @@ The file system implementation's performance is optimized for serial reads. Freq
 
 <!---  Tabs start here -->
 
-You can mount files from a manifest list of files:
-
-For example:
+<Tabs
+groupId="operating-systems"
+defaultValue="Client"
+values={[
+{ label: 'Client', value: 'Client', },
+{ label: 'Docker', value: 'Docker', },
+]
+}>
+<TabItem value="Client">
 
 ```shell
 # Create the mount point
-sudo mkdir /mnt/icgc-argo
-sudo chmod 777 /mnt/icgc-argo
+> sudo mkdir /mnt/icgc-argo
+> sudo chmod 777 /mnt/icgc-argo
 
 # Mount
-bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
+> bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
 ```
 
 Once mounted, you can use standard analysis tools against files found under the mount point:
 
 ```shell
-samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+> samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
 ```
 
-<<<<<<< HEAD
+</TabItem>
 
-# </TabItem>
-
-> > > > > > > initialize-docs-structure
-
-### Mount in Docker
+<TabItem value="Docker">
 
 To avoid having to install the FUSE and Java dependencies when working with the mount command, it is very convenient to mount from within a Docker container. This is also useful for creating a custom image for analysis that derives from the one published by ICGC. First, ensure that both Docker and the score-client image are installed.
 
-Next, export the access token generated from the portal:
+Next, export your personal [API Token](/docs/data-access/user-profile-and-api-token) generated from the ARGO Data Platform:
 
 ```shell
 # Export access token, please replace accessToken with your own token
-export ACCESSTOKEN=<accessToken>
+> export ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0
 ```
 
 And then mount the file system inside the container against the empty /mnt directory:
 
-# Alias for ease of use, assume we use collab profile
-
-alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client --profile collab"
+```shell
+# Alias for ease of use
+> alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client"
 
 # Mount the file system in the container
-
 docker-score-client mount --mount-point /mnt --manifest manifest_file_name.txt
-
 ```
 
 Note that the `--privileged` Docker option is required for FUSE in order to access the host's /dev/fuse device.
 
-docker-score-client mount --mount-point /mnt --manifest <manifest_id or manifest/manifest_file>
-Note that the --privileged Docker option is required for FUSE in order to access the host's /dev/fuse device.
-
 In another terminal, you can access the newly mounted file system:
 
+```shell
 # List all files recursively
+> docker exec -it $(docker ps -lq) find /mnt
+```
 
-docker exec -it $(docker ps -lq) find /mnt
 To perform analysis within the container:
 
+```shell
 # Open a shell in the previously created container
-
-docker exec -it $(docker ps -lq) bash
+> docker exec -it $(docker ps -lq) bash
 
 # Install samtools
+> apt-get install samtools
 
-apt-get install samtools
+# Slice
+> samtools view /mnt/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+```
+
+</TabItem>
+</Tabs>
+
+<!---  Tabs end here -->
 
 ## Additional Data Sources
 
@@ -354,4 +370,3 @@ In addition to the latest harmonized data on the ICGC ARGO Platform, you can als
 - [EGA Data Portal](https://ega-archive.org/): Contains raw datasets of data submitted to ICGC 25k.
   - Data can only be downloaded through their [EGA download client](https://ega-archive.org/download/downloader-quickguide-APIv3#DownloadClient), but metadata may be viewed on their website. Files are grouped into datasets based on the study they were collected in, and access is granted on a dataset by dataset basis. This repository carries both ICGC and non-ICGC data.
   - For more information, consult the [Guide to Data Access](https://ega-archive.org/access/data-access).
-```
