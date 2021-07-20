@@ -34,7 +34,7 @@ Permissions are assigned based on the role that has been granted to you in a spe
 
 DACO access is required to download controlled data from any program you have approval for. If you have been granted DACO access, you should see a green "DACO Approved" checkmark.
 
-If you do not have DACO access, please see the instructions for [applying to controlled access data](/docs/data-access/data-access).
+If you do not have DACO access, please see the instructions for [applying to controlled access data](/docs/data-access/daco/applying).
 
 ### Program Permission
 
