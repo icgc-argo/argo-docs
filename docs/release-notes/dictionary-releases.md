@@ -18,6 +18,18 @@ Coming soon.
 
 None to report.
 ------>
+## Release 1.11
+
+**Release Date:** July 21, 2021
+
+### Updates
+
+A **new** clinical table has been added to the dictionary along with the file template downloads for submission:
+1. **Biomarker**: The collection of data elements describing a donor's biomarker tests. A biomarker is a biological molecule found in blood, other body fluids, or tissues that is indicative of the presence of cancer in the body.
+
+
+### Bug Fixes
+- If `survival_time` field is submitted,then all other interval times should be less than that.  The  `treatment.treatment_start_interval` and `folowup.interval_of_followup` fields are now being validated correctly against this rule. 
 
 ## Release 1.10
 
