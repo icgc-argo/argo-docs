@@ -168,5 +168,5 @@ client.uploadStateDir=/dir/with/write/access/scratch
 Once you have updated the configuration, use the `--force` option to reinitiate the upload.
 
 ```shell
-> .bin/score-client  upload --manifest manifest.txt --force
+> bin/score-client  upload --manifest manifest.txt --force
 ```

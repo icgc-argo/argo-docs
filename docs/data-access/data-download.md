@@ -80,7 +80,7 @@ Update the docker configuration with your user values, including:
 - **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 
 ```shell
-> docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
+> docker run -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
 ```
 
 There is no entry point or command defined for the image. The software is located at score-client which is also the working directory of the container.
@@ -161,7 +161,36 @@ The score-client has the general syntax:
 score-client [options] [command] [command options]
 ```
 
-It offers a set of commands, where each command has its own set of options to influence its operation.
+It offers a set of commands, where each command has its own set of options to influence its operation. You can find all options with `--help`:
+
+```
+  Options:
+        --silent
+       Do not produce any informational messages
+       Default: false
+        --help
+       Show help information
+       Default: false
+        --profile
+       Define environment profile used to resolve configuration properties
+       Default: default
+        --quiet
+       Reduce output for non-interactive usage
+       Default: false
+        --version
+       Show version information
+       Default: false
+  Commands:
+    view      Locally store/display some or all of a remote SAM/BAM file object
+    version   Display application version information
+    mount     Mount a read-only FUSE file system view of the remote storage repository
+    url       Resolve the URL of a specified remote file object
+    help      Display help information for a specified command name
+    info      Display application configuration information
+    manifest  Resolve a file object manifest and display it
+    download  Retrieve file object(s) from the remote storage repository
+    upload    Upload file object(s) to the remote storage repository
+```
 
 ## Download
 
@@ -169,7 +198,7 @@ It offers a set of commands, where each command has its own set of options to in
 
 Using a manifest is ideal for downloading multiple files identified through the [ARGO Platform](https://platform.icgc-argo.org/repository).
 
-Run the score-client using the `download` command. Define your parameters:
+Run the score-client using the `download` command. Define your options:
 
 - **--manifest** : location of the manifest file listing files to be downloaded
 - **--output-dir**: location you want the downloaded files to be written to
@@ -177,16 +206,16 @@ Run the score-client using the `download` command. Define your parameters:
 For example:
 
 ```shell
-> score-client/bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
+> bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
-It offers a set of commands, where each command has its own set of options to influence its operation. You can find all options with `--help`:
+The optional `--output-layout` option can be used to organize the downloads into a couple of predefined directory layouts. See the `--help` option for additional information.
 
 The optional `--output-layout` parameter can be used to organize the downloads into a couple of predefined directory layouts. See the --help for additional information.
 
 ### Download a single file by object ID
 
-Run the score-client using the `download` command. Define your parameters:
+Run the score-client using the `download` command. Define your options:
 
 - **--object-id** : object-id of the file to be downloaded
 - **--output-dir**: directory location you want the downloaded files to be written to
@@ -194,7 +223,7 @@ Run the score-client using the `download` command. Define your parameters:
 For example:
 
 ```shell
-> score-client-/bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
+> bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
 
 You can also specify multiple object id's separated by spaces:
