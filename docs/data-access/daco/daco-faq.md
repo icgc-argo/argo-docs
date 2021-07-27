@@ -62,15 +62,15 @@ platform_key: DOCS_DACO_FAQ
 
    A lay summary describes your research project using lay language for the general public. It should describe the objectives and methodology of your research project as well as how the controlled data you wish to access from the ICGC will be used. Please ensure to mention **ICGC Controlled Data** in your lay summary. 
 
-7. **How can I add/remove collaborators from my approved application?**
+7. **How can I add/remove Collaborators from my approved application?**
 
-   When you have collaborators listed on your application, you will see them listed within the Section C table.
-   * To add a new collaborator, click the **Add a Collaborator** button above the table and fill out all of the required fields in the form. When you add a collaborator to an approved application, they will automatically be granted access and will receive an email notification with instructions.
-   * To remove a collaborator, click the **garbage can** icon associated with that collaborator and confirm this action. 
+   When you have Collaborators listed on your application, you will see them listed within the Section C table.
+   * To add a new Collaborator, click the **Add a Collaborator** button above the table and fill out all of the required fields in the form. When you add a Collaborator to an approved application, they will automatically be granted access and will receive an email notification with instructions.
+   * To remove a Collaborator, click the **garbage can** icon associated with that Collaborator and confirm this action. 
 
 8. **Can I include authorized personnel and students from other institutions?**
 
-   All authorized students and personnel must be employed by your institution, as the institutional representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external collaborator, they must complete a separate Application for Access to the ICGC Controlled Data.
+   All authorized students and personnel must be employed by your institution, as the institutional representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external Collaborator, they must complete a separate Application for Access to the ICGC Controlled Data.
 
 9. **How do I submit an access request on a collaborative project?**
 
@@ -80,7 +80,7 @@ platform_key: DOCS_DACO_FAQ
 
    For secure authorization, we require a valid Google email address (Gmail or G Suite) for logging into the ICGC DACO Website as an application submitter. 
 
-   Once your application is approved, applicants and collaborators have access to ICGC Controlled Data associated only to the Google/G Suite email address that is provided on the application, which will also be used to login to either the [ICGC ARGO Platform](https://platform.icgc-argo.org/) or [ICGC 25K Data Portal](https://dcc.icgc.org/).
+   Once your application is approved, Applicants and Collaborators have access to ICGC Controlled Data associated only to the Google/G Suite email address that is provided on the application, which will also be used to login to either the [ICGC ARGO Platform](https://platform.icgc-argo.org/) or [ICGC 25K Data Portal](https://dcc.icgc.org/).
 
 11. **Do I need to include institutional email addresses for all of the students on my application?**
 
@@ -90,7 +90,7 @@ platform_key: DOCS_DACO_FAQ
 
    If you are uncertain as to whether your research requires an ethics approval, please consult your institutional REB or an Ethics Committee formally designated to approve and/or monitor research involving humans.
    
-   For Canadian institutions: The Canadian TCPS-2 requires that all scientific research projects making secondary use of identifiable data, including coded data such as ICGC controlled data, receive and hold a valid ethics approval from the relevant institutional Research Ethics Board (REB) throughout the life cycle of the project.  Include an approval letter (in `Section E: Ethics`) from your IRB or Ethics Committee formally designated to approve and/or monitor research involving humans with the submission of your application. Otherwise, you may be asked to demonstrate to the ICGC DACO that your research project is not required to undergo ethics review by providing a letter from your IRB stating that your project is exempt from ethics review. 
+   For Canadian institutions: The [Canadian TCPS-2](https://ethics.gc.ca/eng/policy-politique_tcps2-eptc2_2018.html) requires that all scientific research projects making secondary use of identifiable data, including coded data such as ICGC controlled data, receive and hold a valid ethics approval from the relevant institutional Research Ethics Board (REB) throughout the life cycle of the project.  Include an approval letter (in `Section E: Ethics`) from your IRB or Ethics Committee formally designated to approve and/or monitor research involving humans with the submission of your application. Otherwise, you may be asked to demonstrate to the ICGC DACO that your research project is not required to undergo ethics review by providing a letter from your IRB stating that your project is exempt from ethics review. 
 
 13. **How long will it take to process my access request?**
 
