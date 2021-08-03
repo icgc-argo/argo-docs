@@ -47,3 +47,4 @@ Please log in to the **[ARGO Data Platform](https://platform.icgc-argo.org/)** u
 
 If you have been granted DACO access, you should see a green "DACO Approved" check mark on your [user profile page](https://platform.icgc-argo.org/user). This is also where you can access your API Token to use with the ICGC ARGO download client. For more information, check out [How to Download Data](/docs/data-access/data-download).
 ![DACO Approval](/assets/data-access/daco-access.png)
+

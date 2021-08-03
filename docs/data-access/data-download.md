@@ -80,7 +80,7 @@ Update the docker configuration with your user values, including:
 - **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 
 ```shell
-> docker run -it -e "METADATA_URL=https://song.rdpc.cancercollaboratory.org" -e "STORAGE_URL=https://score.rdpc.cancercollaboratory.org" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
+> docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
 ```
 
 There is no entry point or command defined for the image. The software is located at score-client which is also the working directory of the container.
