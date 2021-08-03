@@ -360,3 +360,16 @@ To perform analysis within the container:
 </Tabs>
 
 <!---  Tabs end here -->
+
+# <<<<<<< HEAD
+
+## Additional Data Sources
+
+In addition to the latest harmonized data on the ICGC ARGO Platform, you can also access legacy data from the ICGC 25K project.
+
+- [ICGC 25K Data Portal](https://dcc.icgc.org/): Contains a compiled dataset against the GRCh37 reference genome.
+  - For more information, consult the [ICGC 25K Data Download documentation](https://docs.icgc.org/download/downloading-data/.).
+- [EGA Data Portal](https://ega-archive.org/): Contains raw datasets of data submitted to ICGC 25k.
+  - Data can only be downloaded through their [EGA download client](https://ega-archive.org/download/downloader-quickguide-APIv3#DownloadClient), but metadata may be viewed on their website. Files are grouped into datasets based on the study they were collected in, and access is granted on a dataset by dataset basis. This repository carries both ICGC and non-ICGC data.
+  - For more information, consult the [Guide to Data Access](https://ega-archive.org/access/data-access).
+    > > > > > > > add repos

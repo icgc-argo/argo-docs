@@ -13,7 +13,7 @@ Once submitted to the ICGC DACO, you will be **notified within 10 business days*
 ![DACO Review Process with possible outcomes](/assets/data-access/daco-approval-diagram.png)
 
 ## Requested Revisions
-If the ICGC DACO requires specific criteria to be met before being able to approve the application, they will request revisions from the project team.If this is the case, you will receive an email outlining the sections that require revisions along with specific details that need to be provided.
+If the ICGC DACO requires specific criteria to be met before being able to approve the application, they will request revisions from the project team. If this is the case, you will receive an email outlining the sections that require revisions along with specific details that need to be provided.
 
 At this time, the application submitter can log in to [daco.icgc-argo.org](https://daco.icgc-argo.org) and access their application that is in the `Requested Revisions` state. The sections that need revising will be unlocked and will show an **orange pencil** icon. The `Sign & Submit` section will be enabled once corrections have been made to those sections. Once corrected, please upload the revised and signed application and resubmit.  
 
@@ -28,10 +28,8 @@ If the ICGC DACO approves your application, access to ICGC Controlled Data will 
 
 A copy of the application signed by the Data Access Officer will be sent to the Applicant.
 
-You can access ICGC Controlled Data in the following data portals:
-- [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) - For more information, consult the [Accessing and Downloading Data documentation](/docs/data-access/data-download)
-- [ICGC 25K Data Portal](https://dcc.icgc.org/) - For more information, consult the [ICGC 25K Data Download documentation](https://docs.icgc.org/download/downloading-data/.).
-EGA Data Portal - For more information, consult the Guide to Data Access: https://ega-archive.org/access/data-access .
+You can now access ICGC Controlled Data.  Consult the [access guide](/docs/data-access/daco/data-access) for more information. 
+
 
 ## Editing an Approved Application
 
