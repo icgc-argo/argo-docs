@@ -15,7 +15,7 @@ While there is great potential of data sharing for scientific research, caution 
 1. **The Applicant** must be an independent researcher affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.), and they **must review and sign the finalized application**.
 1. A qualified **Institutional Representative** of a legal entity has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement (e.g. Vice-President Research, a Research Director, or a Contracts Officer for the entity), and **must review and sign the finalized application**.
 1. The Applicant must submit a summary of the research project.  The project will be checked for conformity with the [goals and policies of ICGC](https://www.icgc-argo.org/page/72/introduction-and-goals-) including, but not limited to, policies concerning the purpose and relevance of the research, the protection of the donors and the security of the donors’ data.
-1. The Applicant must submit a lay summary of the project to be posted on the ICGC ARGO website. This summary should be targeted to the general public, clearly explaining the research objectives in non-scientific terms and how the ICGC Controlled Data will be used.
+1. The Applicant must submit a lay summary of the project to be posted on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users). This summary should be targeted to the general public, clearly explaining the research objectives in non-scientific terms and how the ICGC Controlled Data will be used.
 1. The Applicant must submit at least 3 qualifying publications of which they were an author/co-author.
 1. If ethics approval for use of ICGC Controlled Data is required in the Applicant’s country/region, an ethics approval letter must be included with the application.
 1. All required sections of the application must be completed legitimately and all terms agreed upon. 
@@ -27,7 +27,7 @@ The following are a list of the users involved in an application and their requi
 1. **Applicant/Principal Investigator:** Must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.).
 1. **Institutional Representative:** A qualified representative of a legal entity who has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement (e.g. Vice-President Research, a Research Director, or a Contracts Officer for the entity).
 1. **Collaborators:** All investigators, collaborators, research staff at the Applicant’s institute (including post-docs) and students (including graduate students), who will have access to the ICGC Controlled Data in order to work on the research project.
-1. **Application Submitter:** The user who manages and submits the DACO application forms. This could be the same person as the Applicant/Principal Investigator.
+1. **Application Submitter:** The user who manages and submits the DACO application form. This could be the same person as the Applicant/Principal Investigator.
 
 | User        | Accesses and manages applications            | Required to be from the same Primary Affiliation as the Applicant | Required to provide a valid Google email address    | Required to sign the application | Gains access to ICGC Controlled Data once approved |
 | ----------------------- | --------------------------------------- | --------------------- | ---------------- | ---------------------- | ---------------------- |
@@ -74,13 +74,14 @@ When applications are in progress, the Applicant dashboard will show the followi
 The following outlines a bit more information about some specific application sections:
 
 ## Section C: Collaborators
-The `Collaborators` section is the only section that is optional to fill out, i.e. you do not need to request access for any Collaborators in order to apply. If you do have a team that requires access to ICGC Controlled Data, they are required to be at the same primary affiliation (institution) as the Applicant. 
+The `Collaborators` section is the only section that is optional to fill out, i.e. you do not need to request access for any Collaborators in order to apply. If you do have a team that requires access to ICGC Controlled Data, **they are required to be at the same primary affiliation (institution) as the Applicant.** 
 
 You do not need to add the Applicant as a Collaborator, the Applicant will always receive controlled data access once an application is approved. You only need to add each Collaborator once, and it is required to provide a valid Google or G Suite email address for their data access. 
 
 When you have Collaborators listed on your application, you will see them listed within the Section C table.
-- To add a new Collaborator, click the **Add a Collaborator** button above the table and fill out all of the required fields in the form. When you add a Collaborator to an approved application, they will automatically be granted access and will receive an email notification with instructions.
-- To remove a Collaborator, click the **garbage can** icon associated with that Collaborator and confirm this action. 
+- To **add** a new Collaborator, click the **Add a Collaborator** button above the table and fill out all of the required fields in the form. When you add a Collaborator to an approved application, they will automatically be granted access and will receive an email notification with instructions.
+- To **remove** a Collaborator, click the **garbage can** icon associated with that Collaborator and confirm this action. 
+- Before approval, you can **edit** a Collaborator's information by clicking on the **pencil icon** associated with that Collaborator and then editing the form. 
 
 Once the application is approved, the Collaborators will receive an email notifying them that they have been granted access to ICGC Controlled Data.
 
@@ -89,18 +90,18 @@ ICGC is aware that some countries/regions do not require ethics approval for use
 
 If your country/region requires an ethics approval, it is required that you provide the approval letter to the ICGC DACO by uploading it within `Section E: Ethics`. 
 
-If the ethics approval is written in a language other than English or French, please upload a translated version.
+If the ethics approval is written in a language other than English, please upload a translated version.
 
 > Please note: The DACO and the ICGC are not responsible for the ethics approval/monitoring of individual research projects and bear no responsibility for the Applicant's failure to comply with local/national ethical requirements.
 
 ## Signing and Submitting the Application
-The last section of the application, `Sign & Submit` will be disabled if any section of the application is incomplete. 
+The last section of the application, `Sign & Submit`, will be disabled if any section of the application is incomplete. 
 
-When this section is enabled, the final step involves adding the proper signatures to authorize this application. Please do the following:
+When this section is enabled, the final step involves adding the proper signatures to authorize the application. Please do the following:
 1. Download the finalized application from the top application header, or using the button within the section content. 
-1. On the last page of the application pdf you will find a signatures page. You must include **BOTH the Principal Investigator and the Institutional Representative signatures** or your application will be declined. Signatures can be added by either:
-   * Printing the final page, collecting the written signatures, scanning the signed page and adding it back to the finalized application pdf.
-   * Adding the proper signatures using electronic methods, such as [DocuSign](https://www.docusign.ca/) or [AdobeSign](https://acrobat.adobe.com/us/en/sign.html).
+1. On the last page of the application pdf you will find a signatures page. You must include **BOTH the Principal Investigator and the Institutional Representative signatures** or your application will be declined.
+   * You can print the final signature page, collect the written signatures, scan the signed page and add it back to the finalized application pdf.
+   * Or you can add the proper signatures using electronic methods, such as [DocuSign](https://www.docusign.ca/) or [AdobeSign](https://acrobat.adobe.com/us/en/sign.html).
 1. Once you have prepared the digital copy of the signed application, upload it within this section and click the **Submit Application** button.
 1. You will receive an email confirming that the ICGC DACO has received your application. 
 

@@ -13,11 +13,11 @@ platform_key: DOCS_DACO_FAQ
    * You must have at least 3 qualifying publications of which you were an author/co-author.
    * If ethics approval for use of ICGC Controlled Data is required in your country/region, an ethics approval letter must be included with the application.
 
-2. **How do I submit my request to access the controlled data of the ICGC?**
+2. **How do I submit my request to access ICGC Controlled Data?**
 
-   If you wish to submit your Application for Access to ICGC Controlled Data, please create an account and start an application, available on the [ICGC DACO Website](https://daco.icgc-argo.org). 
+   If you wish to submit your Application for Access to ICGC Controlled Data, please visit the [ICGC DACO Website](https://daco.icgc-argo.org), click the **Apply for Access** button, log in with a Google or G Suite email address, and start an application. 
 
-   Are you applying on behalf of your project's Principal Investigator?
+   Are you applying on behalf of the project's Principal Investigator?
    * If so, please log in to start the application process using your preferred Google or G Suite email address.
 
    Are you applying as the Principal Investigator for the project that requires access to ICGC Controlled Data?
@@ -29,13 +29,13 @@ platform_key: DOCS_DACO_FAQ
 
 3. **Who qualifies as an Applicant (Principal Investigator)?**
 
-   As set out in the ICGC Controlled Data access policy users’ guide, qualified applicants for access to the ICGC controlled data must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.). 
+   As set out in the ICGC Controlled Data access policy users’ guide, qualified applicants for access to the ICGC Controlled Data must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.). 
 
    Please note: A student or personnel can fill out the application on behalf of the Applicant, but the Applicant will be responsible for reviewing and signing the application.
 
 4. **Who qualifies as an Institutional Representative?**
 
-   An authorized institutional representative is a qualified representative of a legal entity and has the administrative power to legally commit that entity to the terms and conditions of the data access agreement. Examples of institutional representatives include, but are not limited to: a Vice-President Research, a Research Director, or a Contracts Officer for the entity. If you are uncertain who should be listed in this section, please contact the legal department of your institution.
+   An authorized institutional representative is a qualified representative of a legal entity and has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement. Examples of institutional representatives include, but are not limited to: a Vice-President Research, a Research Director, or a Contracts Officer for the entity. If you are uncertain who should be listed in this section, please contact the legal department of your institution.
 
 5. **What should be included in the Research Summary (Scientific Abstract) section?**
 
@@ -60,7 +60,7 @@ platform_key: DOCS_DACO_FAQ
 
 6. **What is a lay summary?**
 
-   A lay summary describes your research project using lay language for the general public. It should describe the objectives and methodology of your research project as well as how the controlled data you wish to access from the ICGC will be used. Please ensure to mention **ICGC Controlled Data** in your lay summary. 
+   A lay summary describes your research project using lay language for the general public. It should describe the objectives and methodology of your research project as well as how the controlled data you wish to access from the ICGC will be used. Please ensure to mention **ICGC Controlled Data** in your lay summary. Once approved, your lay summary will be posted here on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users).
 
 7. **How can I add/remove Collaborators from my approved application?**
 
@@ -70,27 +70,27 @@ platform_key: DOCS_DACO_FAQ
 
 8. **Can I include authorized personnel and students from other institutions?**
 
-   All authorized students and personnel must be employed by your institution, as the institutional representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external Collaborator, they must complete a separate Application for Access to the ICGC Controlled Data.
+   All authorized students and personnel must be employed by your institution, as the institutional representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external Collaborator, they must complete a separate Application for Access to ICGC Controlled Data.
 
 9. **How do I submit an access request on a collaborative project?**
 
-   If you are working in collaboration with researchers at other institutions, they will need to complete a separate application should they require access to the controlled data. As a collaborative project, Section D of the form (i.e. Title, Research Summary  and Lay Summary) may include the same content. Please mention this collaboration in the application form directly or [contact the ICGC DACO](https://platform.icgc-argo.org/contact).
+   If you are working in collaboration with researchers at other institutions, they will need to complete a separate application should they require access to the ICGC Controlled Data. As a collaborative project, Section D of the form (i.e. Project Title, Research Summary, Lay Summary, and Publications) may include the same content. Please mention this collaboration in the application form directly or [contact the ICGC DACO](https://platform.icgc-argo.org/contact).
 
-10. **Why do I need to provide Google or G Suite email addresses for all people on the application?**
+10. **Why do I need to provide Google or G Suite email addresses for the Applicant and Collaborators?**
 
    For secure authorization, we require a valid Google email address (Gmail or G Suite) for logging into the ICGC DACO Website as an application submitter. 
 
    Once your application is approved, Applicants and Collaborators have access to ICGC Controlled Data associated only to the Google/G Suite email address that is provided on the application, which will also be used to login to either the [ICGC ARGO Platform](https://platform.icgc-argo.org/) or [ICGC 25K Data Portal](https://dcc.icgc.org/).
 
-11. **Do I need to include institutional email addresses for all of the students on my application?**
+11. **Do I need to include institutional email addresses for all of the personnel and students on my application?**
 
-   Yes, the ICGC DACO uses the institutional email addresses provided for all authorized personnel and students to verify their affiliation.
+   Yes, the ICGC DACO uses the institutional email addresses provided for all authorized personnel and students to verify their affiliation. Some system emails will also be sent to this email address as well as any Google/G Suite email address provided.
 
 12. **How do I know if my project is required to undergo an ethics review?**
 
    If you are uncertain as to whether your research requires an ethics approval, please consult your institutional REB or an Ethics Committee formally designated to approve and/or monitor research involving humans.
    
-   For Canadian institutions: The [Canadian TCPS-2](https://ethics.gc.ca/eng/policy-politique_tcps2-eptc2_2018.html) requires that all scientific research projects making secondary use of identifiable data, including coded data such as ICGC controlled data, receive and hold a valid ethics approval from the relevant institutional Research Ethics Board (REB) throughout the life cycle of the project.  Include an approval letter (in `Section E: Ethics`) from your IRB or Ethics Committee formally designated to approve and/or monitor research involving humans with the submission of your application. Otherwise, you may be asked to demonstrate to the ICGC DACO that your research project is not required to undergo ethics review by providing a letter from your IRB stating that your project is exempt from ethics review. 
+   For Canadian institutions: The [Canadian TCPS-2](https://ethics.gc.ca/eng/policy-politique_tcps2-eptc2_2018.html) requires that all scientific research projects making secondary use of identifiable data, including coded data such as ICGC Controlled Data, receive and hold a valid ethics approval from the relevant institutional Research Ethics Board (REB) throughout the life cycle of the project.  Include an approval letter (in `Section E: Ethics`) from your IRB or Ethics Committee formally designated to approve and/or monitor research involving humans with the submission of your application. Otherwise, you may be asked to demonstrate to the ICGC DACO that your research project is not required to undergo ethics review by providing a letter from your IRB stating that your project is exempt from ethics review. 
 
 13. **How long will it take to process my access request?**
 
@@ -102,7 +102,7 @@ platform_key: DOCS_DACO_FAQ
 
 15. **My application was approved by the ICGC DACO, but I did not receive my EGA credentials. Who can I contact?**
 
-   Once the EGA is informed of approved applications by the Data Access Committee (DAC), an EGA account with the agreed dataset permissions is created within 3-5 days from the date of approval. Users will be sent an email with their login details (please check your email junk/trash folder in case the email has been redirected).
+   Once the EGA is informed of approved applications by the Data Access Committee (DAC), an EGA account with the agreed dataset permissions is created within 3-5 days from the date of approval. Users will be sent an email with their login details **(please check your email junk/trash folder in case the email has been redirected).**
 
    If you do not receive an email from the EGA after 5 business days, or if you experience downloading issues, please [contact the EGA helpdesk](mailto:ega-helpdesk@ebi.ac.uk) for technical assistance.
 
@@ -124,7 +124,7 @@ platform_key: DOCS_DACO_FAQ
 
 17. **The Principal Investigator of our project or Institutional Representative has changed. How do we update this?**
 
-   If you are eligible to renew your access request, please reopen your application and update any necessary fields before finalizing your renewal application. 
+   If you are eligible to renew your access request (at the earliest, this will be 45 days prior to access expiry), please renew your application and update any necessary fields before finalizing your renewal application. 
 
    If your application has been recently approved, please [contact the ICGC DACO](https://platform.icgc-argo.org/contact) for further instructions. 
 
