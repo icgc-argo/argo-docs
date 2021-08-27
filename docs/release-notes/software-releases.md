@@ -18,6 +18,13 @@ None to report.
 
 None to report.
 ------>
+
+## August 30, 2021: Program Dashboard Updates
+Data Platform - v1.93.0 API v 3.16.0
+
+### New Features 
+- Table filters have been added to the [Program Dashboard](/docs/submission/submitted-data) to make donor sorting easier. 
+
 ## April 27, 2021: Clinical Submission and Program Dashboard Updates
 Data Platform - v1.93.0 API v 3.16.0
 
