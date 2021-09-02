@@ -19,8 +19,8 @@ None to report.
 None to report.
 ------>
 
-## August 30, 2021: Program Dashboard Updates
-Data Platform - v1.93.0 API v 3.16.0
+## September 02, 2021: Program Dashboard Updates
+Data Platform - v1.101.0 API v3.24.6
 
 ### New Features 
 - Table filters have been added to the [Program Dashboard](/docs/submission/submitted-data) to make donor sorting easier. 

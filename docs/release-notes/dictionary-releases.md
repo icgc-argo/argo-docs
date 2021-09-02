@@ -22,7 +22,7 @@ None to report.
 
 ## Release 1.12
 
-**Release Date:** Aug 30, 2021
+**Release Date:** September 02, 2021
 
 ### Updates
 
@@ -31,7 +31,7 @@ None to report.
   - Stage may be assigned when the TNM stage group results in Any T or Any N with M1, which includes TX or NX e.g. (`TX NX M1`, or `TX N3 M1`). These are classified as Stage IV.
  
   - Stage may be assigned when the TNM stage group results in Any T or Any N with M0, which includes TX or NX e.g. (`TX N1 M0` Stage III in melanoma clinical stage or `T4 NX M0` Stage III in pancreas).
-- Added `pipe` as a term to `exposure.tobacco_type` controlled terminology 
+- Added `pipe` as a term to `exposure.tobacco_type` controlled terminology. 
 
 
 
