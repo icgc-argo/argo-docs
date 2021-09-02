@@ -22,7 +22,7 @@ None to report.
 
 ## Release 1.12
 
-**Release Date:** Aug 30, 2021
+**Release Date:** September 02, 2021
 
 ### Updates
 
