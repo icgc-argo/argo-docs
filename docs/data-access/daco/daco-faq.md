@@ -24,7 +24,7 @@ platform_key: DOCS_DACO_FAQ
    * If you already have an ICGC ARGO Platform account, use the same Google or G Suite email address for the ICGC ARGO Platform account and ICGC DACO website.
    * If you do not yet have an ICGC ARGO Platform account, we recommend applying for access using the Google or G Suite email address with which you will access ICGC Controlled Data.
 
-   Once you have completed your application online, obtain the required signatures and submit your application directly through the website. Once the application has been submitted online, the ICGC DACO committee will review your application and you will hear back **within ten business days**.
+   Once you have completed your application online, obtain the required signatures and submit your application directly through the website. Once the application has been submitted, the ICGC DACO committee will review your application and you will hear back **within ten business days**.
 
 
 3. **Who qualifies as an Applicant (Principal Investigator)?**
@@ -66,11 +66,11 @@ platform_key: DOCS_DACO_FAQ
 
    When you have Collaborators listed on your application, you will see them listed within the Section C table.
    * To add a new Collaborator, click the **Add a Collaborator** button above the table and fill out all of the required fields in the form. When you add a Collaborator to an approved application, they will automatically be granted access and will receive an email notification with instructions.
-   * To remove a Collaborator, click the **garbage can** icon associated with that Collaborator and confirm this action. 
+   * To remove a Collaborator, click the **garbage can** icon associated with that Collaborator and confirm this action. When a Collaborator is removed, they will receive an email notifying them that their access to ICGC Controlled Data will be removed within the next 24 hours.
 
 8. **Can I include authorized personnel and students from other institutions?**
 
-   All authorized students and personnel must be employed by your institution, as the institutional representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external Collaborator, they must complete a separate Application for Access to ICGC Controlled Data.
+   All authorized students and personnel must be employed by your institution, as the Institutional Representative signs the Data Access Agreement on behalf of all the employees and students of the institution. Should you wish to share the ICGC Controlled Data with an external Collaborator, they must complete a separate Application for Access to ICGC Controlled Data.
 
 9. **How do I submit an access request on a collaborative project?**
 
@@ -134,7 +134,7 @@ platform_key: DOCS_DACO_FAQ
 
 19. **How do I renew the application for an additional year of access?**
 
-   DACO approval will expire after two years of access. You may apply for renewal on the DACO portal up to 45 days before your application expires, and you have 90 days to renew the application after it expires. In order to renew your application, please reopen the application and  make any changes (if necessary) to your currently approved application before re-submitting it online. 
+   DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website up to 45 days before your application expires, and you have 90 days to renew the application after it expires. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online. 
 
 20. **Our access to the controlled data has expired after our 2-year approval. Can I still renew it?**
 

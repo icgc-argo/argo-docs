@@ -1,0 +1,48 @@
+---
+id: renew-close
+title: DACO Renewing and Closing
+sidebar_label: Renewing and Closing
+platform_key: DOCS_RENEW_CLOSE
+---
+
+Once approved, access to ICGC Controlled Data will last for 2 years; however, the applicant can easily submit a renewal application to extend the project team’s access for an additional 2 years.
+
+
+### Application Progress Stages for Renewal and Closing
+
+| Application Stage | Description | Application pdf | 
+| ----------------------- | --------------------------- | --------------------- | 
+| **Attestation Required** | The application requires an annual agreement in order to continue with the last year of access. If this is not completed by the annual date, access will be paused until you attest. <br /><br /> ![DACO application requires annual attestation](/assets/data-access/daco-annual-attestation.png)| You can download the DACO signed pdf using the **Approved pdf** top button. <br /><br /> ![Download button for DACO approved pdf](/assets/data-access/download-approved.png) |  
+| **Expired** | Access will expire 2 years after the date of approval. You will have 90 days after the expiry date to renew this application for an additional 2 years of access. <br /><br /> ![DACO application in Expired state](/assets/data-access/daco-expired-renewable.png)| You can download the DACO signed pdf using the **Approved pdf** top button. <br /><br /> ![Download button for DACO approved pdf](/assets/data-access/download-approved.png)| 
+| **Expired Non-renewable** | If you do not renew the application within 90 days after expiry, the application will be closed indefinitely. <br /><br /> ![DACO application in Expired Non-renewable state](/assets/data-access/daco-expired-nonrenewable.png)| You can download the DACO signed pdf using the **Approved pdf** top button. <br /><br /> ![Download button for DACO approved pdf](/assets/data-access/download-approved.png)| 
+| **Renewal Application** | If you choose to renew an application, it will be unlocked for edits and you will be required to agree to the Data Access Agreement and all Appendices again. <br /><br /> ![Renewal DACO application](/assets/data-access/daco-renewal.png)| You can download a **Draft pdf** that will display a watermark if you wish to use it to collaborate with others on the renewal application.<br /><br /> ![Download button for draft pdf](/assets/data-access/download-draft.png)| 
+| **Closed** | An application can be closed before being submitted or after being approved. If an application is closed after approval but before the expiry date, the project team will lose access and the application will be view-only. <br /><br /> ![DACO application in Closed state](/assets/data-access/daco-closed.png) | If the application is approved and then closed, you can still download the DACO signed pdf using the **Approved pdf** top button. <br /><br />![Download button for DACO approved pdf](/assets/data-access/download-approved.png)| 
+
+
+## Annual Attestation
+
+
+## Renewing an Application 
+The DACO approval expires after 2 years of access. An email will be sent to the applicant 45 days before the access expiry date as well as on the date of expiry. If the project team is to remain active, the applicant may wish to renew beyond the 2 years. The option to renew the application will be available 45 days before the application expires, and 90 days after it expires. 
+
+### How to Renew an Application
+
+1. When the applicant receives the email reminder that the application is about to expire (or has expired), they can log in and click the **Renew** button.
+![DACO renew button for an expired application](/assets/data-access/daco-renew-button.png)
+1. At this time, the application will be unlocked and they can make any changes (if necessary) to their currently approved application, agree to the Data Access Agreement and Appendices again, and re-sign and submit the renewal application.
+![DACO renewal application](/assets/data-access/daco-renewal-application.png)
+1. The DACO Administrator will be notified that a renewal application is ready for review. If there are no issues and/or the application remains the same as the previous version, the project team should be quickly approved for an additional two years. 
+
+### Expired and Non-renewable
+
+A signed copy of the renewal application must be sent to the ICGC DACO via the online application system. If a renewal is not received within 90 days of the application's expiry date, it will be considered closed indefinitely. 
+![DACO renewal period is up so application is non-renewable](/assets/data-access/daco-renewal-is-up.png)
+
+## Closing an Application
+
+1. The application can also be closed by the Applicant or by a DACO Administrator at any time within the lifecycle of the application (before or after approval). A **Close Application** button is available from within the application header bar. 
+![DACO close an application button](/assets/data-access/daco-close-button.png)
+1. When clicking this button, the user will be asked to confirm this action, as it cannot be undone. If the application is being closed after it has been approved, the confirmation modal will display a warning notifying the user that this action will remove access for the project team.
+![DACO close confirmation modal with warning](/assets/data-access/daco-close-modal.png)
+1. Once confirming this action, the application will be closed permanently. The expiry date will change to reflect the date that the application was closed. If the applicant wishes to regain access, a new application will have to be submitted for review. 
+1. The applicant and all collaborators will receive an email notifying them that the application has been closed and access to ICGC Controlled Data will be removed within 24 hours.
