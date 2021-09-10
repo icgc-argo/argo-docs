@@ -49,6 +49,7 @@ module.exports = {
           items: [
             'data-access/daco/applying',
             'data-access/daco/approval',
+            'data-access/daco/renew-close',
             'data-access/daco/daco-faq',
           ],
         },

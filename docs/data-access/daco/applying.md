@@ -10,7 +10,9 @@ The International Cancer Genome Consortium has tiered levels of access to donor 
 
 
 ### Eligible Project Guidelines
-While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information. Some specific criteria that the ICGC DACO will look for are as follows:
+While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information.
+
+ICGC DACO provides controlled access to public and private researchers (PIs) that apply for access and the access conditions are the same for both types of researchers.  The application must be completed and submitted through the [online submission system](https://daco.icgc-argo.org). The qualification requirements for applicants are: 
 
 1. **The Applicant** must be an independent researcher affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.), and they **must review and sign the finalized application**.
 1. A qualified **Institutional Representative** of a legal entity has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement (e.g. Vice-President Research, a Research Director, or a Contracts Officer for the entity), and **must review and sign the finalized application**.
@@ -46,19 +48,17 @@ The following are a list of the users involved in an application and their requi
 1. Complete the entire application form, including all required fields.
 ![DACO blank application](/assets/data-access/daco-application.png)
 1. You will notice the application form automatically saves as you fill it in. In the table of contents, icons will indicate which sections haven’t been started (blank), are complete ![DACO icon showing section complete](/assets/data-access/daco-toc-complete.png) or are incomplete ![DACO icon showing section incomplete](/assets/data-access/daco-toc-errors.png).
-1. Above the application form basic information about the application is displayed. This is also where you can access actions, such as downloading a pdf, and a progress bar that indicates what stage your application is in. This progress indicator is also displayed on the dashboard card for each application you have started. [Read more about the progress stages below](/docs/data-access/daco/applying#application-progress-stages).
+1. Above the application form basic information about the application is displayed. This is also where you can access actions, such as downloading a pdf, and a progress bar that indicates what stage your application is in. This progress indicator is also displayed on the dashboard card for each application you have started. [Read more about some of the progress stages below](/docs/data-access/daco/applying#application-progress-stages).
 1. You must have all required sections completed in order to access the final `Sign & Submit` section. 
-1. Once your application form is finalized and signed by both the Applicant (Principal Investigator) and Institutional Representative, you can upload the signed application PDF in the `Sign & Submit` section and click the **Submit Application** button. [Read more about signing and submitting your application below](/docs/data-access/daco/applying#signing-and-submitting-the-application).
+1. Once your application form is finalized and signed by both the Applicant (Principal Investigator) and Institutional Representative, you can upload the signed application pdf in the `Sign & Submit` section and click the **Submit Application** button. [Read more about signing and submitting your application below](/docs/data-access/daco/applying#signing-and-submitting-the-application).
 
-### Application Progress Stages
+### Application Progress Stages when Applying
 
 | Application Stage | Description | Application pdf | 
 | ----------------------- | --------------------------- | --------------------- | 
 | **Draft** | The application is in progress and is incomplete. <br /><br /> ![DACO application in Draft state](/assets/data-access/daco-draft.png)| You can download a **Draft pdf** that will display a watermark if you wish to use it to collaborate with others.<br /><br /> ![Download button for draft pdf](/assets/data-access/download-draft.png) |  
 | **Sign & Submit** | All required sections are completed and the application is ready to be signed by the Principal Investigator and Institutional Representative. <br /><br /> ![DACO application in Sign and Submit state](/assets/data-access/daco-signsubmit.png)| You can now download the **Finalized pdf** from the top button to collect the proper signatures.<br /><br /> ![Download button for finalized pdf](/assets/data-access/download-finalized.png)| 
 | **DACO Review** | Once you upload the signed application and click **Submit Application**, the application will be locked and it will be sent to the ICGC DACO for review. <br /><br /> ![DACO application in DACO Review state](/assets/data-access/daco-review.png) | You can download the signed and submitted pdf using the **Signed pdf** top button. <br /><br />![Download button for signed pdf](/assets/data-access/download-signed.png)| 
-| **Revisions Requested** | If the ICGC DACO office requires revisions to your application before approval, you will receive an email with the details of what to revise and those sections of your application will be unlocked for editing. [Read more](/docs/data-access/daco/approval#requested-revisions).  <br /><br /> ![DACO application in Revisions Requested state](/assets/data-access/daco-revisions-requested.png)| You can download a **Draft pdf** that will display a watermark if you wish to use it to collaborate with others. <br /><br /> ![Download button for draft pdf](/assets/data-access/download-draft.png)| 
-| **Approved** | If the ICGC DACO approves your application, it will be viewable and some sections will remain editable. [Read more](/docs/data-access/daco/approval#approval-for-controlled-data-access).  <br /><br /> ![DACO application in Approved state](/assets/data-access/daco-approved.png)| You will be emailed the ICGC DACO approved copy of the application. <br /><br />  ![Download button for signed pdf](/assets/data-access/download-signed.png)| 
 
 
 ### Applicant Dashboard
@@ -69,6 +69,7 @@ When applications are in progress, the Applicant dashboard will show the followi
 1. A card will show up on your dashboard tracking each application you have opened, what stage they are in, and provides quick links for editing. 
 1. Once an application is approved, the card will show the access expiry date and will eventually alert you when it’s almost time for renewal. 
 1. A smaller card in the top right of the dashboard will indicate if the logged in user has been approved for access to ICGC Controlled Data.  
+1. You will always be able to start a new application, in case you are managing multiple projects.
 
 
 The following outlines a bit more information about some specific application sections:
@@ -92,12 +93,12 @@ If your country/region requires an ethics approval, it is required that you prov
 
 If the ethics approval is written in a language other than English, please upload a translated version.
 
-> Please note: The DACO and the ICGC are not responsible for the ethics approval/monitoring of individual research projects and bear no responsibility for the Applicant's failure to comply with local/national ethical requirements.
+> **Please note:** The DACO and the ICGC are not responsible for the ethics approval/monitoring of individual research projects and bear no responsibility for the Applicant's failure to comply with local/national ethical requirements.
 
 ## Signing and Submitting the Application
 The last section of the application, `Sign & Submit`, will be disabled if any section of the application is incomplete. 
 
-When this section is enabled, the final step involves adding the proper signatures to authorize the application. Please do the following:
+When the application is complete, this section is enabled and the final step involves adding the proper signatures to authorize the application. Please do the following:
 1. Download the finalized application from the top application header, or using the button within the section content. 
 1. On the last page of the application pdf you will find a signatures page. You must include **BOTH the Principal Investigator and the Institutional Representative signatures** or your application will be declined.
    * You can print the final signature page, collect the written signatures, scan the signed page and add it back to the finalized application pdf.
