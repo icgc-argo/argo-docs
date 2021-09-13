@@ -101,3 +101,23 @@ The donor summary table also shows where each donor sample is at in the [DNA-Seq
 ### Last Updated
 
 The **last updated** table column indicates when this donor was last updated with new data submission or molecular analysis.
+
+
+## Pre-Release Data 
+ICGC ARGO member programs will have privileged access to data from other members of the Consortium based on their level of Membership. Data access is tiered and aimed not to disadvantage Members or Associate Member Data producers, with a framework that encourages data sharing, yet provides data generators with sufficient time to perform analyses:
+
+Up to 12 months from completion of standardized analyses: Access to Program submitting data only
+ - 12 months: Access to Full Members
+ - 18 months: Access to Associate Members
+ - 24 months: Accessible by external parties
+
+If you are logged in, the [File Repository](https://platform.icgc-argo.org/repository) will show an additional facet to sort on your priviledged access to pre-release data.  Pre-release data is sorted into 4 categories based on the [ARGO Data Management policy](https://www.icgc-argo.org/page/133/e2-data-management). 
+
+![Viewing Pre-Release Data](/assets/submission/pre-release-data-file-repo-view.png)
+
+ - **My Program Access**: These files are visible to [Program Members](/docs/submission/managing-program-access) only.  
+ - **Full Member Access**: These files are visible to both the [Program Members](/docs/submission/managing-program-access) that submitted the data and to other ARGO Program Members that are part of Full Member programs. 
+ - **Associate Member Access**: These files are visible to both the [Program Members](/docs/submission/managing-program-access) that submitted the data and to other ARGO Program Members that are part of Associate Member programs. 
+ - **Released to the Public**: These files are publicly visible to any user that visits the ARGO Data Platform file Repository.  If the file is `controlled acccess` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously. 
+
+
