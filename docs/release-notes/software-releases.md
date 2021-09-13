@@ -18,6 +18,12 @@ None to report.
 
 None to report.
 ------>
+## September 13, 2021: Program Dashboard Updates
+Data Platform - v1.101.2 API v3.26.1
+
+### New Features 
+- A new download API has been published, resulting in some changes in [How to Download Data](/docs/data-access/data-download). 
+- Pre-release data can now be seen on the [Program Dashboard and File Repository](/docs/submission/submitted-data#pre-release-data). Pre-release data is only visible if you are a Program Member.
 
 ## September 02, 2021: Program Dashboard Updates
 Data Platform - v1.101.0 API v3.24.6
