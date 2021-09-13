@@ -35,7 +35,7 @@ Update the `conf/application.yaml` configuration file with the correct user and 
 
 To do this, change directories into `conf` folder and open the `application.yaml` file. This is an example of how your `application.yaml` configuration file should look:
 
-```yml
+```yml title="song-client config"
 client:
   serverUrl: https://submission-song.rdpc.cancercollaboratory.org
   studyId: DASH-CA #add your Program ID here
@@ -68,7 +68,7 @@ Update the `conf/application.properties` configuration file with the correct use
 
 To do this, change directories into `conf` folder and open the `application.properties` file. This is an example of how your `application.properties` configuration file should look:
 
-```yaml
+```yaml title="score-client config
 # The access token for authorized access to data
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
@@ -88,7 +88,7 @@ Before proceeding, please read the instructions on how to [prepare and validate]
 Once you have formatted the payload correctly, use the song-client `submit` command to upload the payload.
 
 ```shell
-> ./bin/sing submit -f dash-5-tumour.json
+> bin/sing submit -f dash-5-tumour.json
 ```
 
 If your payload is not formatted correctly, you will receive an error message detailing what is wrong. Please fix any errors and resubmit. If your payload is formatted correctly, you will get an `analysisId` in response:
@@ -112,7 +112,7 @@ Use the returned `analysis_id` from step 2 to generate a manifest for file uploa
 
 ```shell
 
-> ./bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
+> bin/sing manifest -a a4142a01-1274-45b4-942a-01127465b422 -f /some/output/dir/manifest.txt  -d /submitting/file/directory
 
 Wrote manifest file 'manifest.txt' for analysisId 'a4142a01-1274-45b4-942a-01127465b422'
 ```
@@ -124,7 +124,7 @@ The `manifest.txt` file will be written out to the directory /some/output/dir/. 
 Using the score-client `upload` command, upload all files associated with the payload. This requires the manifest file generated in step 3.
 
 ```shell
-> .bin/score-client  upload --manifest manifest.txt
+> bin/score-client  upload --manifest manifest.txt
 ```
 
 If the file(s) successfully upload, then you will receive an `Upload completed` message.
@@ -134,9 +134,36 @@ If the file(s) successfully upload, then you will receive an `Upload completed` 
 The final step to submitting molecular data is to set the state of an analysis to `PUBLISHED`. A published analysis signals to the DCC that this data is ready to be processed.
 
 ```shell
-> ./bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
+> bin/sing publish -a a4142a01-1274-45b4-942a-01127465b422
 
 AnalysisId a4142a01-1274-45b4-942a-01127465b422 successfully published
 ```
 
 Once your `sequencing_experiment` analysis has been successfully submitted and published, it will be queued for data processing. You can follow the progress of [molecular data processing](/docs/analysis-workflows/analysis-overview) for submitted data on your [Program Dashboard](/docs/submission/submitted-data).
+
+
+### Troubleshooting help
+
+
+#### Upload error
+
+During upload, a temporary file is written to the directory where the file that is being uploaded is located.  If you do not have permission to write to this directory, the upload will fail.  To address this, update the score-client `conf/application.properties` configuration file with a `client.uploadStateDir` parameter.
+
+```yaml title="score-client config"
+# The access token for authorized access to data
+accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
+
+# The location of the metadata service (SONG)
+metadata.url=https://submission-song.rdpc.cancercollaboratory.org
+
+# The location of the object storage service (SCORE)
+storage.url=https://submission-score.rdpc.cancercollaboratory.org
+
+# Optional absoloute path of a directory to write temporary progress files.
+client.uploadStateDir=/dir/with/write/access/scratch 
+```
+Once you have updated the configuration, use the `--force` option to reinitiate the upload.
+
+```shell
+> bin/score-client  upload --manifest manifest.txt --force
+```
