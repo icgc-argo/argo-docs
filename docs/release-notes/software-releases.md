@@ -19,7 +19,7 @@ None to report.
 None to report.
 ------>
 ## September 13, 2021: Program Dashboard Updates
-Data Platform - v1.101.2 API v3.26.1
+Data Platform - v1.101.3 API v3.26.1
 
 ### New Features 
 - A new download API has been published, resulting in some changes in [How to Download Data](/docs/data-access/data-download). 
