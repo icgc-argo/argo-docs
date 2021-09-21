@@ -34,7 +34,7 @@ These identifier fields allow for linking across the different clinical events a
 
 ### Time Intervals
 
-To prevent potential identification of donors, actual calendar dates are not permitted. The timing of different clinical events are collected in days counted from the date of primary diagnosis. The date of primary diagnosis is the date on which a definitive diagnostic procedure was performed. Validation checks are in place to ensure the values submitted for the different time interval fields make sense according to the following assumptions:
+To prevent potential identification of donors, actual calendar dates are not permitted. The timing of different clinical events are collected in days counted from the date of primary diagnosis. The date of primary diagnosis should be based on the earliest diagnosis of cancer. Validation checks are in place to ensure the values submitted for the different time interval fields make sense according to the following assumptions:
 
 - The `age_at_primary_diagnosis` is used as the reference time point.
 - The day the patient dies is the clinical endpoint (`survival_time`).
@@ -45,11 +45,9 @@ Examples of time interval validation checks:
 - The `relapse_interval` must be less than the `interval_of_followup` in the follow up entry that the relapse was recorded.
 - If a follow up is associated with a particular treatment (via the `submitter_treatment_id`), the `interval_of_followup` must be greater than the `treatment_start_interval`.
 
-
 ### Donors Older than 90 years old
 
 Since the occurrence of individuals over the age of 90 is rare, it is therefore considered a potentially identifiable value. Thus, the allowed value for the `age_at_diagnosis` field is capped at 90.
-
 
 ## Cross Field Validations
 
@@ -60,7 +58,6 @@ A number of cross-field consistency checks within files are implemented to ensur
 - Valid values for `specimen_type` are cross-checked with the `tumour_normal_designation` field.
 - The requirement for fields related to relapse/recurrence are dependent on the `disease_status_at_followup` field.
 - The requirement for `survival_time` is depenedent on the `vital_status` field.
-
 
 ## Cross File Validations
 
@@ -73,8 +70,7 @@ Relationships between different clinical fields across files are validated to en
 - A `submitter_treatment_id` in the `Follow Up` file must have been submitted using the `Treatment` file.
 - The value of a specimen's `tumour_normal_designation` field in the `Sample Registration` file is checked to determine whether fields in the `Specimen` file are required.
 - If `survival_time` is submitted in the `Donor` file, all time interval fields are validated to ensure they are less than or equal to the `survival_time`.
-- Depending on the `treatment_type` selected in the Treatment file, additional treatment details may be required to be submitted. For example, if `treatment_type` includes `Chemotherapy`, the supplemental `Chemotherapy` treatment file is required. 
-
+- Depending on the `treatment_type` selected in the Treatment file, additional treatment details may be required to be submitted. For example, if `treatment_type` includes `Chemotherapy`, the supplemental `Chemotherapy` treatment file is required.
 
 ## Clinical Data Completion
 
