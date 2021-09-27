@@ -6,6 +6,21 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/data-access).
 
+## Data Release 4.0
+
+**Release Date:** September 27, 2021
+
+### New Updates
+
+This release includes a *new* programs' data becoming available:
+- APGI-AU: 89 new donors with aligned WXS reads, Sanger and Mutect2 variant calls.  
+This release includes updated data to 2 programs:
+
+Additionally, more data has been released for: 
+- OCCAMS-GB: 168 new donors with aligned WGS reads, Sanger and Mutect2 variant calls. 
+- LUCA-KR: 8 new donors with aligned reads, Sanger and Mutect2 variant calls.
+
+
 ## Data Release 3.0
 
 **Release Date:** May 10, 2021
