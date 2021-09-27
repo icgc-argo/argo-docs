@@ -14,7 +14,6 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 This release includes a *new* programs' data becoming available:
 - APGI-AU: 89 new donors with aligned WXS reads, Sanger and Mutect2 variant calls.  
-This release includes updated data to 2 programs:
 
 Additionally, more data has been released for: 
 - OCCAMS-GB: 168 new donors with aligned WGS reads, Sanger and Mutect2 variant calls. 
