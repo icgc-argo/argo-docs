@@ -1,11 +1,11 @@
 ---
 id: renew-close
-title: DACO Renewing and Closing
-sidebar_label: Renewing and Closing
+title: Attesting, Renewing & Closing
+sidebar_label: Attesting, Renewing & Closing
 platform_key: DOCS_RENEW_CLOSE
 ---
 
-Once approved, access to ICGC Controlled Data will last for 2 years; however, the applicant can easily submit a renewal application to extend the project team’s access for an additional 2 years.
+Once approved, access to ICGC Controlled Data will last for 2 years; however, access remains conditional upon respecting the terms and conditions of the Data Access Agreement, particularly regarding (but not limited to) the publication moratorium and re-identification of project donors. An annual attestation must be made by the applicant and a bi-annual renewal must be completed in order to access/use controlled data beyond the two-year time period. If a project does not require access for the full 2 years, an application can be closed, which will remove access for all project members.
 
 
 ### Application Progress Stages for Renewal and Closing
@@ -20,16 +20,25 @@ Once approved, access to ICGC Controlled Data will last for 2 years; however, th
 
 
 ## Annual Attestation
+ICGC recognizes the importance of ensuring compliance to data access policies including, but not limited to, policies concerning the security of the donors’ data. Therefore, an annual attestation is required for all project teams. 
 
+45 days prior to the 1-year mark of access, the applicant will receive an email reminder to complete the attestation. If the attestation is not completed by the 1-year mark, access to ICGC Controlled Data will be paused for all members of the project team. Once an applicant has attested, access will resume for the remainder of the 2-year access period. 
+
+### How to Complete an Annual Attestation
+
+1. Upon receiving the email reminder to complete the annual attestation, you can login and navigate to the correct application.
+1. At the top of the application, you will see a yellow banner with some attestation text to review. Please review the terms carefully and if you agree, click the “I attest to the above terms” button.
+1. At this time, the application will move back into the approved state, and if access was paused, it will resume for the project team.    
+ 
 
 ## Renewing an Application 
-The DACO approval expires after 2 years of access. An email will be sent to the applicant 45 days before the access expiry date as well as on the date of expiry. If the project team is to remain active, the applicant may wish to renew beyond the 2 years. The option to renew the application will be available 45 days before the application expires, and 90 days after it expires. 
+The DACO approval expires after 2 years of access. An email reminder will be sent to the applicant 90 days and 45 days prior to the access expiry date as well as on the date of expiry. If the project team is to remain active, the applicant may wish to renew beyond the 2 years. The option to renew the application will be available 90 days before the application expires, and 90 days after it expires. 
 
 ### How to Renew an Application
 
-1. When the applicant receives the email reminder that the application is about to expire (or has expired), they can log in and click the **Renew** button.
+1. When the applicant receives the email reminder that the application is about to expire (or has expired), they can login and click the **Renew** button.
 ![DACO renew button for an expired application](/assets/data-access/daco-renew-button.png)
-1. At this time, the application will be unlocked and they can make any changes (if necessary) to their currently approved application, agree to the Data Access Agreement and Appendices again, and re-sign and submit the renewal application.
+1. At this time, the application will be unlocked and you can make any changes (if necessary) to the currently approved application, agree to the Data Access Agreement and Appendices again, and re-sign and submit the renewal application.
 ![DACO renewal application](/assets/data-access/daco-renewal-application.png)
 1. The DACO Administrator will be notified that a renewal application is ready for review. If there are no issues and/or the application remains the same as the previous version, the project team should be quickly approved for an additional two years. 
 

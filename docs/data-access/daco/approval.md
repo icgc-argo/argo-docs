@@ -64,7 +64,8 @@ The approved application can be accessed from your applications dashboard with t
 
 ## Rejected Applications
 
-If the Applicant is not eligible or if the project raises significant concerns, the application will be rejected with proper justifications sent via email.
+If the Applicant is not eligible or if the project raises significant concerns, the application will be rejected with proper justifications sent via email. The rejected application will be permanently closed, but viewable for your reference.
+
 
 ## Application History
 

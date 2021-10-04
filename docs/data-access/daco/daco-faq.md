@@ -124,7 +124,7 @@ platform_key: DOCS_DACO_FAQ
 
 17. **The Principal Investigator of our project or Institutional Representative has changed. How do we update this?**
 
-   If you are eligible to renew your access request (at the earliest, this will be 45 days prior to access expiry), please renew your application and update any necessary fields before finalizing your renewal application. 
+   If you are eligible to renew your access request (at the earliest, this will be 90 days prior to access expiry), please renew your application and update any necessary fields before finalizing your renewal application. 
 
    If your application has been recently approved, please [contact the ICGC DACO](https://platform.icgc-argo.org/contact) for further instructions. 
 
@@ -134,7 +134,7 @@ platform_key: DOCS_DACO_FAQ
 
 19. **How do I renew the application for an additional year of access?**
 
-   DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website up to 45 days before your application expires, and you have 90 days to renew the application after it expires. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online. 
+   DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website up to 90 days before your application expires, and you have 90 days to renew the application after it expires. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online. 
 
 20. **Our access to the controlled data has expired after our 2-year approval. Can I still renew it?**
 
