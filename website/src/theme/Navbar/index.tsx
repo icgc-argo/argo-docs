@@ -27,6 +27,10 @@ import IconMenu from '@theme/IconMenu';
 import IconClose from '@theme/IconClose';
 
 import styles from './styles.module.css';
+import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import RespImage from '../../components/RespImage';
+import { css } from 'emotion';
 
 // retrocompatible with v1
 const DefaultNavItemPosition = 'right';
@@ -50,8 +54,20 @@ function splitNavItemsByPosition(items: NavbarItemConfig[]) {
 function useMobileSidebar() {
   const windowSize = useWindowSize();
 
-  // Mobile sidebar not visible on hydration: can avoid SSR rendering
-  const shouldRender = windowSize === 'mobile'; // || windowSize === 'ssr';
+  /**
+   * Needs to match our CSS breakpoint for menu
+   *   @media only screen and (max-width: 1170px) {
+        .navbar .navbar__inner a.navbar__link {
+          display: none;
+        }
+
+        .navbar__toggle {
+          display: block;
+        }
+      }
+   */
+
+  const shouldRender = window.innerWidth < 1170;
 
   const [shown, setShown] = useState(false);
 
@@ -167,10 +183,11 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }: NavbarMobileSideba
           />
         )}
         <button type="button" className="clean-btn navbar-sidebar__close" onClick={toggleSidebar}>
-          <IconClose
+          {/*  <IconClose
             color="var(--ifm-color-emphasis-600)"
             className={styles.navbarSidebarCloseSvg}
-          />
+          /> */}
+          X
         </button>
       </div>
 
@@ -214,6 +231,8 @@ function Navbar(): JSX.Element {
     navbar: { hideOnScroll, style },
   } = useThemeConfig();
 
+  const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
+
   const mobileSidebar = useMobileSidebar();
   const colorModeToggle = useColorModeToggle();
   const activeDocPlugin = useActivePlugin();
@@ -223,6 +242,8 @@ function Navbar(): JSX.Element {
   const hasSearchNavbarItem = items.some((item) => item.type === 'search');
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
 
+  const logoUrl = useBaseUrl('/img/logos/icgc_argo_name.svg');
+  const logoUrlSmall = useBaseUrl('/img/logos/icgc_argo_name_stacked.svg');
   return (
     <nav
       ref={navbarRef}
@@ -244,23 +265,38 @@ function Navbar(): JSX.Element {
               tabIndex={0}
               onClick={mobileSidebar.toggle}
               onKeyDown={mobileSidebar.toggle}
+              css={css`
+                border: 1px solid red;
+                background: green !important;
+              `}
             >
               <IconMenu />
             </button>
           )}
-          <Logo
-            className="navbar__brand"
-            imageClassName="navbar__logo"
-            titleClassName="navbar__title"
-          />
+          <Link className="navbar__brand" to={''}>
+            {useBaseUrl('/img/logos/icgc_argo_name.svg') != null && (
+              <RespImage
+                sources={[
+                  {
+                    src: logoUrl,
+                    media: '(min-width: 630px)',
+                  },
+                ]}
+              >
+                <img className="navbar__logo" src={logoUrlSmall} alt={''} />
+              </RespImage>
+            )}
+          </Link>
           {leftItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
         </div>
+
         <div className="navbar__items navbar__items--right">
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
+
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
@@ -268,7 +304,12 @@ function Navbar(): JSX.Element {
               onChange={colorModeToggle.toggle}
             />
           )}
-          {!hasSearchNavbarItem && <SearchBar />}
+          {!hasSearchNavbarItem && (
+            <SearchBar
+              handleSearchBarToggle={setIsSearchBarExpanded}
+              isSearchBarExpanded={isSearchBarExpanded}
+            />
+          )}
         </div>
       </div>
 

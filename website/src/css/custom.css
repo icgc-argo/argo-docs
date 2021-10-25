@@ -142,7 +142,7 @@ li + li {
   --ifm-navbar-height: 57px;
 
   --ifm-tabs-color-active: #25c2a0;
-  
+
   --argo-grey-2: #dcdde1;
   --argo-grey-4: #f8f8fb;
 }
@@ -164,7 +164,12 @@ button:focus {
   outline: none;
 }
 
-/* Header */
+/* Navbar */
+
+.navbar .navbar__inner .navbar__items {
+  flex: none;
+}
+
 .navbar {
   background: #ffffff;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.08);
@@ -198,7 +203,6 @@ button:focus {
 
 .navbar .navbar__inner a.navbar__link--active {
   color: #0774d3;
-  /* border-bottom: 3px solid #0774d3; */
 }
 
 .navbar .navbar__inner .navbar__items a {
@@ -213,6 +217,20 @@ button:focus {
 
 .navbar .navbar__items {
   flex: 1 1 0;
+}
+
+@media only screen and (max-width: 1170px) {
+  .navbar .navbar__inner a.navbar__link {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: block;
+  }
+}
+
+#search_input_react {
+  height: 32px !important;
 }
 
 /* Docs Page */
@@ -402,15 +420,6 @@ div.menu {
   } */
 }
 
-@media only screen and (max-width: 996px) {
-  .navbar .navbar__inner a.navbar__link {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 1400px) {
-}
-
 @media only screen and (min-width: 1500px) {
   .docPage_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
     max-width: 1400px;
@@ -578,11 +587,6 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
 /* Algolia Search */
 .algolia-autocomplete * {
   height: auto !important;
-}
-
-/* Navbar */
-.navbar .navbar__inner .navbar__items {
-  flex: none;
 }
 
 /*******************
