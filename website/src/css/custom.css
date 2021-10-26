@@ -536,6 +536,10 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
   color: #0774d3;
 }
 
+.markdown h1:first-child {
+  font-size: 3rem;
+}
+
 /* Regex Colorizer no bg theme */
 
 .regex {
