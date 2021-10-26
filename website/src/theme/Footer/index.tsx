@@ -1,132 +1,85 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
+/*
+ * Copyright (c) 2020 The Ontario Institute for Cancer Research. All rights reserved
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
+ * This program and the accompanying materials are made available under the terms of the GNU Affero General Public License v3.0.
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+ * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
  */
 
 import React from 'react';
-import clsx from 'clsx';
-
-import Link from '@docusaurus/Link';
-import { FooterLinkItem, useThemeConfig } from '@docusaurus/theme-common';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import isInternalUrl from '@docusaurus/isInternalUrl';
 import styles from './styles.module.css';
-import ThemedImage, { Props as ThemedImageProps } from '@theme/ThemedImage';
-import IconExternalLink from '@theme/IconExternalLink';
 
-function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }: FooterLinkItem) {
-  const toUrl = useBaseUrl(to);
-  const normalizedHref = useBaseUrl(href, { forcePrependBaseUrl: true });
+function Footer() {
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
 
-  return (
-    <Link
-      className="footer__link-item"
-      {...(href
-        ? {
-            href: prependBaseUrlToHref ? normalizedHref : href,
-          }
-        : {
-            to: toUrl,
-          })}
-      {...props}
-    >
-      {href && !isInternalUrl(href) ? (
-        <span>
-          {label}
-          <IconExternalLink />
-        </span>
-      ) : (
-        label
-      )}
-    </Link>
+  const Slash = () => (
+    <img src={useBaseUrl(`img/icons/slash.svg`)} alt="Divider" width="12" height="12" />
   );
-}
-
-const FooterLogo = ({ sources, alt }: Pick<ThemedImageProps, 'sources' | 'alt'>) => (
-  <ThemedImage className="footer__logo" alt={alt} sources={sources} />
-);
-
-function Footer(): JSX.Element | null {
-  const { footer } = useThemeConfig();
-
-  const { copyright, links = [], logo = {} } = footer || {};
-  const sources = {
-    light: useBaseUrl(logo.src),
-    dark: useBaseUrl(logo.srcDark || logo.src),
-  };
-
-  if (!footer) {
-    return null;
-  }
 
   return (
-    <footer
-      className={clsx('footer', {
-        'footer--dark': footer.style === 'dark',
-      })}
-    >
-      <div className="container">
-        {links && links.length > 0 && (
-          <div className="row footer__links">
-            {links.map((linkItem, i) => (
-              <div key={i} className="col footer__col">
-                {linkItem.title != null ? (
-                  <div className="footer__title">{linkItem.title}</div>
-                ) : null}
-                {linkItem.items != null &&
-                Array.isArray(linkItem.items) &&
-                linkItem.items.length > 0 ? (
-                  <ul className="footer__items">
-                    {linkItem.items.map((item, key) =>
-                      item.html ? (
-                        <li
-                          key={key}
-                          className="footer__item"
-                          // Developer provided the HTML, so assume it's safe.
-                          // eslint-disable-next-line react/no-danger
-                          dangerouslySetInnerHTML={{
-                            __html: item.html,
-                          }}
-                        />
-                      ) : (
-                        <li key={item.href || item.to} className="footer__item">
-                          <FooterLink {...item} />
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        )}
-        {(logo || copyright) && (
-          <div className="footer__bottom text--center">
-            {logo && (logo.src || logo.srcDark) && (
-              <div className="margin-bottom--sm">
-                {logo.href ? (
-                  <Link href={logo.href} className={styles.footerLogoLink}>
-                    <FooterLogo alt={logo.alt} sources={sources} />
-                  </Link>
-                ) : (
-                  <FooterLogo alt={logo.alt} sources={sources} />
-                )}
-              </div>
-            )}
-            {copyright ? (
-              <div
-                className="footer__copyright"
-                // Developer provided the HTML, so assume it's safe.
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                  __html: copyright,
-                }}
-              />
-            ) : null}
-          </div>
-        )}
+    <footer className={styles['nav-footer']} id="footer">
+      <div className={styles.footerWrapper}>
+        <div className={styles.footerLogo}>
+          <a href="https://platform.icgc-argo.org/">
+            <img
+              src={useBaseUrl(`img/logos/icgc_argo_full.svg`)}
+              alt="ICGC Accelerating Research in Genomic Oncology"
+              width="240px"
+            />
+          </a>
+        </div>
+        <div className={styles.footerContent}>
+          <section className={styles.footerLinks}>
+            <a href="https://platform.icgc-argo.org/contact" target="_blank">
+              Contact
+            </a>
+            <Slash />
+            <a href="https://www.icgc-argo.org/page/2/privacy" target="_blank">
+              Privacy Policy
+            </a>
+            <Slash />
+            <a href="https://www.icgc-argo.org/page/1/terms-and-conditions" target="_blank">
+              Terms & Conditions
+            </a>
+            <Slash />
+            <a href="https://www.icgc-argo.org/page/77/e3-publication-policy" target="_blank">
+              Publication Policy
+            </a>
+          </section>
+          <section className={styles['legal-text']}>
+            {siteConfig.themeConfig.footer.copyright}
+          </section>
+          <section className={styles['legal-text']}>
+            <a href="https://platform.icgc-argo.org/" target="_blank">
+              ARGO Data Platform
+            </a>{' '}
+            {/*1.0.0 - API v1 - 8e37309*/}
+          </section>
+        </div>
+        <div className={styles.footerLogo}>
+          <a href="https://www.oicr.on.ca/">
+            <img
+              src={useBaseUrl(`img/logos/oicr_logo.svg`)}
+              alt="Ontario Institute for Cancer Research"
+              height="52px"
+            />
+          </a>
+        </div>
       </div>
     </footer>
   );
