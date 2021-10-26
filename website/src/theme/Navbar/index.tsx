@@ -24,13 +24,14 @@ import { useActivePlugin } from '@theme/hooks/useDocs';
 import NavbarItem, { Props as NavbarItemConfig } from '@theme/NavbarItem';
 import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
-import IconClose from '@theme/IconClose';
+import IconClose from '@theme/IconCloseThin';
 
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import RespImage from '../../components/RespImage';
 import { css } from 'emotion';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 // retrocompatible with v1
 const DefaultNavItemPosition = 'right';
@@ -183,11 +184,10 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }: NavbarMobileSideba
           />
         )}
         <button type="button" className="clean-btn navbar-sidebar__close" onClick={toggleSidebar}>
-          {/*  <IconClose
+          <IconClose
             color="var(--ifm-color-emphasis-600)"
             className={styles.navbarSidebarCloseSvg}
-          /> */}
-          X
+          />
         </button>
       </div>
 
@@ -244,6 +244,7 @@ function Navbar(): JSX.Element {
 
   const logoUrl = useBaseUrl('/img/logos/icgc_argo_name.svg');
   const logoUrlSmall = useBaseUrl('/img/logos/icgc_argo_name_stacked.svg');
+
   return (
     <nav
       ref={navbarRef}
@@ -273,8 +274,8 @@ function Navbar(): JSX.Element {
               <IconMenu />
             </button>
           )}
-          <Link className="navbar__brand" to={''}>
-            {useBaseUrl('/img/logos/icgc_argo_name.svg') != null && (
+          <Link className="navbar__brand" to={'/'}>
+            {logoUrl != null && (
               <RespImage
                 sources={[
                   {
