@@ -24,14 +24,15 @@ import { useActivePlugin } from '@theme/hooks/useDocs';
 import NavbarItem, { Props as NavbarItemConfig } from '@theme/NavbarItem';
 import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
-import IconClose from '@theme/IconCloseThin';
+import IconClose from '@theme/IconClose';
 
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import RespImage from '../../components/RespImage';
 import { css } from 'emotion';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Noop from '@docusaurus/Noop';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 // retrocompatible with v1
 const DefaultNavItemPosition = 'right';
@@ -53,6 +54,7 @@ function splitNavItemsByPosition(items: NavbarItemConfig[]) {
 }
 
 function useMobileSidebar() {
+  // this docusaurus hook doesn't check for all cases for window not avaliable on server
   const windowSize = useWindowSize();
 
   /**
@@ -68,7 +70,7 @@ function useMobileSidebar() {
       }
    */
 
-  const shouldRender = window.innerWidth < 1170;
+  const shouldRender = window ? window.innerWidth < 1170 : false;
 
   const [shown, setShown] = useState(false);
 
@@ -233,7 +235,9 @@ function Navbar(): JSX.Element {
 
   const [isSearchBarExpanded, setIsSearchBarExpanded] = useState(false);
 
-  const mobileSidebar = useMobileSidebar();
+  const mobileSidebar = ExecutionEnvironment.canUseDOM
+    ? useMobileSidebar()
+    : { shown: false, shouldRender: false, toggle: Noop };
   const colorModeToggle = useColorModeToggle();
   const activeDocPlugin = useActivePlugin();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
@@ -307,6 +311,8 @@ function Navbar(): JSX.Element {
           )}
           {!hasSearchNavbarItem && (
             <SearchBar
+              //@ts-ignore
+              // ts is looking at default component, not swizzled component
               handleSearchBarToggle={setIsSearchBarExpanded}
               isSearchBarExpanded={isSearchBarExpanded}
             />

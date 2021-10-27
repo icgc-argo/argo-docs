@@ -9,13 +9,11 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import {
   useThemeConfig,
-  useAnnouncementBar,
   MobileSecondaryMenuFiller,
   MobileSecondaryMenuComponent,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
 import useWindowSize from '@theme/hooks/useWindowSize';
-import useScrollPosition from '@theme/hooks/useScrollPosition';
 import Logo from '@theme/Logo';
 import IconArrow from '@theme/IconArrow';
 import { translate } from '@docusaurus/Translate';
@@ -23,17 +21,6 @@ import { DocSidebarItems } from '@theme/DocSidebarItem';
 import type { Props } from '@theme/DocSidebar';
 
 import styles from './styles.module.css';
-
-function useShowAnnouncementBar() {
-  const { isClosed } = useAnnouncementBar();
-  const [showAnnouncementBar, setShowAnnouncementBar] = useState(!isClosed);
-  useScrollPosition(({ scrollY }) => {
-    if (!isClosed) {
-      setShowAnnouncementBar(scrollY === 0);
-    }
-  });
-  return showAnnouncementBar;
-}
 
 function HideableSidebarButton({ onClick }: { onClick: React.MouseEventHandler }) {
   return (
@@ -58,12 +45,10 @@ function HideableSidebarButton({ onClick }: { onClick: React.MouseEventHandler }
 }
 
 function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
-  const showAnnouncementBar = useShowAnnouncementBar();
   const {
     navbar: { hideOnScroll },
     hideableSidebar,
   } = useThemeConfig();
-  const { isClosed: isAnnouncementBarClosed } = useAnnouncementBar();
 
   return (
     <div
@@ -73,13 +58,9 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       })}
     >
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      <nav
-        className={clsx('menu thin-scrollbar', styles.menu, {
-          [styles.menuWithAnnouncementBar]: !isAnnouncementBarClosed && showAnnouncementBar,
-        })}
-      >
+      <nav>
         <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
-          <DocSidebarItems items={sidebar} activePath={path} />
+          <DocSidebarItems level={1} items={sidebar} activePath={path} />
         </ul>
       </nav>
       {hideableSidebar && <HideableSidebarButton onClick={onCollapse} />}
@@ -94,7 +75,12 @@ const DocSidebarMobileSecondaryMenu: MobileSecondaryMenuComponent<Props> = ({
 }) => {
   return (
     <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
-      <DocSidebarItems items={sidebar} activePath={path} onItemClick={() => toggleSidebar()} />
+      <DocSidebarItems
+        level={1}
+        items={sidebar}
+        activePath={path}
+        onItemClick={() => toggleSidebar()}
+      />
     </ul>
   );
 };
