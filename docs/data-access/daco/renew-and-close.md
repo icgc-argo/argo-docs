@@ -1,14 +1,14 @@
 ---
 id: renew-close
-title: Attesting, Renewing & Closing
-sidebar_label: Attesting, Renewing & Closing
+title: Attesting, Renewing, & Closing
+sidebar_label: Attesting, Renewing, & Closing
 platform_key: DOCS_RENEW_CLOSE
 ---
 
-Once approved, access to ICGC Controlled Data will last for 2 years; however, access remains conditional upon respecting the terms and conditions of the Data Access Agreement, particularly regarding (but not limited to) the publication moratorium and re-identification of project donors. An annual attestation must be made by the applicant and a bi-annual renewal must be completed in order to access/use controlled data beyond the two-year time period. If a project does not require access for the full 2 years, an application can be closed, which will remove access for all project members.
+Once approved, access to ICGC Controlled Data will last for 2 years; however, access remains conditional upon respecting the terms and conditions of the Data Access Agreement, particularly regarding (but not limited to) the publication moratorium and re-identification of project donors. An annual attestation must be made by the applicant and a bi-annual renewal must be completed in order to access/use controlled data beyond the 2 year time period. If a project does not require access for the full 2 years, an application can be closed, which will remove access for all project members.
 
 
-### Application Progress Stages for Renewal and Closing
+### Application Progress Stages
 
 | Application Stage | Description | Application pdf | 
 | ----------------------- | --------------------------- | --------------------- | 
@@ -20,14 +20,14 @@ Once approved, access to ICGC Controlled Data will last for 2 years; however, ac
 
 
 ## Annual Attestation
-ICGC recognizes the importance of ensuring compliance to data access policies including, but not limited to, policies concerning the security of the donors’ data. Therefore, an annual attestation is required for all project teams. 
+ICGC recognizes the importance of ensuring compliance to data access policies, therefore **an annual attestation is required for all project teams.** 
 
-45 days prior to the 1-year mark of access, the applicant will receive an email reminder to complete the attestation. If the attestation is not completed by the 1-year mark, access to ICGC Controlled Data will be paused for all members of the project team. Once an applicant has attested, access will resume for the remainder of the 2-year access period. 
+45 days prior to the 1-year mark of access, the applicant will receive an email reminder to complete the attestation. If the applicant does not attest by the 1-year mark, access to ICGC Controlled Data will be paused for all members of the project team. Once an applicant has attested to the terms, access will resume for the remainder of the 2-year access period. 
 
 ### How to Complete an Annual Attestation
 
 1. Upon receiving the email reminder to complete the annual attestation, you can login and navigate to the correct application.
-1. At the top of the application, you will see a yellow banner with some attestation text to review. Please review the terms carefully and if you agree, click the “I attest to the above terms” button.
+1. At the top of the application, you will see a yellow banner with some terms to review. Please carefully review the terms and if you agree, click the “I attest to the above terms” button.
 1. At this time, the application will move back into the approved state, and if access was paused, it will resume for the project team.    
  
 
