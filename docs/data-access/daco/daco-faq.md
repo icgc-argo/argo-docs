@@ -60,7 +60,8 @@ platform_key: DOCS_DACO_FAQ
 
 6. **What is a lay summary?**
 
-   A lay summary describes your research project using lay language for the general public. It should describe the objectives and methodology of your research project as well as how the controlled data you wish to access from the ICGC will be used. Please ensure to mention **ICGC Controlled Data** in your lay summary. Once approved, your lay summary will be posted here on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users).
+   A lay summary describes your research project using lay language for the general public and it allows the public and broader scientific and clinical communities to understand the research and its goals, impact and applications. It should explain in plain language why you are asking the research question, what you expect to find out and how you will use your findings . Please ensure to mention **ICGC Controlled Data** in your lay summary. Consult the [lay summary guide], which includes before and after examples of real lay summaries. Once approved, your lay summary will be posted here on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users).
+
 
 7. **How can I add/remove Collaborators from my approved application?**
 
