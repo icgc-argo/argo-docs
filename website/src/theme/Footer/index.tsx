@@ -21,12 +21,12 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-
 import styles from './styles.module.css';
 
 function Footer() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
+  const { siteConfig } = useDocusaurusContext();
+  // @ts-ignore
+  const copyright: string = siteConfig.themeConfig.footer.copyright;
 
   const Slash = () => (
     <img src={useBaseUrl(`img/icons/slash.svg`)} alt="Divider" width="12" height="12" />
@@ -62,9 +62,7 @@ function Footer() {
               Publication Policy
             </a>
           </section>
-          <section className={styles['legal-text']}>
-            {siteConfig.themeConfig.footer.copyright}
-          </section>
+          <section className={styles['legal-text']}>{copyright} </section>
           <section className={styles['legal-text']}>
             <a href="https://platform.icgc-argo.org/" target="_blank">
               ARGO Data Platform

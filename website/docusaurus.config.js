@@ -27,6 +27,9 @@ module.exports = {
   organizationName: 'ICGC-ARGO',
   projectName: 'icgc-argo-documentation',
 
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+
   favicon: 'favicon.ico',
   tagline: 'ICGC ARGO Docs',
 
@@ -54,6 +57,7 @@ module.exports = {
   ],
 
   themeConfig: {
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     prism: {
       /**
        * if you change the theme, you will need to change the highlighted theme for the code block
