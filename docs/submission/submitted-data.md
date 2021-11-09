@@ -51,7 +51,7 @@ This line graph tracks how many donors have complete clinical data over time.
 
 ### Molecular Data Summary
 
-This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](/docs/analysis-workflows/dna-pipeline) (Raw Read Submission, Alignment, Sanger VC...) over time.
+This line graph compares how many donors have been processed through the [DNA-Seq Pipeline](/docs/analysis-workflows/dna-alignment) (Raw Read Submission, Alignment, Sanger VC...) over time.
 
 - Use the legend to toggle different pipeline steps on/off to check progress of different processing steps.
 - This chart is updated in real-time. While the data may show that a donor has been processed in the molecular summary chart, the donor files may not yet be released to the program if that donor is lacking complete clinical data.
