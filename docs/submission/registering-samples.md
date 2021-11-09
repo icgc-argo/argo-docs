@@ -14,7 +14,7 @@ During sample registration, **ARGO IDs** will be assigned to your program entiti
 
 ## Multiple Data Submitters
 
-There is only one Sample Registration workspace for each program. You can check if sample registration is in progress on the [Dashboard> Program Workspace](/docs/submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
+There is only one Sample Registration workspace for each program. You can check if sample registration is in progress on the [Dashboard> Program Workspace Status](/docs/submission/submitted-data#program-workspace-status) card. All program data submitters will be using the same workspace, and you will see which member has been working in this space by looking at the file upload info above the preview table. Please communicate with your team if you see a sample registration in progress.
 
 ![Multiple Data Submitters](/assets/submission/registration-multiple-submitters.png)
 

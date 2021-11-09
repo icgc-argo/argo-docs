@@ -86,5 +86,5 @@ Complete clinical data means that a donor has a valid value submitted for all fi
 - A donor must have at least one primary diagnosis with all core fields provided.
 - A donor must have at least one tumour and one normal specimen submitted.
 - For each registered specimen, a donor must have all specimen core fields provided.
-- A donor must have at least one treatment and a corresponding treatment detail file (if applicable, e.g. for chemotherapy, hormonal therapy or radiation) with all core fields provided.
+- A donor must have at least one treatment and a corresponding treatment detail file (if applicable, e.g. for chemotherapy, hormonal therapy, radiation, or immunotherapy) with all core fields provided.
 - A donor must have at least one follow up with all core fields provided.
