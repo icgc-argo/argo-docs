@@ -5,7 +5,7 @@ sidebar_label: Sanger WXS Variant Calling
 platform_key: DOCS_DNA_PIPELINE
 ---
 
-Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger WXS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Exome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwxs:3.1.6) as the base workflow. For details, please see the latest version of the [ARGO Sanger WXS Variant Calling workflow](https://github.com/icgc-argo/sanger-wxs-variant-calling/releases).
+Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger WXS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Exome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwxs:3.1.6) as the base workflow. For details, please see the latest version of the [ARGO Sanger WXS Variant Calling workflow](https://github.com/icgc-argo-workflows/sanger-wxs-variant-calling/releases).
 
 ## Inputs
 
@@ -31,5 +31,7 @@ Whole exome sequencing (WXS) aligned CRAM files are processed through the Sanger
 - QC Metrics
   - [Alignment Metrics](/docs/data/qc-metrics#aligned-reads-qc) for both the Tumour and Normal samples
   - [Runtime Stats](/docs/data/qc-metrics#analysis-qc)
+
+## Workflow Diagram
 
 ![Sanger WXS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WXS-variant-calling.png)
