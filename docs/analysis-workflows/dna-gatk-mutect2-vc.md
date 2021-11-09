@@ -5,7 +5,7 @@ sidebar_label: GATK Mutect2 Variant Calling
 platform_key: DOCS_DNA_PIPELINE
 ---
 
-Whole genome/exome sequencing (WGS/WXS) aligned CRAM files are processed through the GATK Mutect2 Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Genome Analysis Toolkit Docker Image](https://hub.docker.com/r/broadinstitute/gatk) developed at Broad Institute as the base workflow. For details, please see the latest version of the [ARGO GATK Mutect2 Variant Calling workflow](https://github.com/icgc-argo/gatk-mutect2-variant-calling/releases).
+Whole genome/exome sequencing (WGS/WXS) aligned CRAM files are processed through the GATK Mutect2 Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Genome Analysis Toolkit Docker Image](https://hub.docker.com/r/broadinstitute/gatk) developed at Broad Institute as the base workflow. For details, please see the latest version of the [ARGO GATK Mutect2 Variant Calling workflow](https://github.com/icgc-argo-workflows/gatk-mutect2-variant-calling/releases).
 
 ## Inputs
 
@@ -35,5 +35,7 @@ Whole genome/exome sequencing (WGS/WXS) aligned CRAM files are processed through
   - [Cross Sample Contamination](/docs/data/qc-metrics#sample-qc)
   - [Variant Filtering Stats](/docs/data/qc-metrics#analysis-qc)
   - [Variant Callable Stats](/docs/data/qc-metrics#analysis-qc)
+
+## Workflow Diagram
 
 ![GATK Mutect2 Variant Calling workflow](/assets/analysis-workflows/ARGO-Mutect2-variant-calling.png)

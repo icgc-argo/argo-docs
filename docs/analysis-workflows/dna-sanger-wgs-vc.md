@@ -5,7 +5,7 @@ sidebar_label: Sanger WGS Variant Calling
 platform_key: DOCS_DNA_PIPELINE
 ---
 
-Whole genome sequencing (WGS) aligned CRAM files are processed through the Sanger WGS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Genome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwgs:2.1.0) as the base workflow. For details, please see the latest version of the [ARGO Sanger WGS Variant Calling workflow](https://github.com/icgc-argo/sanger-wgs-variant-calling/releases).
+Whole genome sequencing (WGS) aligned CRAM files are processed through the Sanger WGS Variant Calling Workflow as tumour/normal pairs. The ARGO DNA Seq pipeline has adopted the [Sanger Whole Genome Sequencing Analysis Docker Image](https://quay.io/wtsicgp/dockstore-cgpwgs:2.1.0) as the base workflow. For details, please see the latest version of the [ARGO Sanger WGS Variant Calling workflow](https://github.com/icgc-argo-workflows/sanger-wgs-variant-calling/releases).
 
 ## Inputs
 
@@ -43,5 +43,7 @@ Whole genome sequencing (WGS) aligned CRAM files are processed through the Sange
   - [Genotyping Stats](/docs/data/qc-metrics#analysis-qc)
   - [Cross Sample Contamination](/docs/data/qc-metrics#sample-qc)
   - [Runtime Stats](/docs/data/qc-metrics#analysis-qc)
+
+## Workflow Diagram
 
 ![Sanger WGS Variant Calling Workflow](/assets/analysis-workflows/ARGO-WGS-variant-calling.png)
