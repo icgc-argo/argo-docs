@@ -121,4 +121,8 @@ If you are logged in, the [File Repository](https://platform.icgc-argo.org/repos
 - **My Program Access**: These files are visible to [Program Members](/docs/submission/managing-program-access) only.
 - **Full Member Access**: These files are visible to both the [Program Members](/docs/submission/managing-program-access) that submitted the data and to all Full Membership Program Members.
 - **Associate Member Access**: These files are visible to the [Program Members](/docs/submission/managing-program-access) that submitted the data, all Full Membership Program Members and all Associate Membership Program Members.
-- **Released to the Public**: These files are publicly visible to any user that visits the ARGO Data Platform file Repository. If the file is `controlled acccess` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously.
+- **Released to the Public**: These files are publicly visible to any user that visits the ARGO Data Platform file Repository.
+
+## DACO Access Control
+
+If a file is `controlled access` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously.
