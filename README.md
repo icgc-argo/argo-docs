@@ -18,7 +18,7 @@ The website, including the docusaurus library, custom pages and components, and 
 
 To run the docs site requires:
 
-- NodeJS version 12+
+- NodeJS version 12.13+
   - This is done best using nvm (node version manager). A good summary of this process can be found here for your reference: https://gist.github.com/d2s/372b5943bce17b964a79
 
 ## Contributing
@@ -27,31 +27,38 @@ To contribute to the docs:
 
 1. Clone the repository to your machine:
 
-```
-git clone git@github.com:icgc-argo/argo-docs.git
-```
+   ```
+   git clone git@github.com:icgc-argo/argo-docs.git
+   ```
 
-2. Move into the website directory ...
+1. Move into the website directory ...
 
-```
-cd argo-docs/website
-```
+   ```
+   cd argo-docs/website
+   ```
 
-...and install dependencies via npm:
+   ...and install dependencies via npm:
 
-```
-npm ci
-```
+   ```
+   npm ci
+   ```
 
-3. Run the development server to see your edits live in the browser:
+1. Setup Environment config:
 
-```
-npm start
-```
+   Copy the file `argo-docs/website/.env.example` to `argo-docs/website/.env`
 
-The site should open in a new page in your browser at the address: [localhost:3000](http://localhost:3000)
+   > **Note**  
+   > This file contains the configuration for the Algolia search used on the site. It is not necessary to set correct values for this config to get the site to run. If you would like to have working Algolia search on while working on your local dev instance, reach out to another team member for the account values.
 
-4. Edit the markdown files in [/docs](docs)! The content in the browser will update whenever you save the file.
+1. Run the development server to see your edits live in the browser:
+
+   ```
+   npm start
+   ```
+
+   The site should open in a new page in your browser at the address: [localhost:3000](http://localhost:3000)
+
+1. Edit the markdown files in [/docs](docs)! The content in the browser will update whenever you save the file.
 
    For other changes to the site, see the extended editing guide in [/website](website):
 
