@@ -51,7 +51,7 @@ export const createSchemasWithDiffs = (schemas, diffs): Schema[] => {
     { updatedSchemas: [], createdSchemas: [], deletedSchemas: [] },
   );
 
-  const schemasWithUpdates = updatedSchemas.map((schemaDiff) => {
+  const schemasWithUpdates = [...updatedSchemas, ...createdSchemas].map((schemaDiff) => {
     const schema = schemas.find((schema) => schema.name === schemaDiff.name);
     const { updated, created } = schemaDiff;
     // add diffs to existing fields
