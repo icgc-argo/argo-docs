@@ -20,6 +20,31 @@ None to report.
 
 ------>
 
+## Release 1.13
+
+**Release Date: November 17, 2021**
+
+### Updates
+
+- The "AJCC 6th Edition" has been added to the controlled terminology for tumour staging systems. This will allow data submitters to submit TNM categories and stage groups for the AJCC 6th Edition.
+- Optional clinical fields related to dose intensity reduction have been added to the Chemotherapy table. These include `dose_intensity_reduction`, `dose_intensity_reduction_event` and `dose_intensity_reduction_amount`.
+- Optional clinical fields related to laterality have been added. These include the `laterality` field in the Primary Diagnosis table and the `specimen_laterality` field in the Specimen table.
+- Removed the term "Unknown" from the controlled terminology of the core `vital_status` clinical field so it is consistent with other core clinical fields.
+- Updated notes to clarify requirements for certain fields:
+  - Added clarification about why the comorbidity_type_code field is "Conditional".
+  - Updated description of age_at_menarche field to indicate it should be submitted in years.
+  - Updated notes for number_lymph_nodes_examined field to indicate it is only required if lymph_nodes_examined_status is 'Yes'.
+  - Updated notes for percent_proliferating_cells, percent_inflammatory_tissue, percent_stromal_cells and percent_necrosis fields in the Specimen table to indicate that they should only be submitted if the specimen is tumour.
+  - Added clarification on how to submit fields in Biomarker table.
+- Changed `radiation_therapy_dosage` to accept number instead of integer.
+- Updated controlled terminology for `anatomical_site_irradiated`.
+
+
+### Bug fixes:
+- Added `sample_registration` file to download templates from Dictionary Viewer page
+
+
+
 ## Release 1.12
 
 **Release Date:** September 02, 2021

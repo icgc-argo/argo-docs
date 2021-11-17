@@ -227,7 +227,7 @@ function DictionaryPage() {
                   adheres to specific formats and restrictions to ensure a standard of data quality.
                   The following describes the attributes and permissible values for all of the
                   fields within the clinical tsv files for the{' '}
-                  <Link to={PLATFORM_UI_ROOT}>ARGO Data Platform.</Link>
+                  <Link to={PLATFORM_UI_ROOT as string}>ARGO Data Platform.</Link>
                 </Typography>
               </div>
               <InfoBar>

@@ -1,18 +1,23 @@
 {
   "version": "0.1.25",
   "scripts": {
+    "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "npm run type-check && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
     "watch-tests": "mocha --require ts-node/register --watch --watch-files src, ./src/**/*.test.ts",
-    "type-check": "tsc -p ./tsconfig.json",
+    "type-check": "tsc",
     "storybook": "start-storybook -s ./static -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.65",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.65",
+    "@docusaurus/core": "2.0.0-beta.8",
+    "@docusaurus/preset-classic": "2.0.0-beta.8",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@icgc-argo/uikit": "^1.7.0",
@@ -21,16 +26,19 @@
     "docsearch.js": "^2.6.3",
     "emotion": "^10.0.27",
     "emotion-theming": "^10.0.27",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-zoom-pan-pinch": "^1.6.1"
+    "postcss": "^8.3.11",
+    "react-zoom-pan-pinch": "^1.6.1",
+    "webpack": "^5.60.0",
+    "@svgr/webpack": "^5.5.0",
+    "clsx": "^1.1.1",
+    "file-loader": "^6.2.0",
+    "prism-react-renderer": "^1.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "url-loader": "^4.1.1",
+    "@mdx-js/react": "^1.6.21"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-alpha.65",
-    "@tsconfig/docusaurus": "^1.0.2",
-    "@types/react": "^16.9.53",
-    "@types/react-helmet": "^6.1.0",
-    "@types/react-router-dom": "^5.1.6",
     "@babel/core": "^7.12.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@storybook/addon-actions": "^6.0.26",
@@ -39,6 +47,9 @@
     "@storybook/react": "^6.0.26",
     "@types/chai": "^4.2.12",
     "@types/mocha": "^8.0.2",
+    "@types/react": "^16.14.17",
+    "@types/react-helmet": "^6.1.4",
+    "@types/react-router-dom": "^5.3.1",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "commander": "^4.1.0",
@@ -49,8 +60,10 @@
     "pretty-quick": "^3.1.0",
     "react-is": "^16.13.1",
     "svg-inline-loader": "^0.8.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "ts-node": "^10.3.0",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.8",
+    "@tsconfig/docusaurus": "^1.0.4",
+    "typescript": "^4.3.5"
   },
   "husky": {
     "hooks": {
