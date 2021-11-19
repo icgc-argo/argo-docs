@@ -55,9 +55,9 @@ module.exports = {
       collapsed: true,
       items: [
         {
-          type: 'link',
+          type: 'doc',
           label: 'Overview',
-          href: '/docs/analysis-workflows/analysis-overview',
+          id: 'analysis-workflows/analysis-overview',
         },
         {
           type: 'category',
