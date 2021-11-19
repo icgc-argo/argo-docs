@@ -73,7 +73,13 @@ const CodeBlock = ({
   );
 };
 
-export const CompareCodeBlock = ({ left, right }: { left: string[]; right: string[] }) => (
+export const CompareCodeBlock = ({
+  left,
+  right,
+}: {
+  left: string[] | null;
+  right: string[] | null;
+}) => (
   <div
     css={css`
       display: flex;
@@ -81,14 +87,16 @@ export const CompareCodeBlock = ({ left, right }: { left: string[]; right: strin
       align-items: center;
     `}
   >
-    <CodeBlock
-      codes={left}
-      css={css`
-        margin-right: 8px;
-      `}
-      prismTheme={codeDeleted}
-    />
-    <CodeBlock codes={right} prismTheme={defaultTheme} />
+    {left && (
+      <CodeBlock
+        codes={left}
+        css={css`
+          margin-right: 8px;
+        `}
+        prismTheme={codeDeleted}
+      />
+    )}
+    {right && <CodeBlock codes={right} prismTheme={defaultTheme} />}
   </div>
 );
 
