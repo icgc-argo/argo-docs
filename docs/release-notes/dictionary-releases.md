@@ -24,7 +24,7 @@ None to report.
 
 **Release Date: November 17, 2021**
 
-### Updates
+#### Updates
 
 - The "AJCC 6th Edition" has been added to the controlled terminology for tumour staging systems. This will allow data submitters to submit TNM categories and stage groups for the AJCC 6th Edition.
 - Optional clinical fields related to dose intensity reduction have been added to the Chemotherapy table. These include `dose_intensity_reduction`, `dose_intensity_reduction_event` and `dose_intensity_reduction_amount`.
@@ -39,11 +39,9 @@ None to report.
 - Changed `radiation_therapy_dosage` to accept number instead of integer.
 - Updated controlled terminology for `anatomical_site_irradiated`.
 
+#### Bug fixes:
 
-### Bug fixes:
 - Added `sample_registration` file to download templates from Dictionary Viewer page
-
-
 
 ## Release 1.12
 
