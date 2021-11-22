@@ -14,7 +14,7 @@ The [dictionary table view](/dictionary) lists all of the clinical fields that t
 
 Field listings can be filtered by Data Tier and Attribute, which can help identify which fields are necessary for [clinical data completion](/docs/submission/clinical-data-validation-rules).
 
-You can explore previous dictionary versions using the dropdown at the top of the dictionary. Using the latest version of the dictionary is required during data submission.
+You can explore previous dictionary versions using the dropdown at the top of the dictionary, or compare the changes to previous versions using the **Compare With** button. It is required to use the latest version of the dictionary during data submission.
 
 ### Field Descriptors
 
@@ -28,7 +28,7 @@ Each field has a data tier and an attribute classification, which reflects the i
 ![Conditional](/assets/submission/dictionary-conditional.svg) classification indicates:
 
 - Field must meet certain conditions, depending on the value of another field.
-- Conditional rules are described in the data dictionary scripts & notes.
+- Conditional rules are described in the data dictionary notes & scripts column.
 
 ![Required](/assets/submission/dictionary-required.svg) classification indicates:
 
@@ -39,7 +39,7 @@ Each field has a data tier and an attribute classification, which reflects the i
 - Field is part of the mandatory minimum set of clinical data that must be submitted.
 - When paired with the `Conditional` attribute, this field is only required if conditional requirements are met.
 
-The set of core clinical fields were defined by the [Tissue & Clinical Annotations Working Group](http://www.icgc-argo.org/page/84/tissue-clinical-annotation-working-group) which involved regular discussions with members of the working group and ARGO Programs. Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
+The set of core clinical fields were defined by the Tissue & Clinical Annotations Working Group which involved regular discussions with members of the working group and ARGO Programs. Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
 
 ![Extended](/assets/submission/dictionary-extended.svg) classification indicates:
 
