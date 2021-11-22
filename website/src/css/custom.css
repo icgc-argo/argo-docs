@@ -572,7 +572,7 @@ nav.pagination-nav a.pagination-nav__link:hover .pagination-nav__link--label {
 }
 
 .markdown h1:first-child {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 /* Regex Colorizer no bg theme */
