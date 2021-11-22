@@ -125,4 +125,4 @@ If you are logged in, the [File Repository](https://platform.icgc-argo.org/repos
 
 ## DACO Access Control
 
-If a file is `controlled access` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously.
+If a file is `controlled access` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously. [Read more about applying for access to controlled data.](https://docs.icgc-argo.org/docs/data-access/data-access)
