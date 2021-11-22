@@ -39,7 +39,7 @@ Each field has a data tier and an attribute classification, which reflects the i
 - Field is part of the mandatory minimum set of clinical data that must be submitted.
 - When paired with the `Conditional` attribute, this field is only required if conditional requirements are met.
 
-The set of core clinical fields were defined by the [Tissue & Clinical Annotations Working Group](http://www.icgc-argo.org/page/84/tissue-clinical-annotation-working-group) which involved regular discussions with members of the working group and ARGO Programs. Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
+The set of core clinical fields were defined by the Tissue & Clinical Annotations Working Group which involved regular discussions with members of the working group and ARGO Programs. Core clinical fields are commonly acquired in cohort-based studies and clinical trials and are required to address clinically relevant topics by cross entity analyses, and therefore constitute a critical element in the analysis of diverse ARGO Programs.
 
 ![Extended](/assets/submission/dictionary-extended.svg) classification indicates:
 
