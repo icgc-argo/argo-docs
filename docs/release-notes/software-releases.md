@@ -18,35 +18,42 @@ None to report.
 
 None to report.
 ------>
+
 ## September 13, 2021: Program Dashboard Updates
+
 Data Platform - v1.101.3 API v3.26.1
 
-### New Features 
-- A new download API has been published, resulting in some changes in [How to Download Data](/docs/data-access/data-download). 
-- Pre-release data can now be seen on the [Program Dashboard and File Repository](/docs/submission/submitted-data#pre-release-data). Pre-release data is only visible if you are a Program Member.
+#### New Features
+
+- A new download API has been published, resulting in some changes in [How to Download Data](/docs/data-access/data-download).
+- Pre-release data can now be seen on the [Program Dashboard and File Repository](/docs/submission/submitted-data#pre-release-data). Pre-release data is only visible if you are logged in as a Program Member.
 
 ## September 02, 2021: Program Dashboard Updates
+
 Data Platform - v1.101.0 API v3.24.6
 
-### New Features 
-- Table filters have been added to the [Program Dashboard](/docs/submission/submitted-data) to make donor sorting easier. 
+#### New Features
+
+- To make sorting donor data easier, table filters have been added to the Donor Data Summary table on the [Program Dashboard](/docs/submission/submitted-data).
 
 ## April 27, 2021: Clinical Submission and Program Dashboard Updates
+
 Data Platform - v1.93.0 API v 3.16.0
 
-### New Features 
-- A New version of the [Program Dashboard](/docs/submission/submitted-data) has been released to help report on data submission and molecular data processing progress has been released. Updates to this section includes: 
-    - Revised program statistics bar
-	- Donor clinical completeness tracking chart showing a programs progress over times towards submitting complete clinical data for all committed program donors. 
-	- Donor molecular summary chart showing molecular processing progress over times, working towards having completeness for all committed program donors.
-	- Updated column in the Donor Summary table showing real-time tracking of the progression of a specific donor through the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-pipeline).
-- Two new clinical data entities can be submitted through the Clinical Submission 
-	- Family History: A donor's familial relationships and familial cancer history. 
-	- Immunotherapy: Treatment regimen details of immunotherapy drugs. 
+#### New Features
 
-### Bug Fixes
+- A New version of the [Program Dashboard](/docs/submission/submitted-data) has been released to help report on data submission and molecular data processing progress has been released. Updates to this section includes:
+  - Revised program statistics bar
+  - Donor clinical completeness tracking chart showing a programs progress over times towards submitting complete clinical data for all committed program donors.
+  - Donor molecular summary chart showing molecular processing progress over times, working towards having completeness for all committed program donors.
+  - Updated column in the Donor Summary table showing real-time tracking of the progression of a specific donor through the [DNA-Seq Analysis Pipeline](/docs/analysis-workflows/dna-alignment).
+- Two new clinical data entities can be submitted through the Clinical Submission
+  - Family History: A donor's familial relationships and familial cancer history.
+  - Immunotherapy: Treatment regimen details of immunotherapy drugs.
 
-- The docs site dictionary viewer would occasionally crash if the page was left open or scrolled too much. This has been resolved.   
+#### Bug Fixes
+
+- The docs site dictionary viewer would occasionally crash if the page was left open or scrolled too much. This has been resolved.
 
 ## Initial Software Release
 
@@ -54,7 +61,7 @@ Data Platform v1.55.0 - API v3.2.0
 
 **Release Date:** June 19, 2020
 
-### New Features
+#### New Features
 
 This is the first release of the ARGO Data Platform. Major features include:
 

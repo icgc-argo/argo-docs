@@ -146,12 +146,11 @@ function Index() {
               <ul>
                 <li>
                   <a href="/docs/analysis-workflows/analysis-overview">
-                    Analysis overview and accepted datatypes
+                    Analysis pipelines overview
                   </a>
                 </li>
                 <li>
-                  Details about the{' '}
-                  <a href="/docs/analysis-workflows/dna-pipeline">DNA-Seq analysis pipeline</a>
+                  <a href="/docs/analysis-workflows/dna-alignment">DNA-Seq analysis pipeline</a>
                 </li>
               </ul>
             </ContentBlock>
