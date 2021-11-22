@@ -381,15 +381,6 @@ nav.menu {
   line-height: 1.57;
 }
 
-.docMainContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage-
-  div.padding-vert--lg
-  > div.container {
-  padding: 0px;
-}
-.docMainContainer_src-theme-DocPage-styles-module {
-  padding-top: 20px;
-}
-
 .table-of-contents.table-of-contents__left-border {
   color: #045093;
   border-left: 2px solid #0774d3;
