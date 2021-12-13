@@ -18,13 +18,13 @@ Data files containing Single Nucleotide Variations (SNV) called from aligned rea
 
 ## Filtered SNV Calls
 
-Data files containing Single Nucleotide Variations (SNV) variants which were filtered through each caller's PASS tag and within only the open access regions.
+Data files containing Single Nucleotide Variations (SNV) variants which were filtered through each caller's PASS tag and locating only within the open access regions.
 
 #### File Types
 
-| Filename Pattern          | Description                                          | Analysis Type   | Data Category               | Generating Workflow(s)                 |
-| ------------------------- | ---------------------------------------------------- | --------------- | --------------------------- | -------------------------------------- |
-| \*.snv.open-filter.vcf.gz | Open access filtered SNV results in VCF File format. | variant_calling | Simple Nucleotide Variation | <ul>Open Access Variant Filtering</ul> |
+| Filename Pattern          | Description                                          | Analysis Type      | Data Category               | Generating Workflow(s)                 |
+| ------------------------- | ---------------------------------------------------- | ------------------ | --------------------------- | -------------------------------------- |
+| \*.snv.open-filter.vcf.gz | Open access filtered SNV results in VCF File format. | variant_processing | Simple Nucleotide Variation | <ul>Open Access Variant Filtering</ul> |
 
 ## SNV Supplement
 
@@ -92,9 +92,9 @@ Data files containing the simple Insertions and Deletions (InDel) variants which
 
 #### File Types
 
-| Filename Pattern            | Description                                | Analysis Type   | Data Category               | Generating Workflow(s)                 |
-| --------------------------- | ------------------------------------------ | --------------- | --------------------------- | -------------------------------------- |
-| \*.indel.open-filter.vcf.gz | Filtered InDel results in VCF file format. | variant_calling | Simple Nucleotide Variation | <ul>Open Access Variant Filtering</ul> |
+| Filename Pattern            | Description                                | Analysis Type      | Data Category               | Generating Workflow(s)                 |
+| --------------------------- | ------------------------------------------ | ------------------ | --------------------------- | -------------------------------------- |
+| \*.indel.open-filter.vcf.gz | Filtered InDel results in VCF file format. | variant_processing | Simple Nucleotide Variation | <ul>Open Access Variant Filtering</ul> |
 
 ## InDel Supplement
 
@@ -112,6 +112,6 @@ Secondary files that are external index files for VCF format files. TBI files fo
 
 #### File Types
 
-| Filename Pattern | Description                                               | Analysis Type   | Data Category                                                                                            | Generating Workflow(s)                                                                                                                                        |
-| ---------------- | --------------------------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \*.vcf.gz.tbi    | VCF Index file format. Requires a corresponding VCF file. | variant_calling | <ul><li>Simple Nucleotide Variation</li><li>Structural Variation</li><li>Copy Number Variation</li></ul> | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li><li>Open Access Variant Filtering</li></ul> |
+| Filename Pattern | Description                                               | Analysis Type                                                | Data Category                                                                                            | Generating Workflow(s)                                                                                                                                        |
+| ---------------- | --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \*.vcf.gz.tbi    | VCF Index file format. Requires a corresponding VCF file. | <ul><li>variant_calling</li><li>variant_processing</li></ul> | <ul><li>Simple Nucleotide Variation</li><li>Structural Variation</li><li>Copy Number Variation</li></ul> | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li><li>Open Access Variant Filtering</li></ul> |
