@@ -25,11 +25,13 @@ All ARGO workflows are published under an GNU AGPL v3 open-source license and ar
 
 The DNA-Sequencing (DNA-Seq) analysis pipeline identifies multiple types of somatic variant from both Whole Exome Sequencing (WXS) and Whole Genome Sequencing (WGS) sample data. DNA-Seq analysis consists of the following workflows:
 
-- [Sequence Alignment](/docs/analysis-workflows/dna-alignment)
+- [DNA-Seq Alignment](/docs/analysis-workflows/dna-alignment)
 - [Sanger WGS Variant Calling](/docs/analysis-workflows/dna-sanger-wgs-vc)
 - [Sanger WXS Variant Calling](/docs/analysis-workflows/dna-sanger-wxs-vc)
 - [GATK Mutect2 Variant Calling](/docs/analysis-workflows/dna-gatk-mutect2-vc)
-- [Open Access Filtering](/docs/analysis-workflows/dna-open-access-filtering)
+- [Open Access Variant Filtering](/docs/analysis-workflows/dna-open-access-filtering)
+
+![DNA-Seq-data-analysis](/assets/analysis-workflows/ARGO-DNA-seq-data-analysis.png)
 
 In the future, these procedures will be extended to include:
 

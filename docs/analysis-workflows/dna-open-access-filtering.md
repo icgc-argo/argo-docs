@@ -44,4 +44,4 @@ In order to make as many somatic variants as possible to be public accessible to
 
 ## Workflow Diagram
 
-![Open Access Filtering Workflow](/assets/analysis-workflows/ARGO-Mutect2-variant-calling.png)
+![Open Access Filtering Workflow](/assets/analysis-workflows/ARGO-open-access-filtering.png)
