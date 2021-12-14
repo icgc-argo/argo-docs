@@ -35,7 +35,15 @@ The score-client can be run in different ways depending on your operating system
 
 ### Prerequisites
 
+<<<<<<< HEAD
+
 Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used.
+
+=======
+
+Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used.
+
+> > > > > > > docs-typofixes-dec14
 
 ```shell
 apt-get install openjdk-11-jdk
@@ -256,7 +264,7 @@ It is also possible to pipe the output of the above to `samtools`, etc. for pipe
 
 ## FUSE Mounting
 
-The mount command can be used to mount the remote S3 bucket as a read-only FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as ls, find, du and tree. It also works very well with standard analysis tools such as `samtools`.
+The mount command can be used to mount the remote S3 bucket as a read-only FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as `ls`, `find`, `du` and `tree`. It also works very well with standard analysis tools such as `samtools`.
 
 In order to use the mount feature, `FUSE` is required. On most Linux based systems, this will require installing `libfuse-dev`, `fuse` and other packages. Below is the command to install them on Ubuntu.
 
@@ -278,7 +286,7 @@ Files are organized into a virtual directory structure. The following shows the 
 /bundleIdn/fileNamej
 ```
 
-where `bundleId` and `fileName` are the original Bundle ID and file name of the file respectively. It possible to control the layout using the `--layout` option. Using `--layout object-id` will instead produce a flat list of files named by their associated object id.
+where `bundleId` and `fileName` are the original Bundle ID and file name of the file respectively. It is possible to control the layout using the `--layout` option. Using `--layout object-id` will instead produce a flat list of files named by their associated object id.
 
 The file system implementation's performance is optimized for serial reads. Frequent random access patterns will lead to very poor performance. Under the covers, each random seek requires a new HTTP connection to S3 with the appropriate Range header set which is an expensive operation. For this reason, it is only recommended for streaming analysis (e.g. `samtools view` like functionality).
 

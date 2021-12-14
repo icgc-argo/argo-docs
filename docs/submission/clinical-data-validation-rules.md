@@ -57,7 +57,7 @@ A number of cross-field consistency checks within files are implemented to ensur
 - Submitted `tumour_grade` is checked against selected `tumour_grading_system`.
 - Valid values for `specimen_type` are cross-checked with the `tumour_normal_designation` field.
 - The requirement for fields related to relapse/recurrence are dependent on the `disease_status_at_followup` field.
-- The requirement for `survival_time` is depenedent on the `vital_status` field.
+- The requirement for `survival_time` is dependent on the `vital_status` field.
 
 ## Cross File Validations
 

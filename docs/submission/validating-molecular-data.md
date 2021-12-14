@@ -323,8 +323,6 @@ Validation will help you ensure your data is formatted correctly (with accurate 
 
 This validation client will check:
 
-This validation client will check:
-
 - Metadata in the payload aligns with the BAM/FASTQ files.
 - Each submission is for a single sample.
 - Each payload is formatted according to the [data validation rules](/docs/submission/molecular-data-prep#file-and-data-validation-rules) stated above.
