@@ -6,6 +6,22 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 5.0
+
+**Release Date:** February 7, 2022
+
+#### New Updates
+
+Data Release 5.0 include the first release of a **new** DNA-Seq Pipeline: [Open Access Variant Filtering Workflow](/docs/analysis-workflows/dna-open-access-filtering), available now for both WXS and WGS samples.
+
+This release includes:
+
+- APGI-AU: 89 previously released donors now have Open Access variant calls
+- PACA-CA: 136 previously released donors now have Open Access variant calls
+- OCCAMS-GB: 400 previously released donors now have Open Access variant calls
+- PTC-SA: 239 previously released donors now have Open Access variant calls
+- LUCK-KR: 167 previously released donors now have Open Access variant calls
+
 ## Data Release 4.0
 
 **Release Date:** September 27, 2021
