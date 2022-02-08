@@ -27,13 +27,13 @@ Data Platform - 1.105.3 - API 3.28.2
 
 - A new **File Entity** page has been released that displays the metadata about a file. This page is accessible from the [File Repository](https://platform.icgc-argo.org/repository) by clicking on a File ID. This page includes:
   - A file summary with a link to all files for the associated program.
-  - Data analysis Information, that include helpful links to documentation about the associated ARGO DNA pipeline workflow and version.
+  - Data analysis information, that include helpful links to documentation about the associated ARGO DNA pipeline workflow and version.
   - Some metadata about the associated donor, samples, and specimens for the file.
   - The ability to download a manifest for the file.
 - The **Program Dashboard** has been updated to prepare for the [Open Access Variant Filtering workflow](/docs/analysis-workflows/dna-open-access-filtering):
   - Once a program has raw reads that are processing in the DNA pipeline, the status of the Open Access VF workflow will be reported on the donor summary table and in the molecular chart (if that donor meets the tumour/normal pair requirements).
 - **File Repository** improvements have been made, which include:
-  - Adding a more user friendly File ID column to the table, that links to the file entity page.
+  - Adding the File ID column to the table, that links to the file entity page.
   - Improving the file metadata that displays in the search facet result suggestions.
   - Making the graphs interactive to filter the file table.
   - Adding a loading indicator to the download action for user feedback.
