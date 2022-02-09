@@ -3,14 +3,14 @@ id: data-download
 title: Accessing and Downloading Data
 platform_key: DOCS_DATA_DOWNLOAD
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+The [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) contains a harmonized dataset against the latest reference genome, GRCh38. For information on the data analysis and data types, please see [Analysis Pipeline](/docs/analysis-workflows/analysis-overview) documentation.
 
-The [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) contains a harmonized dataset against the latest reference genome, GRCh38. For information on the data analysis and data types, please see [Analysis Pipeline](/docs/analysis-workflows/analysis-overview) documentation. 
+## Data Download
 
-
-## Data Download 
 The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable downloads and has built in BAM/CRAM slicing to make data download fast and smooth.
 
 Please note:
@@ -33,18 +33,20 @@ The score-client can be run in different ways depending on your operating system
 - If you are on Windows, use the score-client Docker distribution.
 - If you are on a Unix system (IOS/Linux) you can use the Docker distribution, or score-client directly.
 
-### Prerequisites 
-Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used. 
+### Prerequisites
 
-```shell 
+Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used.
+
+```shell
 apt-get install openjdk-11-jdk
 ```
-If using the Docker distribution, Java is bundled and does not need to be installed. 
 
+If using the Docker distribution, Java is bundled and does not need to be installed.
 
 By default the score-client is configured to use a maximum of 8G of RAM. Most of time this is more than sufficient for fast downloads.
 
 ### Distributions
+
 <!---  Tabs start here -->
 
 <Tabs
@@ -63,12 +65,13 @@ Pull the latest version of the score-client Docker distribution:
 ```shell
 > docker pull overture/score
 ```
+
 Once pulled, you can open a shell in the container by executing:
 
 ```shell
 > docker run -it overture/score
 > score-client
-``` 
+```
 
 Update the docker configuration with your user values, including:
 
@@ -76,13 +79,11 @@ Update the docker configuration with your user values, including:
 - **STORAGE_URL**: the object storage Score server URL
 - **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 
-
-```shell 
-> docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score 
+```shell
+> docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
 ```
 
-There is no entry point or command defined for the image. The software is located at score-client which is also the working directory of the container. 
-
+There is no entry point or command defined for the image. The software is located at score-client which is also the working directory of the container.
 
 </TabItem>
 <TabItem value="Client-ENV">
@@ -98,19 +99,17 @@ Download the **[latest version of the score-client](https://artifacts.oicr.on.ca
 > cd score-client-<latest-release-number>
 ```
 
-You can define required inputs as ENV variable, stored on system or defined with each client operation:  
+You can define required inputs as ENV variable, stored on system or defined with each client operation:
 
 - **METADATA_URL**: the file metadata Song server URL
 - **STORAGE_URL**: the object storage Score server URL
 - **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
-
 
 For example to download files with a manifest:
 
 ```shell
 > METADATA_URL=https://api.platform.icgc-argo.org/storage-api STORAGE_URL=https://api.platform.icgc-argo.org/storage-api bin/score-client download --manifest manifest1.txt
 ```
-
 
 </TabItem>
 <TabItem value="Client">
@@ -152,7 +151,7 @@ Once you have configured your `application.properties`, you will be ready to use
 
 <!---  Tabs end here -->
 
-## Score-client Usage  
+## Score-client Usage
 
 This section provides information on how to use the score-client once it has been properly downloaded and configured according to the [distribution type](/docs/data-access/data-download#distributions).
 
@@ -161,6 +160,7 @@ The score-client has the general syntax:
 ```shell
 score-client [options] [command] [command options]
 ```
+
 It offers a set of commands, where each command has its own set of options to influence its operation. You can find all options with `--help`:
 
 ```
@@ -192,17 +192,20 @@ It offers a set of commands, where each command has its own set of options to in
     upload    Upload file object(s) to the remote storage repository
 ```
 
+## Download
 
-
-## Download 
 ### Download a list of files by manifest
+
+> NOTE: You will experience some warnings when downloading files by manifest, however you should still be able to proceed with the download. This is a known issue that will be fixed in an upcoming release.
+
 Using a manifest is ideal for downloading multiple files identified through the [ARGO Platform](https://platform.icgc-argo.org/repository).
 
-Run the score-client using the `download` command.  Define your options: 
+Run the score-client using the `download` command. Define your options:
+
 - **--manifest** : location of the manifest file listing files to be downloaded
 - **--output-dir**: location you want the downloaded files to be written to
 
-For example: 
+For example:
 
 ```shell
 > bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
@@ -210,28 +213,26 @@ For example:
 
 The optional `--output-layout` option can be used to organize the downloads into a couple of predefined directory layouts. See the `--help` option for additional information.
 
-
 ### Download a single file by object ID
 
-Run the score-client using the `download` command.  Define your options: 
+Run the score-client using the `download` command. Define your options:
 
 - **--object-id** : object-id of the file to be downloaded
 - **--output-dir**: directory location you want the downloaded files to be written to
 
-For example: 
+For example:
+
 ```shell
 > bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
 
 You can also specify multiple object id's separated by spaces:
+
 ```shell
 > bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
 ```
 
-
-
-
-## BAM/CRAM Slicing 
+## BAM/CRAM Slicing
 
 The view command is a minimal version of [samtools](http://www.htslib.org/doc/samtools.html) view. You can view a “genomic slice” of the remote BAM file, freeing the user from having to download the entire file locally, saving bytes and time.
 
@@ -253,19 +254,18 @@ It is also possible to pipe the output of the above to `samtools`, etc. for pipe
 > bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
 ```
 
+## FUSE Mounting
 
-## FUSE Mounting 
-
-The mount command can be used to mount the remote S3 bucket as a read-only  FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as ls, find, du and tree. It also works very well with standard analysis tools such as `samtools`.
+The mount command can be used to mount the remote S3 bucket as a read-only FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as ls, find, du and tree. It also works very well with standard analysis tools such as `samtools`.
 
 In order to use the mount feature, `FUSE` is required. On most Linux based systems, this will require installing `libfuse-dev`, `fuse` and other packages. Below is the command to install them on Ubuntu.
 
-``` shell
+```shell
 > sudo apt-get install -y libfuse-dev fuse curl wget software-properties-common
 ```
 
-
 Files are organized into a virtual directory structure. The following shows the default bundle layout:
+
 ```
 /bundleId1/fileName1
 /bundleId1/fileName2
@@ -282,7 +282,8 @@ where `bundleId` and `fileName` are the original Bundle ID and file name of the 
 
 The file system implementation's performance is optimized for serial reads. Frequent random access patterns will lead to very poor performance. Under the covers, each random seek requires a new HTTP connection to S3 with the appropriate Range header set which is an expensive operation. For this reason, it is only recommended for streaming analysis (e.g. `samtools view` like functionality).
 
-### Mount a manifest of files 
+### Mount a manifest of files
+
 <!---  Tabs start here -->
 
 <Tabs
@@ -309,6 +310,7 @@ Once mounted, you can use standard analysis tools against files found under the 
 ```shell
 > samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
 ```
+
 </TabItem>
 
 <TabItem value="Docker">
@@ -329,8 +331,9 @@ And then mount the file system inside the container against the empty /mnt direc
 > alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client"
 
 # Mount the file system in the container
-docker-score-client mount --mount-point /mnt --manifest manifest_file_name.txt 
+docker-score-client mount --mount-point /mnt --manifest manifest_file_name.txt
 ```
+
 Note that the `--privileged` Docker option is required for FUSE in order to access the host's /dev/fuse device.
 
 In another terminal, you can access the newly mounted file system:
@@ -358,11 +361,12 @@ To perform analysis within the container:
 
 <!---  Tabs end here -->
 
-
 ## Additional Data Sources
-In addition to the latest harmonized data on the ICGC ARGO Platform, you can also access legacy data from the ICGC 25K project.  
+
+In addition to the latest harmonized data on the ICGC ARGO Platform, you can also access legacy data from the ICGC 25K project.
+
 - [ICGC 25K Data Portal](https://dcc.icgc.org/): Contains a compiled dataset against the GRCh37 reference genome.
   - For more information, consult the [ICGC 25K Data Download documentation](https://docs.icgc.org/download/downloading-data/.).
-- [EGA Data Portal](https://ega-archive.org/): Contains raw datasets of data submitted to ICGC 25k. 
+- [EGA Data Portal](https://ega-archive.org/): Contains raw datasets of data submitted to ICGC 25k.
   - Data can only be downloaded through their [EGA download client](https://ega-archive.org/download/downloader-quickguide-APIv3#DownloadClient), but metadata may be viewed on their website. Files are grouped into datasets based on the study they were collected in, and access is granted on a dataset by dataset basis. This repository carries both ICGC and non-ICGC data.
   - For more information, consult the [Guide to Data Access](https://ega-archive.org/access/data-access).
