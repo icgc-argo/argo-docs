@@ -34,7 +34,7 @@ module.exports = {
         'submission/submitting-molecular-data',
         'submission/submitted-data',
         'submission/managing-program-access',
-        'submission/faq'
+        'submission/faq',
       ],
     },
     {
@@ -70,18 +70,13 @@ module.exports = {
       type: 'category',
       label: 'Analysis Pipelines',
       collapsed: true,
-      items: [
-        'analysis-workflows/analysis-overview',
-        'analysis-workflows/dna-pipeline',
-      ],
+      items: ['analysis-workflows/analysis-overview', 'analysis-workflows/dna-alignment'],
     },
     {
       type: 'category',
       label: 'Data and File Types',
       collapsed: true,
-      items: [
-        'data/reads', 'data/variant-calls', 'data/qc-metrics'
-      ],
+      items: ['data/reads', 'data/variant-calls', 'data/qc-metrics'],
     },
     {
       type: 'category',
@@ -95,4 +90,3 @@ module.exports = {
     },
   ],
 };
-
