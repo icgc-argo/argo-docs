@@ -70,7 +70,25 @@ module.exports = {
       type: 'category',
       label: 'Analysis Pipelines',
       collapsed: true,
-      items: ['analysis-workflows/analysis-overview', 'analysis-workflows/dna-alignment'],
+      items: [
+        {
+          type: 'doc',
+          label: 'Overview',
+          id: 'analysis-workflows/analysis-overview',
+        },
+        {
+          type: 'category',
+          label: 'DNA-Seq Analysis',
+          collapsed: false,
+          items: [
+            'analysis-workflows/dna-alignment',
+            'analysis-workflows/dna-sanger-wgs-vc',
+            'analysis-workflows/dna-sanger-wxs-vc',
+            'analysis-workflows/dna-gatk-mutect2-vc',
+            'analysis-workflows/dna-open-access-filtering',
+          ],
+        },
+      ],
     },
     {
       type: 'category',
