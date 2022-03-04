@@ -42,11 +42,28 @@ module.exports = {
       label: 'Data Access',
       collapsed: true,
       items: [
-        'data-access/data-access',
-        'data-access/data-download',
-        'data-access/user-profile-and-api-token',
-        'data-access/programmatic-apis',
-        'data-access/publication-guidelines',
+        {
+          type: 'category',
+          label: 'ICGC DACO',
+          collapsed: false,
+          items: [
+            'data-access/daco/applying',
+            'data-access/daco/approval',
+            'data-access/daco/renew-close',
+            'data-access/daco/daco-faq',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ICGC ARGO',
+          collapsed: false,
+          items: [
+            'data-access/data-download',
+            'data-access/user-profile-and-api-token',
+            'data-access/programmatic-apis',
+            'data-access/publication-guidelines',
+          ],
+        },
       ],
     },
     {

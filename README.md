@@ -12,7 +12,7 @@ This docs site has been generated using [Docusaurus](https://docusaurus.io/).
 
 Documentation is written in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and can be found in [/docs](docs).
 
-The website, including the docusaurus library, custom pages and components, and all styling is kept in [/website](website).
+The website, including the Docusaurus library, custom pages and components, and all styling is kept in [/website](website).
 
 ## Dependencies
 
