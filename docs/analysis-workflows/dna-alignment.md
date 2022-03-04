@@ -9,7 +9,7 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 
 ## Inputs
 
-- All alignments are performed using [GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome) as the human reference genome
+- All alignments are performed using [GRCh38DH](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome) as the human reference genome
 - Submitted FASTQ or BAM files(s)
 
 ## Preprocessing
