@@ -35,15 +35,7 @@ The score-client can be run in different ways depending on your operating system
 
 ### Prerequisites
 
-<<<<<<< HEAD
-
 Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used.
-
-=======
-
-Using the `score-client` directly requires Java 11 to be installed. The procedure for installing OpenJDk 11 will vary depending on the operating system and package manager used.
-
-> > > > > > > docs-typofixes-dec14
 
 ```shell
 apt-get install openjdk-11-jdk
