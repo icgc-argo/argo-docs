@@ -63,14 +63,14 @@ values={[
 Pull the latest version of the score-client Docker distribution:
 
 ```shell
-> docker pull overture/score
+docker pull overture/score
 ```
 
 Once pulled, you can open a shell in the container by executing:
 
 ```shell
-> docker run -it overture/score
-> score-client
+docker run -it overture/score
+score-client
 ```
 
 Update the docker configuration with your user values, including:
@@ -80,7 +80,7 @@ Update the docker configuration with your user values, including:
 - **ACCESSTOKEN**: your personal [API Token](/docs/data-access/user-profile-and-api-token)
 
 ```shell
-> docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
+docker run -it -e "METADATA_URL=https://api.platform.icgc-argo.org/storage-api" -e "STORAGE_URL=https://api.platform.icgc-argo.org/storage-api" -e "ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0" overture/score
 ```
 
 There is no entry point or command defined for the image. The software is located at score-client which is also the working directory of the container.
@@ -91,12 +91,12 @@ There is no entry point or command defined for the image. The software is locate
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
-> wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
 
-> tar xvzf score-client.tar.gz
+tar xvzf score-client.tar.gz
 
 ## Note: Once unzipped, the final directory will be suffixed with the latest release number.
-> cd score-client-<latest-release-number>
+cd score-client-<latest-release-number>
 ```
 
 You can define required inputs as ENV variable, stored on system or defined with each client operation:
@@ -108,7 +108,7 @@ You can define required inputs as ENV variable, stored on system or defined with
 For example to download files with a manifest:
 
 ```shell
-> METADATA_URL=https://api.platform.icgc-argo.org/storage-api STORAGE_URL=https://api.platform.icgc-argo.org/storage-api bin/score-client download --manifest manifest1.txt
+METADATA_URL=https://api.platform.icgc-argo.org/storage-api STORAGE_URL=https://api.platform.icgc-argo.org/storage-api bin/score-client download --manifest manifest1.txt
 ```
 
 </TabItem>
@@ -117,12 +117,12 @@ For example to download files with a manifest:
 Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
-> wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
 
-> tar xvzf score-client.tar.gz
+tar xvzf score-client.tar.gz
 
 ## Note: Once unzipped, the final directory will be suffixed with the latest release number.
-> cd score-client-<latest-release-number>
+cd score-client-<latest-release-number>
 ```
 
 Update the `conf/application.properties` file with your user values, including:
@@ -208,7 +208,7 @@ Run the score-client using the `download` command. Define your options:
 For example:
 
 ```shell
-> bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
+bin/score-client download --manifest ./directory-path/score-manifest.20200520.tsv --output-dir ./output-directory-path
 ```
 
 The optional `--output-layout` option can be used to organize the downloads into a couple of predefined directory layouts. See the `--help` option for additional information.
@@ -223,13 +223,13 @@ Run the score-client using the `download` command. Define your options:
 For example:
 
 ```shell
-> bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
+bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
 
 You can also specify multiple object id's separated by spaces:
 
 ```shell
-> bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
+bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35183-9291-5711-967d-30afcf20e71f --output-dir data
 ```
 
 ## BAM/CRAM Slicing
@@ -239,29 +239,29 @@ The view command is a minimal version of [samtools](http://www.htslib.org/doc/sa
 The following example will download reads overlapping the region 1 - 10,000 on chromosome 1:
 
 ```shell
-> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
+bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-10000
 ```
 
 The BAI is automatically discovered and streamed as part of the operation. For quickly accessing only the BAM header one can issue:
 
 ```shell
-> bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
+bin/score-client view --header-only --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd
 ```
 
 It is also possible to pipe the output of the above to `samtools`, etc. for pipelining a workflow:
 
 ```shell
-> bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
+bin/score-client view --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd --query 1:1-100000 | samtools mpileup -
 ```
 
 ## FUSE Mounting
 
-The mount command can be used to mount the remote S3 bucket as a read-only FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as ls, find, du and tree. It also works very well with standard analysis tools such as `samtools`.
+The mount command can be used to mount the remote S3 bucket as a read-only FUSE file system. This is very useful to browse and explore the available files, as well as quickly see their size and date of modification using common commands such as `ls`, `find`, `du` and `tree`. It also works very well with standard analysis tools such as `samtools`.
 
 In order to use the mount feature, `FUSE` is required. On most Linux based systems, this will require installing `libfuse-dev`, `fuse` and other packages. Below is the command to install them on Ubuntu.
 
 ```shell
-> sudo apt-get install -y libfuse-dev fuse curl wget software-properties-common
+sudo apt-get install -y libfuse-dev fuse curl wget software-properties-common
 ```
 
 Files are organized into a virtual directory structure. The following shows the default bundle layout:
@@ -278,7 +278,7 @@ Files are organized into a virtual directory structure. The following shows the 
 /bundleIdn/fileNamej
 ```
 
-where `bundleId` and `fileName` are the original Bundle ID and file name of the file respectively. It possible to control the layout using the `--layout` option. Using `--layout object-id` will instead produce a flat list of files named by their associated object id.
+where `bundleId` and `fileName` are the original Bundle ID and file name of the file respectively. It is possible to control the layout using the `--layout` option. Using `--layout object-id` will instead produce a flat list of files named by their associated object id.
 
 The file system implementation's performance is optimized for serial reads. Frequent random access patterns will lead to very poor performance. Under the covers, each random seek requires a new HTTP connection to S3 with the appropriate Range header set which is an expensive operation. For this reason, it is only recommended for streaming analysis (e.g. `samtools view` like functionality).
 
@@ -298,17 +298,17 @@ values={[
 
 ```shell
 # Create the mount point
-> sudo mkdir /mnt/icgc-argo
-> sudo chmod 777 /mnt/icgc-argo
+sudo mkdir /mnt/icgc-argo
+sudo chmod 777 /mnt/icgc-argo
 
 # Mount
-> bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
+bin/score-client mount --mount-point /mnt/icgc-argo --manifest manifest_file_name.txt --cache-metadata
 ```
 
 Once mounted, you can use standard analysis tools against files found under the mount point:
 
 ```shell
-> samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+samtools view /mnt/icgc/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
 ```
 
 </TabItem>
@@ -321,14 +321,14 @@ Next, export your personal [API Token](/docs/data-access/user-profile-and-api-to
 
 ```shell
 # Export access token, please replace accessToken with your own token
-> export ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0
+export ACCESSTOKEN=92038829-338c-4aa2-92fc2-a3c241f63ff0
 ```
 
 And then mount the file system inside the container against the empty /mnt directory:
 
 ```shell
 # Alias for ease of use
-> alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client"
+alias docker-score-client="docker run -it --rm -e ACCESSTOKEN --privileged -v `pwd`:/score-client/manifest overture/score bin/score-client"
 
 # Mount the file system in the container
 docker-score-client mount --mount-point /mnt --manifest manifest_file_name.txt
@@ -340,20 +340,20 @@ In another terminal, you can access the newly mounted file system:
 
 ```shell
 # List all files recursively
-> docker exec -it $(docker ps -lq) find /mnt
+docker exec -it $(docker ps -lq) find /mnt
 ```
 
 To perform analysis within the container:
 
 ```shell
 # Open a shell in the previously created container
-> docker exec -it $(docker ps -lq) bash
+docker exec -it $(docker ps -lq) bash
 
 # Install samtools
-> apt-get install samtools
+apt-get install samtools
 
 # Slice
-> samtools view /mnt/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
+samtools view /mnt/fff75930-0f8c-4c99-9b48-732e7ed4c625/443a7a6ab964e41c011cc9a303bc086c.bam 1:10000-20000
 ```
 
 </TabItem>
