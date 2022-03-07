@@ -70,7 +70,7 @@ Update the `conf/application.properties` configuration file with the correct use
 
 To do this, change directories into `conf` folder and open the `application.properties` file. This is an example of how your `application.properties` configuration file should look:
 
-```yaml title="score-client config
+```yaml title="score-client config"
 # The access token for authorized access to data
 accessToken=92038829-338c-4aa2-92fc2-a3c241f63ff0
 
