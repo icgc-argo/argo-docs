@@ -20,7 +20,7 @@ This release includes:
 - PACA-CA: 136 previously released donors now have Open Access variant calls
 - OCCAMS-GB: 400 previously released donors now have Open Access variant calls
 - PTC-SA: 239 previously released donors now have Open Access variant calls
-- LUCK-KR: 167 previously released donors now have Open Access variant calls
+- LUCA-KR: 167 previously released donors now have Open Access variant calls
 
 ## Data Release 4.0
 
