@@ -1,15 +1,15 @@
 ---
 id: dna-alignment
-title: Alignment
-sidebar_label: Alignment
+title: DNA-Seq Alignment
+sidebar_label: DNA-Seq Alignment
 platform_key: DOCS_DNA_PIPELINE
 ---
 
-The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligned or unaligned) format. The first processing step in the DNA-Seq Pipeline is uniformly aligning samples to the GRCh38 reference genome. For details, please see the latest version of the [ARGO DNA Alignment](https://github.com/icgc-argo-workflows/dna-seq-processing-wfs/releases).
+The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligned or unaligned) format. The first processing step in the DNA-Seq Pipeline is uniformly aligning samples to the GRCh38 reference genome. For details, please see the latest version of the [ARGO DNA-Seq Alignment](https://github.com/icgc-argo-workflows/dna-seq-processing-wfs/releases).
 
 ## Inputs
 
-- All alignments are performed using [GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome) as the human reference genome
+- All alignments are performed using [GRCh38DH](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome) as the human reference genome
 - Submitted FASTQ or BAM files(s)
 
 ## Preprocessing
