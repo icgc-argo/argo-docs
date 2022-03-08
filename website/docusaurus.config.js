@@ -77,7 +77,7 @@ module.exports = {
       items: [
         { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
         { to: 'docs/submission/submission-overview', label: 'Submission', position: 'right' },
-        { to: 'docs/data-access/data-access', label: 'Data Access', position: 'right' },
+        { to: 'docs/data-access/daco/applying', label: 'Data Access', position: 'right' },
         {
           to: 'docs/analysis-workflows/analysis-overview',
           label: 'Analysis Pipelines',
