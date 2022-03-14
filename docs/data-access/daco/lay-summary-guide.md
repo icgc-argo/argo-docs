@@ -121,7 +121,7 @@ Example of Content Development using Example 1 - Lay Summary.
 
 3. Using [https://readabilityformulas.com/free-readability-formula-tests.php](https://readabilityformulas.com/free-readability-formula-tests.php) paste a sample of plain text abstract in the box.
 
-4. Identify all words 3 or more syllables long (.g., Use **Show Word Statistics: 3+ syllable words (show all 'hard' words)** for substitution.
+4. Identify all words 3 or more syllables long e.g., Use **Show Word Statistics: 3+ syllable words (show all 'hard' words)** for substitution.
 
 5. a) Substitute simple words or phrases found by checking word synonyms,  
    b) Use simple explanations for complex words or phrases and/or  

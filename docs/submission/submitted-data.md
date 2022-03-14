@@ -24,9 +24,7 @@ Program progress is summarized within the following dashboard "cards":
   - The **percentage of registered donors with complete clinical data**. Once the minimum amount of required clinical data has been submitted for a donor, they are considered [clinically complete](/docs/submission/clinical-data-validation-rules#clinical-data-completion).
   - The **percentage of donors with submitted raw reads for a matched tumour/normal pair**. Once a donor has both a tumour and matched normal raw sequencing data pair [submitted through Song](/docs/submission/submitting-molecular-data), they will be counted towards this percentage.
 
-  > **A donor must be clinically complete before any of their molecular analysis files are released to the program members.**
-
-  > **A donor must also have data for at least one T/N pair before submitted before molecular processing will begin.**
+  > **A donor must be clinically complete and have at least one DNA Tumour/Normal matched pair submitted before any of their processed molecular analysis files are released to the program members.**
 
 ### Donor Release Summary
 
@@ -125,4 +123,4 @@ If you are logged in, the [File Repository](https://platform.icgc-argo.org/repos
 
 ## DACO Access Control
 
-If a file is `controlled access` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously. [Read more about applying for access to controlled data.](/docs/data-access/data-access)
+If a file is `controlled access` DACO permissions are required to download the file. If the file is `open` access, it can be downloaded anonymously. [Read more about applying for access to controlled data.](/docs/data-access/daco/applying)
