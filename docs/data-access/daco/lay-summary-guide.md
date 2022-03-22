@@ -7,7 +7,7 @@ platform_key: DOCS_LAY_GUIDE
 
 ## Tips on Writing a Lay Summary
 
-There are several key elements of developing a lay summary for researchers to consider:
+There are several key elements for developing a lay summary that researchers should consider:
 
 1. Structure and content
 1. Readability
@@ -49,7 +49,7 @@ Using plain language, answer these questions as a general guide to form your lay
 
 - Talk in an active voice (“I.. we..”) and second person in place of third person
 - Use people-first language, ideally by focusing on the person, not the disease or circumstance, for example, use “people with cancer” or “treatments that have failed patients” rather than “patients who failed treatments”
-- Try to avoid emotive or negative language such as battle, fight etc
+- Try to avoid emotive or negative language such as battle, fight etc.
 - Be respectful
 - Be realistic in your language around impact and expected outcomes. Please avoid detailing intensively the anticipated impacts and exaggerating benefits.
 
@@ -119,12 +119,12 @@ Example of Content Development using Example 1 - Lay Summary.
 
 2. Write Draft 1 using answers to each question.
 
-3. Using [https://readabilityformulas.com/free-readability-formula-tests.php](https://readabilityformulas.com/free-readability-formula-tests.php) paste a sample of plain text abstract in the box.
+3. Using [https://readabilityformulas.com/free-readability-formula-tests.php](https://readabilityformulas.com/free-readability-formula-tests.php), paste a sample of plain text abstract in the box.
 
-4. Identify all words 3 or more syllables long e.g., Use **Show Word Statistics: 3+ syllable words (show all 'hard' words)** for substitution.
+4. Identify all words with 3 or more syllables e.g., Use **Show Word Statistics: 3+ syllable words (show all 'hard' words)** for substitution.
 
 5. a) Substitute simple words or phrases found by checking word synonyms,  
    b) Use simple explanations for complex words or phrases and/or  
    c) Read similar concepts on lay websites.
 
-6. Write Final version by making edits as needed to comply with word count, language and readability guidelines.
+6. Write a final version by making edits as needed to comply with word count, language and readability guidelines.

@@ -30,7 +30,7 @@ platform_key: DOCS_DACO_FAQ
 
 3. **Who qualifies as an Applicant (Principal Investigator)?**
 
-   As set out in the ICGC Controlled Data access policy users’ guide, qualified applicants for access to the ICGC Controlled Data must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.).
+   As set out in the [ICGC Controlled Data access policy guidelines](https://www.icgc-argo.org/page/132/data-access-and-data-use-policies-and-guidelines), qualified applicants for access to the ICGC Controlled Data must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.).
 
    Please note: A student or personnel can fill out the application on behalf of the Applicant, but the Applicant will be responsible for reviewing and signing the application.
 
@@ -59,7 +59,7 @@ platform_key: DOCS_DACO_FAQ
    **Use of Data and Methodology:**
    Provide a summary of the methods for your research project and the plans for data usage, including:
 
-   - What major methods and technologies will you use (in-depth methodology is not required)?
+   - What major methods and technologies will you use? (In-depth methodology is not required)
    - How exactly will the ICGC Controlled Data be used?
 
 6. **What is a lay summary?**
@@ -85,7 +85,7 @@ platform_key: DOCS_DACO_FAQ
 
 For secure authorization, we require a valid Google email address (Gmail or G Suite) for logging into the ICGC DACO Website as an application submitter.
 
-Once your application is approved, Applicants and Collaborators have access to ICGC Controlled Data associated only to the Google/G Suite email address that is provided on the application, which will also be used to login to either the [ICGC ARGO Platform](https://platform.icgc-argo.org/) or [ICGC 25K Data Portal](https://dcc.icgc.org/).
+Once your application is approved, ICGC Controlled Data access for Applicants and Collaborators is associated only to the Google/G Suite email address that is provided on the application, which will also be used to login to either the [ICGC ARGO Platform](https://platform.icgc-argo.org/) or [ICGC 25K Data Portal](https://dcc.icgc.org/).
 
 11. **Do I need to include institutional email addresses for all of the personnel and students on my application?**
 
@@ -139,7 +139,7 @@ Approved users may only use the ICGC Controlled Data for the objectives and anal
 
 19. **How do I renew the application for an additional year of access?**
 
-DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website up to 90 days before your application expires, and you have 90 days to renew the application after it expires. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online.
+DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website from 90 days prior to expiry and up to 90 days after expiry. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online.
 
 20. **Our access to the controlled data has expired after our 2-year approval. Can I still renew it?**
 
