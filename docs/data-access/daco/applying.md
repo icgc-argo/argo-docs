@@ -5,27 +5,13 @@ sidebar_label: Applying for Access
 platform_key: DOCS_APPLYING
 ---
 
-## Requirements for Applying
+The International Cancer Genome Consortium has tiered levels of access to donor data as described in the [Data Access Framework](https://www.icgc-argo.org/page/134/e81-data-access-framework). [The ICGC Data Access Compliance Office (ICGC DACO)](https://daco.icgc-argo.org/) has been created to ensure that data from the ICGC will only be used by qualified individuals for public health objectives. Researchers submit their access requests directly to the DACO, who in turn reviews these access requests to ensure compliance with [ICGC Policies and Guidelines](https://www.icgc-argo.org/page/72/introduction-and-goals-). ICGC DACO reviews applications for accessing ICGC Controlled Data in both the [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) and the [ICGC 25K Portal](https://dcc.icgc.org/).
 
-The International Cancer Genome Consortium has tiered levels of access to donor data with strict data access policies. Authorization for access to controlled data is project based and is reviewed for compliance with [ICGC Policies and Guidelines](https://www.icgc-argo.org/page/72/introduction-and-goals-). The **[ICGC Data Access Compliance Office (ICGC DACO)](https://daco.icgc-argo.org/)** has been created as an independent body to ensure that data from the ICGC will only be used by qualified individuals for public health objectives. ICGC DACO reviews applications for accessing ICGC Controlled Data in both the [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) and the [ICGC 25K Portal](https://dcc.icgc.org).
-
-### Eligible Project Guidelines
-
-While there is great potential of data sharing for scientific research, caution is required when sharing data about individuals participating in genomic research because genomic data, like other types of medical data, can contain personal and identifying information.
-
-ICGC DACO provides controlled access to public and private researchers (PIs) that apply for access and the access conditions are the same for both types of researchers. The application must be completed and submitted through the [online submission system](https://daco.icgc-argo.org). The qualification requirements for applicants are:
-
-1. **The Applicant** must be an independent researcher affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.), and they **must review and sign the finalized application**.
-1. A qualified **Institutional Representative** of a legal entity has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement (e.g. Vice-President Research, a Research Director, or a Contracts Officer for the entity), and **must review and sign the finalized application**.
-1. The Applicant must submit a summary of the research project. The project will be checked for conformity with the [goals and policies of ICGC](https://www.icgc-argo.org/page/72/introduction-and-goals-) including, but not limited to, policies concerning the purpose and relevance of the research, the protection of the donors and the security of the donors’ data.
-1. The Applicant must submit a lay summary of the project to be posted on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users). This summary should be targeted to the general public, clearly explaining the research objectives in non-scientific terms and how the ICGC Controlled Data will be used. For tips on writing a lay summary, consult the [lay summary guide](/docs/data-access/daco/lay-summary-guide), which includes before and after examples of real lay summaries.
-1. The Applicant must submit at least 3 qualifying publications of which they were an author/co-author.
-1. If ethics approval for use of ICGC Controlled Data is required in the Applicant’s country/region, an ethics approval letter must be included with the application.
-1. All required sections of the application must be completed legitimately and all terms agreed upon.
+The application must be completed and submitted through the [online submission website](https://daco.icgc-argo.org/). All applicants must review the [DACO Policies and Procedures](https://www.icgc-argo.org/page/136/e83-data-access-compliance-office-policies-and-procedures) for details on eligibility, review criteria and office procedures.
 
 ## Users Involved in the Application
 
-The following are a list of the users involved in an application and their requirements.
+As per DACO policies and procedures, the following are a list of the users involved in an application and their requirements.
 
 1. **Applicant/Principal Investigator:** Must be independent researchers who are affiliated with a legal entity (e.g. university professor, researcher in a private company, independent researchers able to apply for federal research grants, etc.).
 1. **Institutional Representative:** A qualified representative of a legal entity who has the administrative power to legally commit that entity to the terms and conditions of the Data Access Agreement (e.g. Vice-President Research, a Research Director, or a Contracts Officer for the entity).
@@ -88,7 +74,7 @@ Once the application is approved, the Collaborators will receive an email notify
 
 ## Section E: Ethics
 
-ICGC is aware that some countries/regions do not require ethics approval for use of ICGC Controlled Data. Depending on the nature of your research project, it is possible that such approval is needed in your country. If you are uncertain as to whether your research project needs ethics approval to use ICGC Controlled Data, we suggest you contact your local institutional review board / research ethics committee (IRB/REC) to clarify the matter.
+Applicants should confirm requirements for ethical approval to use ICGC Controlled Data by contacting the relevant local institutional review board / research ethics committee (IRB/REC) to clarify the matter.
 
 If your country/region requires an ethics approval, it is required that you provide the approval letter to the ICGC DACO by uploading it within `Section E: Ethics`.
 

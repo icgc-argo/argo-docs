@@ -5,7 +5,7 @@ sidebar_label: Attesting, Renewing, & Closing
 platform_key: DOCS_RENEW_CLOSE
 ---
 
-Once approved, access to ICGC Controlled Data will last for 2 years; however, access remains conditional upon respecting the terms and conditions of the Data Access Agreement, particularly regarding (but not limited to) the publication moratorium and re-identification of project donors. An annual attestation must be made by the applicant and a bi-annual renewal must be completed in order to continue to access/use controlled data. If a project does not require access for the full 2 years, an application can be closed, which will remove access for all project members.
+Once approved, access to ICGC Controlled Data will last for 2 years; however, access remains conditional upon respecting the terms and conditions of the Data Access Agreement. An annual attestation must be made by the applicant and a bi-annual renewal must be completed in order to continue to access/use controlled data. If a project does not require access for the full 2 years, an application can be closed, which will remove access for all project members.
 
 ### Application Progress Stages
 

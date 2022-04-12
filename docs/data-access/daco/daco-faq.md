@@ -26,7 +26,7 @@ platform_key: DOCS_DACO_FAQ
    - If you already have an ICGC ARGO Platform account, use the same Google or G Suite email address for the ICGC ARGO Platform account and ICGC DACO website.
    - If you do not yet have an ICGC ARGO Platform account, we recommend applying for access using the Google or G Suite email address with which you will access ICGC Controlled Data.
 
-   Once you have completed your application online, obtain the required signatures and submit your application directly through the website. Once the application has been submitted, the ICGC DACO committee will review your application and you will hear back **within ten business days**.
+   Once you have completed your application online, obtain the required signatures and submit your application directly through the website. Once the application has been submitted, the ICGC DACO committee will review your application and you will hear back within ten business days.
 
 3. **Who qualifies as an Applicant (Principal Investigator)?**
 
@@ -64,7 +64,7 @@ platform_key: DOCS_DACO_FAQ
 
 6. **What is a lay summary?**
 
-   A lay summary describes your research project using lay language for the general public and it allows the public and broader scientific and clinical communities to understand the research and its goals, impact and applications. It should explain in plain language why you are asking the research question, what you expect to find out and how you will use your findings . Please ensure to mention **ICGC Controlled Data** in your lay summary. Consult the [lay summary guide](/docs/data-access/daco/lay-summary-guide), which includes before and after examples of real lay summaries. Once approved, your lay summary will be posted here on the [ICGC ARGO website](https://www.icgc-argo.org/page/139/controlled-data-users).
+   A lay summary describes your research project using lay language for the general public and it allows the public and broader scientific and clinical communities to understand the research and its goals, impact and applications. It should explain in plain language why you are asking the research question, what you expect to find out and how you will use your findings . Please ensure to mention **ICGC Controlled Data** in your lay summary. Consult the [lay summary guide](/docs/data-access/daco/lay-summary-guide), which includes before and after examples of real lay summaries. If your application is approved, your applicant's name, institution, and scientific lay summary may be included in a public registry of projects that have been granted access to ICGC Controlled Data.
 
 7. **How can I add/remove Collaborators from my approved application?**
 
@@ -99,7 +99,7 @@ For Canadian institutions: The [Canadian TCPS-2](https://ethics.gc.ca/eng/policy
 
 13. **How long will it take to process my access request?**
 
-Once submitted to the ICGC DACO, you will be notified within **10 business days** concerning the status of your application.
+Once submitted to the ICGC DACO, you will be notified within 10 business days concerning the status of your application.
 
 14. **Once my application is approved, how long will we have to wait for our access to be granted?**
 
@@ -109,7 +109,7 @@ Once an application has been approved by the ICGC DACO, it could take up to 24 h
 
 Once the EGA is informed of approved applications by the Data Access Committee (DAC), an EGA account with the agreed dataset permissions is created within 3-5 days from the date of approval. Users will be sent an email with their login details **(please check your email junk/trash folder in case the email has been redirected).**
 
-If you do not receive an email from the EGA after 5 business days, or if you experience downloading issues, please [contact the EGA helpdesk](mailto:ega-helpdesk@ebi.ac.uk) for technical assistance.
+If you do not receive an email from the EGA after 5 business days, or if you experience downloading issues, please [contact the EGA helpdesk](mailto:helpdesk@ega-archive.org) for technical assistance.
 
 16. **I am having issues downloading controlled data from the ICGC Data Portals. Who can I contact?**
 
@@ -125,7 +125,7 @@ DCC Contact Information: [Contact DCC](mailto:dcc-support@icgc.org) <br />
 
 EGA Platform: [ega-archive.org](https://ega-archive.org/) <br />
 Documentation: [Guide to Data Access](https://ega-archive.org/access/data-access) <br />
-EGA Contact Information: [Contact EGA](mailto:ega-helpdesk@ebi.ac.uk)
+EGA Contact Information: [Contact EGA](mailto:helpdesk@ega-archive.org)
 
 17. **The Principal Investigator of our project or Institutional Representative has changed. How do we update this?**
 

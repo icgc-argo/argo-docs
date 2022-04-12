@@ -9,8 +9,6 @@ platform_key: DOCS_APPROVAL
 
 The Data Access Compliance Office (DACO) will receive an email notifying them that your application has been submitted. During the review period, your online application will be locked and uneditable.
 
-Once submitted to the ICGC DACO, you will be **notified within 10 business days** concerning the status of your application.
-
 ![DACO Review Process with possible outcomes](/assets/data-access/daco-approval-diagram.png)
 
 ### Application Progress Stages after DACO Review
@@ -27,11 +25,11 @@ If the ICGC DACO approves your application, access to ICGC Controlled Data will 
 
 The Applicant/PI and all Collaborators will receive an email notifying them that they have been granted access and the Google email addresses provided will become associated with accounts to access the ICGC datasets. The Applicant and Collaborators will also receive an email from EGA about setting up an account to access controlled data on the [EGA website](https://ega-archive.org).
 
-> **Please note** that access to ICGC Controlled Data remains conditional upon respecting the terms and conditions of the Data Access Agreement, particularly regarding (but not limited to) the publication moratorium and re-identification of project donors. An annual agreement must be made by the applicant and a bi-annual renewal must be completed in order to access/use controlled data beyond that two-year time period.
+> **Please note** that access to ICGC Controlled Data remains conditional upon respecting the terms and conditions of the Data Access Agreement. An annual agreement must be made by the applicant and a bi-annual renewal must be completed in order to access/use controlled data beyond that two-year time period.
 
 **Next Steps:**
 
-A copy of the application, signed by the Data Access Officer, will be available for your records within 5 business days of approval. Download the document using the **Approved PDF** button in the top header of your application.
+A copy of the application, signed by the Data Access Officer, will be available for your records. Download the document using the **Approved PDF** button in the top header of your application.
 
 You can now access ICGC Controlled Data in the following data portals:
 
@@ -59,7 +57,7 @@ The following is what an approved application will look like, with Sections C an
 
 ![DACO application showing the approved state](/assets/data-access/daco-approved-application.png)
 
-## Revisions Requested
+## Requested Revisions
 
 If the ICGC DACO requires specific criteria to be met before being able to approve the application, they will request revisions from the project team. If this is the case, you will receive an email outlining the sections that require revisions along with specific details that need to be provided.
 
