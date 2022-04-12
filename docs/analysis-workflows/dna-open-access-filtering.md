@@ -26,7 +26,7 @@ It was reported by [Elena Rojano, et al.](https://doi.org/10.1093/bib/bby039) th
 
 We want to make as many somatic variants as possible publicly accessible to the research community, with minimum risk of potential germline leaks. Therefore, after evaluating the potential risks of possible germline leakage, we have taken the various genomic elements according to the latest version of GENCODE annotations (e.g., v38), and have defined the open access regions to include the genomic regions of highest interest. For details about the definition of open access genomic regions, please refer to [Open-access Regions](https://github.com/icgc-argo/open-access-regions).
 
-**Note**: In order to minimize the risk of germline leaks, all the variants which are not in open access genomic regions are filtered out. If omission of true-positive somatic variants is a concern, we strongly recommend you to apply for the [DACO access to controlled data](/docs/data-access/data-access).
+**Note**: In order to minimize the risk of germline leaks, all the variants which are not in open access genomic regions are filtered out. If omission of true-positive somatic variants is a concern, we strongly recommend you to apply for the [DACO access to controlled data](/docs/data-access/daco/applying).
 
 ## Inputs
 
