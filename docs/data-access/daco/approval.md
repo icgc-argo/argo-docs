@@ -21,7 +21,7 @@ The Data Access Compliance Office (DACO) will receive an email notifying them th
 
 ## Approval for Controlled Data Access
 
-If the ICGC DACO approves your application, access to ICGC Controlled Data will be granted for a **two year period** starting from the date of approval for access. **Note, it may take up to 24 hours for authorization to take effect.**
+If the ICGC DACO approves your application, access to ICGC Controlled Data will be granted for a **two year period** starting from the date of approval for access.
 
 The Applicant/PI and all Collaborators will receive an email notifying them that they have been granted access and the Google email addresses provided will become associated with accounts to access the ICGC datasets. The Applicant and Collaborators will also receive an email from EGA about setting up an account to access controlled data on the [EGA website](https://ega-archive.org).
 
@@ -33,8 +33,8 @@ A copy of the application, signed by the Data Access Officer, will be available 
 
 You can now access ICGC Controlled Data in the following data portals:
 
-- [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) - For more information, consult the [Accessing and Downloading Data documentation](/docs/data-access/data-download)
-- [ICGC 25K Data Portal](https://dcc.icgc.org/) - For more information, consult the [ICGC 25K Data Download documentation](https://docs.icgc.org/download/downloading-data/.).
+- [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) - If you have never logged in to the ARGO Data Platform, [please log in to initialize your account](https://platform.icgc-argo.org/). Access to ICGC ARGO Controlled Data will be authorized **within 24 hours after your account is initialized**. For more information, consult the [Accessing and Downloading Data documentation](/docs/data-access/data-download)
+- [ICGC 25K Data Portal](https://dcc.icgc.org/) - Access to ICGC 25K Controlled Data will be authorized **within 24 hours after DACO approval**. For more information, consult the [ICGC 25K Data Download documentation](https://docs.icgc.org/download/downloading-data/.).
 - [EGA Data Portal](https://ega-archive.org) - For more information, consult the Guide to Data Access: https://ega-archive.org/access/data-access .
 
 ### Editing an Approved Application

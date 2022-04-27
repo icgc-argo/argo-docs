@@ -103,7 +103,7 @@ Once submitted to the ICGC DACO, you will be notified within 10 business days co
 
 14. **Once my application is approved, how long will we have to wait for our access to be granted?**
 
-Once an application has been approved by the ICGC DACO, it could take up to 24 hours for the ICGC list of authorized users to be updated.
+Once an application has been approved by the ICGC DACO, it could take up to 24 hours for the ICGC list of authorized users to be updated. If you have never logged in to the ARGO Data Platform, [please log in to initialize your account](https://platform.icgc-argo.org/). Access to ICGC ARGO Controlled Data will be authorized within 24 hours after your account is initialized.
 
 15. **My application was approved by the ICGC DACO, but I did not receive my EGA credentials. Who can I contact?**
 
