@@ -6,7 +6,7 @@ sidebar_label: Optional Sidebar Title - Remove if same as title
 
 ## Docusaurus Style Links
 
-This is a link to [another document.](../data-access/data-access.md)  
+This is a link to [another document.](../data-access/daco/applying.md)  
 This is a link to an [external page.](http://www.example.com)
 
 ## Markdown Cheatsheet
