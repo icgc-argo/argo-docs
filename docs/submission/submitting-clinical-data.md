@@ -63,3 +63,48 @@ Uploaded data must be checked for accuracy against the data in the current submi
 1. If your data does not require approval by DCC, it will be submitted automatically.
 
 Once submitted, you will see the clinical data reflected on your [Program Dashboard](/docs/submission/submitted-data).
+
+## Submitting data in Surgery file
+
+#### How to indicate a donor who had Mastectomy surgery:
+
+- Submit 'treatment_type' = 'Surgery' and assign a unique submitter_treatment_id ('Tr-1' in this example):
+
+Treatment File
+![Treatment_Example1](/assets/submission/treatment_ex1.png)
+
+- Submit 'surgery_type' = 'Mastectomy' for the same submitter_treatment_id submitted in the Treatment file ('Tr-1), and indicate relevant details about surgery:
+
+Surgery File
+![Surgery Example1](/assets/submission/surgery_ex1.png)
+
+#### How to indicate a donor who had two surgeries at two different times.
+
+- Submit 'treatment_type' = 'Surgery' and assign a unique submitter_treatment_id to each surgery treatment event ('Tr-1' and 'Tr-2' in this example). Indicate treatment_start_interval and treatment_duration for each surgery treatment event.
+
+Treatment File
+![Treatment_Example2](/assets/submission/treatment_ex2.png)
+
+- Submit each surgery as two separate rows in the Surgery file (one for each submitter_treatment_id submitted in the Treatment file). Indicate relevant details about surgery.
+
+Surgery File
+![Surgery Example2](/assets/submission/surgery_ex2.png)
+
+#### How to indicate a specimen that was resected during a donor's mastectomy surgical procedure.
+
+- Indicate the unique identifier of the submitter_specimen_id ('Sp-32' in this example) that was resected during the mastectomy surgery. The submitter_specimen_id must exist in the Specimen file. You do not need to submit 'surgery_site' or 'surgery_location' since this information is collected in the Specimen table for that submitter_specimen_id.
+
+Surgery File
+![Surgery Example3](/assets/submission/surgery_ex3.png)
+
+#### How to indicate two specimens that were resected during a donor's mastectomy surgery.
+
+- Submit 'treatment_type' = 'Surgery' and assign a unique submitter_treatment_id ('Tr-3' in this example)
+
+Treatment File
+![Treatment_Multiple Specimens Resected](/assets/submission/treatment_ex4.png)
+
+- Indicate the unique identifier of each submitter_specimen_id in two separate rows in the Surgery file ('Sp-32' and 'Sp-34' in this example). Since these specimens were resected during the same surgical procedure, the submitter_treatment_id ('Tr-3' submitted in the Treatment file) and surgery_type fields ('Mastectomy') should have the same value for both rows. You do not need to submit surgery_site or surgery_location if submitter_specimen_id is submitted, since this information is collected in the Specimen table, but you can indicate other relevant details about each specimen in the other fields (ex. margins).
+
+Surgery File
+![Surgery_Multiple Specimens Resected](/assets/submission/surgery_ex4.png)
