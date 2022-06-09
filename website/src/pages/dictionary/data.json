@@ -485,6 +485,7 @@
                 "Intrauterine device",
                 "Never used hormonal contraception",
                 "Not applicable",
+                "Oral contraceptive pill",
                 "Other",
                 "Progestin-only pill",
                 "Unknown",
@@ -874,7 +875,7 @@
           },
           {
             "name": "specimen_laterality",
-            "description": "For cancer in a paired organ, indicate the side on which the specimen was obtained. (Reference caDSR 2007875)",
+            "description": "For cancer in a paired organ, indicate the side on which the specimen was obtained. (Reference caDSR CDE ID 2007875)",
             "valueType": "string",
             "restrictions": { "codeList": ["Left", "Not applicable", "Right", "Unknown"] },
             "meta": { "displayName": "Specimen Laterality" }
@@ -923,7 +924,7 @@
           },
           {
             "name": "reference_pathology_confirmed",
-            "description": "Indicate whether the pathological diagnosis was confirmed by a (central) reference pathologist.",
+            "description": "Indicate whether the pathological diagnosis was confirmed by a (central) reference pathologist. (Reference caDSR CDE ID 2007007)",
             "valueType": "string",
             "meta": {
               "validationDependency": true,
@@ -1141,7 +1142,7 @@
           },
           {
             "name": "laterality",
-            "description": "For cancer in a paired organ, indicate the side of the body on which the primary tumour or cancer first developed at the time of primary diagnosis. (Reference caDSR 827)",
+            "description": "For cancer in a paired organ, indicate the side of the body on which the primary tumour or cancer first developed at the time of primary diagnosis. (Reference caDSR CDE ID 827)",
             "valueType": "string",
             "restrictions": {
               "codeList": [
@@ -5153,16 +5154,17 @@
         ]
       }
     ],
-    "_id": "62a1155ee1001c00310a9127",
+    "_id": "62a245e4e1001c00310a916b",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "116.1",
-    "createdAt": "2022-06-08T21:32:14.456Z",
-    "updatedAt": "2022-06-08T21:32:14.456Z",
+    "version": "117.0",
+    "createdAt": "2022-06-09T19:11:32.698Z",
+    "updatedAt": "2022-06-09T19:11:32.698Z",
     "__v": 0
   },
   "versions": [
+    { "version": "117.0", "date": "2022-06-09T19:11:32.698Z" },
     { "version": "116.1", "date": "2022-06-08T21:32:14.456Z" },
     { "version": "114.8", "date": "2021-11-12T21:58:25.356Z" }
   ],
-  "currentVersion": { "version": "116.1", "date": "2022-06-08T21:32:14.456Z" }
+  "currentVersion": { "version": "117.0", "date": "2022-06-09T19:11:32.698Z" }
 }

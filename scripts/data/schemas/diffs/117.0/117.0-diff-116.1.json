@@ -1,0 +1,74 @@
+{
+  "schemas": {
+    "donor": {
+      "updated": {
+        "contraception_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Combination pill",
+                "Contraceptive implant",
+                "Contraceptive patch",
+                "Injectable",
+                "Intrauterine device",
+                "Never used hormonal contraception",
+                "Not applicable",
+                "Oral contraceptive pill",
+                "Other",
+                "Progestin-only pill",
+                "Unknown",
+                "Vaginal ring"
+              ],
+              "right": [
+                "Combination pill",
+                "Contraceptive implant",
+                "Contraceptive patch",
+                "Injectable",
+                "Intrauterine device",
+                "Never used hormonal contraception",
+                "Not applicable",
+                "Other",
+                "Progestin-only pill",
+                "Unknown",
+                "Vaginal ring"
+              ],
+              "data": { "added": [], "deleted": ["Oral contraceptive pill"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "specimen": {
+      "updated": {
+        "specimen_laterality": {
+          "description": {
+            "left": "For cancer in a paired organ, indicate the side on which the specimen was obtained. (Reference caDSR CDE ID 2007875)",
+            "right": "For cancer in a paired organ, indicate the side on which the specimen was obtained. (Reference caDSR 2007875)"
+          }
+        },
+        "reference_pathology_confirmed": {
+          "description": {
+            "left": "Indicate whether the pathological diagnosis was confirmed by a (central) reference pathologist. (Reference caDSR CDE ID 2007007)",
+            "right": "Indicate whether the pathological diagnosis was confirmed by a (central) reference pathologist."
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "primary_diagnosis": {
+      "updated": {
+        "laterality": {
+          "description": {
+            "left": "For cancer in a paired organ, indicate the side of the body on which the primary tumour or cancer first developed at the time of primary diagnosis. (Reference caDSR CDE ID 827)",
+            "right": "For cancer in a paired organ, indicate the side of the body on which the primary tumour or cancer first developed at the time of primary diagnosis. (Reference caDSR 827)"
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}
