@@ -64,7 +64,7 @@ Uploaded data must be checked for accuracy against the data in the current submi
 
 Once submitted, you will see the clinical data reflected on your [Program Dashboard](/docs/submission/submitted-data).
 
-## Submitting Data in Surgery file
+## Submitting Data in Surgery File
 
 #### How to indicate a donor who had Mastectomy surgery:
 
