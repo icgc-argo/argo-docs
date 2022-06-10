@@ -64,7 +64,7 @@ Uploaded data must be checked for accuracy against the data in the current submi
 
 Once submitted, you will see the clinical data reflected on your [Program Dashboard](/docs/submission/submitted-data).
 
-## Submitting data in Surgery file
+## Submitting Data in Surgery file
 
 #### How to indicate a donor who had Mastectomy surgery:
 
@@ -73,7 +73,7 @@ Once submitted, you will see the clinical data reflected on your [Program Dashbo
 Treatment File
 ![Treatment_Example1](/assets/submission/treatment_ex1.png)
 
-- Submit 'surgery_type' = 'Mastectomy' for the same submitter_treatment_id submitted in the Treatment file ('Tr-1), and indicate relevant details about surgery:
+- Submit 'surgery_type' = 'Mastectomy' for the same submitter_treatment_id submitted in the Treatment file ('Tr-1), and indicate relevant details about the surgery:
 
 Surgery File
 ![Surgery Example1](/assets/submission/surgery_ex1.png)
@@ -85,7 +85,7 @@ Surgery File
 Treatment File
 ![Treatment_Example2](/assets/submission/treatment_ex2.png)
 
-- Submit each surgery as two separate rows in the Surgery file (one for each submitter_treatment_id submitted in the Treatment file). Indicate relevant details about surgery.
+- Submit each surgery as two separate rows in the Surgery file (one for each submitter_treatment_id submitted in the Treatment file). Indicate relevant details about each surgery.
 
 Surgery File
 ![Surgery Example2](/assets/submission/surgery_ex2.png)
