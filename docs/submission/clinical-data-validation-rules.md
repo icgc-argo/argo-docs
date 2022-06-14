@@ -49,6 +49,16 @@ Examples of time interval validation checks:
 
 Since the occurrence of individuals over the age of 90 is rare, it is therefore considered a potentially identifiable value. Thus, the allowed value for the `age_at_diagnosis` field is capped at 90.
 
+### Submitting Missing Values for Extended Clinical Fields
+
+If reporting missing values is required for extended fields, data submitters must use the appropriate term, as defined below:
+
+| Term                          | Definition                                                                                                                                                                                                        | Example                                                                                                                                                                                                             |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unknown                       | A value that would be meaningful for analysis if observed, but is not available.                                                                                                                                  | The ER status is relevant for breast cancer, but the value cannot be found in the patient's medical record. (`er_status`: `Unknown`)                                                                                |
+| Not applicable                | The determination of the value is not relevant in the current context. (Reference NCIt [C48660](https://ncithesaurus.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=C48660))      | Clinical data regarding tobacco smoking status is not relevant for pediatric cancers. (ie. `tobacco_smoking_status`: `Not applicable`)                                                                              |
+| Cannot be assessed/determined | Aspects of the context prevent the evaluation needed to determine a value. (Reference NCIt [C48657](https://ncithesaurus.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&ns=ncit&code=C48657)) | Lymph nodes cannot be assessed for metastases because the lymph nodes were previously removed, or surgery is not possible because the patient is too frail. (`lymph_nodes_examined_status`: `Cannot be determined`) |
+
 ## Cross Field Validations
 
 A number of cross-field consistency checks within files are implemented to ensure quality control and data correctness. This requires the value of another field to validate the current field. The cross-field validation checks are implemented using Javascript. For the advanced user, you will be able to see the actual cross-field validation scripts in the Dictionary Viewer by clicking on the `View Script` buttons in the notes column. Examples include:
