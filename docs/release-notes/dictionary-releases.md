@@ -22,7 +22,7 @@ None to report.
 
 ## Release 1.14
 
-**Release Date: June 9, 2022**
+**Release Date: June 16, 2022**
 
 #### Updates
 
