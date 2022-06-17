@@ -6,7 +6,7 @@ COPY . .
 
 # Set env variables here (none to worry about today)
 
-RUN cd website && npm ci && npm run build
+RUN cd website && npm ci --legacy-peer-deps && npm run build
 
 FROM nginx:alpine
 

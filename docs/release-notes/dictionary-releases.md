@@ -20,6 +20,22 @@ None to report.
 
 ------>
 
+## Release 1.14
+
+**Release Date: June 16, 2022**
+
+#### Updates
+
+A new clinical table has been added to the dictionary along with the file template download for submission:
+
+1. **Surgery**: The collection of data elements related to a donor's surgical treatment at a specific point in the clinical record. For treatment regimens that include surgery, these details can now be submitted in this table. Refer to [Submitting data in Surgery file](/docs/submission/submitting-clinical-data#submitting-data-in-surgery-file) documentation for guidelines on how to submit clinical data in this table.
+
+The following updates are also included:
+
+- Addition of 'Unknown' and 'Not applicable' terms to controlled terminology for extended clinical fields. Refer to [Submitting Missing Values for Extended Clinical Fields](/docs/submission/clinical-data-validation-rules#submitting-missing-values-for-extended-clinical-fields) documentation on how to submit these values.
+- Added new term ("Oral contraceptive pill") to controlled terminology for contraception_type field.
+- Corrected Data Tier for family_relative_id to 'ID'.
+
 ## Release 1.13
 
 **Release Date: November 17, 2021**
