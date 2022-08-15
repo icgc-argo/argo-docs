@@ -35,6 +35,7 @@ const useAlgolia = (inputRef, options = {}) => {
     } else {
       docsearch({
         // debug: true,
+        appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_API_KEY,
         indexName: process.env.ALGOLIA_INDEX,
         inputSelector: `#${inputRef.current.id}`,
