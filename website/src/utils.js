@@ -26,5 +26,14 @@ export const getLatestVersion = () =>
     .map((schema) => schema.version)
     .slice(-1)[0];
 
+export const getEnvironment = () => ({
+  IS_SEARCH_ENABLED: process.env.IS_SEARCH_ENABLED === 'true',
+  ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
+  ALGOLIA_INDEX: process.env.ALGOLIA_INDEX,
+  ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
+});
+
+const { IS_SEARCH_ENABLED, ALGOLIA_API_KEY, ALGOLIA_INDEX, ALGOLIA_APP_ID } = getEnvironment();
+
 export const isSearchAvailable =
-  !process.env.ALGOLIA_API_KEY || !process.env.ALGOLIA_INDEX ? false : true;
+  IS_SEARCH_ENABLED && ALGOLIA_API_KEY && ALGOLIA_INDEX && ALGOLIA_APP_ID;
