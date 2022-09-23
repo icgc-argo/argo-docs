@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.15
+
+**Release Date: September 23, 2022**
+
+#### Updates
+
+- Added four new terms ('Hemithyroidectomy', 'Near-total thyroidectomy', 'Subtotal thyroidectomy' and 'Total thyroidectomy') to the controlled terminology for the `surgery_type` field in the Surgery table.
+
 ## Release 1.14
 
 **Release Date: June 16, 2022**
