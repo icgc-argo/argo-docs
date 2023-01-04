@@ -59,7 +59,7 @@
     "prettier": "^2.1.2",
     "pretty-quick": "^3.1.0",
     "react-is": "^16.13.1",
-    "svg-inline-loader": "^0.8.0",
+    "svg-inline-loader": "^0.8.2",
     "ts-node": "^10.3.0",
     "@docusaurus/module-type-aliases": "2.0.0-beta.8",
     "@tsconfig/docusaurus": "^1.0.4",
