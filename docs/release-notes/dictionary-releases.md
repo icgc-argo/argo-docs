@@ -20,6 +20,25 @@ None to report.
 
 ------>
 
+## Release 1.16
+
+**Release Date: January 5, 2023**
+
+#### Updates
+
+- Added new term `Unknown primary site` to the controlled terminology for the `primary_site` field in the Donor table.
+- Added 6 new terms (`Supportive`, `Diagnostic`, `Preventative`, `Guidance`, `Screening`, `Forensic`) to the controlled terminology for the `treatment_intent` field in the Treatment table.
+- Added 8 new terms (`Conditioning`, `Induction`, `Locally advanced`, `Maintenance`, `Mobilization`, `Preventative`, `Radiosensitization`, `Salvage`) to the controlled terminology for the `treatment_setting` field in the Treatment table. The term `Not applicable` was removed. If required, programs will need to apply for a clinical exception.
+- Removed `Unknown` from `is_primary_treatment` field. If required, programs will need to apply for a clinical exception.
+- Added a new required `response_to_treatment_criteria_method` field in the Treatment table. This field consists of a list of response criteria methods, in addition to RECIST.
+- Added new terms for response criteria in the `response_to_treatment` field in the Treatment table. The value submitted in this field will be validated against the `response_to_treatment_criteria_method` field to ensure the correct response criteria term is submitted.
+- Added a new required `lymph_nodes_examined_method` field in the Primary Diagnosis table.
+- Updated validation to permit the `pathological_m_category` field in the Specimen table to be submitted as "Not applicable" if AJCC 7th or 8th editions used.
+- Changed data tier for the `recurrence_tumour_staging_system` field in the Follow Up table so it is no longer a core field.
+- Updated foreignKey attribute for ID fields in the Specimen, Treatment, Follow up and Biomarker tables.
+- Added new `prescribed_cumulative_drug_dose` field and renamed existing `cumulative_drug_dose` field to `actual_cumulative_drug_dose` in the Chemotherapy and Hormone Therapy tables. Added new fields for `prescribed_cumulative_drug_dose` and `actual_cumulative_drug_dose` in the Immunotherapy table. Either field can be submitted. Replaced `dosage` with `dose` for consistency purposes.
+- Corrected term `Revised International staging system (RISS)` in the tumour_staging_system fields to `R-ISS` instead of `RISS`.
+
 ## Release 1.15
 
 **Release Date: September 23, 2022**
