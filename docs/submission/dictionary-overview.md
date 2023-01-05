@@ -301,3 +301,77 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 894). 
 
 References: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 751). American College of Surgeons.
 [http://pathology.jhu.edu/ProstateCancer/NewGradingSystem.pdf](http://pathology.jhu.edu/ProstateCancer/NewGradingSystem.pdf)
+
+## Response to Treatment Criteria
+
+### RECIST
+
+| Response to Treatment        |
+| ---------------------------- |
+| Complete response            |
+| No evidence of disease (NED) |
+| Partial response             |
+| Progressive disease          |
+| Stable disease               |
+
+Reference: https://recist.eortc.org/recist-1-1-2/
+
+### iRECIST
+
+| Response to Treatment                         |
+| --------------------------------------------- |
+| Immune complete response (iCR)                |
+| Immune confirmed progressive disease (iCPD)   |
+| Immune partial response (iPR)                 |
+| Immune stable disease (iSD)                   |
+| Immune unconfirmed progressive disease (iUPD) |
+
+Reference: https://recist.eortc.org/irecist/
+
+### IWG Cheson AML 2003 Oncology Response Criteria
+
+| Response to Treatment                                                     |
+| ------------------------------------------------------------------------- |
+| Cytogenetic complete remission (CRc)                                      |
+| Molecular complete remission (CRm)                                        |
+| Morphologic complete remission                                            |
+| Morphologic complete remission with incomplete blood count recovery (CRi) |
+| Morphologic leukemia-free state                                           |
+| Partial remission                                                         |
+
+Reference: https://doi.org/10.1200/jco.2003.04.036
+
+### Response Assessment in Neuro-Oncology (RANO)
+
+| Response to Treatment |
+| --------------------- |
+| Complete response     |
+| Minor response        |
+| Partial response      |
+| Progressive disease   |
+| Stable disease        |
+
+Reference: https://doi.org/10.1200/jco.2009.26.3541 and https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6499019/
+
+### ELN Dohner AML 2017 Oncology Response Criteria
+
+| Response to Treatment                                         |
+| ------------------------------------------------------------- |
+| Complete remission                                            |
+| Complete remission with incomplete hematologic recovery (CRi) |
+| Complete remission without minimal residual disease (CRMRD-)  |
+| Hematologic relapse (after CRMRD-, CR, CRi)                   |
+| Molecular relapse (after CRMRD-)                              |
+| Partial remission                                             |
+| Progressive disease                                           |
+| Stable disease                                                |
+
+Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5291965/
+
+### Physician Assessed Response Criteria
+
+| Response to Treatment                |
+| ------------------------------------ |
+| Physician assessed complete response |
+| Physician assessed partial response  |
+| Physician assessed stable disease    |
