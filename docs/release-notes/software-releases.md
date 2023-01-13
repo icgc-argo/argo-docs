@@ -19,6 +19,34 @@ None to report.
 None to report.
 ------>
 
+## January 19, 2023: Submitted Data Page and RNA Seq Data View
+
+Data Platform - v1.115.2 API v3.37.1
+
+#### New Features
+
+A new Submitted Data Page has been released that shows submitted clinical data. This page is accessible from the My Programs by clicking on the Submitted Data. This Page includes:
+
+- Detailed views of all submitted clinical data categorized by clinical entities.
+- Each data table includes a Clinical Core Completion section and a Submitted Data section. The Clinical Core Completion section indicates the donor core complete status, and the Submitted Data section displays all submitted data.
+- Download options: users can now download all or selected clinical data by clicking on the CLINICAL DATA button. Users can also download specific clinical data by clicking on the download button located on the top right corner of each data table. For example, users can download Donor data only.
+- Quick filters that let users filter submitted clinical data.
+- List filter that lets users filter submitted clinical data by a comma separated list of donor or submitter donor IDs.
+
+A new RNA-SEQ table has been released in the Dashboard. This table is accessible from the Program Dashboard by clicking on the RNA-SEQ tab. The table includes:
+
+- A Registered Samples column that displays the number of registered tumour and normal RNA samples.
+- A Raw Reads column that displays the number of submitted tumour and normal RNA raw reads.
+- An Alignment column that displays the number of RNA SEQ Alignment workflow categorized by workflow status.
+- An Alerts column that signals any errors in the submitted clinical data that need to be updated.
+- A Last Updated column that displays the most recent date that the RNA data is updated.
+
+New filters have been released in the Dashboard - DNA SEQ table. Users can now filter DNA Registered Samples and Raw Reads by more granular criteria.
+
+#### Bug Fixes
+
+- Some Program Dashboard bugs have been fixed allowing the correct DNA pipeline data to be reported on the molecular summary chart and the donor summary table.
+
 ## February 7, 2022: File Entity Page and Open Access Variant Filtering​
 
 Data Platform - 1.105.3 - API 3.28.2
