@@ -40,7 +40,7 @@ New filters have been released in the Dashboard - DNA SEQ table. Users can now f
 - The UI global loader has been improved so that it works consistently on all pages.
 - Some Program Dashboard bugs have been fixed allowing the correct DNA pipeline data to be reported on the molecular summary chart and the donor summary table.
 
-## Aug. 17, 2022
+## Aug 17, 2022
 
 Data Platform - 1.110.1 - API 3.34.1
 
@@ -48,7 +48,7 @@ Data Platform - 1.110.1 - API 3.34.1
 
 - Due to the complex nature of Surgery clinical table validation rules, we have updated and enhanced clinical validation error messages in Surgery tables to further assist data submission.
 
-## July.1, 2022
+## July 1, 2022
 
 Data Platform - 1.110.1 - API 3.32.1
 
