@@ -3,7 +3,7 @@ id: software-releases
 title: Software Releases
 ---
 
-An ARGO software release is a set of new features and bug fixes for the ARGO Data Platform. Software releases happen approximately every month.
+An ARGO software release is a set of new features and bug fixes for the ARGO Data Platform. The release notes here describe the major releases. We also release minor fixes and enhancements approximately once a month.
 
 <!---
 ## Software Release 2.0
@@ -18,6 +18,51 @@ None to report.
 
 None to report.
 ------>
+
+## January 30, 2023: RNA Seq Data View
+
+Data Platform - 1.119.1 - API 3.38.1
+
+#### New Features
+
+A new RNA-SEQ table has been released in the Dashboard. This table is accessible from the Program Dashboard by clicking on the RNA-SEQ tab. The table includes:
+
+- A Registered Samples column that displays the number of registered tumour and normal RNA samples.
+- A Raw Reads column that displays the number of submitted tumour and normal RNA raw reads.
+- An Alignment column that displays the number of RNA SEQ Alignment workflow categorized by workflow status.
+- An Alerts column that signals any errors in the submitted clinical data that need to be updated.
+- A Last Updated column that displays the most recent date that the RNA data is updated.
+
+New filters have been released in the Dashboard - DNA SEQ table. Users can now filter DNA Registered Samples and Raw Reads by more granular criteria.
+
+#### Bug Fixes
+
+- The UI global loader has been improved so that it works consistently on all pages.
+- Some Program Dashboard bugs have been fixed allowing the correct DNA pipeline data to be reported on the molecular summary chart and the donor summary table.
+
+## Aug. 17, 2022
+
+Data Platform - 1.110.1 - API 3.34.1
+
+#### New Features
+
+- Due to the complex nature of Surgery clinical table validation rules, we have updated and enhanced clinical validation error messages in Surgery tables to further assist data submission.
+
+## July.1, 2022
+
+Data Platform - 1.110.1 - API 3.32.1
+
+#### New Features​
+
+- Data submitters can now submit supplemental surgery data for donors that have this specified treatment in the new Surgery clinical table.
+  - The Surgery table is a collection of data elements related to a donor's surgical treatment at a specific point in the clinical record.
+  - To submit a Surgery file, simply go to the Submit Clinical Data page and upload a Surgey.tsv file.
+  - To submit multiple surgeries, submit multiple rows in the Surgery file.
+  - If a specimen was resected during surgery, indicate the unique identifier of the specimen in the 'submitter_specimen_id' field. If multiple specimens were resected during a single surgical procedure, submit each 'submitter_specimen_id' as a new row with the same 'submitter_treatment_id' and 'surgery_type' values.
+
+#### Enhancement
+
+- The Genome Build property on the file entity page is now updated to ‘GRCh38DH’. The link is also updated to the specific versions of reference genomes used in the process.
 
 ## February 7, 2022: File Entity Page and Open Access Variant Filtering​
 
