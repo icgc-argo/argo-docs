@@ -3,7 +3,7 @@ id: software-releases
 title: Software Releases
 ---
 
-An ARGO software release is a set of new features and bug fixes for the ARGO Data Platform. Software releases happen approximately every month.
+An ARGO software release is a set of new features and bug fixes for the ARGO Data Platform. The release notes here describe the major releases. We also release minor fixes and enhancements approximately once a month.
 
 <!---
 ## Software Release 2.0
@@ -19,19 +19,11 @@ None to report.
 None to report.
 ------>
 
-## January 19, 2023: Submitted Data Page and RNA Seq Data View
+## January 30, 2023: RNA Seq Data View
 
-Data Platform - v1.115.2 API v3.37.1
+Data Platform - 1.119.1 - API 3.38.1
 
 #### New Features
-
-A new Submitted Data Page has been released that shows submitted clinical data. This page is accessible from the My Programs by clicking on the Submitted Data. This Page includes:
-
-- Detailed views of all submitted clinical data categorized by clinical entities.
-- Each data table includes a Clinical Core Completion section and a Submitted Data section. The Clinical Core Completion section indicates the donor core complete status, and the Submitted Data section displays all submitted data.
-- Download options: users can now download all or selected clinical data by clicking on the CLINICAL DATA button. Users can also download specific clinical data by clicking on the download button located on the top right corner of each data table. For example, users can download Donor data only.
-- Quick filters that let users filter submitted clinical data.
-- List filter that lets users filter submitted clinical data by a comma separated list of donor or submitter donor IDs.
 
 A new RNA-SEQ table has been released in the Dashboard. This table is accessible from the Program Dashboard by clicking on the RNA-SEQ tab. The table includes:
 
@@ -45,7 +37,32 @@ New filters have been released in the Dashboard - DNA SEQ table. Users can now f
 
 #### Bug Fixes
 
+- The UI global loader has been improved so that it works consistently on all pages.
 - Some Program Dashboard bugs have been fixed allowing the correct DNA pipeline data to be reported on the molecular summary chart and the donor summary table.
+
+## Aug. 17, 2022
+
+Data Platform - 1.110.1 - API 3.34.1
+
+#### New Features
+
+- Due to the complex nature of Surgery clinical table validation rules, we have updated and enhanced clinical validation error messages in Surgery tables to further assist data submission.
+
+## July.1, 2022
+
+Data Platform - 1.110.1 - API 3.32.1
+
+#### New Features​
+
+- Data submitters can now submit supplemental surgery data for donors that have this specified treatment in the new Surgery clinical table.
+  - The Surgery table is a collection of data elements related to a donor's surgical treatment at a specific point in the clinical record.
+  - To submit a Surgery file, simply go to the Submit Clinical Data page and upload a Surgey.tsv file.
+  - To submit multiple surgeries, submit multiple rows in the Surgery file.
+  - If a specimen was resected during surgery, indicate the unique identifier of the specimen in the 'submitter_specimen_id' field. If multiple specimens were resected during a single surgical procedure, submit each 'submitter_specimen_id' as a new row with the same 'submitter_treatment_id' and 'surgery_type' values.
+
+#### Enhancement
+
+- The Genome Build property on the file entity page is now updated to ‘GRCh38DH’. The link is also updated to the specific versions of reference genomes used in the process.
 
 ## February 7, 2022: File Entity Page and Open Access Variant Filtering​
 
