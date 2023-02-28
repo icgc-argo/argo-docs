@@ -10,3 +10,16 @@ temp/
 .env
 
 ignore
+
+
+
+
+#updoc
+# dependencies
+./updoc/node_modules
+# next.js
+./updoc/.next/
+./updoc/out/
+# production
+./updoc/build
+updoc/.next/
