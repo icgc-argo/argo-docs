@@ -223,7 +223,7 @@ Run the score-client using the `download` command. Define your options:
 For example:
 
 ```shell
-bin/score-client download --objectid ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
+bin/score-client download --object-id ce86a332-407a-11eb-b378-0242ac130002 --output-dir ./output-directory-path
 ```
 
 You can also specify multiple object id's separated by spaces:
