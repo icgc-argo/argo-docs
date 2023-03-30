@@ -20,7 +20,7 @@ The ARGO Data Platform accepts raw sequencing data in both FASTQ and BAM (aligne
 ## Processing
 
 - [BWA-MEM (version 0.7.17-r1188)](https://github.com/lh3/bwa/archive/v0.7.17.tar.gz) is performed to map the reads to the reference genome for each read group.
-- [Biobambam (version 2.0.153)](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz) is used to merge all read group level mapped BAMs into sample level BAM and mark duplicates per library.
+- [Biobambam2 (version 2.0.153)](https://gitlab.com/german.tischler/biobambam2/-/archive/2.0.153-release-20200124123734/biobambam2-2.0.153-release-20200124123734.tar.gz) is used to merge all read group level mapped BAMs into sample level BAM and mark duplicates per library.
 - [Samtools:stats](http://www.htslib.org/doc/samtools-stats.html) is used to calculate Alignment QC metrics.
 - [Picard:CollectOxoGMetrics](https://gatk.broadinstitute.org/hc/en-us/articles/360040098852-CollectOxoGMetrics-Picard-) is used to calculate the `OxoQ` score for oxidative artifact assessment.
 
