@@ -35,6 +35,23 @@ The DNA-Sequencing (DNA-Seq) analysis pipeline identifies multiple types of soma
 
 In the future, these procedures will be extended to include:
 
+- Somatic Variant Calling
+- Germline Variant Calling
+- Consensus Variant Calling
 - Variant Masking
 - Variant Annotation
-- Consensus Calling
+
+## RNA-Sequencing Analysis Pipeline
+
+The RNA-Sequencing (RNA-Seq) analysis pipeline identifies gene expression patterns and differentially expressed genes between samples or conditions, and to gain insights into their biological functions and pathways. RNA-Seq analysis consists and will be extended to include:
+
+- [RNA-Seq Alignment](/docs/analysis-workflows/rna-alignment)
+- Expression Counting
+- Alternative Promoter
+- Alternative Splicing
+- RNA Variant Calling
+- Allele Specific Expression
+- RNA Editing
+- RNA Fusion
+
+![RNA-Seq-data-analysis](/assets/analysis-workflows/RNA-Seq-data-analysis.png)

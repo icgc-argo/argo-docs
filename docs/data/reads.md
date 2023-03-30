@@ -20,13 +20,15 @@ Raw reads submitted by ARGO member programs are used as inputs within the ARGO A
 
 ## Aligned Reads
 
-A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that only stores reads different from the reference sequence) format. ARGO reads are aligned to the [GRCh38 Human Reference Genome](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome).
+A read is a sequence obtained from a single sequencing experiment. An aligned read is a sequence that has been aligned to a common reference genome. Typically these reads can number from the hundreds of thousands to tens of millions. Aligned reads are generated internally by the ARGO alignment workflow(s) and maintained in CRAM (a compressed version of BAM that only stores reads different from the reference sequence) format. ARGO reads are aligned to the GRCh38 Human Reference Genome.
 
 #### File Types
 
-| Filename Pattern | Description                                                        | Analysis Type        | Data Category    | Generating Workflow(s) |
-| ---------------- | ------------------------------------------------------------------ | -------------------- | ---------------- | ---------------------- |
-| \*.aln.cram      | CRAM file format represents a compressed version of the alignment. | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
+| Filename Pattern         | Description                                                                                        | Analysis Type        | Data Category    | Generating Workflow(s) |
+| ------------------------ | -------------------------------------------------------------------------------------------------- | -------------------- | ---------------- | ---------------------- |
+| \*.aln.cram              | CRAM file format represents a compressed version of the DNA Seq alignment.                         | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
+| \*.genome_aln.cram       | CRAM file format represents a compressed version of the RNA Seq alignment in genome coordinates.   | sequencing_alignment | Sequencing Reads | RNA Seq Alignment      |
+| \*.transcriptome_aln.bam | BAM file format represents a compressed version of the RNA Seq alignment in trancript coordinates. | sequencing_alignment | Sequencing Reads | RNA Seq Alignment      |
 
 ## Aligned Reads Index
 
@@ -34,6 +36,7 @@ Secondary files that are external index files for CRAM format files. CRAI files 
 
 #### File Types
 
-| Filename Pattern | Description                                                 | Analysis Type        | Data Category    | Generating Workflow(s) |
-| ---------------- | ----------------------------------------------------------- | -------------------- | ---------------- | ---------------------- |
-| \*.aln.cram.crai | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
+| Filename Pattern        | Description                                                 | Analysis Type        | Data Category    | Generating Workflow(s) |
+| ----------------------- | ----------------------------------------------------------- | -------------------- | ---------------- | ---------------------- |
+| \*.aln.cram.crai        | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_alignment | Sequencing Reads | DNA Seq Alignment      |
+| \*.genome_aln.cram.crai | CRAM Index file format. Requires a corresponding CRAM file. | sequencing_alignment | Sequencing Reads | RNA Seq Alignment      |
