@@ -89,13 +89,24 @@ module.exports = {
             'analysis-workflows/dna-open-access-filtering',
           ],
         },
+        {
+          type: 'category',
+          label: 'RNA-Seq Analysis',
+          collapsed: false,
+          items: ['analysis-workflows/rna-alignment'],
+        },
       ],
     },
     {
       type: 'category',
       label: 'Data and File Types',
       collapsed: true,
-      items: ['data/reads', 'data/variant-calls', 'data/qc-metrics'],
+      items: [
+        'data/reads',
+        'data/variant-calls',
+        'data/qc-metrics',
+        'data/transcriptome-profiling',
+      ],
     },
     {
       type: 'category',
