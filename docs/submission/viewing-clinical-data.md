@@ -50,7 +50,7 @@ The donor data record displays the submitted `donor.tsv` file alongside a table 
 >
 > - Donor record (DO)
 > - Primary Diagnosis record (PD)
-> - All registered Normal DNA Sepcimen record (NS)
+> - All registered Normal DNA Specimen record (NS)
 > - All registered Tumour DNA Specimen record (TS)
 > - Treatment record (TR)
 > - Follow Up record (FO)
