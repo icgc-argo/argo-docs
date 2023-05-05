@@ -19,6 +19,18 @@ None to report.
 None to report.
 ------>
 
+## May 3, 2023: Submitted Data Page
+
+Data Platform - 1.122.5 - API 3.39.0
+
+#### New Features
+
+- The **Submitted Data** page is where you can review, query, and download clinical data submitted by your program. Submitted clinical data will be accessible from this page following sample registration and clinical data submission sign-off. Only program administrators, data submitters, and collaborators can access the program's submitted data page.
+
+  - The submitted data dashboard is accessed by clicking the "submitted data" tab on the left-hand menu. The dashboard has two main sections, the donor filter pane and the clinical data table pane.
+
+- Tooltips are available on the Dashboard - Completed Core Clinical Data and Molecular Data Summary charts. The tooltips will help users quickly understand the data they are viewing on the charts. By hovering over a specific data point, users can see the number of completed core clinical donors on the Completed Core Clinical Data chart, and the numbers of donors involved in the DNA and RNA Sequencing pipelines.
+
 ## January 30, 2023: RNA Seq Data View
 
 Data Platform - 1.119.1 - API 3.38.1
