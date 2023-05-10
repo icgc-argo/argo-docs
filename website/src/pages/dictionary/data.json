@@ -121,6 +121,7 @@
                 "Primary tumour - adjacent to normal",
                 "Primary tumour",
                 "Recurrent tumour",
+                "Tumour - unknown if derived from primary or metastatic",
                 "Xenograft - derived from primary tumour",
                 "Xenograft - derived from tumour cell line"
               ],
@@ -1018,6 +1019,20 @@
             "restrictions": { "range": { "min": 0, "max": 1 } }
           },
           {
+            "name": "percent_tumour_cells_measurement_method",
+            "description": "Indicate method used to measure percent_tumour_cells.",
+            "valueType": "string",
+            "meta": {
+              "core": true,
+              "dependsOn": "sample_registration.tumour_normal_designation",
+              "notes": "This field is only required if the specimen is a tumour.",
+              "displayName": "Percent Tumour Cells Measurement Method"
+            },
+            "restrictions": {
+              "codeList": ["Genomics", "Image analysis", "Pathology estimate by percent nuclei"]
+            }
+          },
+          {
             "name": "percent_proliferating_cells",
             "description": "Indicate a value, in decimals, that represents the count of proliferating cells determined during pathologic review of the specimen.",
             "valueType": "number",
@@ -1186,7 +1201,7 @@
             "valueType": "string",
             "restrictions": {
               "script": [
-                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      \n      if (!$field || $field === null || checkforEmpty($field)) {\n        if (lymphNodesExaminedStatus === 'yes') {\n          result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n        }\n      }\n      else {\n         if (notExamined.includes(lymphNodesExaminedStatus)) {\n           result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n         }\n      }\n    return result;\n})"
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
               ],
               "codeList": [
                 "Imaging",
@@ -3843,9 +3858,10 @@
             }
           },
           {
-            "description": "Indicate the ICD-O-3 topography code for the anatomic site where disease progression, relapse or recurrence occurred, according to the International Classification of Diseases for Oncology, 3rd Edition (WHO ICD-O-3). Refer to the ICD-O-3 manual for guidelines at https://apps.who.int/iris/handle/10665/42344.",
+            "description": "Indicate the ICD-O-3 topography code for the anatomic site(s) where disease progression, relapse or recurrence occurred, according to the International Classification of Diseases for Oncology, 3rd Edition (WHO ICD-O-3). Refer to the ICD-O-3 manual for guidelines at https://apps.who.int/iris/handle/10665/42344.",
             "name": "anatomic_site_progression_or_recurrence",
             "valueType": "string",
+            "isArray": true,
             "restrictions": {
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        \n        /* required field, cannot be null */\n        if ($row.disease_status_at_followup != null) {\n           const diseaseStatus = $row.disease_status_at_followup.trim().toLowerCase();\n           const stateOfProgression = (entry) => {return /(progression)$/.test(decodeURI(entry))}; \n           const relapseOrRecurrence = diseaseStatus === \"relapse or recurrence\";\n   \n           /* checks for a string just consisting of whitespace */\n           const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n           \n           if ($name === 'recurrence_tumour_staging_system') {\n             if (!(!$field || checkforEmpty($field)) && !stateOfProgression(diseaseStatus) && !relapseOrRecurrence) {\n              result = {valid: false, message: `'${$name}' should not be submitted if 'disease_status_at_followup' is not a state of progression, relapse, or recurrence.` }\n             }\n           }\n           else {\n             if ((!$field || checkforEmpty($field)) && (stateOfProgression(diseaseStatus) || relapseOrRecurrence)) {\n               result = {valid: false, message: `'${$name}' is a required field if 'disease_status_at_followup' is set a state of progression, relapse, or recurrence.` }\n             }\n             else if (!(!$field || checkforEmpty($field)) && !stateOfProgression(diseaseStatus) && !relapseOrRecurrence) {\n               result = {valid: false, message: `'${$name}' should not be submitted if 'disease_status_at_followup' is not a state of progression, relapse, or recurrence.` }\n             }\n           }\n        }\n        return  result;\n  })"
@@ -3856,8 +3872,8 @@
               "core": true,
               "dependsOn": "follow_up.disease_status_at_followup",
               "displayName": "Anatomic Site Progression or Recurrences",
-              "examples": "C50.1,C18",
-              "notes": "This field is required to be submitted if disease_status_at_followup indicates a state of progression, relapse, or recurrence."
+              "examples": "C50.1|C18",
+              "notes": "This field is required to be submitted if disease_status_at_followup indicates a state of progression, relapse, or recurrence.\nTo include multiple values, separate values with a pipe delimiter '|' within your file."
             }
           },
           {
@@ -5370,14 +5386,15 @@
         ]
       }
     ],
-    "_id": "63a4cd7bfa2d3f0031d0f69a",
+    "_id": "645bef33d6ccc60031fa68dc",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "1.16",
-    "createdAt": "2022-12-22T21:34:51.645Z",
-    "updatedAt": "2022-12-22T21:34:51.645Z",
+    "version": "1.17",
+    "createdAt": "2023-05-10T19:23:31.428Z",
+    "updatedAt": "2023-05-10T19:23:31.428Z",
     "__v": 0
   },
   "versions": [
+    { "version": "1.17", "date": "2023-05-10T19:23:31.428Z" },
     { "version": "1.16", "date": "2022-12-22T21:34:51.645Z" },
     { "version": "1.15", "date": "2022-09-23T20:14:56.970Z" },
     { "version": "1.14", "date": "2022-06-16T19:14:29.303Z" },
@@ -5403,5 +5420,5 @@
     { "version": "0.6", "date": "2020-03-27T20:53:14.913Z" },
     { "version": "0.5", "date": "2020-03-06T21:28:41.074Z" }
   ],
-  "currentVersion": { "version": "1.16", "date": "2022-12-22T21:34:51.645Z" }
+  "currentVersion": { "version": "1.17", "date": "2023-05-10T19:23:31.428Z" }
 }

@@ -1,0 +1,113 @@
+{
+  "schemas": {
+    "sample_registration": {
+      "updated": {
+        "specimen_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Cell line - derived from normal",
+                "Cell line - derived from tumour",
+                "Cell line - derived from xenograft tumour",
+                "Metastatic tumour - additional metastatic",
+                "Metastatic tumour - metastasis local to lymph node",
+                "Metastatic tumour - metastasis to distant location",
+                "Metastatic tumour",
+                "Normal - tissue adjacent to primary tumour",
+                "Normal",
+                "Primary tumour - additional new primary",
+                "Primary tumour - adjacent to normal",
+                "Primary tumour",
+                "Recurrent tumour",
+                "Tumour - unknown if derived from primary or metastatic",
+                "Xenograft - derived from primary tumour",
+                "Xenograft - derived from tumour cell line"
+              ],
+              "right": [
+                "Cell line - derived from normal",
+                "Cell line - derived from tumour",
+                "Cell line - derived from xenograft tumour",
+                "Metastatic tumour - additional metastatic",
+                "Metastatic tumour - metastasis local to lymph node",
+                "Metastatic tumour - metastasis to distant location",
+                "Metastatic tumour",
+                "Normal - tissue adjacent to primary tumour",
+                "Normal",
+                "Primary tumour - additional new primary",
+                "Primary tumour - adjacent to normal",
+                "Primary tumour",
+                "Recurrent tumour",
+                "Xenograft - derived from primary tumour",
+                "Xenograft - derived from tumour cell line"
+              ],
+              "data": {
+                "added": [],
+                "deleted": ["Tumour - unknown if derived from primary or metastatic"]
+              }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "specimen": {
+      "updated": {},
+      "created": {},
+      "deleted": {
+        "percent_tumour_cells_measurement_method": {
+          "changeType": "deleted",
+          "name": "percent_tumour_cells_measurement_method",
+          "description": "Indicate method used to measure percent_tumour_cells.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "dependsOn": "sample_registration.tumour_normal_designation",
+            "notes": "This field is only required if the specimen is a tumour.",
+            "displayName": "Percent Tumour Cells Measurement Method"
+          },
+          "restrictions": {
+            "codeList": ["Genomics", "Image analysis", "Pathology estimate by percent nuclei"]
+          }
+        }
+      }
+    },
+    "primary_diagnosis": {
+      "updated": {
+        "lymph_nodes_examined_method": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      \n      if (!$field || $field === null || checkforEmpty($field)) {\n        if (lymphNodesExaminedStatus === 'yes') {\n          result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n        }\n      }\n      else {\n         if (notExamined.includes(lymphNodesExaminedStatus)) {\n           result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n         }\n      }\n    return result;\n})"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "follow_up": {
+      "updated": {
+        "anatomic_site_progression_or_recurrence": {
+          "description": {
+            "left": "Indicate the ICD-O-3 topography code for the anatomic site(s) where disease progression, relapse or recurrence occurred, according to the International Classification of Diseases for Oncology, 3rd Edition (WHO ICD-O-3). Refer to the ICD-O-3 manual for guidelines at https://apps.who.int/iris/handle/10665/42344.",
+            "right": "Indicate the ICD-O-3 topography code for the anatomic site where disease progression, relapse or recurrence occurred, according to the International Classification of Diseases for Oncology, 3rd Edition (WHO ICD-O-3). Refer to the ICD-O-3 manual for guidelines at https://apps.who.int/iris/handle/10665/42344."
+          },
+          "meta": {
+            "examples": { "left": "C50.1|C18", "right": "C50.1,C18" },
+            "notes": {
+              "left": "This field is required to be submitted if disease_status_at_followup indicates a state of progression, relapse, or recurrence.\nTo include multiple values, separate values with a pipe delimiter '|' within your file.",
+              "right": "This field is required to be submitted if disease_status_at_followup indicates a state of progression, relapse, or recurrence."
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}
