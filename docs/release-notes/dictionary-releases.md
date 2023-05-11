@@ -20,6 +20,17 @@ None to report.
 
 ------>
 
+## Release 1.17
+
+**Release Date: May 11, 2023**
+
+#### Updates
+
+- Updated `anatomic_site_progression_or_recurrence` field in Follow Up table to accept multiple values.
+- Added new permissible term (`Tumour - unknown if derived from primary or metastatic`) to `specimen_type` field in Sample Registration table.
+- Added new required core field `percent_tumour_cells_measurement_method` in Specimen table.
+- Fixed minor bug in validation script for existing `lymph_nodes_examined_method` field in Primary Diagnosis table.
+
 ## Release 1.16
 
 **Release Date: January 5, 2023**
