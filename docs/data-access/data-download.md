@@ -234,7 +234,7 @@ bin/score-client download --object-id ddcdd044-adda-5f09-8849-27d6038f8ccd 5cc35
 
 ## BAM/CRAM Slicing
 
-The view command is a minimal version of [samtools](http://www.htslib.org/doc/samtools.html) view. You can view a “genomic slice” of the remote BAM file, freeing the user from having to download the entire file locally, saving bytes and time. For CRAM files, kindly refer to the file page on platform (e.g. https://platform.icgc-argo.org/file/FL37608) for your specific file and use the indicated genome build to get the reference file.
+The view command is a minimal version of [samtools](http://www.htslib.org/doc/samtools.html) view. You can view a “genomic slice” of the remote BAM file, freeing the user from having to download the entire file locally, saving bytes and time. For CRAM files, kindly refer to the file page on platform (e.g. https://platform.icgc-argo.org/file/FL38379) for your specific file and use the indicated genome build to get the reference file.
 
 The following example will download reads overlapping the region 1 - 10,000 on chromosome 1:
 
