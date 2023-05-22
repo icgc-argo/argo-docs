@@ -8,7 +8,7 @@ User documentation for the data model and data submission to CancerModels.org.
 
 ## Contents
 
-This docs site has been generated using [Docusaurus](https://docusaurus.io/) and built by referening to [ICGC-ARGO](https://github.com/icgc-argo/argo-docs).
+This docs site has been generated using [Docusaurus](https://docusaurus.io/) and built by referring to [ICGC-ARGO](https://github.com/icgc-argo/argo-docs).
 
 Documentation is written in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and can be found in [/docs](docs).
 
