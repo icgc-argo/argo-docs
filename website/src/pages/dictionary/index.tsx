@@ -223,11 +223,11 @@ function DictionaryPage() {
                   Data Dictionary
                 </Typography>
                 <Typography variant="paragraph" color="#000">
-                  The ICGC ARGO Data Dictionary expresses the details of the data model, which
-                  adheres to specific formats and restrictions to ensure a standard of data quality.
-                  The following describes the attributes and permissible values for all of the
-                  fields within the clinical tsv files for the{' '}
-                  <Link to={PLATFORM_UI_ROOT as string}>ARGO Data Platform.</Link>
+                  The CancerModels.org Data Dictionary expresses the details of the data model,
+                  which adheres to specific formats and restrictions to ensure a standard of data
+                  quality. The following describes the attributes and permissible values for all of
+                  the fields within the clinical tsv files for the{' '}
+                  <Link to={PLATFORM_UI_ROOT as string}>CancerModels.org platform.</Link>
                 </Typography>
               </div>
               <InfoBar>

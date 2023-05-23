@@ -1,117 +1,68 @@
 [
   [
-    "sample_registration.program_id",
+    "patient.patient_id",
     {
       "left": {
-        "name": "program_id",
+        "name": "patient_id",
         "valueType": "string",
-        "description": "Unique identifier of the ARGO program.",
+        "description": "Unique anonymous/de-identified ID for the patient from the provider.",
         "meta": {
-          "validationDependency": true,
           "primaryId": true,
           "examples": "TEST-CA",
-          "notes": "This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.",
-          "displayName": "Program ID"
+          "notes": "This is the unique id that is assigned to each patient.",
+          "displayName": "Patient ID"
         },
         "restrictions": {
           "required": true,
-          "script": [
-            "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-          ]
+          "regex": "#/charset/regex/URL_SAFE"
         }
       },
       "diff": {
         "type": "deleted",
         "data": {
-          "name": "program_id",
+          "name": "patient_id",
           "valueType": "string",
-          "description": "Unique identifier of the ARGO program.",
+          "description": "Unique anonymous/de-identified ID for the patient from the provider.",
           "meta": {
             "validationDependency": true,
             "primaryId": true,
             "examples": "TEST-CA",
-            "notes": "This is the unique id that is assigned to your program.  If you have logged into the platform, this is the Program Id that you see in the Program Services area. For example, TEST-CA is a Program ID.",
+            "notes": "This is the unique id that is assigned to each patient.",
             "displayName": "Program ID"
           },
           "restrictions": {
             "required": true,
-            "script": [
-              "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-            ]
+            "regex": "#/charset/regex/URL_SAFE"
           }
         }
       }
     }
   ],
   [
-    "sample_registration.submitter_donor_id",
+    "sample_registration.sex",
     {
       "left": {
-        "name": "submitter_donor_id",
+        "name": "sex",
         "valueType": "string",
-        "description": "Unique identifier of the donor, assigned by the data provider.",
+        "description": "Sex of the patient.",
         "meta": {
-          "validationDependency": true,
-          "primaryId": true,
-          "examples": "90234,BLD_donor_89,AML-90",
-          "displayName": "Submitter Donor ID",
-          "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "required": true,
-          "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "diff": {
-        "type": "deleted",
-        "data": {
-          "name": "submitter_donor_id",
-          "valueType": "string",
-          "description": "Unique identifier of the donor, assigned by the data provider.",
-          "meta": {
-            "validationDependency": true,
-            "primaryId": true,
-            "examples": "90234,BLD_donor_89,AML-90",
-            "displayName": "Submitter Donor ID",
-            "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-          },
-          "restrictions": {
-            "required": true,
-            "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.gender",
-    {
-      "left": {
-        "name": "gender",
-        "valueType": "string",
-        "description": "Description of the donor self-reported gender. Gender is described as the assemblage of properties that distinguish people on the basis of their societal roles.",
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Gender"
-        },
-        "restrictions": {
-          "required": true,
-          "codeList": ["Female", "Other"]
-        }
-      },
-      "right": {
-        "name": "gender",
-        "valueType": "string",
-        "description": "needs to be here ",
-        "meta": {
-          "validationDependency": true,
-          "primaryId": true,
-          "displayName": "Gender"
+          "displayName": "Sex"
         },
         "restrictions": {
           "required": false,
-          "codeList": ["Female", "Male"]
+          "codeList": ["female", "male", "other", "Not provided"]
+        }
+      },
+      "right": {
+        "name": "sex",
+        "valueType": "string",
+        "description": "Sex of the patient.",
+        "meta": {
+          "displayName": "Sex"
+        },
+        "restrictions": {
+          "required": true,
+          "codeList": ["female", "male", "other", "Not provided", "Not collected"]
         }
       },
       "diff": {
@@ -119,537 +70,17 @@
           "type": "updated",
           "data": "needs to be here "
         },
-        "meta": {
-          "core": {
-            "type": "deleted",
-            "data": true
-          },
-          "primaryId": {
-            "type": "created",
-            "data": true
-          }
-        },
         "restrictions": {
           "required": {
             "type": "updated",
-            "data": false
+            "data": true
           },
           "codeList": {
             "type": "updated",
             "data": {
-              "added": ["Male"],
-              "deleted": ["Other"]
+              "added": ["Not collected"]
             }
           }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.submitter_specimen_id",
-    {
-      "left": {
-        "name": "submitter_specimen_id",
-        "valueType": "string",
-        "description": "Unique identifier of the specimen, assigned by the data provider.",
-        "meta": {
-          "validationDependency": true,
-          "primaryId": true,
-          "examples": "LAML_PO,00445,THY_099-tumour",
-          "displayName": "Submitter Specimen ID",
-          "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "right": {
-        "name": "submitter_specimen_id",
-        "valueType": "string",
-        "description": "Unique identifier of the specimen, assigned by the data provider.",
-        "meta": {
-          "dependsOn": "sample_registration.gender",
-          "validationDependency": true,
-          "primaryId": true,
-          "examples": "new example LAML_PO,00445,THY_099-tumour",
-          "displayName": "Submitter Specimen ID",
-          "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "required": true,
-          "regex": "$(changed)\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "diff": {
-        "meta": {
-          "examples": {
-            "type": "updated",
-            "data": "new example LAML_PO,00445,THY_099-tumour"
-          },
-          "dependsOn": {
-            "type": "created",
-            "data": "sample_registration.gender"
-          }
-        },
-        "restrictions": {
-          "regex": {
-            "type": "updated",
-            "data": "$(changed)\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-          },
-          "required": {
-            "type": "created",
-            "data": true
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.specimen_tissue_source",
-    {
-      "left": {
-        "name": "specimen_tissue_source",
-        "valueType": "string",
-        "description": "Tissue source of the biospecimen.",
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Specimen Tissue Source"
-        },
-        "restrictions": {
-          "required": true,
-          "codeList": ["Blood derived - bone marrow", "Bone marrow", "Spleen", "Urine"]
-        }
-      },
-      "right": {
-        "name": "specimen_tissue_source",
-        "valueType": "string",
-        "description": "Tissue source of the biospecimen.",
-        "meta": {
-          "validationDependency": false,
-          "core": false,
-          "displayName": "Specimen Tissue Source dedited"
-        },
-        "restrictions": {
-          "required": true,
-          "codeList": ["Blood derived - bone marrow", "Bone marrow", "Spleen", "Urine"]
-        }
-      },
-      "diff": {
-        "meta": {
-          "validationDependency": {
-            "type": "updated",
-            "data": false
-          },
-          "core": {
-            "type": "updated",
-            "data": false
-          },
-          "displayName": {
-            "type": "updated",
-            "data": "Specimen Tissue Source dedited"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.tumour_normal_designation",
-    {
-      "left": {
-        "name": "tumour_normal_designation",
-        "valueType": "string",
-        "description": "Description of specimens tumour/normal status for data processing.",
-        "restrictions": {
-          "required": true,
-          "codeList": ["Normal", "Tumour"]
-        },
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Tumour Normal Designation"
-        }
-      },
-      "right": {
-        "name": "tumour_normal_designation",
-        "valueType": "integer",
-        "description": "Description of specimens tumour/normal status for data processing.",
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Tumour Normal Designation"
-        }
-      },
-      "diff": {
-        "valueType": {
-          "type": "updated",
-          "data": "integer"
-        },
-        "restrictions": {
-          "type": "deleted",
-          "data": {
-            "required": true,
-            "codeList": ["Normal", "Tumour"]
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.specimen_type",
-    {
-      "left": {
-        "name": "specimen_type",
-        "valueType": "string",
-        "description": "Description of the kind of specimen that was collected with respect to tumour/normal tissue origin.",
-        "restrictions": {
-          "required": true,
-          "codeList": [
-            "Cell line - derived from normal",
-            "Metastatic tumour - metastasis to distant location",
-            "Metastatic tumour",
-            "Primary tumour",
-            "Recurrent tumour",
-            "Xenograft - derived from tumour cell line"
-          ],
-          "script": [
-            "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-          ]
-        },
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Specimen Type"
-        }
-      },
-      "right": {
-        "name": "specimen_type",
-        "valueType": "string",
-        "description": "Description of the kind of specimen that was collected with respect to tumour/normal tissue origin.",
-        "restrictions": {
-          "required": true,
-          "codeList": [
-            "Cell line - derived from normal",
-            "Metastatic tumour - metastasis to distant location",
-            "Metastatic tumour",
-            "Primary tumour",
-            "Recurrent tumour",
-            "Xenograft - derived from tumour cell line"
-          ],
-          "script": [
-            "(function shouldValidate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-          ]
-        },
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Specimen Type"
-        }
-      },
-      "diff": {
-        "restrictions": {
-          "script": {
-            "type": "updated",
-            "data": {
-              "added": [
-                "(function shouldValidate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-              ],
-              "deleted": [
-                "(function validate() {\n\n        const row = $row;\n        let result = {valid: true, message: \"Ok\"};\n        \n        const designation = row.tumour_normal_designation.trim().toLowerCase();\n        const specimen_type = $field.trim().toLowerCase();\n        \n        if (designation === \"normal\"){\n            const validTypes = [\"normal\", \"normal - tissue adjacent to primary tumour\", \"cell line - derived from normal\"];\n            if (!validTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type can only be set to a normal type value (Normal, Normal - tissue adjacent to primary tumour, or Cell line - derived from normal) when tumour_normal_designation is set to Normal.\"};\n            }\n        }\n        else if (designation === \"tumour\") {\n            const invalidTypes = [\"normal\", \"cell line - derived from normal\"];\n            if (invalidTypes.includes(specimen_type)){\n                result = {valid: false, message: \"Invalid specimen_type. Specimen_type cannot be set to normal type value (Normal or Cell line - derived from normal) when tumour_normal_designation is set to Tumour.\"};\n            }\n        }\n        return result;\n    })()"
-              ]
-            }
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.submitter_sample_id",
-    {
-      "left": {
-        "name": "submitter_sample_id",
-        "valueType": "string",
-        "description": "Unique identifier of the sample, assigned by the data provider.",
-        "meta": {
-          "validationDependency": true,
-          "primaryId": true,
-          "examples": "hnc_12,CCG_34_94583,BRCA47832-3239",
-          "displayName": "Submitter Sample ID",
-          "notes": "To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "required": true,
-          "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "right": {
-        "name": "submitter_sample_id",
-        "valueType": "string",
-        "description": "Unique identifier of the sample, assigned by the data provider.",
-        "meta": {
-          "validationDependency": true,
-          "primaryId": false,
-          "examples": "hnc_12,CCG_34_94583,BRCA47832-3239",
-          "displayName": "Submitter Sample ID",
-          "notes": "betterTo prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "required": true,
-          "regex": "\\b(?!([Dd][Oo])|([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "diff": {
-        "meta": {
-          "primaryId": {
-            "type": "updated",
-            "data": false
-          },
-          "notes": {
-            "type": "updated",
-            "data": "betterTo prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.sample_type",
-    {
-      "left": {
-        "name": "sample_type",
-        "valueType": "string",
-        "description": "Description of the type of molecular sample used for testing.",
-        "meta": {
-          "validationDependency": true,
-          "core": true,
-          "displayName": "Sample Type"
-        },
-        "restrictions": {
-          "required": true,
-          "codeList": [
-            "Amplified DNA",
-            "ctDNA",
-            "Other DNA enrichments",
-            "ctDNA-0",
-            "ctDNA-1",
-            "ctDNA-2",
-            "ctDNA-3"
-          ]
-        }
-      },
-      "right": {
-        "name": "sample_type",
-        "valueType": "string",
-        "description": "Description of the type of molecular sample used for testing.",
-        "restrictions": {
-          "required": true,
-          "codeList": [
-            "Amplified DNA",
-            "ctDNA",
-            "Other DNA enrichments",
-            "ctDNA-0",
-            "ctDNA-1",
-            "ctDNA-2",
-            "ctDNA-3",
-            "added_to_list"
-          ]
-        }
-      },
-      "diff": {
-        "meta": {
-          "type": "deleted",
-          "data": {
-            "validationDependency": true,
-            "core": true,
-            "displayName": "Sample Type"
-          }
-        },
-        "restrictions": {
-          "codeList": {
-            "type": "updated",
-            "data": {
-              "added": ["added_to_list"],
-              "deleted": []
-            }
-          }
-        }
-      }
-    }
-  ],
-  [
-    "donor.height",
-    {
-      "left": {
-        "description": "Indicate the donor's height, in centimeters (cm).",
-        "name": "height",
-        "valueType": "integer",
-        "meta": {
-          "displayName": "Height"
-        }
-      },
-      "diff": {
-        "type": "deleted",
-        "data": {
-          "description": "Indicate the donor's height, in centimeters (cm).",
-          "name": "height",
-          "valueType": "integer",
-          "meta": {
-            "displayName": "Height"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "donor.weight",
-    {
-      "left": {
-        "description": "Indicate the donor's weight, in kilograms (kg).",
-        "name": "weight",
-        "valueType": "integer",
-        "meta": {
-          "displayName": "Weight"
-        }
-      },
-      "diff": {
-        "type": "deleted",
-        "data": {
-          "description": "Indicate the donor's weight, in kilograms (kg).",
-          "name": "weight",
-          "valueType": "integer",
-          "meta": {
-            "displayName": "Weight"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "donor.bmi",
-    {
-      "left": {
-        "description": "Indicate the donor's Body Mass Index (BMI) in kg/m².",
-        "name": "bmi",
-        "valueType": "integer",
-        "meta": {
-          "displayName": "BMI"
-        }
-      },
-      "diff": {
-        "type": "deleted",
-        "data": {
-          "description": "Indicate the donor's Body Mass Index (BMI) in kg/m².",
-          "name": "bmi",
-          "valueType": "integer",
-          "meta": {
-            "displayName": "BMI"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "sample_registration.updated_submitter_donor_id",
-    {
-      "right": {
-        "name": "updated_submitter_donor_id",
-        "valueType": "string",
-        "description": "better Unique identifier of the donor, assigned by the data provider.",
-        "meta": {
-          "validationDependency": false,
-          "primaryId": false,
-          "examples": "good dexamples 90234,BLD_donor_89,AML-90",
-          "displayName": "Submitter Donor ID Display",
-          "notes": "Edited this, To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-        },
-        "restrictions": {
-          "required": false,
-          "regex": "\\b(?!([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-        }
-      },
-      "diff": {
-        "type": "created",
-        "data": {
-          "name": "updated_submitter_donor_id",
-          "valueType": "string",
-          "description": "better Unique identifier of the donor, assigned by the data provider.",
-          "meta": {
-            "validationDependency": false,
-            "primaryId": false,
-            "examples": "good dexamples 90234,BLD_donor_89,AML-90",
-            "displayName": "Submitter Donor ID Display",
-            "notes": "Edited this, To prevent data collisions, submitter_id cannot begin with any of the ARGO ID prefixes.  The restricted prefixes include: `DO`, `SP`, `SA`,`TR`,`FU`, `PD`."
-          },
-          "restrictions": {
-            "required": false,
-            "regex": "\\b(?!([Ss][Pp])|([Ss][Aa])|([Tt][Rr])|([pP][Dd])|([Ff][Uu]))\\b^[A-Za-z0-9\\-\\._]{1,64}"
-          }
-        }
-      }
-    }
-  ],
-  [
-    "treatment.adverse_events",
-    {
-      "right": {
-        "name": "adverse_events",
-        "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
-        "valueType": "string",
-        "meta": {
-          "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
-        },
-        "restrictions": {
-          "codeList": ["Abducens nerve disorder", "item-0"]
-        }
-      },
-      "diff": {
-        "type": "created",
-        "data": {
-          "name": "adverse_events",
-          "description": "Report any treatment related adverse events. (Codelist reference: NCI-CTCAE (v5.0))",
-          "valueType": "string",
-          "meta": {
-            "notes": "To include multiple values, separate values with a pipe delimiter '|' within your file."
-          },
-          "restrictions": {
-            "codeList": ["Abducens nerve disorder", "item-0"]
-          }
-        }
-      }
-    }
-  ],
-  [
-    "treatment.outcome_of_treatment",
-    {
-      "right": {
-        "name": "outcome_of_treatment",
-        "description": "Indicate the donor's outcome of the prescribed treatment.",
-        "valueType": "string"
-      },
-      "diff": {
-        "type": "created",
-        "data": {
-          "name": "outcome_of_treatment",
-          "description": "Indicate the donor's outcome of the prescribed treatment.",
-          "valueType": "string"
-        }
-      }
-    }
-  ],
-  [
-    "treatment.number_of_cycles",
-    {
-      "right": {
-        "name": "number_of_cycles",
-        "description": "Indicate the number of treatment cycles.",
-        "valueType": "integer"
-      },
-      "diff": {
-        "type": "created",
-        "data": {
-          "name": "number_of_cycles",
-          "description": "Indicate the number of treatment cycles.",
-          "valueType": "integer"
         }
       }
     }

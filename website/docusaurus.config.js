@@ -21,17 +21,17 @@
 const path = require('path');
 
 module.exports = {
-  title: 'ICGC ARGO Docs',
-  url: 'https://docs.icgc-argo.com',
+  title: 'CancerModels.org: Data dictionary',
+  url: 'https://www.cancermodels.org/',
   baseUrl: '/',
-  organizationName: 'ICGC-ARGO',
-  projectName: 'icgc-argo-documentation',
+  organizationName: 'CancerModels.org',
+  projectName: 'cancermodels.org-data-dictionary',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
   favicon: 'favicon.ico',
-  tagline: 'ICGC ARGO Docs',
+  tagline: 'CancerModels.org: Data dictionary',
 
   stylesheets: ['https://fonts.googleapis.com/css?family=Source+Code+Pro|Work+Sans&display=swap'],
 
@@ -71,33 +71,18 @@ module.exports = {
     navbar: {
       title: '',
       logo: {
-        alt: 'ICGC-ARGO',
+        alt: 'CancerModels.org',
         src: 'img/logos/icgc_argo_name_stacked.svg',
       },
-      items: [
-        { to: 'dictionary', label: 'Data Dictionary', position: 'right' },
-        { to: 'docs/submission/submission-overview', label: 'Submission', position: 'right' },
-        { to: 'docs/data-access/daco/applying', label: 'Data Access', position: 'right' },
-        {
-          to: 'docs/analysis-workflows/analysis-overview',
-          label: 'Analysis Pipelines',
-          position: 'right',
-        },
-
-        // {
-        //   href: 'https://platform.icgc-argo.org/contact',
-        //   label: 'Contact',
-        //   position: 'right',
-        // },
-      ],
+      items: [{ to: 'dictionary', label: 'Data Dictionary', position: 'right' }],
     },
     footer: {
       logo: {},
-      copyright: `© ${new Date().getFullYear()} ICGC ARGO. All Rights reserved.`,
+      copyright: `© ${new Date().getFullYear()} CancerModels.org. All Rights reserved.`,
     },
   },
   customFields: {
-    PLATFORM_UI_ROOT: 'https://platform.icgc-argo.org/',
-    GATEWAY_API_ROOT: 'https://api.platform.icgc-argo.org/',
+    PLATFORM_UI_ROOT: 'https://www.cancermodels.org/',
+    GATEWAY_API_ROOT: 'https://www.cancermodels.org/api/',
   },
 };
