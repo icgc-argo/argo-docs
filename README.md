@@ -20,3 +20,18 @@ To run the docs site requires the following:
 
 - NodeJS version 12.13+
   - This is done best using nvm (node version manager). A good summary of this process can be found here for your reference: https://gist.github.com/d2s/372b5943bce17b964a79
+
+
+Move into the website directory ...
+
+`cd argo-docs/website`
+
+...and install dependencies via npm:
+
+`npm ci`
+
+Run the development server to see your edits live in the browser:
+
+`npm start`
+
+The site should open in a new page in your browser at the address: localhost:3000
