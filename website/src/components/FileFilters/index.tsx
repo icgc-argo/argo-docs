@@ -37,14 +37,12 @@ export const NO_ACTIVE_FILTER: string = 'no_active_filter';
 export const DEFAULT_FILTER: FilterSelect = { content: 'All', value: NO_ACTIVE_FILTER };
 
 const FileFilters = ({
-  tiers = [],
   attributes = [],
   comparisons = [],
   searchParams = {},
   isDiffShowing,
   onFilter,
 }: {
-  tiers: Array<FilterSelect>;
   attributes: Array<FilterSelect>;
   comparisons: Array<FilterSelect>;
   searchParams: { [key: string]: string };
@@ -74,14 +72,6 @@ const FileFilters = ({
             onChange={onSelect('comparison')}
           />
         ) : null}
-
-        <Filter
-          label="Data Tier"
-          ariaLabel="Data Tier Select"
-          options={[DEFAULT_FILTER, ...tiers]}
-          value={searchParams.tier}
-          onChange={onSelect('tier')}
-        />
 
         <Filter
           label="Attribute"

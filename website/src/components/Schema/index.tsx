@@ -303,29 +303,6 @@ const SchemaView = ({
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
     {
-      Header: 'Data Tier',
-      Cell: ({ original }) => {
-        const { meta = {}, diff, changeType } = original;
-
-        const hasDiff = checkDiff(diff, ['meta.core', 'meta.primaryId']);
-
-        const tier = getDataTier(meta.primaryId, meta.core);
-
-        return changeType === ChangeType.UPDATED && hasDiff ? (
-          <DiffText
-            newText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.right, diff.meta.core.right)]}
-            oldText={TAG_DISPLAY_NAME[getDataTier(diff.meta.primaryId.left, diff.meta.core.left)]}
-          />
-        ) : changeType === ChangeType.DELETED ? (
-          TAG_DISPLAY_NAME[tier]
-        ) : (
-          <Tag variant={tier} />
-        );
-      },
-      style: { padding: '8px' },
-      width: 85,
-    },
-    {
       Header: 'Attributes',
       id: 'attributes',
       Cell: ({ original }) => {
@@ -454,38 +431,6 @@ const SchemaView = ({
 
       style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
     },
-    {
-      Header: 'Notes & Scripts',
-      Cell: ({ original: { name, meta, restrictions, diff, changeType } }) => {
-        const notes = meta && meta.notes;
-        const script = restrictions && restrictions.script;
-        const diffScript = get(diff, 'restrictions.script');
-        const diffNotes = get(diff, 'meta.notes');
-
-        return (
-          <div>
-            {changeType === ChangeType.UPDATED && checkDiff(diff, ['meta.notes']) ? (
-              <DiffText newText={diffNotes.right} oldText={diffNotes.left} />
-            ) : (
-              notes
-            )}
-            {script && changeType === ChangeType.DELETED ? (
-              <Button variant="secondary" size="sm" disabled>
-                View Scripts
-              </Button>
-            ) : script || diffScript ? (
-              <Script
-                name={name}
-                script={script}
-                diff={diffScript}
-                showScript={setCurrentShowingScripts}
-              />
-            ) : null}
-          </div>
-        );
-      },
-      style: { whiteSpace: 'normal', wordWrap: 'break-word', padding: '8px' },
-    },
   ].filter((col) => (isDiffShowing ? true : col.id !== 'compare'));
 
   const containerRef = React.createRef<HTMLDivElement>();
@@ -501,10 +446,6 @@ const SchemaView = ({
   });
 
   const tableData = getTableData(isDiffShowing, schema.fields);
-
-  const getDataTier = (primaryId: boolean, core: boolean): TagVariant => {
-    return primaryId ? TagVariant.ID : core ? TagVariant.CORE : TagVariant.EXTENDED;
-  };
 
   const getAttributes = (required: boolean, dependsOn: boolean): TagVariant[] => {
     const attributes = [];

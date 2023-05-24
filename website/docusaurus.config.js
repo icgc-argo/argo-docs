@@ -72,12 +72,11 @@ module.exports = {
       title: '',
       logo: {
         alt: 'CancerModels.org',
-        src: 'img/logos/icgc_argo_name_stacked.svg',
+        src: 'img/logos/',
       },
       items: [{ to: 'dictionary', label: 'Data Dictionary', position: 'right' }],
     },
     footer: {
-      logo: {},
       copyright: `© ${new Date().getFullYear()} CancerModels.org. All Rights reserved.`,
     },
   },

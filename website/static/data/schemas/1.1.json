@@ -1,0 +1,811 @@
+{
+  "schemas": [
+    {
+      "name": "patient",
+      "description": "The collection of descriptors associated with patient information for data submission to CancerModels.org.",
+      "fields": [
+        {
+          "name": "patient_id",
+          "valueType": "string",
+          "description": "Unique anonymous/de-identified ID for the patient from the provider.",
+          "meta": {
+            "primaryKey": true,
+            "examples": "A0088",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "sex",
+          "valueType": "string",
+          "description": "Sex of the patient.",
+          "meta": {
+            "examples": "Female",
+            "format": "Any of the following values: [male, female, other, not collected, not provided]"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["female", "male", "other", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "history",
+          "valueType": "string",
+          "description": "Cancer relevant comorbidity or eviromental exposure.",
+          "meta": {
+            "examples": "Lynch Syndrome",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+.',<>%:;_/\\-&]{0,1000}$"
+          }
+        },
+        {
+          "name": "ethnicity",
+          "valueType": "string",
+          "description": "Patient Ethnic group. Can be derived from self-assement or genetic analysis.",
+          "meta": {
+            "examples": "Eastern European",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "ethnicity_assessment_method",
+          "valueType": "string",
+          "description": "Patient Ethnic group assessment method.",
+          "meta": {
+            "examples": "self-assessed",
+            "format": "Any of the following: ['self-assessed', 'genetic', 'not provided', 'not collected']"
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$",
+            "codeList": ["self-assessed", "genetic", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "initial_diagnosis",
+          "valueType": "string",
+          "description": "Diagnosis of the patient when first diagnosed at age_at_initial_diagnosis - this can be different than the diagnosis at the time of collection which is collected in the sample section.",
+          "meta": {
+            "examples": "colorectal carcinoma",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "age_at_initial_diagnosis",
+          "valueType": "string",
+          "description": "This is the age of first diagnostic. Can be prior to the age at which the tissue sample was collected for implant.",
+          "meta": {
+            "examples": "70",
+            "format": "Numeric.\nCan be exact age or binned in 10 year groups (1-9, 10-19, ...)."
+          },
+          "restrictions": {
+            "regex": "^([\\d\\s\\.,-]+(months)?|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "patient_sample",
+      "description": "The collection of descriptors associated with clincal information of the tumor sample for data submission to CancerModels.org.",
+      "fields": [
+        {
+          "name": "patient_id",
+          "valueType": "string",
+          "description": "Unique anonymous/de-identified ID for the patient from the provider.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "A0088",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "sample_id",
+          "valueType": "string",
+          "description": "Unique ID of the patient tumour sample used to generate cancer models.",
+          "meta": {
+            "primaryKey": true,
+            "examples": "CRC0228PRH0000000000D01000",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "collection_date",
+          "valueType": "string",
+          "description": "Date of collections. Important for understanding the time relationship between models generated for the same patient.",
+          "meta": {
+            "examples": "Oct 2015",
+            "format": "MMM YYYY"
+          },
+          "restrictions": {
+            "regex": "^([A-Za-z]{3}\\s[0-9]{4}|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "collection_event",
+          "valueType": "string",
+          "description": "Collection event corresponding to each time a patient was sampled to generate a cancer model, subsequent collection events are incremented by 1.",
+          "meta": {
+            "examples": "collection event 1",
+            "format": "collection event + 'event number'"
+          },
+          "restrictions": {
+            "regex": "^((c|C)ollection\\sevent\\s[0-9]{1,3}||(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "months_since_collection_1",
+          "valueType": "string",
+          "description": "The time difference between the 1st collection event and the current one (in months).",
+          "meta": {
+            "examples": "0",
+            "format": "Numeric.\nThe collection event 1 should be 0, collection event 2 should be 6 if 6 months have elapase between collection 1 and collection 2 and collection event 3 should be 9 if 9 months have elapsed between collection 1 and collection 3."
+          },
+          "restrictions": {
+            "regex": "^([\\d\\s\\.,->?]+|(A|a)ll|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "age_in_years_at_collection",
+          "valueType": "string",
+          "description": "Patient age at collection.",
+          "meta": {
+            "examples": "70",
+            "format": "Numeric.\nCan be exact age or binned in 10 year groups (1-9, 10-19, ...)."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^([\\d\\s\\.,-]+(months)?|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "diagnosis",
+          "valueType": "string",
+          "description": "Diagnosis at time of collection of the patient tumour used in the cancer model",
+          "meta": {
+            "examples": "colorectal carcinoma",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "tumour_type",
+          "valueType": "string",
+          "description": "Collected tumour type.",
+          "meta": {
+            "examples": "primary",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": [
+              "primary",
+              "metastatic",
+              "recurrent",
+              "refractory",
+              "pre-malignant",
+              "Not provided",
+              "Not collected"
+            ]
+          }
+        },
+        {
+          "name": "primary_site",
+          "valueType": "string",
+          "description": "Site of the primary tumor where primary cancer is originating from (may not correspond to the site of the current tissue sample).",
+          "meta": {
+            "examples": "colon",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "collection_site",
+          "valueType": "string",
+          "description": "Site of collection of the tissue sample (can be different than the primary site if tumour type is metastatic).",
+          "meta": {
+            "examples": "colon",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "stage",
+          "valueType": "string",
+          "description": "Stage of the patient at the time of collection.",
+          "meta": {
+            "examples": "T2,N1,M0",
+            "format": "Should be in the format of the stage classification."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "staging_system",
+          "valueType": "string",
+          "description": "Stage classification system used to describe the stage, add the version if available.",
+          "meta": {
+            "examples": "TNM staging system",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "grade",
+          "valueType": "string",
+          "description": "The implanded tumour grade value.",
+          "meta": {
+            "examples": "Grade 1",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "grading_system",
+          "valueType": "string",
+          "description": "Grade classification corresponding used to describe the stage, add the version if available.",
+          "meta": {
+            "examples": "Nottingham grading system",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "virology_status",
+          "valueType": "string",
+          "description": "Positive virology status at the time of collection. Any relevent virology information which can infliuence cancer like EBV, HIV, HPV status.",
+          "meta": {
+            "examples": "Human Immunodeficiency Virus",
+            "format": "Use NCIT ontology term where possible."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "sharable",
+          "valueType": "string",
+          "description": "Is patient treatement information avalaible and sharable? If yes fill out following treatment columns: treatment_naive_at_collection, treated_at_collection, treated_prior_to_collection.",
+          "meta": {
+            "examples": "yes",
+            "format": "Any of the following: ['yes', 'no', 'not provided', 'not collected']"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["yes", "no", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "treatment_naive_at_collection",
+          "valueType": "string",
+          "description": "Was the patient treatment naive at the time of collection? This includes the patient being treated at the time of tumour sample collection and if the patient was treated prior to the tumour sample collection.\nThe value will be 'yes' if either treated_at_collection or treated_prior_to_collection are 'yes'.",
+          "meta": {
+            "examples": "yes",
+            "format": "Any of the following: ['yes', 'no', 'not provided', 'not collected']"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["yes", "no", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "treated_at_collection",
+          "valueType": "string",
+          "description": "Was the patient being treated for cancer at the time of tumour sample collection. This includes any of the following: radiotherapy, chemotherapy, targeted therapy, homorno-therapy.",
+          "meta": {
+            "examples": "yes",
+            "format": "Any of the following: ['yes', 'no', 'not provided', 'not collected']"
+          },
+          "restrictions": {
+            "codeList": ["yes", "no", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "treated_prior_to_collection",
+          "valueType": "string",
+          "description": "Was the patient treated for cancer prior to the time of tumour sample collection. This includes any of the following: radiotherapy, chemotherapy, targeted therapy, homorno-therapy.",
+          "meta": {
+            "examples": "yes",
+            "format": "Any of the following: ['yes', 'no', 'not provided', 'not collected']"
+          },
+          "restrictions": {
+            "codeList": ["yes", "no", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "model_id",
+          "valueType": "string",
+          "description": "Unique identifier for all the cancer models derived from the same tissue sample. Needs to be unique.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "CRC0228PR",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "sharing",
+      "description": "The collection of descriptors associated with model data sharability for data submission to CancerModels.org.",
+      "fields": [
+        {
+          "name": "model_id",
+          "valueType": "string",
+          "description": "Unique identifier for all the cancer models derived from the same tissue sample.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "CRC0228PR",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "accessibility",
+          "valueType": "string",
+          "description": "Define any limitation of access of the model per type of users like academia, industry, academia and industry, or national limitation if needed (e.g. no specific consent for sequencing).",
+          "meta": {
+            "examples": "academia",
+            "format": "Any of the following: ['academia', 'industry', 'academia and industry']"
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["academia", "industry", "academia and industry"]
+          }
+        },
+        {
+          "name": "europdx_access_modality",
+          "valueType": "string",
+          "description": "If part of EUROPDX consortium fill this in. Designates a model is accessible for transnational access through the EDIReX infrastructure, or only on a collaborative basis (i.e. upon approval of the proposed project by the owner of the model)",
+          "meta": {
+            "examples": "transnational access",
+            "format": "Any of the following: ['transnational access', 'collaboration only', 'not provided']"
+          },
+          "restrictions": {
+            "codeList": [
+              "transnational access",
+              "collaboration only",
+              "Not applicable",
+              "Not provided",
+              "Not collected"
+            ]
+          }
+        },
+        {
+          "name": "email",
+          "valueType": "string",
+          "description": "Contact email for any requests from users about models. If multiple, include as comma separated list.",
+          "meta": {
+            "examples": "j.doe@example.com",
+            "format": "Email address"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^(([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+,?\\s?)*|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "name",
+          "valueType": "string",
+          "description": "Contact person (should match that included in email column).",
+          "meta": {
+            "examples": "Jane Doe",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\s\\W]{0,250}$"
+          }
+        },
+        {
+          "name": "form_url",
+          "valueType": "string",
+          "description": "If the center has a contact form rather than a contact email include the link here.",
+          "meta": {
+            "examples": "http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=J000106527",
+            "format": "URL"
+          },
+          "restrictions": {
+            "regex": "^(http|https)://[a-zA-Z0-9-\\.]+\\.[a-zA-Z]{2,5}(/[a-zA-Z0-9-._~:/%?#[\\]@!$&'()*+,;=]*)?$"
+          }
+        },
+        {
+          "name": "database_url",
+          "valueType": "string",
+          "description": "If institution has a public database and want that link to be shared, include here.",
+          "meta": {
+            "examples": "http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=TM01220",
+            "format": "URL"
+          },
+          "restrictions": {
+            "regex": "^(http|https)://[a-zA-Z0-9-\\.]+\\.[a-zA-Z]{2,5}(/[a-zA-Z0-9-._~:/%?#[\\]@!$&'()*+,;=]*)?$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pdx_model",
+      "description": "The collection of descriptors associated with PDX models for data submission to CancerModels.org",
+      "fields": [
+        {
+          "name": "model_id",
+          "valueType": "string",
+          "description": "Unique identifier for all the cancer models derived from the same tissue sample.",
+          "meta": {
+            "primaryKey": true,
+            "examples": "CRC0228PR",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "host_strain_name",
+          "valueType": "string",
+          "description": "Host mouse strain name (e.g. NOD-SCID, NSG, etc).",
+          "meta": {
+            "examples": "NOD SCID",
+            "format": "Mouse strain name"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "host_strain_nomenclature",
+          "valueType": "string",
+          "description": "The full nomenclature form of the host mouse strain name.",
+          "meta": {
+            "examples": "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ",
+            "format": "Use most precise nomenclature where possible."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "engraftment_site",
+          "valueType": "string",
+          "description": "Organ or anatomical site used for the PDX tumour engraftment (e.g. mammary fat pad, Right flank).",
+          "meta": {
+            "examples": "colon",
+            "format": "Use anatomical graft site, not collected, or not provided."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "engraftment_type",
+          "valueType": "string",
+          "description": "PDX Engraftment Type: Orthotopic if the tumour was engrafted at a corresponding anatomical site (e.g. patient tumour of primary site breast was grafted in mouse mamary fat pad). If grafted subcuteanously use hererotopic.",
+          "meta": {
+            "examples": "heterotopic",
+            "format": "Any of the following: ['heterotopic', 'orthotopic', 'not collected', 'not provided']."
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": ["heterotopic", "orthotopic", "Not provided", "Not collected"]
+          }
+        },
+        {
+          "name": "sample_type",
+          "valueType": "string",
+          "description": "Description of the type of  material grafted into the mouse. (e.g. tissue fragments, cell suspension).",
+          "meta": {
+            "examples": "tissue fragment",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "sample_state",
+          "valueType": "string",
+          "description": "PDX Engraftment material state (e.g. fresh or frozen). If other please describe.",
+          "meta": {
+            "examples": "fresh",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "passage_number",
+          "valueType": "string",
+          "description": "Passage number: When different host strains, or PDX Engraftment Site or PDX Engraftment Type or PDX Engraftment Material were used during the PDX line generation, please add passage - add rows per model as needed.\nWe assume that passage 0 correspond to first engraftment - if not the case please indicate what passage 0 correspond to. passage number- add rows if columns D,E,F, G changes - if no change and always same D,E,F,G add 'all' as passage value to specify the conditions are the same in all passages.",
+          "meta": {
+            "examples": "all",
+            "format": "Numeric or all."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^([\\d\\s\\.,->?]+|(A|a)ll|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "publications",
+          "valueType": "string",
+          "description": "If model has been part of a published study include pubmed IDs separated by commas.",
+          "meta": {
+            "examples": "PMID: 27771609, PMID: 27771610 ",
+            "format": "PMID: 8 digit format, separatedby commas."
+          },
+          "restrictions": {
+            "regex": "^(?:PMID:\\s?[0-9]{1,8},?\\s?)*$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "model_validation",
+      "description": "The collection of descriptors associated with cancer model validation techniques for data submission to CancerModels.org",
+      "fields": [
+        {
+          "name": "model_id",
+          "valueType": "string",
+          "description": "Unique identifier for all the cancer models derived from the same tissue sample.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "CRC0228PR",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "validation_technique",
+          "valueType": "string",
+          "description": "Any technique used to validate PDX against their original patient tumour, including fingerprinting, histology, immunohistochemistry.",
+          "meta": {
+            "examples": "fingerprinting",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "description",
+          "valueType": "string",
+          "description": "Short description of what was compared and what was the result: (e.g. high, good, moderate concordance between xenograft, 'model validated against histological features of same diagnosis' or 'not determined') - It needs to be clear if the model is validated or not.",
+          "meta": {
+            "examples": "high concordance between xenograft and  patient tumour",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+.',<>%:;_/\\-&]{0,1000}$"
+          }
+        },
+        {
+          "name": "passages_tested",
+          "valueType": "string",
+          "description": "Provide a list of all passages where validation was performed. Passage 0 correspond to first engraftment (if this is not the case please define how passages are numbered).",
+          "meta": {
+            "examples": "1, 2",
+            "format": "A list of numbers separted by commas."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^([\\d\\s\\.,->?]+|(A|a)ll|(N|n)ot (P|p)rovided|(N|n)ot (C|c)ollected)$"
+          }
+        },
+        {
+          "name": "validation_host_strain_nomenclature",
+          "valueType": "string",
+          "description": "Validation host mouse strain, following mouse strain nomenclature from MGI JAX.",
+          "meta": {
+            "examples": "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ",
+            "format": "Full host strain name, not collected, or not provided"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cell_model",
+      "description": "The collection of descriptors associated with cell and organoid models for data submission to CancerModels.org",
+      "fields": [
+        {
+          "name": "model_id",
+          "valueType": "string",
+          "description": "Unique identifier for all the cancer models derived from the same tissue sample.",
+          "meta": {
+            "primaryKey": true,
+            "examples": "CRC0228PR",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "name",
+          "valueType": "string",
+          "description": "Most common name associate with model. Please use the CCLE name if available.",
+          "meta": {
+            "examples": "LAMA84_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "type",
+          "valueType": "string",
+          "description": "Type of organoid or cell model.",
+          "meta": {
+            "examples": "organoid",
+            "format": "One of the following: ['organoid', 'CRC', '3-D: other', '2D: other', 'cell line']."
+          },
+          "restrictions": {
+            "required": true,
+            "codeList": [
+              "organoid",
+              "CRC",
+              "3-D: other",
+              "2D: other",
+              "cell line",
+              "Not provided",
+              "Not collected"
+            ]
+          }
+        },
+        {
+          "name": "growth_properties",
+          "valueType": "string",
+          "description": "Observed growth properties of the related model.",
+          "meta": {
+            "examples": "embedded 3d culture",
+            "format": "One of the following: ['embedded 3d culture', 'adherent', 'mix of adherent and suspension', 'suspension']."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "parent_id",
+          "valueType": "string",
+          "description": "Please add the model Id of the model used to generate the model. If the model was not in this set, please refer to it by external id.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "CRC0014LM",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "origin_patient_sample_id",
+          "valueType": "string",
+          "description": "Unique ID of the patient tumour sample used to generate the model.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "CRC0014LM-P1",
+            "format": "Alphanumeric"
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s/._~-]+$"
+          }
+        },
+        {
+          "name": "comments",
+          "valueType": "string",
+          "description": "Add crucial comments about the model that cannot be expressed by other fields.",
+          "meta": {
+            "examples": "MEC-1 and MEC-2 were both established from the same patient.",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "required": true,
+            "regex": "^[\\w\\d\\s\\(\\)\\+.',<>%:;_/\\-&]{0,1000}$"
+          }
+        },
+        {
+          "name": "supplier",
+          "valueType": "string",
+          "description": "Please provide the suplies brief acronym or name followed by a colon and thel number or name use to reference the model.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "DSMZ:ACC-497",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "external_ids",
+          "valueType": "string",
+          "description": "Depmap accession, Cellusaurus accession or other id. Please place in comma separated list.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "COSMIC905988,,CVCL_0417",
+            "format": "Free text."
+          },
+          "restrictions": {
+            "regex": "^[\\w\\d\\s\\(\\)\\+\\[\\].',<>%:;_/\\-&]{0,250}$"
+          }
+        },
+        {
+          "name": "publications",
+          "valueType": "string",
+          "description": "If model has been part of a published study include pubmed IDs separated by commas.",
+          "meta": {
+            "foreignKey": true,
+            "examples": "PMID: 27771609, PMID: 27771610",
+            "format": "PMID: 8 digit format, separatedby commas."
+          },
+          "restrictions": {
+            "regex": "^(?:PMID:\\s?[0-9]{1,8},?\\s?)*$"
+          }
+        }
+      ]
+    }
+  ],
+  "_id": "64678817b033cf9e675ab106",
+  "name": "CancerModels_Dictionary",
+  "__v": 0,
+  "createdAt": "2023-05-10T12:43:52.000Z",
+  "updatedAt": "2023-05-19T05:43:29.000Z",
+  "version": "1.0"
+}

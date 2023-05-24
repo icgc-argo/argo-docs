@@ -36,45 +36,45 @@ function Footer() {
     <footer className={styles['nav-footer']} id="footer">
       <div className={styles.footerWrapper}>
         <div className={styles.footerLogo}>
-          <a href="https://platform.icgc-argo.org/">
+          <a href="https://www.cancermodels.org/">
             <img
               src={useBaseUrl(`img/logos/icgc_argo_full.svg`)}
-              alt="ICGC Accelerating Research in Genomic Oncology"
+              alt="CancerModels.org"
               width="240px"
             />
           </a>
         </div>
         <div className={styles.footerContent}>
           <section className={styles.footerLinks}>
-            <a href="https://platform.icgc-argo.org/contact" target="_blank">
+            <a href="https://www.cancermodels.org/contact" target="_blank">
               Contact
             </a>
             <Slash />
-            <a href="https://www.icgc-argo.org/page/2/privacy" target="_blank">
+            <a href="https://www.cancermodels.org/privacy-policy" target="_blank">
               Privacy Policy
             </a>
             <Slash />
-            <a href="https://www.icgc-argo.org/page/1/terms-and-conditions" target="_blank">
-              Terms & Conditions
+            <a href="https://www.cancermodels.org/terms-of-use" target="_blank">
+              Terms of use
             </a>
             <Slash />
-            <a href="https://www.icgc-argo.org/page/77/e3-publication-policy" target="_blank">
-              Publication Policy
+            <a href="https://www.cancermodels.org/about" target="_blank">
+              About
             </a>
           </section>
           <section className={styles['legal-text']}>{copyright} </section>
           <section className={styles['legal-text']}>
-            <a href="https://platform.icgc-argo.org/" target="_blank">
-              ARGO Data Platform
+            <a href="" target="_blank">
+              CancerModels.org
             </a>{' '}
             {/*1.0.0 - API v1 - 8e37309*/}
           </section>
         </div>
         <div className={styles.footerLogo}>
-          <a href="https://www.oicr.on.ca/">
+          <a href="">
             <img
-              src={useBaseUrl(`img/logos/oicr_logo.svg`)}
-              alt="Ontario Institute for Cancer Research"
+              src={useBaseUrl(`img/logos/embl-ebi-rgb-full-colour.png`)}
+              alt="EMBL EBI"
               height="52px"
             />
           </a>
