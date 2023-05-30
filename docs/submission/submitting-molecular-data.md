@@ -175,7 +175,8 @@ values={[
 - Fields `submitter_sequencing_experiment_id`, `experimental_strategy`, `platform` and `read_group_count` are `Required` for all samples.
 - Fields `target_capture_kit`, `primary_target_regions` and `capture_target_regions` are `Required` for `Targeted-Seq/WXS` samples.
 - Field `library_strandedness` is `Required` for `RNA-Seq` samples.
-  :::
+
+:::
 
 #### read_groups
 
@@ -240,7 +241,8 @@ values={[
 - Field `read_group_id_in_bam` is `Required` for `BAM/CRAM` files, however this can NOT be submitted for FASTQ files.
 - Field `file_r1` is `Required`, and both `file_r1` and `file_r2` must match a fileName identified in the `files` section.
 - Fields `file_r2`, `read_length_r2` and `insert_size` are `Required` if and only if paired-end sequencing was done.
-  :::
+
+:::
 
 #### files
 
@@ -289,7 +291,8 @@ values={[
 - Fields `name`, `format`, `size`, `md5sum` are `Required` for all files.
 - Field `path` is `Required` for both local data (use the file path relative to the directory you run the workflow) and data downloaded from EGA through Aspera (use the file path relative to Aspera root directory).
 - Field `ega_file_id` is `Required` for data downloaded from EGA.
-  :::
+
+:::
 
 ### Step 2. Run the Data Submission Workflow
 
@@ -316,6 +319,7 @@ nextflow run main.nf \
   --read_group_info_tsv path/to/read_groups.tsv \
   --file_info_tsv path/to/files.tsv \
   -- api_token YOUR_API_TOKEN
+
 ```
 
 </TabItem>
@@ -331,6 +335,7 @@ nextflow run main.nf \
   --file_info_tsv path/to/files.tsv \
   --api_token YOUR_API_TOKEN \
   --ref_genome_fa path/to/ref_genome_fa
+
 ```
 
 :::note
@@ -338,7 +343,8 @@ nextflow run main.nf \
 - Provide the `ref_genome_fa` in `fasta` or `fasta.gz` formats if your data contains CRAMs.
 - This will perform a local conversion of CRAM files to BAM for submission. Please make sure you have enough local space for the converted intermediate BAM files.
 - Intermediate BAM files will be deleted at the end of the pipeline process.
-  :::
+
+:::
 
 </TabItem>
 </Tabs>
@@ -385,7 +391,8 @@ nextflow run main.nf \
 - Field `path` in table `files.tsv` is `Required` to run with this mode and it will have to be formatted according to the file path relative to Aspera root directory.
 - Field `ega_file_id` in table `files.tsv` is `Required` to run with this mode. Please retrieve the EGAF IDs from https://ega-archive.org/ or the EGA API.
 - You do NOT need to install the aspera client and crypt4gh at your local to run the data submission workflow, however you will need to login your aspera dbox to retrieve the files’ relative path and get the `c4gh_secret_key`.
-  :::
+
+:::
 
 </TabItem>
 <TabItem value="pyega3">
@@ -463,7 +470,7 @@ values={[
 |             **Field**              |                         **Attribute**                         |                                                                              **Description**                                                                              |                                                         **Permissible Values**                                                         |                         **Note**                         |
 | :--------------------------------: | :-----------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
 |                type                |    ![Required](/assets/submission/dictionary-required.svg)    |                                                                                table type                                                                                 |                                                         sequencing_experiment                                                          |
-| submitter_sequencing_experiment_id |    ![Required](/assets/submission/dictionary-required.svg)    |                                              Unique identifier of the sequencing experiment, assigned by the data provider.                                               |               String values that meet the regular expression ^[a-zA-Z0-9]{1}[a-zA-Z0-9\\-\_\\.:']{0,98}[a-zA-Z0-9]{1}\$                |
+| submitter_sequencing_experiment_id |    ![Required](/assets/submission/dictionary-required.svg)    |                                              Unique identifier of the sequencing experiment, assigned by the data provider.                                               |               String values that meet the regular expression ^[a-zA-Z0-9]{1}[a-zA-Z0-9\\-\\_\\.:']{0,98}[a-zA-Z0-9]{1}\$               |
 |             program_id             |    ![Required](/assets/submission/dictionary-required.svg)    | ARGO Program ID, the unique identifier of your program. If you have logged into the ARGO Data Platform, this is the Program ID that you see in the Program Services area. |                                                                                                                                        |
 |         submitter_donor_id         |    ![Required](/assets/submission/dictionary-required.svg)    |                                                      Unique identifier of the donor, assigned by the data provider.                                                       |                                    Values must meet the regular expression ^[A-Za-z0-9\-\.\_]{1,64}                                    | Must be the same as what is in sample_registration table |
 |       submitter_specimen_id        |    ![Required](/assets/submission/dictionary-required.svg)    |                                                     Unique identifier of the specimen, assigned by the data provider.                                                     |                                    Values must meet the regular expression ^[A-Za-z0-9\-\.\_]{1,64}                                    | Must be the same as what is in sample_registration table |
@@ -488,28 +495,30 @@ values={[
 |               dv200                |                           Optional                            |                                                     The percentage of RNA fragments that are >200 nucleotides in size                                                     |                                                      A percentage or empty(null)                                                       |                   Optional for RNA-Seq                   |
 
 :::note
+
 :zap: Please contact DCC to create the `Customized Enum values`. :zap:
+
 :::
 
 </TabItem>
 
 <TabItem value="read_groups">
 
-|             **Field**              |                         **Attribute**                         |                                                                                               **Description**                                                                                               |                                          **Permissible Values**                                           |                                                **Note**                                                |
-| :--------------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: |
-|                type                |                           Required                            |                                                                                              type of the table                                                                                              |                                                read_group                                                 |
-| submitter_sequencing_experiment_id |    ![Required](/assets/submission/dictionary-required.svg)    |                                                               Unique identifier of the sequencing experiment, assigned by the data provider.                                                                | String values that meet the regular expression ^[a-zA-Z0-9]{1}[a-zA-Z0-9\\-\_\\.:']{0,98}[a-zA-Z0-9]{1}\$ |
-|      submitter_read_group_id       |    ![Required](/assets/submission/dictionary-required.svg)    |             The identifier of a read group. Must be unique within each sample. After submission, the submitter_read_group_id in the metadata will be used for all future @RG ID in the header.              |                 String values that meet the regular expression ^[a-zA-Z0-9\\-\_:\\.']+\$.                 |
-|        read_group_id_in_bam        | ![Conditional](/assets/submission/dictionary-conditional.svg) | Conditional required field indicating the @RD ID in the BAM header and RG:Z in BAM body. If submitted, this will be used to map the @RG ID in the BAM header to the submitter_read_group_id in the payload. |          String value must meet the regular expression ^[a-zA-Z0-9\\-\_:\\.']+\$ or empty(null).          |                Required for BAM/CRAM files. This can NOT be submitted for FASTQ files.                 |
-|           platform_unit            |    ![Required](/assets/submission/dictionary-required.svg)    |         Unique identifier indicates a particular flow cell, lane and sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.         |                                             Any string value.                                             |
-|           is_paired_end            |    ![Required](/assets/submission/dictionary-required.svg)    |                                                                              Indicate if paired-end sequencing was performed.                                                                               |                                                true, false                                                |
-|              file_r1               |    ![Required](/assets/submission/dictionary-required.svg)    |                                                            Name of the sequencing file containing reads from the first end of a sequencing run.                                                             |                                             Any string value.                                             |                           Must match a name identified in the files section.                           |
-|              file_r2               | ![Conditional](/assets/submission/dictionary-conditional.svg) |                          Name of the sequencing file containing reads from the second end of a paired-end sequencing run. Required if and only if paired-end sequencing was done.                           |                                     Any string value or empty(null).                                      | Required only for paired-end sequencing. Must match a name identified in the files section if provided |
-|            library_name            |    ![Required](/assets/submission/dictionary-required.svg)    |                                                                                        Name of a sequencing library.                                                                                        |                                             Any string value.                                             |
-|           read_length_r1           |                           Optional                            |                                                Length of sequencing reads in file_r1; this corresponds to the number of sequencing cycles of the first end.                                                 |                            Integer with a minimum value of 20 or empty(null).                             |
-|           read_length_r2           |                           Optional                            |                                                Length of sequencing reads in file_r2; this corresponds to the number of sequencing cycles of the second end.                                                |                            Integer with a minimum value of 20 or empty(null).                             |                            Can be populated only for paired-end sequencing.                            |
-|            insert_size             |                           Optional                            |                                                            For paired-end sequencing, the average size of sequences between two sequencing ends.                                                            |                             Integer with a minimum value of 0 or empty(null).                             |                            Can be populated only for paired-end sequencing.                            |
-|           sample_barcode           |                           Optional                            |                                     According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                      |                                     Any string value or empty(null).                                      |
+|             **Field**              |                         **Attribute**                         |                                                                                               **Description**                                                                                               |                                           **Permissible Values**                                           |                                                **Note**                                                |
+| :--------------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------: |
+|                type                |                           Required                            |                                                                                              type of the table                                                                                              |                                                 read_group                                                 |
+| submitter_sequencing_experiment_id |    ![Required](/assets/submission/dictionary-required.svg)    |                                                               Unique identifier of the sequencing experiment, assigned by the data provider.                                                                | String values that meet the regular expression ^[a-zA-Z0-9]{1}[a-zA-Z0-9\\-\\_\\.:']{0,98}[a-zA-Z0-9]{1}\$ |
+|      submitter_read_group_id       |    ![Required](/assets/submission/dictionary-required.svg)    |             The identifier of a read group. Must be unique within each sample. After submission, the submitter_read_group_id in the metadata will be used for all future @RG ID in the header.              |                 String values that meet the regular expression ^[a-zA-Z0-9\\-\_:\\.']+\$.                  |
+|        read_group_id_in_bam        | ![Conditional](/assets/submission/dictionary-conditional.svg) | Conditional required field indicating the @RD ID in the BAM header and RG:Z in BAM body. If submitted, this will be used to map the @RG ID in the BAM header to the submitter_read_group_id in the payload. |          String value must meet the regular expression ^[a-zA-Z0-9\\-\_:\\.']+\$ or empty(null).           |                Required for BAM/CRAM files. This can NOT be submitted for FASTQ files.                 |
+|           platform_unit            |    ![Required](/assets/submission/dictionary-required.svg)    |         Unique identifier indicates a particular flow cell, lane and sample/library-specific identifier. For non-multiplex sequencing, platform unit and read group have a one-to-one relationship.         |                                             Any string value.                                              |
+|           is_paired_end            |    ![Required](/assets/submission/dictionary-required.svg)    |                                                                              Indicate if paired-end sequencing was performed.                                                                               |                                                true, false                                                 |
+|              file_r1               |    ![Required](/assets/submission/dictionary-required.svg)    |                                                            Name of the sequencing file containing reads from the first end of a sequencing run.                                                             |                                             Any string value.                                              |                           Must match a name identified in the files section.                           |
+|              file_r2               | ![Conditional](/assets/submission/dictionary-conditional.svg) |                          Name of the sequencing file containing reads from the second end of a paired-end sequencing run. Required if and only if paired-end sequencing was done.                           |                                      Any string value or empty(null).                                      | Required only for paired-end sequencing. Must match a name identified in the files section if provided |
+|            library_name            |    ![Required](/assets/submission/dictionary-required.svg)    |                                                                                        Name of a sequencing library.                                                                                        |                                             Any string value.                                              |
+|           read_length_r1           |                           Optional                            |                                                Length of sequencing reads in file_r1; this corresponds to the number of sequencing cycles of the first end.                                                 |                             Integer with a minimum value of 20 or empty(null).                             |
+|           read_length_r2           |                           Optional                            |                                                Length of sequencing reads in file_r2; this corresponds to the number of sequencing cycles of the second end.                                                |                             Integer with a minimum value of 20 or empty(null).                             |                            Can be populated only for paired-end sequencing.                            |
+|            insert_size             |                           Optional                            |                                                            For paired-end sequencing, the average size of sequences between two sequencing ends.                                                            |                             Integer with a minimum value of 0 or empty(null).                              |                            Can be populated only for paired-end sequencing.                            |
+|           sample_barcode           |                           Optional                            |                                     According to the SAM specification, this is the expected barcode bases as read by the sequencing machine in the absence of errors.                                      |                                      Any string value or empty(null).                                      |
 
 </TabItem>
 <TabItem value="files">
