@@ -19,6 +19,21 @@ None to report.
 None to report.
 ------>
 
+## June 8, 2023: Clinical Exceptions And Program Entity Page
+
+Data Platform - 1.123.2 - API 3.39.1
+
+#### New Features
+
+- We are thrilled to announce the release of Clinical Exceptions, a new feature that allows programs to request program and entity level data exceptions. When clinical exception requests are approved and enabled, users can submit Unknown or Not applicable to one or many core data fields defined in [the ARGO dictionary](https://docs.icgc-argo.org/dictionary). Clinical exceptions will significantly accelerate the clinical data submission process.
+
+- There are two types of clinical exceptions:
+
+  - Program level exceptions: when enabled, exception rules will apply to all donors.
+  - Entity level exceptions: when enabled, exception rules will apply to one or many submitter_specimen_id and submitter_follow_up_id. We are currently accepting entity level exceptions in Specimen and Follow Up schemas.
+
+- Another new feature is also available on our platform: The Program Entity Page. Accessible from the File Repository, this page presents a summary of the programs, offering a high-level overview of donor and file statistics.
+
 ## May 3, 2023: Submitted Data Page
 
 Data Platform - 1.122.5 - API 3.39.0
