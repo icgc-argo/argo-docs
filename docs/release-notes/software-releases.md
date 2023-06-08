@@ -21,7 +21,7 @@ None to report.
 
 ## June 8, 2023: Clinical Exceptions And Program Entity Page
 
-Data Platform - 1.123.1 - API 3.39.1
+Data Platform - 1.123.2 - API 3.39.1
 
 #### New Features
 
