@@ -19,6 +19,18 @@ None to report.
 None to report.
 ------>
 
+## August 23, 2023: Submitted Data Page Updates
+
+Data Platform - UI 1.124.1 - API 3.40.0
+
+We are excited to share that we've successfully addressed two bugs in the Submitted Data page:
+
+- In the Treatment Tab, fields of the Surgery table were incorrectly appended, this has now been fixed.
+
+- The Submitted Data view did not update after the clinical file with errors was re-uploaded, validated with corrected data, and signed-off on. The error message box at the top persisted, even though the table view displayed the updated corrected data. This issue has also been resolved. The error message box will now reflect updated error messages when clinical data is updated.
+
+- Other API fixes have also been released.
+
 ## June 8, 2023: Clinical Exceptions And Program Entity Page
 
 Data Platform - 1.123.2 - API 3.39.1
