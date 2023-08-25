@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.18
+
+**Release Date: August 25, 2023**
+
+#### Updates
+
+- Updated validation scripts for conditional fields `tumour_grade`, `lymph_nodes_examined_method` and `prescribed_cumulative_drug_dose` and `actual_cumulative_drug_dose` fields to take into account clinical exception values.
+
 ## Release 1.17
 
 **Release Date: May 11, 2023**
