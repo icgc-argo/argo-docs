@@ -20,6 +20,17 @@ None to report.
 
 ------>
 
+## Release 1.19
+
+**Release Date: October 18, 2023**
+
+#### Updates
+
+- New optional field called `lost_to_followup_after_clinical_event_id` added to Donor table to allow data submitters to indicate whether donor was lost to follow up after a clinical event.
+- New permissible terms (`Cell line – derived from metastatic tumour` and `Xenograft – derived from metastatic tumour`) added to `specimen_type` field in Sample Registration table.
+- Updated regular expression condition for all identifier fields to prevent invalid characters from being submitted.
+- New permissible term `Physician assessed progressive disease` added to `response_to_treatment` field in Treatment table.
+
 ## Release 1.18
 
 **Release Date: August 25, 2023**
