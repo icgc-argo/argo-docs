@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.20
+
+**Release Date: October 30, 2023**
+
+#### Updates
+
+- Updated validation scripts for required field `treatment_type` in treatment table to take into account clinical exception value `Unknown`.
+
 ## Release 1.19
 
 **Release Date: October 18, 2023**
