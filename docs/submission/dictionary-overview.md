@@ -370,8 +370,9 @@ Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5291965/
 
 ### Physician Assessed Response Criteria
 
-| Response to Treatment                |
-| ------------------------------------ |
-| Physician assessed complete response |
-| Physician assessed partial response  |
-| Physician assessed stable disease    |
+| Response to Treatment                  |
+| -------------------------------------- |
+| Physician assessed complete response   |
+| Physician assessed partial response    |
+| Physician assessed progressive disease |
+| Physician assessed stable disease      |

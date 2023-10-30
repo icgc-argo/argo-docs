@@ -28,7 +28,7 @@
               "examples": "90234,BLD_donor_89,AML-90",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "gender",
@@ -47,7 +47,7 @@
               "examples": "LAML_PO,00445,THY_099-tumour",
               "displayName": "Submitter Specimen ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "specimen_tissue_source",
@@ -108,6 +108,7 @@
             "restrictions": {
               "required": true,
               "codeList": [
+                "Cell line - derived from metastatic tumour",
                 "Cell line - derived from normal",
                 "Cell line - derived from tumour",
                 "Cell line - derived from xenograft tumour",
@@ -122,6 +123,7 @@
                 "Primary tumour",
                 "Recurrent tumour",
                 "Tumour - unknown if derived from primary or metastatic",
+                "Xenograft - derived from metastatic tumour",
                 "Xenograft - derived from primary tumour",
                 "Xenograft - derived from tumour cell line"
               ],
@@ -141,7 +143,7 @@
               "examples": "hnc_12,CCG_34_94583,BRCA47832-3239",
               "displayName": "Submitter Sample ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "sample_type",
@@ -191,7 +193,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Donor's last known state of living or deceased.",
@@ -512,6 +514,21 @@
               "units": "months",
               "dependsOn": "donor.contraception_type"
             }
+          },
+          {
+            "description": "If the donor became lost to follow up, indicate the identifier of the clinical event (eg. submitter_primary_diagnosis_id, submitter_treatment_id or submitter_follow_up_id) after which the donor became lost to follow up.",
+            "name": "lost_to_followup_after_clinical_event_id",
+            "valueType": "string",
+            "restrictions": {
+              "script": [
+                "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n      \n        /* checks for a string just consisting of whitespace */\n        const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n        \n        if (currField != null && !(checkforEmpty(currField))) {\n           const vitalStatus = $row.vital_status.trim().toLowerCase();\n\n           if (vitalStatus === \"deceased\") {\n              result = {valid: false, message: `${$name} cannot be submitted if the donor's vital_status is deceased.`}\n           }\n        }\n        return result;\n    })"
+              ]
+            },
+            "meta": {
+              "displayName": "Lost To Follow Up After Clinical Event",
+              "foreignKey": "primary_diagnosis.submitter_primary_diagnosis_id",
+              "validationDependency": true
+            }
           }
         ]
       },
@@ -542,7 +559,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_specimen_id",
@@ -554,7 +571,7 @@
               "foreignKey": "sample_registration.submitter_specimen_id",
               "displayName": "Submitter Specimen ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_primary_diagnosis_id",
@@ -566,7 +583,7 @@
               "foreignKey": "primary_diagnosis.submitter_primary_diagnosis_id",
               "displayName": "Submitter Primary Diagnosis ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "pathological_tumour_staging_system",
@@ -1002,7 +1019,7 @@
                 "Grade Group 5"
               ],
               "script": [
-                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
               ]
             }
           },
@@ -1105,14 +1122,14 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_primary_diagnosis_id",
             "valueType": "string",
             "description": "Unique identifier of the primary diagnosis event, assigned by the data provider.",
             "meta": { "primaryId": true, "displayName": "Submitter Primary Diagnosis ID" },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "age_at_diagnosis",
@@ -1201,7 +1218,7 @@
             "valueType": "string",
             "restrictions": {
               "script": [
-                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable', 'unknown'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
               ],
               "codeList": [
                 "Imaging",
@@ -1607,7 +1624,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -1618,7 +1635,7 @@
               "primaryId": true,
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_primary_diagnosis_id",
@@ -1630,7 +1647,7 @@
               "foreignKey": "primary_diagnosis.submitter_primary_diagnosis_id",
               "displayName": "Submitter Primary Diagnosis ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "treatment_type",
@@ -1835,7 +1852,7 @@
             "restrictions": {
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })",
-                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed progressive disease',\n            'physician assessed stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
               ],
               "codeList": [
                 "Complete remission",
@@ -1860,6 +1877,7 @@
                 "Partial response",
                 "Physician assessed complete response",
                 "Physician assessed partial response",
+                "Physician assessed progressive disease",
                 "Physician assessed stable disease",
                 "Progressive disease",
                 "Stable disease"
@@ -2907,7 +2925,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -2919,7 +2937,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "drug_rxnormcui",
@@ -2961,13 +2979,14 @@
             "valueType": "number",
             "restrictions": {
               "script": [
-                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n        result = {\n          valid: false,\n          message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n        };\n      }\n      return result;\n  })"
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n   \n      // Check for when chemotherapy dose has a clinical exception value of 'not applicable'\n      if ($row.chemotherapy_drug_dose_units && $row.chemotherapy_drug_dose_units != null && !(checkforEmpty($row.chemotherapy_drug_dose_units)) && $row.chemotherapy_drug_dose_units.trim().toLowerCase() === 'not applicable') {\n        if ($field && $field != null && !(checkforEmpty($field))) {\n          result = {\n            valid: false,\n            message: `The '${$name}' field cannot be submitted when 'chemotherapy_drug_dose_units' = 'Not applicable'`\n          };\n        }\n      }\n      else {\n        if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n          result = {\n            valid: false,\n            message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n          };\n        }\n      }\n      return result;\n  })"
               ],
               "range": { "exclusiveMin": 0 }
             },
             "meta": {
               "core": true,
               "displayName": "Prescribed Cumulative Drug Dose",
+              "validationDependency": true,
               "dependsOn": "chemotherapy.actual_cumulative_drug_dose",
               "notes": "Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' field must be submitted."
             }
@@ -2978,13 +2997,14 @@
             "valueType": "number",
             "restrictions": {
               "script": [
-                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n        result = {\n          valid: false,\n          message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n        };\n      }\n      return result;\n  })"
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n   \n      // Check for when chemotherapy dose has a clinical exception value of 'not applicable'\n      if ($row.chemotherapy_drug_dose_units && $row.chemotherapy_drug_dose_units != null && !(checkforEmpty($row.chemotherapy_drug_dose_units)) && $row.chemotherapy_drug_dose_units.trim().toLowerCase() === 'not applicable') {\n        if ($field && $field != null && !(checkforEmpty($field))) {\n          result = {\n            valid: false,\n            message: `The '${$name}' field cannot be submitted when 'chemotherapy_drug_dose_units' = 'Not applicable'`\n          };\n        }\n      }\n      else {\n        if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n          result = {\n            valid: false,\n            message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n          };\n        }\n      }\n      return result;\n  })"
               ],
               "range": { "exclusiveMin": 0 }
             },
             "meta": {
               "core": true,
               "displayName": "Actual Cumulative Drug Dose",
+              "validationDependency": true,
               "dependsOn": "chemotherapy.prescribed_cumulative_drug_dose",
               "notes": "Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' field must be submitted."
             }
@@ -3055,7 +3075,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -3067,7 +3087,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "drug_rxnormcui",
@@ -3164,7 +3184,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -3176,7 +3196,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "radiation_therapy_modality",
@@ -3272,7 +3292,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -3284,7 +3304,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "immunotherapy_type",
@@ -3398,7 +3418,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_specimen_id",
@@ -3411,7 +3431,7 @@
               "displayName": "Submitter Specimen ID",
               "notes": "Please refer to documentation for instructions on how to submit a specimen that was resected during surgery: https://docs.icgc-argo.org/docs/submission/submitting-clinical-data#submitting-data-in-surgery-file"
             },
-            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -3423,7 +3443,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "surgery_type",
@@ -3699,7 +3719,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Unique identifier for a follow-up event in a donor's clinical record, assigned by the data provider.",
@@ -3710,7 +3730,7 @@
               "primaryId": true,
               "displayName": "Submitter Follow-Up ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Interval from the primary diagnosis date to the follow-up date, in days.",
@@ -3753,7 +3773,7 @@
               "displayName": "Submitter Primary Diagnosis ID",
               "primaryId": true
             },
-            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_treatment_id",
@@ -3765,7 +3785,7 @@
               "foreignKey": "treatment.submitter_treatment_id",
               "displayName": "Submitter Treatment ID"
             },
-            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Indicate the donor's weight, in kilograms (kg), at the time of follow-up.",
@@ -4440,7 +4460,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Indicate donor's self-reported smoking status and history. (Reference: caDSR CDE ID 2181650)",
@@ -4706,7 +4726,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Unique identifier of the relative, assigned by the data provider.",
@@ -4717,7 +4737,7 @@
               "primaryId": true,
               "notes": "This field is required to ensure that family members are identified in unique records.  Ids can be as simple as an incremented numeral to ensure uniqueness."
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "description": "Indicate if donor has any genetic relatives with a history of cancer. (Reference: NCIt C159104, caDSR CDE ID 6161023)",
@@ -4869,7 +4889,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "submitter_specimen_id",
@@ -4883,7 +4903,7 @@
               "notes": "Only one of ['submitter_specimen_id', 'submitter_primary_diagnosis_id', 'submitter_treatment_id', 'submitter_follow_up_id'] is required. If the biomarker test is not associated with a specimen or primary diagnosis, treatment or follow up event, then the 'test_interval' field will be required."
             },
             "restrictions": {
-              "regex": "^[A-Za-z0-9\\-\\._]{1,64}",
+              "regex": "^[A-Za-z0-9\\-\\._]{1,64}$",
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let missing = true;\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n\n      const identifierFields = ['submitter_specimen_id', 'submitter_treatment_id', 'submitter_primary_diagnosis_id', 'submitter_follow_up_id', 'test_interval'];\n     \n      if (!$field || checkforEmpty($field) || $field === null) { \n        for (let idField of identifierFields) {\n          if (!$row[idField] || checkforEmpty($row[idField]) || $row[idField] === null) {\n            continue;\n          }\n          else {\n            missing = false;\n          }\n        }\n        if (missing === true && (!$row.test_interval || checkforEmpty($row.test_interval) || $row.test_interval === null)) {\n          result = {\n            valid: false,\n            message: `The biomarker test must be associated with one clinical event or time interval. Please submit one of [submitter_specimen_id, submitter_primary_diagnosis_id, submitter_treatment_id, submitter_follow_up_id] OR the 'test_interval' field.`};\n        }\n      }\n      else if ($field && !(checkforEmpty($field)) && $field != null) {\n        for (let idField of identifierFields) {\n          if (($name != idField) && ($row[idField] && $row[idField] != null && !(checkforEmpty($row[idField])))) {\n            result = {\n              valid: false,\n              message: `Cannot submit both '${$name}' and '${idField}'. The biomarker test can only be associated with one event clinical identifier. If it is not associated with a clinical event, then the 'test_interval' field must be submitted. If the biomarker test was done during two clinical events, then submit biomarker test as new row in table.`};\n            break;\n          }\n        }\n      }\n      return result;\n  })"
               ]
@@ -4901,7 +4921,7 @@
               "notes": "Only one of ['submitter_specimen_id', 'submitter_primary_diagnosis_id', 'submitter_treatment_id', 'submitter_follow_up_id'] is required. If the biomarker test is not associated with a specimen or primary diagnosis, treatment or follow up event, then the 'test_interval' field will be required."
             },
             "restrictions": {
-              "regex": "^[A-Za-z0-9\\-\\._]{1,64}",
+              "regex": "^[A-Za-z0-9\\-\\._]{1,64}$",
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let missing = true;\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n\n      const identifierFields = ['submitter_specimen_id', 'submitter_treatment_id', 'submitter_primary_diagnosis_id', 'submitter_follow_up_id', 'test_interval'];\n     \n      if (!$field || checkforEmpty($field) || $field === null) { \n        for (let idField of identifierFields) {\n          if (!$row[idField] || checkforEmpty($row[idField]) || $row[idField] === null) {\n            continue;\n          }\n          else {\n            missing = false;\n          }\n        }\n        if (missing === true && (!$row.test_interval || checkforEmpty($row.test_interval) || $row.test_interval === null)) {\n          result = {\n            valid: false,\n            message: `The biomarker test must be associated with one clinical event or time interval. Please submit one of [submitter_specimen_id, submitter_primary_diagnosis_id, submitter_treatment_id, submitter_follow_up_id] OR the 'test_interval' field.`};\n        }\n      }\n      else if ($field && !(checkforEmpty($field)) && $field != null) {\n        for (let idField of identifierFields) {\n          if (($name != idField) && ($row[idField] && $row[idField] != null && !(checkforEmpty($row[idField])))) {\n            result = {\n              valid: false,\n              message: `Cannot submit both '${$name}' and '${idField}'. The biomarker test can only be associated with one event clinical identifier. If it is not associated with a clinical event, then the 'test_interval' field must be submitted. If the biomarker test was done during two clinical events, then submit biomarker test as new row in table.`};\n            break;\n          }\n        }\n      }\n      return result;\n  })"
               ]
@@ -4919,7 +4939,7 @@
               "notes": "Only one of ['submitter_specimen_id', 'submitter_primary_diagnosis_id', 'submitter_treatment_id', 'submitter_follow_up_id'] is required. If the biomarker test is not associated with a specimen or primary diagnosis, treatment or follow up event, then the 'test_interval' field will be required."
             },
             "restrictions": {
-              "regex": "^[A-Za-z0-9\\-\\._]{1,64}",
+              "regex": "^[A-Za-z0-9\\-\\._]{1,64}$",
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let missing = true;\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n\n      const identifierFields = ['submitter_specimen_id', 'submitter_treatment_id', 'submitter_primary_diagnosis_id', 'submitter_follow_up_id', 'test_interval'];\n     \n      if (!$field || checkforEmpty($field) || $field === null) { \n        for (let idField of identifierFields) {\n          if (!$row[idField] || checkforEmpty($row[idField]) || $row[idField] === null) {\n            continue;\n          }\n          else {\n            missing = false;\n          }\n        }\n        if (missing === true && (!$row.test_interval || checkforEmpty($row.test_interval) || $row.test_interval === null)) {\n          result = {\n            valid: false,\n            message: `The biomarker test must be associated with one clinical event or time interval. Please submit one of [submitter_specimen_id, submitter_primary_diagnosis_id, submitter_treatment_id, submitter_follow_up_id] OR the 'test_interval' field.`};\n        }\n      }\n      else if ($field && !(checkforEmpty($field)) && $field != null) {\n        for (let idField of identifierFields) {\n          if (($name != idField) && ($row[idField] && $row[idField] != null && !(checkforEmpty($row[idField])))) {\n            result = {\n              valid: false,\n              message: `Cannot submit both '${$name}' and '${idField}'. The biomarker test can only be associated with one event clinical identifier. If it is not associated with a clinical event, then the 'test_interval' field must be submitted. If the biomarker test was done during two clinical events, then submit biomarker test as new row in table.`};\n            break;\n          }\n        }\n      }\n      return result;\n  })"
               ]
@@ -4937,7 +4957,7 @@
               "notes": "Only one of ['submitter_specimen_id', 'submitter_primary_diagnosis_id', 'submitter_treatment_id', 'submitter_follow_up_id'] is required. If the biomarker test is not associated with a specimen or primary diagnosis, treatment or follow up event, then the 'test_interval' field will be required."
             },
             "restrictions": {
-              "regex": "^[A-Za-z0-9\\-\\._]{1,64}",
+              "regex": "^[A-Za-z0-9\\-\\._]{1,64}$",
               "script": [
                 "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let missing = true;\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n\n      const identifierFields = ['submitter_specimen_id', 'submitter_treatment_id', 'submitter_primary_diagnosis_id', 'submitter_follow_up_id', 'test_interval'];\n     \n      if (!$field || checkforEmpty($field) || $field === null) { \n        for (let idField of identifierFields) {\n          if (!$row[idField] || checkforEmpty($row[idField]) || $row[idField] === null) {\n            continue;\n          }\n          else {\n            missing = false;\n          }\n        }\n        if (missing === true && (!$row.test_interval || checkforEmpty($row.test_interval) || $row.test_interval === null)) {\n          result = {\n            valid: false,\n            message: `The biomarker test must be associated with one clinical event or time interval. Please submit one of [submitter_specimen_id, submitter_primary_diagnosis_id, submitter_treatment_id, submitter_follow_up_id] OR the 'test_interval' field.`};\n        }\n      }\n      else if ($field && !(checkforEmpty($field)) && $field != null) {\n        for (let idField of identifierFields) {\n          if (($name != idField) && ($row[idField] && $row[idField] != null && !(checkforEmpty($row[idField])))) {\n            result = {\n              valid: false,\n              message: `Cannot submit both '${$name}' and '${idField}'. The biomarker test can only be associated with one event clinical identifier. If it is not associated with a clinical event, then the 'test_interval' field must be submitted. If the biomarker test was done during two clinical events, then submit biomarker test as new row in table.`};\n            break;\n          }\n        }\n      }\n      return result;\n  })"
               ]
@@ -5287,7 +5307,7 @@
               "foreignKey": "sample_registration.submitter_donor_id",
               "displayName": "Submitter Donor ID"
             },
-            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}" }
+            "restrictions": { "required": true, "regex": "^[A-Za-z0-9\\-\\._]{1,64}$" }
           },
           {
             "name": "prior_malignancy",
@@ -5386,14 +5406,16 @@
         ]
       }
     ],
-    "_id": "645bef33d6ccc60031fa68dc",
+    "_id": "6530337c9a767100313b83a2",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "1.17",
-    "createdAt": "2023-05-10T19:23:31.428Z",
-    "updatedAt": "2023-05-10T19:23:31.428Z",
+    "version": "1.19",
+    "createdAt": "2023-10-18T19:35:24.055Z",
+    "updatedAt": "2023-10-18T19:35:24.055Z",
     "__v": 0
   },
   "versions": [
+    { "version": "1.19", "date": "2023-10-18T19:35:24.055Z" },
+    { "version": "1.18", "date": "2023-08-25T15:45:15.320Z" },
     { "version": "1.17", "date": "2023-05-10T19:23:31.428Z" },
     { "version": "1.16", "date": "2022-12-22T21:34:51.645Z" },
     { "version": "1.15", "date": "2022-09-23T20:14:56.970Z" },
@@ -5420,5 +5442,5 @@
     { "version": "0.6", "date": "2020-03-27T20:53:14.913Z" },
     { "version": "0.5", "date": "2020-03-06T21:28:41.074Z" }
   ],
-  "currentVersion": { "version": "1.17", "date": "2023-05-10T19:23:31.428Z" }
+  "currentVersion": { "version": "1.19", "date": "2023-10-18T19:35:24.055Z" }
 }

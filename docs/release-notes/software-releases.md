@@ -19,6 +19,21 @@ None to report.
 None to report.
 ------>
 
+## October 18, 2023: Lost to Followup
+
+Data Platform - UI 1.124.6 - API 3.41.0
+
+- We are thrilled to announce the release of lost to follow up feature, this new feature that allows programs to submit data with lost to followup information within the platform. Information on additional fields can be found in the ARGO Dictionary
+- Minor API fixes.
+
+## August 24, 2023: Bug Fixes
+
+Data Platform - UI 1.124.1 - API 3.40.0
+
+- On the Submitted Data page, misplaced fields from the Surgery table are removed from the Treatment table.
+- The error message box in Submitted Data page now displays accurate error messages when clinical data is updated.
+- Minor API fixes.
+
 ## June 8, 2023: Clinical Exceptions And Program Entity Page
 
 Data Platform - 1.123.2 - API 3.39.1
