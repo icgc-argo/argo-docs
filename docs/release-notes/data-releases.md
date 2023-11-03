@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 #### New Updates
 
-ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Genome Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), Pancreatic Cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and Papillary Thyroid Cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
+ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Cancer Genome Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), Pancreatic Cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and Papillary Thyroid Cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
 
 This release includes:
 
