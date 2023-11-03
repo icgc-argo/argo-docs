@@ -18,7 +18,7 @@ This release includes:
 
 - APGI-AU: New clinical data has been added for 84 donors
 - PACA-CA: 38 previously released donors now have new clinical data
-- PTC-SA: 239 previously released donors now have new clinical data
+- PTC-SA: New clinical data has been added for 239 donors
 
 ## Data Release 6.0
 
