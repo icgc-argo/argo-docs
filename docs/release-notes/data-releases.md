@@ -26,7 +26,7 @@ This release includes:
 
 #### New Updates
 
-ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Genome Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
+ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Cancer Genome Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
 
 This release includes:
 
