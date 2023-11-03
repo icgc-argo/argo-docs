@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 #### New Updates
 
-ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Cancer Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), pancreatic cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
+ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Genome Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), Pancreatic Cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and Papillary Thyroid Cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
 
 This release includes:
 
@@ -26,7 +26,7 @@ This release includes:
 
 #### New Updates
 
-ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Cancer Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
+ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Genome Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
 
 This release includes:
 
