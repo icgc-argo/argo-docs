@@ -16,7 +16,7 @@ ICGC ARGO is excited to announce the first release of **new clinical data** avai
 
 This release includes:
 
-- APGI-AU: 84 previously released donors now have new clinical data
+- APGI-AU: New clinical data has been added for 84 donors
 - PACA-CA: 38 previously released donors now have new clinical data
 - PTC-SA: 239 previously released donors now have new clinical data
 
