@@ -6,6 +6,20 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 7.0
+
+**Release Date:** November 06, 2023
+
+#### New Updates
+
+ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Cancer Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), pancreatic cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and papillary thyroid cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
+
+This release includes:
+
+- APGI-AU: 84 previously released donors now have new clinical data
+- PACA-CA: 38 previously released donors now have new clinical data
+- PTC-SA: 239 previously released donors now have new clinical data
+
 ## Data Release 6.0
 
 **Release Date:** April 05, 2023
