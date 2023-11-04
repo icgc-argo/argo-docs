@@ -6,13 +6,27 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 7.0
+
+**Release Date:** November 06, 2023
+
+#### New Updates
+
+ICGC ARGO is excited to announce the first release of **new clinical data** available now for Australian Pancreatic Cancer Genome Initiative [(APGI-AU)](https://www.icgc-argo.org/page/145/apgi-au), Pancreatic Cancer [(PACA-CA)](https://www.icgc-argo.org/page/96/panchope), and Papillary Thyroid Cancer [(PTC-SA)](https://www.icgc-argo.org/page/98/ptcp). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU.
+
+This release includes:
+
+- APGI-AU: New clinical data has been added for 84 donors
+- PACA-CA: New clinical data has been added for 38 donors
+- PTC-SA: New clinical data has been added for 239 donors
+
 ## Data Release 6.0
 
 **Release Date:** April 05, 2023
 
 #### New Updates
 
-ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Cancer Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
+ICGC ARGO is excited to announce the first release of a **new** RNA-Seq analysis workflow: [RNA Seq Alignment](/docs/analysis-workflows/rna-alignment), available now for transcriptome sequencing data from Australian Pancreatic Cancer Genome Initiative (APGI-AU). APGI-AU was a member of the original ICGC-25K data portal as PACA-AU. While clinical data is being actively submitted by the program, a selection of its RNA-Seq data has been reprocessed against the latest GRCh38 Human Reference Genome using the ARGO RNA Seq Alignment Workflow.
 
 This release includes:
 
