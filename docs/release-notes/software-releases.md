@@ -19,6 +19,12 @@ None to report.
 None to report.
 ------>
 
+## November 6, 2023: Clinical Downloads
+
+Data Platform - UI 1.125.1 - API 3.42.0
+
+- Clinical data is now available to download! You can access the clinical data that corresponds to any file's donor through the download dropdown of the File Repository.
+
 ## October 18, 2023: Lost to Followup
 
 Data Platform - UI 1.124.6 - API 3.41.0
