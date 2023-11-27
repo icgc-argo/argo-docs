@@ -699,9 +699,10 @@ Please follow the [instructions](https://docs.icgc-argo.org/docs/data-access/use
 
 Check URLs for `Song-Client` and `Score-Client` to make sure they both are correct. For example the Song/Score URLs for RDPC hosted at OICR Toronto are:
 
-- Song URL: `https://submission-song.rdpc.argo.genomeinformatics.org`
-- Score URL: `https://submission-score.rdpc.argo.genomeinformatics.org`
-- Object storage space might be undergoing maintenance, check site banners for updates
+    - Song URL: `https://submission-song.rdpc.argo.genomeinformatics.org`
+    - Score URL: `https://submission-score.rdpc.argo.genomeinformatics.org`
+
+- **The Object Storage providers might be undergoing maintenance, check site banners for updates**
 
 ### EGA data downloading related issues
 
