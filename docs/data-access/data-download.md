@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 The [ICGC ARGO Data Platform](https://platform.icgc-argo.org/) contains a harmonized dataset against the latest reference genome, GRCh38. For information on the data analysis and data types, please see [Analysis Pipeline](/docs/analysis-workflows/analysis-overview) documentation.
 
+> **IMPORTANT: Please make sure to upgrade the `score-client` or Docker distribution to version `5.10.0` or later.**
+
 ## Data Download
 
 The ARGO Data Platform uses the score-client as a file download manager. The score-client facilitates the transfer of data with resumable downloads and has built in BAM/CRAM slicing to make data download fast and smooth.
