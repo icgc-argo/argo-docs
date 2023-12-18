@@ -18,7 +18,7 @@ The website, including the Docusaurus library, custom pages and components, and 
 
 To run the docs site requires the following:
 
-- NodeJS version 12.13+
+- NodeJS version 15
   - This is done best using nvm (node version manager). A good summary of this process can be found here for your reference: https://gist.github.com/d2s/372b5943bce17b964a79
 
 ## Contributing
