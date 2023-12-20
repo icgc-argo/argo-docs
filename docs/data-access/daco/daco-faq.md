@@ -64,7 +64,7 @@ platform_key: DOCS_DACO_FAQ
 
 6. **What is a lay summary?**
 
-   A lay summary describes your research project using lay language for the general public and it allows the public and broader scientific and clinical communities to understand the research and its goals, impact and applications. It should explain in plain language why you are asking the research question, what you expect to find out and how you will use your findings . Please ensure to mention **ICGC Controlled Data** in your lay summary. Consult the [lay summary guide](/docs/data-access/daco/lay-summary-guide), which includes before and after examples of real lay summaries. If your application is approved, your applicant's name, institution, and scientific lay summary may be included in a public registry of projects that have been granted access to ICGC Controlled Data.
+   A lay summary describes your research project using lay language for the general public and it allows the public and broader scientific and clinical communities to understand the research and its goals, impact and applications. It should explain in plain language why you are asking the research question, what you expect to find out and how you will use your findings. Please ensure to mention **ICGC Controlled Data** in your lay summary. Consult the [lay summary guide](/docs/data-access/daco/lay-summary-guide), which includes before and after examples of real lay summaries. If your application is approved, your applicant's name, institution, and scientific lay summary may be included in a public registry of projects that have been granted access to ICGC Controlled Data.
 
 7. **How can I add/remove Collaborators from my approved application?**
 
@@ -139,8 +139,8 @@ Approved users may only use the ICGC Controlled Data for the objectives and anal
 
 19. **How do I renew the application for an additional year of access?**
 
-DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website from 90 days prior to expiry and up to 90 days after expiry. In order to renew your application, please click the renew button at the top of the application and make any changes (if necessary) to your currently approved application before re-submitting it online.
+DACO approval will expire after two years of access. You may renew your application on the ICGC DACO website from 90 days prior to expiry and up to 90 days after expiry. For more details, see our section covering [How to Renew an Application](https://docs.icgc-argo.org/docs/data-access/daco/renew-close#how-to-renew-an-application).
 
 20. **Our access to the controlled data has expired after our 2-year approval. Can I still renew it?**
 
-If you wish to regain access, you may, within 90 days of expiry, verify or update information in your application and re-submit it for annual renewal. Beyond this period, your application will be closed and you will then have to submit a new application in order to be granted access.
+Yes, if your access has expired, you have up to 90 days post-expiry to renew your application. Beyond this 90-day window, your application will be closed, and you will need to submit a completely new application to regain access.
