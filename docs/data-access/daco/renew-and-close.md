@@ -41,13 +41,13 @@ The DACO approval expires after 2 years of access. An email reminder will be sen
 
    ![DACO renew button for an expired application](/assets/data-access/daco-renew-button.png)
 
-2. Upon clicking the **Renew** button, a new, separate draft renewal application is created. This draft is linked to the original application for reference purposes. The applicant must complete this new draft application for renewal. The original application cannot be edited directly.
+2. Upon clicking the **Renew** button, a new, separate draft renewal application is created. This draft is linked to the original application for reference only. The applicant must complete this new draft application for renewal.
 
-3. Upon clicking the **Renew** button, a new, separate draft renewal application is created. This draft is linked to the original application for reference only. The applicant must complete this new draft application for renewal. While the original application remains in the APPROVED state some fields can be edited. Collaborators can be added or removed, and ethics documents can be appended. Any changes made do not transfer to the renewal draft.
+   - **Note:** While the original application remains in the APPROVED state some fields can be edited. Collaborators can be added or removed, and ethics documents can be appended.
 
    ![DACO renewal application](/assets/data-access/daco-renewal-application.png)
 
-4. The DACO Administrator will be notified that a renewal application is ready for review. If there are no issues and/or the application remains consistent with the previous version, the project team should be quickly approved for an additional 2 years.
+3. Following submission, the DACO Administrator will be notified that a renewal application is ready for review. If there are no issues and/or the application remains consistent with the previous version, the project team should be quickly approved for an additional 2 years.
 
 ### Expired and Non-renewable
 
