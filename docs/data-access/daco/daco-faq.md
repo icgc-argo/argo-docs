@@ -143,4 +143,4 @@ DACO approval will expire after two years of access. You may renew your applicat
 
 20. **Our access to the controlled data has expired after our 2-year approval. Can I still renew it?**
 
-Yes, if your access has expired, you have up to 90 days post-expiry to renew your application. Beyond this 90-day window, your application will be closed, and you will need to submit a completely new application to regain access.
+Yes, if your access has expired, you have up to 90 days post-expiry to renew your application. Beyond this 90-day window, your application will be permanently expired, and you will need to submit a new application to regain access.
