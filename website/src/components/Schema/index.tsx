@@ -200,7 +200,7 @@ const SchemaView = ({
   } = context;
 
   const downloadTsvFileTemplate = (fileName) => {
-    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/proxy/template/${fileName}`);
   };
 
   /**
