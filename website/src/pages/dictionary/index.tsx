@@ -148,7 +148,7 @@ function DictionaryPage() {
   const [selectedTab, setSelectedTab] = React.useState(TAB_STATE.DETAILS);
 
   const downloadTsvFileTemplate = (fileName) =>
-    window.location.assign(`${GATEWAY_API_ROOT}clinical/template/${fileName}`);
+    window.location.assign(`${GATEWAY_API_ROOT}clinical/proxy/template/${fileName}`);
 
   // filter schemas
   const filteredSchemas = React.useMemo(
