@@ -329,7 +329,7 @@ nextflow run main.nf \
 :::note
 
 - Field `path` in table `files.tsv` is `Required` for local data and it will have to be formatted using the file path **relative** to the directory you run the data submission workflow
-- If data is submitted through a laptop, users may come across issue that required memory exceeds available memory. In such case, add `--score_mem 16 --score_cpus 2` in the nextflow command. The required memory and cup use can be adjusted in this argument. 
+- If data is submitted through a laptop, users may come across issue that required memory exceeds available memory. In such case, add `--score_mem 16 --score_cpus 2` in the nextflow command. The required memory and cpu use can be adjusted in these arguments. 
 
 :::
 
