@@ -328,6 +328,7 @@ nextflow run main.nf \
 
 :::note
 
+- If local computer has Mac M1 (ARM64) system, you may run into docker platform issue. To solve this issue, users can run `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before run the nextflow pipleline.
 - Field `path` in table `files.tsv` is `Required` for local data and it will have to be formatted using the file path **relative** to the directory you run the data submission workflow
 
 :::
