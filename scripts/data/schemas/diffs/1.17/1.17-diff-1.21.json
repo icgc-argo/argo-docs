@@ -1,0 +1,630 @@
+{
+  "schemas": {
+    "sample_registration": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_specimen_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "specimen_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Cell line - derived from normal",
+                "Cell line - derived from tumour",
+                "Cell line - derived from xenograft tumour",
+                "Metastatic tumour - additional metastatic",
+                "Metastatic tumour - metastasis local to lymph node",
+                "Metastatic tumour - metastasis to distant location",
+                "Metastatic tumour",
+                "Normal - tissue adjacent to primary tumour",
+                "Normal",
+                "Primary tumour - additional new primary",
+                "Primary tumour - adjacent to normal",
+                "Primary tumour",
+                "Recurrent tumour",
+                "Tumour - unknown if derived from primary or metastatic",
+                "Xenograft - derived from primary tumour",
+                "Xenograft - derived from tumour cell line"
+              ],
+              "right": [
+                "Cell line - derived from metastatic tumour",
+                "Cell line - derived from normal",
+                "Cell line - derived from tumour",
+                "Cell line - derived from xenograft tumour",
+                "Metastatic tumour - additional metastatic",
+                "Metastatic tumour - metastasis local to lymph node",
+                "Metastatic tumour - metastasis to distant location",
+                "Metastatic tumour",
+                "Normal - tissue adjacent to primary tumour",
+                "Normal",
+                "Primary tumour - additional new primary",
+                "Primary tumour - adjacent to normal",
+                "Primary tumour",
+                "Recurrent tumour",
+                "Tumour - unknown if derived from primary or metastatic",
+                "Xenograft - derived from metastatic tumour",
+                "Xenograft - derived from primary tumour",
+                "Xenograft - derived from tumour cell line"
+              ],
+              "data": {
+                "added": [
+                  "Cell line - derived from metastatic tumour",
+                  "Xenograft - derived from metastatic tumour"
+                ],
+                "deleted": []
+              }
+            }
+          }
+        },
+        "submitter_sample_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "donor": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {
+        "lost_to_followup_after_clinical_event_id": {
+          "changeType": "created",
+          "description": "If the donor became lost to follow up, indicate the identifier of the clinical event (eg. submitter_primary_diagnosis_id, submitter_treatment_id or submitter_follow_up_id) after which the donor became lost to follow up.",
+          "name": "lost_to_followup_after_clinical_event_id",
+          "valueType": "string",
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n      \n        /* checks for a string just consisting of whitespace */\n        const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n        \n        if (currField != null && !(checkforEmpty(currField))) {\n           const vitalStatus = $row.vital_status.trim().toLowerCase();\n\n           if (vitalStatus === \"deceased\") {\n              result = {valid: false, message: `${$name} cannot be submitted if the donor's vital_status is deceased.`}\n           }\n        }\n        return result;\n    })"
+            ]
+          },
+          "meta": {
+            "displayName": "Lost To Follow Up After Clinical Event",
+            "foreignKey": "primary_diagnosis.submitter_primary_diagnosis_id",
+            "validationDependency": true
+          }
+        }
+      },
+      "deleted": {}
+    },
+    "specimen": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_specimen_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_primary_diagnosis_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "tumour_grade": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+              ]
+            }
+          }
+        },
+        "percent_tumour_cells": {
+          "restrictions": {
+            "script": {
+              "left": null,
+              "right": [
+                "(function validate(inputs) {\n    // When $name is percent_tumour_cells, and $field is a number between 0 and 1\n    const {$row, $name, $field} = inputs;\n\n    const result = { valid: true, message: 'Ok' };\n    const measurementMethodExceptionTypes = ['not applicable'];\n\n    // checks for a string just consisting of whitespace\n    const checkforEmpty = (entry) => {\n      return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n\n    const fieldHasValue = $field && $field != null && !(checkforEmpty($field));\n    const measurementMethod = $row?.percent_tumour_cells_measurement_method?.trim?.().toLowerCase();\n\n    if (fieldHasValue) {\n      if (measurementMethodExceptionTypes.includes(measurementMethod)) {\n        return {\n          valid: false,\n          message: `The '${$name}' field cannot be submitted when 'percent_tumour_cells_measurement_method' = 'Not applicable'`\n        };\n      }\n    }\n\n    return result;\n  })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "primary_diagnosis": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_primary_diagnosis_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "lymph_nodes_examined_method": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n\n      const notExamined = ['cannot be determined', 'no', 'no lymph nodes found in resected specimen', 'not applicable', 'unknown'];\n      /* checks for a string just consisting of whitespace */\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if (!$row.lymph_nodes_examined_status || $row.lymph_nodes_examined_status === null || checkforEmpty($row.lymph_nodes_examined_status)) {\n        result = {valid: false, message: `The 'lymph_nodes_examined_status' field must be submitted.`};\n      }\n      else {\n        const lymphNodesExaminedStatus = $row.lymph_nodes_examined_status.trim().toLowerCase();\n      \n        if (!$field || $field === null || checkforEmpty($field)) {\n          if (lymphNodesExaminedStatus === 'yes') {\n            result = { valid: false, message: `The '${$name}' field must be submitted if the 'lymph_nodes_examined_status' field is 'Yes'`};\n          }\n        }\n        else {\n          if (notExamined.includes(lymphNodesExaminedStatus)) {\n            result = { valid: false, message: `The '${$name}' field should not be submitted if the 'lymph_nodes_examined_status' field is '${lymphNodesExaminedStatus}'`};\n          }\n        }\n      }\n    return result;\n})"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "treatment": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_primary_diagnosis_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "treatment_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "right": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "End of life care",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "data": { "added": ["End of life care"], "deleted": [] }
+            }
+          }
+        },
+        "is_primary_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_start_interval": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_duration": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "days_per_cycle": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "number_of_cycles": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_intent": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_setting": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "response_to_treatment_criteria_method": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "response_to_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })",
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })",
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed progressive disease',\n            'physician assessed stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
+              ]
+            },
+            "codeList": {
+              "left": [
+                "Complete remission",
+                "Complete remission with incomplete hematologic recovery (CRi)",
+                "Complete remission without minimal residual disease (CRMRD-)",
+                "Complete response",
+                "Cytogenetic complete remission (CRc)",
+                "Hematologic relapse (after CRMRD-, CR, CRi)",
+                "Immune complete response (iCR)",
+                "Immune confirmed progressive disease (iCPD)",
+                "Immune partial response (iPR)",
+                "Immune stable disease (iSD)",
+                "Immune unconfirmed progressive disease (iUPD)",
+                "Minor response",
+                "Molecular complete remission (CRm)",
+                "Molecular relapse (after CRMRD-)",
+                "Morphologic complete remission",
+                "Morphologic complete remission with incomplete blood count recovery (CRi)",
+                "Morphologic leukemia-free state",
+                "No evidence of disease (NED)",
+                "Partial remission",
+                "Partial response",
+                "Physician assessed complete response",
+                "Physician assessed partial response",
+                "Physician assessed stable disease",
+                "Progressive disease",
+                "Stable disease"
+              ],
+              "right": [
+                "Complete remission",
+                "Complete remission with incomplete hematologic recovery (CRi)",
+                "Complete remission without minimal residual disease (CRMRD-)",
+                "Complete response",
+                "Cytogenetic complete remission (CRc)",
+                "Hematologic relapse (after CRMRD-, CR, CRi)",
+                "Immune complete response (iCR)",
+                "Immune confirmed progressive disease (iCPD)",
+                "Immune partial response (iPR)",
+                "Immune stable disease (iSD)",
+                "Immune unconfirmed progressive disease (iUPD)",
+                "Minor response",
+                "Molecular complete remission (CRm)",
+                "Molecular relapse (after CRMRD-)",
+                "Morphologic complete remission",
+                "Morphologic complete remission with incomplete blood count recovery (CRi)",
+                "Morphologic leukemia-free state",
+                "No evidence of disease (NED)",
+                "Partial remission",
+                "Partial response",
+                "Physician assessed complete response",
+                "Physician assessed partial response",
+                "Physician assessed progressive disease",
+                "Physician assessed stable disease",
+                "Progressive disease",
+                "Stable disease"
+              ],
+              "data": { "added": ["Physician assessed progressive disease"], "deleted": [] }
+            }
+          }
+        },
+        "outcome_of_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "adverse_events": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      const coreFields = ['treatment_start_interval', 'treatment_duration', 'is_primary_treatment', 'treatment_intent', 'treatment_setting', 'response_to_treatment_criteria_method', 'response_to_treatment'];\n \n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      const treatmentType = ($row.treatment_type).map(value => value.toLowerCase());\n       \n      if (!treatmentType.includes(\"no treatment\") && coreFields.includes($name) && (!$field || $field === null || checkforEmpty($field))) {\n          result = { valid: false, message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentType}'`};\n      }\n      else if (treatmentType.includes(\"no treatment\") && ($field && $field != null && !(checkforEmpty($field)))) {\n        if (coreFields.includes($name) || (typeof($field) === 'string' && $field.trim().toLowerCase() != 'not applicable') || typeof($field) === 'number') {\n          result = { valid: false, message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentType}'`};\n        }\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "chemotherapy": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "prescribed_cumulative_drug_dose": {
+          "meta": { "validationDependency": { "left": null, "right": true } },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n        result = {\n          valid: false,\n          message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n        };\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n   \n      // Check for when chemotherapy dose has a clinical exception value of 'not applicable'\n      if ($row.chemotherapy_drug_dose_units && $row.chemotherapy_drug_dose_units != null && !(checkforEmpty($row.chemotherapy_drug_dose_units)) && $row.chemotherapy_drug_dose_units.trim().toLowerCase() === 'not applicable') {\n        if ($field && $field != null && !(checkforEmpty($field))) {\n          result = {\n            valid: false,\n            message: `The '${$name}' field cannot be submitted when 'chemotherapy_drug_dose_units' = 'Not applicable'`\n          };\n        }\n      }\n      else {\n        if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n          result = {\n            valid: false,\n            message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n          };\n        }\n      }\n      return result;\n  })"
+              ]
+            }
+          }
+        },
+        "actual_cumulative_drug_dose": {
+          "meta": { "validationDependency": { "left": null, "right": true } },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n      \n      if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n        result = {\n          valid: false,\n          message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n        };\n      }\n      return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n      const {$row, $name, $field} = inputs;\n      let result = {valid: true, message: \"Ok\"};\n      let checkField = \"\";\n\n      if ($name === 'actual_cumulative_drug_dose') { checkField = 'prescribed_cumulative_drug_dose'; }\n      else if ($name === 'prescribed_cumulative_drug_dose') { checkField = 'actual_cumulative_drug_dose'; }\n\n      // checks for a string just consisting of whitespace\n      const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n   \n      // Check for when chemotherapy dose has a clinical exception value of 'not applicable'\n      if ($row.chemotherapy_drug_dose_units && $row.chemotherapy_drug_dose_units != null && !(checkforEmpty($row.chemotherapy_drug_dose_units)) && $row.chemotherapy_drug_dose_units.trim().toLowerCase() === 'not applicable') {\n        if ($field && $field != null && !(checkforEmpty($field))) {\n          result = {\n            valid: false,\n            message: `The '${$name}' field cannot be submitted when 'chemotherapy_drug_dose_units' = 'Not applicable'`\n          };\n        }\n      }\n      else {\n        if ( (!$field || $field === null || checkforEmpty($field)) && (!($row[checkField]) || $row[checkField] === null || checkforEmpty(!($row[checkField])))) {\n          result = {\n            valid: false,\n            message: `Either the 'actual_cumulative_drug_dose' or the 'prescribed_cumulative_drug_dose' fields must be submitted.`\n          };\n        }\n      }\n      return result;\n  })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "hormone_therapy": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "radiation": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "immunotherapy": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "surgery": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_specimen_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "follow_up": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_follow_up_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_primary_diagnosis_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "exposure": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "family_history": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "family_relative_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "biomarker": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_specimen_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_primary_diagnosis_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_treatment_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        },
+        "submitter_follow_up_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "comorbidity": {
+      "updated": {
+        "submitter_donor_id": {
+          "restrictions": {
+            "regex": { "left": "^[A-Za-z0-9\\-\\._]{1,64}", "right": "^[A-Za-z0-9\\-\\._]{1,64}$" }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}

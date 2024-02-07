@@ -1033,7 +1033,12 @@
               "notes": "This field is only required if the specimen is a tumour.",
               "displayName": "Percent Tumour Cells"
             },
-            "restrictions": { "range": { "min": 0, "max": 1 } }
+            "restrictions": {
+              "range": { "min": 0, "max": 1 },
+              "script": [
+                "(function validate(inputs) {\n    // When $name is percent_tumour_cells, and $field is a number between 0 and 1\n    const {$row, $name, $field} = inputs;\n\n    const result = { valid: true, message: 'Ok' };\n    const measurementMethodExceptionTypes = ['not applicable'];\n\n    // checks for a string just consisting of whitespace\n    const checkforEmpty = (entry) => {\n      return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n\n    const fieldHasValue = $field && $field != null && !(checkforEmpty($field));\n    const measurementMethod = $row?.percent_tumour_cells_measurement_method?.trim?.().toLowerCase();\n\n    if (fieldHasValue) {\n      if (measurementMethodExceptionTypes.includes(measurementMethod)) {\n        return {\n          valid: false,\n          message: `The '${$name}' field cannot be submitted when 'percent_tumour_cells_measurement_method' = 'Not applicable'`\n        };\n      }\n    }\n\n    return result;\n  })"
+              ]
+            }
           },
           {
             "name": "percent_tumour_cells_measurement_method",
@@ -1661,6 +1666,7 @@
                 "Bone marrow transplant",
                 "Chemotherapy",
                 "Endoscopic therapy",
+                "End of life care",
                 "Hormonal therapy",
                 "Immunotherapy",
                 "No treatment",
@@ -5406,14 +5412,15 @@
         ]
       }
     ],
-    "_id": "653c18629a767100313b83a3",
+    "_id": "65c2707d7cdb85003127761c",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "1.20",
-    "createdAt": "2023-10-27T20:06:58.227Z",
-    "updatedAt": "2023-10-27T20:06:58.227Z",
+    "version": "1.21",
+    "createdAt": "2024-02-06T17:46:37.784Z",
+    "updatedAt": "2024-02-06T17:46:37.784Z",
     "__v": 0
   },
   "versions": [
+    { "version": "1.21", "date": "2024-02-06T17:46:37.784Z" },
     { "version": "1.20", "date": "2023-10-27T20:06:58.227Z" },
     { "version": "1.19", "date": "2023-10-18T19:35:24.055Z" },
     { "version": "1.18", "date": "2023-08-25T15:45:15.320Z" },
@@ -5443,5 +5450,5 @@
     { "version": "0.6", "date": "2020-03-27T20:53:14.913Z" },
     { "version": "0.5", "date": "2020-03-06T21:28:41.074Z" }
   ],
-  "currentVersion": { "version": "1.20", "date": "2023-10-27T20:06:58.227Z" }
+  "currentVersion": { "version": "1.21", "date": "2024-02-06T17:46:37.784Z" }
 }

@@ -20,6 +20,15 @@ None to report.
 
 ------>
 
+## Release 1.21
+
+**Release Date: Feburary 07, 2024**
+
+#### Updates
+
+- New permissible term `End of life care` added to `treatment_type` field in Treatment table.
+- Updated validation scripts for conditional fields `percent_tumour_cell` and `percent_tumour_cells_measurement_method` fields to take into account clinical exception values.
+
 ## Release 1.20
 
 **Release Date: October 30, 2023**
