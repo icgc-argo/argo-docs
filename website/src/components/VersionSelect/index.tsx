@@ -18,7 +18,7 @@ const VersionSelect = ({ value, onChange, versions, style }) => {
     <form>
       <div
         css={css`
-          width: 225px;
+          width: 230px;
           ${style}
         `}
       >
