@@ -23,13 +23,13 @@ None to report.
 
 Data Platform - UI 1.125.4 - API 3.42.2
 
-We've listened to your feedback on our submission process and are excited to announce these updates:
+This release sees the addition of new ways for data submitters to accommodate missing values or data:
 
-With this release, we have introduced **enhanced entity-level exceptions for numeric fields.** These exception rules allow numeric fields to accept "Unknown" and "Not Applicable" values when enabled. This enhancement dramatically improves the flexibility of data submissions.
+1.**Enhanced Entity-Level Exceptions** for Numeric Fields: These exception rules now permit numeric fields to accept "Unknown" and "Not Applicable" values when enabled.
 
-Additionally, we are excited to introduce the **missing entity exception feature.** This feature, when enabled, allows submitters the flexibility to exclude core entity fields, such as treatments and follow-ups, for specific donors. With this feature, data submitters have more options to manage their submissions efficiently, especially when certain information is unavailable.
+2.**New Missing Entity Exception Feature**: This feature allows submitters to exclude core entity fields, such as treatments and follow-ups, for specific donors.
 
-For more information on gaining access to entity exceptions, see our [clinical data exception policy.](https://www.icgc-argo.org/page/79/quality-standards-of-samples#:~:text=Clinical%20Data%20Exceptions%20Policy%C2%A0) We encourage data submitters to explore these new features and look forward to your feedback.
+For more information on gaining access to entity exceptions, see our [clinical data exception policy](https://www.icgc-argo.org/page/79/quality-standards-of-samples#:~:text=Clinical%20Data%20Exceptions%20Policy%C2%A0). We encourage data submitters to explore these new features and welcome any [feedback](https://www.icgc-argo.org/page/69/contact-us) they may have.
 
 ## November 6, 2023: Clinical Downloads
 
