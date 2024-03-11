@@ -16,10 +16,10 @@ Data Release 8.0 includes new clinical and molecular data Mutographs ([MUTO-INTL
 
 This release includes:
 
-- MUTO-INTL: New 448 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+- MUTO-INTL: 448 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
   - MUTO-INTL: 285/448 donors additionally have Sanger variant calls
   - MUTO-INTL: 9/448 donors have open access Sanger variant Calls
-- P1000-US: New 67 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+- P1000-US: 67 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
 
 ## Data Release 7.0
 
