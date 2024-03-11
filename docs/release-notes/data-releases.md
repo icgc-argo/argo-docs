@@ -6,6 +6,21 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 8.0
+
+**Release Date:** March 07, 2024
+
+#### New Updates
+
+Data Release 8.0 includes new clinical and molecular data Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
+
+This release includes:
+
+- MUTO-INTL: New 448 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - MUTO-INTL: 285/448 donors additionally have Sanger variant calls
+  - MUTO-INTL: 9/448 donors have open access Sanger variant Calls
+- P1000-US: New 67 donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+
 ## Data Release 7.0
 
 **Release Date:** November 06, 2023
