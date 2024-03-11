@@ -10,8 +10,6 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 **Release Date:** March 11, 2024
 
-#### New Updates
-
 Data Release 8.0 includes new clinical and molecular data from the Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
 
 This release includes:
