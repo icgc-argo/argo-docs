@@ -329,8 +329,8 @@ nextflow run main.nf \
 :::note
 
 - Field `path` in table `files.tsv` is `Required` for local data and it will have to be formatted using the file path **relative** to the directory you run the data submission workflow
-- If data is submitted through a laptop, users may come across issue that required memory exceeds available memory. In such case, add `--score_mem 16 --score_cpus 2` in the nextflow command. The required memory and cpu use can be adjusted in these arguments.
-- If local computer has Mac M1 (ARM64) system, you may run into docker platform issue. To solve this issue, users can add `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before executing the nextflow pipleline.
+- If data is submitted through a laptop, users may encounter hardware resource limitations. Memory and cpu usage can be set by adding the flags `--score_mem 16 --score_cpus 2` into the nextflow command.
+- If local computer has Mac M1 (ARM64) system, you may run into docker platform issue. To run docker on ARM64 systems, users can execute `export DOCKER_DEFAULT_PLATFORM=linux/amd64` in the terminal before executing the nextflow pipleline.
 
 :::
 
