@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.22
+
+**Release Date: April 18, 2024**
+
+#### Updates
+
+- New permissible term `mg` added to `chemotherapy_drug_dose_units`, `hormone_drug_dose_units` and `immunotherapy_drug_dose_units` fields.
+
 ## Release 1.21
 
 **Release Date: Feburary 07, 2024**
