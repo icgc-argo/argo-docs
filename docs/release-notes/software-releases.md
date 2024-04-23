@@ -19,7 +19,7 @@ None to report.
 None to report.
 ------>
 
-## April 22, 2024: Clinical Exceptions Enhancement, and Exception Manifest
+## April 23, 2024: Clinical Exceptions Enhancement, and Exception Manifest
 
 Data Platform - UI 1.125.5 - API 3.42.2
 
