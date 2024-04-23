@@ -23,9 +23,9 @@ None to report.
 
 Data Platform - UI 1.126.0 - API 3.44.0
 
-This release adds another clinical data exception - Treatment Details Exceptions - which will accommodate submissions for donors that where a treatment was know to have occurred but none of the details of that treatment are available. Treatment Detail exceptions allow a donor to include treatments without their corresponding treatment detail entity being submitted.
+This release adds another clinical data exception - **Treatment Details Exceptions** - which will accommodate submissions for donors that where a treatment was know to have occurred but none of the details of that treatment are available. **Treatment Detail exceptions** allow a donor to include treatments without their corresponding treatment detail entity being submitted.
 
-Additionally, downloads of ARGO clinical data will now include an Exceptions Manifest file. This new file includes a detailed list of any exceptions to the ARGO data dictionary that affect the donors included in the download.
+Additionally, downloads of ARGO clinical data will now include an **Exceptions Manifest** file. This new file includes a detailed list of any exceptions to the ARGO data dictionary that affect the donors included in the download.
 
 ## February 14, 2024: New Entity Exception Features​
 
