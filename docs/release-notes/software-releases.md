@@ -21,7 +21,7 @@ None to report.
 
 ## April 22, 2024: Clinical Exceptions Enhancement and Exception Manifest
 
-Data Platform - UI 1.126.0 - API 3.44.0
+Data Platform - UI 1.125.5 - API 3.42.2
 
 This release adds another clinical data exception - **Treatment Details Exceptions** - which will accommodate submissions for donors that where a treatment was know to have occurred but none of the details of that treatment are available. **Treatment Detail exceptions** allow a donor to include treatments without their corresponding treatment detail entity being submitted.
 
