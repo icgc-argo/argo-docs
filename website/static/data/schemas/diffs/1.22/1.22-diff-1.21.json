@@ -1,0 +1,49 @@
+{
+  "schemas": {
+    "chemotherapy": {
+      "updated": {
+        "chemotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "hormone_therapy": {
+      "updated": {
+        "hormone_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "immunotherapy": {
+      "updated": {
+        "immunotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}
