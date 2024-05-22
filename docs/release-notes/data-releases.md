@@ -6,6 +6,25 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 9.0
+
+**Release Date:** May 23 , 2024
+
+#### New Updates​
+
+Data Release 9.0 includes new clinical and molecular data from the CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)), BC Cancer Personalised OncoGenics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
+
+This release includes:
+
+- MUTO-INTL: 1015 donors (913 new donors) with clinical data, and aligned WGS reads.
+  - MUTO-INTL: 912 donors additionally have Mutect2 variant calls
+  - MUTO-INTL: 911 donors additionally have Sanger variant calls
+- POG-CA: 300 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - POG-CA: 58 donors additionally have Sanger variant calls
+- P1000-US: 60 donors (4 new donors) with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - P1000-US: 14 donors have Sanger variant calls
+  - P1000-US: 60 donors have RNA-Seq
+
 ## Data Release 8.0
 
 **Release Date:** March 11, 2024
