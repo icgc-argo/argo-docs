@@ -16,14 +16,19 @@ Data Release 9.0 includes new clinical and molecular data from the CRUK Grand Ch
 
 This release includes:
 
-- MUTO-INTL: 1015 donors (913 new donors) with clinical data, and aligned WGS reads.
-  - MUTO-INTL: 912 donors additionally have Mutect2 variant calls
-  - MUTO-INTL: 911 donors additionally have Sanger variant calls
-- POG-CA: 300 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
-  - POG-CA: 58 donors additionally have Sanger variant calls
-- P1000-US: 60 donors (4 new donors) with clinical data, aligned WGS reads, and Mutect2 variant calls
-  - P1000-US: 14 donors have Sanger variant calls
-  - P1000-US: 60 donors have RNA-Seq
+- MUTO-INTL: 913 new donors and 102 updated donors
+  - 913 new donors with clinical data, and aligned WGS reads.
+  - 912/913 donors additionally have Mutect2 variant calls
+  - 809/913 donors additionally have Sanger variant calls
+  - 102 previously released donors have new Sanger variant calls
+- POG-CA: 300 new donors
+  - 300 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - 58/300 donors additionally have Sanger variant calls
+- P1000-US: 10 new donors and 53 updated donors
+  - 4/10 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - 6/10 new donors with clinical data, aligned RNA-Seq reads
+  - 13 previously released donors have new Sanger variant calls
+  - 53 previously released donors have new aligned RNA-Seq reads
 
 ## Data Release 8.0
 
