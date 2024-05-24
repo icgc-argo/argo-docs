@@ -6,6 +6,30 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 9.0
+
+**Release Date:** May 23 , 2024
+
+#### New Updates​
+
+Data Release 9.0 includes new clinical and molecular data from the CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)), BC Cancer Personalised OncoGenics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
+
+This release includes:
+
+- MUTO-INTL: 913 new donors and 102 updated donors
+  - 913 new donors with clinical data, and aligned WGS reads.
+  - 912/913 donors additionally have Mutect2 variant calls
+  - 809/913 donors additionally have Sanger variant calls
+  - 102 previously released donors have new Sanger variant calls
+- POG-CA: 300 new donors
+  - 300 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - 58/300 donors additionally have Sanger variant calls
+- P1000-US: 10 new donors and 53 updated donors
+  - 4/10 new donors with clinical data, aligned WGS reads, and Mutect2 variant calls
+  - 6/10 new donors with clinical data, aligned RNA-Seq reads
+  - 13 previously released donors have new Sanger variant calls
+  - 53 previously released donors have new aligned RNA-Seq reads
+
 ## Data Release 8.0
 
 **Release Date:** March 11, 2024
