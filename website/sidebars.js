@@ -65,6 +65,12 @@ module.exports = {
             'data-access/publication-guidelines',
           ],
         },
+        {
+          type: 'category',
+          label: 'ICGC 25K',
+          collapsed: false,
+          items: ['data-access/icgc-25k-data'],
+        },
       ],
     },
     {
