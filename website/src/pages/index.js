@@ -122,7 +122,10 @@ function Index() {
             >
               <ul>
                 <li>
-                  How to <a href="/docs/data-access/daco/applying">apply for access to controlled data through ICGC DACO</a>
+                  How to{' '}
+                  <a href="/docs/data-access/daco/applying">
+                    apply for access to controlled data through ICGC DACO
+                  </a>
                 </li>
                 <li>
                   How to <a href="/docs/data-access/data-download">access and download data</a>
@@ -131,6 +134,14 @@ function Index() {
                   How to use the <a href="/docs/data-access/data-download">Score Download Client</a>
                 </li>
               </ul>
+              <span>
+                The ICGC 25K Data Portal has been retired, but the final release data is still
+                available.{' '}
+                <a className={styles.contentAction} href="/docs/data-access/icgc-25k-data">
+                  Access ICGC 25K Data
+                  <img src="img/icons/chevron-right.svg" height={8} width={8} />
+                </a>
+              </span>
             </ContentBlock>
           </div>
           <div className={styles.row}>
@@ -153,9 +164,7 @@ function Index() {
                   <a href="/docs/analysis-workflows/dna-alignment">DNA-Seq analysis pipeline</a>
                 </li>
                 <li>
-                  <a href="/docs/data/reads">
-                    Accepted Data and File Types
-                  </a>
+                  <a href="/docs/data/reads">Accepted Data and File Types</a>
                 </li>
               </ul>
             </ContentBlock>
