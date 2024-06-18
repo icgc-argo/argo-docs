@@ -9,28 +9,47 @@ import TabItem from '@theme/TabItem';
 
 The ICGC Data Portal was retired in June 2024.
 
-## Data Portal
-The [Data portal](https://pubmed.ncbi.nlm.nih.gov/21930502/) served as a hub and reponsitory, a culmination of the collaborative effort between International Cancer Genome Consortium and multiple partners from various cancer projects (including [TCGA](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) and [Sanger Cancer genome project](https://www.sanger.ac.uk/group/cancer-genome-project/)).
+The [Data Portal](https://pubmed.ncbi.nlm.nih.gov/21930502/) served as a hub and reponsitory, a culmination of the collaborative effort between International Cancer Genome Consortium and multiple partners from various cancer projects (including [TCGA](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) and [Sanger Cancer genome project](https://www.sanger.ac.uk/group/cancer-genome-project/)).
 
 The aim was to analyze multiple cancer types and share open access data such as simple somatic mutations, copy number alterations, structural rearrangements, gene expression, microRNAs, DNA methylation and exon junctions.
 
-As of June 15 2024, efforts were refocused to [ICGC-ARGO](https://www.icgc-argo.org/) and the ICGC Data Portal was retired.
+### Relocated ICGC 25K Data
 
-The following documentation outlines what data remains available, where to find the data and how to access it.
- 
-- Description of data that remains available
-  - ICGC DCC Data Release 28 + Supplemental and PCAWG data
-  - Raw sequencing data saved at EGA, PDC and GDC.
+Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now hosted by ICGC ARGO. This data is [available to authorized users via an SFTP](#accessing-icgc-25k-release-data).
+
+Files from other contributing projects are all hosted by ICGC's partner repositories. To access this data, you will need to identify which repository hosts the data you are looking for and then request the data through their service. A [mapping file is available](#mapping-icgc-legacy-data-to-external-repositories) to download below which maps ICGC 25K file IDs to their current hosted location.
 
 ## Accessing ICGC 25K Release Data
 
-- DACO Requirement, how to apply for DACO access
-  - To apply for access, please visit [ICGC's DACO portal](https://daco.icgc-argo.org) and follow [the procedures outlined](https://docs.icgc-argo.org/docs/data-access/daco/applying)
-- How to get API Key for SFTP Access
-- Common clients to interact with the SFTP server
+An SFTP server is available to access ICGC Release Data and PCAWG data.
+
+The server hosts three data directories with the following data:
+
+- `/release_28` - This is the Data Portal data Release 28 of the International Cancer Genome Consortium (ICGC).
+- `/PCAWG` - Analysis results from the PCAWG study.
+- `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts for projects LICA-FR and PRAD-UK.
+
+Only users with DACO approval are able to access the SFTP server. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
+
+### SFTP Connection Details
+
+The SFTP server is located at:
+
+- **Host**: `legacy-icgc-sftp.platform.icgc-argo.org`
+- **Port**: `2222`
+
+Authentication to the server is done using username and password:
+
+- **Username**: The email address that was approved for DACO access. This is the account you would use to log into the [ARGO platform](https://platform.icgc-argo.com).
+- **Password**: ICGC API Key. This is available on your ARGO Platform [profile page](https://platform.icgc-argo.com/user).
+
+You can connect to this server using any SFTP client of your choice. For a free client you consider [FileZilla](https://filezilla-project.org/download.php?type=client).
 
 ## Partner Repositories with ICGC 25K File Data
 
+ICGC file data is hosted across the following repositories.
+
+If you know the specific files from ICGC that you want to access, consult the provided [Mapping File](#mapping-icgc-legacy-data-to-external-repositories) to discover which repositories host that file.
 
 ### EGA
 
@@ -43,6 +62,7 @@ If the email has never been used to access EGA, please follow the password reset
 Access to EGA may take up to 48 hours post DACO approval.
 
 ### PDC
+
 Due to data regulation policies, TCGA affiliated data from the PCAWG study are saved in PDC and controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
 DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
@@ -52,26 +72,29 @@ Access can be requested by following instructions in [phs000178](https://www.ncb
 To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) and follow the login prompt using eRA commons ID and password.
 
 ### GDC
-Due to data regulation policies, TCGA raw sequencing data submitted to ICGC or used in PCAWG are saved in GDC and controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
-DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
+
+Due to data regulation policies, TCGA raw sequencing data submitted to ICGC or used in PCAWG are saved in GDC and controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8). DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
+
 Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 To access data, navigate to [GDC Portal](https://portal.gdc.cancer.gov) and follow the login prompt using eRA commons ID and password.
 
-### Mapping of ICGC Legacy Data to Repositories
+### Mapping ICGC Legacy Data to External Repositories
 
-**Mapping.tsv** contains a list of files submitted to ICGC and their location following portal retirement, relevant ICGC mapping IDs (object, donor, sample, specimen), and IDs for affiliated repos.
+Provided below is a download link for our legacy data mapping file. This will download a TSV file which contains a mapping between ICGC File IDs and their current hosted location(s), relevant ICGC mapping IDs (object, donor, sample, specimen), and IDs for affiliated repositories.
 
-Note this does not contain all files related to ICGC DCC Data Release 28 + Supplemental and PCAWG found on the SFTP.
+**Download**: [**icgc25k-file-mapping.tsv**](https://icgc25k.s3.ca-central-1.amazonaws.com/icgc25k-legacy-data-locations.tsv) (54MB)
 
- To retrieve files listed in **Mapping.tsv**, follow the `location` column
-  - `SFTP` - files are saved at listed `SFTP_location` or within the listed file
-  - `EGA` - file can be found by following the `ega_dataset_id`, `ega_analysis_id`, `ega_file_id`, or  `ega_run_id`
-  - `PDC` - file can be found using the `PDC_ID`
-  - `GDC` - file can be found using `GDC_ID`
+To find files listed in this TSV, check the `location` column:
 
+- `SFTP` - files are saved at listed `SFTP_location` or within the listed file
+- `EGA` - file can be found by following the `ega_dataset_id`, `ega_analysis_id`, `ega_file_id`, or `ega_run_id`
+- `PDC` - file can be found using the `PDC_ID`
+- `GDC` - file can be found using `GDC_ID`
 
 ## Data use and publication policy
- - Please see ICGC ARGO's [publication policy](https://www.icgc-argo.org/page/77/e3-publication-policy) and [data use](https://www.icgc-argo.org/page/132/data-access-and-data-use-policies-and-guidelines) policies.
+
+Please see ICGC ARGO's [publication policy](https://www.icgc-argo.org/page/77/e3-publication-policy) and [data use](https://www.icgc-argo.org/page/132/data-access-and-data-use-policies-and-guidelines) policies.
 
 ## Questions and Concerns
- - Please contact us at ICGC ARGO's [helpdesk](https://platform.icgc-argo.org/contact).
+
+If you have any further questions or require additional information please contact the [helpdesk](https://platform.icgc-argo.org/contact).
