@@ -91,7 +91,7 @@ To find files listed in this TSV, check the `location` column:
 - `PDC` - file can be found using the `PDC_ID`
 - `GDC` - file can be found using `GDC_ID`
 
-## Data use and publication policy
+## Data Use and Publication Policy
 
 Please see ICGC ARGO's [publication policy](https://www.icgc-argo.org/page/77/e3-publication-policy) and [data use](https://www.icgc-argo.org/page/132/data-access-and-data-use-policies-and-guidelines) policies.
 
