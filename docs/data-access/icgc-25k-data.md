@@ -12,6 +12,8 @@ The [Data Portal](https://pubmed.ncbi.nlm.nih.gov/21930502/) served as a hub and
 
 The aim was to analyze multiple cancer types and share open access data such as simple somatic mutations, copy number alterations, structural rearrangements, gene expression, microRNAs, DNA methylation and exon junctions.
 
+The dataset spanned `86` cancer projects, `22` cancer primary sites, `24,289` donors of which `22,330` had molecular data, and `81,782,588` simple somatic mutations.
+
 ### Relocated ICGC 25K Data
 
 Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now available to authorized users through an [SFTP server](#accessing-icgc-25k-release-data) hosted by ICGC ARGO.
@@ -24,7 +26,7 @@ An SFTP server is available to access ICGC Release Data and PCAWG data.
 
 The server hosts three data directories with the following data:
 
-- `/release_28` - This is the Data Portal data Release 28 of the International Cancer Genome Consortium (ICGC).
+- `/release_28` - This is the Data Portal data Release 28 (2019-11-26) of the International Cancer Genome Consortium (ICGC).
 - `/PCAWG` - Analysis results from the PCAWG study.
 - `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts for projects LICA-FR and PRAD-UK.
 
@@ -68,7 +70,7 @@ DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.
 
 Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
-To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) for PCAWG affiliated data or [GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
+To access data, navigate to PDC/[ICGC Bionimbus](https://icgc.bionimbus.org/files) for PCAWG affiliated data or GDC/[GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
 
 ### Mapping ICGC Legacy Data to External Repositories
 
