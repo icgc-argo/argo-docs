@@ -8,7 +8,7 @@ platform_key: DOCS_ICGC_25K
 
 The ICGC Data Portal was retired in June 2024.
 
-The [Data Portal](https://pubmed.ncbi.nlm.nih.gov/21930502/) served as a hub and reponsitory, a culmination of the collaborative effort between International Cancer Genome Consortium and multiple partners from various cancer projects (including [TCGA](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) and [Sanger Cancer genome project](https://www.sanger.ac.uk/group/cancer-genome-project/)).
+The [Data Portal](https://pubmed.ncbi.nlm.nih.gov/21930502/) served as a hub and repository, a culmination of the collaborative effort between International Cancer Genome Consortium and multiple partners from various cancer projects (including [TCGA](https://www.cancer.gov/ccg/research/genome-sequencing/tcga) and [Sanger Cancer genome project](https://www.sanger.ac.uk/group/cancer-genome-project/)).
 
 The aim was to analyze multiple cancer types and share open access data such as simple somatic mutations, copy number alterations, structural rearrangements, gene expression, microRNAs, DNA methylation and exon junctions.
 
