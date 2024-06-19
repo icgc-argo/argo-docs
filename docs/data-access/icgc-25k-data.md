@@ -61,22 +61,16 @@ If the email has never been used to access EGA, please follow the password reset
 
 Access to EGA may take up to 48 hours post DACO approval.
 
-### PDC
 
-Due to data regulation policies, TCGA affiliated data from the PCAWG study are saved in PDC and controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
+### TCGA 
+
+Due to data regulation policies, raw sequencing data submitted to ICGC and affiliated data from the PCAWG study are controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8). 
 
 DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
 
 Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
-To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) and follow the login prompt using eRA commons ID and password.
-
-### GDC
-
-Due to data regulation policies, TCGA raw sequencing data submitted to ICGC or used in PCAWG are saved in GDC and controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8). DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
-
-Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
-To access data, navigate to [GDC Portal](https://portal.gdc.cancer.gov) and follow the login prompt using eRA commons ID and password.
+To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) for  PCAWG affiliated data or [GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
 
 ### Mapping ICGC Legacy Data to External Repositories
 
