@@ -122,7 +122,10 @@ function Index() {
             >
               <ul>
                 <li>
-                  How to <a href="/docs/data-access/daco/applying">apply for access to controlled data through ICGC DACO</a>
+                  How to{' '}
+                  <a href="/docs/data-access/daco/applying">
+                    apply for access to controlled data through ICGC DACO
+                  </a>
                 </li>
                 <li>
                   How to <a href="/docs/data-access/data-download">access and download data</a>
@@ -153,9 +156,7 @@ function Index() {
                   <a href="/docs/analysis-workflows/dna-alignment">DNA-Seq analysis pipeline</a>
                 </li>
                 <li>
-                  <a href="/docs/data/reads">
-                    Accepted Data and File Types
-                  </a>
+                  <a href="/docs/data/reads">Accepted Data and File Types</a>
                 </li>
               </ul>
             </ContentBlock>
