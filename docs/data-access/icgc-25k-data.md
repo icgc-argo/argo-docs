@@ -1,11 +1,10 @@
 ---
 id: icgc-25k-data
-title: ICGC 25K Data Access
+title: Legacy ICGC 25K Data
 platform_key: DOCS_ICGC_25K
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+## ICGC 25k Portal and Project
 
 The ICGC Data Portal was retired in June 2024.
 
@@ -15,7 +14,7 @@ The aim was to analyze multiple cancer types and share open access data such as 
 
 ### Relocated ICGC 25K Data
 
-Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now hosted by ICGC ARGO. This data is [available to authorized users via an SFTP](#accessing-icgc-25k-release-data).
+Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now available to authorized users through an [SFTP server](#accessing-icgc-25k-release-data) hosted by ICGC ARGO.
 
 Files from other contributing projects are all hosted by ICGC's partner repositories. To access this data, you will need to identify which repository hosts the data you are looking for and then request the data through their service. A [mapping file is available](#mapping-icgc-legacy-data-to-external-repositories) to download below which maps ICGC 25K file IDs to their current hosted location.
 
@@ -29,7 +28,7 @@ The server hosts three data directories with the following data:
 - `/PCAWG` - Analysis results from the PCAWG study.
 - `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts for projects LICA-FR and PRAD-UK.
 
-Only users with DACO approval are able to access the SFTP server. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
+The SFTP server is available to authorized, DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
 ### SFTP Connection Details
 
@@ -40,16 +39,16 @@ The SFTP server is located at:
 
 Authentication to the server is done using username and password:
 
-- **Username**: The email address that was approved for DACO access. This is the account you would use to log into the [ARGO platform](https://platform.icgc-argo.com).
-- **Password**: ICGC API Key. This is available on your ARGO Platform [profile page](https://platform.icgc-argo.com/user).
+- **Username**: The email address that was approved for DACO access. This is the account you would use to log into the [ARGO platform](https://platform.icgc-argo.org).
+- **Password**: ICGC API Key. This is available on your ARGO Platform [profile page](https://platform.icgc-argo.org/user).
 
-You can connect to this server using any SFTP client of your choice. For a free client you consider [FileZilla](https://filezilla-project.org/download.php?type=client).
+You can connect to this server using any SFTP client of your choice.
 
 ## Partner Repositories with ICGC 25K File Data
 
-ICGC file data is hosted across the following repositories.
+ICGC 25K file data is hosted across the following repositories.
 
-If you know the specific files from ICGC that you want to access, consult the provided [Mapping File](#mapping-icgc-legacy-data-to-external-repositories) to discover which repositories host that file.
+If you know the specific file IDs to access, the provided [Mapping File](#mapping-icgc-legacy-data-to-external-repositories) links those to their alternate locations.
 
 ### EGA
 
@@ -61,16 +60,15 @@ If the email has never been used to access EGA, please follow the password reset
 
 Access to EGA may take up to 48 hours post DACO approval.
 
+### TCGA
 
-### TCGA 
-
-Due to data regulation policies, raw sequencing data submitted to ICGC and affiliated data from the PCAWG study are controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8). 
+Due to data regulation policies, raw sequencing data submitted to ICGC and affiliated data from the PCAWG study are controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
 DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
 
 Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
-To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) for  PCAWG affiliated data or [GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
+To access data, navigate to [ICGC Bionimbus](https://icgc.bionimbus.org/files) for PCAWG affiliated data or [GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
 
 ### Mapping ICGC Legacy Data to External Repositories
 
