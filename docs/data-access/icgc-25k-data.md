@@ -16,19 +16,19 @@ The dataset spanned `86` cancer projects, `22` cancer primary sites, `24,289` do
 
 ### Relocated ICGC 25K Data
 
-Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now available to authorized users through an [SFTP server](#accessing-icgc-25k-release-data) hosted by ICGC ARGO.
+Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now available to authorized users through a [SFTP server](#accessing-icgc-25k-release-data) hosted by ICGC ARGO.
 
 Files from other contributing projects are all hosted by ICGC's partner repositories. To access this data, you will need to identify which repository hosts the data you are looking for and then request the data through their service. A [mapping file is available](#mapping-icgc-legacy-data-to-external-repositories) to download below which maps ICGC 25K file IDs to their current hosted location.
 
 ## Accessing ICGC 25K Release Data
 
-An SFTP server is available to access ICGC Release Data and PCAWG data.
+A SFTP server is available to access ICGC Release Data and PCAWG data.
 
 The server hosts three data directories with the following data:
 
 - `/release_28` - This is the Data Portal data Release 28 (2019-11-26) of the International Cancer Genome Consortium (ICGC).
 - `/PCAWG` - Analysis results from the PCAWG study.
-- `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-11-16) for projects LICA-FR and PRAD-UK.
+- `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-10-16) for projects LICA-FR and PRAD-UK.
 
 The SFTP server is available to authorized, DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
@@ -54,9 +54,9 @@ If you know the specific file IDs to access, the provided [Mapping File](#mappin
 
 ### EGA
 
-Raw sequences submitted to ICGC or reprocessed apart of PCAWG are hosted across multiple EGA datasets managed by the data access committee [EGAC00001000010](https://ega-archive.org/dacs/EGAC00001000010).
+ICGC 25k DACO approval includes access to raw sequences submitted to ICGC and reprocessed PCAWG files hosted on EGA. Available datasets are listed under the data access committee [EGAC00001000010](https://ega-archive.org/dacs/EGAC00001000010).
 
-Upon DACO approval, the institutional email (the same email used in your DACO application, not the affiliated Gmail account) can be used to log in/sign up at [EGA-Archive](https://ega-archive.org).
+Upon [DACO](https://docs.icgc-argo.org/docs/data-access/daco/applying) approval, the institutional email (the same email used in your DACO application, not the affiliated Gmail account) can be used to log in/sign up at [EGA-Archive](https://ega-archive.org).
 
 If the email has never been used to access EGA, you will need to create an local EGA account; please follow the EGA password reset procedure to do so.
 
