@@ -58,7 +58,7 @@ Raw sequences submitted to ICGC or reprocessed apart of PCAWG are hosted across 
 
 Upon DACO approval, the institutional email (the same email used in your DACO application, not the affiliated Gmail account) can be used to log in/sign up at [EGA-Archive](https://ega-archive.org).
 
-If the email has never been used to access EGA, please follow the password reset procedure.
+If the email has never been used to access EGA, you will need to create an local EGA account; please follow the EGA password reset procedure to do so.
 
 Access to EGA may take up to 48 hours post DACO approval.
 
@@ -66,9 +66,9 @@ Access to EGA may take up to 48 hours post DACO approval.
 
 Due to data regulation policies, raw sequencing data submitted to ICGC and affiliated data from the PCAWG study are controlled under dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
-DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
+ICGC 25k DACO approval does not include dbGap study [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8) and will not grant access to said files.
 
-Access can be requested by following instructions in [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
+Access can be requested by following instructions at [phs000178](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000178.v11.p8).
 
 To access data, navigate to PDC/[ICGC Bionimbus](https://icgc.bionimbus.org/files) for PCAWG affiliated data or GDC/[GDC Portal](https://portal.gdc.cancer.gov) for raw sequencing data. Both portal will provide a login prompt using eRA commons ID and password.
 
