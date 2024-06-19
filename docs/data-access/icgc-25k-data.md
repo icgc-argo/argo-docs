@@ -28,7 +28,7 @@ The server hosts three data directories with the following data:
 
 - `/release_28` - This is the Data Portal data Release 28 (2019-11-26) of the International Cancer Genome Consortium (ICGC).
 - `/PCAWG` - Analysis results from the PCAWG study.
-- `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts for projects LICA-FR and PRAD-UK.
+- `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-11-16) for projects LICA-FR and PRAD-UK.
 
 The SFTP server is available to authorized, DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
