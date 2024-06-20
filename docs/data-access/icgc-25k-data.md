@@ -36,7 +36,7 @@ The SFTP server is available to authorized, DACO-approved users only. If you pre
 
 The SFTP server is located at:
 
-- **Host**: `legacy-icgc-sftp.platform.icgc-argo.org`
+- **Host**: `icgc-legacy-sftp.platform.icgc-argo.org`
 - **Port**: `2222`
 
 Authentication to the server is done using username and password:
