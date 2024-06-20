@@ -4,7 +4,7 @@ title: Legacy ICGC 25K Data
 platform_key: DOCS_ICGC_25K
 ---
 
-## ICGC 25k Portal and Project
+## ICGC 25K Portal and Project
 
 The ICGC Data Portal was retired in June 2024.
 
