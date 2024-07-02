@@ -92,3 +92,25 @@ Please see ICGC ARGO's [publication policy](https://www.icgc-argo.org/page/77/e3
 ## Questions and Concerns
 
 If you have any further questions or require additional information please contact the [helpdesk](https://platform.icgc-argo.org/contact).
+
+## Frequently asked questions
+
+### 1. I cannot find anything inside the **Example folder**
+```
+sftp> ls PCAWG/*
+PCAWG/APOBEC_mutagenesis                     PCAWG/Hartwig                                PCAWG/README.md                              PCAWG/benchmarking_data                      PCAWG/broad_calls                            PCAWG/cell_lines                             PCAWG/clinical_and_histology                 PCAWG/consensus_cnv
+PCAWG/consensus_snv_indel                    PCAWG/consensus_sv                           PCAWG/data_releases                          PCAWG/dkfz_embl_calls                        PCAWG/donors_and_biospecimens                PCAWG/driver_mutations                       PCAWG/drivers                                PCAWG/evolution_and_heterogeneity
+PCAWG/germline_variations                    PCAWG/hla_and_neoantigen                     PCAWG/minibams                               PCAWG/msi                                    PCAWG/muse_calls                             PCAWG/mutational_signatures                  PCAWG/networks                               PCAWG/pathogen_analysis
+PCAWG/pcawg_dkfz_caller                      PCAWG/pilot50-mosaic                         PCAWG/pilot50_calls                          PCAWG/quality_control_info                   PCAWG/reference_data                         PCAWG/retrotransposition                     PCAWG/rnaseq_aligned_bams                    PCAWG/sanger_calls
+PCAWG/sequencing_metadata                    PCAWG/smufin_indel_calls                     PCAWG/subclonal_reconstruction               PCAWG/terminology_and_standard_colours       PCAWG/thesaurus_snv                          PCAWG/transcriptome                          PCAWG/unaligned_bams                         PCAWG/validation_bams
+PCAWG/wgs_aligned_bams 
+```
+
+### 2. Connecting through SFTP gives the following error `no matching host key type found. Their offer: ssh-rsa`
+
+This will depends on system but ensure your `~/.ssh/.config` has the following content:
+
+```
+HostKeyAlgorithms ssh-rsa
+PubkeyAcceptedKeyTypes ssh-rsa
+```
