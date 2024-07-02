@@ -93,9 +93,10 @@ Please see ICGC ARGO's [publication policy](https://www.icgc-argo.org/page/77/e3
 
 If you have any further questions or require additional information please contact the [helpdesk](https://platform.icgc-argo.org/contact).
 
-## Frequently asked questions
+## Frequently Asked Questions
 
 ### 1. Using CLI SFTP, I cannot find anything inside the **Example folder**
+
 ```
 sftp> ls PCAWG/*
 PCAWG/APOBEC_mutagenesis                     PCAWG/Hartwig                                PCAWG/README.md                              PCAWG/benchmarking_data                      PCAWG/broad_calls                            PCAWG/cell_lines                             PCAWG/clinical_and_histology                 PCAWG/consensus_cnv
@@ -103,10 +104,10 @@ PCAWG/consensus_snv_indel                    PCAWG/consensus_sv                 
 PCAWG/germline_variations                    PCAWG/hla_and_neoantigen                     PCAWG/minibams                               PCAWG/msi                                    PCAWG/muse_calls                             PCAWG/mutational_signatures                  PCAWG/networks                               PCAWG/pathogen_analysis
 PCAWG/pcawg_dkfz_caller                      PCAWG/pilot50-mosaic                         PCAWG/pilot50_calls                          PCAWG/quality_control_info                   PCAWG/reference_data                         PCAWG/retrotransposition                     PCAWG/rnaseq_aligned_bams                    PCAWG/sanger_calls
 PCAWG/sequencing_metadata                    PCAWG/smufin_indel_calls                     PCAWG/subclonal_reconstruction               PCAWG/terminology_and_standard_colours       PCAWG/thesaurus_snv                          PCAWG/transcriptome                          PCAWG/unaligned_bams                         PCAWG/validation_bams
-PCAWG/wgs_aligned_bams 
+PCAWG/wgs_aligned_bams
 ```
 
-### 2. Connecting through CLI SFTP gives the following error `no matching host key type found. Their offer: ssh-rsa`
+### 2. Connecting through CLI SFTP, I receive the following error: `no matching host key type found. Their offer: ssh-rsa`
 
 This will depends on system but ensure your `~/.ssh/.config` has the following content:
 
