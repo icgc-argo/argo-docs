@@ -95,7 +95,7 @@ If you have any further questions or require additional information please conta
 
 ## Frequently asked questions
 
-### 1. I cannot find anything inside the **Example folder**
+### 1. Using CLI SFTP, I cannot find anything inside the **Example folder**
 ```
 sftp> ls PCAWG/*
 PCAWG/APOBEC_mutagenesis                     PCAWG/Hartwig                                PCAWG/README.md                              PCAWG/benchmarking_data                      PCAWG/broad_calls                            PCAWG/cell_lines                             PCAWG/clinical_and_histology                 PCAWG/consensus_cnv
@@ -106,7 +106,7 @@ PCAWG/sequencing_metadata                    PCAWG/smufin_indel_calls           
 PCAWG/wgs_aligned_bams 
 ```
 
-### 2. Connecting through SFTP gives the following error `no matching host key type found. Their offer: ssh-rsa`
+### 2. Connecting through CLI SFTP gives the following error `no matching host key type found. Their offer: ssh-rsa`
 
 This will depends on system but ensure your `~/.ssh/.config` has the following content:
 
