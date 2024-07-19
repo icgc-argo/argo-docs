@@ -22,7 +22,7 @@ Files from other contributing projects are all hosted by ICGC's partner reposito
 
 ## Accessing ICGC 25K Release Data
 
-ICGC Release Data and PCAWG data are hosted in two locations: a SFTP sever and an AWS bucket.
+ICGC Release Data and PCAWG data are hosted in two locations: an SFTP server, and an AWS bucket.
 
 The SFTP contains public and DACO controlled data, only available to authorized DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
