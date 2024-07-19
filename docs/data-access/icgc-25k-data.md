@@ -22,11 +22,11 @@ Files from other contributing projects are all hosted by ICGC's partner reposito
 
 ## Accessing ICGC 25K Release Data
 
-ICGC Release Data and PCAWG data are hosted in two locations: an SFTP server, and an AWS bucket.
+ICGC Release Data contains both open and controlled access data.
 
-The SFTP contains public and DACO controlled data, only available to authorized DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
+All [open access release data](#open-release-data---object-bucket-details) is stored on a publicly available Object Storage Bucket and is available to everyone.
 
-The AWS bucket contains public data and can be accessed without DACO approval.
+The [controlled access release data](#controlled-release-data---sftp-connection-details) is hosted on an SFTP server, and is only available to authorized DACO-approved users. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
 Both locations contain directories with the following data:
 
@@ -34,8 +34,7 @@ Both locations contain directories with the following data:
 - `/PCAWG` - Analysis results from the PCAWG study.
 - `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-10-16) for projects LICA-FR and PRAD-UK.
 
-
-### SFTP Connection Details
+### Controlled Release Data - SFTP Connection Details
 
 The SFTP server is located at:
 
@@ -49,24 +48,29 @@ Authentication to the server is done using username and password:
 
 You can connect to this server using any SFTP client of your choice.
 
-### AWS details
+### Open Release Data - Object Bucket Details
 
-The AWS bucket is reachable at: 
+Open access release data is hosted on a publicly available Object Storage Bucket. This bucket uses the AWS S3 interface and is therefore accessible using any AWS object storage client.
+
+The bucket is reachable at:
+
 - **Host**: `https://object.genomeinformatics.org`
+- **Bucket Name**: `icgc25k-open`
 
 No additional authentication is required.
 
 To navigate and explore the data:
+
 ```
 aws s3 ls s3://icgc25k-open --endpoint-url https://object.genomeinformatics.org --no-sign-request
 ```
+
 To download a file or recursively download a directory:
+
 ```
 aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel/README.md <local-download-directory> --endpoint-url https://object.genomeinformatics.org --no-sign-request
 aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel <local-download-directory> --recursive --endpoint-url https://object.genomeinformatics.org --no-sign-request
 ```
-
-
 
 ## Partner Repositories with ICGC 25K File Data
 
@@ -118,6 +122,7 @@ If you have any further questions or require additional information please conta
 ## Frequently asked questions
 
 ### 1. Using CLI SFTP, I cannot find anything inside the **Example folder**
+
 ```
 sftp> ls PCAWG/*
 PCAWG/APOBEC_mutagenesis                     PCAWG/Hartwig                                PCAWG/README.md                              PCAWG/benchmarking_data                      PCAWG/broad_calls                            PCAWG/cell_lines                             PCAWG/clinical_and_histology                 PCAWG/consensus_cnv
@@ -125,7 +130,7 @@ PCAWG/consensus_snv_indel                    PCAWG/consensus_sv                 
 PCAWG/germline_variations                    PCAWG/hla_and_neoantigen                     PCAWG/minibams                               PCAWG/msi                                    PCAWG/muse_calls                             PCAWG/mutational_signatures                  PCAWG/networks                               PCAWG/pathogen_analysis
 PCAWG/pcawg_dkfz_caller                      PCAWG/pilot50-mosaic                         PCAWG/pilot50_calls                          PCAWG/quality_control_info                   PCAWG/reference_data                         PCAWG/retrotransposition                     PCAWG/rnaseq_aligned_bams                    PCAWG/sanger_calls
 PCAWG/sequencing_metadata                    PCAWG/smufin_indel_calls                     PCAWG/subclonal_reconstruction               PCAWG/terminology_and_standard_colours       PCAWG/thesaurus_snv                          PCAWG/transcriptome                          PCAWG/unaligned_bams                         PCAWG/validation_bams
-PCAWG/wgs_aligned_bams 
+PCAWG/wgs_aligned_bams
 ```
 
 ### 2. Connecting through CLI SFTP gives the following error `no matching host key type found. Their offer: ssh-rsa`
@@ -136,7 +141,9 @@ This will depends on system but ensure your `~/.ssh/.config` has the following c
 HostKeyAlgorithms ssh-rsa
 PubkeyAcceptedKeyTypes ssh-rsa
 ```
+
 Or add `-o HostKeyAlgorithms=+ssh-rsa` to your SFTP command, E.g:
+
 ```
 sftp -P 2222 -o HostKeyAlgorithms=+ssh-rsa 'example@gmail.com'@icgc-legacy-sftp.platform.icgc-argo.org
 ```
