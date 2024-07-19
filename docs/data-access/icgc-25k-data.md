@@ -51,7 +51,7 @@ You can connect to this server using any SFTP client of your choice.
 
 ### AWS details
 
-The AWS bucket is located at: 
+The AWS bucket is reachable at: 
 - **Host**: `https://object.genomeinformatics.org`
 
 No additional authentication is required.
