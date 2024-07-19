@@ -22,15 +22,18 @@ Files from other contributing projects are all hosted by ICGC's partner reposito
 
 ## Accessing ICGC 25K Release Data
 
-A SFTP server is available to access ICGC Release Data and PCAWG data.
+ICGC Release Data and PCAWG data are hosted in two locations: a SFTP sever and an AWS bucket.
 
-The server hosts three data directories with the following data:
+The SFTP contains public and DACO controlled data, only available to authorized DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
+
+The AWS bucket contains public and can be accessed without DACO approval.
+
+Both locations contain directories with the following data:
 
 - `/release_28` - This is the Data Portal data Release 28 (2019-11-26) of the International Cancer Genome Consortium (ICGC).
 - `/PCAWG` - Analysis results from the PCAWG study.
 - `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-10-16) for projects LICA-FR and PRAD-UK.
 
-The SFTP server is available to authorized, DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
 
 ### SFTP Connection Details
 
@@ -45,6 +48,25 @@ Authentication to the server is done using username and password:
 - **Password**: ICGC API Key. This is available on your ARGO Platform [profile page](https://platform.icgc-argo.org/user).
 
 You can connect to this server using any SFTP client of your choice.
+
+### AWS details
+
+The AWS bucket is located at: 
+- **Host**: `https://object.genomeinformatics.org`
+
+No additional authentication is required.
+
+To navigate and explore the data:
+```
+aws s3 ls s3://icgc25k-open --endpoint-url https://object.genomeinformatics.org --no-sign-request
+```
+To download a file or recursively download a directory:
+```
+aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel/README.md <local-download-directory> --endpoint-url https://object.genomeinformatics.org --no-sign-request
+aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel <local-download-directory> --recursive --endpoint-url https://object.genomeinformatics.org --no-sign-request
+```
+
+
 
 ## Partner Repositories with ICGC 25K File Data
 
@@ -113,4 +135,8 @@ This will depends on system but ensure your `~/.ssh/.config` has the following c
 ```
 HostKeyAlgorithms ssh-rsa
 PubkeyAcceptedKeyTypes ssh-rsa
+```
+Or add `-o HostKeyAlgorithms=+ssh-rsa` to your SFTP command, E.g:
+```
+sftp -P 2222 -o HostKeyAlgorithms=+ssh-rsa 'example@gmail.com'@icgc-legacy-sftp.platform.icgc-argo.org
 ```
