@@ -50,7 +50,7 @@ You can connect to this server using any SFTP client of your choice.
 
 ### Open Release Data - Object Bucket Details
 
-Open access release data is hosted on a publicly available Object Storage Bucket. This bucket uses the AWS S3 interface and is therefore accessible using any AWS object storage client.
+Open access release data is hosted on a publicly available Object Storage Bucket. This bucket is hosted by the ARGO platform, not Amazon AWS, but it uses the AWS S3 interface and is therefore accessible using any AWS object storage client.
 
 The bucket is reachable at:
 
@@ -58,6 +58,12 @@ The bucket is reachable at:
 - **Bucket Name**: `icgc25k-open`
 
 No additional authentication is required.
+
+#### Using the AWS CLI to access the open data bucket
+
+Instructions for installing the AWS CLI are [found here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+This data is not hosted by AWS, so you will need to specify an `--endpoint-url` argument when using this tool so that it knows where to find this bucket. Below are example commands to accomplish some common use cases.
 
 To navigate and explore the data:
 
