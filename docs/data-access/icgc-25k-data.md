@@ -50,7 +50,7 @@ You can connect to this server using any SFTP client of your choice.
 
 ### Open Release Data - Object Bucket Details
 
-Open access release data is hosted on a publicly available Object Storage Bucket. This bucket is hosted by the ARGO platform, not Amazon AWS, but it uses the AWS S3 interface and is therefore accessible using any AWS object storage client.
+Open access release data is hosted on a publicly available Object Storage Bucket. While not hosted on Amazon AWS, it uses the AWS S3 interface and is therefore accessible using any S3 compatible object storage client.
 
 The bucket is reachable at:
 
