@@ -22,17 +22,19 @@ Files from other contributing projects are all hosted by ICGC's partner reposito
 
 ## Accessing ICGC 25K Release Data
 
-A SFTP server is available to access ICGC Release Data and PCAWG data.
+ICGC Release Data contains both open and controlled access data.
 
-The server hosts three data directories with the following data:
+All [open access release data](#open-release-data---object-bucket-details) is stored on a publicly available Object Storage Bucket and is available to everyone.
+
+The [controlled access release data](#controlled-release-data---sftp-connection-details) is hosted on an SFTP server, and is only available to authorized DACO-approved users. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
+
+Both locations contain directories with the following data:
 
 - `/release_28` - This is the Data Portal data Release 28 (2019-11-26) of the International Cancer Genome Consortium (ICGC).
 - `/PCAWG` - Analysis results from the PCAWG study.
 - `/Supplemental` - Corrected clinical metadata and RNA-Seq raw read counts (2019-10-16) for projects LICA-FR and PRAD-UK.
 
-The SFTP server is available to authorized, DACO-approved users only. If you previously had DACO access for ICGC 25K data you will continue to have permission to access the SFTP server. If you require DACO approval please see the documentation on [applying for DACO access](./daco/applying.md).
-
-### SFTP Connection Details
+### Controlled Release Data - SFTP Connection Details
 
 The SFTP server is located at:
 
@@ -45,6 +47,36 @@ Authentication to the server is done using username and password:
 - **Password**: ICGC API Key. This is available on your ARGO Platform [profile page](https://platform.icgc-argo.org/user).
 
 You can connect to this server using any SFTP client of your choice.
+
+### Open Release Data - Object Bucket Details
+
+Open access release data is hosted on a publicly available Object Storage Bucket. While not hosted on Amazon AWS, it uses the AWS S3 interface and is therefore accessible using any S3 compatible object storage client.
+
+The bucket is reachable at:
+
+- **Host**: `https://object.genomeinformatics.org`
+- **Bucket Name**: `icgc25k-open`
+
+No additional authentication is required.
+
+#### Using the AWS CLI to access the open data bucket
+
+Instructions for installing the AWS CLI are [found here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+This data is not hosted by AWS, so you will need to specify an `--endpoint-url` argument when using this tool so that it knows where to find this bucket. Below are example commands to accomplish some common use cases.
+
+To navigate and explore the data:
+
+```
+aws s3 ls s3://icgc25k-open --endpoint-url https://object.genomeinformatics.org --no-sign-request
+```
+
+To download a file or recursively download a directory:
+
+```
+aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel/README.md <local-download-directory> --endpoint-url https://object.genomeinformatics.org --no-sign-request
+aws s3 cp s3://icgc25k-open/PCAWG/consensus_snv_indel <local-download-directory> --recursive --endpoint-url https://object.genomeinformatics.org --no-sign-request
+```
 
 ## Partner Repositories with ICGC 25K File Data
 
@@ -114,4 +146,10 @@ This will depends on system but ensure your `~/.ssh/.config` has the following c
 ```
 HostKeyAlgorithms ssh-rsa
 PubkeyAcceptedKeyTypes ssh-rsa
+```
+
+Or add `-o HostKeyAlgorithms=+ssh-rsa` to your SFTP command, E.g:
+
+```
+sftp -P 2222 -o HostKeyAlgorithms=+ssh-rsa 'example@gmail.com'@icgc-legacy-sftp.platform.icgc-argo.org
 ```
