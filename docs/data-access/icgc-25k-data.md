@@ -16,7 +16,7 @@ The dataset spanned `86` cancer projects, `22` cancer primary sites, `24,289` do
 
 ### Relocated ICGC 25K Data
 
-Although the interactive data portal was shut down, data from the project remains available. The final release data, as well as the PCAWG project data are now available to authorized users through a [SFTP server](#accessing-icgc-25k-release-data) hosted by ICGC ARGO.
+Although the interactive data portal was shut down, the final release data, as well as the PCAWG project data from the project remain available. See details below for how to [access these data](#accessing-icgc-25k-release-data).
 
 Files from other contributing projects are all hosted by ICGC's partner repositories. To access this data, you will need to identify which repository hosts the data you are looking for and then request the data through their service. A [mapping file is available](#mapping-icgc-legacy-data-to-external-repositories) to download below which maps ICGC 25K file IDs to their current hosted location.
 
