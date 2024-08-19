@@ -1,0 +1,39 @@
+{
+  "schemas": {
+    "specimen": {
+      "updated": {
+        "specimen_acquisition_interval": {
+          "restrictions": { "range": { "left": { "min": 0 }, "right": null } }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "radiation": {
+      "updated": {},
+      "created": {
+        "radiation_boost": {
+          "changeType": "created",
+          "name": "radiation_boost",
+          "description": "A radiation boost is an extra radiation treatment targeted at the tumor bed, given after the regular sessions of radiation is complete (Reference NCIt: C137812). Indicate if this radiation treatment was a radiation boost.",
+          "valueType": "string",
+          "restrictions": { "codeList": ["Yes", "No", "Not applicable"] },
+          "meta": { "displayName": "Radiation Boost" }
+        },
+        "reference_radiation_treatment_id": {
+          "changeType": "created",
+          "name": "reference_radiation_treatment_id",
+          "description": "If a radiation boost was given, indicate the 'submitter_treatment_id' of the primary radiation treatment the radiation boost treatment is linked to.",
+          "valueType": "string",
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n        \n        if ($row.radiation_boost != null) {\n           const radiationBoost = $row.radiation_boost.trim().toLowerCase();\n\n           if (!currField && radiationBoost === \"yes\") {\n              result = {valid: false, message: `${$name} must be provided when if a radiation boost was given.`}\n           }\n           else if (currField && radiationBoost != \"yes\"){\n              result = {valid: false, message: `${$name} cannot be provided if the 'radiation_boost' field is '${radiationBoost}'.`}\n           }\n        }\n        else if ((!$row.radiation_boost) && (currField)) {\n           result = {valid: false, message: `'${$name}' requires the 'radiation_boost' field.` }\n        }\n        return result;\n    })"
+            ]
+          },
+          "meta": { "displayName": "Reference Radiation Treatment for Boost" }
+        }
+      },
+      "deleted": {}
+    }
+  }
+}
