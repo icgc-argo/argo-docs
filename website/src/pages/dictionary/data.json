@@ -871,7 +871,7 @@
               "notes": "The associated primary diagnosis is used as the reference point for this interval. To calculate this, find the number of days since the date of primary diagnosis.",
               "displayName": "Specimen Acquisition Interval"
             },
-            "restrictions": { "required": true, "range": { "min": 0 } }
+            "restrictions": { "required": true }
           },
           {
             "name": "tumour_histological_type",
@@ -3268,6 +3268,24 @@
               ]
             },
             "meta": { "core": true, "displayName": "Anatomical Site Irradiated" }
+          },
+          {
+            "name": "radiation_boost",
+            "description": "A radiation boost is an extra radiation treatment targeted at the tumor bed, given after the regular sessions of radiation is complete (Reference NCIt: C137812). Indicate if this radiation treatment was a radiation boost.",
+            "valueType": "string",
+            "restrictions": { "codeList": ["Yes", "No", "Not applicable"] },
+            "meta": { "displayName": "Radiation Boost" }
+          },
+          {
+            "name": "reference_radiation_treatment_id",
+            "description": "If a radiation boost was given, indicate the 'submitter_treatment_id' of the primary radiation treatment the radiation boost treatment is linked to.",
+            "valueType": "string",
+            "restrictions": {
+              "script": [
+                "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n        \n        if ($row.radiation_boost != null) {\n           const radiationBoost = $row.radiation_boost.trim().toLowerCase();\n\n           if (!currField && radiationBoost === \"yes\") {\n              result = {valid: false, message: `${$name} must be provided when if a radiation boost was given.`}\n           }\n           else if (currField && radiationBoost != \"yes\"){\n              result = {valid: false, message: `${$name} cannot be provided if the 'radiation_boost' field is '${radiationBoost}'.`}\n           }\n        }\n        else if ((!$row.radiation_boost) && (currField)) {\n           result = {valid: false, message: `'${$name}' requires the 'radiation_boost' field.` }\n        }\n        return result;\n    })"
+              ]
+            },
+            "meta": { "displayName": "Reference Radiation Treatment for Boost" }
           }
         ]
       },
@@ -5412,14 +5430,15 @@
         ]
       }
     ],
-    "_id": "66213a2df1ed6b00326469fe",
+    "_id": "66c3777f2c44e20031788e59",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "1.22",
-    "createdAt": "2024-04-18T15:20:13.668Z",
-    "updatedAt": "2024-04-18T15:20:13.668Z",
+    "version": "1.23",
+    "createdAt": "2024-08-19T16:49:03.624Z",
+    "updatedAt": "2024-08-19T16:49:03.624Z",
     "__v": 0
   },
   "versions": [
+    { "version": "1.23", "date": "2024-08-19T16:49:03.624Z" },
     { "version": "1.22", "date": "2024-04-18T15:20:13.668Z" },
     { "version": "1.21", "date": "2024-02-06T17:46:37.784Z" },
     { "version": "1.20", "date": "2023-10-27T20:06:58.227Z" },
@@ -5451,5 +5470,5 @@
     { "version": "0.6", "date": "2020-03-27T20:53:14.913Z" },
     { "version": "0.5", "date": "2020-03-06T21:28:41.074Z" }
   ],
-  "currentVersion": { "version": "1.22", "date": "2024-04-18T15:20:13.668Z" }
+  "currentVersion": { "version": "1.23", "date": "2024-08-19T16:49:03.624Z" }
 }

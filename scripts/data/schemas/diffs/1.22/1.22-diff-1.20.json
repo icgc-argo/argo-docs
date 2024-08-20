@@ -1,0 +1,107 @@
+{
+  "schemas": {
+    "specimen": {
+      "updated": {
+        "percent_tumour_cells": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    // When $name is percent_tumour_cells, and $field is a number between 0 and 1\n    const {$row, $name, $field} = inputs;\n\n    const result = { valid: true, message: 'Ok' };\n    const measurementMethodExceptionTypes = ['not applicable'];\n\n    // checks for a string just consisting of whitespace\n    const checkforEmpty = (entry) => {\n      return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n\n    const fieldHasValue = $field && $field != null && !(checkforEmpty($field));\n    const measurementMethod = $row?.percent_tumour_cells_measurement_method?.trim?.().toLowerCase();\n\n    if (fieldHasValue) {\n      if (measurementMethodExceptionTypes.includes(measurementMethod)) {\n        return {\n          valid: false,\n          message: `The '${$name}' field cannot be submitted when 'percent_tumour_cells_measurement_method' = 'Not applicable'`\n        };\n      }\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "treatment": {
+      "updated": {
+        "treatment_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "End of life care",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "right": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "data": { "added": [], "deleted": ["End of life care"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "chemotherapy": {
+      "updated": {
+        "chemotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "hormone_therapy": {
+      "updated": {
+        "hormone_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "immunotherapy": {
+      "updated": {
+        "immunotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}

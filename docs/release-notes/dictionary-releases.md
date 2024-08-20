@@ -20,6 +20,15 @@ None to report.
 
 ------>
 
+## Release 1.23
+
+**Release Date: August 19, 2024**
+
+#### Updates
+
+- Expanded `specimen_acquisition_interval` to accept negative numbers to record any specimens which was collected prior to primary diagnosis.
+- Added two new optional fields `radiation_boost` and `reference_radiation_treatment_id` in `Radiation` schema to denote radiation boost.
+
 ## Release 1.22
 
 **Release Date: April 18, 2024**
