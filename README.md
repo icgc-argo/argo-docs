@@ -20,6 +20,7 @@ To run the docs site requires the following:
 
 - NodeJS version 15
   - This is done best using nvm (node version manager). A good summary of this process can be found here for your reference: https://gist.github.com/d2s/372b5943bce17b964a79
+  - May work with other versions but is only tested with the specified version.
 
 ## Contributing
 
@@ -40,7 +41,7 @@ To contribute to the docs:
    ...and install dependencies via npm:
 
    ```
-   npm ci
+   npm ci --legacy-peer-deps
    ```
 
 1. Setup Environment config:
