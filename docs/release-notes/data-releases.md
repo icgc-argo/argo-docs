@@ -6,13 +6,109 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 10.0
+
+**Release Date:** September 25 , 2024
+
+#### New Updates​
+
+Data release 10 features new **297** donors and updates to **396** existing donors from programs:
+
+- CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
+- BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
+- Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000))
+
+<table>
+    <thead>
+        <tr>
+            <th>Program</th>
+            <th></th>
+            <th>Clinical</th>
+            <th>DNA-Seq Alignment</th>
+            <th>Mutect Variant</th>
+            <th>Sanger Variant</th>
+            <th>Total Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan='2'>POG-CA</td>
+            <td rowspan='1'>New</td>
+            <td rowspan='1'>217</td>
+            <td rowspan='1'>217</td>
+            <td rowspan='1'>216</td>
+            <td rowspan='1'>216</td>
+            <td rowspan='1'>217</td>
+        </tr>
+        <tr>
+            <td rowspan='1'>Update</td>
+            <td rowspan='1'></td>
+            <td rowspan='1'></td>
+            <td rowspan='1'></td>
+            <td rowspan='1'>239</td>
+            <td rowspan='1'>239</td>
+        </tr>
+        <tr>
+            <td rowspan='2'>MUTO-INTL</td>
+            <td rowspan='1'>New</td>
+            <td rowspan='1'>79</td>
+            <td rowspan='1'>79</td>
+            <td rowspan='1'>79</td>
+            <td rowspan='1'>78</td>
+            <td rowspan='1'>79</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">155</td>
+            <td rowspan="1">156</td>
+        </tr>
+        <tr>
+            <td rowspan="2">P1000-US</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+        </tr>
+        <tr>
+            <td rowspan="2">DR10.0 Summary</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">297</td>
+            <td rowspan="1">297</td>
+            <td rowspan="1">296</td>
+            <td rowspan="1">294</td>
+            <td rowspan="1"><b>297</b></td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">395</td>
+            <td rowspan="1"><b>396</b></td>
+        </tr>
+    </tbody>
+</table>
+
 ## Data Release 9.0
 
 **Release Date:** May 24 , 2024
 
 #### New Updates​
 
-Data Release 9.0 includes new clinical and molecular data from the CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)), BC Cancer Personalised OncoGenics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
+Data Release 9.0 includes new clinical and molecular data from the CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs)), BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp)) and Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000)).
 
 This release includes:
 
