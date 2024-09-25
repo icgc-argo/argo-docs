@@ -57,7 +57,7 @@
   border: none;
   height: 100%;
   width: 100%;
-  
+
   font-size: 18px;
 
   color: #525767;
@@ -89,7 +89,7 @@ span.bannerText {
 
   margin: 0px 25px;
   padding-top: 10px;
-  min-height: 215px;
+  min-height: 265px;
 
   flex: 1;
 }

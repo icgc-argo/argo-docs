@@ -1,0 +1,136 @@
+{
+  "schemas": {
+    "specimen": {
+      "updated": {
+        "specimen_acquisition_interval": {
+          "restrictions": { "range": { "left": { "min": 0 }, "right": null } }
+        },
+        "percent_tumour_cells": {
+          "restrictions": {
+            "script": {
+              "left": null,
+              "right": [
+                "(function validate(inputs) {\n    // When $name is percent_tumour_cells, and $field is a number between 0 and 1\n    const {$row, $name, $field} = inputs;\n\n    const result = { valid: true, message: 'Ok' };\n    const measurementMethodExceptionTypes = ['not applicable'];\n\n    // checks for a string just consisting of whitespace\n    const checkforEmpty = (entry) => {\n      return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n\n    const fieldHasValue = $field && $field != null && !(checkforEmpty($field));\n    const measurementMethod = $row?.percent_tumour_cells_measurement_method?.trim?.().toLowerCase();\n\n    if (fieldHasValue) {\n      if (measurementMethodExceptionTypes.includes(measurementMethod)) {\n        return {\n          valid: false,\n          message: `The '${$name}' field cannot be submitted when 'percent_tumour_cells_measurement_method' = 'Not applicable'`\n        };\n      }\n    }\n\n    return result;\n  })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "treatment": {
+      "updated": {
+        "treatment_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "right": [
+                "Ablation",
+                "Bone marrow transplant",
+                "Chemotherapy",
+                "Endoscopic therapy",
+                "End of life care",
+                "Hormonal therapy",
+                "Immunotherapy",
+                "No treatment",
+                "Other targeting molecular therapy",
+                "Photodynamic therapy",
+                "Radiation therapy",
+                "Stem cell transplant",
+                "Surgery"
+              ],
+              "data": { "added": ["End of life care"], "deleted": [] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "chemotherapy": {
+      "updated": {
+        "chemotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "data": { "added": ["mg"], "deleted": [] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "hormone_therapy": {
+      "updated": {
+        "hormone_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "data": { "added": ["mg"], "deleted": [] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "immunotherapy": {
+      "updated": {
+        "immunotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "data": { "added": ["mg"], "deleted": [] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "radiation": {
+      "updated": {},
+      "created": {
+        "radiation_boost": {
+          "changeType": "created",
+          "name": "radiation_boost",
+          "description": "A radiation boost is an extra radiation treatment targeted at the tumor bed, given after the regular sessions of radiation is complete (Reference NCIt: C137812). Indicate if this radiation treatment was a radiation boost.",
+          "valueType": "string",
+          "restrictions": { "codeList": ["Yes", "No", "Not applicable"] },
+          "meta": { "displayName": "Radiation Boost" }
+        },
+        "reference_radiation_treatment_id": {
+          "changeType": "created",
+          "name": "reference_radiation_treatment_id",
+          "description": "If a radiation boost was given, indicate the 'submitter_treatment_id' of the primary radiation treatment the radiation boost treatment is linked to.",
+          "valueType": "string",
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n        \n        if ($row.radiation_boost != null) {\n           const radiationBoost = $row.radiation_boost.trim().toLowerCase();\n\n           if (!currField && radiationBoost === \"yes\") {\n              result = {valid: false, message: `${$name} must be provided when if a radiation boost was given.`}\n           }\n           else if (currField && radiationBoost != \"yes\"){\n              result = {valid: false, message: `${$name} cannot be provided if the 'radiation_boost' field is '${radiationBoost}'.`}\n           }\n        }\n        else if ((!$row.radiation_boost) && (currField)) {\n           result = {valid: false, message: `'${$name}' requires the 'radiation_boost' field.` }\n        }\n        return result;\n    })"
+            ]
+          },
+          "meta": { "displayName": "Reference Radiation Treatment for Boost" }
+        }
+      },
+      "deleted": {}
+    }
+  }
+}
