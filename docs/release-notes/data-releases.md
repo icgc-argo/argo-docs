@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 #### New Updates​
 
-Data release 10 features new **297** donors and updates to **396** existing donors from programs:
+Data release 10 features new **296** donors and updates to **397** existing donors from programs:
 
 - CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
 - BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
@@ -68,36 +68,36 @@ Data release 10 features new **297** donors and updates to **396** existing dono
         <tr>
             <td rowspan="2">P1000-US</td>
             <td rowspan="1">New</td>
-            <td rowspan="1">1</td>
-            <td rowspan="1">1</td>
-            <td rowspan="1">1</td>
             <td rowspan="1"></td>
-            <td rowspan="1">1</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
             <td rowspan="1"></td>
-            <td rowspan="1"></td>
-            <td rowspan="1"></td>
             <td rowspan="1">1</td>
             <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">2</td>
         </tr>
         <tr>
             <td rowspan="2">DR10.0 Summary</td>
             <td rowspan="1">New</td>
-            <td rowspan="1">297</td>
-            <td rowspan="1">297</td>
             <td rowspan="1">296</td>
+            <td rowspan="1">296</td>
+            <td rowspan="1">295</td>
             <td rowspan="1">294</td>
-            <td rowspan="1"><b>297</b></td>
+            <td rowspan="1"><b>296</b></td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
             <td rowspan="1"></td>
-            <td rowspan="1"></td>
             <td rowspan="1">1</td>
+            <td rowspan="1">2</td>
             <td rowspan="1">395</td>
-            <td rowspan="1"><b>396</b></td>
+            <td rowspan="1"><b>397</b></td>
         </tr>
     </tbody>
 </table>
