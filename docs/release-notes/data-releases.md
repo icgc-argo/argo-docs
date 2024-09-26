@@ -68,11 +68,11 @@ Data release 10 features new **296** donors and updates to **397** existing dono
         <tr>
             <td rowspan="2">P1000-US</td>
             <td rowspan="1">New</td>
-            <td rowspan="1">1</td>
-            <td rowspan="1">1</td>
-            <td rowspan="1">1</td>
             <td rowspan="1"></td>
-            <td rowspan="1">1</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
@@ -88,8 +88,8 @@ Data release 10 features new **296** donors and updates to **397** existing dono
             <td rowspan="1">296</td>
             <td rowspan="1">296</td>
             <td rowspan="1">295</td>
-            <td rowspan="1">296</td>
-            <td rowspan="1"><b>297</b></td>
+            <td rowspan="1">294</td>
+            <td rowspan="1"><b>296</b></td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
