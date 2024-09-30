@@ -1,4 +1,9 @@
-# XML Variant Ingestion
+---
+id: xml-variant-ingestion
+title: XML Variant Ingestion
+sidebar_label: XML Variant Ingestion
+platform_key: DOCS_DNA_PIPELINE
+---
 
 The ARGO Data Platform accepts variant calling data in XML format (based on hg19 genome reference). The XML file will be converted to VCF file followed by lift over to GRCh38 reference genome. For details, please see the latest version of the [ARGO xml_variant_ingestion workflow](https://github.com/icgc-argo-workflows/dna-seq-processing-wfs/releases).
 
@@ -14,7 +19,8 @@ The ARGO Data Platform accepts variant calling data in XML format (based on hg19
 * [Picard:liftovervcf](https://gatk.broadinstitute.org/hc/en-us/articles/27007978536219-LiftoverVcf-Picard) is used to lift the variant calling to GRCh38 reference genome.
 
 ## Outputs
-* [Raw SNV Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-snv-calls), [Indel Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-indel-calls) and [VCF Index](https://docs.icgc-argo.org/docs/data/variant-calls#vcf-index)
+* [Raw SNV Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-snv-calls) and [VCF Index](https://docs.icgc-argo.org/docs/data/variant-calls#vcf-index)
+* [Raw Indel Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-indel-calls) and [VCF Index](https://docs.icgc-argo.org/docs/data/variant-calls#vcf-index)
 * [Raw SV Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-sv-calls) and [VCF Index](https://docs.icgc-argo.org/docs/data/variant-calls#vcf-index)
 * [Raw CNV Calls](https://docs.icgc-argo.org/docs/data/variant-calls#raw-cnv-calls) and [VCF Index](https://docs.icgc-argo.org/docs/data/variant-calls#vcf-index)
 
