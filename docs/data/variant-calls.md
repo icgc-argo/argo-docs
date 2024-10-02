@@ -74,7 +74,7 @@ Data files containing the simple Insertions and Deletions (InDel) data called fr
 
 | Filename Pattern | Description                     | Analysis Type   | Data Category         | Generating Workflow(s)     |
 | ---------------- | ------------------------------- | --------------- | --------------------- | -------------------------- |
-| \*.indel.vcf.gz    | CNV results in VCF file format. | variant_calling | Copy Number Variation | XML Variant Ingestion |
+| \*.indel.vcf.gz    | CNV results in VCF file format. | variant_calling | Simple Nucleotide Variation | XML Variant Ingestion |
 
 ## InDel Supplement
 
@@ -120,4 +120,4 @@ Secondary files that are external index files for VCF format files. TBI files fo
 
 | Filename Pattern | Description                                               | Analysis Type                                                | Data Category                                                                                            | Generating Workflow(s)                                                                                                                                        |
 | ---------------- | --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \*.vcf.gz.tbi    | VCF Index file format. Requires a corresponding VCF file. | <ul><li>variant_calling</li><li>variant_processing</li></ul> | <ul><li>Simple Nucleotide Variation</li><li>Structural Variation</li><li>Copy Number Variation</li></ul> | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li><li>Open Access Variant Filtering</li></ul> |
+| \*.vcf.gz.tbi    | VCF Index file format. Requires a corresponding VCF file. | <ul><li>variant_calling</li><li>variant_processing</li></ul> | <ul><li>Simple Nucleotide Variation</li><li>Structural Variation</li><li>Copy Number Variation</li></ul> | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li><li>Open Access Variant Filtering</li><li>XML Variant Ingestion </li></ul> |
