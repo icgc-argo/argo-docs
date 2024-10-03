@@ -20,6 +20,15 @@ None to report.
 
 ------>
 
+## Release 1.24
+
+**Release Date: October 1, 2024**
+
+#### Updates
+
+- Expanded interval fields: `treatment_start_interval`, `interval_of_followup`, `relapse_interval`, `test_interval` to accept negative numbers to record any clinical events which happened prior to primary diagnosis.
+- Added 3 new optional fields: `drug_database`, `drug_id` and `drug_term` to `Chemotherapy`, `Hormone Therapy` and `Immunotherapy` tables to support the submission of non-RxNorm drugs.
+
 ## Release 1.23
 
 **Release Date: August 19, 2024**
