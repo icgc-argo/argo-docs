@@ -90,10 +90,10 @@ There is no entry point or command defined for the image. The software is locate
 </TabItem>
 <TabItem value="Client-ENV">
 
-Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
+Download the **[score-client](https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
-wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+wget -O score-client.tar.gz https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz
 
 tar xvzf score-client.tar.gz
 
@@ -116,10 +116,10 @@ METADATA_URL=https://api.platform.icgc-argo.org/storage-api STORAGE_URL=https://
 </TabItem>
 <TabItem value="Client">
 
-Download the **[latest version of the score-client](https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
+Download the **[score-client](https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
-wget -O score-client.tar.gz https://artifacts.oicr.on.ca/artifactory/dcc-release/bio/overture/score-client/[RELEASE]/score-client-[RELEASE]-dist.tar.gz
+wget -O score-client.tar.gz https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz
 
 tar xvzf score-client.tar.gz
 
