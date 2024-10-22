@@ -90,7 +90,7 @@ There is no entry point or command defined for the image. The software is locate
 </TabItem>
 <TabItem value="Client-ENV">
 
-Download the **[score-client](https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
+Download the **[latest score-client](https://github.com/overture-stack/score/releases/latest)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
 wget -O score-client.tar.gz https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz
@@ -116,7 +116,7 @@ METADATA_URL=https://api.platform.icgc-argo.org/storage-api STORAGE_URL=https://
 </TabItem>
 <TabItem value="Client">
 
-Download the **[score-client](https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz)**. Once you have unzipped the tarball, change directories into the unzipped folder:
+Download the **[latest score-client](https://github.com/overture-stack/score/releases/latest)**. Once you have unzipped the tarball, change directories into the unzipped folder:
 
 ```shell
 wget -O score-client.tar.gz https://github.com/overture-stack/score/releases/download/5.11.0/score-client-5.11.0-dist.tar.gz
