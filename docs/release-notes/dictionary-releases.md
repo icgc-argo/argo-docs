@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.26
+
+**Release Date: October 22, 2024**
+
+#### Updates
+
+- Updated validation scripts for treatment fields to allow `treatment_start_interval` field to accept `0` as a valid input.
+
 ## Release 1.24
 
 **Release Date: October 1, 2024**
