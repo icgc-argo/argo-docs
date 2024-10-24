@@ -41,10 +41,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
-    "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-links": "^6.0.26",
-    "@storybook/react": "^6.0.26",
+    "@storybook/react": "^6.5.16",
     "@types/chai": "^4.2.12",
     "@types/mocha": "^8.0.2",
     "@types/react": "^16.14.17",
