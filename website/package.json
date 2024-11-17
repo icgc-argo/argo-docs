@@ -16,7 +16,7 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.8",
+    "@docusaurus/core": "2.4.3",
     "@docusaurus/preset-classic": "2.0.0-beta.8",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -42,9 +42,9 @@
     "@babel/core": "^7.12.1",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-links": "^6.0.26",
-    "@storybook/react": "^6.0.26",
+    "@storybook/react": "^6.5.16",
     "@types/chai": "^4.2.12",
     "@types/mocha": "^8.0.2",
     "@types/react": "^16.14.17",
