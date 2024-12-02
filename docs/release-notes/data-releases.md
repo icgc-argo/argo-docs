@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 #### New Updates
 
-Data release 11 features 37 new donors and updates to 405 existing donors from programs:
+Data release 11 features **37** new donors and updates to **405** existing donors from programs:
 
 - CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
 - BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
@@ -120,7 +120,7 @@ Data release 11 features 37 new donors and updates to 405 existing donors from p
     </tbody>
 </table>
 
-Due to processing errors 133 files have been rescinded
+Due to processing errors 133 files have been rescinded.
 
 ## Data Release 10.0
 
