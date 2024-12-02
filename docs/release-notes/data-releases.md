@@ -8,11 +8,11 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 ## Data Release 11.0
 
-**Release Date:**
+**Release Date:** December 02, 2024
 
 #### New Updates
 
-Data release 11 features new 396 donors and updates to 13 existing donors from programs:
+Data release 11 features 37 new donors and updates to 405 existing donors from programs:
 
 - CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
 - BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
@@ -27,8 +27,8 @@ Data release 11 features new 396 donors and updates to 13 existing donors from p
             <th>DNA-Seq Alignment</th>
             <th>Mutect Variant</th>
             <th>Sanger Variant</th>
-            <th>Hisat2 RNA-Seq</th>
-            <th>STAR RNA-Seq</th>
+            <th>RNA-Seq Hisat2</th>
+            <th>RNA-Seq STAR</th>
             <th>Total Changes</th>
         </tr>
     </thead>
@@ -36,13 +36,13 @@ Data release 11 features new 396 donors and updates to 13 existing donors from p
         <tr>
             <td rowspan="2">POG-CA</td>
             <td rowspan="1">New</td>
-            <td rowspan="1">396</td>
+            <td rowspan="1">37</td>
             <td rowspan="1">36</td>
             <td rowspan="1">36</td>
-            <td rowspan="1">9</td>
-            <td rowspan="1">393</td>
-            <td rowspan="1">393</td>
-            <td rowspan="1">396</td>
+            <td rowspan="1">25</td>
+            <td rowspan="1">24</td>
+            <td rowspan="1">24</td>
+            <td rowspan="1">37</td>
         </tr>
         <tr>
             <td rowspan="1">Update</td>
@@ -50,9 +50,9 @@ Data release 11 features new 396 donors and updates to 13 existing donors from p
             <td rowspan="1"></td>
             <td rowspan="1">1</td>
             <td rowspan="1">1</td>
-            <td rowspan="1"></td>
-            <td rowspan="1">1</td>
-            <td rowspan="1">2</td>
+            <td rowspan="1">393</td>
+            <td rowspan="1">394</td>
+            <td rowspan="1">394</td>
         </tr>
         <tr>
             <td rowspan="2">MUTO-INTL</td>
@@ -97,15 +97,15 @@ Data release 11 features new 396 donors and updates to 13 existing donors from p
             <td rowspan="1">10</td>
         </tr>
         <tr>
-            <td rowspan="2">DR10.0 Summary</td>
+            <td rowspan="2">DR11.0 Summary</td>
             <td rowspan="1">New</td>
-            <td rowspan="1">396</td>
+            <td rowspan="1">37</td>
             <td rowspan="1">36</td>
             <td rowspan="1">36</td>
-            <td rowspan="1">9</td>
-            <td rowspan="1">393</td>
-            <td rowspan="1">393</td>
-            <td rowspan="1"><b>396</b></td>
+            <td rowspan="1">25</td>
+            <td rowspan="1">24</td>
+            <td rowspan="1">24</td>
+            <td rowspan="1"><b>37</b></td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
@@ -113,9 +113,9 @@ Data release 11 features new 396 donors and updates to 13 existing donors from p
             <td rowspan="1"></td>
             <td rowspan="1">1</td>
             <td rowspan="1">12</td>
-            <td rowspan="1"></td>
-            <td rowspan="1">1</td>
-            <td rowspan="1"><b>13</b></td>
+            <td rowspan="1">393</td>
+            <td rowspan="1">394</td>
+            <td rowspan="1"><b>405</b></td>
         </tr>
     </tbody>
 </table>
