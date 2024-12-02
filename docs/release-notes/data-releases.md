@@ -120,7 +120,7 @@ Data release 11 features **37** new donors and updates to **405** existing donor
     </tbody>
 </table>
 
-Due to processing errors 133 files have been rescinded.
+Due to processing errors, 133 files have been rescinded.
 
 ## Data Release 10.0
 
