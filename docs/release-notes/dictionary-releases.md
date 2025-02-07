@@ -20,6 +20,14 @@ None to report.
 
 ------>
 
+## Release 1.28
+
+**Release Date: Feburary 07, 2025**
+
+#### Updates
+
+- Added 1 new optional field: `country_of_residence_at_enrollment` to `Donor` table to indicate the donor's country of residence at the time they were enrolled in the study.
+
 ## Release 1.26
 
 **Release Date: October 22, 2024**
