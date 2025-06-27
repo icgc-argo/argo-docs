@@ -20,6 +20,13 @@ None to report.
 
 ------>
 
+## Release 1.29
+
+**Release Date: June 27, 2025**
+
+- Added new response to treatment terminology for RECIST 1.1 to `response_to_treatment` and `response_to_treatment_criteria_method` fields.
+- Added two new terms ("Child" and "Sibling") to `relationship_type` field in the Family History schema.
+
 ## Release 1.28
 
 **Release Date: February 07, 2025**
