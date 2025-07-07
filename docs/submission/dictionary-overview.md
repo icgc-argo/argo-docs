@@ -316,6 +316,19 @@ References: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 751).
 
 Reference: https://recist.eortc.org/recist-1-1-2/
 
+### RECIST 1.1
+
+| Response to Treatment                                         |
+| ------------------------------------------------------------- |
+| Complete response                                             |
+| Not evaluable (NE)                                            |
+| Non-Complete response/Non-Progressive disease (Non-CR/Non-PD) |
+| Partial response                                              |
+| Progressive disease                                           |
+| Stable disease                                                |
+
+Reference: https://project.eortc.org/recist/wp-content/uploads/sites/4/2015/03/RECISTGuidelines.pdf
+
 ### iRECIST
 
 | Response to Treatment                         |
