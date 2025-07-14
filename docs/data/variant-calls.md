@@ -72,9 +72,9 @@ Data files containing the simple Insertions and Deletions (InDel) data called fr
 
 #### File Types
 
-| Filename Pattern | Description                     | Analysis Type   | Data Category               | Generating Workflow(s)                                                                                                                                  |
-| ---------------- | ------------------------------- | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \*.indel.vcf.gz  | CNV results in VCF file format. | variant_calling | Simple Nucleotide Variation | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li> <li>XML Variant Ingestion </li></ul> |
+| Filename Pattern | Description                       | Analysis Type   | Data Category               | Generating Workflow(s)                                                                                                                                  |
+| ---------------- | --------------------------------- | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \*.indel.vcf.gz  | InDel results in VCF file format. | variant_calling | Simple Nucleotide Variation | <ul><li>Sanger WGS Variant Calling </li><li>Sanger WXS Variant Calling </li><li> GATK Mutect2 Variant Calling</li> <li>XML Variant Ingestion </li></ul> |
 
 ## InDel Supplement
 
