@@ -92,6 +92,7 @@ module.exports = {
             'analysis-workflows/dna-sanger-wgs-vc',
             'analysis-workflows/dna-sanger-wxs-vc',
             'analysis-workflows/dna-gatk-mutect2-vc',
+            'analysis-workflows/xml-variant-ingestion',
             'analysis-workflows/dna-open-access-filtering',
           ],
         },
