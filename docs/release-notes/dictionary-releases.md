@@ -20,6 +20,29 @@ None to report.
 
 ------>
 
+## Release 1.29
+
+**Release Date: July 7, 2025**
+
+- Added new response to treatment terminology for RECIST 1.1 to `response_to_treatment` and `response_to_treatment_criteria_method` fields.
+- Added two new terms ("Child" and "Sibling") to `relationship_type` field in the Family History schema.
+
+## Release 1.28
+
+**Release Date: February 07, 2025**
+
+#### Updates
+
+- Added 1 new optional field: `country_of_residence_at_enrollment` to `Donor` table to indicate the donor's country of residence at the time they were enrolled in the study.
+
+## Release 1.26
+
+**Release Date: October 22, 2024**
+
+#### Updates
+
+- Updated validation scripts for treatment fields to allow `treatment_start_interval` field to accept `0` as a valid input.
+
 ## Release 1.24
 
 **Release Date: October 1, 2024**
