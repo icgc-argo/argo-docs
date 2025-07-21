@@ -13,6 +13,7 @@ The ARGO Data Platform will accept a wide range of datatypes, including:
 - DNA Methylation data
 - Transcriptomic data
 - Proteomic data
+- Variant calling data (in XML format)
 - Slide images
 
 Pipelines, and the individual analysis workflows that they are constructed from, have been developed by the DCC Bioinformatics team based on established, best community practices.
