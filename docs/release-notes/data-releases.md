@@ -8,7 +8,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 ## Data Release 12.0
 
-**Release Date:** July 15, 2025
+**Release Date:** July 21, 2025
 
 #### New Updates
 
