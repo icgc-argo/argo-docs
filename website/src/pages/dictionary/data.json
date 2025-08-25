@@ -1213,6 +1213,8 @@
                 "G4",
                 "Low",
                 "High",
+                "Intermediate",
+                "Very low",
                 "Grade I",
                 "Grade II",
                 "Grade III",
@@ -1224,7 +1226,7 @@
                 "Grade Group 5"
               ],
               "script": [
-                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n            'intermediate',\n            'very low'\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
               ]
             }
           },
@@ -3893,10 +3895,12 @@
                 "Gastric Antrectomy",
                 "Hemithyroidectomy",
                 "Hepaticojejunostomy",
+                "Hysterectomy",
                 "Ivor Lewis subtotal esophagectomy",
                 "Laparotomy (Open and Shut)",
                 "Left thoracoabdominal incision",
                 "Lobectomy",
+                "Lymphadenectomy",
                 "Mammoplasty",
                 "Mastectomy",
                 "McKeown esophagectomy",
@@ -5825,14 +5829,15 @@
         ]
       }
     ],
-    "_id": "685eea5b18953600311cf658",
+    "_id": "68a8996618953600311cf659",
     "name": "ICGC-ARGO Data Dictionary",
-    "version": "1.29",
-    "createdAt": "2025-06-27T19:00:43.550Z",
-    "updatedAt": "2025-06-27T19:00:43.550Z",
+    "version": "1.30",
+    "createdAt": "2025-08-22T16:23:02.646Z",
+    "updatedAt": "2025-08-22T16:23:02.646Z",
     "__v": 0
   },
   "versions": [
+    { "version": "1.30", "date": "2025-08-22T16:23:02.646Z" },
     { "version": "1.29", "date": "2025-06-27T19:00:43.550Z" },
     { "version": "1.28", "date": "2025-02-07T16:27:40.646Z" },
     { "version": "1.26", "date": "2024-10-22T20:12:58.754Z" },
@@ -5869,5 +5874,5 @@
     { "version": "0.6", "date": "2020-03-27T20:53:14.913Z" },
     { "version": "0.5", "date": "2020-03-06T21:28:41.074Z" }
   ],
-  "currentVersion": { "version": "1.29", "date": "2025-06-27T19:00:43.550Z" }
+  "currentVersion": { "version": "1.30", "date": "2025-08-22T16:23:02.646Z" }
 }
