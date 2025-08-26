@@ -214,12 +214,17 @@ Reference: Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition
 
 ### Grading for Gastrointestinal Stromal Tumours (GISTs)
 
-| Mitotic Rate | Definition                    |
-| ------------ | ----------------------------- |
-| Low          | 5 or fewer mitoses per 5 mm2. |
-| High         | Over 5 mitoses per 5 mm2.     |
+| Grade        | Tumour Size (cm) | Mitotic count (per 50 HPF) |
+| ------------ | ---------------- | -------------------------- |
+| Very low     | <2               | <5                         |
+| Low          | 2-5              | <5                         |
+| Intermediate | <5               | 6-10                       |
+|              | 5-10             | <5                         |
+| High         | >5               | >5                         |
+|              | >10              | Any mitotic rate           |
+|              | Any size         | >10                        |
 
-Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 546). American College of Surgeons.
+Reference: Fletcher CD, Berman JJ, Corless C, Gorstein F, et al. Diagnosis of gastrointestinal stromal tumors: a consensus approach. Int J Surg Pathol. 2002;10(2):81–9. doi: 10.1177/106689690201000201.
 
 ### Grading System for GNETs
 

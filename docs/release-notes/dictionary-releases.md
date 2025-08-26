@@ -20,6 +20,13 @@ None to report.
 
 ------>
 
+## Release 1.30
+
+**Release Date: August 26, 2025**
+
+- Added two new terms to the `surgery_type` terminology: `Hysterectomy` and `Lymphadenectomy`
+- Added two new terms to the `tumour_grade` terminology: `Very low` and `Intermediate`. These are associated with the `Grading system for GISTs` tumour grading system.
+
 ## Release 1.29
 
 **Release Date: July 7, 2025**
