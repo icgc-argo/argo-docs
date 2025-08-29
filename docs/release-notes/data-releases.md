@@ -14,7 +14,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 Data Release 12.1 features updates to 134 existing donors in the PACA-CA program:
 
-- Pancreatic Cancer Harmonized "Omics" analysis for Personalized Treatment - Canada (PACA-CA)
+- Pancreatic Cancer Harmonized "Omics" analysis for Personalized Treatment - Canada ([**PACA-CA**](https://www.icgc-argo.org/page/96/paca-ca))
   - Updates to submitter_specimen_id, specimen_tissue_source and specimen_type fields.
 
 | Program        |        | Clinical | Total Changes |
