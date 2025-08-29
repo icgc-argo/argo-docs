@@ -6,6 +6,22 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 12.1
+
+**Release Date:** August 29, 2025
+
+#### New Updates
+
+Data Release 12.1 features updates to 134 existing donors in the PACA-CA program:
+
+- Pancreatic Cancer Harmonized "Omics" analysis for Personalized Treatment - Canada ([**PACA-CA**](https://www.icgc-argo.org/page/96/paca-ca))
+  - Updates to submitter_specimen_id, specimen_tissue_source and specimen_type fields.
+
+| Program        |        | Clinical | Total Changes |
+| -------------- | ------ | -------- | ------------- |
+| PACA-CA        | Update | 134      | 134           |
+| DR12.1 Summary | Update | 134      | 134           |
+
 ## Data Release 12.0
 
 **Release Date:** July 21, 2025
