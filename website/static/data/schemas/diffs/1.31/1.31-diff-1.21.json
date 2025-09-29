@@ -1,0 +1,1089 @@
+{
+  "schemas": {
+    "donor": {
+      "updated": {},
+      "created": {},
+      "deleted": {
+        "country_of_residence_at_enrollment": {
+          "changeType": "deleted",
+          "description": "Indicate the donor's country of residence at the time they were enrolled in the study. The country list include 193 UN member states plus 2 UN observer states. Source: https://www.un.org/en/about-us/member-states",
+          "name": "country_of_residence_at_enrollment",
+          "valueType": "string",
+          "restrictions": {
+            "codeList": [
+              "Afghanistan",
+              "Albania",
+              "Algeria",
+              "Andorra",
+              "Angola",
+              "Antigua and Barbuda",
+              "Argentina",
+              "Armenia",
+              "Australia",
+              "Austria",
+              "Azerbaijan",
+              "Bahamas",
+              "Bahrain",
+              "Bangladesh",
+              "Barbados",
+              "Belarus",
+              "Belgium",
+              "Belize",
+              "Benin",
+              "Bhutan",
+              "Bolivia (Plurinational State of)",
+              "Bosnia and Herzegovina",
+              "Botswana",
+              "Brazil",
+              "Brunei Darussalam",
+              "Bulgaria",
+              "Burkina Faso",
+              "Burundi",
+              "Cabo Verde",
+              "Cambodia",
+              "Cameroon",
+              "Canada",
+              "Central African Republic",
+              "Chad",
+              "Chile",
+              "China",
+              "Colombia",
+              "Comoros",
+              "Congo",
+              "Costa Rica",
+              "Côte d’Ivoire",
+              "Croatia",
+              "Cuba",
+              "Cyprus",
+              "Czechia",
+              "Democratic People’s Republic of Korea",
+              "Democratic Republic of the Congo",
+              "Denmark",
+              "Djibouti",
+              "Dominica",
+              "Dominican Republic",
+              "Ecuador",
+              "Egypt",
+              "El Salvador",
+              "Equatorial Guinea",
+              "Eritrea",
+              "Estonia",
+              "Eswatini",
+              "Ethiopia",
+              "Fiji",
+              "Finland",
+              "France",
+              "Gabon",
+              "Gambia",
+              "Georgia",
+              "Germany",
+              "Ghana",
+              "Greece",
+              "Grenada",
+              "Guatemala",
+              "Guinea",
+              "Guinea-Bissau",
+              "Guyana",
+              "Haiti",
+              "Honduras",
+              "Hungary",
+              "Iceland",
+              "India",
+              "Indonesia",
+              "Iran (Islamic Republic of)",
+              "Iraq",
+              "Ireland",
+              "Israel",
+              "Italy",
+              "Jamaica",
+              "Japan",
+              "Jordan",
+              "Kazakhstan",
+              "Kenya",
+              "Kiribati",
+              "Kuwait",
+              "Kyrgyzstan",
+              "Lao People’s Democratic Republic",
+              "Latvia",
+              "Lebanon",
+              "Lesotho",
+              "Liberia",
+              "Libya",
+              "Liechtenstein",
+              "Lithuania",
+              "Luxembourg",
+              "Madagascar",
+              "Malawi",
+              "Malaysia",
+              "Maldives",
+              "Mali",
+              "Malta",
+              "Marshall Islands",
+              "Mauritania",
+              "Mauritius",
+              "Mexico",
+              "Micronesia (Federated States of)",
+              "Monaco",
+              "Mongolia",
+              "Montenegro",
+              "Morocco",
+              "Mozambique",
+              "Myanmar",
+              "Namibia",
+              "Nauru",
+              "Nepal",
+              "Netherlands",
+              "New Zealand",
+              "Nicaragua",
+              "Niger",
+              "Nigeria",
+              "North Macedonia",
+              "Norway",
+              "Oman",
+              "Pakistan",
+              "Palau",
+              "Panama",
+              "Papua New Guinea",
+              "Paraguay",
+              "Peru",
+              "Philippines",
+              "Poland",
+              "Portugal",
+              "Qatar",
+              "Republic of Korea",
+              "Republic of Moldova",
+              "Romania",
+              "Russian Federation",
+              "Rwanda",
+              "Saint Kitts and Nevis",
+              "Saint Lucia",
+              "Saint Vincent and the Grenadines",
+              "Samoa",
+              "San Marino",
+              "Sao Tome and Principe",
+              "Saudi Arabia",
+              "Senegal",
+              "Serbia",
+              "Seychelles",
+              "Sierra Leone",
+              "Singapore",
+              "Slovakia",
+              "Slovenia",
+              "Solomon Islands",
+              "Somalia",
+              "South Africa",
+              "South Sudan",
+              "Spain",
+              "Sri Lanka",
+              "Sudan",
+              "Suriname",
+              "Sweden",
+              "Switzerland",
+              "Syrian Arab Republic",
+              "Tajikistan",
+              "Thailand",
+              "Timor-Leste",
+              "Togo",
+              "Tonga",
+              "Trinidad and Tobago",
+              "Tunisia",
+              "Turkey",
+              "Turkmenistan",
+              "Tuvalu",
+              "Uganda",
+              "Ukraine",
+              "United Arab Emirates",
+              "United Kingdom of Great Britain and Northern Ireland",
+              "United Republic of Tanzania",
+              "United States of America",
+              "Uruguay",
+              "Uzbekistan",
+              "Vanuatu",
+              "Venezuela (Bolivarian Republic of)",
+              "Viet Nam",
+              "Yemen",
+              "Zambia",
+              "Zimbabwe",
+              "Holy See",
+              "State of Palestine"
+            ]
+          },
+          "meta": { "displayName": "Country of Residence at Enrollment" }
+        }
+      }
+    },
+    "specimen": {
+      "updated": {
+        "specimen_acquisition_interval": {
+          "restrictions": { "range": { "left": null, "right": { "min": 0 } } }
+        },
+        "tumour_grade": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Low grade",
+                "High grade",
+                "GX",
+                "G1",
+                "G2",
+                "G3",
+                "G4",
+                "Low",
+                "High",
+                "Intermediate",
+                "Very low",
+                "Grade I",
+                "Grade II",
+                "Grade III",
+                "Grade IV",
+                "Grade Group 1",
+                "Grade Group 2",
+                "Grade Group 3",
+                "Grade Group 4",
+                "Grade Group 5"
+              ],
+              "right": [
+                "Low grade",
+                "High grade",
+                "GX",
+                "G1",
+                "G2",
+                "G3",
+                "G4",
+                "Low",
+                "High",
+                "Grade I",
+                "Grade II",
+                "Grade III",
+                "Grade IV",
+                "Grade Group 1",
+                "Grade Group 2",
+                "Grade Group 3",
+                "Grade Group 4",
+                "Grade Group 5"
+              ],
+              "data": { "added": [], "deleted": ["Intermediate", "Very low"] }
+            },
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n            'intermediate',\n            'very low'\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n    if ($row.tumour_grading_system && $field) {\n      let codeList = [];\n      const tieredGradingList = ['gx','g1','g2','g3'];\n      const gradingSystems = ['two-tier grading system', 'three-tier grading system', 'four-tier grading system', 'grading system for gists', 'grading system for gnets', 'isup grading system', 'who grading system for cns tumours', 'fnclcc grading system', 'gleason grade group system', 'scarff-bloom-richardson grading system', 'nuclear grading system for dcis'];\n      switch ($row.tumour_grading_system && $row.tumour_grading_system.trim().toLowerCase()) {\n        case 'two-tier grading system':\n          codeList = [\n            'low grade',\n            'high grade',\n          ];\n          break;\n        case 'three-tier grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'four-tier grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'grading system for gists':\n          codeList = [\n            'low',\n            'high',\n          ];\n          break;\n        case 'grading system for gnets':\n          codeList = tieredGradingList;\n          break;\n        case 'isup grading system':\n          codeList = [\n            'gx',\n            'g1',\n            'g2',\n            'g3',\n            'g4',\n          ];\n          break;\n        case 'who grading system for cns tumours':\n          codeList = [\n            'grade i',\n            'grade ii',\n            'grade iii',\n            'grade iv',\n          ];\n          break;\n        case 'fnclcc grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'gleason grade group system':\n          codeList = [\n            'grade group 1',\n            'grade group 2',\n            'grade group 3',\n            'grade group 4',\n            'grade group 5',\n          ];\n          break;\n        case 'scarff-bloom-richardson grading system':\n          codeList = tieredGradingList;\n          break;\n        case 'nuclear grading system for dcis':\n          codeList = tieredGradingList;\n          break;\n        case 'unknown':\n          codeList = ['unknown'];\n          break;\n        case 'not applicable':\n          codeList = ['not applicable'];\n          break;\n      }\n\n      if (!codeList.includes($field.trim().toLowerCase())) {\n        const msg = `'${$field}' is not a permissible value. When 'tumour_grading_system' is set to '${\n          $row.tumour_grading_system\n        }', 'tumour_grade' must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n        result.valid = false;\n        result.message = msg;\n      }\n      else if (!gradingSystems.includes($row.tumour_grading_system.trim().toLowerCase())) {\n         result.valid = false;\n         const msg = `'${$row.tumour_grading_system}' is not a permissible value for 'tumour_grading_system'. If the tumour grading system you use is missing, please contact the DCC.`;\n         result.message = msg;\n      }\n    }\n    return result;\n  })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "treatment": {
+      "updated": {
+        "is_primary_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_start_interval": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            },
+            "range": { "left": null, "right": { "exclusiveMin": 0 } }
+          }
+        },
+        "treatment_duration": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "days_per_cycle": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "number_of_cycles": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_intent": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "treatment_setting": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "response_to_treatment_criteria_method": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            },
+            "codeList": {
+              "left": [
+                "ELN Dohner AML 2017 Oncology Response Criteria",
+                "IWG Cheson AML 2003 Oncology Response Criteria",
+                "iRECIST",
+                "RECIST",
+                "RECIST 1.1",
+                "Response Assessment in Neuro-Oncology (RANO)",
+                "Physician Assessed Response Criteria"
+              ],
+              "right": [
+                "ELN Dohner AML 2017 Oncology Response Criteria",
+                "IWG Cheson AML 2003 Oncology Response Criteria",
+                "iRECIST",
+                "RECIST",
+                "Response Assessment in Neuro-Oncology (RANO)",
+                "Physician Assessed Response Criteria"
+              ],
+              "data": { "added": [], "deleted": ["RECIST 1.1"] }
+            }
+          }
+        },
+        "response_to_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})",
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed progressive disease',\n            'physician assessed stable disease'\n          ];\n          break;\n        case 'recist 1.1':\n          codeList = [\n            'complete response',\n            'not evaluable (ne)',\n            'non-complete response/non-progressive disease (non-cr/non-pd)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })",
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = { valid: true, message: 'Ok' };\n\n    /* checks for a string just consisting of whitespace */\n    const checkforEmpty = (entry) => {return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))};\n    let codeList = [];\n    \n      switch ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method.trim().toLowerCase()) {\n        case 'eln dohner aml 2017 oncology response criteria':\n          codeList = [\n            'complete remission',\n            'complete remission with incomplete hematologic recovery (cri)',\n            'complete remission without minimal residual disease (crmrd-)',\n            'hematologic relapse (after crmrd-, cr, cri)',\n            'molecular relapse (after crmrd-)',\n            'partial remission',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'iwg cheson aml 2003 oncology response criteria':\n          codeList = [\n            'cytogenetic complete remission (crc)',\n            'molecular complete remission (crm)',\n            'morphologic complete remission',\n            'morphologic complete remission with incomplete blood count recovery (cri)',\n            'morphologic leukemia-free state',\n            'partial remission'\n          ];\n          break;\n        case 'irecist':\n          codeList = [\n            'immune complete response (icr)',\n            'immune confirmed progressive disease (icpd)',\n            'immune partial response (ipr)',\n            'immune stable disease (isd)',\n            'immune unconfirmed progressive disease (iupd)'\n          ];\n          break;\n        case 'recist':\n          codeList = [\n            'complete response',\n            'no evidence of disease (ned)',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'response assessment in neuro-oncology (rano)':\n          codeList = [\n            'complete response',\n            'minor response',\n            'partial response',\n            'progressive disease',\n            'stable disease'\n          ];\n          break;\n        case 'physician assessed response criteria':\n          codeList = [\n            'physician assessed complete response',\n            'physician assessed partial response',\n            'physician assessed progressive disease',\n            'physician assessed stable disease'\n          ];\n          break;\n        default:\n          codelist = [];\n      }\n\n    if ($field && $field != null && !(checkforEmpty($field))) {\n      if (!codeList.includes($field.trim().toLowerCase()) && codeList.length) {\n        const msg = `'${$field}' is not a permissible value. When 'response_to_treatment_criteria_method' is set to '${\n          $row.response_to_treatment_criteria_method}', the '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`;\n\n        result.valid = false;\n        result.message = msg;\n      }\n    }\n    else {\n       if ($row.response_to_treatment_criteria_method && $row.response_to_treatment_criteria_method != null && !(checkforEmpty($row.response_to_treatment_criteria_method))) {\n         result = { valid: false, message: `The '${$name}' field must be submitted when 'response_to_treatment_criteria_method' is set to '${$row.response_to_treatment_criteria_method}'. The '${$name}' field must be one of the following: \\n${codeList\n          .map(code => `- \"${code}\"`)\n          .join('\\n')}`};\n       }\n    }\n    return result;\n  })"
+              ]
+            },
+            "codeList": {
+              "left": [
+                "Complete remission",
+                "Complete remission with incomplete hematologic recovery (CRi)",
+                "Complete remission without minimal residual disease (CRMRD-)",
+                "Complete response",
+                "Cytogenetic complete remission (CRc)",
+                "Hematologic relapse (after CRMRD-, CR, CRi)",
+                "Immune complete response (iCR)",
+                "Immune confirmed progressive disease (iCPD)",
+                "Immune partial response (iPR)",
+                "Immune stable disease (iSD)",
+                "Immune unconfirmed progressive disease (iUPD)",
+                "Minor response",
+                "Molecular complete remission (CRm)",
+                "Molecular relapse (after CRMRD-)",
+                "Morphologic complete remission",
+                "Morphologic complete remission with incomplete blood count recovery (CRi)",
+                "Morphologic leukemia-free state",
+                "No evidence of disease (NED)",
+                "Non-Complete response/Non-Progressive disease (Non-CR/Non-PD)",
+                "Not evaluable (NE)",
+                "Partial remission",
+                "Partial response",
+                "Physician assessed complete response",
+                "Physician assessed partial response",
+                "Physician assessed progressive disease",
+                "Physician assessed stable disease",
+                "Progressive disease",
+                "Stable disease"
+              ],
+              "right": [
+                "Complete remission",
+                "Complete remission with incomplete hematologic recovery (CRi)",
+                "Complete remission without minimal residual disease (CRMRD-)",
+                "Complete response",
+                "Cytogenetic complete remission (CRc)",
+                "Hematologic relapse (after CRMRD-, CR, CRi)",
+                "Immune complete response (iCR)",
+                "Immune confirmed progressive disease (iCPD)",
+                "Immune partial response (iPR)",
+                "Immune stable disease (iSD)",
+                "Immune unconfirmed progressive disease (iUPD)",
+                "Minor response",
+                "Molecular complete remission (CRm)",
+                "Molecular relapse (after CRMRD-)",
+                "Morphologic complete remission",
+                "Morphologic complete remission with incomplete blood count recovery (CRi)",
+                "Morphologic leukemia-free state",
+                "No evidence of disease (NED)",
+                "Partial remission",
+                "Partial response",
+                "Physician assessed complete response",
+                "Physician assessed partial response",
+                "Physician assessed progressive disease",
+                "Physician assessed stable disease",
+                "Progressive disease",
+                "Stable disease"
+              ],
+              "data": {
+                "added": [],
+                "deleted": [
+                  "Non-Complete response/Non-Progressive disease (Non-CR/Non-PD)",
+                  "Not evaluable (NE)"
+                ]
+              }
+            }
+          }
+        },
+        "outcome_of_treatment": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        },
+        "adverse_events": {
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n\t\tconst { $row, $name, $field } = inputs;\n\t\tconst result = { valid: true, message: 'Ok' };\n\n\t\tconst arrayItemsInSecondArray = (arr1, arr2) => {\n\t\t\treturn arr2.some(arr2Item => {\n\t\t\t\treturn arr1.includes(arr2Item);\n\t\t\t});\n\t\t};\n\n\t\tconst coreFields = [\n\t\t\t'treatment_start_interval',\n\t\t\t'treatment_duration',\n\t\t\t'is_primary_treatment',\n\t\t\t'treatment_intent',\n\t\t\t'treatment_setting',\n\t\t\t'response_to_treatment_criteria_method',\n\t\t\t'response_to_treatment',\n\t\t];\n\n\t\tconst treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n\t\tconst checkforInvalid = entry => {\n\t\t\t// note: negative numbers are allowed as per\n\t\t\t// https://github.com/icgc-argo/argo-dictionary/issues/432 */\n\n\t\t\treturn (\n\t\t\t\t// regular falsy values\n\t\t\t\t[null, undefined, ''].includes($field) ||\n\t\t\t\t// whitespace-filled strings\n\t\t\t\t/^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'))\n\t\t\t);\n\t\t};\n\n\t\tconst treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n\t\tconst recordHasTreatments = !arrayItemsInSecondArray(treatmentExceptionTypes, treatmentTypes);\n\n\t\tif (recordHasTreatments) {\n\t\t\tif (coreFields.includes($name) && checkforInvalid($field)) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t} // otherwise, is there a valid value without a treatment defined\n\t\telse if (!checkforInvalid($field)) {\n\t\t\tif (\n\t\t\t\tcoreFields.includes($name) ||\n\t\t\t\t(typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n\t\t\t\t!isNaN(parseFloat($field))\n\t\t\t) {\n\t\t\t\treturn {\n\t\t\t\t\tvalid: false,\n\t\t\t\t\tmessage: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n\t\t\t\t};\n\t\t\t}\n\t\t}\n\n\t\treturn result;\n\t})"
+              ],
+              "right": [
+                "(function validate(inputs) {\n        const { $row, $name, $field } = inputs;\n        const result = { valid: true, message: 'Ok' };\n\n        const arrayItemsInSecondArray = (arr1, arr2) => {\n            return arr2.some(arr2Item => {\n                return arr1.includes(arr2Item);\n            });\n        };\n\n        const coreFields = [\n            'treatment_start_interval',\n            'treatment_duration',\n            'is_primary_treatment',\n            'treatment_intent',\n            'treatment_setting',\n            'response_to_treatment_criteria_method',\n            'response_to_treatment',\n        ];\n\n        const treatmentExceptionTypes = ['no treatment', 'unknown'];\n\n        // checks for a string just consisting of whitespace\n        const checkforEmpty = entry => {\n            return /^\\s+$/g.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n        };\n        const treatmentTypes = $row.treatment_type.map(value => value.toLowerCase());\n\n        const recordHasTreatments = !arrayItemsInSecondArray(\n            treatmentExceptionTypes,\n            treatmentTypes,\n        );\n\n        if (recordHasTreatments) {\n            if (\n                coreFields.includes($name) &&\n                (!$field || $field === null || checkforEmpty($field))\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field must be submitted when the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n\n        } else if ($field && $field != null && !checkforEmpty($field)) {\n            if (\n                coreFields.includes($name) ||\n                (typeof $field === 'string' && $field.trim().toLowerCase() != 'not applicable') ||\n                typeof $field === 'number'\n            ) {\n                return {\n                    valid: false,\n                    message: `The '${$name}' field cannot be submitted if the 'treatment_type' field is '${treatmentTypes}'`,\n                };\n            }\n        }\n        return result;\n    })"
+              ]
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "chemotherapy": {
+      "updated": {
+        "drug_rxnormcui": {
+          "meta": {
+            "dependsOn": { "left": "chemotherapy.drug_database", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "drug_name": {
+          "meta": {
+            "dependsOn": { "left": "chemotherapy.drug_rxnormcui", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "chemotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {
+        "drug_database": {
+          "changeType": "deleted",
+          "name": "drug_database",
+          "description": "Indicate the drug database where drug term is found.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "chemotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Database"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ],
+            "codeList": ["KEGG", "PubChem", "NCI Thesaurus"]
+          }
+        },
+        "drug_id": {
+          "changeType": "deleted",
+          "name": "drug_id",
+          "description": "Indicate the identifier from the drug_database for the drug.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "chemotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug ID"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        },
+        "drug_term": {
+          "changeType": "deleted",
+          "name": "drug_term",
+          "description": "Indicate the drug term as it exists in the database specified in the drug_database.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "chemotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Term"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        }
+      }
+    },
+    "hormone_therapy": {
+      "updated": {
+        "drug_rxnormcui": {
+          "meta": {
+            "validationDependency": { "left": true, "right": null },
+            "dependsOn": { "left": "hormone_therapy.drug_database", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "drug_name": {
+          "meta": {
+            "validationDependency": { "left": true, "right": null },
+            "dependsOn": { "left": "hormone_therapy.drug_rxnormcui", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "hormone_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {
+        "drug_database": {
+          "changeType": "deleted",
+          "name": "drug_database",
+          "description": "Indicate the drug database where drug term is found.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "hormone_therapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Database"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ],
+            "codeList": ["KEGG", "PubChem", "NCI Thesaurus"]
+          }
+        },
+        "drug_id": {
+          "changeType": "deleted",
+          "name": "drug_id",
+          "description": "Indicate the identifier from the drug_database for the drug.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "hormone_therapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug ID"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        },
+        "drug_term": {
+          "changeType": "deleted",
+          "name": "drug_term",
+          "description": "Indicate the drug term as it exists in the database specified in the drug_database.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "hormone_therapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Term"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        }
+      }
+    },
+    "radiation": {
+      "updated": {},
+      "created": {},
+      "deleted": {
+        "radiation_boost": {
+          "changeType": "deleted",
+          "name": "radiation_boost",
+          "description": "A radiation boost is an extra radiation treatment targeted at the tumor bed, given after the regular sessions of radiation is complete (Reference NCIt: C137812). Indicate if this radiation treatment was a radiation boost.",
+          "valueType": "string",
+          "restrictions": { "codeList": ["Yes", "No", "Not applicable"] },
+          "meta": { "displayName": "Radiation Boost" }
+        },
+        "reference_radiation_treatment_id": {
+          "changeType": "deleted",
+          "name": "reference_radiation_treatment_id",
+          "description": "If a radiation boost was given, indicate the 'submitter_treatment_id' of the primary radiation treatment the radiation boost treatment is linked to.",
+          "valueType": "string",
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n        const {$row, $name, $field} = inputs;\n        let result = {valid: true, message: \"Ok\"};\n        const currField = typeof($field) === 'string' ? $field.trim().toLowerCase() : $field;\n        \n        if ($row.radiation_boost != null) {\n           const radiationBoost = $row.radiation_boost.trim().toLowerCase();\n\n           if (!currField && radiationBoost === \"yes\") {\n              result = {valid: false, message: `${$name} must be provided when if a radiation boost was given.`}\n           }\n           else if (currField && radiationBoost != \"yes\"){\n              result = {valid: false, message: `${$name} cannot be provided if the 'radiation_boost' field is '${radiationBoost}'.`}\n           }\n        }\n        else if ((!$row.radiation_boost) && (currField)) {\n           result = {valid: false, message: `'${$name}' requires the 'radiation_boost' field.` }\n        }\n        return result;\n    })"
+            ]
+          },
+          "meta": { "displayName": "Reference Radiation Treatment for Boost" }
+        }
+      }
+    },
+    "immunotherapy": {
+      "updated": {
+        "drug_rxnormcui": {
+          "meta": {
+            "dependsOn": { "left": "immunotherapy.drug_database", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "drug_name": {
+          "meta": {
+            "dependsOn": { "left": "immunotherapy.drug_rxnormcui", "right": null },
+            "notes": {
+              "left": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin. \n\nIf the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+              "right": "This field uses standardized vocabulary from the RxNorm database (https://www.nlm.nih.gov/research/umls/rxnorm), provided by the NIH.\n\nYou can search for RX Norm values through the web interface (https://mor.nlm.nih.gov/RxNav/) or API (https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html).\n\nFor example, to find the rxnormcui based on drug name, you can use: https://rxnav.nlm.nih.gov/REST/rxcui.json?name=leucovorin or https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=leucovorin"
+            },
+            "displayName": { "left": "Chemotherapy Drug Name", "right": "Immunotherapy Drug Name" }
+          },
+          "restrictions": {
+            "script": {
+              "left": [
+                "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+              ],
+              "right": null
+            },
+            "required": { "left": null, "right": true }
+          }
+        },
+        "immunotherapy_drug_dose_units": {
+          "restrictions": {
+            "codeList": {
+              "left": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg", "mg"],
+              "right": ["mg/m2", "IU/m2", "ug/m2", "g/m2", "mg/kg"],
+              "data": { "added": [], "deleted": ["mg"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {
+        "drug_database": {
+          "changeType": "deleted",
+          "name": "drug_database",
+          "description": "Indicate the drug database where drug term is found.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "immunotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Database"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ],
+            "codeList": ["KEGG", "PubChem", "NCI Thesaurus"]
+          }
+        },
+        "drug_id": {
+          "changeType": "deleted",
+          "name": "drug_id",
+          "description": "Indicate the identifier from the drug_database for the drug.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "immunotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug ID"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        },
+        "drug_term": {
+          "changeType": "deleted",
+          "name": "drug_term",
+          "description": "Indicate the drug term as it exists in the database specified in the drug_database.",
+          "valueType": "string",
+          "meta": {
+            "core": true,
+            "validationDependency": true,
+            "dependsOn": "immunotherapy.drug_rxnormcui",
+            "notes": "If the drugs don't exist in RxNorm, please indicate drug_database, drug_id and drug_term where the drugs information can be found.",
+            "displayName": "Drug Term"
+          },
+          "restrictions": {
+            "script": [
+              "(function validate(inputs) {\n    const {$row, $name, $field} = inputs;\n    let result = {valid: true, message: \"Ok\"};\n\n    // Extract related fields from the row\n    const drug_rxnormcui = $row.drug_rxnormcui;\n    const drug_name = $row.drug_name;\n    const drug_database = $row.drug_database;\n    const drug_id = $row.drug_id;\n    const drug_term = $row.drug_term;\n      \n    // checks for empty fields\n    const checkforEmpty = (entry) => {\n      // Check if entry is null or undefined\n      if (entry === null || entry === undefined) {\n        return true;\n      } \n      // Logic to check if the entry is an empty string or contains only whitespace\n      return /^\\s*$/.test(decodeURI(entry).replace(/^\"(.*)\"$/, '$1'));\n    };\n     \n    // Validate based on the field name\n    switch ($name) {\n        case 'drug_rxnormcui':\n            // If drug_rxnormcui is provided\n            if (!checkforEmpty($field)) {\n              if (checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name is required when drug_rxnormcui is provided.`\n                  };\n              }\n              if (!checkforEmpty(drug_database) || !checkforEmpty(drug_id) || !checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term should be blank when drug_rxnormcui is provided.`\n                  };\n              }\n          } else {\n              // If drug_rxnormcui is not provided\n              if (!checkforEmpty(drug_name)) {\n                  result = {\n                    valid: false,\n                    message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n              if (checkforEmpty(drug_database) || checkforEmpty(drug_id) || checkforEmpty(drug_term) ) {\n                  result = {\n                    valid: false,\n                    message: `drug_database, drug_id and drug_term must be populated when drug_rxnormcui is not provided.`\n                  };\n              }\n          }\n          break;\n\n      case 'drug_name':\n          // If drug_rxnormcui is provided, drug_name must be populated\n          if (!checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name is required when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, drug_name should be empty\n          if (checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `drug_name should not be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n      case 'drug_database':\n      case 'drug_id': \n      case 'drug_term':\n          // If drug_rxnormcui is provided, these fields should be empty\n          if (!checkforEmpty(drug_rxnormcui) && !checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' should be blank when drug_rxnormcui is provided.`\n              };\n          }\n          // If drug_rxnormcui is not provided, these fields must be populated\n          if (checkforEmpty(drug_rxnormcui) && checkforEmpty($field)) {\n              result = {\n                valid: false,\n                message: `'${$name}' must be populated when drug_rxnormcui is not provided.`\n              };\n          }\n          break;\n\n        default:\n            break;\n    }\n\n    return result;\n  })"
+            ]
+          }
+        }
+      }
+    },
+    "surgery": {
+      "updated": {
+        "surgery_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Axillary Clearance",
+                "Axillary lymph nodes sampling",
+                "Biopsy",
+                "Bypass Gastrojejunostomy",
+                "Cholecystectomy",
+                "Cholecystojejunostomy",
+                "Completion gastrectomy",
+                "Debridement of pancreatic and peripancreatic necrosis",
+                "Debulking",
+                "Distal subtotal pancreatectomy",
+                "Drainage of abscess",
+                "Duodenal preserving pancreatic head resection",
+                "Endoscopic biopsy",
+                "Endoscopic brushings of GIT",
+                "Enucleation",
+                "Esophageal bypass surgery/jejunostomy only",
+                "Exploratory laparotomy",
+                "Fine needle aspiration biopsy",
+                "Gastric Antrectomy",
+                "Hemithyroidectomy",
+                "Hepaticojejunostomy",
+                "Hysterectomy",
+                "Ivor Lewis subtotal esophagectomy",
+                "Laparotomy (Open and Shut)",
+                "Left thoracoabdominal incision",
+                "Lobectomy",
+                "Lymphadenectomy",
+                "Mammoplasty",
+                "Mastectomy",
+                "McKeown esophagectomy",
+                "Merendino procedure",
+                "Minimally invasive esophagectomy",
+                "Near-total thyroidectomy",
+                "Pancreaticoduodenectomy",
+                "Pancreaticojejunostomy, side-to-side anastomosis",
+                "Pneumonectomy",
+                "Proximal subtotal gastrectomy",
+                "Pylorus-sparing Whipple operation",
+                "Radical pancreaticoduodenectomy",
+                "Radical prostatectomy",
+                "Reexcision",
+                "Segmentectomy",
+                "Sentinal Lymph Node Biopsy",
+                "Spleen preserving distal pancreatectomy",
+                "Splenectomy",
+                "Subtotal pancreatectomy",
+                "Subtotal thyroidectomy",
+                "Thoracotomy (Open & Shut)",
+                "Total gastrectomy",
+                "Total gastrectomy with extended lymphadenectomy",
+                "Total pancreatectomy",
+                "Total thyroidectomy",
+                "Transhiatal esophagectomy",
+                "Triple bypass of pancreas",
+                "Wedge/localised gastric resection",
+                "Wide Local Excision"
+              ],
+              "right": [
+                "Axillary Clearance",
+                "Axillary lymph nodes sampling",
+                "Biopsy",
+                "Bypass Gastrojejunostomy",
+                "Cholecystectomy",
+                "Cholecystojejunostomy",
+                "Completion gastrectomy",
+                "Debridement of pancreatic and peripancreatic necrosis",
+                "Debulking",
+                "Distal subtotal pancreatectomy",
+                "Drainage of abscess",
+                "Duodenal preserving pancreatic head resection",
+                "Endoscopic biopsy",
+                "Endoscopic brushings of GIT",
+                "Enucleation",
+                "Esophageal bypass surgery/jejunostomy only",
+                "Exploratory laparotomy",
+                "Fine needle aspiration biopsy",
+                "Gastric Antrectomy",
+                "Hemithyroidectomy",
+                "Hepaticojejunostomy",
+                "Ivor Lewis subtotal esophagectomy",
+                "Laparotomy (Open and Shut)",
+                "Left thoracoabdominal incision",
+                "Lobectomy",
+                "Mammoplasty",
+                "Mastectomy",
+                "McKeown esophagectomy",
+                "Merendino procedure",
+                "Minimally invasive esophagectomy",
+                "Near-total thyroidectomy",
+                "Pancreaticoduodenectomy",
+                "Pancreaticojejunostomy, side-to-side anastomosis",
+                "Pneumonectomy",
+                "Proximal subtotal gastrectomy",
+                "Pylorus-sparing Whipple operation",
+                "Radical pancreaticoduodenectomy",
+                "Reexcision",
+                "Segmentectomy",
+                "Sentinal Lymph Node Biopsy",
+                "Spleen preserving distal pancreatectomy",
+                "Splenectomy",
+                "Subtotal pancreatectomy",
+                "Subtotal thyroidectomy",
+                "Thoracotomy (Open & Shut)",
+                "Total gastrectomy",
+                "Total gastrectomy with extended lymphadenectomy",
+                "Total pancreatectomy",
+                "Total thyroidectomy",
+                "Transhiatal esophagectomy",
+                "Triple bypass of pancreas",
+                "Wedge/localised gastric resection",
+                "Wide Local Excision"
+              ],
+              "data": {
+                "added": [],
+                "deleted": ["Hysterectomy", "Lymphadenectomy", "Radical prostatectomy"]
+              }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "follow_up": {
+      "updated": {
+        "interval_of_followup": {
+          "restrictions": { "range": { "left": null, "right": { "exclusiveMin": 0 } } }
+        },
+        "relapse_interval": {
+          "restrictions": { "range": { "left": null, "right": { "exclusiveMin": 0 } } }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "family_history": {
+      "updated": {
+        "relationship_type": {
+          "restrictions": {
+            "codeList": {
+              "left": [
+                "Aunt",
+                "Brother",
+                "Child",
+                "Cousin",
+                "Daughter",
+                "Father",
+                "Grandchild",
+                "Grandfather",
+                "Grandmother",
+                "Maternal Aunt",
+                "Maternal Cousin",
+                "Maternal Grandfather",
+                "Maternal Grandmother",
+                "Maternal Half-brother",
+                "Maternal Half-sister",
+                "Maternal Uncle",
+                "Mother",
+                "Nephew",
+                "Niece",
+                "Other",
+                "Paternal Aunt",
+                "Paternal Cousin",
+                "Paternal Grandfather",
+                "Paternal Grandmother",
+                "Paternal Half-brother",
+                "Paternal Half-sister",
+                "Paternal Uncle",
+                "Sibling",
+                "Sister",
+                "Son",
+                "Uncle",
+                "Unknown"
+              ],
+              "right": [
+                "Aunt",
+                "Brother",
+                "Cousin",
+                "Daughter",
+                "Father",
+                "Grandchild",
+                "Grandfather",
+                "Grandmother",
+                "Maternal Aunt",
+                "Maternal Cousin",
+                "Maternal Grandfather",
+                "Maternal Grandmother",
+                "Maternal Half-brother",
+                "Maternal Half-sister",
+                "Maternal Uncle",
+                "Mother",
+                "Nephew",
+                "Niece",
+                "Other",
+                "Paternal Aunt",
+                "Paternal Cousin",
+                "Paternal Grandfather",
+                "Paternal Grandmother",
+                "Paternal Half-brother",
+                "Paternal Half-sister",
+                "Paternal Uncle",
+                "Sister",
+                "Son",
+                "Uncle",
+                "Unknown"
+              ],
+              "data": { "added": [], "deleted": ["Child", "Sibling"] }
+            }
+          }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    },
+    "biomarker": {
+      "updated": {
+        "test_interval": {
+          "restrictions": { "range": { "left": null, "right": { "exclusiveMin": 0 } } }
+        }
+      },
+      "created": {},
+      "deleted": {}
+    }
+  }
+}

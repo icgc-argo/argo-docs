@@ -20,6 +20,12 @@ None to report.
 
 ------>
 
+## Release 1.31
+
+**Release Date: September 29, 2025**
+
+- Added new term `Radical prostatectomy` to the `surgery_type` terminology.
+
 ## Release 1.30
 
 **Release Date: August 26, 2025**
