@@ -19,6 +19,12 @@ None to report.
 None to report.
 ------>
 
+## September 29, 2025: Data Discovery Page
+
+Data Platform - UI 1.133.6 - API 3.46.0
+
+A new Data Discovery section is available on the ARGO platform portal, which allows users to explore donor data in the ICGC-ARGO through interactive charts, using clinical and file filters. [DACO approval](https://docs.icgc-argo.org/docs/data-access/daco/applying) is required to access this feature.
+
 ## April 24, 2024: Clinical Exceptions Enhancement, and Exception Manifest
 
 Data Platform - UI 1.125.5 - API 3.42.2
