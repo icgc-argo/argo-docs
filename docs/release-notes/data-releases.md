@@ -6,6 +6,167 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 13.0
+
+**Release Date:** September 26, 2025
+
+#### New Updates
+
+Data release 13 features new 366 donors and updates to 6 existing donors from programs:
+
+- BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
+- CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
+- Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000))
+- Multicenter Study to Profile and Monitor Cancer-related Genomic Alterations in Circulating Tumor DNA and Gut Microbiome in Advanced Solid Malignancies - SCRUM-Japan MONSTAR-SCREEN ([MONSTAR-JP](https://www.icgc-argo.org/page/130/scrum-monstar)).
+
+<table>
+    <thead>
+        <tr>
+            <th>Program</th>
+            <th></th>
+            <th>Clinical</th>
+            <th>DNA-Seq Alignment</th>
+            <th>Mutect Variant</th>
+            <th>Sanger Variant</th>
+            <th>RNA-Seq Hisat2</th>
+            <th>RNA-Seq STAR</th>
+            <th>FoundationOneCDx</th>
+            <th>FoundationOneLiquidCDx</th>
+            <th>Total Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="2">POG-CA</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">238</td>
+            <td rowspan="1">238</td>
+            <td rowspan="1">238</td>
+            <td rowspan="1">6</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">238</td>
+        </tr>
+        <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">5</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">5</td>
+        </tr>
+        <tr>
+            <td rowspan="2">MUTO-INTL</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+        </tr>
+        <tr>
+            <td rowspan="2">P1000-US</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">72</td>
+            <td rowspan="1">72</td>
+            <td rowspan="1">72</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">72</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
+        </tr>
+        <tr>
+            <td rowspan="2">MONSTAR-JP</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">55</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">22</td>
+            <td rowspan="1">54</td>
+            <td rowspan="1">55</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
+        </tr>
+        <tr>
+            <td rowspan="2">DR13.0 Summary</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">366</td>
+            <td rowspan="1">311</td>
+            <td rowspan="1">311</td>
+            <td rowspan="1">6</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">22</td>
+            <td rowspan="1">54</td>
+            <td rowspan="1"><b>366</b></td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">1</td>
+            <td rowspan="1">6</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"><b>6</b></td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
+Due to processing errors 180 files have been rescinded
+
 ## Data Release 12.1
 
 **Release Date:** August 29, 2025
