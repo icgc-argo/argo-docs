@@ -151,22 +151,26 @@ Reference: [https://www.myeloma.org/durie-salmon-staging](https://www.myeloma.or
 
 ### FIGO Staging of Cervical Carcinomas
 
-| Stage      | Description                                                                                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Stage IA   | Invasive cancer identified only microscopically. Invasion is limited to measured stromal invasion with a maximum depth of 5 mm and no wider than 7 mm.       |
-| Stage IA1  | Measured invasion of the stroma no greater than 3 mm in depth and no wider than 7 mm diameter.                                                               |
-| Stage IA2  | Measured invasion of stroma greater than 3 mm but no greater than 5 mm in depth and no wider than 7 mm in diameter.                                          |
-| Stage IB   | Clinical lesions confined to the cervix or preclinical lesions greater than Stage IA. All gross lesions even with superficial invasion are Stage IB cancers. |
-| Stage IB1  | Clinical lesions no greater than 4 cm in size.                                                                                                               |
-| Stage IB2  | Clinical lesions greater than 4 cm in size.                                                                                                                  |
-| Stage IIA  | No obvious parametrial involvement. Involvement of up to the upper two-thirds of the vagina.                                                                 |
-| Stage IAB  | Obvious parametrial involvement, but not into the pelvic sidewall.                                                                                           |
-| Stage IIIA | No extension into the pelvic sidewall but involvement of the lower third of the vagina.                                                                      |
-| Stage IIIB | Extension into the pelvic sidewall or hydronephrosis or non-functioning kidney.                                                                              |
-| Stage IVA  | Spread of the tumour into adjacent pelvic organs.                                                                                                            |
-| Stage IVB  | Spread to distant organs.                                                                                                                                    |
+| Stage       | Description                                                                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Stage IA    | Invasive cancer identified only microscopically. Invasion is limited to measured stromal invasion with a maximum depth of 5 mm and no wider than 7 mm.       |
+| Stage IA1   | Measured invasion of the stroma no greater than 3 mm in depth and no wider than 7 mm diameter.                                                               |
+| Stage IA2   | Measured invasion of stroma greater than 3 mm but no greater than 5 mm in depth and no wider than 7 mm in diameter.                                          |
+| Stage IB    | Clinical lesions confined to the cervix or preclinical lesions greater than Stage IA. All gross lesions even with superficial invasion are Stage IB cancers. |
+| Stage IB1   | Clinical lesions no greater than 4 cm in size.                                                                                                               |
+| Stage IB2   | Clinical lesions greater than 4 cm in size.                                                                                                                  |
+| Stage IIA   | No obvious parametrial involvement. Involvement of up to the upper two-thirds of the vagina.                                                                 |
+| Stage IAB   | Obvious parametrial involvement, but not into the pelvic sidewall.                                                                                           |
+| Stage IIIA  | No extension into the pelvic sidewall but involvement of the lower third of the vagina.                                                                      |
+| Stage IIIB  | Extension into the pelvic sidewall or hydronephrosis or non-functioning kidney.                                                                              |
+| Stage IIIC  | Metastasis to the pelvic or para-aortic lymph nodes or both.                                                                                                 |
+| Stage IIIC1 | Metastasis to the pelvic lymph nodes.                                                                                                                        |
+| Stage IIIC2 | Metastasis to para-aortic lymph nodes up to the renal vessels, with or without metastasis to the pelvic lymph nodes.                                         |
+| Stage IV    | Spread to the bladder mucosa and/or intestinal mucosa and/or distance metastasis.                                                                            |
+| Stage IVA   | Spread of the tumour into adjacent pelvic organs.                                                                                                            |
+| Stage IVB   | Spread to distant organs.                                                                                                                                    |
 
-Reference: [https://screening.iarc.fr/viaviliappendix1.php](https://screening.iarc.fr/viaviliappendix1.php).
+References: [https://screening.iarc.fr/viaviliappendix1.php](https://screening.iarc.fr/viaviliappendix1.php), [https://doi.org/10.1002/ijgo.14923](https://doi.org/10.1002/ijgo.14923)
 
 ### Binet Staging System
 
