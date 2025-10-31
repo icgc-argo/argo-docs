@@ -20,6 +20,12 @@ None to report.
 
 ------>
 
+## Release 1.33
+
+**Release Date: October 31st, 2025**
+
+- Updated validation script for fields related to stage groups to include existing stage groups : `stage i`,`stage ii`, `stage iii` in updated version of FIGO staging system.
+
 ## Release 1.32
 
 **Release Date: October 27, 2025**
