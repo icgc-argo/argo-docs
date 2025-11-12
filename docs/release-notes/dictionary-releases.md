@@ -20,6 +20,13 @@ None to report.
 
 ------>
 
+## Release 1.34
+
+**Release Date: November 12, 2025**
+
+- Updated validation script for tumour_grade field to include existing tumour_grade `GX` in the Two-tier grading system.
+- Added `Head and neck surgery` to the `surgery_type` controlled terminology.
+
 ## Release 1.33
 
 **Release Date: October 31st, 2025**
