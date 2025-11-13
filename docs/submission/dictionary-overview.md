@@ -191,6 +191,7 @@ Reference: Amin, Mahul B.. AJCC Cancer Staging Manual, Eighth Edition (p. 975). 
 
 | Grade      |
 | ---------- |
+| GX         |
 | Low grade  |
 | High grade |
 
