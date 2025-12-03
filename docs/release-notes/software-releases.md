@@ -19,6 +19,12 @@ None to report.
 None to report.
 ------>
 
+## December 4, 2025: Data Discovery Page
+
+Data Platform - UI 1.135.0 - API 3.47.0
+
+This release adds a Download feature to the Data Discovery page, enabling DACO-approved users to download clinical data, molecular file manifests, or both for all donors in their selected cohort by applying clinical and molecular filters. [DACO approval](https://docs.icgc-argo.org/docs/data-access/daco/applying) is required to access this feature on the Data Discovery page.
+
 ## September 29, 2025: Data Discovery Page
 
 Data Platform - UI 1.133.6 - API 3.46.0
