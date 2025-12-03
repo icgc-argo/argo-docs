@@ -20,6 +20,25 @@ None to report.
 
 ------>
 
+## Release 1.34
+
+**Release Date: November 12, 2025**
+
+- Updated validation script for tumour_grade field to include existing tumour_grade `GX` in the Two-tier grading system.
+- Added `Head and neck surgery` to the `surgery_type` controlled terminology.
+
+## Release 1.33
+
+**Release Date: October 31st, 2025**
+
+- Updated validation script for fields related to stage groups to include existing stage groups : `stage i`,`stage ii`, `stage iii` in updated version of FIGO staging system.
+
+## Release 1.32
+
+**Release Date: October 27, 2025**
+
+- Updated validation script for fields related to stage groups to include existing stage groups in updated version of FIGO staging system.
+
 ## Release 1.31
 
 **Release Date: September 29, 2025**
