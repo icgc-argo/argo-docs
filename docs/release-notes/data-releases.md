@@ -61,7 +61,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
             <td rowspan="1"></td>
             <td rowspan="1"></td>
             <td rowspan="1"></td>
-            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
         </tr>
         <tr>
             <td rowspan="2">POG-CA</td>
@@ -136,7 +136,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
             <td rowspan="1"></td>
             <td rowspan="1"></td>
             <td rowspan="1"></td>
-            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
         </tr>
        <tr>
             <td rowspan="2">APGI-AU</td>
@@ -174,7 +174,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
             <td rowspan="1"></td>
             <td rowspan="1"></td>
             <td rowspan="1"></td>
-            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
        </tr>
        <tr>
             <td rowspan="1">Update</td>
