@@ -71,7 +71,7 @@ To contribute to the docs:
 
 The Data Dictionary content is not updated dynamically when the dictionary is updated. Instead, the dictionary content is included as static files included in this repository. This allows the docs site to be completely static and not have to load the dictionary from the source everytime it is requested.
 
-To simplify updating the dictonary content, the process has been scripted so it can be run by following the commands below. Files will be saved in `scripts/data` folder and then moved to website directory by `copy-data` script.
+To simplify updating the dictionary content, the process has been scripted so it can be run by following the commands below. Files will be saved in `scripts/data` folder and then moved to website directory by `copy-data` script.
 
 1. Pull latest code and branch off `develop`
 
