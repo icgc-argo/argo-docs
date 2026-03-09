@@ -12,7 +12,7 @@ An ARGO data release is a curated data set of clinical and molecular data submit
 
 #### New Updates
 
-Data release 14 features 1528 new donors and updates to 419 existing donors from these programs:
+Data release 14 features 1528 new donors and updates to 495 existing donors from these programs:
 
 - CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
 - BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
@@ -178,7 +178,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
        </tr>
        <tr>
             <td rowspan="1">Update</td>
-            <td rowspan="1"></td>
+            <td rowspan="1">79</td>
             <td rowspan="1">3</td>
             <td rowspan="1">3</td>
             <td rowspan="1"></td>
@@ -186,7 +186,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
             <td rowspan="1"></td>
             <td rowspan="1"></td>
             <td rowspan="1"></td>
-            <td rowspan="1">3</td>
+            <td rowspan="1">79</td>
         </tr>
   <tr>
             <td rowspan="2">DR14.0 Summary</td>
@@ -203,7 +203,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
        </tr>
        <tr>
             <td rowspan="1">Update</td>
-            <td rowspan="1"></td>
+            <td rowspan="1">79</td>
             <td rowspan="1">8</td>
             <td rowspan="1">8</td>
             <td rowspan="1"></td>
@@ -211,7 +211,7 @@ Data release 14 features 1528 new donors and updates to 419 existing donors from
             <td rowspan="1">410</td>
             <td rowspan="1"></td>
             <td rowspan="1"></td>
-            <td rowspan="1"><b>419</b></td>
+            <td rowspan="1"><b>495</b></td>
         </tr>
     </tbody>
 </table>
