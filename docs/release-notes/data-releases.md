@@ -6,6 +6,216 @@ platform_key: DOCS_DATA_RELEASES
 
 An ARGO data release is a curated data set of clinical and molecular data submitted to the ARGO Data Platform. Data releases happen approximately four times a year and are cumulative in nature. Released data can be browsed using the [File Repository](https://platform.icgc-argo.org/repository) and [downloaded](/docs/data-access/data-download) using a client tool, provided that access to controlled data has been granted. To access controlled data, please see the [DACO application process here](/docs/data-access/daco/applying).
 
+## Data Release 14.0
+
+**Release Date:** March 9, 2026
+
+#### New Updates
+
+Data release 14 features 1528 new donors and updates to 419 existing donors from these programs:
+
+- CRUK Grand Challenge – Mutographs ([MUTO-INTL](https://www.icgc-argo.org/page/99/mutographs))
+- BC Cancer Personalized OncoGenomics Program ([POG-CA](https://www.icgc-argo.org/page/97/bc-pogp))
+- Multicenter Study to Profile and Monitor Cancer-related Genomic Alterations in Circulating Tumor DNA and Gut Microbiome in Advanced Solid Malignancies - SCRUM-Japan MONSTAR-SCREEN ([MONSTAR-JP](https://www.icgc-argo.org/page/130/scrum-monstar))
+- Polyethnic-1000 ([P1000-US](https://www.icgc-argo.org/page/115/p-1000))
+- The Australian Pancreatic Genome Initiative ([APGI-AU](https://www.icgc-argo.org/page/145/apgi-au))
+- Pancreatic Cancer Harmonized "Omics" analysis for Personalized Treatment ([PACA-CA](https://www.icgc-argo.org/page/96/paca-ca))
+
+<table>
+    <thead>
+        <tr>
+            <th>Program</th>
+            <th></th>
+            <th>Clinical</th>
+            <th>DNA-Seq Alignment</th>
+            <th>Mutect Variant</th>
+            <th>Sanger Variant</th>
+            <th>RNA-Seq Hisat2</th>
+            <th>RNA-Seq STAR</th>
+            <th>FoundationOneCDx</th>
+            <th>FoundationOneLiquidCDx</th>
+            <th>Total Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="2">MUTO-INTL</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">1218</td>
+            <td rowspan="1">1218</td>
+            <td rowspan="1">1218</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">1218</td>
+        </tr>
+        <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
+        </tr>
+        <tr>
+            <td rowspan="2">POG-CA</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">139</td>
+            <td rowspan="1">137</td>
+            <td rowspan="1">137</td>
+            <td rowspan="1">4</td>
+            <td rowspan="1">22</td>
+            <td rowspan="1">131</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">139</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">110</td>
+            <td rowspan="1">321</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">322</td>
+        </tr>
+        <tr>
+            <td rowspan="2">P1000-US</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">126</td>
+            <td rowspan="1">125</td>
+            <td rowspan="1">125</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">75</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">126</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">5</td>
+            <td rowspan="1">5</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">61</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">66</td>
+        </tr>
+        <tr>
+            <td rowspan="2">MONSTAR-JP</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">37</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">16</td>
+            <td rowspan="1">35</td>
+            <td rowspan="1">37</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
+        </tr>
+       <tr>
+            <td rowspan="2">APGI-AU</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">8</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">8</td>
+            <td rowspan="1">8</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">8</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">28</td>
+            <td rowspan="1">28</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">28</td>
+        </tr>
+<tr>
+            <td rowspan="2">PACA-CA</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">-</td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">3</td>
+            <td rowspan="1">3</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1">3</td>
+        </tr>
+  <tr>
+            <td rowspan="2">DR14.0 Summary</td>
+            <td rowspan="1">New</td>
+            <td rowspan="1">1528</td>
+            <td rowspan="1">1480</td>
+            <td rowspan="1">1480</td>
+            <td rowspan="1">4</td>
+            <td rowspan="1">30</td>
+            <td rowspan="1">214</td>
+            <td rowspan="1">16</td>
+            <td rowspan="1">35</td>
+            <td rowspan="1"><b>1528</b></td>
+       </tr>
+       <tr>
+            <td rowspan="1">Update</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">8</td>
+            <td rowspan="1">8</td>
+            <td rowspan="1"></td>
+            <td rowspan="1">138</td>
+            <td rowspan="1">410</td>
+            <td rowspan="1"></td>
+            <td rowspan="1"></td>
+            <td rowspan="1"><b>419</b></td>
+        </tr>
+    </tbody>
+</table>
+
 ## Data Release 13.0
 
 **Release Date:** September 26, 2025
